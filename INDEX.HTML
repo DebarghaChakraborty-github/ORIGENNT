@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origennt: Strategic Talent Engineering - Data Visualized</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js (for interactive, animated charts) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <style>
+        /* Define the primary accent color */
+        :root {
+            --primary-purple: #8c52ff;
+            --primary-dark: #0d0d0d;
+            --secondary-dark: #111827;
+        }
+        .text-purple-accent { color: var(--primary-purple); }
+        .bg-purple-accent { background-color: var(--primary-purple); }
+        .border-purple-accent { border-color: var(--primary-purple); }
+        
+        /* Global Font and Dark Background */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--primary-dark);
+            color: #E5E7EB; 
+        }
+        .section-bg { background-color: var(--primary-dark); }
+        .linear-panel {
+            background-color: var(--secondary-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px; 
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- Panel Hover Animation --- */
+        .linear-panel:hover {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 18px rgba(140, 82, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        /* --- Button and Interactive Element Animations --- */
+        .animated-btn {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            will-change: transform, box-shadow;
+        }
+        .animated-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(140, 82, 255, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* --- Text/Word Hover Animation --- */
+        .text-hover-glow { transition: text-shadow 0.3s ease-out, color 0.2s; }
+        .text-hover-glow:hover {
+            text-shadow: 0 0 5px rgba(140, 82, 255, 0.7), 0 0 10px rgba(140, 82, 255, 0.3);
+            color: white; 
+        }
+        h1:hover, h2:hover, h3:hover, p.text-gray-400:hover, a.nav-link:hover, .text-hover-glow-strong:hover {
+            text-shadow: 0 0 8px rgba(140, 82, 255, 0.8);
+            color: #FFFFFF;
+        }
+        .nav-link, .link-animated { transition: color 0.3s, border-bottom 0.3s; }
+        .nav-link:hover {
+            color: white;
+            border-bottom: 2px solid var(--primary-purple);
+            padding-bottom: 4px;
+        }
+
+        /* --- Scroll Fade-in CSS (More Dynamic) --- */
+        [data-scroll-fade] {
+            opacity: 0;
+            transform: translateY(40px) translateX(-20px); /* Add slide-in effect */
+            transition: opacity 1s cubic-bezier(0.65, 0.05, 0.36, 1), transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+        }
+        /* Make cards in grids fade in from straight up */
+        .grid [data-scroll-fade], .linear-panel[data-scroll-fade] {
+             transform: translateY(40px);
+        }
+        
+        [data-scroll-fade].faded-in {
+            opacity: 1;
+            transform: translateY(0) translateX(0);
+        }
+
+        /* Staggered delay groups */
+        [data-scroll-fade][data-delay="200"] { transition-delay: 0.2s; }
+        [data-scroll-fade][data-delay="400"] { transition-delay: 0.4s; }
+        [data-scroll-fade][data-delay="600"] { transition-delay: 0.6s; }
+        [data-scroll-fade][data-delay="800"] { transition-delay: 0.8s; }
+
+        /* Typing Effect */
+        #typing-text {
+            min-height: 1.25em; /* Prevent layout shift */
+        }
+        
+        /* Chart.js container styling */
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-gray-50">
+    
+    <!-- Navigation & Header -->
+    <header class="sticky top-0 z-50 bg-gray-900 shadow-xl border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#home" class="text-2xl font-extrabold tracking-widest text-white transition duration-300 link-animated">ORIGENNT</a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium items-center">
+                    <a href="#home" class="nav-link text-gray-300 transition duration-300">Overview</a>
+                    <a href="#methodology" class="nav-link text-gray-300 transition duration-300">Methodology</a>
+                    <a href="#models" class="nav-link text-gray-300 transition duration-300">Models & Pillars</a>
+                    <a href="#insights" class="nav-link text-gray-300 transition duration-300">Intelligence</a>
+                    <a href="#proof" class="nav-link text-gray-300 transition duration-300">Performance</a>
+                    <a href="#booking" class="ml-4 px-4 py-2 rounded bg-purple-accent text-gray-900 font-bold animated-btn">Schedule Blueprint</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-50 hover:text-purple-accent focus:outline-none transition duration-300 animated-btn p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 absolute w-full shadow-lg border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#home" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Overview</a>
+                <a href="#methodology" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Methodology</a>
+                <a href="#models" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Models & Pillars</a>
+                <a href="#insights" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Intelligence</a>
+                <a href="#proof" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Performance</a>
+                <a href="#booking" class="block px-3 py-2 my-2 rounded bg-purple-accent text-gray-900 font-bold transition duration-300 w-11/12 text-center animated-btn">Schedule Blueprint</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section (Home) -->
+        <section id="home" class="section-bg pt-24 pb-16 text-center border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-5xl mx-auto px-4">
+                <p class="text-sm font-semibold tracking-widest uppercase text-purple-accent mb-4 text-hover-glow" data-scroll-fade>Strategic Talent Engineering</p>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 tracking-tight text-white text-hover-glow-strong" data-scroll-fade data-delay="200">
+                    Architecting Human Capital for <span class="text-purple-accent">Verifiable ROI</span>.
+                </h1>
+                
+                <p id="typing-text" class="text-xl md:text-2xl text-gray-300 font-medium mb-8 max-w-3xl mx-auto text-hover-glow">
+                    <!-- Text will be typed here -->
+                </p>
+
+                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-3xl mx-auto text-hover-glow" data-scroll-fade data-delay="400">
+                    Origennt applies analytical rigor and proprietary AI modeling to define, acquire, and retain the elite talent necessary for global enterprise scale.
+                </p>
+                <a href="#booking" class="inline-block px-8 py-3 text-lg font-bold rounded bg-purple-accent text-gray-900 animated-btn" data-scroll-fade data-delay="600">
+                    Initiate Strategic Mandate
+                </a>
+            </div>
+            
+            <!-- Graphic Placeholder -->
+            <div class="max-w-7xl mx-auto mt-16 px-4" data-scroll-fade data-delay="800">
+                <img src="https://placehold.co/1200x400/0d0d0d/8c52ff?text=AI+DATA+STREAM+VISUALIZATION" alt="AI Data Visualization" class="w-full rounded shadow-xl border border-gray-800 opacity-80">
+            </div>
+        </section>
+
+        <!-- 2. Performance (Proof) -->
+        <section id="proof" class="section-bg py-20 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 tracking-tight text-hover-glow-strong" data-scroll-fade>Performance Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Proof Card 1 -->
+                    <div class="p-8 linear-panel text-center" data-scroll-fade>
+                        <p class="text-5xl font-extrabold text-purple-accent tracking-tight mb-2 text-hover-glow">40%</p>
+                        <p class="text-lg font-semibold text-white text-hover-glow">Time-to-Hire Reduction</p>
+                        <p class="text-sm text-gray-400 mt-1 text-hover-glow">Efficiency derived from AI-driven candidate identification.</p>
+                    </div>
+                    <!-- Proof Card 2 -->
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="200">
+                        <p class="text-5xl font-extrabold text-purple-accent tracking-tight mb-2 text-hover-glow">15%+</p>
+                        <p class="text-lg font-semibold text-white text-hover-glow">Retention Lift</p>
+                        <p class="text-sm text-gray-400 mt-1 text-hover-glow">Engineered career pathways and organizational fit modeling.</p>
+                    </div>
+                    <!-- Proof Card 3 -->
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="400">
+                        <p class="text-5xl font-extrabold text-purple-accent tracking-tight mb-2 text-hover-glow">7.2x</p>
+                        <p class="text-lg font-semibold text-white text-hover-glow">Candidate Pool Quality Index</p>
+                        <p class="text-sm text-gray-400 mt-1 text-hover-glow">Average quality multiplier vs. conventional sourcing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3. Methodology -->
+        <section id="methodology" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>The Origennt <span class="text-purple-accent">Analytical Methodology</span></h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    We transcend recruitment and HR with a 4-Phase system focused on predictive analysis and structural engineering of talent ecosystems.
+                </p>
+
+                <!-- 4 Phase Process with Graphic -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Graphic -->
+                    <div data-scroll-fade data-delay="400">
+                         <img src="https://placehold.co/600x600/111827/8c52ff?text=METHODOLOGY+PIPELINE" alt="Methodology Pipeline" class="w-full rounded-lg shadow-xl border border-gray-700 opacity-90">
+                    </div>
+                    
+                    <!-- Steps (Vertical Layout) -->
+                    <div class="space-y-6">
+                        <div class="flex space-x-4" data-scroll-fade data-delay="600">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">01</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">DIAGNOSE: The Baseline Audit</h3>
+                                <p class="text-gray-400 text-sm">Quantify current organizational drag, assess technological and cultural deficiencies, and establish a data baseline.</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4" data-scroll-fade data-delay="800">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">02</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">MODEL: Predictive Blueprinting</h3>
+                                <p class="text-gray-400 text-sm">Utilize proprietary AI to model market trajectories, predict future skill demands, and generate the optimal structural blueprint.</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4" data-scroll-fade data-delay="1000">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">03</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">ENGINEER: Precision Execution</h3>
+                                <p class="text-gray-400 text-sm">Execute the blueprint using targeted outreach, deep-vetting protocols, and negotiation strategies optimized for long-term equity.</p>
+                            </div>
+                        </div>
+                         <div class="flex space-x-4" data-scroll-fade data-delay="1200">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">04</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">ACCELERATE: Measurement & Handover</h3>
+                                <p class="text-gray-400 text-sm">Finalize integration, measure initial performance against baseline metrics, and provide continuous advisory to ensure sustained velocity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Models & Pillars -->
+        <section id="models" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>Analytical <span class="text-purple-accent">Models & Service Pillars</span></h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    Our solutions are structured around two distinct operational pillars, supported by advanced data modeling.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Pillar 1: Enterprise (B2B) -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="400">
+                        <img src="https://placehold.co/100x100/8c52ff/0d0d0d?text=B2B" alt="B2B Icon" class="h-16 w-16 mb-6 rounded-full border-2 border-purple-accent p-2">
+                        <h3 class="text-2xl font-extrabold text-white mb-4 border-b border-gray-700 pb-2 text-hover-glow">I. Enterprise Talent Strategy (B2B)</h3>
+                        <p class="text-gray-400 mb-6 text-hover-glow">
+                            Focus: Organizational architecture, risk mitigation, and executive pipeline engineering. We are a force multiplier for HR and leadership.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Structural Efficiency Modeling (SEM):</strong> Optimization of org charts and global compensation.
+                            </li>
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Executive Acquisition Protocol (EAP):</strong> Deep-vetting and discreet sourcing for VP-level and C-suite roles.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Pillar 2: Candidate (B2C) -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="600">
+                         <img src="https://placehold.co/100x100/8c52ff/0d0d0d?text=B2C" alt="B2C Icon" class="h-16 w-16 mb-6 rounded-full border-2 border-purple-accent p-2">
+                        <h3 class="text-2xl font-extrabold text-white mb-4 border-b border-gray-700 pb-2 text-hover-glow">II. Elite Career Blueprinting (Candidate)</h3>
+                        <p class="text-gray-400 mb-6 text-hover-glow">
+                            Focus: Converting professional experience into a quantifiable, high-value asset capable of navigating proprietary Applicant Tracking Systems (ATS).
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Profile SEO Engineering (PSE):</strong> Rewriting profiles and CVs for algorithmic visibility.
+                            </li>
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Negotiation and Equity Strategy (NES):</strong> Data-backed compensation negotiation.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. Global Talent Intelligence (New Section with CHARTS) -->
+        <section id="insights" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>Global Talent <span class="text-purple-accent">Intelligence</span></h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    Proprietary data insights driving strategic allocation of human capital resources worldwide.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    
+                    <!-- Chart 1: Interactive Pie Chart -->
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="400">
+                        <h3 class="text-lg font-semibold text-white mb-4 text-hover-glow text-center">Global Talent Pool Demographics</h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Animated Bar Chart (Histogram) -->
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="600">
+                        <h3 class="text-lg font-semibold text-white mb-4 text-hover-glow text-center">YoY Growth in High-Demand Skills</h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Data Cards -->
+                    <div class="space-y-6" data-scroll-fade data-delay="800">
+                        <div class="linear-panel p-6 border-l-4 border-purple-accent text-hover-glow">
+                            <strong class="text-purple-accent text-3xl font-extrabold block">12% YoY</strong>
+                            <span class="text-gray-300">Shift in demand for decentralized AI/ML architects (APAC).</span>
+                        </div>
+                         <div class="linear-panel p-6 border-l-4 border-purple-accent text-hover-glow">
+                            <strong class="text-purple-accent text-3xl font-extrabold block">600+</strong>
+                            <span class="text-gray-300">Metrics in our Predictive Stability Index (PSI) for C-suite retention.</span>
+                        </div>
+                         <div class="linear-panel p-6 border-l-4 border-purple-accent text-hover-glow">
+                            <strong class="text-purple-accent text-3xl font-extrabold block">+8%</strong>
+                            <span class="text-gray-300">Negotiation success rate for non-cash equity packages (Global).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Booking Page (Simulated Route) -->
+        <section id="booking" class="section-bg py-24 border-t border-gray-800 overflow-x-hidden">
+            <div class="max-w-4xl mx-auto px-4" data-scroll-fade>
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong">Initiate Blueprint <span class="text-purple-accent">Mandate</span></h2>
+                <p class="text-lg text-gray-400 text-center mb-10 text-hover-glow">
+                    Your confidential, strategic session with a lead Origennt analyst is three steps away.
+                </p>
+
+                <!-- Booking Steps UI -->
+                <div class="linear-panel p-8 md:p-12">
+                    <div class="flex justify-between mb-8">
+                        <div id="step-1-indicator" class="text-center w-1/3 transition-all duration-300">
+                            <span class="text-lg font-bold text-purple-accent text-hover-glow">1. Focus</span>
+                            <div class="h-1 bg-purple-accent mt-2 transition-all duration-300"></div>
+                        </div>
+                        <div id="step-2-indicator" class="text-center w-1/3 transition-all duration-300">
+                            <span class="text-lg font-bold text-gray-500 text-hover-glow">2. Details</span>
+                            <div class="h-1 bg-gray-700 mt-2 transition-all duration-300"></div>
+                        </div>
+                        <div id="step-3-indicator" class="text-center w-1/3 transition-all duration-300">
+                            <span class="text-lg font-bold text-gray-500 text-hover-glow">3. Confirm</span>
+                            <div class="h-1 bg-gray-700 mt-2 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step Content Container -->
+                    <div id="booking-content">
+                        <!-- Step 1: Focus Selection -->
+                        <div id="step-1" class="booking-step">
+                            <h3 class="text-2xl font-bold mb-6 text-white text-hover-glow">Step 1: Define Mandate Focus</h3>
+                            <div class="space-y-4">
+                                <label class="block linear-panel p-4 cursor-pointer hover:border-purple-accent transition duration-300">
+                                    <input type="radio" name="focus" value="enterprise" checked class="form-radio text-purple-accent focus:ring-purple-accent mr-3 animated-btn">
+                                    <strong class="text-white text-hover-glow">Enterprise (B2B):</strong> Structural optimization and C-suite acquisition.
+                                </label>
+                                <label class="block linear-panel p-4 cursor-pointer hover:border-purple-accent transition duration-300">
+                                    <input type="radio" name="focus" value="candidate" class="form-radio text-purple-accent focus:ring-purple-accent mr-3 animated-btn">
+                                    <strong class="text-white text-hover-glow">Candidate (B2C):</strong> Career blueprinting and profile engineering.
+                                </label>
+                            </div>
+                            <button onclick="nextStep(2)" class="mt-8 w-full px-4 py-3 bg-purple-accent text-gray-900 font-bold rounded animated-btn">
+                                Proceed to Details (Step 2)
+                            </button>
+                        </div>
+                        
+                        <!-- Step 2: Details & Schedule (Hidden by default) -->
+                        <div id="step-2" class="booking-step hidden">
+                            <h3 class="text-2xl font-bold mb-6 text-white text-hover-glow">Step 2: Contact & Availability</h3>
+                            <form id="details-form" class="space-y-4">
+                                <div>
+                                    <label for="contact-name" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Full Name / Company Name</label>
+                                    <input type="text" id="contact-name" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Email (Confidential)</label>
+                                    <input type="email" id="contact-email" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300">
+                                </div>
+                                <div>
+                                    <label for="contact-message" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Brief Project Scope / Challenge</label>
+                                    <textarea id="contact-message" rows="3" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300"></textarea>
+                                </div>
+                                
+                                <p class="text-gray-400 pt-4 text-hover-glow">Simulated Schedule Availability (Choose Slot):</p>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="linear-panel p-3 text-center cursor-pointer hover:border-purple-accent transition duration-300">
+                                        <input type="radio" name="schedule" value="mon_10am" checked class="form-radio text-purple-accent focus:ring-purple-accent mr-2 animated-btn"> Mon, 10:00 AM UTC
+                                    </label>
+                                    <label class="linear-panel p-3 text-center cursor-pointer hover:border-purple-accent transition duration-300">
+                                        <input type="radio" name="schedule" value="tue_2pm" class="form-radio text-purple-accent focus:ring-purple-accent mr-2 animated-btn"> Tue, 2:00 PM UTC
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="mt-8 w-full px-4 py-3 bg-purple-accent text-gray-900 font-bold rounded animated-btn">
+                                    Finalize Blueprint Request (Step 3)
+                                </button>
+                                <button type="button" onclick="prevStep(1)" class="w-full mt-2 px-4 py-2 border border-gray-600 text-gray-300 font-bold rounded hover:bg-gray-800 transition duration-300 animated-btn">
+                                    ← Back to Focus
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Step 3: Confirmation (Hidden by default) -->
+                        <div id="step-3" class="booking-step hidden text-center">
+                            <h3 class="text-2xl font-bold mb-6 text-purple-accent text-hover-glow-strong">Mandate Confirmed</h3>
+                            <svg class="w-20 h-20 text-green-500 mx-auto mb-6 transition-transform duration-500 hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p class="text-lg text-white mb-4 text-hover-glow">
+                                **Thank you, <span id="conf-name"></span>.**
+                            </p>
+                            <p class="text-gray-400 mb-6 text-hover-glow">
+                                Your strategic blueprint request has been initiated for the **<span id="conf-focus"></span>** focus area.
+                                A confirmation email with the details of your <span id="conf-schedule"></span> session has been sent to **<span id="conf-email"></span>**.
+                            </p>
+                            <p class="text-sm text-gray-500 text-hover-glow">
+                                An Origennt lead analyst will perform the initial assessment prior to your meeting.
+                            </p>
+                            <a href="#home" class="inline-block mt-8 px-4 py-2 border border-purple-accent text-purple-accent font-bold rounded hover:bg-gray-800 transition duration-300 animated-btn">
+                                Return to Overview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm text-gray-500 text-hover-glow">
+                &copy; 2025 ORIGENNT. Precision Talent Engineering. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle Logic ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+        }
+
+        // --- Letter-by-Letter Typing Effect Logic ---
+        function typeWriter(text, targetId, speed = 40) {
+            const target = document.getElementById(targetId);
+            if (!target) return;
+            let i = 0;
+            target.textContent = ''; 
+            function type() {
+                if (i < text.length) {
+                    target.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // --- Scroll Fade-in Logic (Intersection Observer) ---
+        function setupScrollFade() {
+            const fadeElements = document.querySelectorAll('[data-scroll-fade]');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('faded-in');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '0px 0px -15% 0px', threshold: 0.1 });
+                fadeElements.forEach(el => observer.observe(el));
+            } else {
+                fadeElements.forEach(el => el.classList.add('faded-in'));
+            }
+        }
+
+        // --- Chart.js Logic ---
+        function setupCharts() {
+            const chartObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.id === 'pieChart') createPieChart();
+                        if (entry.target.id === 'barChart') createBarChart();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }); // Trigger when 50% visible
+
+            const pieCanvas = document.getElementById('pieChart');
+            const barCanvas = document.getElementById('barChart');
+            if (pieCanvas) chartObserver.observe(pieCanvas);
+            if (barCanvas) chartObserver.observe(barCanvas);
+        }
+
+        // Global Chart.js text color
+        Chart.defaults.color = '#E5E7EB';
+        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+
+        // 1. Create Pie Chart
+        function createPieChart() {
+            const ctx = document.getElementById('pieChart')?.getContext('2d');
+            if (!ctx) return;
+            
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Gen Z (20-30)', 'Millennial (31-45)', 'Gen X (46-60)', 'Boomer (60+)'],
+                    datasets: [{
+                        label: 'Talent Pool',
+                        data: [35, 40, 20, 5],
+                        backgroundColor: [
+                            'rgba(140, 82, 255, 0.8)', // Purple
+                            'rgba(140, 82, 255, 0.6)',
+                            'rgba(140, 82, 255, 0.4)',
+                            'rgba(140, 82, 255, 0.2)'
+                        ],
+                        borderColor: '#111827',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#E5E7EB' } },
+                        tooltip: {
+                            backgroundColor: '#0d0d0d',
+                            titleColor: '#8c52ff',
+                            bodyColor: '#E5E7EB'
+                        }
+                    },
+                    // -- INTERACTIVE HOVER EFFECT --
+                    onHover: (event, chartElement) => {
+                        event.native.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                    },
+                    hoverOffset: 20 // Lifts the slice on hover
+                }
+            });
+        }
+
+        // 2. Create Bar Chart (Histogram)
+        function createBarChart() {
+            const ctx = document.getElementById('barChart')?.getContext('2d');
+            if (!ctx) return;
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['AI/ML', 'Cybersecurity', 'Data Science', 'Cloud Arch.', 'Quantum'],
+                    datasets: [{
+                        label: 'YoY Skill Demand Growth',
+                        data: [45, 38, 30, 25, 10],
+                        backgroundColor: 'rgba(140, 82, 255, 0.6)',
+                        borderColor: 'rgba(140, 82, 255, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Makes it a horizontal bar chart (histogram style)
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.1)' } },
+                        y: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#0d0d0d',
+                            titleColor: '#8c52ff',
+                            bodyColor: '#E5E7EB'
+                        }
+                    }
+                }
+            });
+        }
+
+
+        // --- Booking Step Logic ---
+        let currentStep = 1;
+        function showStep(step) {
+            document.querySelectorAll('.booking-step').forEach(el => el.classList.add('hidden'));
+            const currentStepEl = document.getElementById(`step-${step}`);
+            if (currentStepEl) currentStepEl.classList.remove('hidden');
+            
+            for(let i = 1; i <= 3; i++) {
+                const indicator = document.getElementById(`step-${i}-indicator`);
+                if (indicator) {
+                    const span = indicator.querySelector('span');
+                    const line = indicator.querySelector('div');
+                    if (i <= step) {
+                        span.classList.remove('text-gray-500'); span.classList.add('text-purple-accent');
+                        line.classList.remove('bg-gray-700'); line.classList.add('bg-purple-accent');
+                    } else {
+                        span.classList.remove('text-purple-accent'); span.classList.add('text-gray-500');
+                        line.classList.remove('bg-purple-accent'); line.classList.add('bg-gray-700');
+                    }
+                }
+            }
+            currentStep = step;
+        }
+        function nextStep(step) { showStep(step); }
+        function prevStep(step) { showStep(step); }
+
+        // Handle Step 2 Form Submission
+        const detailsForm = document.getElementById('details-form');
+        if (detailsForm) {
+            detailsForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('contact-name').value;
+                const email = document.getElementById('contact-email').value;
+                const focusRadio = document.querySelector('input[name="focus"]:checked');
+                const focus = focusRadio ? focusRadio.value : 'N/A';
+                const scheduleRadio = document.querySelector('input[name="schedule"]:checked');
+                const schedule = scheduleRadio ? scheduleRadio.nextSibling.textContent.trim() : 'Unscheduled';
+                document.getElementById('conf-name').textContent = name;
+                document.getElementById('conf-email').textContent = email;
+                document.getElementById('conf-focus').textContent = focus === 'enterprise' ? 'ENTERPRISE STRATEGY' : 'CAREER BLUEPRINTING';
+                document.getElementById('conf-schedule').textContent = schedule;
+                nextStep(3);
+            });
+        }
+
+        // Initialize all features on load
+        window.onload = () => {
+            showStep(1);
+            setupScrollFade();
+            setupCharts(); // Initialize chart observers
+            typeWriter('Applying Predictive Talent Science.', 'typing-text', 50);
+        };
+
+    </script>
+</body>
+</html>
