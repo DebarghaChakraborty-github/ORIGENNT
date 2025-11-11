@@ -1,0 +1,306 @@
+/* ============================================
+   ORIGENNT - GLOBAL STYLES
+   ============================================ */
+
+/* ----- CSS Variables ----- */
+:root {
+    --primary-purple: #8c52ff;
+    --primary-dark: #0d0d0d;
+    --secondary-dark: #111827;
+    --text-light: #E5E7EB;
+    --text-gray: #9CA3AF;
+}
+
+/* ----- Global Styles ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    scroll-behavior: smooth;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* ----- Typography ----- */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ----- Color Classes ----- */
+.text-purple-accent {
+    color: var(--primary-purple);
+}
+
+.bg-purple-accent {
+    background-color: var(--primary-purple);
+}
+
+.border-purple-accent {
+    border-color: var(--primary-purple);
+}
+
+/* ----- Section Background ----- */
+.section-bg {
+    background-color: var(--primary-dark);
+}
+
+/* ----- Linear Panel Style ----- */
+.linear-panel {
+    background-color: var(--secondary-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+.linear-panel:hover {
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 18px rgba(140, 82, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ----- Button Animations ----- */
+.animated-btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: transform, box-shadow;
+}
+
+.animated-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(140, 82, 255, 0.4);
+    filter: brightness(1.1);
+}
+
+/* ----- Text Hover Glow Effects ----- */
+.text-hover-glow {
+    transition: text-shadow 0.3s ease-out, color 0.2s;
+}
+
+.text-hover-glow:hover {
+    text-shadow: 0 0 5px rgba(140, 82, 255, 0.7), 0 0 10px rgba(140, 82, 255, 0.3);
+    color: white;
+}
+
+h1:hover, h2:hover, h3:hover,
+.text-hover-glow-strong:hover {
+    text-shadow: 0 0 8px rgba(140, 82, 255, 0.8);
+    color: #FFFFFF;
+}
+
+/* ----- Navigation Links ----- */
+.nav-link {
+    transition: color 0.3s, border-bottom 0.3s;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.nav-link:hover {
+    color: white;
+    border-bottom: 2px solid var(--primary-purple);
+    padding-bottom: 4px;
+}
+
+.link-animated {
+    transition: all 0.3s ease;
+}
+
+.link-animated:hover {
+    color: var(--primary-purple);
+    transform: scale(1.05);
+}
+
+/* ----- Scroll Fade-in Animation ----- */
+[data-scroll-fade] {
+    opacity: 0;
+    transform: translateY(40px) translateX(-20px);
+    transition: opacity 1s cubic-bezier(0.65, 0.05, 0.36, 1), 
+                transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.grid [data-scroll-fade], 
+.linear-panel[data-scroll-fade] {
+    transform: translateY(40px);
+}
+
+[data-scroll-fade].faded-in {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+}
+
+/* Staggered delay groups */
+[data-scroll-fade][data-delay="200"] { transition-delay: 0.2s; }
+[data-scroll-fade][data-delay="400"] { transition-delay: 0.4s; }
+[data-scroll-fade][data-delay="600"] { transition-delay: 0.6s; }
+[data-scroll-fade][data-delay="800"] { transition-delay: 0.8s; }
+[data-scroll-fade][data-delay="1000"] { transition-delay: 1s; }
+[data-scroll-fade][data-delay="1200"] { transition-delay: 1.2s; }
+
+/* ----- Typing Effect ----- */
+#typing-text {
+    min-height: 2em;
+}
+
+/* ----- Chart Container ----- */
+.chart-container {
+    position: relative;
+    height: 350px;
+    width: 100%;
+}
+
+/* ----- Region Selector Dropdown ----- */
+.region-selector {
+    position: relative;
+}
+
+#region-dropdown {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.region-option {
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.region-option:hover {
+    background-color: rgba(140, 82, 255, 0.2);
+}
+
+/* ----- Form Inputs ----- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 0 3px rgba(140, 82, 255, 0.1);
+}
+
+/* ----- Radio Buttons ----- */
+input[type="radio"] {
+    cursor: pointer;
+}
+
+/* ----- Booking Steps ----- */
+.booking-step {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----- Responsive Typography ----- */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ----- Smooth Scrolling for Anchor Links ----- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ----- Loading State (Optional) ----- */
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ----- Currency Symbol Styling ----- */
+.currency-symbol {
+    font-weight: 700;
+}
+
+/* ----- Price Display ----- */
+.price {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* ----- Mobile Menu ----- */
+.nav-link-mobile {
+    text-align: center;
+}
+
+/* ----- Footer Links ----- */
+footer a:hover {
+    color: var(--primary-purple);
+}
+
+/* ----- Custom Scrollbar (Webkit browsers) ----- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-purple);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a066ff;
+}
+
+/* ----- Accessibility ----- */
+*:focus-visible {
+    outline: 2px solid var(--primary-purple);
+    outline-offset: 2px;
+}
+
+/* ----- Print Styles ----- */
+@media print {
+    header, footer, .animated-btn {
+        display: none;
+    }
+    
+    body {
+        color: black;
+        background: white;
+    }
+}
+
+/* ----- Chart.js Global Styles ----- */
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
