@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Origennt - Strategic Talent Engineering from Odisha, India serving global clients with data-driven recruitment solutions.">
+    <meta name="keywords" content="talent acquisition, recruitment, HR consulting, Odisha, India, global recruitment">
+    <title>Origennt: Strategic Talent Engineering - Global Services from India</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js for Data Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script src="script.js"></script>
+</head>
+
+<body class="bg-gray-900 text-gray-50">
+    
+    <!-- Navigation & Header -->
+    <header class="sticky top-0 z-50 bg-gray-900 shadow-xl border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#home" class="text-2xl font-extrabold tracking-widest text-white transition duration-300 link-animated">
+                    ORIGENNT
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium items-center">
+                    <a href="#home" class="nav-link text-gray-300">Overview</a>
+                    <a href="#methodology" class="nav-link text-gray-300">Methodology</a>
+                    <a href="#models" class="nav-link text-gray-300">Services</a>
+                    <a href="#pricing" class="nav-link text-gray-300">Pricing</a>
+                    <a href="#insights" class="nav-link text-gray-300">Intelligence</a>
+                    <a href="#proof" class="nav-link text-gray-300">Performance</a>
+                    
+                    <!-- Region Selector -->
+                    <div class="relative region-selector">
+                        <button id="region-btn" class="flex items-center space-x-2 px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 transition duration-300">
+                            <span id="region-flag">🌐</span>
+                            <span id="region-name" class="text-sm">Global</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="region-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 border border-gray-700 z-50">
+                            <div class="py-1">
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="IN" data-flag="🇮🇳" data-currency="INR" data-symbol="₹">
+                                    🇮🇳 India
+                                </button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="US" data-flag="🇺🇸" data-currency="USD" data-symbol="$">
+                                    🇺🇸 United States
+                                </button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="GB" data-flag="🇬🇧" data-currency="GBP" data-symbol="£">
+                                    🇬🇧 United Kingdom
+                                </button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="EU" data-flag="🇪🇺" data-currency="EUR" data-symbol="€">
+                                    🇪🇺 Europe
+                                </button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="AE" data-flag="🇦🇪" data-currency="AED" data-symbol="AED">
+                                    🇦🇪 Middle East
+                                </button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="SG" data-flag="🇸🇬" data-currency="SGD" data-symbol="S$">
+                                    🇸🇬 Singapore/APAC
+                                </button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="AU" data-flag="🇦🇺" data-currency="AUD" data-symbol="A$">
+                                    🇦🇺 Australia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#booking" class="ml-4 px-4 py-2 rounded bg-purple-accent text-gray-900 font-bold animated-btn">Schedule Blueprint</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-50 hover:text-purple-accent focus:outline-none transition duration-300 animated-btn p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 absolute w-full shadow-lg border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+                <a href="#home" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Overview</a>
+                <a href="#methodology" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Methodology</a>
+                <a href="#models" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Services</a>
+                <a href="#pricing" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Pricing</a>
+                <a href="#insights" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Intelligence</a>
+                <a href="#proof" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-800 hover:text-purple-accent transition duration-300 w-full text-center">Performance</a>
+                
+                <!-- Mobile Region Selector -->
+                <div class="w-full px-3 py-2">
+                    <select id="mobile-region-select" class="w-full px-3 py-2 rounded bg-gray-800 border border-gray-700 text-white">
+                        <option value="IN">🇮🇳 India</option>
+                        <option value="US">🇺🇸 United States</option>
+                        <option value="GB">🇬🇧 United Kingdom</option>
+                        <option value="EU">🇪🇺 Europe</option>
+                        <option value="AE">🇦🇪 Middle East</option>
+                        <option value="SG">🇸🇬 Singapore/APAC</option>
+                        <option value="AU">🇦🇺 Australia</option>
+                    </select>
+                </div>
+                
+                <a href="#booking" class="block px-3 py-2 my-2 rounded bg-purple-accent text-gray-900 font-bold transition duration-300 w-11/12 text-center animated-btn">Schedule Blueprint</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section (Home) -->
+        <section id="home" class="section-bg pt-24 pb-16 text-center border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-5xl mx-auto px-4">
+                <p class="text-sm font-semibold tracking-widest uppercase text-purple-accent mb-2 text-hover-glow" data-scroll-fade>
+                    Strategic Talent Engineering
+                </p>
+                <p class="text-xs text-gray-400 mb-4 text-hover-glow" data-scroll-fade>
+                    🏢 Based in Bhubaneswar, Odisha, India 🇮🇳 | 🌍 Serving Clients Worldwide
+                </p>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 tracking-tight text-white text-hover-glow-strong" data-scroll-fade data-delay="200">
+                    Architecting Human Capital for <span class="text-purple-accent">Verifiable ROI</span>
+                </h1>
+                
+                <p id="typing-text" class="text-xl md:text-2xl text-gray-300 font-medium mb-8 max-w-3xl mx-auto text-hover-glow min-h-[2em]">
+                    <!-- Typing animation will appear here -->
+                </p>
+
+                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-3xl mx-auto text-hover-glow" data-scroll-fade data-delay="400">
+                    Origennt applies analytical rigor and proprietary AI modeling to define, acquire, and retain elite talent for global enterprise scale.
+                </p>
+                <a href="#booking" class="inline-block px-8 py-3 text-lg font-bold rounded bg-purple-accent text-gray-900 animated-btn" data-scroll-fade data-delay="600">
+                    Initiate Strategic Mandate
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. Performance (Proof) -->
+        <section id="proof" class="section-bg py-20 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 tracking-tight text-hover-glow-strong" data-scroll-fade>Performance Metrics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-8 linear-panel text-center" data-scroll-fade>
+                        <p class="text-5xl font-extrabold text-purple-accent tracking-tight mb-2 text-hover-glow">40%</p>
+                        <p class="text-lg font-semibold text-white text-hover-glow">Time-to-Hire Reduction</p>
+                        <p class="text-sm text-gray-400 mt-1 text-hover-glow">Efficiency derived from AI-driven candidate identification.</p>
+                    </div>
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="200">
+                        <p class="text-5xl font-extrabold text-purple-accent tracking-tight mb-2 text-hover-glow">15%+</p>
+                        <p class="text-lg font-semibold text-white text-hover-glow">Retention Lift</p>
+                        <p class="text-sm text-gray-400 mt-1 text-hover-glow">Engineered career pathways and organizational fit modeling.</p>
+                    </div>
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="400">
+                        <p class="text-5xl font-extrabold text-purple-accent tracking-tight mb-2 text-hover-glow">7.2x</p>
+                        <p class="text-lg font-semibold text-white text-hover-glow">Candidate Pool Quality Index</p>
+                        <p class="text-sm text-gray-400 mt-1 text-hover-glow">Average quality multiplier vs. conventional sourcing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3. Methodology -->
+        <section id="methodology" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>
+                    The Origennt <span class="text-purple-accent">Analytical Methodology</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    We transcend recruitment and HR with a 4-Phase system focused on predictive analysis and structural engineering of talent ecosystems.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div data-scroll-fade data-delay="400">
+                         <img src="https://placehold.co/600x600/111827/8c52ff?text=METHODOLOGY+PIPELINE" alt="Methodology Pipeline" class="w-full rounded-lg shadow-xl border border-gray-700 opacity-80">
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex space-x-4" data-scroll-fade data-delay="600">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">01</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">DIAGNOSE: The Baseline Audit</h3>
+                                <p class="text-gray-400 text-sm">Quantify current organizational drag, assess technological and cultural deficiencies, and establish a data baseline.</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4" data-scroll-fade data-delay="800">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">02</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">MODEL: Predictive Blueprinting</h3>
+                                <p class="text-gray-400 text-sm">Utilize proprietary AI to model market trajectories, predict future skill demands, and generate the optimal structural blueprint.</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4" data-scroll-fade data-delay="1000">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">03</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">ENGINEER: Precision Execution</h3>
+                                <p class="text-gray-400 text-sm">Execute the blueprint using targeted outreach, deep-vetting protocols, and negotiation strategies optimized for long-term equity.</p>
+                            </div>
+                        </div>
+                         <div class="flex space-x-4" data-scroll-fade data-delay="1200">
+                            <div class="text-purple-accent text-3xl font-extrabold min-w-[30px] pt-1">04</div>
+                            <div class="linear-panel p-6 w-full text-hover-glow">
+                                <h3 class="text-xl font-semibold mb-2 text-white">ACCELERATE: Measurement & Handover</h3>
+                                <p class="text-gray-400 text-sm">Finalize integration, measure initial performance against baseline metrics, and provide continuous advisory to ensure sustained velocity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Models & Services -->
+        <section id="models" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>
+                    Our <span class="text-purple-accent">Service Pillars</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    Comprehensive solutions for enterprises and individuals, powered by advanced data modeling.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- B2B Services -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="400">
+                        <img src="https://placehold.co/100x100/8c52ff/0d0d0d?text=B2B" alt="B2B Icon" class="h-16 w-16 mb-6 rounded-full border-2 border-purple-accent p-2">
+                        <h3 class="text-2xl font-extrabold text-white mb-4 border-b border-gray-700 pb-2 text-hover-glow">
+                            I. Enterprise Talent Strategy (B2B)
+                        </h3>
+                        <p class="text-gray-400 mb-6 text-hover-glow">
+                            Focus: Organizational architecture, risk mitigation, and executive pipeline engineering. We are a force multiplier for HR and leadership.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Structural Efficiency Modeling (SEM):</strong> Optimization of org charts and global compensation.
+                            </li>
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Executive Acquisition Protocol (EAP):</strong> Deep-vetting and discreet sourcing for VP-level and C-suite roles.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- B2C Services -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="600">
+                         <img src="https://placehold.co/100x100/8c52ff/0d0d0d?text=B2C" alt="B2C Icon" class="h-16 w-16 mb-6 rounded-full border-2 border-purple-accent p-2">
+                        <h3 class="text-2xl font-extrabold text-white mb-4 border-b border-gray-700 pb-2 text-hover-glow">
+                            II. Elite Career Blueprinting (B2C)
+                        </h3>
+                        <p class="text-gray-400 mb-6 text-hover-glow">
+                            Focus: Converting professional experience into a quantifiable, high-value asset capable of navigating proprietary Applicant Tracking Systems (ATS).
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Profile SEO Engineering (PSE):</strong> Rewriting profiles and CVs for algorithmic visibility.
+                            </li>
+                            <li class="p-4 bg-gray-900 border-l-4 border-purple-accent transition-all duration-300 hover:bg-gray-700 text-hover-glow">
+                                <strong class="text-white">Negotiation and Equity Strategy (NES):</strong> Data-backed compensation negotiation.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Pricing Section (NEW) -->
+        <section id="pricing" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>
+                    Transparent <span class="text-purple-accent">Global Pricing</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-12 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    Premium services at competitive rates. Prices shown in <span id="pricing-currency" class="text-purple-accent font-bold">your local currency</span>.
+                </p>
+
+                <!-- B2B Pricing -->
+                <div class="mb-16" data-scroll-fade data-delay="400">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-white">Enterprise Solutions (B2B)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300">
+                            <h4 class="text-xl font-bold text-purple-accent mb-4">Executive Search</h4>
+                            <p class="text-4xl font-extrabold text-white mb-4">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="250000" data-usd="3000" data-gbp="2400" data-eur="2800" data-aed="11000" data-sgd="4000" data-aud="4500">250,000</span>
+                            </p>
+                            <p class="text-sm text-gray-400 mb-6">C-suite & VP-level recruitment</p>
+                            <ul class="text-left text-sm text-gray-300 space-y-2 mb-6">
+                                <li>✓ 90-day placement guarantee</li>
+                                <li>✓ Deep background verification</li>
+                                <li>✓ Compensation negotiation support</li>
+                            </ul>
+                            <a href="#booking" class="inline-block px-6 py-2 bg-purple-accent text-gray-900 font-bold rounded animated-btn">Get Started</a>
+                        </div>
+
+                        <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300 border-2 border-purple-accent">
+                            <div class="inline-block px-3 py-1 bg-purple-accent text-gray-900 text-xs font-bold rounded-full mb-2">POPULAR</div>
+                            <h4 class="text-xl font-bold text-purple-accent mb-4">Org Structure Audit</h4>
+                            <p class="text-4xl font-extrabold text-white mb-4">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="150000" data-usd="1800" data-gbp="1500" data-eur="1700" data-aed="6600" data-sgd="2400" data-aud="2700">150,000</span>
+                            </p>
+                            <p class="text-sm text-gray-400 mb-6">Complete organizational analysis</p>
+                            <ul class="text-left text-sm text-gray-300 space-y-2 mb-6">
+                                <li>✓ Efficiency assessment</li>
+                                <li>✓ Compensation benchmarking</li>
+                                <li>✓ 30-day implementation roadmap</li>
+                            </ul>
+                            <a href="#booking" class="inline-block px-6 py-2 bg-purple-accent text-gray-900 font-bold rounded animated-btn">Get Started</a>
+                        </div>
+
+                        <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300">
+                            <h4 class="text-xl font-bold text-purple-accent mb-4">Talent Strategy</h4>
+                            <p class="text-4xl font-extrabold text-white mb-4">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="350000" data-usd="4200" data-gbp="3400" data-eur="3900" data-aed="15400" data-sgd="5600" data-aud="6300">350,000</span>
+                            </p>
+                            <p class="text-sm text-gray-400 mb-6">6-month strategic partnership</p>
+                            <ul class="text-left text-sm text-gray-300 space-y-2 mb-6">
+                                <li>✓ Quarterly talent audits</li>
+                                <li>✓ Predictive modeling & forecasting</li>
+                                <li>✓ Dedicated account manager</li>
+                            </ul>
+                            <a href="#booking" class="inline-block px-6 py-2 bg-purple-accent text-gray-900 font-bold rounded animated-btn">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B2C Pricing -->
+                <div class="mb-16" data-scroll-fade data-delay="600">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-white">Career Services (B2C)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300">
+                            <h4 class="text-xl font-bold text-purple-accent mb-4">Resume Engineering</h4>
+                            <p class="text-4xl font-extrabold text-white mb-4">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="2999" data-usd="49" data-gbp="39" data-eur="45" data-aed="180" data-sgd="65" data-aud="75">2,999</span>
+                            </p>
+                            <p class="text-sm text-gray-400 mb-6">ATS-optimized resume</p>
+                            <ul class="text-left text-sm text-gray-300 space-y-2 mb-6">
+                                <li>✓ 2 rounds of revisions</li>
+                                <li>✓ Keyword optimization</li>
+                                <li>✓ 48-hour delivery</li>
+                            </ul>
+                            <a href="#booking" class="inline-block px-6 py-2 bg-purple-accent text-gray-900 font-bold rounded animated-btn">Order Now</a>
+                        </div>
+
+                        <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300 border-2 border-purple-accent">
+                            <div class="inline-block px-3 py-1 bg-purple-accent text-gray-900 text-xs font-bold rounded-full mb-2">BEST VALUE</div>
+                            <h4 class="text-xl font-bold text-purple-accent mb-4">Complete Profile Makeover</h4>
+                            <p class="text-4xl font-extrabold text-white mb-4">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="7999" data-usd="129" data-gbp="105" data-eur="119" data-aed="475" data-sgd="175" data-aud="195">7,999</span>
+                            </p>
+                            <p class="text-sm text-gray-400 mb-6">LinkedIn + Resume + Cover Letter</p>
+                            <ul class="text-left text-sm text-gray-300 space-y-2 mb-6">
+                                <li>✓ Complete LinkedIn optimization</li>
+                                <li>✓ Professional resume rewrite</li>
+                                <li>✓ Custom cover letter template</li>
+                            </ul>
+                            <a href="#booking" class="inline-block px-6 py-2 bg-purple-accent text-gray-900 font-bold rounded animated-btn">Order Now</a>
+                        </div>
+
+                        <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300">
+                            <h4 class="text-xl font-bold text-purple-accent mb-4">Career Blueprint</h4>
+                            <p class="text-4xl font-extrabold text-white mb-4">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="14999" data-usd="249" data-gbp="199" data-eur="229" data-aed="915" data-sgd="335" data-aud="375">14,999</span>
+                            </p>
+                            <p class="text-sm text-gray-400 mb-6">Complete career transformation</p>
+                            <ul class="text-left text-sm text-gray-300 space-y-2 mb-6">
+                                <li>✓ 1-on-1 strategy consultation</li>
+                                <li>✓ Interview coaching (3 sessions)</li>
+                                <li>✓ Salary negotiation support</li>
+                            </ul>
+                            <a href="#booking" class="inline-block px-6 py-2 bg-purple-accent text-gray-900 font-bold rounded animated-btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goodies/Resources -->
+                <div data-scroll-fade data-delay="800">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-white">Digital Resources & Goodies</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="linear-panel p-6 text-center hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl mb-3">📚</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Career Guide eBook</h4>
+                            <p class="text-2xl font-extrabold text-purple-accent mb-3">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="499" data-usd="9" data-gbp="7" data-eur="8" data-aed="33" data-sgd="12" data-aud="14">499</span>
+                            </p>
+                            <a href="#booking" class="text-sm text-purple-accent hover:underline">Buy Now</a>
+                        </div>
+
+                        <div class="linear-panel p-6 text-center hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl mb-3">🎯</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Interview Prep Kit</h4>
+                            <p class="text-2xl font-extrabold text-purple-accent mb-3">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="1999" data-usd="29" data-gbp="24" data-eur="27" data-aed="107" data-sgd="39" data-aud="44">1,999</span>
+                            </p>
+                            <a href="#booking" class="text-sm text-purple-accent hover:underline">Buy Now</a>
+                        </div>
+
+                        <div class="linear-panel p-6 text-center hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl mb-3">📄</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Premium Templates</h4>
+                            <p class="text-2xl font-extrabold text-purple-accent mb-3">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="2999" data-usd="49" data-gbp="39" data-eur="45" data-aed="180" data-sgd="65" data-aud="75">2,999</span>
+                            </p>
+                            <a href="#booking" class="text-sm text-purple-accent hover:underline">Buy Now</a>
+                        </div>
+
+                        <div class="linear-panel p-6 text-center hover:scale-105 transition-transform duration-300">
+                            <div class="text-4xl mb-3">🎁</div>
+                            <h4 class="text-lg font-bold text-white mb-2">Origennt Merch</h4>
+                            <p class="text-2xl font-extrabold text-purple-accent mb-3">
+                                <span class="currency-symbol">₹</span><span class="price" data-inr="1499" data-usd="24" data-gbp="19" data-eur="22" data-aed="88" data-sgd="32" data-aud="36">1,499</span>
+                            </p>
+                            <a href="#booking" class="text-sm text-purple-accent hover:underline">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. Global Talent Intelligence -->
+        <section id="insights" class="section-bg py-24 border-b border-gray-800 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong" data-scroll-fade>
+                    Global Talent <span class="text-purple-accent">Intelligence</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-4xl mx-auto text-hover-glow" data-scroll-fade data-delay="200">
+                    Proprietary data insights driving strategic allocation of human capital resources worldwide.
+                </p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="400">
+                        <h3 class="text-lg font-semibold text-white mb-4 text-hover-glow text-center">Global Talent Pool Demographics</h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="600">
+                        <h3 class="text-lg font-semibold text-white mb-4 text-hover-glow text-center">YoY Growth in High-Demand Skills</h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6" data-scroll-fade data-delay="800">
+                        <div class="linear-panel p-6 border-l-4 border-purple-accent text-hover-glow">
+                            <strong class="text-purple-accent text-3xl font-extrabold block">12% YoY</strong>
+                            <span class="text-gray-300">Shift in demand for decentralized AI/ML architects (APAC).</span>
+                        </div>
+                         <div class="linear-panel p-6 border-l-4 border-purple-accent text-hover-glow">
+                            <strong class="text-purple-accent text-3xl font-extrabold block">600+</strong>
+                            <span class="text-gray-300">Metrics in our Predictive Stability Index (PSI) for C-suite retention.</span>
+                        </div>
+                         <div class="linear-panel p-6 border-l-4 border-purple-accent text-hover-glow">
+                            <strong class="text-purple-accent text-3xl font-extrabold block">+8%</strong>
+                            <span class="text-gray-300">Negotiation success rate for non-cash equity packages (Global).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Booking Section -->
+        <section id="booking" class="section-bg py-24 border-t border-gray-800 overflow-x-hidden">
+            <div class="max-w-4xl mx-auto px-4" data-scroll-fade>
+                <h2 class="text-3xl font-bold text-center mb-4 tracking-tight text-hover-glow-strong">
+                    Initiate Blueprint <span class="text-purple-accent">Mandate</span>
+                </h2>
+                <p class="text-lg text-gray-400 text-center mb-10 text-hover-glow">
+                    Your confidential, strategic session with a lead Origennt analyst is three steps away.
+                </p>
+
+                <div class="linear-panel p-8 md:p-12">
+                    <div class="flex justify-between mb-8">
+                        <div id="step-1-indicator" class="text-center w-1/3 transition-all duration-300">
+                            <span class="text-lg font-bold text-purple-accent text-hover-glow">1. Focus</span>
+                            <div class="h-1 bg-purple-accent mt-2 transition-all duration-300"></div>
+                        </div>
+                        <div id="step-2-indicator" class="text-center w-1/3 transition-all duration-300">
+                            <span class="text-lg font-bold text-gray-500 text-hover-glow">2. Details</span>
+                            <div class="h-1 bg-gray-700 mt-2 transition-all duration-300"></div>
+                        </div>
+                        <div id="step-3-indicator" class="text-center w-1/3 transition-all duration-300">
+                            <span class="text-lg font-bold text-gray-500 text-hover-glow">3. Confirm</span>
+                            <div class="h-1 bg-gray-700 mt-2 transition-all duration-300"></div>
+                        </div>
+                    </div>
+
+                    <div id="booking-content">
+                        <!-- Step 1 -->
+                        <div id="step-1" class="booking-step">
+                            <h3 class="text-2xl font-bold mb-6 text-white text-hover-glow">Step 1: Define Mandate Focus</h3>
+                            <div class="space-y-4">
+                                <label class="block linear-panel p-4 cursor-pointer hover:border-purple-accent transition duration-300">
+                                    <input type="radio" name="focus" value="enterprise" checked class="form-radio text-purple-accent focus:ring-purple-accent mr-3 animated-btn">
+                                    <strong class="text-white text-hover-glow">Enterprise (B2B):</strong> Structural optimization and C-suite acquisition.
+                                </label>
+                                <label class="block linear-panel p-4 cursor-pointer hover:border-purple-accent transition duration-300">
+                                    <input type="radio" name="focus" value="candidate" class="form-radio text-purple-accent focus:ring-purple-accent mr-3 animated-btn">
+                                    <strong class="text-white text-hover-glow">Candidate (B2C):</strong> Career blueprinting and profile engineering.
+                                </label>
+                            </div>
+                            <button onclick="nextStep(2)" class="mt-8 w-full px-4 py-3 bg-purple-accent text-gray-900 font-bold rounded animated-btn">
+                                Proceed to Details (Step 2)
+                            </button>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div id="step-2" class="booking-step hidden">
+                            <h3 class="text-2xl font-bold mb-6 text-white text-hover-glow">Step 2: Contact & Availability</h3>
+                            <form id="details-form" class="space-y-4">
+                                <div>
+                                    <label for="contact-name" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Full Name / Company Name</label>
+                                    <input type="text" id="contact-name" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300">
+                                </div>
+                                <div>
+                                    <label for="contact-email" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Email (Confidential)</label>
+                                    <input type="email" id="contact-email" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300">
+                                </div>
+                                <div>
+                                    <label for="contact-phone" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Phone Number</label>
+                                    <input type="tel" id="contact-phone" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300">
+                                </div>
+                                <div>
+                                    <label for="contact-message" class="block text-sm font-medium text-gray-300 mb-1 text-hover-glow">Brief Project Scope / Challenge</label>
+                                    <textarea id="contact-message" rows="3" required class="w-full px-4 py-2 rounded bg-gray-900 border border-gray-700 focus:border-purple-accent text-white transition duration-300"></textarea>
+                                </div>
+                                
+                                <p class="text-gray-400 pt-4 text-hover-glow">
+                                    Available Slots (Showing in <span id="user-timezone" class="text-purple-accent font-bold">your timezone</span>):
+                                </p>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="linear-panel p-3 text-center cursor-pointer hover:border-purple-accent transition duration-300">
+                                        <input type="radio" name="schedule" value="mon_10am" checked class="form-radio text-purple-accent focus:ring-purple-accent mr-2 animated-btn">
+                                        <span class="schedule-time" data-ist="Mon 10:00 AM">Mon 10:00 AM IST</span>
+                                    </label>
+                                    <label class="linear-panel p-3 text-center cursor-pointer hover:border-purple-accent transition duration-300">
+                                        <input type="radio" name="schedule" value="tue_2pm" class="form-radio text-purple-accent focus:ring-purple-accent mr-2 animated-btn">
+                                        <span class="schedule-time" data-ist="Tue 2:00 PM">Tue 2:00 PM IST</span>
+                                    </label>
+                                    <label class="linear-panel p-3 text-center cursor-pointer hover:border-purple-accent transition duration-300">
+                                        <input type="radio" name="schedule" value="wed_4pm" class="form-radio text-purple-accent focus:ring-purple-accent mr-2 animated-btn">
+                                        <span class="schedule-time" data-ist="Wed 4:00 PM">Wed 4:00 PM IST</span>
+                                    </label>
+                                    <label class="linear-panel p-3 text-center cursor-pointer hover:border-purple-accent transition duration-300">
+                                        <input type="radio" name="schedule" value="thu_11am" class="form-radio text-purple-accent focus:ring-purple-accent mr-2 animated-btn">
+                                        <span class="schedule-time" data-ist="Thu 11:00 AM">Thu 11:00 AM IST</span>
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="mt-8 w-full px-4 py-3 bg-purple-accent text-gray-900 font-bold rounded animated-btn">
+                                    Finalize Blueprint Request (Step 3)
+                                </button>
+                                <button type="button" onclick="prevStep(1)" class="w-full mt-2 px-4 py-2 border border-gray-600 text-gray-300 font-bold rounded hover:bg-gray-800 transition duration-300 animated-btn">
+                                    ← Back to Focus
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div id="step-3" class="booking-step hidden text-center">
+                            <h3 class="text-2xl font-bold mb-6 text-purple-accent text-hover-glow-strong">Mandate Confirmed</h3>
+                            <svg class="w-20 h-20 text-green-500 mx-auto mb-6 transition-transform duration-500 hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <p class="text-lg text-white mb-4 text-hover-glow">
+                                Thank you, <span id="conf-name" class="font-bold"></span>!
+                            </p>
+                            <p class="text-gray-400 mb-6 text-hover-glow">
+                                Your strategic blueprint request has been initiated for the <span id="conf-focus" class="font-bold text-purple-accent"></span> focus area.
+                                A confirmation email with details of your <span id="conf-schedule" class="font-bold"></span> session has been sent to <span id="conf-email" class="font-bold"></span>.
+                            </p>
+                            <p class="text-sm text-gray-500 text-hover-glow">
+                                An Origennt lead analyst will perform the initial assessment prior to your meeting.
+                            </p>
+                            <a href="#home" class="inline-block mt-8 px-4 py-2 border border-purple-accent text-purple-accent font-bold rounded hover:bg-gray-800 transition duration-300 animated-btn">
+                                Return to Overview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-4">ORIGENNT</h4>
+                    <p class="text-sm text-gray-400 mb-4">Strategic Talent Engineering for the Global Enterprise.</p>
+                    <p class="text-xs text-gray-500">
+                        🏢 Headquartered in<br>
+                        Bhubaneswar, Odisha, India 🇮🇳
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#methodology" class="hover:text-purple-accent transition">Methodology</a></li>
+                        <li><a href="#models" class="hover:text-purple-accent transition">Services</a></li>
+                        <li><a href="#pricing" class="hover:text-purple-accent transition">Pricing</a></li>
+                        <li><a href="#booking" class="hover:text-purple-accent transition">Book Consultation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>📧 <a href="mailto:contact@origennt.com" class="hover:text-purple-accent transition">contact@origennt.com</a></li>
+                        <li>📞 India: +91-XXXXX-XXXXX</li>
+                        <li>💬 WhatsApp: +91-XXXXX-XXXXX</li>
+                        <li class="pt-2">
+                            <span class="text-xs text-gray-500">Working Hours</span><br>
+                            <span class="text-xs">Mon-Sat: 9:00 AM - 6:00 PM IST</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social & Legal -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Follow Us</h4>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="text-gray-400 hover:text-purple-accent transition text-2xl">🔗</a>
+                        <a href="#" class="text-gray-400 hover:text-purple-accent transition text-2xl">📘</a>
+                        <a href="#" class="text-gray-400 hover:text-purple-accent transition text-2xl">🐦</a>
+                        <a href="#" class="text-gray-400 hover:text-purple-accent transition text-2xl">📷</a>
+                    </div>
+                    <ul class="space-y-1 text-xs text-gray-500">
+                        <li><a href="#" class="hover:text-purple-accent transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-purple-accent transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-purple-accent transition">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-sm text-gray-500 text-hover-glow">
+                    &copy; 2025 ORIGENNT. Precision Talent Engineering. All Rights Reserved.
+                </p>
+                <p class="text-xs text-gray-600 mt-2">
+                    Serving clients in 25+ countries | Proudly based in Odisha, India
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
