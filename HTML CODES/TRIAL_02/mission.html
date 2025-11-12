@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission - Origennt</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-900 text-gray-50">
+    
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-xl border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="text-2xl font-extrabold tracking-widest text-white hover:text-purple-accent transition duration-300">ORIGENNT</a>
+                
+                <nav class="hidden lg:flex space-x-6 text-sm font-medium items-center">
+                    <a href="index.html" class="nav-link text-gray-300">HOME</a>
+                    <a href="b2b-services.html" class="nav-link text-gray-300">B2B SERVICES</a>
+                    <a href="b2c-services.html" class="nav-link text-gray-300">B2C SERVICES</a>
+                    <a href="methodology.html" class="nav-link text-gray-300">OUR METHODOLOGY</a>
+                    <a href="mission.html" class="nav-link text-purple-accent">OUR MISSION</a>
+                    <a href="merchandise.html" class="nav-link text-gray-300">MERCHANDISE</a>
+                    <a href="founders-voice.html" class="nav-link text-gray-300">FOUNDER'S VOICE</a>
+                    <a href="careers.html" class="nav-link text-gray-300">CAREERS</a>
+                    <a href="about.html" class="nav-link text-gray-300">ABOUT US</a>
+                    <a href="contact.html" class="ml-4 px-5 py-2 rounded bg-purple-accent text-gray-900 font-bold animated-btn">GET IN TOUCH</a>
+                </nav>
+
+                <button id="mobile-menu-button" class="lg:hidden text-gray-50 p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden bg-gray-900 absolute w-full shadow-lg border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 flex flex-col items-center">
+                <a href="index.html" class="nav-link-mobile block px-3 py-2 w-full text-center">HOME</a>
+                <a href="b2b-services.html" class="nav-link-mobile block px-3 py-2 w-full text-center">B2B SERVICES</a>
+                <a href="b2c-services.html" class="nav-link-mobile block px-3 py-2 w-full text-center">B2C SERVICES</a>
+                <a href="methodology.html" class="nav-link-mobile block px-3 py-2 w-full text-center">OUR METHODOLOGY</a>
+                <a href="mission.html" class="nav-link-mobile block px-3 py-2 text-purple-accent w-full text-center">OUR MISSION</a>
+                <a href="merchandise.html" class="nav-link-mobile block px-3 py-2 w-full text-center">MERCHANDISE</a>
+                <a href="founders-voice.html" class="nav-link-mobile block px-3 py-2 w-full text-center">FOUNDER'S VOICE</a>
+                <a href="careers.html" class="nav-link-mobile block px-3 py-2 w-full text-center">CAREERS</a>
+                <a href="about.html" class="nav-link-mobile block px-3 py-2 w-full text-center">ABOUT US</a>
+                <a href="contact.html" class="block px-4 py-2 my-2 rounded bg-purple-accent text-gray-900 font-bold w-11/12 text-center">GET IN TOUCH</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Video -->
+        <section class="relative py-32 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-20">
+                    <source src="videos/mission-hero.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-gray-900/90 to-gray-900"></div>
+            </div>
+
+            <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+                <div class="inline-block px-4 py-2 bg-purple-accent/20 border border-purple-accent rounded-full mb-6" data-scroll-fade>
+                    <span class="text-purple-accent font-bold">🎯 OUR VISION & IMPACT</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6" data-scroll-fade data-delay="200">
+                    Transforming <span class ="text-purple-accent">10,000 Careers</span><br>by 2030
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto" data-scroll-fade data-delay="400">
+                    Building India's largest AI-powered career transformation platform, one success story at a time—starting from the heart of Odisha.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center" data-scroll-fade data-delay="600">
+                    <a href="#dashboard" class="px-8 py-4 bg-purple-accent text-gray-900 font-bold rounded-lg animated-btn">
+                        View Our Progress Dashboard
+                    </a>
+                    <a href="#roadmap" class="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold rounded-lg transition duration-300">
+                        See Our Roadmap
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="section-bg py-20 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Image -->
+                    <div data-scroll-fade>
+                        <img src="https://placehold.co/800x600/111827/8c52ff?text=ORIGENNT+MISSION" alt="Origennt Mission" class="w-full rounded-lg shadow-2xl border border-gray-700">
+                    </div>
+
+                    <!-- Content -->
+                    <div data-scroll-fade data-delay="200">
+                        <h2 class="text-4xl font-bold text-white mb-6">Our <span class="text-purple-accent">Mission</span></h2>
+                        <p class="text-xl text-gray-300 mb-6 leading-relaxed">
+                            To democratize access to world-class career transformation by combining human empathy with AI-powered precision, making premium career engineering affordable and accessible to every ambitious professional in India and beyond.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="text-3xl mr-4">🌟</div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Empowerment Through Technology</h3>
+                                    <p class="text-gray-400">Leveraging AI to level the playing field for candidates from all backgrounds.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="text-3xl mr-4">🇮🇳</div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Odisha to the World</h3>
+                                    <p class="text-gray-400">Showcasing that world-class services can come from tier-2 cities like Bhubaneswar.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="text-3xl mr-4">📈</div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white mb-2">Measurable Social Impact</h3>
+                                    <p class="text-gray-400">Every placement creates a ripple effect—better careers lead to stronger communities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Dashboard Section -->
+        <section id="dashboard" class="section-bg py-24 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    Impact <span class="text-purple-accent">Dashboard</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    Real-time metrics tracking our progress toward transforming 10,000 careers by 2030.
+                </p>
+
+                <!-- Current Progress KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade>
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2" id="careers-transformed">248</p>
+                        <p class="text-sm text-gray-400 mb-1">Careers Transformed</p>
+                        <div class="w-full bg-gray-700 h-2 rounded-full mt-3">
+                            <div class="bg-purple-accent h-2 rounded-full" style="width: 2.48%"></div>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">2.48% of 10,000 goal</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="200">
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">₹4.2Cr</p>
+                        <p class="text-sm text-gray-400 mb-1">Total Salary Impact</p>
+                        <p class="text-xs text-gray-500 mt-2">Cumulative salary increases generated</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="400">
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">6</p>
+                        <p class="text-sm text-gray-400 mb-1">Countries Served</p>
+                        <p class="text-xs text-gray-500 mt-2">India, USA, UK, UAE, Singapore, Australia</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="600">
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">88%</p>
+                        <p class="text-sm text-gray-400 mb-1">Success Rate</p>
+                        <p class="text-xs text-gray-500 mt-2">Placements within 90 days</p>
+                    </div>
+                </div>
+
+                <!-- Charts Row 1 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Growth Trajectory Chart -->
+                    <div class="linear-panel p-8" data-scroll-fade>
+                        <h3 class="text-2xl font-bold text-white mb-6">📈 Growth Trajectory (2023-2030)</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4 text-center">Projected careers transformed per year with 45% YoY growth rate</p>
+                    </div>
+
+                    <!-- Geographic Distribution Pie Chart -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="200">
+                        <h3 class="text-2xl text-center font-bold text-white mb-6">🌍 Geographic Distribution</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="geoChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4 text-center">Current client distribution across regions</p>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Service Distribution -->
+                    <div class="linear-panel p-8" data-scroll-fade>
+                        <h3 class="text-2xl font-bold text-white mb-6">💼 Service Distribution</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="serviceChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4 text-center">Most popular services (B2B vs B2C breakdown)</p>
+                    </div>
+
+                    <!-- Monthly Revenue Forecast -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="200">
+                        <h3 class="text-2xl font-bold text-white mb-6">💰 Revenue Forecast (2025-2030)</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4 text-center">Projected annual revenue with conservative estimates</p>
+                    </div>
+                </div>
+
+                <!-- India State-wise Distribution -->
+                <div class="linear-panel p-8" data-scroll-fade>
+                    <h3 class="text-2xl font-bold text-white mb-6">🇮🇳 India: State-wise Client Distribution</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-6">
+                        <div class="bg-gray-800/50 p-4 rounded text-center">
+                            <p class="text-3xl font-bold text-purple-accent">42%</p>
+                            <p class="text-sm text-gray-400">Odisha</p>
+                        </div>
+                        <div class="bg-gray-800/50 p-4 rounded text-center">
+                            <p class="text-3xl font-bold text-purple-accent">18%</p>
+                            <p class="text-sm text-gray-400">Karnataka</p>
+                        </div>
+                        <div class="bg-gray-800/50 p-4 rounded text-center">
+                            <p class="text-3xl font-bold text-purple-accent">12%</p>
+                            <p class="text-sm text-gray-400">Maharashtra</p>
+                        </div>
+                        <div class="bg-gray-800/50 p-4 rounded text-center">
+                            <p class="text-3xl font-bold text-purple-accent">10%</p>
+                            <p class="text-sm text-gray-400">Delhi NCR</p>
+                        </div>
+                        <div class="bg-gray-800/50 p-4 rounded text-center">
+                            <p class="text-3xl font-bold text-purple-accent">18%</p>
+                            <p class="text-sm text-gray-400">Other States</p>
+                        </div>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="indiaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Short-term Goals (2025-2026) -->
+        <section class="section-bg py-20 border-b border-gray-800 bg-gray-800/30">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    Short-Term Goals <span class="text-purple-accent">(2025-2026)</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    Our immediate priorities for the next 18 months.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Goal 1 -->
+                    <div class="linear-panel p-8 hover:scale-105 transition-transform duration-300" data-scroll-fade>
+                        <div class="text-5xl mb-4">🎯</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">500 Careers Transformed</h3>
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Current: 248</span>
+                                <span class="text-purple-accent">Target: 500</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-3 rounded-full">
+                                <div class="bg-purple-accent h-3 rounded-full transition-all duration-1000" style="width: 49.6%"></div>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>✓ 252 more placements needed</li>
+                            <li>✓ ~20 placements/month</li>
+                            <li>✓ Target: June 2026</li>
+                        </ul>
+                    </div>
+
+                    <!-- Goal 2 -->
+                    <div class="linear-panel p-8 hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="200">
+                        <div class="text-5xl mb-4">🌍</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">10 Countries</h3>
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Current: 6</span>
+                                <span class="text-purple-accent">Target: 10</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-3 rounded-full">
+                                <div class="bg-purple-accent h-3 rounded-full transition-all duration-1000" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>✓ Expand to Canada, Germany</li>
+                            <li>✓ Enter Middle East (Dubai, Riyadh)</li>
+                            <li>✓ Launch in Southeast Asia</li>
+                        </ul>
+                    </div>
+
+                    <!-- Goal 3 -->
+                    <div class="linear-panel p-8 hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="400">
+                        <div class="text-5xl mb-4">👥</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Team of 15</h3>
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Current: 5</span>
+                                <span class="text-purple-accent">Target: 15</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-3 rounded-full">
+                                <div class="bg-purple-accent h-3 rounded-full transition-all duration-1000" style="width: 33.3%"></div>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>✓ Hire 10 career coaches</li>
+                            <li>✓ 2 AI/ML engineers</li>
+                            <li>✓ 3 marketing specialists</li>
+                        </ul>
+                    </div>
+
+                    <!-- Goal 4 -->
+                    <div class="linear-panel p-8 hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="600">
+                        <div class="text-5xl mb-4">🤖</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">AI Platform V2.0</h3>
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Progress: 35%</span>
+                                <span class="text-purple-accent">Target: 100%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-3 rounded-full">
+                                <div class="bg-purple-accent h-3 rounded-full transition-all duration-1000" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>✓ Advanced resume parser</li>
+                            <li>✓ Predictive salary models</li>
+                            <li>✓ Automated interview prep bot</li>
+                        </ul>
+                    </div>
+
+                    <!-- Goal 5 -->
+                    <div class="linear-panel p-8 hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="800">
+                        <div class="text-5xl mb-4">🏢</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">New Office Space</h3>
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Target: Q3 2025</span>
+                                <span class="text-purple-accent">Bhubaneswar</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-3 rounded-full">
+                                <div class="bg-purple-accent h-3 rounded-full transition-all duration-1000" style="width: 25%"></div>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>✓ 3000 sq ft modern workspace</li>
+                            <li>✓ 20-seat capacity</li>
+                            <li>✓ Recording studio for content</li>
+                        </ul>
+                    </div>
+
+                    <!-- Goal 6 -->
+                    <div class="linear-panel p-8 hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="1000">
+                        <div class="text-5xl mb-4">💰</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">₹2Cr ARR</h3>
+                        <div class="mb-6">
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Current: ₹45L</span>
+                                <span class="text-purple-accent">Target: ₹2Cr</span>
+                            </div>
+                            <div class="w-full bg-gray-700 h-3 rounded-full">
+                                <div class="bg-purple-accent h-3 rounded-full transition-all duration-1000" style="width: 22.5%"></div>
+                            </div>
+                        </div>
+                        <ul class="text-gray-400 space-y-2 text-sm">
+                            <li>✓ ₹1.55Cr growth needed</li>
+                            <li>✓ ~₹17L/month average</li>
+                            <li>✓ Achieve by Dec 2026</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Long-term Vision (2027-2030) -->
+        <section id="roadmap" class="section-bg py-24 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    Long-Term Vision <span class="text-purple-accent">(2027-2030)</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    Our ambitious roadmap to becoming India's #1 career transformation platform.
+                </p>
+
+                <!-- Timeline Visualization -->
+                <div class="relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-purple-accent/30 hidden lg:block"></div>
+
+                    <!-- 2027 -->
+                    <div class="mb-16" data-scroll-fade>
+                        <div class="flex flex-col lg:flex-row items-center gap-8">
+                            <div class="lg:w-1/2 lg:text-right lg:pr-12">
+                                <div class="linear-panel p-8">
+                                    <h3 class="text-3xl font-bold text-purple-accent mb-4">2027: Expansion Year</h3>
+                                    <ul class="space-y-3 text-gray-300">
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">🎯</span>
+                                            <span><strong>2,000 Careers</strong> transformed (cumulative)</span>
+                                        </li>
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">🌍</span>
+                                            <span><strong>15 Countries</strong> operational</span>
+                                        </li>
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">💼</span>
+                                            <span><strong>50-person team</strong> across 3 cities</span>
+                                        </li>
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">💰</span>
+                                            <span><strong>₹8Cr ARR</strong> revenue milestone</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block w-16 h-16 bg-purple-accent rounded-full flex-shrink-0 flex items-center justify-center border-4 border-gray-900 z-10">
+                                <span class="text-2xl font-bold text-gray-900">27</span>
+                            </div>
+                            <div class="lg:w-1/2 lg:pl-12">
+                                <img src="https://placehold.co/600x400/111827/8c52ff?text=2027+EXPANSION" alt="2027 Vision" class="rounded-lg shadow-xl border border-gray-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2028 -->
+                    <div class="mb-16" data-scroll-fade>
+                        <div class="flex flex-col lg:flex-row-reverse items-center gap-8">
+                            <div class="lg:w-1/2 lg:text-left lg:pl-12">
+                                <div class="linear-panel p-8">
+                                    <h3 class="text-3xl font-bold text-purple-accent mb-4">2028: Technology Leadership</h3>
+                                    <ul class="space-y-3 text-gray-300">
+                                        <li class="flex items-start">
+                                            <span class="mr-2">🤖</span>
+                                            <span><strong>AI Platform 3.0</strong> with predictive analytics</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">📱</span>
+                                            <span><strong>Mobile App Launch</strong> (iOS & Android)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">🎯</span>
+                                            <span><strong>5,000 Careers</strong></span>
+                                            <span class="mr-2">🎯</span>
+                                            <span><strong>5,000 Careers</strong> transformed (cumulative)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">💰</span>
+                                            <span><strong>₹15Cr ARR</strong> milestone achieved</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block w-16 h-16 bg-purple-accent rounded-full flex-shrink-0 flex items-center justify-center border-4 border-gray-900 z-10">
+                                <span class="text-2xl font-bold text-gray-900">28</span>
+                            </div>
+                            <div class="lg:w-1/2 lg:pr-12">
+                                <img src="https://placehold.co/600x400/111827/8c52ff?text=2028+TECH+LEADERSHIP" alt="2028 Vision" class="rounded-lg shadow-xl border border-gray-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2029 -->
+                    <div class="mb-16" data-scroll-fade>
+                        <div class="flex flex-col lg:flex-row items-center gap-8">
+                            <div class="lg:w-1/2 lg:text-right lg:pr-12">
+                                <div class="linear-panel p-8">
+                                    <h3 class="text-3xl font-bold text-purple-accent mb-4">2029: Market Leadership</h3>
+                                    <ul class="space-y-3 text-gray-300">
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">🏆</span>
+                                            <span><strong>India's #1</strong> career transformation platform</span>
+                                        </li>
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">🎯</span>
+                                            <span><strong>7,500 Careers</strong> transformed (cumulative)</span>
+                                        </li>
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">🌍</span>
+                                            <span><strong>20 Countries</strong> with local teams</span>
+                                        </li>
+                                        <li class="flex items-start lg:justify-end">
+                                            <span class="mr-2">💰</span>
+                                            <span><strong>₹25Cr ARR</strong> revenue milestone</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block w-16 h-16 bg-purple-accent rounded-full flex-shrink-0 flex items-center justify-center border-4 border-gray-900 z-10">
+                                <span class="text-2xl font-bold text-gray-900">29</span>
+                            </div>
+                            <div class="lg:w-1/2 lg:pl-12">
+                                <img src="https://placehold.co/600x400/111827/8c52ff?text=2029+MARKET+LEADER" alt="2029 Vision" class="rounded-lg shadow-xl border border-gray-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2030 -->
+                    <div data-scroll-fade>
+                        <div class="flex flex-col lg:flex-row-reverse items-center gap-8">
+                            <div class="lg:w-1/2 lg:text-left lg:pl-12">
+                                <div class="linear-panel p-8 border-2 border-purple-accent bg-gradient-to-br from-purple-900/30 to-transparent">
+                                    <h3 class="text-3xl font-bold text-purple-accent mb-4">2030: Mission Accomplished 🎉</h3>
+                                    <ul class="space-y-3 text-gray-300">
+                                        <li class="flex items-start">
+                                            <span class="mr-2">🎯</span>
+                                            <span><strong>10,000 Careers</strong> transformed (GOAL!)</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">🌍</span>
+                                            <span><strong>25+ Countries</strong> global presence</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">👥</span>
+                                            <span><strong>200+ Team Members</strong> worldwide</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">💰</span>
+                                            <span><strong>₹50Cr+ ARR</strong> sustainable business</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="mr-2">🏆</span>
+                                            <span><strong>IPO Ready</strong> or strategic acquisition</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block w-16 h-16 bg-gradient-to-br from-purple-600 to-purple-400 rounded-full flex-shrink-0 flex items-center justify-center border-4 border-gray-900 z-10 shadow-lg shadow-purple-500/50">
+                                <span class="text-2xl font-bold items-center justify-center flex w-full h-full rounded-full font-bold text-gray-900">2030</span>
+                            </div>
+                            <div class="lg:w-1/2 lg:pr-12">
+                                <img src="https://placehold.co/600x400/111827/8c52ff?text=2030+MISSION+COMPLETE" alt="2030 Vision" class="rounded-lg shadow-xl border-2 border-purple-accent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forecasting Models -->
+        <section class="section-bg py-20 border-b border-gray-800 bg-gray-800/30">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    Data-Driven <span class="text-purple-accent">Forecasting</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    Our projections are based on historical data, market trends, and conservative growth assumptions.
+                </p>
+
+                <!-- Forecast Dashboard -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Client Acquisition Forecast -->
+                    <div class="linear-panel p-8" data-scroll-fade>
+                        <h3 class="text-2xl font-bold text-white mb-6">📊 Client Acquisition Forecast</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="acquisitionForecast"></canvas>
+                        </div>
+                        <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <p class="text-2xl font-bold text-green-400">Best Case</p>
+                                <p class="text-sm text-gray-400">60% YoY growth</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-purple-accent">Expected</p>
+                                <p class="text-sm text-gray-400">45% YoY growth</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold text-orange-400">Conservative</p>
+                                <p class="text-sm text-gray-400">30% YoY growth</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Market Share Projection -->
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="200">
+                        <h3 class="text-2xl font-bold text-white mb-6">🎯 Market Share Projection</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="marketShareChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-400 mt-4 text-center">Projected market share in India's career services industry (₹5,000Cr TAM)</p>
+                    </div>
+                </div>
+
+                <!-- Key Assumptions Table -->
+                <div class="linear-panel p-8" data-scroll-fade>
+                    <h3 class="text-2xl font-bold text-white mb-6">📋 Forecast Assumptions & Methodology</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="border-b-2 border-purple-accent">
+                                <tr>
+                                    <th class="p-3 text-purple-accent">Parameter</th>
+                                    <th class="p-3 text-purple-accent">Current (2025)</th>
+                                    <th class="p-3 text-purple-accent">2027</th>
+                                    <th class="p-3 text-purple-accent">2030</th>
+                                    <th class="p-3 text-purple-accent">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-300">
+                                <tr class="border-b border-gray-700">
+                                    <td class="p-3 font-semibold">Avg. Deal Size</td>
+                                    <td class="p-3">₹18,000</td>
+                                    <td class="p-3">₹22,000</td>
+                                    <td class="p-3">₹28,000</td>
+                                    <td class="p-3 text-sm text-gray-400">Mix of B2B/B2C, premium services increase</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="p-3 font-semibold">Monthly Clients</td>
+                                    <td class="p-3">20</td>
+                                    <td class="p-3">70</td>
+                                    <td class="p-3">170</td>
+                                    <td class="p-3 text-sm text-gray-400">Scaling with team & marketing</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="p-3 font-semibold">Success Rate</td>
+                                    <td class="p-3">88%</td>
+                                    <td class="p-3">90%</td>
+                                    <td class="p-3">92%</td>
+                                    <td class="p-3 text-sm text-gray-400">Process optimization & AI improvements</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="p-3 font-semibold">Team Size</td>
+                                    <td class="p-3">5</td>
+                                    <td class="p-3">50</td>
+                                    <td class="p-3">200</td>
+                                    <td class="p-3 text-sm text-gray-400">Scaling proportional to client load</td>
+                                </tr>
+                                <tr class="border-b border-gray-700">
+                                    <td class="p-3 font-semibold">CAC (Customer Acquisition Cost)</td>
+                                    <td class="p-3">₹4,500</td>
+                                    <td class="p-3">₹3,200</td>
+                                    <td class="p-3">₹2,500</td>
+                                    <td class="p-3 text-sm text-gray-400">Economies of scale, brand awareness</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-semibold">Net Margin</td>
+                                    <td class="p-3">25%</td>
+                                    <td class="p-3">32%</td>
+                                    <td class="p-3">38%</td>
+                                    <td class="p-3 text-sm text-gray-400">Operational efficiency improvements</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Impact -->
+        <section class="section-bg py-20 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    Our <span class="text-purple-accent">Social Impact</span>
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    Beyond placements—creating lasting change in communities.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    <div class="linear-panel p-8 text-center" data-scroll-fade>
+                        <div class="text-5xl mb-4">🎓</div>
+                        <p class="text-4xl font-bold text-purple-accent mb-2">500+</p>
+                        <p class="text-sm text-gray-400">Free career counselling sessions for students</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="200">
+                        <div class="text-5xl mb-4">👩‍💼</div>
+                        <p class="text-4xl font-bold text-purple-accent mb-2">60%</p>
+                        <p class="text-sm text-gray-400">Women professionals empowered</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="400">
+                        <div class="text-5xl mb-4">🏘️</div>
+                        <p class="text-4xl font-bold text-purple-accent mb-2">42%</p>
+                        <p class="text-sm text-gray-400">Clients from Tier-2/3 cities</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="600">
+                        <div class="text-5xl mb-4">💰</div>
+                        <p class="text-4xl font-bold text-purple-accent mb-2">₹4.2Cr</p>
+                        <p class="text-sm text-gray-400">Total salary impact created</p>
+                    </div>
+                </div>
+
+                <!-- Impact Stories -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="linear-panel p-8" data-scroll-fade>
+                        <h3 class="text-xl font-bold text-white mb-4">🌟 Odisha First Initiative</h3>
+                        <p class="text-gray-400 mb-4">
+                            50% of our services offered at subsidized rates for professionals based in Odisha, giving back to our home state.
+                        </p>
+                        <div class="bg-purple-accent/10 border border-purple-accent rounded p-4">
+                            <p class="text-sm text-gray-300"><strong class="text-purple-accent">Impact:</strong> 104 Odisha-based careers transformed, avg. salary increase of ₹3.2L per person.</p>
+                        </div>
+                    </div>
+
+                    <div class="linear-panel p-8" data-scroll-fade data-delay="200">
+                        <h3 class="text-xl font-bold text-white mb-4">🎓 Campus Connect Program</h3>
+                        <p class="text-gray-400 mb-4">
+                            Free workshops and career guidance at 15+ colleges across Odisha, reaching 2,000+ students annually.
+                        </p>
+                        <div class="bg-purple-accent/10 border border-purple-accent rounded p-4">
+                            <p class="text-sm text-gray-300"><strong class="text-purple-accent">Goal 2030:</strong> Reach 50,000 students across India with free career education.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values -->
+        <section class="section-bg py-20 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-16" data-scroll-fade>
+                    Our <span class="text-purple-accent">Core Values</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="linear-panel p-8 text-center" data-scroll-fade>
+                        <div class="text-6xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Result-Obsessed</h3>
+                        <p class="text-gray-400">We measure everything. If it doesn't lead to placement, we don't do it.</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="200">
+                        <div class="text-6xl mb-4">🤝</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Empathy First</h3>
+                        <p class="text-gray-400">Behind every resume is a person with dreams. We treat them with respect and care.</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="400">
+                        <div class="text-6xl mb-4">🚀</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Innovation Driven</h3>
+                        <p class="text-gray-400">We constantly improve our methodology with AI, data, and client feedback.</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="600">
+                        <div class="text-6xl mb-4">💎</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Transparency</h3>
+                        <p class="text-gray-400">No hidden fees. No false promises. We tell it like it is.</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="800">
+                        <div class="text-6xl mb-4">🌱</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Community Focus</h3>
+                        <p class="text-gray-400">Success is shared. We reinvest in Odisha and give back to society.</p>
+                    </div>
+
+                    <div class="linear-panel p-8 text-center" data-scroll-fade data-delay="1000">
+                        <div class="text-6xl mb-4">⚡</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Speed & Quality</h3>
+                        <p class="text-gray-400">Fast execution without compromising excellence. Both matter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="relative py-24 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-gray-900"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6" data-scroll-fade>
+                    Be Part of <span class="text-purple-accent">Our Journey</span>
+                </h2>
+                <p class="text-xl text-gray-300 mb-10" data-scroll-fade data-delay="200">
+                    Join us in transforming 10,000 careers by 2030. Whether you're a client, partner, or team member—there's a place for you.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center" data-scroll-fade data-delay="400">
+                    <a href="https://topmate.io/origennt" target="_blank" class="inline-block px-8 py-4 text-lg font-bold rounded-lg bg-purple-accent text-gray-900 animated-btn shadow-xl">
+                        Transform Your Career
+                    </a>
+                    <a href="careers.html" class="inline-block px-8 py-4 text-lg font-bold rounded-lg border-2 border-white text-white hover:bg-white hover:text-gray-900 transition duration-300">
+                        Join Our Team
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-4">ORIGENNT</h4>
+                    <p class="text-sm text-gray-400 mb-4">Empowering Every Step of Your Career Journey</p>
+                    <p class="text-xs text-gray-500">🏢 Bhubaneswar, Odisha, India 🇮🇳</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="b2b-services.html" class="hover:text-purple-accent transition">B2B Services</a></li>
+                        <li><a href="b2c-services.html" class="hover:text-purple-accent transition">B2C Services</a></li>
+                        <li><a href="merchandise.html" class="hover:text-purple-accent transition">Merchandise</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="about.html" class="hover:text-purple-accent transition">About Us</a></li>
+                        <li><a href="mission.html" class="hover:text-purple-accent transition">Our Mission</a></li>
+                        <li><a href="methodology.html" class="hover:text-purple-accent transition">Methodology</a></li>
+                        <li><a href="founders-voice.html" class="hover:text-purple-accent transition">Founder's Voice</a></li>
+                        <li><a href="careers.html" class="hover:text-purple-accent transition">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>📧 <a href="mailto:origennt@gmail.com" class="hover:text-purple-accent transition">origennt@gmail.com</a></li>
+                        <li>📞 +91 6370947106</li>
+                        <li>💬 <a href="https://topmate.io/origennt" target="_blank" class="hover:text-purple-accent transition">Book on Topmate</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-sm text-gray-500">&copy; 2025 ORIGENNT. All Rights Reserved.</p>
+                <p class="text-xs text-gray-600 mt-2">Your Premium HR & Career Consultancy Partner</p>
+            </div>
+        </div>
+    </footer>
+    <script src="missionscript.js"></script>
+</body>
+</html>
+
+   
