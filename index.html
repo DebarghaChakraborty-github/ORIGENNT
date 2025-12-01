@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Origennt - Strategic Talent Engineering from Odisha, India serving global clients with data-driven recruitment solutions.">
+    <title>Origennt - Strategic Talent Engineering | Home</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-900 text-gray-50">
+    
+    <!-- Navigation (Shared across all pages) -->
+    <header class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm shadow-xl border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="text-2xl font-extrabold tracking-widest text-white hover:text-purple-accent transition duration-300">
+                    ORIGENNT
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-6 text-sm font-medium items-center">
+                    <a href="index.html" class="nav-link text-purple-accent">HOME</a>
+                    <a href="b2b-services.html" class="nav-link text-gray-300">B2B SERVICES</a>
+                    <a href="b2c-services.html" class="nav-link text-gray-300">B2C SERVICES</a>
+                    <a href="methodology.html" class="nav-link text-gray-300">OUR METHODOLOGY</a>
+                    <a href="mission.html" class="nav-link text-gray-300">OUR MISSION</a>
+                    <a href="merchandise.html" class="nav-link text-gray-300">MERCHANDISE</a>
+                    <a href="founders-voice.html" class="nav-link text-gray-300">FOUNDER'S VOICE</a>
+                    <a href="careers.html" class="nav-link text-gray-300">CAREERS</a>
+                    <a href="about.html" class="nav-link text-gray-300">ABOUT US</a>
+                    <a href="contact.html" class="block px-4 py-2 my-2 rounded bg-purple-accent text-white-900 border-2 text-sm font-bold w-11/12 text-center hover:bg-gray-700">GET IN TOUCH</a>
+                    
+                    <!-- Region Selector -->
+                    <div class="relative region-selector">
+                        <button id="region-btn" class="flex items-center space-x-2 px-3 py-2 rounded bg-gray-800 hover:bg-gray-700 transition duration-300">
+                            <span id="region-flag">🌐</span>
+                            <span id="region-name" class="text-sm">Global</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="region-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 border border-gray-700 z-50">
+                            <div class="py-1">
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="IN" data-flag="🇮🇳">🇮🇳 India</button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="US" data-flag="🇺🇸">🇺🇸 United States</button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="GB" data-flag="🇬🇧">🇬🇧 United Kingdom</button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="EU" data-flag="🇪🇺">🇪🇺 Europe</button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="AE" data-flag="🇦🇪">🇦🇪 Middle East</button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="SG" data-flag="🇸🇬">🇸🇬 Singapore/APAC</button>
+                                <button class="region-option w-full text-left px-4 py-2 text-sm hover:bg-gray-700" data-region="AU" data-flag="🇦🇺">🇦🇺 Australia</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="contact.html" class="ml-4 px-5 py-2 rounded bg-purple-accent text-gray-900 font-bold animated-btn">GET IN TOUCH</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-gray-50 hover:text-purple-accent focus:outline-none transition duration-300 p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-gray-900 absolute w-full shadow-lg border-t border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 flex flex-col items-center">
+                <a href="index.html" class="nav-link-mobile block px-3 py-2 text-purple-accent w-full text-center">HOME</a>
+                <a href="b2b-services.html" class="nav-link-mobile block px-3 py-2 w-full text-center">B2B SERVICES</a>
+                <a href="b2c-services.html" class="nav-link-mobile block px-3 py-2 w-full text-center">B2C SERVICES</a>
+                <a href="methodology.html" class="nav-link-mobile block px-3 py-2 w-full text-center">OUR METHODOLOGY</a>
+                <a href="mission.html" class="nav-link-mobile block px-3 py-2 w-full text-center">OUR MISSION</a>
+                <a href="merchandise.html" class="nav-link-mobile block px-3 py-2 w-full text-center">MERCHANDISE</a>
+                <a href="founders-voice.html" class="nav-link-mobile block px-3 py-2 w-full text-center">FOUNDER'S VOICE</a>
+                <a href="careers.html" class="nav-link-mobile block px-3 py-2 w-full text-center">CAREERS</a>
+                <a href="about.html" class="nav-link-mobile block px-3 py-2 w-full text-center">ABOUT US</a>
+                <a href="contact.html" class="block px-4 py-2 my-2 rounded bg-purple-accent text-gray-900 font-bold w-11/12 text-center">GET IN TOUCH</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Background Video -->
+        <section class="relative h-screen flex items-center justify-center overflow-hidden">
+            <!-- Background Video -->
+            <div class="absolute inset-0 z-0">
+                <video autoplay muted loop playsinline class="absolute w-full h-full object-cover opacity-100">
+                    <source src="D:\ORIGENNT\WEBSITE\trial 02\video\hero-background-video.mp4" type="video/mp4">
+                    <!-- Fallback gradient -->
+                     Your Browser does not Support the Video Format
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900/50 via-gray-900/80 to-gray-900"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 max-w-5xl mx-auto px-4 text-center" data-scroll-fade>
+                <p class="text-sm font-semibold tracking-widest uppercase text-purple-accent mb-2">
+                    Strategic Talent Engineering
+                </p>
+                <p class="text-xs text-gray-400 mb-6">
+                    🏢 Based in Bhubaneswar, Odisha, India 🇮🇳 | 🌍 Serving 25+ Countries Worldwide
+                </p>
+                
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 tracking-tight text-white">
+                    Architecting Human Capital<br>for <span class="text-purple-accent">Verifiable ROI</span>
+                </h1>
+                
+                <p id="typing-text" class="text-xl md:text-2xl text-gray-300 font-medium mb-10 max-w-3xl mx-auto min-h-[2em]">
+                    <!-- Typing animation -->
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://topmate.io/origennt" target="_blank" class="inline-block px-8 py-4 text-lg font-bold rounded-lg bg-purple-accent text-white-900 animated-btn shadow-xl hover:text-gray-400 duration-300">
+                        📅 Book a Consultation
+                    </a>
+                    <a href="contact.html" class="inline-block px-8 py-4 text-lg font-bold rounded-lg border-2 border-purple-accent text-purple-accent hover:scale-105 transition-transform bg-purple-accent hover:text-gray-400 transition duration-300">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <svg class="w-6 h-6 text-purple-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- What We Do Section -->
+        <section class="section-bg py-24 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    What We Do
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    We don't just recruit. We engineer talent ecosystems that drive measurable business outcomes.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- B2B Services -->
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade>
+                        <div class="text-6xl mb-6">🏢</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">B2B Enterprise Solutions</h3>
+                        <p class="text-gray-400 mb-6">
+                            Strategic talent acquisition, organizational design, and C-suite recruitment for scaling enterprises.
+                        </p>
+                        <a href="b2b-services.html" class="inline-block px-6 py-2 border-2 border-purple-accent text-purple-accent hover:bg-purple-accent hover:text-gray-900 rounded transition duration-300">
+                            Explore B2B Services →
+                        </a>
+                    </div>
+
+                    <!-- B2C Services -->
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="200">
+                        <div class="text-6xl mb-6">👤</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">B2C Career Services</h3>
+                        <p class="text-gray-400 mb-6">
+                            Personal branding, resume engineering, interview coaching, and career transformation for ambitious professionals.
+                        </p>
+                        <a href="b2c-services.html" class="inline-block px-6 py-2 border-2 border-purple-accent text-purple-accent hover:bg-purple-accent hover:text-gray-900 rounded transition duration-300">
+                            Explore B2C Services →
+                        </a>
+                    </div>
+
+                    <!-- Merchandise -->
+                    <div class="linear-panel p-8 text-center hover:scale-105 transition-transform duration-300" data-scroll-fade data-delay="400">
+                        <div class="text-6xl mb-6">🎁</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Resources & Merchandise</h3>
+                        <p class="text-gray-400 mb-6">
+                            Premium career guides, templates, toolkits, and exclusive Origennt merchandise for talent professionals.
+                        </p>
+                        <a href="merchandise.html" class="inline-block px-6 py-2 border-2 border-purple-accent text-purple-accent hover:bg-purple-accent hover:text-gray-900 rounded transition duration-300">
+                            Shop Now →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Metrics -->
+        <section class="section-bg py-20 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12" data-scroll-fade>
+                    Results That Speak
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="p-8 linear-panel text-center" data-scroll-fade>
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">500+</p>
+                        <p class="text-lg font-semibold text-white">Successful Placements</p>
+                    </div>
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="200">
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">25+</p>
+                        <p class="text-lg font-semibold text-white">Countries Served</p>
+                    </div>
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="400">
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">40%</p>
+                        <p class="text-lg font-semibold text-white">Faster Hiring</p>
+                    </div>
+                    <div class="p-8 linear-panel text-center" data-scroll-fade data-delay="600">
+                        <p class="text-5xl font-extrabold text-purple-accent mb-2">95%</p>
+                        <p class="text-lg font-semibold text-white">Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Origennt -->
+        <section class="section-bg py-24 border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-6" data-scroll-fade>
+                    Why Choose <span class="text-purple-accent">Origennt</span>?
+                </h2>
+                <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto" data-scroll-fade>
+                    We combine global expertise with Indian value to deliver unmatched results.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="linear-panel p-6" data-scroll-fade>
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Data-Driven Decisions</h3>
+                        <p class="text-gray-400">Proprietary AI models and predictive analytics power every placement decision.</p>
+                    </div>
+
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="200">
+                        <div class="text-4xl mb-4">🌍</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Global Reach</h3>
+                        <p class="text-gray-400">Serving clients across 25+ countries with localized expertise.</p>
+                    </div>
+
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="400">
+                        <div class="text-4xl mb-4">💰</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Cost-Effective Excellence</h3>
+                        <p class="text-gray-400">Premium quality at competitive rates from our Odisha base.</p>
+                    </div>
+
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="600">
+                        <div class="text-4xl mb-4">⚡</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Speed & Efficiency</h3>
+                        <p class="text-gray-400">40% faster time-to-hire without compromising quality.</p>
+                    </div>
+
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="800">
+                        <div class="text-4xl mb-4">🤝</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Long-Term Partnership</h3>
+                        <p class="text-gray-400">We don't just fill positions—we build lasting talent ecosystems.</p>
+                    </div>
+
+                    <div class="linear-panel p-6" data-scroll-fade data-delay="1000">
+                        <div class="text-4xl mb-4">🎓</div>
+                        <h3 class="text-xl font-bold text-white mb-3">Continuous Learning</h3>
+                        <p class="text-gray-400">Ongoing training and development for sustained success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative py-24 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-gray-900"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6" data-scroll-fade>
+                    Ready to Transform Your Talent Strategy?
+                </h2>
+                <p class="text-xl text-gray-300 mb-10" data-scroll-fade data-delay="200">
+                    Let's discuss how Origennt can help you achieve measurable ROI through strategic talent engineering.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center" data-scroll-fade data-delay="400">
+                    <a href="https://topmate.io/origennt" target="_blank" class="inline-block px-8 py-4 text-lg font-bold rounded-lg bg-purple-accent text-gray-900 animated-btn shadow-xl">
+                        📅 Schedule a Free Consultation
+                    </a>
+                    <a href="contact.html" class="inline-block px-8 py-4 text-lg font-bold rounded-lg border-2 border-white text-white hover:bg-white hover:text-gray-900 transition duration-300">
+                        ✉️ Send Us a Message
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-4">ORIGENNT</h4>
+                    <p class="text-sm text-gray-400 mb-4">Strategic Talent Engineering for the Global Enterprise.</p>
+                    <p class="text-xs text-gray-500">🏢 Bhubaneswar, Odisha, India 🇮🇳</p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="b2b-services.html" class="hover:text-purple-accent transition">B2B Services</a></li>
+                        <li><a href="b2c-services.html" class="hover:text-purple-accent transition">B2C Services</a></li>
+                        <li><a href="merchandise.html" class="hover:text-purple-accent transition">Merchandise</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="about.html" class="hover:text-purple-accent transition">About Us</a></li>
+                        <li><a href="mission.html" class="hover:text-purple-accent transition">Our Mission</a></li>
+                        <li><a href="methodology.html" class="hover:text-purple-accent transition">Methodology</a></li>
+                        <li><a href="founders-voice.html" class="hover:text-purple-accent transition">Founder's Voice</a></li>
+                        <li><a href="careers.html" class="hover:text-purple-accent transition">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Connect</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>📧 <a href="mailto:origennt@gmail.com" class="hover:text-purple-accent transition">origennt@gmail.com</a></li>
+                        <li>📞 +91-XXXXX-XXXXX</li>
+                        <li>💬 <a href="https://topmate.io/origennt" target="_blank" class="hover:text-purple-accent transition">Book on Topmate</a></li>
+                        <li class="pt-2">
+                            <span class="text-xs text-gray-500">Mon-Sat: 9 AM - 6 PM IST</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-sm text-gray-500">&copy; 2025 ORIGENNT. All Rights Reserved.</p>
+                <p class="text-xs text-gray-600 mt-2">Proudly serving 25+ countries from Odisha, India</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
