@@ -419,6 +419,9 @@ header {
   border-bottom: 1px solid var(--border-color);
   transition: background-color 0.3s ease, border-color 0.3s ease;
   padding: var(--space-md) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 header.scrolled {
@@ -488,6 +491,10 @@ header.scrolled {
   background-clip: text;
   transition: transform 0.3s var(--apple-ease);
   display: inline-block;
+}
+
+.flex.justify-between.items-center.h-16 {
+width: 100%;
 }
 
 .logo:hover {
