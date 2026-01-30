@@ -10,11 +10,11 @@ Version: 2.0 Enhanced
 
 /* ==================== CSS VARIABLES ==================== */
 :root {
-  /* Dark Theme Colors */
-  --bg-dark: #0a0a0c;
-  --bg-panel: #111114;
-  --bg-card: #1a1a1f;
-  --bg-elevated: #22222a;
+  /* Light Theme Colors (Default) */
+  --bg-dark: #ffffff;
+  --bg-panel: #f9fafb;
+  --bg-card: #ffffff;
+  --bg-elevated: #f3f4f6;
   
   /* Purple Spectrum */
   --purple-50: #faf5ff;
@@ -29,18 +29,18 @@ Version: 2.0 Enhanced
   --purple-900: #581c87;
   
   --purple-accent: #a855f7;
-  --purple-glow: rgba(168, 85, 247, 0.4);
-  --purple-subtle: rgba(168, 85, 247, 0.08);
+  --purple-glow: rgba(168, 85, 247, 0.2);
+  --purple-subtle: rgba(168, 85, 247, 0.05);
   
   /* Grayscale */
-  --text-main: #f9fafb;
-  --text-secondary: #d1d5db;
-  --text-muted: #9ca3af;
-  --text-subtle: #6b7280;
+  --text-main: #111827;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
   
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-light: rgba(255, 255, 255, 0.05);
-  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --border-light: rgba(0, 0, 0, 0.05);
+  --border-strong: rgba(0, 0, 0, 0.2);
   
   /* Semantic Colors */
   --success: #10b981;
@@ -50,11 +50,11 @@ Version: 2.0 Enhanced
   
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 30px rgba(168, 85, 247, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-glow: 0 0 30px rgba(168, 85, 247, 0.2);
   
   /* Animations */
   --apple-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -90,30 +90,30 @@ Version: 2.0 Enhanced
   --z-tooltip: 1600;
 }
 
-/* Light Theme Override */
-[data-theme="light"] {
-  --bg-dark: #ffffff;
-  --bg-panel: #f9fafb;
-  --bg-card: #ffffff;
-  --bg-elevated: #f3f4f6;
+/* Dark Theme Override */
+[data-theme="dark"] {
+  --bg-dark: #0a0a0c;
+  --bg-panel: #111114;
+  --bg-card: #1a1a1f;
+  --bg-elevated: #22222a;
   
-  --text-main: #111827;
-  --text-secondary: #374151;
-  --text-muted: #6b7280;
-  --text-subtle: #9ca3af;
+  --text-main: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-subtle: #6b7280;
   
-  --border-color: rgba(0, 0, 0, 0.1);
-  --border-light: rgba(0, 0, 0, 0.05);
-  --border-strong: rgba(0, 0, 0, 0.2);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-strong: rgba(255, 255, 255, 0.2);
   
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
   
-  --purple-subtle: rgba(168, 85, 247, 0.05);
-  --purple-glow: rgba(168, 85, 247, 0.2);
+  --purple-subtle: rgba(168, 85, 247, 0.08);
+  --purple-glow: rgba(168, 85, 247, 0.4);
 }
 
 /* ==================== BASE RESET & SETUP ==================== */
@@ -208,9 +208,9 @@ p {
   height: 500px;
   background: radial-gradient(
     circle,
-    rgba(168, 85, 247, 0.15) 0%,
-    rgba(168, 85, 247, 0.08) 30%,
-    rgba(168, 85, 247, 0.03) 60%,
+    rgba(168, 85, 247, 0.08) 0%,
+    rgba(168, 85, 247, 0.04) 30%,
+    rgba(168, 85, 247, 0.02) 60%,
     transparent 80%
   );
   border-radius: 50%;
@@ -219,7 +219,18 @@ p {
   transform: translate(-50%, -50%);
   transition: width 0.4s var(--apple-ease), height 0.4s var(--apple-ease), opacity 0.4s ease;
   will-change: transform;
-  opacity: 0.7;
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .cursor-halo {
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.15) 0%,
+    rgba(168, 85, 247, 0.08) 30%,
+    rgba(168, 85, 247, 0.03) 60%,
+    transparent 80%
+  );
   mix-blend-mode: screen;
 }
 
@@ -252,6 +263,72 @@ p {
   opacity: 0.8;
 }
 
+/* ==================== TEXT GLOW ON HOVER ==================== */
+h1, h2, h3, h4, h5, h6, p, a, span, li, td, th, label, button {
+  position: relative;
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Glow effect for headings */
+h1:hover, h2:hover, h3:hover {
+  text-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.3),
+    0 0 40px rgba(168, 85, 247, 0.2),
+    0 0 60px rgba(168, 85, 247, 0.1);
+}
+
+/* Glow effect for paragraphs and body text */
+p:hover, span:hover, li:hover {
+  text-shadow: 
+    0 0 15px rgba(168, 85, 247, 0.25),
+    0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+/* Glow effect for links */
+a:hover {
+  text-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.4),
+    0 0 40px rgba(168, 85, 247, 0.25);
+  color: var(--purple-600);
+}
+
+/* Glow effect for buttons */
+button:hover, .btn:hover {
+  text-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced glow for purple accent text */
+.text-purple-accent:hover {
+  text-shadow: 
+    0 0 25px rgba(168, 85, 247, 0.5),
+    0 0 50px rgba(168, 85, 247, 0.3),
+    0 0 75px rgba(168, 85, 247, 0.2);
+}
+
+/* Table cells glow */
+td:hover, th:hover {
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] h1:hover,
+[data-theme="dark"] h2:hover,
+[data-theme="dark"] h3:hover {
+  text-shadow: 
+    0 0 25px rgba(168, 85, 247, 0.4),
+    0 0 50px rgba(168, 85, 247, 0.3),
+    0 0 75px rgba(168, 85, 247, 0.2);
+}
+
+[data-theme="dark"] p:hover,
+[data-theme="dark"] span:hover,
+[data-theme="dark"] li:hover {
+  text-shadow: 
+    0 0 20px rgba(168, 85, 247, 0.35),
+    0 0 40px rgba(168, 85, 247, 0.2);
+}
+
 /* ==================== SCROLL ANIMATIONS ==================== */
 .reveal {
   opacity: 0;
@@ -267,6 +344,49 @@ p {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
+}
+
+/* Card-specific fade animations */
+.card-fade,
+.linear-panel,
+.glass-panel,
+.gradient-panel,
+.card {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: 
+    opacity 0.8s var(--apple-ease),
+    transform 0.8s var(--apple-ease),
+    box-shadow 0.8s ease;
+}
+
+.card-fade.in-view,
+.linear-panel.in-view,
+.glass-panel.in-view,
+.gradient-panel.in-view,
+.card.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Fade out when scrolling away */
+.card-fade.out-of-view,
+.linear-panel.out-of-view,
+.glass-panel.out-of-view,
+.gradient-panel.out-of-view,
+.card.out-of-view {
+  opacity: 0.3;
+  transform: translateY(20px) scale(0.98);
+}
+
+/* Enhanced fade for cards leaving viewport completely */
+.card-fade.far-out,
+.linear-panel.far-out,
+.glass-panel.far-out,
+.gradient-panel.far-out,
+.card.far-out {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
 }
 
 .reveal-left {
@@ -306,8 +426,8 @@ p {
 .linear-panel {
   background: linear-gradient(
     145deg,
-    rgba(26, 26, 31, 0.9),
-    rgba(17, 17, 20, 0.95)
+    rgba(255, 255, 255, 0.95),
+    rgba(249, 250, 251, 0.98)
   );
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
@@ -321,6 +441,7 @@ p {
     transform 0.4s var(--apple-ease),
     box-shadow 0.4s ease;
   padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
 }
 
 .linear-panel::before {
@@ -345,38 +466,44 @@ p {
   transform: translateY(-8px);
   box-shadow: 
     var(--shadow-2xl),
-    0 0 40px rgba(168, 85, 247, 0.2);
+    0 0 40px rgba(168, 85, 247, 0.15);
 }
 
 .linear-panel:hover::before {
   opacity: 1;
 }
 
-/* Light theme panels */
-[data-theme="light"] .linear-panel {
+/* Dark theme panels */
+[data-theme="dark"] .linear-panel {
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.95),
-    rgba(249, 250, 251, 0.98)
+    rgba(26, 26, 31, 0.9),
+    rgba(17, 17, 20, 0.95)
   );
   box-shadow: var(--shadow-lg);
 }
 
-[data-theme="light"] .linear-panel:hover {
+[data-theme="dark"] .linear-panel:hover {
   box-shadow: 
     var(--shadow-2xl),
-    0 0 30px rgba(168, 85, 247, 0.15);
+    0 0 40px rgba(168, 85, 247, 0.2);
 }
 
 /* Panel Variants */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(168, 85, 247, 0.15);
   backdrop-filter: blur(30px);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-panel::after {
@@ -400,12 +527,17 @@ p {
 }
 
 .gradient-panel {
-  background: linear-gradient(135deg, var(--purple-900) 0%, var(--bg-dark) 100%);
-  border: 1px solid var(--purple-700);
+  background: linear-gradient(135deg, var(--purple-50) 0%, var(--bg-dark) 100%);
+  border: 1px solid var(--purple-200);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
   position: relative;
   overflow: hidden;
+}
+
+[data-theme="dark"] .gradient-panel {
+  background: linear-gradient(135deg, var(--purple-900) 0%, var(--bg-dark) 100%);
+  border: 1px solid var(--purple-700);
 }
 
 /* ==================== NAVIGATION ==================== */
@@ -413,29 +545,26 @@ header {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
-  background: rgba(10, 10, 12, 0.85) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(30px) saturate(180%);
   -webkit-backdrop-filter: blur(30px) saturate(180%);
   border-bottom: 1px solid var(--border-color);
   transition: background-color 0.3s ease, border-color 0.3s ease;
   padding: var(--space-md) 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 header.scrolled {
-  background: rgba(10, 10, 12, 0.95) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   border-bottom-color: var(--border-strong);
   box-shadow: var(--shadow-lg);
 }
 
-[data-theme="light"] header {
-  background: rgba(255, 255, 255, 0.85) !important;
+[data-theme="dark"] header {
+  background: rgba(10, 10, 12, 0.85) !important;
 }
 
-[data-theme="light"] header.scrolled {
-  background: rgba(255, 255, 255, 0.95) !important;
+[data-theme="dark"] header.scrolled {
+  background: rgba(10, 10, 12, 0.95) !important;
 }
 
 .nav-link {
@@ -491,10 +620,6 @@ header.scrolled {
   background-clip: text;
   transition: transform 0.3s var(--apple-ease);
   display: inline-block;
-}
-
-.flex.justify-between.items-center.h-16 {
-width: 100%;
 }
 
 .logo:hover {
@@ -720,7 +845,7 @@ width: 100%;
   top: calc(100% + 8px);
   right: 0;
   min-width: 200px;
-  background: rgba(17, 17, 20, 0.98);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(30px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
@@ -731,6 +856,10 @@ width: 100%;
   pointer-events: none;
   transition: all 0.3s var(--apple-ease);
   z-index: var(--z-dropdown);
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background: rgba(17, 17, 20, 0.98);
 }
 
 .dropdown-menu.active {
@@ -874,7 +1003,7 @@ canvas {
   left: 50%;
   transform: translateX(-50%) translateY(-5px);
   padding: var(--space-sm) var(--space-md);
-  background: rgba(17, 17, 20, 0.98);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
@@ -886,6 +1015,10 @@ canvas {
   transition: all 0.3s var(--apple-ease);
   z-index: var(--z-tooltip);
   box-shadow: var(--shadow-lg);
+}
+
+[data-theme="dark"] .tooltip-content {
+  background: rgba(17, 17, 20, 0.98);
 }
 
 .tooltip:hover .tooltip-content {
