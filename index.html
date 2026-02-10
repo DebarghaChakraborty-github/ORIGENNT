@@ -2,51 +2,42 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="favicon.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Origennt - Strategic Talent Engineering from Odisha, India serving global clients with data-driven recruitment solutions.">
-    
-    
-    <title>ORIGENNT | Strategic Command & Intelligence Hub</title>
-    
-    <meta name="description" content="Origennt provides recruitment solutions, HR consulting, corporate training and career development services for businesses and professionals in India.">
-    <meta name="keywords" content="Origennt, recruitment, HR consulting, staffing, corporate training, placement services">
-    <meta property="og:title" content="Origennt – Recruitment & HR Consulting">
-    <meta property="og:description" content="Professional recruitment, training, staffing and HR consulting services across India.">
-    <meta property="og:url" content="https://origennt.com/">
-    <meta property="og:type" content="website">
-
+    <title>ORIGENNT | Strategic Authentication Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- CORE DESIGN SYSTEM --- */
+        /* ====================================================================
+           ORIGENNT STRATEGIC AUTHENTICATION SYSTEM
+           Design System: Emerald Universe with Advanced Micromotions
+           ==================================================================== */
+
         :root {
-            --bg-universe: #0a0e0d;
-            --bg-secondary: #111816;
+            --bg-universe: #0a0f0d;
+            --bg-secondary: #152520;
             --text-logo: #ffffff;
             --brand-green: #00ff88;
             --brand-green-dark: #00cc6a;
             --halo-shadow: rgba(0, 255, 136, 0.4);
-            --portal-bg: rgba(31, 123, 77, 0.08);
+            --portal-bg: rgba(31, 123, 77, 0.15);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --card-hover: rgba(0, 255, 136, 0.03);
+            --input-bg: rgba(255, 255, 255, 0.03);
             --accent-blue: #00d4ff;
             --accent-purple: #b794f6;
-            --danger-red: #ff4757;
-            --warning-amber: #ffa502;
         }
 
         [data-theme="light"] {
             --bg-universe: #f0fdf4;
-            --bg-secondary: #ffffff;
+            --bg-secondary: #e6f7ed;
             --text-logo: #062c1b;
             --brand-green: #15803d;
             --brand-green-dark: #166534;
             --halo-shadow: rgba(37, 195, 95, 0.3);
-            --portal-bg: rgba(220, 252, 231, 0.5);
+            --portal-bg: rgba(255, 255, 255, 0.9);
             --glass-border: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(0, 0, 0, 0.03);
         }
 
         * {
@@ -55,57 +46,142 @@
             box-sizing: border-box;
         }
 
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-            background-color: var(--bg-universe); 
-            color: var(--text-logo); 
-            transition: background-color 0.5s ease, color 0.5s ease; 
-            overflow-x: hidden;
-            line-height: 1.6;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-universe);
+            color: var(--text-logo);
+            transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            position: relative;
         }
 
-        /* --- ENHANCED ANIMATIONS --- */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* ====== CINEMATIC LOADER ====== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #050a08, #0a120e);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease;
         }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        #loader.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .logo-load-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.2em;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.05em;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        .tie-icon {
+            height: 1.2em;
+            fill: var(--brand-green);
+            filter: drop-shadow(0 0 25px var(--brand-green));
+            transition: transform 1.2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+            animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 25px var(--brand-green)); }
+            50% { filter: drop-shadow(0 0 40px var(--brand-green)) drop-shadow(0 0 60px var(--brand-green)); }
+        }
+
+        .tie-icon.zoom {
+            transform: scale(150);
+        }
+
+        /* Orbital Rings Around Logo */
+        .orbit-path {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 255, 136, 0.15);
+            pointer-events: none;
+        }
+
+        .orbit-1 {
+            width: 300px;
+            height: 300px;
+            animation: orbit-spin 8s linear infinite;
+        }
+
+        .orbit-2 {
+            width: 450px;
+            height: 450px;
+            animation: orbit-spin 12s linear infinite reverse;
+        }
+
+        .orbit-3 {
+            width: 600px;
+            height: 600px;
+            animation: orbit-spin 16s linear infinite;
+        }
+
+        @keyframes orbit-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .orbit-path::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--brand-green);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--brand-green), 0 0 40px var(--brand-green);
+            animation: orbit-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes orbit-pulse {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.6; transform: translateX(-50%) scale(1.5); }
+        }
+
+        /* Loading Bar */
+        .load-bar-container {
+            width: 400px;
+            max-width: 80vw;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-top: 3rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .load-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand-green), var(--accent-blue));
+            box-shadow: 0 0 20px var(--brand-green);
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .load-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 1.5s infinite;
         }
 
         @keyframes shimmer {
@@ -113,1264 +189,884 @@
             100% { transform: translateX(100%); }
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px var(--halo-shadow); }
-            50% { box-shadow: 0 0 40px var(--halo-shadow); }
-        }
-
-        .animate-fadeInUp {
-            animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
-        .animate-slideInLeft {
-            animation: slideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        .animate-slideInRight {
-            animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        .animate-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-glow {
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        /* --- NAVIGATION --- */
-        #main-nav { 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-scrolled { 
-            background: rgba(10, 14, 13, 0.95) !important; 
-            backdrop-filter: blur(20px) saturate(180%); 
-            margin: 15px 30px; 
-            width: calc(100% - 60px) !important; 
-            border-radius: 100px; 
-            border: 1px solid var(--glass-border); 
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); 
-            padding: 0.8rem 3rem !important; 
-        }
-
-        /* --- GLOW EFFECTS --- */
-        .glow-word { 
-            display: inline-block; 
-            transition: all 0.3s ease; 
-            cursor: pointer; 
-            position: relative;
-        }
-
-        .glow-word:hover { 
-            color: var(--brand-green) !important; 
-            text-shadow: 0 0 20px var(--brand-green), 0 0 30px var(--brand-green); 
-            transform: translateY(-2px); 
-        }
-
-        /* --- ENHANCED CARDS --- */
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-        }
-
-        .metric-card {
-            background: var(--portal-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--brand-green), var(--accent-blue));
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--brand-green);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
-        }
-
-        /* --- SEARCH BAR --- */
-        #universal-search { 
-            width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 1.5rem 2.5rem;
-            font-size: 1.2rem;
-            color: var(--text-logo);
-            outline: none;
-            transition: all 0.4s ease;
-        }
-
-        #universal-search:focus { 
-            border-color: var(--brand-green); 
-            box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.1), 0 20px 40px rgba(0, 255, 136, 0.2);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        #universal-search::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* --- PROGRESS BARS --- */
-        .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--brand-green), var(--accent-blue));
-            transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            border-radius: 10px;
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        /* --- STAT NUMBERS --- */
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--brand-green), var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1;
-        }
-
-        /* --- BADGES --- */
-        .status-badge {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .badge-active {
-            background: rgba(0, 255, 136, 0.15);
-            color: var(--brand-green);
-            border: 1px solid var(--brand-green);
-        }
-
-        .badge-pending {
-            background: rgba(255, 165, 2, 0.15);
-            color: var(--warning-amber);
-            border: 1px solid var(--warning-amber);
-        }
-
-        /* --- SERVICE CARDS --- */
-        .service-card {
-            background: var(--portal-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 28px;
-            padding: 2.5rem;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--halo-shadow) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--brand-green);
-            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.25);
-        }
-
-        /* --- MATRIX QUADRANT --- */
-        .matrix-quadrant { 
-            border: 1px solid var(--glass-border); 
-            border-radius: 28px; 
-            padding: 2.5rem; 
-            background: var(--portal-bg); 
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .matrix-quadrant:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(0, 255, 136, 0.15);
-        }
-
-        /* --- THEME TOGGLE --- */
-        .theme-toggle {
-            width: 60px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: var(--brand-green);
-            border-radius: 50%;
-            top: 2px;
-            left: 3px;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 0 10px var(--halo-shadow);
-        }
-
-        [data-theme="light"] .theme-toggle::before {
-            transform: translateX(30px);
-            background: var(--warning-amber);
-        }
-
-        /* --- GRADIENT TEXT --- */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--brand-green), var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* --- GRID OVERLAY --- */
-        .grid-overlay {
-            position: fixed;
-            inset: 0;
-            background-image: 
-                linear-gradient(var(--glass-border) 1px, transparent 1px),
-                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            opacity: 0.2;
-            z-index: 0;
-        }
-
-        /* --- MEGA MENU --- */
-        #mega-menu {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0e0d 100%);
-        }
-
-        /* --- NOTIFICATION --- */
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 30px;
-            background: rgba(10, 14, 13, 0.98);
-            border: 2px solid var(--brand-green);
-            border-radius: 20px;
-            padding: 1.5rem 2rem;
-            min-width: 320px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 20px var(--halo-shadow);
-            transform: translateX(450px);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 9999;
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
-        /* --- ACCORDION --- */
-        .accordion-header {
-            cursor: pointer;
-            padding: 1.8rem;
-            background: var(--portal-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            margin-bottom: 0.8rem;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-header:hover {
-            border-color: var(--brand-green);
-            background: rgba(0, 255, 136, 0.05);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .accordion-content.active {
-            max-height: 500px;
-        }
-
-        /* --- BREADCRUMB --- */
-        .breadcrumb {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
+        .load-text {
+            margin-top: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
             color: var(--brand-green);
-            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            animation: text-flicker 0.5s infinite;
         }
 
-        .breadcrumb span:not(:last-child)::after {
-            content: '→';
-            margin-left: 1rem;
-            color: var(--brand-green);
+        @keyframes text-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
-        /* --- SCROLLBAR --- */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-universe); }
-        ::-webkit-scrollbar-thumb { 
-            background: var(--brand-green); 
-            border-radius: 10px; 
-        }
-        ::-webkit-scrollbar-thumb:hover { 
-            background: var(--brand-green-dark); 
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .stat-number { font-size: 2.5rem; }
-            #universal-search { font-size: 1rem; padding: 1rem 1.5rem; }
-            .nav-scrolled { margin: 10px; width: calc(100% - 20px) !important; padding: 0.6rem 1.5rem !important; }
-        }
-
-        /* --- HOLOGRAPHIC EFFECT --- */
-        .holographic {
-            position: relative;
-            background: linear-gradient(135deg, 
-                rgba(0, 255, 136, 0.05) 0%,
-                rgba(0, 212, 255, 0.05) 50%,
-                rgba(183, 148, 246, 0.05) 100%);
-            border: 1px solid var(--glass-border);
-        }
-
-        .holographic::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
-            background-size: 200% 200%;
-            animation: holoShine 4s ease infinite;
-        }
-
-        @keyframes holoShine {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        /* --- LOADING STATES --- */
-        .loading {
-            opacity: 0;
-        }
-
-        .loaded {
-            opacity: 1;
-            transition: opacity 0.6s ease;
-        }
-
-        /* --- ENHANCED TACTICAL NODE --- */
-        .tactical-node { 
-            border: 1px solid var(--glass-border); 
-            padding: 2.5rem; 
-            transition: all 0.4s ease; 
-            position: relative;
-            overflow: hidden;
-            background: var(--portal-bg);
-            border-radius: 20px;
-        }
-
-        .tactical-node:hover { 
-            background: var(--card-hover); 
-            border-color: var(--brand-green);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.15);
-        }
-
-        /* --- TAG STYLES --- */
-        .tag {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            margin: 0.25rem;
-            font-size: 0.7rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-weight: 700;
-        }
-
-        .tag:hover {
-            background: var(--brand-green);
-            color: #0a0e0d;
-            transform: translateY(-2px);
-            border-color: var(--brand-green);
-        }
-
-        /* --- FLOATING ACTION BUTTON --- */
-        .fab {
+        /* ====== PARTICLE CANVAS ====== */
+        #particle-canvas, #transition-canvas {
             position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #transition-canvas {
+            z-index: 9998;
+        }
+
+        /* ====== MAIN CONTAINER ====== */
+        .main-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .main-container.visible {
+            opacity: 1;
+        }
+
+        /* ====== LEFT PANEL - 3D LOGO SHOWCASE ====== */
+        .left-panel {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-right: 1px solid var(--glass-border);
+            background: linear-gradient(135deg, var(--bg-universe), var(--bg-secondary));
+            overflow: hidden;
+        }
+
+        .orbit-wrapper {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            perspective: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-main {
+            color: var(--text-logo);
+            font-weight: 900;
+            font-size: clamp(3rem, 6vw, 5rem);
+            letter-spacing: -0.05em;
+            z-index: 10;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .logo-subtitle {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            letter-spacing: 0.8em;
+            color: var(--brand-green);
+            text-transform: uppercase;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .electron-ring {
+            position: absolute;
+            border: 2px solid var(--brand-green);
+            border-radius: 50%;
+            opacity: 0.4;
+            pointer-events: none;
+            box-shadow: 0 0 30px var(--halo-shadow), inset 0 0 30px var(--halo-shadow);
+        }
+
+        .ring-1 {
+            width: 380px;
+            height: 380px;
+            animation: spherical-spin-1 10s linear infinite;
+        }
+
+        .ring-2 {
+            width: 520px;
+            height: 520px;
+            animation: spherical-spin-2 15s linear infinite;
+        }
+
+        .ring-3 {
+            width: 660px;
+            height: 660px;
+            animation: spherical-spin-3 20s linear infinite;
+        }
+
+        @keyframes spherical-spin-1 {
+            0% { transform: rotateY(70deg) rotateX(25deg) rotateZ(0deg); }
+            100% { transform: rotateY(70deg) rotateX(25deg) rotateZ(360deg); }
+        }
+
+        @keyframes spherical-spin-2 {
+            0% { transform: rotateY(-70deg) rotateX(-25deg) rotateZ(0deg); }
+            100% { transform: rotateY(-70deg) rotateX(-25deg) rotateZ(360deg); }
+        }
+
+        @keyframes spherical-spin-3 {
+            0% { transform: rotateY(45deg) rotateX(-45deg) rotateZ(0deg); }
+            100% { transform: rotateY(45deg) rotateX(-45deg) rotateZ(360deg); }
+        }
+
+        /* Decorative Elements */
+        .corner-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--glass-border);
+            opacity: 0.3;
+        }
+
+        .corner-tl {
+            top: 40px;
+            left: 40px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-br {
             bottom: 40px;
             right: 40px;
-            width: 70px;
-            height: 70px;
-            background: var(--brand-green);
+            border-left: none;
+            border-top: none;
+        }
+
+        /* ====== RIGHT PANEL - AUTH FORMS ====== */
+        .right-panel {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 6rem;
+            position: relative;
+            background: var(--bg-secondary);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .top-bar {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            z-index: 100;
+        }
+
+        #theme-toggle {
+            width: 50px;
+            height: 50px;
+            background: var(--portal-bg);
+            border: 1px solid var(--glass-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 10px 40px var(--halo-shadow);
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 5000;
-            animation: float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .fab:hover {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 15px 60px var(--halo-shadow);
+        #theme-toggle:hover {
+            transform: scale(1.1) rotate(180deg);
+            border-color: var(--brand-green);
+            box-shadow: 0 0 25px var(--halo-shadow);
         }
 
-        /* --- DIVIDER --- */
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
-            margin: 3rem 0;
+        #live-clock {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--brand-green);
+            letter-spacing: 0.1em;
+            padding: 0.75rem 1.5rem;
+            background: var(--portal-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
         }
 
-        /* --- CTA SECTION ENHANCEMENTS --- */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 212, 255, 0.1) 100%);
+        .auth-container {
+            max-width: 480px;
+            width: 100%;
+            margin: 8rem 0;
+        }
+
+        .content-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .content-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .auth-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-logo), var(--brand-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 2.5rem;
+        }
+
+        [data-theme="light"] .auth-subtitle {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Form Tabs */
+        .form-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--portal-bg);
+            padding: 0.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-logo);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .tab-btn.active {
+            background: var(--brand-green);
+            color: #000;
+            opacity: 1;
+            box-shadow: 0 4px 15px var(--halo-shadow);
+        }
+
+        .tab-btn:hover:not(.active) {
+            opacity: 0.8;
+        }
+
+        /* Form Content */
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--brand-green);
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: var(--input-bg);
             border: 2px solid var(--glass-border);
-            border-radius: 40px;
-            padding: 4rem;
+            border-radius: 16px;
+            color: var(--text-logo);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-field:focus {
+            border-color: var(--brand-green);
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 20px var(--halo-shadow);
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        [data-theme="light"] .input-field::placeholder {
+            color: rgba(0, 0, 0, 0.3);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--brand-green);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -0.5rem;
+        }
+
+        .forgot-password a {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--brand-green);
+        }
+
+        /* Buttons */
+        .btn-halo {
+            width: 100%;
+            padding: 1.1rem 2rem;
+            background: var(--brand-green);
+            color: #000;
+            border: none;
+            border-radius: 16px;
+            font-weight: 900;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 0 rgba(0, 255, 136, 0);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-section::before {
+        .btn-halo::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 136, 0.15), transparent);
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-halo:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-halo:hover {
+            box-shadow: 0 0 30px var(--halo-shadow), 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .btn-halo:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-guest {
+            background: transparent;
+            border: 2px solid var(--brand-green);
+            color: var(--brand-green);
+            margin-top: 0.75rem;
+        }
+
+        .btn-guest:hover {
+            background: var(--brand-green);
+            color: #000;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+        }
+
+        .divider span {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+        }
+
+        /* Social Login Buttons */
+        .social-login {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .social-btn {
+            padding: 1rem;
+            background: var(--portal-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            color: var(--text-logo);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-btn:hover {
+            border-color: var(--brand-green);
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Info */
+        .footer-info {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Glow Word Effect */
+        .glow-text {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .glow-text:hover {
+            color: var(--brand-green);
+            text-shadow: 0 0 15px var(--brand-green);
+            transform: translateY(-2px);
+            cursor: default;
+        }
+
+        /* Checkbox */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--glass-border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .custom-checkbox.checked {
+            background: var(--brand-green);
+            border-color: var(--brand-green);
+        }
+
+        .custom-checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-size: 0.85rem;
+            font-weight: 900;
+        }
+
+        .checkbox-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .left-panel {
+                display: none;
+            }
+            .right-panel {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .right-panel {
+                padding: 0 2rem;
+            }
+            .auth-title {
+                font-size: 2rem;
+            }
+            .top-bar {
+                right: 2rem;
+                top: 1.5rem;
+            }
+        }
+
+        /* Loading Animation for Button */
+        .btn-loading {
             pointer-events: none;
+            opacity: 0.7;
+            position: relative;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin-top: -10px;
+            margin-left: -10px;
+            border: 3px solid transparent;
+            border-top-color: #000;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--brand-green);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            font-weight: 700;
+            box-shadow: 0 10px 40px var(--halo-shadow);
+            transform: translateX(400px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10001;
+        }
+
+        .success-message.show {
+            transform: translateX(0);
         }
     </style>
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PBCDJ7Y3JQ">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PBCDJ7Y3JQ');
-</script>
 </head>
-<body class="min-h-screen loading">
-
-    <!-- Grid Overlay -->
-    <div class="grid-overlay"></div>
-
-    <!-- Navigation -->
-    <nav id="main-nav" class="fixed top-0 w-full z-[1000] px-12 py-6 flex items-center justify-between">
-        <div class="animate-slideInLeft" style="animation-delay: 0.1s;">
-            <h1 class="text-3xl font-black tracking-tighter uppercase cursor-pointer hover:scale-105 transition-transform">
-                OR<span class="text-[var(--brand-green)]">|</span>GENNT
-            </h1>
+<body>
+    <!-- Cinematic Loader -->
+    <div id="loader">
+        <div class="orbit-path orbit-1"></div>
+        <div class="orbit-path orbit-2"></div>
+        <div class="orbit-path orbit-3"></div>
+        <div class="logo-load-wrap">
+            <span class="glow-text">OR</span>
+            <svg class="tie-icon" viewBox="0 0 100 200">
+                <path d="M50,10 L85,45 L75,150 L50,190 L25,150 L15,45 Z" />
+            </svg>
+            <span class="glow-text">GENNT</span>
         </div>
-        <div class="hidden lg:flex items-center gap-8 text-[10px] font-bold tracking-[0.3em] uppercase animate-slideInRight" style="animation-delay: 0.2s;">
-            <a href="#intelligence" class="glow-word hover:underline">Intelligence Hub</a>
-            <a href="#services" class="glow-word hover:underline">Service Matrix</a>
-            <a href="#contact" class="glow-word hover:underline">Contact</a>
-            <div class="theme-toggle" id="theme-toggle" title="Toggle Theme"></div>
-            <a href="index.html" class="glow-word hover:underline">Login</a>
-            <button id="menu-trigger" class="flex flex-col gap-1.5 group px-2">
-                <span class="w-8 h-0.5 bg-white group-hover:bg-[var(--brand-green)] transition-all"></span>
-                <span class="w-5 h-0.5 bg-white group-hover:bg-[var(--brand-green)] transition-all ml-auto"></span>
-                <span class="w-8 h-0.5 bg-white group-hover:bg-[var(--brand-green)] transition-all"></span>
-            </button>
-            <div id="live-clock" class="text-[var(--brand-green)] font-mono ml-4 border-l border-white/10 pl-6"></div>
+        <div class="load-bar-container">
+            <div class="load-bar-fill"></div>
         </div>
-    </nav>
-
-    <!-- Mega Menu -->
-    <div id="mega-menu" class="fixed inset-0 z-[2000] opacity-0 pointer-events-none transition-all duration-700 p-20 overflow-y-auto">
-        <button id="menu-close" class="absolute top-10 right-12 text-6xl font-light hover:text-[var(--brand-green)] transition-colors">&times;</button>
-        <div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mt-20">
-            <div class="animate-fadeInUp" style="animation-delay: 0.1s;">
-                <h3 class="text-[var(--brand-green)] text-[10px] font-mono mb-8 uppercase tracking-[0.4em]">B2C_Talent_Assets</h3>
-                <ul class="space-y-4 text-2xl font-black">
-                    <li class="glow-word">Career Mapping</li>
-                    <li class="glow-word">LinkedIn Optimization</li>
-                    <li class="glow-word">Internship Assistance</li>
-                    <li class="glow-word">Resume Engineering</li>
-                    <li class="glow-word">Interview Preparation</li>
-                    <li class="glow-word">Skill Assessment</li>
-                </ul>
-            </div>
-            <div class="animate-fadeInUp" style="animation-delay: 0.2s;">
-                <h3 class="text-[var(--brand-green)] text-[10px] font-mono mb-8 uppercase tracking-[0.4em]">B2B_Enterprise_Ops</h3>
-                <ul class="space-y-4 text-2xl font-black">
-                    <li class="glow-word">Executive Search</li>
-                    <li class="glow-word">Payroll Processing</li>
-                    <li class="glow-word">Compliance Management</li>
-                    <li class="glow-word">Organizational Audit</li>
-                    <li class="glow-word">Talent Analytics</li>
-                    <li class="glow-word">HR Transformation</li>
-                </ul>
-            </div>
-            <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
-                <h3 class="text-[var(--brand-green)] text-[10px] font-mono mb-8 uppercase tracking-[0.4em]">Internship_Accelerator</h3>
-                <ul class="space-y-4 text-2xl font-black">
-                    <li class="glow-word">Web Development</li>
-                    <li class="glow-word">Data Analytics</li>
-                    <li class="glow-word">HR Operations</li>
-                    <li class="glow-word">Digital Marketing</li>
-                    <li class="glow-word">Content Strategy</li>
-                    <li class="glow-word">Business Development</li>
-                </ul>
-            </div>
-            <div class="animate-fadeInUp" style="animation-delay: 0.4s;">
-                <h3 class="text-[var(--brand-green)] text-[10px] font-mono mb-8 uppercase tracking-[0.4em]">Strategic_Services</h3>
-                <ul class="space-y-4 text-2xl font-black">
-                    <li class="glow-word">Management Consulting</li>
-                    <li class="glow-word">Process Optimization</li>
-                    <li class="glow-word">Change Management</li>
-                    <li class="glow-word">Leadership Development</li>
-                    <li class="glow-word">Performance Management</li>
-                    <li class="glow-word">Culture Transformation</li>
-                </ul>
-            </div>
-        </div>
+        <div class="load-text">Initializing Strategic Portal...</div>
     </div>
 
-    <!-- Main Content -->
-    <main class="pt-48 px-8 md:px-20 relative z-10">
-        
-        <!-- Hero Section -->
-        <section class="max-w-6xl mb-40 animate-fadeInUp">
-            <div class="breadcrumb mb-8">
-                <span>Home</span>
-                <span>Intelligence Hub</span>
-                <span>Command Center</span>
-            </div>
-            <h2 class="text-6xl md:text-8xl font-black italic uppercase leading-[0.9] mb-12">
-                Strategic <br> 
-                <span class="gradient-text">Intelligence.</span>
-            </h2>
-            <div class="relative mb-8">
-                <input type="text" id="universal-search" placeholder="INITIALIZE STRATEGIC INTENT..." autocomplete="off">
-            </div>
-            <div class="flex flex-wrap gap-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">
-                <span>Active_Nodes:</span>
-                <span class="text-[var(--brand-green)] cursor-pointer hover:underline transition-all">#Mass_Recruitment</span>
-                <span class="text-[var(--brand-green)] cursor-pointer hover:underline transition-all">#Web_Dev_Intern</span>
-                <span class="text-[var(--brand-green)] cursor-pointer hover:underline transition-all">#Org_Audit</span>
-                <span class="text-[var(--brand-green)] cursor-pointer hover:underline transition-all">#Executive_Search</span>
-                <span class="text-[var(--brand-green)] cursor-pointer hover:underline transition-all">#Payroll_Ops</span>
-            </div>
-            <div class="w-32 h-1 bg-gradient-to-r from-[var(--brand-green)] to-transparent mt-8 rounded"></div>
-        </section>
+    <!-- Particle Background Canvas -->
+    <canvas id="particle-canvas"></canvas>
 
-        <!-- Real-time Metrics Dashboard -->
-        <section class="mb-40 animate-fadeInUp" id="intelligence" style="animation-delay: 0.2s;">
-            <div class="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
-                <h3 class="text-xs font-mono tracking-[0.5em] text-gray-500">REAL_TIME_METRICS_DASHBOARD</h3>
-                <span class="text-[var(--brand-green)] text-[9px] font-bold animate-pulse">● LIVE_STREAM_ACTIVE</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="metric-card animate-fadeInUp" style="animation-delay: 0.1s;">
-                    <div class="text-[10px] font-mono text-gray-500 mb-4 uppercase tracking-wider">Active_Placements</div>
-                    <div class="stat-number mb-2">247+</div>
-                    <div class="text-xs text-gray-600 mb-4">↑ 23% from last quarter</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 78%"></div>
-                    </div>
-                </div>
-                <div class="metric-card animate-fadeInUp" style="animation-delay: 0.2s;">
-                    <div class="text-[10px] font-mono text-gray-500 mb-4 uppercase tracking-wider">Client_Satisfaction</div>
-                    <div class="stat-number mb-2">94%</div>
-                    <div class="text-xs text-gray-600 mb-4">Across 156 enterprises</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 94%"></div>
-                    </div>
-                </div>
-                <div class="metric-card animate-fadeInUp" style="animation-delay: 0.3s;">
-                    <div class="text-[10px] font-mono text-gray-500 mb-4 uppercase tracking-wider">Intern_Conversions</div>
-                    <div class="stat-number mb-2">68%</div>
-                    <div class="text-xs text-gray-600 mb-4">To full-time positions</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 68%"></div>
-                    </div>
-                </div>
-                <div class="metric-card animate-fadeInUp" style="animation-delay: 0.4s;">
-                    <div class="text-[10px] font-mono text-gray-500 mb-4 uppercase tracking-wider">Avg_Time_To_Hire</div>
-                    <div class="stat-number mb-2">12d</div>
-                    <div class="text-xs text-gray-600 mb-4">Industry avg: 28 days</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 43%"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Theme Transition Canvas -->
+    <canvas id="transition-canvas"></canvas>
 
-        <!-- BCG Growth Matrix -->
-        <section class="mb-40 animate-fadeInUp" id="matrix" style="animation-delay: 0.3s;">
-            <div class="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
-                <h3 class="text-xs font-mono tracking-[0.5em] text-gray-500">GROWTH_SHARE_MATRIX_V2.0</h3>
-                <span class="text-[var(--brand-green)] text-[9px] font-bold">STRATEGIC_PORTFOLIO</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="matrix-quadrant border-t-4 border-t-[var(--brand-green)]">
-                    <span class="text-[var(--brand-green)] font-mono text-[9px] tracking-wider">⭐ STARS</span>
-                    <h4 class="text-2xl font-black mt-4 mb-4 uppercase">Executive Search</h4>
-                    <p class="text-xs text-gray-500 leading-relaxed mb-4">High-growth leadership placement services with premium market positioning.</p>
-                    <div class="space-y-2">
-                        <div class="text-[9px] font-mono text-gray-600">Market Share: <span class="text-[var(--brand-green)]">34%</span></div>
-                        <div class="text-[9px] font-mono text-gray-600">Growth Rate: <span class="text-[var(--brand-green)]">+45%</span></div>
-                    </div>
-                </div>
-                <div class="matrix-quadrant border-t-4 border-t-[var(--accent-blue)]">
-                    <span class="text-[var(--accent-blue)] font-mono text-[9px] tracking-wider">💰 CASH_COWS</span>
-                    <h4 class="text-2xl font-black mt-4 mb-4 uppercase">Payroll Services</h4>
-                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Stable revenue stream with strong client retention and operational excellence.</p>
-                    <div class="space-y-2">
-                        <div class="text-[9px] font-mono text-gray-600">Market Share: <span class="text-[var(--accent-blue)]">58%</span></div>
-                        <div class="text-[9px] font-mono text-gray-600">Growth Rate: <span class="text-[var(--accent-blue)]">+12%</span></div>
-                    </div>
-                </div>
-                <div class="matrix-quadrant border-t-4 border-t-[var(--warning-amber)]">
-                    <span class="text-[var(--warning-amber)] font-mono text-[9px] tracking-wider">❓ QUESTION_MARKS</span>
-                    <h4 class="text-2xl font-black mt-4 mb-4 uppercase">AI Automation</h4>
-                    <p class="text-xs text-gray-500 leading-relaxed mb-4">Emerging tech-driven solutions with high growth potential requiring investment.</p>
-                    <div class="space-y-2">
-                        <div class="text-[9px] font-mono text-gray-600">Market Share: <span class="text-[var(--warning-amber)]">8%</span></div>
-                        <div class="text-[9px] font-mono text-gray-600">Growth Rate: <span class="text-[var(--warning-amber)]">+127%</span></div>
-                    </div>
-                </div>
-                <div class="matrix-quadrant holographic flex items-center justify-center border-dashed border-2">
-                    <div class="text-center">
-                        <span class="text-[4rem] opacity-30">📊</span>
-                        <p class="text-[9px] mt-4 opacity-50 uppercase tracking-widest font-bold">Portfolio_Analysis</p>
-                        <button class="mt-6 px-6 py-3 bg-[var(--brand-green)] text-black text-xs font-black rounded-full hover:scale-105 transition-transform uppercase">
-                            View Full Report
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Success Notification -->
+    <div id="success-message" class="success-message">
+        ✓ Authentication Successful
+    </div>
 
-        <!-- Service Offerings Grid -->
-        <section class="mb-40 animate-fadeInUp" id="services" style="animation-delay: 0.4s;">
-            <div class="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
-                <h3 class="text-xs font-mono tracking-[0.5em] text-gray-500">COMPREHENSIVE_SERVICE_PORTFOLIO</h3>
-                <div class="flex gap-4">
-                    <span class="status-badge badge-active">15 ACTIVE</span>
-                    <span class="status-badge badge-pending">4 LAUNCHING</span>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="service-card animate-fadeInUp" style="animation-delay: 0.1s;">
-                    <div class="text-5xl mb-6">🎯</div>
-                    <h4 class="text-2xl font-black uppercase mb-3">Talent Acquisition</h4>
-                    <p class="text-sm text-gray-500 mb-6">End-to-end recruitment solutions from strategic sourcing to seamless onboarding.</p>
-                    <ul class="space-y-2 text-xs text-gray-600 mb-6">
-                        <li>• Executive Search & Leadership Hiring</li>
-                        <li>• Campus Recruitment Programs</li>
-                        <li>• High-Volume Hiring Solutions</li>
-                        <li>• Niche Technical Talent Sourcing</li>
-                    </ul>
-                    <div class="mt-auto pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-gray-600">Avg. Time to Fill</span>
-                            <span class="text-[var(--brand-green)] font-bold">12 Days</span>
-                        </div>
-                    </div>
-                </div>
+    
 
-                <div class="service-card animate-fadeInUp" style="animation-delay: 0.2s;">
-                    <div class="text-5xl mb-6">💼</div>
-                    <h4 class="text-2xl font-black uppercase mb-3">Payroll Management</h4>
-                    <p class="text-sm text-gray-500 mb-6">Comprehensive payroll processing with 99.8% compliance accuracy guarantee.</p>
-                    <ul class="space-y-2 text-xs text-gray-600 mb-6">
-                        <li>• Multi-State Payroll Processing</li>
-                        <li>• Advanced Tax Compliance</li>
-                        <li>• Benefits & Compensation Admin</li>
-                        <li>• Statutory Reporting & Audits</li>
-                    </ul>
-                    <div class="mt-auto pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-gray-600">Employees Managed</span>
-                            <span class="text-[var(--accent-blue)] font-bold">18,500+</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card animate-fadeInUp" style="animation-delay: 0.3s;">
-                    <div class="text-5xl mb-6">🚀</div>
-                    <h4 class="text-2xl font-black uppercase mb-3">Internship Programs</h4>
-                    <p class="text-sm text-gray-500 mb-6">Industry-ready skill development with live projects and mentorship excellence.</p>
-                    <ul class="space-y-2 text-xs text-gray-600 mb-6">
-                        <li>• Full-Stack Web Development</li>
-                        <li>• Data Science & Analytics</li>
-                        <li>• Digital Marketing Mastery</li>
-                        <li>• HR Operations & Strategy</li>
-                    </ul>
-                    <div class="mt-auto pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-gray-600">Conversion Rate</span>
-                            <span class="text-[var(--accent-purple)] font-bold">68%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card animate-fadeInUp" style="animation-delay: 0.4s;">
-                    <div class="text-5xl mb-6">📊</div>
-                    <h4 class="text-2xl font-black uppercase mb-3">HR Analytics</h4>
-                    <p class="text-sm text-gray-500 mb-6">Advanced data-driven insights for strategic workforce planning and optimization.</p>
-                    <ul class="space-y-2 text-xs text-gray-600 mb-6">
-                        <li>• Predictive Workforce Analytics</li>
-                        <li>• Attrition Risk Modeling</li>
-                        <li>• Competency Gap Analysis</li>
-                        <li>• ROI & Performance Metrics</li>
-                    </ul>
-                    <div class="mt-auto pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-gray-600">Reports Generated</span>
-                            <span class="text-[var(--warning-amber)] font-bold">650+/mo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card animate-fadeInUp" style="animation-delay: 0.5s;">
-                    <div class="text-5xl mb-6">⚖️</div>
-                    <h4 class="text-2xl font-black uppercase mb-3">Compliance Services</h4>
-                    <p class="text-sm text-gray-500 mb-6">Stay compliant with evolving labor laws and regulatory frameworks nationwide.</p>
-                    <ul class="space-y-2 text-xs text-gray-600 mb-6">
-                        <li>• Legal Advisory & Consultation</li>
-                        <li>• Policy Development & Review</li>
-                        <li>• Comprehensive Audit Support</li>
-                        <li>• Proactive Risk Mitigation</li>
-                    </ul>
-                    <div class="mt-auto pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-gray-600">Compliance Rate</span>
-                            <span class="text-[var(--brand-green)] font-bold">99.8%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card animate-fadeInUp" style="animation-delay: 0.6s;">
-                    <div class="text-5xl mb-6">🎓</div>
-                    <h4 class="text-2xl font-black uppercase mb-3">L&D Programs</h4>
-                    <p class="text-sm text-gray-500 mb-6">Customized learning solutions for continuous skill enhancement and growth.</p>
-                    <ul class="space-y-2 text-xs text-gray-600 mb-6">
-                        <li>• Executive Leadership Training</li>
-                        <li>• Technical Skill Upskilling</li>
-                        <li>• Soft Skills & Communication</li>
-                        <li>• Industry Certification Programs</li>
-                    </ul>
-                    <div class="mt-auto pt-6 border-t border-white/5">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-gray-600">Participants Trained</span>
-                            <span class="text-[var(--danger-red)] font-bold">4,800+</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Client Success Stories -->
-        <section class="mb-40 animate-fadeInUp">
-            <div class="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
-                <h3 class="text-xs font-mono tracking-[0.5em] text-gray-500">CLIENT_SUCCESS_PORTFOLIO</h3>
-                <span class="text-[var(--brand-green)] text-[9px] font-bold">180+ ENTERPRISES SERVED</span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass p-8 hover:border-[var(--brand-green)] transition-all">
-                    <div class="text-6xl mb-4">🏢</div>
-                    <h4 class="text-xl font-black uppercase mb-3">Tech Unicorn Scale-Up</h4>
-                    <p class="text-sm text-gray-500 mb-6 leading-relaxed">"ORIGENNT scaled our engineering team from 50 to 300 in just 6 months with zero quality compromise. Their strategic sourcing is unmatched."</p>
-                    <div class="flex items-center gap-3 mt-6 pt-6 border-t border-white/5">
-                        <div class="w-12 h-12 bg-gradient-to-br from-[var(--brand-green)] to-[var(--accent-blue)] rounded-full"></div>
-                        <div>
-                            <div class="text-xs font-bold">Rajesh Kumar</div>
-                            <div class="text-[9px] text-gray-600 uppercase">CTO, Bangalore Tech</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-8 hover:border-[var(--accent-blue)] transition-all">
-                    <div class="text-6xl mb-4">🏭</div>
-                    <h4 class="text-xl font-black uppercase mb-3">Manufacturing Giant</h4>
-                    <p class="text-sm text-gray-500 mb-6 leading-relaxed">"Their compliance expertise saved us ₹2.8Cr in potential penalties during our national expansion. Truly strategic partners."</p>
-                    <div class="flex items-center gap-3 mt-6 pt-6 border-t border-white/5">
-                        <div class="w-12 h-12 bg-gradient-to-br from-[var(--accent-blue)] to-[var(--accent-purple)] rounded-full"></div>
-                        <div>
-                            <div class="text-xs font-bold">Priya Sharma</div>
-                            <div class="text-[9px] text-gray-600 uppercase">Head HR, Mumbai Industries</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-8 hover:border-[var(--accent-purple)] transition-all">
-                    <div class="text-6xl mb-4">💡</div>
-                    <h4 class="text-xl font-black uppercase mb-3">Startup Ecosystem</h4>
-                    <p class="text-sm text-gray-500 mb-6 leading-relaxed">"72% of our interns converted to FTE. Best talent pipeline we've ever established. Game-changing results."</p>
-                    <div class="flex items-center gap-3 mt-6 pt-6 border-t border-white/5">
-                        <div class="w-12 h-12 bg-gradient-to-br from-[var(--accent-purple)] to-[var(--warning-amber)] rounded-full"></div>
-                        <div>
-                            <div class="text-xs font-bold">Anil Mehta</div>
-                            <div class="text-[9px] text-gray-600 uppercase">CEO, Hyderabad Ventures</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Accordion -->
-        <section class="mb-40 animate-fadeInUp">
-            <div class="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
-                <h3 class="text-xs font-mono tracking-[0.5em] text-gray-500">FREQUENTLY_ASKED_QUESTIONS</h3>
-            </div>
-            <div class="max-w-4xl space-y-4">
-                <div class="accordion-item">
-                    <div class="accordion-header" data-accordion="0">
-                        <div class="flex justify-between items-center">
-                            <span class="font-black uppercase text-sm">What industries do you specialize in?</span>
-                            <span class="text-3xl text-[var(--brand-green)] accordion-icon">+</span>
-                        </div>
-                    </div>
-                    <div class="accordion-content" id="accordion-0">
-                        <div class="p-6 text-sm text-gray-500 leading-relaxed">
-                            We serve diverse sectors including IT/ITES, Manufacturing, BFSI, Healthcare (non-clinical), E-commerce, Retail, and emerging startups. Our expertise spans technical and non-technical roles across all seniority levels from entry-level to C-suite positions.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header" data-accordion="1">
-                        <div class="flex justify-between items-center">
-                            <span class="font-black uppercase text-sm">How does the internship program work?</span>
-                            <span class="text-3xl text-[var(--brand-green)] accordion-icon">+</span>
-                        </div>
-                    </div>
-                    <div class="accordion-content" id="accordion-1">
-                        <div class="p-6 text-sm text-gray-500 leading-relaxed">
-                            Our internship program runs for 8-12 weeks with structured learning modules, live client project assignments, and dedicated mentorship. Interns gain hands-on experience working on real business challenges. Top performers (typically 60-70%) receive pre-placement offers with our partner organizations.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header" data-accordion="2">
-                        <div class="flex justify-between items-center">
-                            <span class="font-black uppercase text-sm">What's your typical time-to-hire?</span>
-                            <span class="text-3xl text-[var(--brand-green)] accordion-icon">+</span>
-                        </div>
-                    </div>
-                    <div class="accordion-content" id="accordion-2">
-                        <div class="p-6 text-sm text-gray-500 leading-relaxed">
-                            Our average time-to-hire is 12 days for standard positions and 18-25 days for senior/specialized roles. We maintain a pre-vetted talent pool of 50,000+ candidates and use AI-powered matching algorithms to accelerate the process by 60% compared to industry standards.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header" data-accordion="3">
-                        <div class="flex justify-between items-center">
-                            <span class="font-black uppercase text-sm">Do you handle compliance for multi-state operations?</span>
-                            <span class="text-3xl text-[var(--brand-green)] accordion-icon">+</span>
-                        </div>
-                    </div>
-                    <div class="accordion-content" id="accordion-3">
-                        <div class="p-6 text-sm text-gray-500 leading-relaxed">
-                            Yes, we manage payroll and compliance across all 28 Indian states and 8 union territories. Our legal team stays updated with state-specific labor laws, tax regulations, and statutory requirements. We provide complete audit trails, documentation, and quarterly compliance reports with 99.8% accuracy.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header" data-accordion="4">
-                        <div class="flex justify-between items-center">
-                            <span class="font-black uppercase text-sm">What's your pricing model?</span>
-                            <span class="text-3xl text-[var(--brand-green)] accordion-icon">+</span>
-                        </div>
-                    </div>
-                    <div class="accordion-content" id="accordion-4">
-                        <div class="p-6 text-sm text-gray-500 leading-relaxed">
-                            We offer flexible pricing: 8-15% of annual CTC for placements (varies by role seniority), ₹800-1,500 per-employee-per-month for payroll services, and project-based pricing for consulting engagements. Custom packages with volume discounts are available for long-term strategic partnerships.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="mb-40 animate-fadeInUp">
-            <div class="cta-section text-center">
-                <h3 class="text-5xl md:text-6xl font-black uppercase mb-6 gradient-text">Ready to Transform Your Workforce?</h3>
-                <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    Join 180+ leading enterprises that trust ORIGENNT for strategic HR excellence and talent transformation
-                </p>
-                <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-12">
-                    <button class="px-12 py-5 bg-[var(--brand-green)] text-black font-black text-lg rounded-full hover:scale-105 hover:shadow-[0_0_40px_var(--halo-shadow)] transition-all uppercase">
-                        Schedule Consultation
-                    </button>
-                    <button class="px-12 py-5 glass font-black text-lg rounded-full hover:scale-105 hover:border-[var(--brand-green)] transition-all uppercase">
-                        Download Brochure
-                    </button>
-                </div>
-                <div class="flex flex-wrap justify-center gap-12 text-sm">
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-[var(--brand-green)] mb-2">24/7</div>
-                        <div class="text-gray-500 text-xs uppercase tracking-wider">Dedicated Support</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-[var(--accent-blue)] mb-2">99.8%</div>
-                        <div class="text-gray-500 text-xs uppercase tracking-wider">SLA Compliance</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-[var(--accent-purple)] mb-2">12 Days</div>
-                        <div class="text-gray-500 text-xs uppercase tracking-wider">Avg Time to Hire</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-black text-[var(--warning-amber)] mb-2">180+</div>
-                        <div class="text-gray-500 text-xs uppercase tracking-wider">Enterprise Clients</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="mb-40 animate-fadeInUp" id="contact">
-            <div class="flex items-center justify-between mb-12 border-b border-white/5 pb-4">
-                <h3 class="text-xs font-mono tracking-[0.5em] text-gray-500">COMMAND_CENTER_LOCATIONS</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass p-8 hover:border-[var(--brand-green)] transition-all">
-                    <div class="text-[var(--brand-green)] text-sm font-mono mb-4 uppercase tracking-wider">● HEADQUARTERS</div>
-                    <h4 class="text-2xl font-black uppercase mb-6">Bhubaneswar</h4>
-                    <div class="space-y-3 text-sm text-gray-500">
-                        <p class="flex items-center gap-2">📍 Plot No. 247, Infocity Area</p>
-                        <p class="flex items-center gap-2">🏢 Bhubaneswar, Odisha 751024</p>
-                        <p class="flex items-center gap-2">📞 +91 98765 43210</p>
-                        <p class="flex items-center gap-2">✉️ hq@origennt.com</p>
-                    </div>
-                    <div class="mt-6 pt-6 border-t border-white/5">
-                        <div class="status-badge badge-active">PRIMARY HUB • OPERATIONAL</div>
-                    </div>
-                </div>
-
-                <div class="glass p-8 hover:border-[var(--accent-blue)] transition-all">
-                    <div class="text-[var(--accent-blue)] text-sm font-mono mb-4 uppercase tracking-wider">● EXPANSION Q2 2026</div>
-                    <h4 class="text-2xl font-black uppercase mb-6">Bangalore</h4>
-                    <div class="space-y-3 text-sm text-gray-500">
-                        <p class="flex items-center gap-2">📍 Tech Park, Whitefield Phase III</p>
-                        <p class="flex items-center gap-2">🏢 Bangalore, Karnataka 560066</p>
-                        <p class="flex items-center gap-2">📞 +91 98765 43211</p>
-                        <p class="flex items-center gap-2">✉️ blr@origennt.com</p>
-                    </div>
-                    <div class="mt-6 pt-6 border-t border-white/5">
-                        <div class="status-badge badge-pending">OPENING APRIL 2026</div>
-                    </div>
-                </div>
-
-                <div class="glass p-8 hover:border-[var(--accent-purple)] transition-all">
-                    <div class="text-[var(--accent-purple)] text-sm font-mono mb-4 uppercase tracking-wider">● EXPANSION Q3 2026</div>
-                    <h4 class="text-2xl font-black uppercase mb-6">Mumbai</h4>
-                    <div class="space-y-3 text-sm text-gray-500">
-                        <p class="flex items-center gap-2">📍 Business District, BKC</p>
-                        <p class="flex items-center gap-2">🏢 Bandra East, Mumbai 400051</p>
-                        <p class="flex items-center gap-2">📞 +91 98765 43212</p>
-                        <p class="flex items-center gap-2">✉️ mum@origennt.com</p>
-                    </div>
-                    <div class="mt-6 pt-6 border-t border-white/5">
-                        <div class="status-badge badge-pending">LAUNCHING JULY 2026</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="p-20 border-t border-white/5 bg-[var(--bg-secondary)] relative z-10">
-        <div class="max-w-[1600px] mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div>
-                    <h4 class="text-3xl font-black mb-6 uppercase">OR<span class="text-[var(--brand-green)]">|</span>GENNT</h4>
-                    <p class="text-xs text-gray-600 leading-relaxed mb-6">
-                        Strategic Talent Engineering & Management Consultancy headquartered in Bhubaneswar, Odisha. 
-                        Registered under the Companies Act 2013 with focus on HR excellence and workforce transformation.
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Panel: 3D Logo Showcase -->
+        <div class="left-panel">
+            <div class="corner-decoration corner-tl"></div>
+            <div class="corner-decoration corner-br"></div>
+            
+            <div class="orbit-wrapper">
+                <div class="z-20 text-center relative">
+                    <h1 class="logo-main">
+                        <span class="glow-text"><a href="home.html">ORIGENNT</a></span>
+                    </h1>
+                    <p class="logo-subtitle">
+                        Strategic Talent Engineering
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-12 h-12 bg-[var(--portal-bg)] border border-[var(--glass-border)] rounded-full flex items-center justify-center hover:border-[var(--brand-green)] hover:scale-110 transition-all">
-                            <span class="text-sm font-bold">in</span>
-                        </a>
-                        <a href="#" class="w-12 h-12 bg-[var(--portal-bg)] border border-[var(--glass-border)] rounded-full flex items-center justify-center hover:border-[var(--brand-green)] hover:scale-110 transition-all">
-                            <span class="text-sm font-bold">tw</span>
-                        </a>
-                        <a href="#" class="w-12 h-12 bg-[var(--portal-bg)] border border-[var(--glass-border)] rounded-full flex items-center justify-center hover:border-[var(--brand-green)] hover:scale-110 transition-all">
-                            <span class="text-sm font-bold">ig</span>
-                        </a>
-                    </div>
                 </div>
-
-                <div>
-                    <h5 class="text-sm font-black uppercase mb-6 text-gray-400 tracking-wider">Services</h5>
-                    <ul class="space-y-3 text-xs">
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Talent Acquisition</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Payroll Management</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Compliance Services</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Internship Programs</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">HR Analytics</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">L&D Solutions</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h5 class="text-sm font-black uppercase mb-6 text-gray-400 tracking-wider">Company</h5>
-                    <ul class="space-y-3 text-xs">
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">About Us</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Leadership Team</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Careers</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Case Studies</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Blog & Insights</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-[var(--brand-green)] transition-colors">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h5 class="text-sm font-black uppercase mb-6 text-gray-400 tracking-wider">Newsletter</h5>
-                    <p class="text-xs text-gray-600 mb-6 leading-relaxed">Get monthly insights on HR trends, talent strategies, and workforce intelligence.</p>
-                    <div class="flex gap-2">
-                        <input type="email" placeholder="your@email.com" class="flex-1 bg-[var(--portal-bg)] border border-[var(--glass-border)] rounded-lg px-4 py-3 text-xs focus:border-[var(--brand-green)] focus:outline-none transition-all">
-                        <button class="px-6 py-3 bg-[var(--brand-green)] text-black text-sm font-black rounded-lg hover:scale-105 transition-transform">
-                            →
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="text-[9px] font-bold text-gray-700 uppercase tracking-wider">
-                    <p>Managed by Origennt Private Limited • CIN: [Company Registration Number]</p>
-                    <p class="mt-2">Core Objects: Management Consultancy & Human Resource Functions</p>
-                    <p class="mt-2 text-[var(--brand-green)]">⚠️ Compliance: NO MEDICAL/CLINICAL ROLES</p>
-                </div>
-
-                <div class="flex gap-8 text-[9px] font-bold text-gray-500 uppercase tracking-widest">
-                    <span class="hover:text-[var(--brand-green)] transition-colors cursor-pointer">GSTIN_PENDING</span>
-                    <span class="hover:text-[var(--brand-green)] transition-colors cursor-pointer">MSME_VERIFIED</span>
-                    <span class="hover:text-[var(--brand-green)] transition-colors cursor-pointer">Bhubaneswar_HQ</span>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center text-[8px] text-gray-700 uppercase tracking-widest">
-                © 2026 ORIGENNT PRIVATE LIMITED. ALL RIGHTS RESERVED. | CRAFTED WITH PRECISION IN BHUBANESWAR, ODISHA, INDIA
+                <div class="electron-ring ring-1"></div>
+                <div class="electron-ring ring-2"></div>
+                <div class="electron-ring ring-3"></div>
             </div>
         </div>
-    </footer>
 
-    <!-- Floating Action Button -->
-    <div class="fab" id="gemini-trigger" title="AI Assistant">
-        🤖
-    </div>
+        <!-- Right Panel: Authentication Forms -->
+        <div class="right-panel">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <button id="theme-toggle" aria-label="Toggle Theme">🌓</button>
+                <div id="live-clock">00:00:00 IST</div>
+            </div>
 
-    <!-- Notification -->
-    <div id="notification" class="notification">
-        <div class="flex items-start gap-4">
-            <div class="text-2xl">✓</div>
-            <div>
-                <div class="font-black uppercase text-sm mb-1">System Alert</div>
-                <div class="text-xs text-gray-400" id="notification-text">Operation completed successfully</div>
+            <!-- Auth Container -->
+            <div class="auth-container">
+                <!-- Title Section -->
+                <div class="content-reveal">
+                    <h2 class="auth-title">Welcome Back</h2>
+                    <p class="auth-subtitle">Access the Global Meritocracy Network</p>
+                </div>
+
+                <!-- Form Tabs -->
+                <div class="form-tabs content-reveal">
+                    <button class="tab-btn active" data-tab="login">Sign In</button>
+                    <button class="tab-btn" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div class="form-content active" id="login-form">
+                    <form class="auth-form content-reveal">
+                        <div class="input-group">
+                            <label class="input-label">Email Address</label>
+                            <input type="email" class="input-field" placeholder="your.email@example.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Password</label>
+                            <input type="password" class="input-field" placeholder="Enter your secure password" required>
+                        </div>
+
+                        <div class="forgot-password">
+                            <a href="#" class="glow-text">Forgot Password?</a>
+                        </div>
+
+                        <button type="submit" class="btn-halo btn-primary">
+                            <span>Enter Universe</span>
+                        </button>
+
+                        <button type="button" class="btn-halo btn-guest">
+                            <span>Continue as Guest</span>
+                        </button>
+                    </form>
+
+                    <div class="divider content-reveal">
+                        <span>or connect via</span>
+                    </div>
+
+                    <div class="social-login content-reveal">
+                        <button class="social-btn">Google</button>
+                        <button class="social-btn">LinkedIn</button>
+                        <button class="social-btn">GitHub</button>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="form-content" id="signup-form">
+                    <form class="auth-form content-reveal">
+                        <div class="input-group">
+                            <label class="input-label">Full Name</label>
+                            <input type="text" class="input-field" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Email Address</label>
+                            <input type="email" class="input-field" placeholder="your.email@example.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Password</label>
+                            <input type="password" class="input-field" placeholder="Create a strong password" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label">Confirm Password</label>
+                            <input type="password" class="input-field" placeholder="Re-enter your password" required>
+                        </div>
+
+                        <div class="checkbox-wrapper">
+                            <div class="custom-checkbox" id="terms-checkbox"></div>
+                            <label class="checkbox-label" for="terms-checkbox">
+                                I agree to the Terms of Service and Privacy Policy
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-halo btn-primary">
+                            <span>Create Account</span>
+                        </button>
+                    </form>
+
+                    <div class="divider content-reveal">
+                        <span>or sign up with</span>
+                    </div>
+
+                    <div class="social-login content-reveal">
+                        <button class="social-btn">Google</button>
+                        <button class="social-btn">LinkedIn</button>
+                        <button class="social-btn">GitHub</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="footer-info">
+                Origennt Private Limited | Bhubaneswar, Odisha, India | Management Consultancy
             </div>
         </div>
     </div>
 
     <script>
-        const OrigenntDashboard = {
+        /**
+         * ORIGENNT STRATEGIC AUTHENTICATION ENGINE
+         * Advanced Animation & Interaction System
+         */
+
+        const OrigenntAuth = {
             init() {
-                this.nav = document.getElementById('main-nav');
-                this.menu = document.getElementById('mega-menu');
-                this.search = document.getElementById('universal-search');
-                this.themeToggle = document.getElementById('theme-toggle');
+                this.loader = document.getElementById('loader');
+                this.fillBar = document.querySelector('.load-bar-fill');
+                this.tieIcon = document.querySelector('.tie-icon');
+                this.mainContainer = document.querySelector('.main-container');
+                this.particleCanvas = document.getElementById('particle-canvas');
+                this.transitionCanvas = document.getElementById('transition-canvas');
+                this.particles = [];
+                this.transitionParticles = [];
                 
-                this.attachListeners();
-                this.startClock();
-                this.initAccordions();
+                this.setupCanvas();
+                this.startLoader();
+                this.initClock();
                 this.initTheme();
-                this.initLoading();
+                this.attachEventListeners();
+                this.startParticleAnimation();
             },
 
-            initLoading() {
-                // Remove loading class and add loaded class
+            setupCanvas() {
+                this.particleCanvas.width = window.innerWidth;
+                this.particleCanvas.height = window.innerHeight;
+                this.transitionCanvas.width = window.innerWidth;
+                this.transitionCanvas.height = window.innerHeight;
+                this.pCtx = this.particleCanvas.getContext('2d');
+                this.tCtx = this.transitionCanvas.getContext('2d');
+
+                window.addEventListener('resize', () => {
+                    this.particleCanvas.width = window.innerWidth;
+                    this.particleCanvas.height = window.innerHeight;
+                    this.transitionCanvas.width = window.innerWidth;
+                    this.transitionCanvas.height = window.innerHeight;
+                });
+            },
+
+            startLoader() {
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 1;
+                    this.fillBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        this.executeTransition();
+                    }
+                }, 30);
+            },
+
+            executeTransition() {
                 setTimeout(() => {
-                    document.body.classList.remove('loading');
-                    document.body.classList.add('loaded');
-                }, 100);
+                    this.tieIcon.classList.add('zoom');
+                    
+                    setTimeout(() => {
+                        this.loader.classList.add('hidden');
+                        this.mainContainer.classList.add('visible');
+                        this.revealContent();
+                    }, 1200);
+                }, 500);
             },
 
-            attachListeners() {
-                // Scroll effect for navigation
-                let lastScroll = 0;
-                window.addEventListener('scroll', () => {
-                    const currentScroll = window.pageYOffset;
-                    
-                    if (currentScroll > 50) {
-                        this.nav.classList.add('nav-scrolled');
-                    } else {
-                        this.nav.classList.remove('nav-scrolled');
-                    }
-                    
-                    lastScroll = currentScroll;
-                });
-
-                // Menu triggers
-                document.getElementById('menu-trigger').addEventListener('click', () => {
-                    this.menu.style.opacity = '1';
-                    this.menu.style.pointerEvents = 'auto';
-                    document.body.style.overflow = 'hidden';
-                });
-
-                document.getElementById('menu-close').addEventListener('click', () => {
-                    this.menu.style.opacity = '0';
-                    this.menu.style.pointerEvents = 'none';
-                    document.body.style.overflow = 'auto';
-                });
-
-                // Search functionality
-                this.search.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' && this.search.value.trim()) {
-                        this.showNotification(`SEARCHING: "${this.search.value}" ACROSS 180+ ENTERPRISE NODES...`);
-                        setTimeout(() => {
-                            this.search.value = '';
-                        }, 1200);
-                    }
-                });
-
-                // AI Assistant
-                document.getElementById('gemini-trigger').addEventListener('click', () => {
-                    this.showNotification('AI ASSISTANT INITIALIZING... CONNECTING TO NEURAL NETWORK');
-                });
-
-                // Theme toggle
-                this.themeToggle.addEventListener('click', () => {
-                    this.toggleTheme();
-                });
-
-                // Smooth scroll for anchor links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    });
+            revealContent() {
+                const reveals = document.querySelectorAll('.content-reveal');
+                reveals.forEach((el, i) => {
+                    setTimeout(() => {
+                        el.classList.add('active');
+                    }, i * 150);
                 });
             },
 
-            startClock() {
+            initClock() {
+                const clock = document.getElementById('live-clock');
                 const update = () => {
-                    const now = new Date();
-                    const time = now.toLocaleTimeString('en-IN', { 
-                        timeZone: 'Asia/Kolkata', 
+                    const time = new Date().toLocaleTimeString('en-IN', {
+                        timeZone: 'Asia/Kolkata',
                         hour12: true,
                         hour: '2-digit',
                         minute: '2-digit',
                         second: '2-digit'
                     });
-                    const clock = document.getElementById('live-clock');
-                    if (clock) {
-                        clock.textContent = time + " IST";
-                    }
+                    clock.textContent = time + ' IST';
                 };
                 setInterval(update, 1000);
                 update();
-            },
-
-            initAccordions() {
-                document.querySelectorAll('.accordion-header').forEach(header => {
-                    header.addEventListener('click', function() {
-                        const accordionId = this.getAttribute('data-accordion');
-                        const content = document.getElementById(`accordion-${accordionId}`);
-                        const icon = this.querySelector('.accordion-icon');
-                        
-                        // Close all other accordions
-                        document.querySelectorAll('.accordion-content').forEach(c => {
-                            if (c !== content && c.classList.contains('active')) {
-                                c.classList.remove('active');
-                            }
-                        });
-                        
-                        document.querySelectorAll('.accordion-icon').forEach(i => {
-                            if (i !== icon && i.textContent === '−') {
-                                i.textContent = '+';
-                            }
-                        });
-                        
-                        // Toggle current accordion
-                        if (content.classList.contains('active')) {
-                            content.classList.remove('active');
-                            icon.textContent = '+';
-                        } else {
-                            content.classList.add('active');
-                            icon.textContent = '−';
-                        }
-                    });
-                });
             },
 
             initTheme() {
@@ -1378,33 +1074,180 @@
                 document.documentElement.setAttribute('data-theme', savedTheme);
             },
 
-            toggleTheme() {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('origennt-theme', newTheme);
-                this.showNotification(`THEME SWITCHED TO ${newTheme.toUpperCase()} MODE`);
+            attachEventListeners() {
+                // Theme Toggle
+                document.getElementById('theme-toggle').addEventListener('click', () => {
+                    this.triggerThemeTransition();
+                });
+
+                // Tab Switching
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.switchTab(btn.dataset.tab);
+                    });
+                });
+
+                // Form Submissions
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleSubmit(e.target);
+                    });
+                });
+
+                // Custom Checkbox
+                const checkbox = document.getElementById('terms-checkbox');
+                if (checkbox) {
+                    checkbox.addEventListener('click', () => {
+                        checkbox.classList.toggle('checked');
+                    });
+                }
+
+                // Guest Button
+                document.querySelectorAll('.btn-guest').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.showSuccess('Entering as guest...');
+                    });
+                });
             },
 
-            showNotification(message) {
-                const notification = document.getElementById('notification');
-                const notificationText = document.getElementById('notification-text');
-                notificationText.textContent = message;
-                notification.classList.add('show');
+            switchTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+                // Update form content
+                document.querySelectorAll('.form-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabName}-form`).classList.add('active');
+
+                // Re-trigger reveal animations
                 setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 3500);
+                    document.querySelectorAll(`#${tabName}-form .content-reveal`).forEach((el, i) => {
+                        el.classList.remove('active');
+                        setTimeout(() => el.classList.add('active'), i * 100);
+                    });
+                }, 50);
+            },
+
+            handleSubmit(form) {
+                const button = form.querySelector('.btn-primary');
+                button.classList.add('btn-loading');
+                
+                setTimeout(() => {
+                    button.classList.remove('btn-loading');
+                    this.showSuccess('Authentication successful! Redirecting...');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 2000);
+                }, 2000);
+            },
+
+            showSuccess(message) {
+                const successMsg = document.getElementById('success-message');
+                successMsg.textContent = message;
+                successMsg.classList.add('show');
+                
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 3000);
+            },
+
+            triggerThemeTransition() {
+                const current = document.documentElement.getAttribute('data-theme');
+                const target = current === 'dark' ? 'light' : 'dark';
+
+                // Create particle explosion
+                for (let i = 0; i < 150; i++) {
+                    this.transitionParticles.push({
+                        x: Math.random() * this.transitionCanvas.width,
+                        y: Math.random() * this.transitionCanvas.height,
+                        size: Math.random() * 4 + 2,
+                        speedX: (Math.random() - 0.5) * 30,
+                        speedY: (Math.random() - 0.5) * 30,
+                        opacity: 1,
+                        hue: 145
+                    });
+                }
+
+                this.animateTransition();
+                
+                setTimeout(() => {
+                    document.documentElement.setAttribute('data-theme', target);
+                    localStorage.setItem('origennt-theme', target);
+                }, 300);
+            },
+
+            animateTransition() {
+                this.tCtx.clearRect(0, 0, this.transitionCanvas.width, this.transitionCanvas.height);
+                
+                this.transitionParticles.forEach((p, i) => {
+                    this.tCtx.beginPath();
+                    this.tCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    this.tCtx.fillStyle = `hsla(${p.hue}, 80%, 60%, ${p.opacity})`;
+                    this.tCtx.fill();
+                    
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.opacity -= 0.015;
+                    p.size *= 0.97;
+                    
+                    if (p.opacity <= 0) {
+                        this.transitionParticles.splice(i, 1);
+                    }
+                });
+
+                if (this.transitionParticles.length > 0) {
+                    requestAnimationFrame(() => this.animateTransition());
+                }
+            },
+
+            startParticleAnimation() {
+                // Create ambient particles
+                for (let i = 0; i < 50; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.particleCanvas.width,
+                        y: Math.random() * this.particleCanvas.height,
+                        size: Math.random() * 2 + 1,
+                        speedX: (Math.random() - 0.5) * 0.5,
+                        speedY: (Math.random() - 0.5) * 0.5,
+                        opacity: Math.random() * 0.5 + 0.2
+                    });
+                }
+
+                this.animateParticles();
+            },
+
+            animateParticles() {
+                this.pCtx.clearRect(0, 0, this.particleCanvas.width, this.particleCanvas.height);
+                
+                this.particles.forEach(p => {
+                    this.pCtx.beginPath();
+                    this.pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    this.pCtx.fillStyle = `rgba(0, 255, 136, ${p.opacity})`;
+                    this.pCtx.fill();
+                    
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    
+                    // Wrap around edges
+                    if (p.x < 0) p.x = this.particleCanvas.width;
+                    if (p.x > this.particleCanvas.width) p.x = 0;
+                    if (p.y < 0) p.y = this.particleCanvas.height;
+                    if (p.y > this.particleCanvas.height) p.y = 0;
+                });
+
+                requestAnimationFrame(() => this.animateParticles());
             }
         };
 
-        // Initialize dashboard when DOM is loaded
+        // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', () => {
-            OrigenntDashboard.init();
-        });
-
-        // Prevent FOUC (Flash of Unstyled Content)
-        window.addEventListener('load', () => {
-            document.body.style.visibility = 'visible';
+            OrigenntAuth.init();
         });
     </script>
 </body>
