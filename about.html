@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #CC2229; --red-dark: #a31a20; --black: #0d0d0d; --white: #ffffff;
+  --off: #f7f6f4; --grey-light: #eeecea; --grey-mid: #c2bfba; --grey-text: #6b6660; --sidebar: 300px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+* { cursor: none !important; }
+.cursor { position: fixed; width: 10px; height: 10px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s,height .2s; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(204,34,41,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s,height .35s; }
+
+/* ── Sidebar ── */
+.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; background: var(--black); z-index: 200; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.86,0,.07,1); }
+.sidebar-top { padding: 36px 40px 32px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.logo { font-family: 'Libre Baskerville', serif; font-size: 19px; color: var(--white); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
+.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; scrollbar-width: none; }
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+.nav-section { margin-bottom: 36px; }
+.nav-section-label { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
+.nav-link { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s; }
+.nav-link:hover, .nav-link.active { color: var(--white); }
+.nav-link svg { opacity: 0; transition: opacity .2s; }
+.nav-link:hover svg, .nav-link.active svg { opacity: 1; }
+.sidebar-bottom { padding: 24px 40px 32px; border-top: 1px solid rgba(255,255,255,.06); }
+.sidebar-contact-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
+.sidebar-contact-info { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
+.sidebar-contact-info a:hover { color: var(--red); }
+
+/* ── Main ── */
+.main { margin-left: var(--sidebar); }
+.topbar { position: fixed; top: 0; left: var(--sidebar); right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey-light); }
+.back-link { font-size: 12.5px; color: var(--grey-text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color .2s; }
+.back-link:hover { color: var(--black); }
+.back-link::before { content: '←'; }
+.topbar-cta { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--white); background: var(--red); text-decoration: none; padding: 10px 28px; transition: background .2s; }
+.topbar-cta:hover { background: var(--red-dark); }
+
+/* ── Hero ── */
+.hero { padding: 110px 64px 0; background: var(--black); position: relative; overflow: hidden; min-height: 88vh; display: flex; flex-direction: column; justify-content: flex-end; }
+.hero-bg-circle { position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: var(--red); border-radius: 50%; opacity: .05; animation: blobFloat 22s ease-in-out infinite; pointer-events: none; }
+.hero-bg-circle2 { position: absolute; bottom: -300px; left: 10%; width: 500px; height: 500px; background: var(--red); border-radius: 50%; opacity: .04; animation: blobFloat 28s ease-in-out infinite reverse; pointer-events: none; }
+@keyframes blobFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,40px) scale(1.06); } }
+.hero-eyebrow { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; position: relative; z-index: 2; }
+.hero-eyebrow span { color: var(--red); }
+.hero-h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(44px,6vw,90px); font-weight: 400; color: var(--white); line-height: 1.02; letter-spacing: -.025em; max-width: 820px; position: relative; z-index: 2; opacity: 0; transform: translateY(28px); animation: up .9s .1s forwards; }
+.hero-h1 em { font-style: italic; color: rgba(255,255,255,.35); }
+.hero-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,.45); max-width: 560px; line-height: 1.85; margin-top: 32px; margin-bottom: 0; position: relative; z-index: 2; opacity: 0; transform: translateY(20px); animation: up .9s .28s forwards; }
+@keyframes up { to { opacity: 1; transform: none; } }
+
+/* Hero bottom strip */
+.hero-strip { background: var(--red); margin-top: 72px; padding: 0 64px; display: flex; position: relative; z-index: 2; }
+.hero-strip-cell { padding: 22px 56px 22px 0; border-right: 1px solid rgba(255,255,255,.18); margin-right: 56px; }
+.hero-strip-cell:last-child { border-right: none; }
+.hsc-label { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 4px; }
+.hsc-val { font-family: 'Libre Baskerville', serif; font-size: 24px; color: var(--white); }
+
+/* ── Shared ── */
+.label { font-size: 10px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.label::before { content: ''; width: 22px; height: 1px; background: var(--red); }
+.h2 { font-family: 'Libre Baskerville', serif; font-size: clamp(28px,3.2vw,46px); font-weight: 400; line-height: 1.12; letter-spacing: -.02em; }
+.h2 em { font-style: italic; color: var(--red); }
+.body-text { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--grey-text); }
+.body-text p { margin-bottom: 20px; }
+
+/* ── Origin Story ── */
+.origin-section { padding: 100px 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.origin-visual { position: relative; }
+.origin-card { background: var(--black); padding: 56px 48px; position: relative; overflow: hidden; }
+.origin-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--red); }
+.origin-card-year { font-family: 'Libre Baskerville', serif; font-size: 80px; font-weight: 400; color: rgba(255,255,255,.06); line-height: 1; position: absolute; top: 24px; right: 28px; }
+.origin-card-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.origin-card-h { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 400; color: var(--white); margin-bottom: 18px; line-height: 1.3; }
+.origin-card-p { font-size: 13px; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.8; }
+.origin-card-2 { background: var(--off); padding: 32px; margin-top: 2px; }
+.origin-card-2 .mini-stat { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.mini-n { font-family: 'Libre Baskerville', serif; font-size: 36px; color: var(--black); }
+.mini-label { font-size: 11px; font-weight: 300; color: var(--grey-text); }
+
+/* ── Mission / Vision / Values ── */
+.mvv { background: var(--off); padding: 90px 64px; }
+.mvv-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 56px; }
+.mvv-card { background: var(--white); padding: 44px 40px; position: relative; overflow: hidden; transition: background .25s; }
+.mvv-card::after { content: ''; position: absolute; bottom: -80px; right: -80px; width: 200px; height: 200px; background: var(--red); border-radius: 50%; transform: scale(0); transition: transform .55s cubic-bezier(.23,1,.32,1); z-index: 0; }
+.mvv-card:hover::after { transform: scale(3.2); }
+.mvv-card > * { position: relative; z-index: 1; }
+.mvv-card:hover .mvv-icon, .mvv-card:hover .mvv-title, .mvv-card:hover .mvv-text { color: rgba(255,255,255,.85); }
+.mvv-icon { font-size: 32px; margin-bottom: 24px; display: block; transition: color .3s; }
+.mvv-title { font-family: 'Libre Baskerville', serif; font-size: 20px; font-weight: 400; margin-bottom: 16px; transition: color .3s; }
+.mvv-text { font-size: 13.5px; font-weight: 300; color: var(--grey-text); line-height: 1.8; transition: color .3s; }
+
+/* ── Numbers ── */
+.numbers { background: var(--black); padding: 90px 64px; }
+.numbers-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin-top: 56px; }
+.num-cell { padding: 44px 0; border-right: 1px solid rgba(255,255,255,.05); padding-right: 40px; }
+.num-cell:last-child { border-right: none; }
+.num-n { font-family: 'Libre Baskerville', serif; font-size: 62px; font-weight: 400; color: var(--white); line-height: 1; }
+.num-n sup { font-size: 28px; color: var(--red); vertical-align: super; font-family: 'Outfit', sans-serif; }
+.num-label { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-top: 14px; line-height: 1.5; }
+
+/* ── What We Stand For ── */
+.values-section { padding: 100px 64px; display: grid; grid-template-columns: 400px 1fr; gap: 100px; align-items: start; }
+.values-sticky { position: sticky; top: 90px; }
+.values-list { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+.val-row { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding: 24px 20px; background: var(--off); position: relative; overflow: hidden; transition: background .2s; }
+.val-row::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 0; background: var(--red); transition: height .35s cubic-bezier(.77,0,.18,1); }
+.val-row:hover { background: var(--grey-light); }
+.val-row:hover::before { height: 100%; }
+.val-icon { font-size: 20px; margin-top: 2px; }
+.val-title { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+.val-desc { font-size: 13px; font-weight: 300; color: var(--grey-text); line-height: 1.7; }
+
+/* ── Timeline ── */
+.timeline-section { background: var(--off); padding: 90px 64px; }
+.timeline { margin-top: 56px; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 116px; top: 0; bottom: 0; width: 1px; background: var(--grey-light); }
+.tl-row { display: grid; grid-template-columns: 116px 1fr; gap: 40px; margin-bottom: 48px; align-items: start; }
+.tl-year { font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 400; color: var(--grey-mid); padding-top: 4px; text-align: right; padding-right: 28px; position: relative; }
+.tl-year::after { content: ''; position: absolute; right: -5px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--white); border: 2px solid var(--grey-mid); transition: border-color .2s, background .2s; }
+.tl-row:hover .tl-year::after { border-color: var(--red); background: var(--red); }
+.tl-content { background: var(--white); padding: 28px 32px; border-left: 3px solid transparent; transition: border-color .2s; }
+.tl-row:hover .tl-content { border-left-color: var(--red); }
+.tl-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.tl-text { font-size: 13px; font-weight: 300; color: var(--grey-text); line-height: 1.75; }
+.tl-tag { display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--red); background: rgba(204,34,41,.08); padding: 4px 10px; margin-top: 10px; }
+
+/* ── Expansion ── */
+.expansion { background: var(--black); padding: 90px 64px; }
+.expansion-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.exp-card { padding: 40px 36px; border: 1px solid rgba(255,255,255,.05); transition: border-color .25s, background .25s; position: relative; overflow: hidden; }
+.exp-card:hover { border-color: rgba(204,34,41,.35); background: rgba(255,255,255,.02); }
+.exp-dot { width: 10px; height: 10px; border-radius: 50%; margin-bottom: 24px; }
+.exp-dot.active { background: #22c55e; box-shadow: 0 0 12px rgba(34,197,94,.5); animation: glow 2s ease-in-out infinite; }
+.exp-dot.soon { background: var(--red); opacity: .7; }
+@keyframes glow { 0%,100% { box-shadow: 0 0 8px rgba(34,197,94,.5); } 50% { box-shadow: 0 0 20px rgba(34,197,94,.8); } }
+.exp-city { font-family: 'Libre Baskerville', serif; font-size: 22px; color: var(--white); margin-bottom: 6px; }
+.exp-tag { font-size: 9px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; display: block; }
+.exp-addr { font-size: 13px; font-weight: 300; color: rgba(255,255,255,.35); line-height: 1.7; }
+
+/* ── Sectors ── */
+.sectors { padding: 90px 64px; }
+.sector-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 48px; }
+.sector-cell { background: var(--off); padding: 28px 24px; transition: background .2s; }
+.sector-cell:hover { background: var(--grey-light); }
+.sector-icon { font-size: 24px; margin-bottom: 14px; display: block; }
+.sector-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.sector-desc { font-size: 12px; font-weight: 300; color: var(--grey-text); line-height: 1.6; }
+
+/* ── CTA ── */
+.cta { background: var(--red); padding: 90px 64px; display: flex; justify-content: space-between; align-items: center; gap: 48px; position: relative; overflow: hidden; }
+.cta::before { content: ''; position: absolute; right: -150px; top: -150px; width: 400px; height: 400px; background: rgba(255,255,255,.05); border-radius: 50%; pointer-events: none; }
+.cta-h { font-family: 'Libre Baskerville', serif; font-size: clamp(26px,2.8vw,42px); font-weight: 400; color: var(--white); max-width: 460px; line-height: 1.2; position: relative; z-index: 1; }
+.cta-h em { font-style: italic; opacity: .7; }
+.cta-btns { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+.btn-w { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--red); background: var(--white); text-decoration: none; padding: 14px 36px; transition: background .2s; text-align: center; }
+.btn-w:hover { background: var(--off); }
+.btn-text { font-size: 12px; color: rgba(255,255,255,.65); text-decoration: none; text-align: center; transition: color .2s; }
+.btn-text:hover { color: var(--white); }
+
+/* ── Footer ── */
+footer { background: var(--black); padding: 40px 64px; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--white); }
+.footer-logo span { color: var(--red); }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+
+/* ── Reveal ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* ── Hamburger ── */
+.hamburger { display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--black); border: none; padding: 13px; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 190; }
+
+@media (max-width: 1100px) {
+  .numbers-grid { grid-template-columns: repeat(2,1fr); }
+  .sector-grid { grid-template-columns: repeat(2,1fr); }
+  .expansion-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 1024px) {
+  :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-300px); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar { left: 0; padding: 0 20px 0 70px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .hero { padding: 100px 32px 0; min-height: auto; }
+  .hero-strip { padding: 0 32px; flex-wrap: wrap; }
+  .hero-strip-cell { padding: 18px 32px 18px 0; }
+  .origin-section { grid-template-columns: 1fr; gap: 48px; padding: 64px 32px; }
+  .mvv { padding: 64px 32px; }
+  .mvv-grid { grid-template-columns: 1fr; }
+  .numbers { padding: 64px 32px; }
+  .numbers-grid { grid-template-columns: 1fr 1fr; }
+  .values-section { grid-template-columns: 1fr; gap: 48px; padding: 64px 32px; }
+  .values-sticky { position: static; }
+  .timeline-section { padding: 64px 32px; }
+  .expansion { padding: 64px 32px; }
+  .expansion-grid { grid-template-columns: 1fr; }
+  .sectors { padding: 64px 32px; }
+  .sector-grid { grid-template-columns: 1fr 1fr; }
+  .cta { flex-direction: column; align-items: flex-start; padding: 64px 32px; }
+  footer { flex-direction: column; gap: 16px; align-items: flex-start; padding: 36px 32px; }
+  * { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none; }
+}
+@media (max-width: 600px) {
+  .numbers-grid, .sector-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="services/management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="services/talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="about.html" class="nav-link active">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Plot No. 247, Infocity Area<br>Bhubaneswar, Odisha 751024<br><a href="mailto:hq@origennt.com">hq@origennt.com</a></div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a href="index.html" class="back-link">Home</a>
+    <a href="contact.html" class="topbar-cta">Engage Us</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-circle"></div>
+    <div class="hero-bg-circle2"></div>
+    <div class="hero-eyebrow">ORIGENNT <span>/</span> About Us</div>
+    <h1 class="hero-h1">Strategic talent<br>engineering, <em>built<br>from Odisha.</em></h1>
+    <p class="hero-sub">ORIGENNT is a management consultancy and full-spectrum HR services firm — incorporated under the Companies Act, 2013, MSME verified, and headquartered in Bhubaneswar. We are on a mission to redefine how organisations attract, develop, and retain talent across India.</p>
+    <div class="hero-strip">
+      <div class="hero-strip-cell">
+        <div class="hsc-label">Active Placements</div>
+        <div class="hsc-val">247+</div>
+      </div>
+      <div class="hero-strip-cell">
+        <div class="hsc-label">Enterprise Clients</div>
+        <div class="hsc-val">180+</div>
+      </div>
+      <div class="hero-strip-cell">
+        <div class="hsc-label">Avg. Time to Hire</div>
+        <div class="hsc-val">12 Days</div>
+      </div>
+      <div class="hero-strip-cell">
+        <div class="hsc-label">Client Satisfaction</div>
+        <div class="hsc-val">94%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Origin Story -->
+  <section class="origin-section reveal">
+    <div>
+      <div class="label">Our Story</div>
+      <h2 class="h2">Born to bridge<br><em>talent gaps.</em></h2>
+      <div class="body-text" style="margin-top:28px">
+        <p>ORIGENNT was founded with a single conviction: that great organisations are built by great people, and that great people deserve a partner who takes their careers as seriously as their employers take their business.</p>
+        <p>Headquartered in the rapidly growing Infocity corridor of Bhubaneswar, we built our practice at the intersection of India's HR evolution and Odisha's emergence as a business destination. What began as a local consulting practice has expanded into a 173-service platform serving enterprises across IT/ITES, BFSI, manufacturing, e-commerce, and emerging sectors.</p>
+        <p>We are registered under the Companies Act, 2013 with core objects focused exclusively on Management Consultancy and Human Resource Functions. Our MSME verification reflects our commitment to building a lean, high-impact practice — not a bloated firm.</p>
+      </div>
+    </div>
+    <div class="origin-visual">
+      <div class="origin-card">
+        <div class="origin-card-year">2026</div>
+        <div class="origin-card-label">Registered Entity</div>
+        <div class="origin-card-h">Origennt Private Limited</div>
+        <div class="origin-card-p">Incorporated under Companies Act, 2013. Core objects: Management Consultancy & Human Resource Functions. MSME Verified. No medical or clinical roles.</div>
+      </div>
+      <div class="origin-card-2">
+        <div class="mini-stat"><span class="mini-n">18,500<sup style="font-size:18px;color:var(--red)">+</sup></span><span class="mini-label">Employees currently managed on payroll</span></div>
+        <div class="mini-stat" style="margin-bottom:0"><span class="mini-n">68<sup style="font-size:18px;color:var(--red)">%</sup></span><span class="mini-label">Intern-to-full-time conversion rate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission / Vision / Values -->
+  <section class="mvv reveal">
+    <div class="label">Purpose</div>
+    <h2 class="h2">What drives <em>us.</em></h2>
+    <div class="mvv-grid">
+      <div class="mvv-card">
+        <span class="mvv-icon">◎</span>
+        <div class="mvv-title">Our Mission</div>
+        <div class="mvv-text">To deliver strategic HR excellence and management consulting that creates measurable competitive advantage for every organisation and meaningful career growth for every individual we serve.</div>
+      </div>
+      <div class="mvv-card">
+        <span class="mvv-icon">◈</span>
+        <div class="mvv-title">Our Vision</div>
+        <div class="mvv-text">To become India's most trusted full-spectrum HR and management consulting partner — known for precision, integrity, and outcomes that outlast any individual engagement.</div>
+      </div>
+      <div class="mvv-card">
+        <span class="mvv-icon">◇</span>
+        <div class="mvv-title">Our Commitment</div>
+        <div class="mvv-text">Dedicated support, 99.8% SLA compliance, an average 12-day time-to-hire, and a philosophy that every client relationship is a long-term partnership — not a transactional placement.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section class="numbers reveal">
+    <div class="label" style="color:rgba(255,255,255,.5)">By the Numbers</div>
+    <h2 class="h2" style="color:var(--white)">Performance that<br><em>speaks for itself.</em></h2>
+    <div class="numbers-grid">
+      <div class="num-cell">
+        <div class="num-n">247<sup>+</sup></div>
+        <div class="num-label">Active Placements</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">180<sup>+</sup></div>
+        <div class="num-label">Enterprise Clients Served</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">94<sup>%</sup></div>
+        <div class="num-label">Client Satisfaction Rate</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">12<sup>d</sup></div>
+        <div class="num-label">Avg. Time to Hire<br><span style="font-size:10px;opacity:.4">(Industry avg: 28 days)</span></div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">68<sup>%</sup></div>
+        <div class="num-label">Intern to Full-Time Conversion</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">18.5<sup>K+</sup></div>
+        <div class="num-label">Employees on Payroll</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">4.8<sup>K+</sup></div>
+        <div class="num-label">Training Participants</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-n">650<sup>+</sup></div>
+        <div class="num-label">Analytics Reports / Month</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="values-section reveal">
+    <div class="values-sticky">
+      <div class="label">Our Values</div>
+      <h2 class="h2">The principles we<br><em>operate by.</em></h2>
+      <div class="body-text" style="margin-top:24px">
+        <p>At ORIGENNT, values aren't a wall poster. They are built into how we engage, how we deliver, and how we hold ourselves accountable — every single day.</p>
+      </div>
+    </div>
+    <div class="values-list">
+      <div class="val-row">
+        <div class="val-icon">⬡</div>
+        <div><div class="val-title">Precision Over Volume</div><div class="val-desc">We believe in doing fewer things better. Every candidate we place, every strategy we deliver, reflects meticulous craft — not mass output.</div></div>
+      </div>
+      <div class="val-row">
+        <div class="val-icon">⬡</div>
+        <div><div class="val-title">Client Partnership</div><div class="val-desc">We embed alongside leadership teams rather than handing over reports. Implementation accountability is non-negotiable for us.</div></div>
+      </div>
+      <div class="val-row">
+        <div class="val-icon">⬡</div>
+        <div><div class="val-title">Integrity Without Exception</div><div class="val-desc">99.8% compliance accuracy is not a marketing number — it is our standard. We will not take shortcuts in our legal, financial, or ethical obligations.</div></div>
+      </div>
+      <div class="val-row">
+        <div class="val-icon">⬡</div>
+        <div><div class="val-title">Speed That Respects Quality</div><div class="val-desc">Our 12-day average time-to-hire is achieved through a pre-vetted pool of 50,000+ candidates and AI-assisted matching — not by lowering the bar.</div></div>
+      </div>
+      <div class="val-row">
+        <div class="val-icon">⬡</div>
+        <div><div class="val-title">Individual-First</div><div class="val-desc">Whether it is an enterprise or a fresh graduate, we treat every engagement with the same seriousness. Careers matter as much as clients.</div></div>
+      </div>
+      <div class="val-row">
+        <div class="val-icon">⬡</div>
+        <div><div class="val-title">Odisha-Proud, India-Ready</div><div class="val-desc">We are rooted in Bhubaneswar and proud of it. Our geographic origin does not limit our ambition — we operate pan-India and are expanding fast.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline-section reveal">
+    <div class="label">Milestones</div>
+    <h2 class="h2">Our journey,<br><em>so far.</em></h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-year">Founded</div>
+        <div class="tl-content">
+          <div class="tl-title">Incorporated in Bhubaneswar</div>
+          <div class="tl-text">Origennt Private Limited is incorporated under the Companies Act, 2013, headquartered at Infocity Area, Bhubaneswar, Odisha. Core objects defined: Management Consultancy & Human Resource Functions.</div>
+          <div class="tl-tag">Formation</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">Early</div>
+        <div class="tl-content">
+          <div class="tl-title">MSME Verification & Initial Portfolio</div>
+          <div class="tl-text">MSME verification secured. Initial service portfolio launched across B2C career services and B2B talent acquisition. First enterprise clients onboarded across IT/ITES and manufacturing.</div>
+          <div class="tl-tag">Growth</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">Scale</div>
+        <div class="tl-content">
+          <div class="tl-title">180+ Enterprise Clients & 247+ Active Placements</div>
+          <div class="tl-text">Platform expands to 173 services across 11 categories. Payroll operations scale to 18,500+ employees. Internship programme achieves 68% conversion to full-time positions. Executive Search unit reaches 34% market positioning.</div>
+          <div class="tl-tag">Scale</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">Q2 2026</div>
+        <div class="tl-content">
+          <div class="tl-title">Bangalore Office Opens — Tech Park, Whitefield</div>
+          <div class="tl-text">First expansion beyond Odisha. The Bangalore office opens in the Whitefield Tech Park to serve the South India IT corridor and strengthen executive search capabilities in the technology sector.</div>
+          <div class="tl-tag">Expansion</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-year">Q3 2026</div>
+        <div class="tl-content">
+          <div class="tl-title">Mumbai Office Launches — Bandra Kurla Complex</div>
+          <div class="tl-text">ORIGENNT enters Mumbai's financial district with a dedicated BFSI and corporate consulting practice. The BKC office completes a three-city presence — Bhubaneswar, Bangalore, and Mumbai.</div>
+          <div class="tl-tag">Expansion</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expansion Map -->
+  <section class="expansion reveal">
+    <div class="label" style="color:rgba(255,255,255,.5)">Geographic Presence</div>
+    <h2 class="h2" style="color:var(--white)">Where we are<br><em>today & tomorrow.</em></h2>
+    <div class="expansion-grid">
+      <div class="exp-card">
+        <div class="exp-dot active"></div>
+        <div class="exp-city">Bhubaneswar</div>
+        <span class="exp-tag">● Headquarters · Operational</span>
+        <div class="exp-addr">Plot No. 247, Infocity Area<br>Bhubaneswar, Odisha 751024<br>hq@origennt.com</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-dot soon"></div>
+        <div class="exp-city">Bangalore</div>
+        <span class="exp-tag">Opening April 2026</span>
+        <div class="exp-addr">Tech Park, Whitefield Phase III<br>Bangalore, Karnataka 560066<br>blr@origennt.com</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-dot soon"></div>
+        <div class="exp-city">Mumbai</div>
+        <span class="exp-tag">Launching July 2026</span>
+        <div class="exp-addr">Business District, BKC<br>Bandra East, Mumbai 400051<br>mum@origennt.com</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sectors -->
+  <section class="sectors reveal">
+    <div class="label">Industries We Serve</div>
+    <h2 class="h2">Deep sector<br><em>knowledge.</em></h2>
+    <div class="sector-grid">
+      <div class="sector-cell">
+        <span class="sector-icon">💻</span>
+        <div class="sector-name">IT / ITES</div>
+        <div class="sector-desc">Software, SaaS, IT services, BPO, KPO and technology-enabled businesses.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🏦</span>
+        <div class="sector-name">BFSI</div>
+        <div class="sector-desc">Banking, financial services, insurance, fintech and capital markets.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🏭</span>
+        <div class="sector-name">Manufacturing</div>
+        <div class="sector-desc">Industrial, FMCG, auto-components, process industries and blue-collar operations.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🛒</span>
+        <div class="sector-name">E-Commerce & Retail</div>
+        <div class="sector-desc">D2C brands, marketplaces, quick commerce, and omnichannel retail operations.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🏗️</span>
+        <div class="sector-name">Infrastructure</div>
+        <div class="sector-desc">Construction, real estate, logistics, warehousing and facility management.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🎓</span>
+        <div class="sector-name">Education & Skilling</div>
+        <div class="sector-desc">Ed-tech, vocational training institutes, universities and skill development centres.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🌱</span>
+        <div class="sector-name">Startups & D2C</div>
+        <div class="sector-desc">Seed to Series-B ventures needing HR infrastructure, culture design and talent pipelines.</div>
+      </div>
+      <div class="sector-cell">
+        <span class="sector-icon">🔬</span>
+        <div class="sector-name">Research & Analytics</div>
+        <div class="sector-desc">Data-driven organisations needing workforce analytics, salary benchmarks and talent intelligence.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta reveal">
+    <h2 class="cta-h">Ready to build something <em>remarkable together?</em></h2>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn-w">Start a Conversation</a>
+      <a href="services.html" class="btn-text">View All 173 Services →</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ORIGENNT<span>.</span></div>
+    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function tick(){ cursor.style.left=mx+'px'; cursor.style.top=my+'px'; rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+});
+document.getElementById('overlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+});
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis'); }), {threshold:.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
