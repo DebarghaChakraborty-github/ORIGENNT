@@ -22,163 +22,982 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --red: #CC2229; --red-dark: #a31a20; --black: #0d0d0d; --white: #ffffff;
-  --off: #f7f6f4; --grey-light: #eeecea; --grey-mid: #c2bfba; --grey-text: #6b6660; --sidebar: 300px;
-}
-html { scroll-behavior: smooth; }
-body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
-* { cursor: none !important; }
-.cursor { position: fixed; width: 10px; height: 10px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s,height .2s; }
-.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(204,34,41,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s,height .35s; }
 
-/* Sidebar */
-.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; background: var(--black); z-index: 200; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.86,0,.07,1); }
-.sidebar-top { padding: 36px 40px 32px; border-bottom: 1px solid rgba(255,255,255,.06); }
-.logo { font-family: 'Libre Baskerville', serif; font-size: 19px; color: var(--white); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
+:root {
+  --red: #CC2229;
+  --red-dark: #a31a20;
+  --red-deep: #7a1016;
+  --black: #0d0d0d;
+  --white: #ffffff;
+  --off: #f7f6f4;
+  --grey-light: #eeecea;
+  --grey-mid: #c2bfba;
+  --grey-text: #6b6660;
+  --sidebar: 300px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─────────────────────────── */
+* { cursor: none !important; }
+.cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s, background .2s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(204,34,41,.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .35s, height .35s, border-color .3s;
+}
+body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 18px; height: 18px; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: rgba(204,34,41,.25); }
+
+/* ─── FLOATING BLOBS ─────────────────── */
+.blob-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.045;
+  animation: blobFloat linear infinite;
+  will-change: transform;
+}
+.blob-1 { width: 600px; height: 600px; background: var(--red); top: -100px; left: -100px; animation-duration: 25s; }
+.blob-2 { width: 500px; height: 500px; background: #ff6b35; top: 40%; right: -150px; animation-duration: 30s; animation-delay: -10s; }
+.blob-3 { width: 400px; height: 400px; background: var(--red); bottom: -100px; left: 30%; animation-duration: 20s; animation-delay: -5s; }
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, -60px) scale(1.05); }
+  66%  { transform: translate(-30px, 40px) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* ─── SIDEBAR ────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar);
+  height: 100vh;
+  background: var(--black);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  transition: transform .5s cubic-bezier(.86,0,.07,1);
+}
+
+.sidebar-top {
+  padding: 36px 40px 32px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 19px;
+  color: var(--white);
+  letter-spacing: .06em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
 .logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
-.sidebar-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; scrollbar-width: none; }
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 40px;
+  scrollbar-width: none;
+}
 .sidebar-scroll::-webkit-scrollbar { display: none; }
+
 .nav-section { margin-bottom: 36px; }
-.nav-section-label { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
-.nav-link { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s; }
+
+.nav-section-label {
+  font-size: 9px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,.6);
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  transition: color .2s;
+  letter-spacing: .01em;
+}
 .nav-link:hover, .nav-link.active { color: var(--white); }
 .nav-link svg { opacity: 0; transition: opacity .2s, transform .2s; }
-.nav-link:hover svg, .nav-link.active svg { opacity: 1; }
-.sidebar-bottom { padding: 24px 40px 32px; border-top: 1px solid rgba(255,255,255,.06); }
-.sidebar-contact-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
-.sidebar-contact-info { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
-.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
+.nav-link:hover svg { opacity: 1; transform: translateX(4px); }
+
+.sidebar-bottom {
+  padding: 24px 40px 32px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.sidebar-contact-label {
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 12px;
+}
+.sidebar-contact-info {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.8;
+}
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
 .sidebar-contact-info a:hover { color: var(--red); }
 
-/* Main */
-.main { margin-left: var(--sidebar); }
-.topbar { position: fixed; top: 0; left: var(--sidebar); right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey-light); }
-.back-link { font-size: 12.5px; color: var(--grey-text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color .2s; }
-.back-link:hover { color: var(--black); }
-.back-link::before { content: '←'; }
-.topbar-cta { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--white); background: var(--red); text-decoration: none; padding: 10px 28px; transition: background .2s; }
-.topbar-cta:hover { background: var(--red-dark); }
+/* ─── MAIN ───────────────────────────── */
+.main {
+  margin-left: var(--sidebar);
+  position: relative;
+  z-index: 1;
+}
 
-/* Page Header */
-.page-header { padding: 110px 64px 80px; background: var(--black); position: relative; overflow: hidden; }
-.page-header::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: var(--red); border-radius: 50%; opacity: .06; animation: blobFloat 20s ease-in-out infinite; }
-@keyframes blobFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,40px) scale(1.05); } }
-.page-breadcrumb { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
-.page-breadcrumb span { color: var(--red); }
-.page-h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(42px,5.5vw,76px); font-weight: 400; color: var(--white); line-height: 1.06; letter-spacing: -.02em; max-width: 700px; opacity: 0; transform: translateY(24px); animation: up .8s .1s forwards; }
-.page-h1 em { font-style: italic; color: rgba(255,255,255,.4); }
-.page-intro { font-size: 16px; font-weight: 300; color: rgba(255,255,255,.5); max-width: 580px; line-height: 1.8; margin-top: 32px; opacity: 0; transform: translateY(20px); animation: up .8s .25s forwards; }
-@keyframes up { to { opacity: 1; transform: none; } }
+/* ─── TOP NAV ────────────────────────── */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar);
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  z-index: 100;
+  transition: background .4s, border-color .4s;
+}
+.topnav.scrolled {
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--grey-light);
+}
+.topnav-links { display: flex; align-items: center; gap: 40px; }
+.topnav-link {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--grey-text);
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: color .2s;
+}
+.topnav-link:hover { color: var(--black); }
+.topnav-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  background: var(--red);
+  text-decoration: none;
+  padding: 11px 32px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.topnav-cta:hover { background: var(--red-dark); }
 
-/* Filter tabs */
-.filter-bar { background: var(--off); border-bottom: 1px solid var(--grey-light); padding: 0 64px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
-.filter-bar::-webkit-scrollbar { display: none; }
-.filter-tab { font-size: 11.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--grey-text); padding: 18px 28px; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .2s, border-color .2s; }
-.filter-tab:hover { color: var(--black); }
-.filter-tab.active { color: var(--red); border-bottom-color: var(--red); }
+/* ─── HERO ───────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding: 68px 0 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  overflow: hidden;
+}
 
-/* Count bar */
-.count-bar { background: var(--white); padding: 18px 64px; border-bottom: 1px solid var(--grey-light); display: flex; align-items: center; justify-content: space-between; }
-.count-text { font-size: 12px; color: var(--grey-text); }
-.count-n { font-family: 'Libre Baskerville', serif; font-size: 28px; color: var(--black); }
-.search-box { display: flex; align-items: center; gap: 12px; border: 1px solid var(--grey-light); padding: 10px 20px; background: var(--off); }
-.search-box input { border: none; background: transparent; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--black); outline: none; width: 220px; }
-.search-box input::placeholder { color: var(--grey-mid); }
-.search-icon { color: var(--grey-mid); font-size: 14px; }
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px 60px;
+  max-width: 900px;
+}
 
-/* Service Grid */
-.services-area { padding: 56px 64px 90px; }
-.category-block { margin-bottom: 72px; }
-.category-block.hidden { display: none; }
-.cat-header { display: flex; align-items: flex-end; gap: 24px; margin-bottom: 32px; padding-bottom: 20px; border-bottom: 1px solid var(--grey-light); }
-.cat-badge { font-size: 10px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: var(--white); background: var(--red); padding: 5px 14px; }
-.cat-title { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 400; }
-.cat-title em { font-style: italic; color: var(--red); }
-.cat-count { font-size: 11px; color: var(--grey-mid); margin-left: auto; letter-spacing: .1em; }
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: slideIn .7s .1s forwards;
+}
+.hero-tag::before {
+  content: '';
+  width: 28px; height: 1px;
+  background: var(--red);
+}
 
-.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.service-card { background: var(--off); padding: 24px 26px; position: relative; overflow: hidden; transition: background .2s; }
-.service-card::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 0; background: var(--red); transition: height .3s cubic-bezier(.77,0,.18,1); }
-.service-card:hover { background: var(--grey-light); }
-.service-card:hover::before { height: 100%; }
-.service-card.hidden { display: none; }
-.svc-n { font-size: 10px; color: var(--grey-mid); letter-spacing: .15em; margin-bottom: 8px; font-family: 'Libre Baskerville', serif; }
-.svc-name { font-size: 13.5px; font-weight: 500; line-height: 1.45; }
-.svc-arrow { position: absolute; bottom: 18px; right: 20px; font-size: 16px; color: var(--grey-mid); opacity: 0; transition: opacity .2s, transform .2s; }
-.service-card:hover .svc-arrow { opacity: 1; transform: translateX(4px); }
+.hero-h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(48px, 6.5vw, 88px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -.02em;
+  color: var(--black);
+  opacity: 0;
+  animation: slideIn .8s .22s forwards;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--red);
+}
 
-/* Stats dark */
-.stats-dark { background: var(--black); padding: 80px 64px; display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; }
-.stat-cell { padding: 40px 48px; border-right: 1px solid rgba(255,255,255,.05); }
-.stat-cell:last-child { border-right: none; }
-.stat-n { font-family: 'Libre Baskerville', serif; font-size: 54px; font-weight: 400; color: var(--white); line-height: 1; }
-.stat-n sup { font-size: 24px; color: var(--red); vertical-align: super; }
-.stat-l { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 12px; }
+.hero-body {
+  margin-top: 36px;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--grey-text);
+  max-width: 560px;
+  opacity: 0;
+  animation: slideIn .8s .38s forwards;
+}
 
-/* CTA */
-.cta { background: var(--red); padding: 90px 64px; display: flex; justify-content: space-between; align-items: center; gap: 48px; position: relative; overflow: hidden; }
-.cta::before { content: ''; position: absolute; right: -150px; top: -150px; width: 400px; height: 400px; background: rgba(255,255,255,.05); border-radius: 50%; }
-.cta-h { font-family: 'Libre Baskerville', serif; font-size: clamp(26px,2.8vw,40px); font-weight: 400; color: var(--white); max-width: 440px; line-height: 1.2; position: relative; z-index: 1; }
-.cta-h em { font-style: italic; opacity: .7; }
-.cta-btns { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
-.btn-w { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--red); background: var(--white); text-decoration: none; padding: 14px 36px; transition: background .2s; text-align: center; }
-.btn-w:hover { background: var(--off); }
-.btn-text { font-size: 12px; color: rgba(255,255,255,.65); text-decoration: none; text-align: center; transition: color .2s; }
-.btn-text:hover { color: var(--white); }
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 52px;
+  opacity: 0;
+  animation: slideIn .8s .52s forwards;
+}
 
-/* Footer */
-footer { background: var(--black); padding: 40px 64px; display: flex; justify-content: space-between; align-items: center; }
-.footer-logo { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--white); }
-.footer-logo span { color: var(--red); }
-.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+.btn-red {
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--red);
+  text-decoration: none;
+  padding: 15px 40px;
+  transition: background .2s, transform .2s;
+  display: inline-block;
+}
+.btn-red:hover { background: var(--red-dark); transform: translateY(-1px); }
 
-/* Reveal */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.btn-ghost {
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: gap .2s;
+}
+.btn-ghost:hover { gap: 16px; }
+.btn-ghost::after { content: '→'; }
+
+/* Hero bottom ticker */
+.hero-ticker {
+  background: var(--red);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+}
+.ticker-track {
+  display: flex;
+  gap: 0;
+  animation: ticker 30s linear infinite;
+  white-space: nowrap;
+}
+.ticker-item {
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+  padding: 0 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.ticker-item::after {
+  content: '◆';
+  font-size: 6px;
+  color: rgba(255,255,255,.4);
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── SECTION BASE ───────────────────── */
+.section { padding: 110px 64px; }
+.section-sm { padding: 80px 64px; }
+
+.label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.label::before { content: ''; width: 22px; height: 1px; background: var(--red); }
+
+.h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(34px, 3.8vw, 54px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--black);
+}
+.h2 em { font-style: italic; color: var(--red); }
+
+.body-text {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--grey-text);
+}
+
+/* ─── INTRO STRIP ────────────────────── */
+.intro-strip {
+  background: var(--off);
+  padding: 80px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  border-top: 1px solid var(--grey-light);
+  border-bottom: 1px solid var(--grey-light);
+}
+.intro-col {
+  padding: 40px 48px;
+  background: var(--off);
+  position: relative;
+  overflow: hidden;
+}
+.intro-col::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--red);
+  transition: width .5s cubic-bezier(.77,0,.18,1);
+}
+.intro-col:hover::before { width: 100%; }
+.intro-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 56px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.intro-num sup { font-size: 24px; color: var(--red); font-family: 'Outfit', sans-serif; vertical-align: super; }
+.intro-label {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--grey-text);
+  font-weight: 400;
+}
+
+/* ─── ABOUT ──────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 5fr 4fr;
+  gap: 100px;
+  align-items: center;
+}
+.about-text { }
+.about-text .body-text { margin-top: 32px; max-width: 540px; }
+.about-text .body-text p { margin-bottom: 20px; }
+
+.about-panel {
+  background: var(--black);
+  padding: 52px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.about-panel::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 300px; height: 300px;
+  background: var(--red);
+  border-radius: 50%;
+  opacity: .08;
+  pointer-events: none;
+}
+.about-panel-label {
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 32px;
+}
+.about-panel-item {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.about-panel-item:last-child { border-bottom: none; }
+.about-panel-item-head {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 4px;
+}
+.about-panel-item-sub {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,.35);
+}
+
+/* ─── SERVICES ───────────────────────── */
+.services-section { background: var(--off); }
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 64px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.svc-card {
+  background: var(--white);
+  padding: 44px 40px 40px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+  group: true;
+}
+
+/* Bubble hover effect */
+.svc-card::before {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 260px;
+  height: 260px;
+  background: var(--red);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform .6s cubic-bezier(.23,1,.32,1);
+  z-index: 0;
+}
+.svc-card:hover::before { transform: scale(2.8); }
+.svc-card:hover { background: var(--white); }
+
+.svc-card > * { position: relative; z-index: 1; }
+
+.svc-card:hover .svc-num,
+.svc-card:hover .svc-title,
+.svc-card:hover .svc-desc,
+.svc-card:hover .svc-link { color: rgba(255,255,255,.9); }
+.svc-card:hover .svc-link { color: var(--white); }
+
+.svc-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 12px;
+  color: var(--grey-mid);
+  letter-spacing: .18em;
+  margin-bottom: 28px;
+  transition: color .3s;
+}
+.svc-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--black);
+  margin-bottom: 18px;
+  transition: color .3s;
+}
+.svc-desc {
+  font-size: 13.5px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--grey-text);
+  margin-bottom: 32px;
+  transition: color .3s;
+}
+.svc-link {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color .3s, gap .2s;
+}
+.svc-card:hover .svc-link { gap: 16px; }
+
+/* ─── MARQUEE ────────────────────────── */
+.marquee-band {
+  padding: 20px 0;
+  overflow: hidden;
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+.marquee-track {
+  display: flex;
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255,255,255,.18);
+  padding: 0 56px;
+  flex-shrink: 0;
+}
+.marquee-item span { color: var(--red); margin-left: 56px; font-style: normal; font-size: 8px; }
+
+/* ─── APPROACH ───────────────────────── */
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+.approach-left .body-text { margin-top: 28px; max-width: 460px; }
+
+.steps { margin-top: 48px; }
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 28px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--grey-light);
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity .6s, transform .6s;
+}
+.step.vis { opacity: 1; transform: none; }
+.step-n {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--grey-light);
+  line-height: 1;
+  margin-top: 4px;
+}
+.step-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--black); }
+.step-text { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--grey-text); }
+
+.approach-right { padding-top: 80px; }
+
+.pull-quote {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 26px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--black);
+  border-left: 3px solid var(--red);
+  padding-left: 32px;
+  margin-bottom: 56px;
+}
+
+.location-cards { display: flex; flex-direction: column; gap: 2px; }
+.loc-card {
+  background: var(--off);
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 3px solid transparent;
+  transition: border-color .2s, background .2s;
+}
+.loc-card:hover { border-left-color: var(--red); background: var(--grey-light); }
+.loc-name { font-size: 14px; font-weight: 500; }
+.loc-sub { font-size: 12px; color: var(--grey-text); margin-top: 2px; }
+.loc-badge {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  background: var(--red);
+  color: var(--white);
+}
+.loc-badge.soon { background: transparent; border: 1px solid var(--grey-mid); color: var(--grey-text); }
+
+/* ─── APP SECTION ────────────────────── */
+.app-section {
+  background: var(--black);
+  padding: 110px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.app-section::before {
+  content: '';
+  position: absolute;
+  top: -200px; left: -200px;
+  width: 600px; height: 600px;
+  background: var(--red);
+  border-radius: 50%;
+  opacity: .05;
+  pointer-events: none;
+  animation: blobFloat 18s ease-in-out infinite;
+}
+
+.app-label { color: rgba(255,255,255,.4); }
+.app-label::before { background: rgba(255,255,255,.3); }
+.app-h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(32px, 3.5vw, 50px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--white);
+  margin-top: 20px;
+}
+.app-h2 em { font-style: italic; color: rgba(255,255,255,.4); }
+.app-body {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,.45);
+  margin-top: 24px;
+  max-width: 440px;
+}
+.app-btns { display: flex; flex-direction: column; gap: 14px; margin-top: 48px; }
+
+.app-btn {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 28px;
+  border: 1px solid rgba(255,255,255,.1);
+  text-decoration: none;
+  color: var(--white);
+  max-width: 260px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s;
+}
+.app-btn::before {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: var(--red);
+  transition: left .35s cubic-bezier(.77,0,.18,1);
+  z-index: 0;
+}
+.app-btn:hover { border-color: var(--red); }
+.app-btn:hover::before { left: 0; }
+.app-btn > * { position: relative; z-index: 1; }
+.app-btn-icon { font-size: 24px; }
+.app-btn-sub { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); display: block; margin-bottom: 3px; }
+.app-btn-label { font-size: 15px; font-weight: 500; }
+
+.app-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+.phone {
+  width: 200px; height: 400px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 36px;
+  background: rgba(255,255,255,.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  box-shadow: 0 0 80px rgba(204,34,41,.08);
+}
+.phone::before { content: ''; width: 70px; height: 7px; background: rgba(255,255,255,.07); border-radius: 4px; position: absolute; top: 18px; }
+.phone-inner { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.2); text-align: center; }
+.phone-glyph { font-size: 36px; opacity: .15; }
+
+/* pulse rings on phone */
+.phone-pulse {
+  position: absolute;
+  width: 240px; height: 440px;
+  border: 1px solid rgba(204,34,41,.12);
+  border-radius: 40px;
+  animation: pulse 3s ease-out infinite;
+}
+.phone-pulse-2 {
+  width: 290px; height: 490px;
+  animation-delay: 1s;
+  border-color: rgba(204,34,41,.07);
+}
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.06); }
+}
+
+/* ─── TESTIMONIALS ───────────────────── */
+.testi-section { background: var(--off); }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+.testi-card {
+  background: var(--white);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.testi-quote {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 40px;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 20px;
+  opacity: .3;
+}
+.testi-text {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--grey-text);
+  margin-bottom: 28px;
+}
+.testi-author { font-size: 13px; font-weight: 500; color: var(--black); }
+.testi-role { font-size: 12px; color: var(--grey-text); margin-top: 3px; }
+
+/* ─── CONTACT ────────────────────────── */
+.contact-band {
+  background: var(--red);
+  padding: 90px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-band::before {
+  content: '';
+  position: absolute;
+  right: -200px; top: -200px;
+  width: 500px; height: 500px;
+  background: rgba(255,255,255,.05);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.contact-band::after {
+  content: '';
+  position: absolute;
+  left: -100px; bottom: -200px;
+  width: 400px; height: 400px;
+  background: rgba(0,0,0,.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.contact-h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 400;
+  color: var(--white);
+  max-width: 480px;
+  line-height: 1.2;
+  position: relative; z-index: 1;
+}
+.contact-h2 em { font-style: italic; opacity: .7; }
+.contact-actions { display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 1; }
+.btn-white {
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--red);
+  background: var(--white);
+  text-decoration: none;
+  padding: 15px 40px;
+  transition: background .2s, color .2s;
+  text-align: center;
+}
+.btn-white:hover { background: var(--off); }
+.btn-ghost-white {
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  text-align: center;
+  transition: color .2s;
+}
+.btn-ghost-white:hover { color: var(--white); }
+
+/* ─── FOOTER ─────────────────────────── */
+footer {
+  background: var(--black);
+  padding: 56px 64px 40px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-desc { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.3); line-height: 1.8; max-width: 260px; }
+.footer-col-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-weight: 500; }
+.footer-col-link { display: block; font-size: 12.5px; color: rgba(255,255,255,.4); text-decoration: none; padding: 5px 0; transition: color .2s; }
+.footer-col-link:hover { color: rgba(255,255,255,.8); }
+.footer-bottom {
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy { font-size: 11.5px; color: rgba(255,255,255,.2); }
+.footer-legal { display: flex; gap: 28px; }
+.footer-legal-link { font-size: 11px; color: rgba(255,255,255,.2); text-decoration: none; transition: color .2s; }
+.footer-legal-link:hover { color: rgba(255,255,255,.5); }
+
+/* ─── SCROLL REVEAL ──────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.vis { opacity: 1; transform: none; }
 
-/* Hamburger */
-.hamburger { display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--black); border: none; padding: 13px; flex-direction: column; gap: 5px; }
-.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
-.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 190; }
-
-@media (max-width: 1100px) {
-  .service-grid { grid-template-columns: repeat(2,1fr); }
+/* ─── ANIMATIONS ─────────────────────── */
+@keyframes slideIn {
+  to { opacity: 1; transform: none; }
 }
+
+/* ─── HAMBURGER (mobile) ─────────────── */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 20px; left: 20px;
+  z-index: 300;
+  background: var(--black);
+  border: none;
+  padding: 13px;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: .3s; }
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 190;
+}
+
+/* ─── RESPONSIVE ─────────────────────── */
 @media (max-width: 1024px) {
   :root { --sidebar: 0px; }
   .sidebar { transform: translateX(-300px); }
-  .sidebar.open { transform: translateX(0); }
+  .sidebar.open { transform: translateX(0); --sidebar: 300px; }
   .main { margin-left: 0; }
-  .topbar { left: 0; padding: 0 20px 0 70px; }
+  .topnav { left: 0; padding: 0 24px 0 72px; }
   .hamburger { display: flex; }
   .overlay.show { display: block; }
-  .page-header, .services-area, .cta, .stats-dark { padding-left: 32px; padding-right: 32px; }
-  .filter-bar { padding: 0 32px; }
-  .count-bar { padding: 18px 32px; }
-  .stats-dark { grid-template-columns: 1fr 1fr; }
-  .cta { flex-direction: column; align-items: flex-start; }
-  footer { flex-direction: column; gap: 16px; align-items: flex-start; padding: 36px 32px; }
+  .hero-content { padding: 80px 32px 50px; }
+  .section, .section-sm { padding: 70px 32px; }
+  .intro-strip { grid-template-columns: 1fr; padding: 40px 32px; }
+  .intro-col { padding: 28px 24px; }
+  .about-grid, .approach-grid, .app-section { grid-template-columns: 1fr; gap: 48px; }
+  .about-panel { display: none; }
+  .services-grid, .testi-grid { grid-template-columns: 1fr; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .contact-band { flex-direction: column; align-items: flex-start; padding: 60px 32px; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  footer { padding: 48px 32px 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .topnav-links { display: none; }
+  .app-visual { display: none; }
   * { cursor: auto !important; }
   .cursor, .cursor-ring { display: none; }
-}
-@media (max-width: 600px) {
-  .service-grid { grid-template-columns: 1fr; }
-  .stats-dark { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
+<!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="ring"></div>
-<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Floating blobs -->
+<div class="blob-container">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- Mobile hamburger -->
+<button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
 <div class="overlay" id="overlay"></div>
 
+<!-- ─── SIDEBAR ─── -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-top">
-    <a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+    <a href="#" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
   </div>
+
   <div class="sidebar-scroll">
     <div class="nav-section">
       <div class="nav-section-label">Consulting</div>
@@ -187,6 +1006,7 @@ footer { background: var(--black); padding: 40px 64px; display: flex; justify-co
       <a href="services/organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="services/change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
+
     <div class="nav-section">
       <div class="nav-section-label">HR Practice</div>
       <a href="services/talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
@@ -195,453 +1015,435 @@ footer { background: var(--black); padding: 40px 64px; display: flex; justify-co
       <a href="services/hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="services/learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Programs</div>
+      <a href="services/internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/career-services.html" class="nav-link">Career Services <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+
     <div class="nav-section">
       <div class="nav-section-label">Company</div>
       <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
   </div>
+
   <div class="sidebar-bottom">
     <div class="sidebar-contact-label">Headquarters</div>
-    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:hq@origennt.com">hq@origennt.com</a></div>
+    <div class="sidebar-contact-info">
+      Bhubaneswar, Odisha<br>
+      <a href="mailto:origennt@gmail.com">origennt@gmail.com</a>
+    </div>
   </div>
 </aside>
 
+<!-- ─── MAIN ─── -->
 <div class="main">
-  <header class="topbar">
-    <a href="index.html" class="back-link">Home</a>
-    <a href="contact.html" class="topbar-cta">Engage Us</a>
-  </header>
 
-  <div class="page-header">
-    <div class="page-breadcrumb">ORIGENNT <span>/</span> All Services</div>
-    <h1 class="page-h1">173 ways we<br><em>deliver value.</em></h1>
-    <p class="page-intro">From individual career guidance to enterprise transformation — ORIGENNT's full-spectrum service portfolio covers every stage of the talent and business lifecycle.</p>
+  <!-- Top Nav -->
+  <nav class="topnav" id="topnav">
+    <div class="topnav-links">
+      <a href="about.html" class="topnav-link">About</a>
+      <a href="services.html" class="topnav-link">Services</a>
+      <a href="#approach" class="topnav-link">Our Approach</a>
+      <a href="insights.html" class="topnav-link">Insights</a>
+    </div>
+    <a href="contact.html" class="topnav-cta">Schedule Consultation</a>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Management Consultancy &amp; HR</div>
+      <h1 class="hero-h1">
+        Results that<br>
+        <em>reshape</em><br>
+        organisations.
+      </h1>
+      <p class="hero-body">
+        ORIGENNT is a strategic management consultancy and HR firm. We partner with India's leading enterprises to transform strategy into execution — and build the human capability to sustain it.
+      </p>
+      <div class="hero-actions">
+        <a href="contact.html" class="btn-red">Begin Engagement</a>
+        <a href="#services" class="btn-ghost">Our Services</a>
+      </div>
+    </div>G
+
+    <!-- Ticker -->G
+    <div class="hero-ticker">
+      <div class="ticker-track">
+        <span class="ticker-item">Management Consulting</span>
+        <span class="ticker-item">Strategy & Transformation</span>
+        <span class="ticker-item">Executive Search</span>
+        <span class="ticker-item">HR Analytics</span>
+        <span class="ticker-item">Talent Acquisition</span>
+        <span class="ticker-item">Payroll & Compliance</span>
+        <span class="ticker-item">Organisational Design</span>
+        <span class="ticker-item">Internship Programs</span>
+        <!-- duplicate for seamless loop -->
+        <span class="ticker-item">Management Consulting</span>
+        <span class="ticker-item">Strategy & Transformation</span>
+        <span class="ticker-item">Executive Search</span>
+        <span class="ticker-item">HR Analytics</span>
+        <span class="ticker-item">Talent Acquisition</span>
+        <span class="ticker-item">Payroll & Compliance</span>
+        <span class="ticker-item">Organisational Design</span>
+        <span class="ticker-item">Internship Programs</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── INTRO STRIP ─── -->
+  <div class="intro-strip">
+    <div class="intro-col reveal">
+      <div class="intro-num">247<sup>+</sup></div>
+      <div class="intro-label">Active Placements</div>
+    </div>
+    <div class="intro-col reveal" style="transition-delay:.1s">
+      <div class="intro-num">180<sup>+</sup></div>
+      <div class="intro-label">Enterprise Clients</div>
+    </div>
+    <div class="intro-col reveal" style="transition-delay:.2s">
+      <div class="intro-num">12<sup>d</sup></div>
+      <div class="intro-label">Avg. Time to Hire</div>
+    </div>
   </div>
 
-  <!-- Filter Bar -->
-  <div class="filter-bar" id="filterBar">
-    <div class="filter-tab active" data-cat="all">All Services</div>
-    <div class="filter-tab" data-cat="b2c">B2C — Individual</div>
-    <div class="filter-tab" data-cat="b2b">B2B — HR & Talent</div>
-    <div class="filter-tab" data-cat="consulting">Corporate Consulting</div>
-    <div class="filter-tab" data-cat="training">Corporate Training</div>
-    <div class="filter-tab" data-cat="education">Training & Education</div>
-    <div class="filter-tab" data-cat="bluecollar">Blue/Grey Collar</div>
-    <div class="filter-tab" data-cat="facility">Facility Management</div>
-    <div class="filter-tab" data-cat="tech">Technology & AI-HR</div>
-    <div class="filter-tab" data-cat="partners">Partnerships</div>
-    <div class="filter-tab" data-cat="research">Research & Analytics</div>
-    <div class="filter-tab" data-cat="internships">Internship Programs</div>
+  <!-- ─── ABOUT ─── -->
+  <section class="section" id="about">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <div class="label">Who We Are</div>
+        <h2 class="h2">A consultancy that<br>operates at the <em>intersection</em><br>of strategy and people.</h2>
+        <div class="body-text">
+          <p>ORIGENNT was founded on a single conviction: that sustainable business performance is inseparable from organisational capability. We are a management consultancy first — one whose deepest expertise lies in the human infrastructure that makes strategy possible.</p>
+          <p>From our headquarters in Bhubaneswar, we serve enterprises across IT/ITES, BFSI, manufacturing, e-commerce and beyond. Our multidisciplinary teams combine strategic advisory with rigorous HR practice, delivering integrated solutions that create lasting competitive advantage.</p>
+        </div>
+        <div style="margin-top:40px">
+          <a href="about.html" class="btn-red">Our Story</a>
+        </div>
+      </div>
+      <div class="about-panel">
+        <div class="about-panel-label">Core Practice Areas</div>
+        <div class="about-panel-item">
+          <div class="about-panel-item-head">Management Consulting</div>
+          <div class="about-panel-item-sub">Strategy · Transformation · Organisational Design</div>
+        </div>
+        <div class="about-panel-item">
+          <div class="about-panel-item-head">HR & Talent Advisory</div>
+          <div class="about-panel-item-sub">Acquisition · Executive Search · Analytics</div>
+        </div>
+        <div class="about-panel-item">
+          <div class="about-panel-item-head">Workforce Operations</div>
+          <div class="about-panel-item-sub">Payroll · Compliance · Administration</div>
+        </div>
+        <div class="about-panel-item">
+          <div class="about-panel-item-head">Capability Development</div>
+          <div class="about-panel-item-sub">L&D · Internship Programs · Career Services</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ─── -->
+  <div class="marquee-band">
+    <div class="marquee-track">
+      <span class="marquee-item">Strategy Consulting <span>◆</span></span>
+      <span class="marquee-item">Talent Engineering <span>◆</span></span>
+      <span class="marquee-item">Executive Search <span>◆</span></span>
+      <span class="marquee-item">Organisational Design <span>◆</span></span>
+      <span class="marquee-item">HR Analytics <span>◆</span></span>
+      <span class="marquee-item">Change Management <span>◆</span></span>
+      <span class="marquee-item">Payroll & Compliance <span>◆</span></span>
+      <span class="marquee-item">Strategy Consulting <span>◆</span></span>
+      <span class="marquee-item">Talent Engineering <span>◆</span></span>
+      <span class="marquee-item">Executive Search <span>◆</span></span>
+      <span class="marquee-item">Organisational Design <span>◆</span></span>
+      <span class="marquee-item">HR Analytics <span>◆</span></span>
+      <span class="marquee-item">Change Management <span>◆</span></span>
+      <span class="marquee-item">Payroll & Compliance <span>◆</span></span>
+    </div>
   </div>
 
-  <!-- Count Bar -->
-  <div class="count-bar">
+  <!-- ─── SERVICES ─── -->
+  <section class="section services-section" id="services">
+    <div class="services-header reveal">
+      <div>
+        <div class="label">What We Do</div>
+        <h2 class="h2">Our service <em>portfolio.</em></h2>
+      </div>
+      <a href="services/" class="btn-ghost">All Services</a>
+    </div>
+
+    <div class="services-grid">
+      <a href="management-consulting.html" class="svc-card reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-title">Management Consulting</div>
+        <div class="svc-desc">Strategic advisory for complex business challenges. We help leadership teams define direction, align resources and drive performance across the enterprise.</div>
+        <div class="svc-link">Explore →</div>
+      </a>
+      <a href="services/strategy.html" class="svc-card reveal" style="transition-delay:.07s">
+        <div class="svc-num">02</div>
+        <div class="svc-title">Strategy & Transformation</div>
+        <div class="svc-desc">From growth strategy to large-scale transformation programmes. We translate ambition into executable roadmaps with measurable milestones.</div>
+        <div class="svc-link">Explore →</div>
+      </a>
+      <a href="services/organizational-design.html" class="svc-card reveal" style="transition-delay:.14s">
+        <div class="svc-num">03</div>
+        <div class="svc-title">Organisational Design</div>
+        <div class="svc-desc">Structure follows strategy. We design operating models, reporting lines and governance frameworks that enable your strategy to scale.</div>
+        <div class="svc-link">Explore →</div>
+      </a>
+      <a href="services/talent-acquisition.html" class="svc-card reveal" style="transition-delay:.21s">
+        <div class="svc-num">04</div>
+        <div class="svc-title">Talent Acquisition</div>
+        <div class="svc-desc">End-to-end recruitment across all levels and functions. Our AI-powered pipeline delivers hires 60% faster than industry average — without compromising quality.</div>
+        <div class="svc-link">Explore →</div>
+      </a>
+      <a href="services/executive-search.html" class="svc-card reveal" style="transition-delay:.28s">
+        <div class="svc-num">05</div>
+        <div class="svc-title">Executive Search</div>
+        <div class="svc-desc">Confidential, research-led identification of C-suite and senior leadership talent. We assess for cultural fit, not just capability.</div>
+        <div class="svc-link">Explore →</div>
+      </a>
+      <a href="services/hr-analytics.html" class="svc-card reveal" style="transition-delay:.35s">
+        <div class="svc-num">06</div>
+        <div class="svc-title">HR Analytics</div>
+        <div class="svc-desc">Workforce intelligence that drives decisions. Predictive attrition modelling, competency mapping, productivity benchmarking and ROI measurement.</div>
+        <div class="svc-link">Explore →</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── APPROACH ─── -->
+  <section class="section" id="approach">
+    <div class="approach-grid">
+      <div class="approach-left reveal">
+        <div class="label">How We Work</div>
+        <h2 class="h2">Rigorous.<br><em>Collaborative.</em><br>Outcome-led.</h2>
+        <p class="body-text" style="margin-top:28px; max-width:460px">Our methodology is built on the belief that the best consulting is not advice — it is transformation, delivered alongside you.</p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-n">01</div>
+            <div>
+              <div class="step-title">Discovery & Diagnostic</div>
+              <div class="step-text">Deep immersion in your business context, challenges and strategic intent before any recommendation is made.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">02</div>
+            <div>
+              <div class="step-title">Bespoke Solution Design</div>
+              <div class="step-text">No templates. Every engagement is crafted to your specific situation, sector and scale.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">03</div>
+            <div>
+              <div class="step-title">Precision Execution</div>
+              <div class="step-text">We work alongside your teams to implement — not just recommend — with clear milestones and accountability.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-n">04</div>
+            <div>
+              <div class="step-title">Sustained Impact</div>
+              <div class="step-text">Post-engagement reviews and analytics ensure outcomes endure well beyond our involvement.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="approach-right reveal" style="transition-delay:.15s">
+        <div class="pull-quote">
+          "We don't deliver presentations. We deliver the capability to perform."
+        </div>
+        <div class="location-cards">
+          <div class="loc-card">
+            <div>
+              <div class="loc-name">Bhubaneswar</div>
+              <div class="loc-sub">Odisha — Headquarters</div>
+            </div>
+            <div class="loc-badge">Active</div>
+          </div>
+          <div class="loc-card">
+            <div>
+              <div class="loc-name">Bangalore</div>
+              <div class="loc-sub">Karnataka — South India Hub</div>
+            </div>
+            <div class="loc-badge soon">Nov 2026</div>
+          </div>
+          <div class="loc-card">
+            <div>
+              <div class="loc-name">Mumbai</div>
+              <div class="loc-sub">Maharashtra — West India Hub</div>
+            </div>
+            <div class="loc-badge soon">Jul 2027</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ─── -->
+  <section class="section testi-section reveal">
+    <div class="label">Client Outcomes</div>
+    <h2 class="h2">What our clients <em>say.</em></h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">ORIGENNT scaled our engineering team from 50 to 300 in six months without any compromise on calibre. Their strategic sourcing capability is unlike anything we've seen from a firm in Odisha.</div>
+        <div class="testi-author">Rajesh Kumar</div>
+        <div class="testi-role">CTO, Bangalore Tech (IT/ITES)</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">Their compliance expertise saved us ₹2.8Cr in potential penalties during our national expansion. They don't just advise — they operationalise. Genuinely strategic partners.</div>
+        <div class="testi-author">Priya Sharma</div>
+        <div class="testi-role">Head of HR, Mumbai Industries</div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="testi-text">72% of our interns converted to full-time employees. The programme is structured, rigorous and genuinely prepares people for real business impact. Best pipeline we've established.</div>
+        <div class="testi-author">Anil Mehta</div>
+        <div class="testi-role">CEO, Hyderabad Ventures</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── APP ─── -->
+  <section class="app-section" id="app">
     <div>
-      <div class="count-text">Total Services</div>
-      <div class="count-n" id="visibleCount">173</div>
-    </div>
-    <div class="search-box">
-      <span class="search-icon">⌕</span>
-      <input type="text" id="searchInput" placeholder="Search any service…">
-    </div>
-  </div>
-
-  <div class="services-area">
-
-    <!-- A: B2C -->
-    <div class="category-block" id="cat-b2c">
-      <div class="cat-header">
-        <div class="cat-badge">A</div>
-        <h2 class="cat-title">B2C — Individual / Student / <em>Job Seeker</em></h2>
-        <div class="cat-count">28 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">01</div><div class="svc-name">Career Counselling</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">02</div><div class="svc-name">Career Mapping & Planning</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">03</div><div class="svc-name">Resume Building</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">04</div><div class="svc-name">LinkedIn Optimization</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">05</div><div class="svc-name">Interview Preparation</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">06</div><div class="svc-name">Job Search Strategy</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">07</div><div class="svc-name">Personality Development</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">08</div><div class="svc-name">Communication Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">09</div><div class="svc-name">Group Discussion Practice</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">10</div><div class="svc-name">Internship Assistance</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">11</div><div class="svc-name">Job Placement Assistance</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">12</div><div class="svc-name">Psychometric Assessments</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">13</div><div class="svc-name">Soft Skills Certification</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">14</div><div class="svc-name">Digital Skills Certification</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">15</div><div class="svc-name">Vocational Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">16</div><div class="svc-name">Corporate Readiness Certification</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">17</div><div class="svc-name">Domain-focused Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">18</div><div class="svc-name">Leadership Development</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">19</div><div class="svc-name">Entrepreneurship Programs</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">20</div><div class="svc-name">E-learning Course Certifications</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">21</div><div class="svc-name">Study Abroad Counselling</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">22</div><div class="svc-name">Career Gap Analysis Report</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">23</div><div class="svc-name">ATS Resume Audit Report</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">24</div><div class="svc-name">Interview Video Feedback Analysis</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">25</div><div class="svc-name">Portfolio Development Program</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">26</div><div class="svc-name">Freelancing Readiness Program</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">27</div><div class="svc-name">Government Exam Career Guidance</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">28</div><div class="svc-name">Career Transition Advisory</div><span class="svc-arrow">→</span></div>
+      <div class="label app-label">Coming Soon</div>
+      <h2 class="app-h2">ORIGENNT<br><em>in your pocket.</em></h2>
+      <p class="app-body">Track placements, manage your talent pipeline, monitor compliance dashboards and connect with your dedicated consultant — available on iOS and Android.</p>
+      <div class="app-btns">
+        <a href="#app" class="app-btn">
+          <span class="app-btn-icon">🍎</span>
+          <div>
+            <span class="app-btn-sub">Download on the</span>
+            <span class="app-btn-label">App Store</span>
+          </div>
+        </a>
+        <a href="#app" class="app-btn">
+          <span class="app-btn-icon">▶</span>
+          <div>
+            <span class="app-btn-sub">Get it on</span>
+            <span class="app-btn-label">Google Play</span>
+          </div>
+        </a>
       </div>
     </div>
-
-    <!-- B: B2B HR -->
-    <div class="category-block" id="cat-b2b">
-      <div class="cat-header">
-        <div class="cat-badge">B</div>
-        <h2 class="cat-title">B2B — HR & <em>Talent Management</em></h2>
-        <div class="cat-count">20 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">29</div><div class="svc-name">Recruitment Services</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">30</div><div class="svc-name">Mass Hiring</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">31</div><div class="svc-name">Executive Search</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">32</div><div class="svc-name">Contract Staffing</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">33</div><div class="svc-name">Temporary Staffing</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">34</div><div class="svc-name">On-roll Manpower</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">35</div><div class="svc-name">Off-roll Manpower</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">36</div><div class="svc-name">Recruitment Process Outsourcing (RPO)</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">37</div><div class="svc-name">HR Outsourcing (HRO)</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">38</div><div class="svc-name">Payroll Processing</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">39</div><div class="svc-name">Performance Management</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">40</div><div class="svc-name">Employee Engagement</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">41</div><div class="svc-name">Competency Mapping</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">42</div><div class="svc-name">Assessment Tests</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">43</div><div class="svc-name">Employer Branding Strategy</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">44</div><div class="svc-name">HR Compliance Audit</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">45</div><div class="svc-name">Employee Retention Strategy Consulting</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">46</div><div class="svc-name">Workforce Cost Optimization Consulting</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">47</div><div class="svc-name">HR Automation Setup</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">48</div><div class="svc-name">Background Verification Coordination</div><span class="svc-arrow">→</span></div>
+    <div class="app-visual">
+      <div class="phone-pulse phone-pulse-2"></div>
+      <div class="phone-pulse"></div>
+      <div class="phone">
+        <div class="phone-glyph">📱</div>
+        <div class="phone-inner">In Development</div>
       </div>
     </div>
+  </section>
 
-    <!-- C: Corporate Consulting -->
-    <div class="category-block" id="cat-consulting">
-      <div class="cat-header">
-        <div class="cat-badge">C</div>
-        <h2 class="cat-title">Corporate <em>Consulting</em></h2>
-        <div class="cat-count">10 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">49</div><div class="svc-name">Business Strategy Consulting</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">50</div><div class="svc-name">Operational Consulting</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">51</div><div class="svc-name">Process Improvement</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">52</div><div class="svc-name">Organizational Restructuring</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">53</div><div class="svc-name">Culture Transformation</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">54</div><div class="svc-name">Succession Planning</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">55</div><div class="svc-name">HR Policy Creation</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">56</div><div class="svc-name">JD & Role Framework Development</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">57</div><div class="svc-name">Benchmarking & Salary Mapping</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">58</div><div class="svc-name">Change Management</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- D: Corporate Training -->
-    <div class="category-block" id="cat-training">
-      <div class="cat-header">
-        <div class="cat-badge">D</div>
-        <h2 class="cat-title">Corporate <em>Training</em></h2>
-        <div class="cat-count">8 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">59</div><div class="svc-name">Induction Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">60</div><div class="svc-name">Soft Skills Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">61</div><div class="svc-name">Leadership Coaching</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">62</div><div class="svc-name">Manager Development</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">63</div><div class="svc-name">Compliance Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">64</div><div class="svc-name">Digital Transformation Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">65</div><div class="svc-name">Sales Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">66</div><div class="svc-name">Customer Service Training</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- E: Education -->
-    <div class="category-block" id="cat-education">
-      <div class="cat-header">
-        <div class="cat-badge">E</div>
-        <h2 class="cat-title">Training, Institute & <em>Education Solutions</em></h2>
-        <div class="cat-count">10 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">67</div><div class="svc-name">Training Centre Setup</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">68</div><div class="svc-name">E-learning Platform Development</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">69</div><div class="svc-name">LMS Course Creation</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">70</div><div class="svc-name">Vocational Training Programs</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">71</div><div class="svc-name">Skill Development Camps</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">72</div><div class="svc-name">Corporate Academy Setup</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">73</div><div class="svc-name">Workshops & Masterclasses</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">74</div><div class="svc-name">In-house Certification Programs</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">75</div><div class="svc-name">Industry Readiness Programs</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">76</div><div class="svc-name">Placement-linked Training</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- F: Blue Collar -->
-    <div class="category-block" id="cat-bluecollar">
-      <div class="cat-header">
-        <div class="cat-badge">F</div>
-        <h2 class="cat-title">Blue / Grey Collar <em>Manpower & Facility</em></h2>
-        <div class="cat-count">16 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">77</div><div class="svc-name">Housekeeping Staff Deployment</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">78</div><div class="svc-name">Security Guards Deployment</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">79</div><div class="svc-name">Helpers Supply</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">80</div><div class="svc-name">Loaders Supply</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">81</div><div class="svc-name">Unskilled Labour</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">82</div><div class="svc-name">Semi-skilled Labour</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">83</div><div class="svc-name">Drivers Supply</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">84</div><div class="svc-name">Delivery Personnel</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">85</div><div class="svc-name">Facility Workers</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">86</div><div class="svc-name">Warehouse Manpower</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">87</div><div class="svc-name">Manufacturing Labour</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">88</div><div class="svc-name">Grey-collar Technicians</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">89</div><div class="svc-name">Industrial Safety Training</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">90</div><div class="svc-name">Site Supervisor Deployment</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">91</div><div class="svc-name">Contract Labour License Support</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">92</div><div class="svc-name">Labour Law Documentation Assistance</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- G: Facility Management -->
-    <div class="category-block" id="cat-facility">
-      <div class="cat-header">
-        <div class="cat-badge">G</div>
-        <h2 class="cat-title">Contractor & <em>Facility Management</em></h2>
-        <div class="cat-count">12 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">93</div><div class="svc-name">Contractor / Vendor Hiring Model</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">94</div><div class="svc-name">Compliance Monitoring</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">95</div><div class="svc-name">Quality Control</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">96</div><div class="svc-name">Client Operations Support</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">97</div><div class="svc-name">Housekeeping Services</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">98</div><div class="svc-name">Industrial Cleaning</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">99</div><div class="svc-name">Security Services</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">100</div><div class="svc-name">Pantry Boys</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">101</div><div class="svc-name">Office Assistants</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">102</div><div class="svc-name">Facility Supervisors</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">103</div><div class="svc-name">Driver Supply Contracts</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">104</div><div class="svc-name">Warehouse Operations Manpower</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- H: Tech & AI -->
-    <div class="category-block" id="cat-tech">
-      <div class="cat-header">
-        <div class="cat-badge">H</div>
-        <h2 class="cat-title">Technology & <em>AI-based HR Solutions</em></h2>
-        <div class="cat-count">14 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">105</div><div class="svc-name">AI-based Resume Screening</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">106</div><div class="svc-name">Career Mapping Tools</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">107</div><div class="svc-name">Skill Assessment Tools</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">108</div><div class="svc-name">Psychometric Tech Systems</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">109</div><div class="svc-name">Workforce Analytics</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">110</div><div class="svc-name">HR Dashboards</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">111</div><div class="svc-name">Attendance Analytics</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">112</div><div class="svc-name">LMS Automation</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">113</div><div class="svc-name">ATS Setup</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">114</div><div class="svc-name">Data-driven HR Insights</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">115</div><div class="svc-name">Custom ATS Development Support</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">116</div><div class="svc-name">AI Chatbot for Career Support</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">117</div><div class="svc-name">Interview Scheduling Automation</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">118</div><div class="svc-name">Employee Feedback Analytics Tool</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- I: Partnerships -->
-    <div class="category-block" id="cat-partners">
-      <div class="cat-header">
-        <div class="cat-badge">I</div>
-        <h2 class="cat-title">Partnerships & <em>Institutional Collaborations</em></h2>
-        <div class="cat-count">7 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">119</div><div class="svc-name">College Partnerships</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">120</div><div class="svc-name">Corporate Training Tie-ups</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">121</div><div class="svc-name">NGO Collaborations</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">122</div><div class="svc-name">Skill India / PMKVY Partnerships</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">123</div><div class="svc-name">Incubator Training Programs</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">124</div><div class="svc-name">Industrial Training Programs</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">125</div><div class="svc-name">CSR Skill Initiatives</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- J: Research -->
-    <div class="category-block" id="cat-research">
-      <div class="cat-header">
-        <div class="cat-badge">J</div>
-        <h2 class="cat-title">Research, Analytics & <em>Consulting Projects</em></h2>
-        <div class="cat-count">11 services</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">126</div><div class="svc-name">HR Analytics Projects</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">127</div><div class="svc-name">Salary Benchmark Studies</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">128</div><div class="svc-name">Workforce Reports</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">129</div><div class="svc-name">Competency Framework Development</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">130</div><div class="svc-name">Organizational Audits</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">131</div><div class="svc-name">Workforce Readiness Reports</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">132</div><div class="svc-name">Talent Insight Surveys</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">133</div><div class="svc-name">Attrition Risk Analysis</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">134</div><div class="svc-name">Workforce Forecasting Reports</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">135</div><div class="svc-name">Hiring Funnel Analytics</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">136</div><div class="svc-name">Campus Employability Index Report</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- K: Internships -->
-    <div class="category-block" id="cat-internships">
-      <div class="cat-header">
-        <div class="cat-badge">K</div>
-        <h2 class="cat-title"><em>Internship</em> Programs</h2>
-        <div class="cat-count">37 programs</div>
-      </div>
-      <div class="service-grid">
-        <div class="service-card"><div class="svc-n">137</div><div class="svc-name">HR Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">138</div><div class="svc-name">Talent Acquisition Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">139</div><div class="svc-name">Recruitment Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">140</div><div class="svc-name">HR Operations Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">141</div><div class="svc-name">Training & Development Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">142</div><div class="svc-name">Employee Engagement Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">143</div><div class="svc-name">Performance & Evaluation Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">144</div><div class="svc-name">Business Development Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">145</div><div class="svc-name">Client Relations Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">146</div><div class="svc-name">Sales & Coordination Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">147</div><div class="svc-name">Operations Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">148</div><div class="svc-name">Project Management Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">149</div><div class="svc-name">Entrepreneurship & Strategy Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">150</div><div class="svc-name">Digital Marketing Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">151</div><div class="svc-name">Social Media Marketing Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">152</div><div class="svc-name">Content Writing Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">153</div><div class="svc-name">Branding & Communication Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">154</div><div class="svc-name">Market Research Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">155</div><div class="svc-name">Public Relations Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">156</div><div class="svc-name">Data Analytics Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">157</div><div class="svc-name">Business Analytics Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">158</div><div class="svc-name">Power BI / Tableau Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">159</div><div class="svc-name">Python for Analytics Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">160</div><div class="svc-name">IT Business Analyst Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">161</div><div class="svc-name">Product Management Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">162</div><div class="svc-name">QA / Manual Testing Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">163</div><div class="svc-name">Web Development Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">164</div><div class="svc-name">Customer Support Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">165</div><div class="svc-name">BPO / Process Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">166</div><div class="svc-name">Administrative Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">167</div><div class="svc-name">Documentation & Compliance Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">168</div><div class="svc-name">Career Counselling Assistant Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">169</div><div class="svc-name">Project Intern (College Mandated)</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">170</div><div class="svc-name">Research Intern (Non-Scientific)</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">171</div><div class="svc-name">Hybrid / Virtual Intern</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">172</div><div class="svc-name">Paid Training + Internship Program</div><span class="svc-arrow">→</span></div>
-        <div class="service-card"><div class="svc-n">173</div><div class="svc-name">Capstone Project Intern</div><span class="svc-arrow">→</span></div>
-      </div>
-    </div>
-
-    <!-- No results -->
-    <div id="noResults" style="display:none; text-align:center; padding:80px 0;">
-      <div style="font-family:'Libre Baskerville',serif; font-size:42px; color:var(--grey-light);">—</div>
-      <p style="font-size:14px; color:var(--grey-text); margin-top:16px;">No services match your search.</p>
-    </div>
-
-  </div><!-- /services-area -->
-
-  <!-- Stats -->
-  <div class="stats-dark reveal">
-    <div class="stat-cell"><div class="stat-n">173<sup>+</sup></div><div class="stat-l">Services Offered</div></div>
-    <div class="stat-cell"><div class="stat-n">11<sup></sup></div><div class="stat-l">Practice Categories</div></div>
-    <div class="stat-cell"><div class="stat-n">180<sup>+</sup></div><div class="stat-l">Enterprise Clients</div></div>
-    <div class="stat-cell"><div class="stat-n">94<sup>%</sup></div><div class="stat-l">Client Satisfaction</div></div>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta reveal">
-    <h2 class="cta-h">Can't find what you're looking for? <em>Talk to us.</em></h2>
-    <div class="cta-btns">
-      <a href="contact.html" class="btn-w">Get in Touch</a>
-      <a href="index.html" class="btn-text">← Back to Home</a>
+  <!-- ─── CONTACT BAND ─── -->
+  <div class="contact-band reveal">
+    <h2 class="contact-h2">Ready to transform your organisation? <em>Let's talk.</em></h2>
+    <div class="contact-actions">
+      <a href="https://wa.me/919861168291?text=Hi%20Origennt%2C%20I%20just%20filled%20out%20the%20consultation%20form.%0A%0AName%3A%0AService%3A%0ATime%3A%0A%0APlease%20guide%20me." class="btn-white">Schedule Consultation on Whatsapp</a>
+      <a href="https://wa.me/c/245836025987098" class="btn-ghost-white">View All Services</a>
     </div>
   </div>
 
+  <!-- ─── FOOTER ─── -->
   <footer>
-    <div class="footer-logo">ORIGENNT<span>.</span></div>
-    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+        <p class="footer-desc">Strategic management consultancy and HR firm headquartered in Bhubaneswar, Odisha. Registered under the Companies Act 2013.</p>
+      </div>
+      <div>
+        <div class="footer-col-label">Consulting</div>
+        <a href="management-consulting.html" class="footer-col-link">Management Consulting</a>
+        <a href="services/strategy.html" class="footer-col-link">Strategy & Transformation</a>
+        <a href="services/organizational-design.html" class="footer-col-link">Organisational Design</a>
+        <a href="services/change-management.html" class="footer-col-link">Change Management</a>
+      </div>
+      <div>
+        <div class="footer-col-label">HR Practice</div>
+        <a href="services/talent-acquisition.html" class="footer-col-link">Talent Acquisition</a>
+        <a href="services/executive-search.html" class="footer-col-link">Executive Search</a>
+        <a href="services/payroll-compliance.html" class="footer-col-link">Payroll & Compliance</a>
+        <a href="services/hr-analytics.html" class="footer-col-link">HR Analytics</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <a href="about.html" class="footer-col-link">About Us</a>
+        <a href="insights.html" class="footer-col-link">Insights</a>
+        <a href="contact.html" class="footer-col-link">Contact</a>
+        <a href="#app" class="footer-col-link">Download App</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved. MSME Verified · Bhubaneswar, Odisha.</div>
+      <div class="footer-legal">
+        <a href="privacy-policy.html" class="footer-legal-link">Privacy Policy</a>
+        <a href="terms.html" class="footer-legal-link">Terms of Use</a>
+        <a href="#" class="footer-legal-link">Disclaimer</a>
+      </div>
+    </div>
   </footer>
-</div>
+
+</div><!-- /main -->
 
 <script>
-// Cursor
+// Custom cursor
 const cursor = document.getElementById('cursor');
-const ring = document.getElementById('ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-(function tick(){ cursor.style.left=mx+'px'; cursor.style.top=my+'px'; rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
-
-// Hamburger
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
-});
-document.getElementById('overlay').addEventListener('click', () => {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-});
-
-// Reveal
-const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis'); }), {threshold:.1});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Filter + Search
-const catMap = {
-  'b2c': 'cat-b2c', 'b2b': 'cat-b2b', 'consulting': 'cat-consulting',
-  'training': 'cat-training', 'education': 'cat-education', 'bluecollar': 'cat-bluecollar',
-  'facility': 'cat-facility', 'tech': 'cat-tech', 'partners': 'cat-partners',
-  'research': 'cat-research', 'internships': 'cat-internships'
-};
-let activeCat = 'all';
-
-function applyFilters() {
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  let total = 0;
-
-  Object.values(catMap).forEach(id => {
-    const block = document.getElementById(id);
-    const catKey = Object.keys(catMap).find(k => catMap[k] === id);
-    const catMatch = activeCat === 'all' || activeCat === catKey;
-
-    if (!catMatch) { block.classList.add('hidden'); return; }
-    block.classList.remove('hidden');
-
-    let visInCat = 0;
-    block.querySelectorAll('.service-card').forEach(card => {
-      const name = card.querySelector('.svc-name').textContent.toLowerCase();
-      const match = !q || name.includes(q);
-      card.classList.toggle('hidden', !match);
-      if (match) visInCat++;
-    });
-    if (visInCat === 0) block.classList.add('hidden');
-    total += visInCat;
-  });
-
-  document.getElementById('visibleCount').textContent = total;
-  document.getElementById('noResults').style.display = total === 0 ? 'block' : 'none';
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
 }
+animateCursor();
 
-document.querySelectorAll('.filter-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    activeCat = tab.dataset.cat;
-    applyFilters();
-  });
+// Topnav scroll
+const topnav = document.getElementById('topnav');
+window.addEventListener('scroll', () => {
+  topnav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-document.getElementById('searchInput').addEventListener('input', applyFilters);
+// Mobile sidebar
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+hamburger.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .step').forEach(el => obs.observe(el));
+
+// Stagger steps
+document.querySelectorAll('.step').forEach((s, i) => {
+  s.style.transitionDelay = `${i * 0.12}s`;
+});
 </script>
 </body>
 </html>
