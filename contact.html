@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #CC2229; --red-dark: #a31a20; --black: #0d0d0d; --white: #ffffff;
+  --off: #f7f6f4; --grey-light: #eeecea; --grey-mid: #c2bfba; --grey-text: #6b6660; --sidebar: 300px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+* { cursor: none !important; }
+.cursor { position: fixed; width: 10px; height: 10px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s,height .2s; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(204,34,41,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s,height .35s; }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; background: var(--black); z-index: 200; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.86,0,.07,1); }
+.sidebar-top { padding: 36px 40px 32px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.logo { font-family: 'Libre Baskerville', serif; font-size: 19px; color: var(--white); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
+.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; scrollbar-width: none; }
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+.nav-section { margin-bottom: 36px; }
+.nav-section-label { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
+.nav-link { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s; }
+.nav-link:hover, .nav-link.active { color: var(--white); }
+.nav-link svg { opacity: 0; transition: opacity .2s; }
+.nav-link:hover svg, .nav-link.active svg { opacity: 1; }
+.sidebar-bottom { padding: 24px 40px 32px; border-top: 1px solid rgba(255,255,255,.06); }
+.sidebar-contact-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
+.sidebar-contact-info { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
+.sidebar-contact-info a:hover { color: var(--red); }
+
+/* Main */
+.main { margin-left: var(--sidebar); }
+.topbar { position: fixed; top: 0; left: var(--sidebar); right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey-light); }
+.back-link { font-size: 12.5px; color: var(--grey-text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color .2s; }
+.back-link:hover { color: var(--black); }
+.back-link::before { content: '←'; }
+.topbar-badge { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--red); border: 1px solid var(--red); padding: 7px 18px; }
+
+/* Page Header */
+.page-header { padding: 110px 64px 80px; background: var(--black); position: relative; overflow: hidden; }
+.page-header::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: var(--red); border-radius: 50%; opacity: .06; animation: blobFloat 20s ease-in-out infinite; }
+@keyframes blobFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,40px) scale(1.05); } }
+.page-breadcrumb { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+.page-breadcrumb span { color: var(--red); }
+.page-h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(42px,5.5vw,76px); font-weight: 400; color: var(--white); line-height: 1.06; letter-spacing: -.02em; max-width: 700px; opacity: 0; transform: translateY(24px); animation: up .8s .1s forwards; }
+.page-h1 em { font-style: italic; color: rgba(255,255,255,.4); }
+.page-intro { font-size: 16px; font-weight: 300; color: rgba(255,255,255,.5); max-width: 520px; line-height: 1.8; margin-top: 32px; opacity: 0; transform: translateY(20px); animation: up .8s .25s forwards; }
+@keyframes up { to { opacity: 1; transform: none; } }
+
+/* Contact Grid */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+
+/* Left – Info panel */
+.contact-info { background: var(--off); padding: 72px 64px; display: flex; flex-direction: column; gap: 56px; }
+.info-label { font-size: 9px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.info-label::before { content: ''; width: 18px; height: 1px; background: var(--red); }
+.info-item-title { font-family: 'Libre Baskerville', serif; font-size: 15px; margin-bottom: 8px; }
+.info-item-text { font-size: 13.5px; font-weight: 300; color: var(--grey-text); line-height: 1.8; }
+.info-item-text a { color: var(--grey-text); text-decoration: none; transition: color .2s; }
+.info-item-text a:hover { color: var(--red); }
+
+.office-cards { display: flex; flex-direction: column; gap: 2px; }
+.office-card { background: var(--white); padding: 22px 24px; border-left: 3px solid transparent; transition: border-color .2s; }
+.office-card:hover { border-left-color: var(--red); }
+.office-city { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--grey-text); margin-bottom: 6px; }
+.office-addr { font-size: 13px; font-weight: 300; color: var(--grey-text); line-height: 1.7; }
+
+.response-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--black); color: var(--white); font-size: 12px; padding: 14px 22px; }
+.badge-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.3); } }
+
+/* Right – Form panel */
+.contact-form-wrap { background: var(--white); padding: 72px 64px; }
+.form-title { font-family: 'Libre Baskerville', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
+.form-title em { font-style: italic; color: var(--red); }
+.form-sub { font-size: 13px; font-weight: 300; color: var(--grey-text); margin-bottom: 40px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 20px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--grey-text); display: block; margin-bottom: 8px; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; background: var(--off); border: 1px solid var(--grey-light);
+  font-family: 'Outfit', sans-serif; font-size: 13.5px; font-weight: 300; color: var(--black);
+  padding: 14px 18px; outline: none; transition: border-color .2s, background .2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--red); background: var(--white); }
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c2bfba' stroke-width='1.4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; padding-right: 40px; }
+
+.form-submit { margin-top: 8px; }
+.btn-submit { width: 100%; background: var(--red); color: var(--white); font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; border: none; padding: 18px; transition: background .2s; position: relative; overflow: hidden; }
+.btn-submit:hover { background: var(--red-dark); }
+.btn-submit::after { content: '→'; margin-left: 10px; }
+
+.form-privacy { font-size: 11px; font-weight: 300; color: var(--grey-mid); margin-top: 14px; line-height: 1.7; }
+.form-privacy a { color: var(--grey-text); text-decoration: underline; }
+
+/* Success state */
+.form-success { display: none; text-align: center; padding: 60px 0; }
+.form-success .tick { font-size: 48px; color: #22c55e; }
+.form-success h3 { font-family: 'Libre Baskerville', serif; font-size: 24px; margin: 20px 0 10px; }
+.form-success p { font-size: 14px; font-weight: 300; color: var(--grey-text); }
+
+/* Map strip */
+.map-strip { background: var(--black); padding: 72px 64px; }
+.map-strip-label { font-size: 9px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+.map-strip-label::before { content: ''; width: 18px; height: 1px; background: var(--red); }
+.map-strip-title { font-family: 'Libre Baskerville', serif; font-size: clamp(22px,2.5vw,34px); color: var(--white); margin-bottom: 48px; }
+.map-strip-title em { font-style: italic; color: rgba(255,255,255,.4); }
+.map-locations { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.map-loc { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); padding: 32px 36px; transition: background .2s, border-color .2s; }
+.map-loc:hover { background: rgba(255,255,255,.07); border-color: rgba(204,34,41,.3); }
+.map-loc-pin { font-size: 24px; margin-bottom: 16px; }
+.map-loc-city { font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+.map-loc-type { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+.map-loc-addr { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.4); line-height: 1.7; }
+
+/* Footer */
+footer { background: var(--black); padding: 40px 64px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,.05); }
+.footer-logo { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--white); }
+.footer-logo span { color: var(--red); }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* Hamburger */
+.hamburger { display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--black); border: none; padding: 13px; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 190; }
+
+@media (max-width: 1024px) {
+  :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-300px); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar { left: 0; padding: 0 20px 0 70px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .page-header { padding: 100px 32px 64px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-info, .contact-form-wrap { padding: 56px 32px; }
+  .map-strip { padding: 56px 32px; }
+  .map-locations { grid-template-columns: 1fr; gap: 2px; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 16px; align-items: flex-start; padding: 36px 32px; }
+  * { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div>Home</div>
+      <a href="index.html" class="nav-link">Home Page</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="services/talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link active">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:hq@origennt.com">hq@origennt.com</a></div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a href="index.html" class="back-link">Home</a>
+    <div class="topbar-badge">Open to Engagements</div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-breadcrumb">ORIGENNT <span>/</span> Contact</div>
+    <h1 class="page-h1">Let's start a<br><em>conversation.</em></h1>
+    <p class="page-intro">Whether you're a business seeking talent solutions, an individual charting your career, or an institution exploring partnerships — we want to hear from you.</p>
+  </div>
+
+  <!-- Contact Body -->
+  <div class="contact-grid reveal">
+    <!-- Info -->
+    <div class="contact-info">
+      <div>
+        <div class="info-label">Get in Touch</div>
+        <div class="office-cards">
+          <div class="office-card">
+            <div class="office-city">📍 Headquarters</div>
+            <div class="office-addr">Bhubaneswar, Odisha, India<br>PIN: 751001</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="info-label">Direct Contact</div>
+        <div class="info-item-text">
+          Email: <a href="mailto:hq@origennt.com">hq@origennt.com</a><br>
+          Business: <a href="mailto:business@origennt.com">business@origennt.com</a><br>
+          Careers: <a href="mailto:careers@origennt.com">careers@origennt.com</a>
+        </div>
+      </div>
+      <div>
+        <div class="info-label">Response Time</div>
+        <div class="response-badge">
+          <div class="badge-dot"></div>
+          We typically respond within 24 hours
+        </div>
+      </div>
+      <div>
+        <div class="info-label">Working Hours</div>
+        <div class="info-item-text">Monday – Saturday<br>9:00 AM – 6:30 PM IST<br><br>Emergency support available for active clients.</div>
+      </div>
+      <div>
+        <div class="info-label">Services We Can Help With</div>
+        <div class="info-item-text">
+          Recruitment · Executive Search · HR Outsourcing<br>
+          Management Consulting · Corporate Training<br>
+          Career Counselling · Manpower Supply<br>
+          AI-HR Solutions · Research & Analytics
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="contact-form-wrap">
+      <h2 class="form-title">Send us a <em>message.</em></h2>
+      <p class="form-sub">Fill in the form below and our team will get back to you shortly.</p>
+
+      <div id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">First Name *</label>
+            <input class="form-input" id="fname" type="text" placeholder="Rahul" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lname">Last Name</label>
+            <input class="form-input" id="lname" type="text" placeholder="Sharma">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-input" id="email" type="email" placeholder="rahul@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input class="form-input" id="phone" type="tel" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="org">Organisation / Company</label>
+          <input class="form-input" id="org" type="text" placeholder="Your company or institution">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="service">Service of Interest *</label>
+          <select class="form-select" id="service" required>
+            <option value="" disabled selected>Select a service category…</option>
+            <option>B2C — Career / Individual Services</option>
+            <option>B2B — HR & Talent Management</option>
+            <option>Corporate Consulting</option>
+            <option>Corporate Training</option>
+            <option>Training & Education Solutions</option>
+            <option>Blue / Grey Collar Manpower</option>
+            <option>Facility Management</option>
+            <option>Technology & AI-HR Solutions</option>
+            <option>Partnerships & Collaborations</option>
+            <option>Research & Analytics</option>
+            <option>Internship Programs</option>
+            <option>Other / Not Sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Your Message *</label>
+          <textarea class="form-textarea" id="message" placeholder="Tell us about your requirement, timeline, or any specific questions…" required></textarea>
+        </div>
+        <div class="form-submit">
+          <button class="btn-submit" id="submitBtn" onclick="handleSubmit(event)">Send Message</button>
+        </div>
+        <p class="form-privacy">By submitting this form, you agree to our <a href="privacy-policy.html">Privacy Policy</a>. We do not share your information with third parties.</p>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <div class="tick">✓</div>
+        <h3>Message Received</h3>
+        <p>Thank you for reaching out. A member of our team will contact you within 24 hours.</p>
+        <br>
+        <a href="services.html" style="font-size:12.5px;color:var(--red);text-decoration:none;font-weight:500;letter-spacing:.06em;">Explore Our Services →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Strip -->
+  <div class="map-strip reveal">
+    <div class="map-strip-label">Our Presence</div>
+    <h2 class="map-strip-title">Where we <em>operate.</em></h2>
+    <div class="map-locations">
+      <div class="map-loc">
+        <div class="map-loc-pin">📍</div>
+        <div class="map-loc-city">Bhubaneswar</div>
+        <div class="map-loc-type">Headquarters</div>
+        <div class="map-loc-addr">Odisha, India — 751001<br>hq@origennt.com</div>
+      </div>
+      <div class="map-loc">
+        <div class="map-loc-pin">🌐</div>
+        <div class="map-loc-city">Pan-India Operations</div>
+        <div class="map-loc-type">Service Delivery</div>
+        <div class="map-loc-addr">Active client delivery across IT, BFSI, Manufacturing & E-Commerce sectors nationwide.</div>
+      </div>
+      <div class="map-loc">
+        <div class="map-loc-pin">📡</div>
+        <div class="map-loc-city">Remote & Virtual</div>
+        <div class="map-loc-type">Digital Engagements</div>
+        <div class="map-loc-addr">Online consulting, training & career services available across all time zones.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ORIGENNT<span>.</span></div>
+    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function tick(){ cursor.style.left=mx+'px'; cursor.style.top=my+'px'; rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+});
+document.getElementById('overlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+});
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis'); }), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const fname = document.getElementById('fname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const service = document.getElementById('service').value;
+  const message = document.getElementById('message').value.trim();
+  if (!fname || !email || !service || !message) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
+</body>
+</html>
