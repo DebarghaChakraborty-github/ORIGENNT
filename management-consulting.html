@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Management Consulting — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #CC2229; --red-dark: #a31a20; --black: #0d0d0d; --white: #ffffff;
+  --off: #f7f6f4; --grey-light: #eeecea; --grey-mid: #c2bfba; --grey-text: #6b6660; --sidebar: 300px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+* { cursor: none !important; }
+.cursor { position: fixed; width: 10px; height: 10px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s,height .2s; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(204,34,41,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s,height .35s; }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; background: var(--black); z-index: 200; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.86,0,.07,1); }
+.sidebar-top { padding: 36px 40px 32px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.logo { font-family: 'Libre Baskerville', serif; font-size: 19px; color: var(--white); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
+.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; scrollbar-width: none; }
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+.nav-section { margin-bottom: 36px; }
+.nav-section-label { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
+.nav-link { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s; }
+.nav-link:hover, .nav-link.active { color: var(--white); }
+.nav-link svg { opacity: 0; transition: opacity .2s, transform .2s; }
+.nav-link:hover svg, .nav-link.active svg { opacity: 1; }
+.sidebar-bottom { padding: 24px 40px 32px; border-top: 1px solid rgba(255,255,255,.06); }
+.sidebar-contact-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
+.sidebar-contact-info { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
+.sidebar-contact-info a:hover { color: var(--red); }
+
+/* Main */
+.main { margin-left: var(--sidebar); }
+.topbar { position: fixed; top: 0; left: var(--sidebar); right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey-light); }
+.back-link { font-size: 12.5px; color: var(--grey-text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color .2s, gap .2s; }
+.back-link:hover { color: var(--black); gap: 14px; }
+.back-link::before { content: '←'; }
+.topbar-cta { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--white); background: var(--red); text-decoration: none; padding: 10px 28px; transition: background .2s; }
+.topbar-cta:hover { background: var(--red-dark); }
+
+/* Page header */
+.page-header {
+  padding: 110px 64px 80px;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -150px; right: -150px;
+  width: 500px; height: 500px;
+  background: var(--red);
+  border-radius: 50%;
+  opacity: .06;
+  animation: blobFloat 20s ease-in-out infinite;
+}
+@keyframes blobFloat {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(-40px, 40px) scale(1.05); }
+  100% { transform: translate(0,0) scale(1); }
+}
+.page-breadcrumb { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+.page-breadcrumb span { color: var(--red); }
+.page-h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(42px, 5.5vw, 76px); font-weight: 400; color: var(--white); line-height: 1.06; letter-spacing: -.02em; max-width: 700px; opacity: 0; animation: up .8s .1s forwards; }
+.page-h1 em { font-style: italic; color: rgba(255,255,255,.4); }
+.page-intro { font-size: 16px; font-weight: 300; color: rgba(255,255,255,.5); max-width: 580px; line-height: 1.8; margin-top: 32px; opacity: 0; animation: up .8s .25s forwards; }
+@keyframes up { to { opacity: 1; transform: none; } }
+.page-h1 { transform: translateY(24px); }
+.page-intro { transform: translateY(20px); }
+
+.page-meta-bar {
+  background: var(--red);
+  padding: 0 64px;
+  display: flex;
+  gap: 0;
+}
+.meta-cell {
+  padding: 22px 48px 22px 0;
+  border-right: 1px solid rgba(255,255,255,.15);
+  margin-right: 48px;
+}
+.meta-cell:last-child { border-right: none; }
+.meta-label { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 4px; }
+.meta-val { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 400; color: var(--white); }
+
+/* Content */
+.section { padding: 90px 64px; }
+.label { font-size: 10px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.label::before { content: ''; width: 22px; height: 1px; background: var(--red); }
+.h2 { font-family: 'Libre Baskerville', serif; font-size: clamp(30px, 3.2vw, 46px); font-weight: 400; line-height: 1.12; letter-spacing: -.02em; }
+.h2 em { font-style: italic; color: var(--red); }
+.body-text { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--grey-text); }
+.body-text p { margin-bottom: 20px; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+
+/* Offering */
+.offering { margin-top: 48px; display: flex; flex-direction: column; gap: 2px; }
+.offering-row {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 24px;
+  padding: 26px 28px;
+  background: var(--off);
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+.offering-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px; height: 0;
+  background: var(--red);
+  transition: height .35s cubic-bezier(.77,0,.18,1);
+}
+.offering-row:hover { background: var(--grey-light); }
+.offering-row:hover::before { height: 100%; }
+.offering-n { font-family: 'Libre Baskerville', serif; font-size: 18px; color: var(--grey-mid); margin-top: 2px; }
+.offering-name { font-size: 14.5px; font-weight: 500; margin-bottom: 5px; }
+.offering-desc { font-size: 13px; font-weight: 300; color: var(--grey-text); line-height: 1.7; }
+
+/* Stats */
+.stats-dark { background: var(--black); padding: 80px 64px; display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; }
+.stat-cell { padding: 40px 48px; border-right: 1px solid rgba(255,255,255,.05); }
+.stat-cell:last-child { border-right: none; }
+.stat-n { font-family: 'Libre Baskerville', serif; font-size: 58px; font-weight: 400; color: var(--white); line-height: 1; }
+.stat-n sup { font-size: 28px; color: var(--red); font-family: 'Outfit', sans-serif; vertical-align: super; }
+.stat-l { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 12px; }
+
+/* Process */
+.process-bg { background: var(--off); padding: 90px 64px; }
+.process-title { font-family: 'Libre Baskerville', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 400; margin-bottom: 56px; }
+.process-title em { font-style: italic; color: var(--red); }
+.process-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.proc-step { background: var(--white); padding: 36px 32px; position: relative; overflow: hidden; }
+
+/* bubble effect on process steps */
+.proc-step::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -80px;
+  width: 180px; height: 180px;
+  background: var(--red);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform .5s cubic-bezier(.23,1,.32,1);
+  z-index: 0;
+}
+.proc-step:hover::after { transform: scale(3); }
+.proc-step > * { position: relative; z-index: 1; transition: color .3s; }
+.proc-step:hover .proc-n,
+.proc-step:hover .proc-title,
+.proc-step:hover .proc-text { color: rgba(255,255,255,.85); }
+
+.proc-n { font-family: 'Libre Baskerville', serif; font-size: 44px; font-weight: 400; color: var(--grey-light); margin-bottom: 20px; line-height: 1; }
+.proc-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: var(--black); text-transform: uppercase; letter-spacing: .05em; }
+.proc-text { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--grey-text); }
+
+/* CTA */
+.cta { background: var(--red); padding: 90px 64px; display: flex; justify-content: space-between; align-items: center; gap: 48px; position: relative; overflow: hidden; }
+.cta::before { content: ''; position: absolute; right: -150px; top: -150px; width: 400px; height: 400px; background: rgba(255,255,255,.05); border-radius: 50%; pointer-events: none; }
+.cta-h { font-family: 'Libre Baskerville', serif; font-size: clamp(26px, 2.8vw, 40px); font-weight: 400; color: var(--white); max-width: 440px; line-height: 1.2; position: relative; z-index: 1; }
+.cta-h em { font-style: italic; opacity: .7; }
+.cta-btns { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+.btn-w { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--red); background: var(--white); text-decoration: none; padding: 14px 36px; transition: background .2s; text-align: center; }
+.btn-w:hover { background: var(--off); }
+.btn-text { font-size: 12px; color: rgba(255,255,255,.65); text-decoration: none; text-align: center; transition: color .2s; }
+.btn-text:hover { color: var(--white); }
+
+/* Footer */
+footer { background: var(--black); padding: 40px 64px; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--white); }
+.footer-logo span { color: var(--red); }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* Mobile */
+.hamburger { display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--black); border: none; padding: 13px; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 190; }
+
+@media (max-width: 1024px) {
+  :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-300px); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar { left: 0; padding: 0 20px 0 70px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .page-header, .section, .process-bg, .cta, .stats-dark { padding-left: 32px; padding-right: 32px; }
+  .two-col { grid-template-columns: 1fr; gap: 48px; }
+  .process-row { grid-template-columns: 1fr 1fr; }
+  .stats-dark { grid-template-columns: 1fr; }
+  .cta { flex-direction: column; align-items: flex-start; }
+  footer { flex-direction: column; gap: 16px; align-items: flex-start; padding: 36px 32px; }
+  * { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="management-consulting.html" class="nav-link active">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:hq@origennt.com">hq@origennt.com</a></div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a href="index.html" class="back-link">Home</a>
+    <a href="contact.html" class="topbar-cta">Engage Us</a>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-breadcrumb">ORIGENNT <span>/</span> Consulting <span>/</span> Management Consulting</div>
+    <h1 class="page-h1">Management<br><em>Consulting.</em></h1>
+    <p class="page-intro">Strategic advisory for India's leading enterprises. We translate complexity into clarity — and clarity into competitive advantage.</p>
+  </div>
+  <div class="page-meta-bar">
+    <div class="meta-cell">
+      <div class="meta-label">Engagements Delivered</div>
+      <div class="meta-val">180+</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Sectors Covered</div>
+      <div class="meta-val">IT · BFSI · Mfg · E-com</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Average Engagement</div>
+      <div class="meta-val">6–18 months</div>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section class="section reveal">
+    <div class="two-col">
+      <div>
+        <div class="label">Practice Overview</div>
+        <h2 class="h2">Strategy that <em>sticks.</em></h2>
+        <div class="body-text" style="margin-top:28px">
+          <p>ORIGENNT's management consulting practice exists at the intersection of strategic rigour and operational reality. Unlike traditional consulting firms that deliver recommendations and leave, we embed alongside leadership teams to drive implementation — ensuring strategy translates to measurable outcomes.</p>
+          <p>Our consultants bring deep sector knowledge across IT/ITES, BFSI, manufacturing and emerging sectors. We are trusted by founders, CEOs and boards navigating growth, restructuring, or transformation at scale.</p>
+        </div>
+      </div>
+      <div>
+        <div class="label">Service Offerings</div>
+        <div class="offering">
+          <div class="offering-row">
+            <div class="offering-n">01</div>
+            <div><div class="offering-name">Business Strategy</div><div class="offering-desc">Market entry, growth strategy, competitive positioning and long-range planning.</div></div>
+          </div>
+          <div class="offering-row">
+            <div class="offering-n">02</div>
+            <div><div class="offering-name">Operating Model Design</div><div class="offering-desc">Structural redesign to align your organisation with strategy and eliminate friction.</div></div>
+          </div>
+          <div class="offering-row">
+            <div class="offering-n">03</div>
+            <div><div class="offering-name">Performance Improvement</div><div class="offering-desc">Operational diagnostics, efficiency programmes and margin enhancement.</div></div>
+          </div>
+          <div class="offering-row">
+            <div class="offering-n">04</div>
+            <div><div class="offering-name">Digital Transformation</div><div class="offering-desc">Technology strategy, process automation and digital capability building.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-dark">
+    <div class="stat-cell">
+      <div class="stat-n">94<sup>%</sup></div>
+      <div class="stat-l">Client Satisfaction</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">3x<sup></sup></div>
+      <div class="stat-l">Avg. ROI on Engagement</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">180<sup>+</sup></div>
+      <div class="stat-l">Enterprise Clients Served</div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <section class="process-bg reveal">
+    <h2 class="process-title">Our <em>engagement</em> process.</h2>
+    <div class="process-row">
+      <div class="proc-step">
+        <div class="proc-n">01</div>
+        <div class="proc-title">Diagnostic</div>
+        <div class="proc-text">Immersive discovery into your strategy, operations, people and market context.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">02</div>
+        <div class="proc-title">Design</div>
+        <div class="proc-text">Bespoke solution architecture with clear hypotheses, workstreams and milestones.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">03</div>
+        <div class="proc-title">Execute</div>
+        <div class="proc-text">Embedded delivery alongside your teams with weekly reporting and course correction.</div>
+      </div>
+      <div class="proc-step">
+        <div class="proc-n">04</div>
+        <div class="proc-title">Sustain</div>
+        <div class="proc-text">Capability transfer, 90-day reviews and analytics to ensure lasting impact.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta reveal">
+    <h2 class="cta-h">Ready to begin your <em>transformation?</em></h2>
+    <div class="cta-btns">
+      <a href="../contact.html" class="btn-w">Schedule a Consultation</a>
+      <a href="../index.html#services" class="btn-text">View All Services →</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ORIGENNT<span>.</span></div>
+    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function tick() {
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(tick);
+})();
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+});
+document.getElementById('overlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+});
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis'); }), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
