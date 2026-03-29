@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #CC2229; --red-dark: #a31a20; --black: #0d0d0d; --white: #ffffff;
+  --off: #f7f6f4; --grey-light: #eeecea; --grey-mid: #c2bfba; --grey-text: #6b6660; --sidebar: 300px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+* { cursor: none !important; }
+.cursor { position: fixed; width: 10px; height: 10px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s,height .2s; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(204,34,41,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s,height .35s; }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; background: var(--black); z-index: 200; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.86,0,.07,1); }
+.sidebar-top { padding: 36px 40px 32px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.logo { font-family: 'Libre Baskerville', serif; font-size: 19px; color: var(--white); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
+.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; scrollbar-width: none; }
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+.nav-section { margin-bottom: 36px; }
+.nav-section-label { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
+.nav-link { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s; }
+.nav-link:hover, .nav-link.active { color: var(--white); }
+.nav-link svg { opacity: 0; transition: opacity .2s; }
+.nav-link:hover svg, .nav-link.active svg { opacity: 1; }
+.sidebar-bottom { padding: 24px 40px 32px; border-top: 1px solid rgba(255,255,255,.06); }
+.sidebar-contact-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
+.sidebar-contact-info { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
+.sidebar-contact-info a:hover { color: var(--red); }
+
+/* Main */
+.main { margin-left: var(--sidebar); }
+.topbar { position: fixed; top: 0; left: var(--sidebar); right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey-light); }
+.back-link { font-size: 12.5px; color: var(--grey-text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color .2s; }
+.back-link:hover { color: var(--black); }
+.back-link::before { content: '←'; }
+.topbar-cta { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--white); background: var(--red); text-decoration: none; padding: 10px 28px; transition: background .2s; }
+.topbar-cta:hover { background: var(--red-dark); }
+
+/* Page Header */
+.page-header { padding: 110px 64px 72px; background: var(--black); position: relative; overflow: hidden; }
+.page-header::before { content: ''; position: absolute; top: -150px; right: -150px; width: 500px; height: 500px; background: var(--red); border-radius: 50%; opacity: .06; animation: blobFloat 20s ease-in-out infinite; }
+@keyframes blobFloat { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,40px) scale(1.05); } }
+.page-breadcrumb { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+.page-breadcrumb span { color: var(--red); }
+.page-h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(36px,4.5vw,64px); font-weight: 400; color: var(--white); line-height: 1.08; letter-spacing: -.02em; max-width: 700px; opacity: 0; transform: translateY(24px); animation: up .8s .1s forwards; }
+.page-h1 em { font-style: italic; color: rgba(255,255,255,.4); }
+.effective-date { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 24px; letter-spacing: .05em; opacity: 0; transform: translateY(12px); animation: up .8s .3s forwards; }
+@keyframes up { to { opacity: 1; transform: none; } }
+
+/* TOC Strip */
+.toc-strip { background: var(--off); border-bottom: 1px solid var(--grey-light); padding: 0 64px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+.toc-strip::-webkit-scrollbar { display: none; }
+.toc-link { font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--grey-text); padding: 16px 24px; white-space: nowrap; text-decoration: none; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.toc-link:hover { color: var(--black); border-bottom-color: var(--red); }
+
+/* Policy Body */
+.policy-body { display: grid; grid-template-columns: 220px 1fr; gap: 0; }
+.policy-sticky { position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; background: var(--off); border-right: 1px solid var(--grey-light); padding: 48px 36px; scrollbar-width: none; }
+.policy-sticky::-webkit-scrollbar { display: none; }
+.sticky-title { font-size: 9px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--grey-mid); margin-bottom: 28px; }
+.sticky-link { display: block; font-size: 12px; font-weight: 400; color: var(--grey-text); text-decoration: none; padding: 8px 0; border-left: 2px solid transparent; padding-left: 14px; transition: color .2s, border-color .2s; line-height: 1.4; }
+.sticky-link:hover, .sticky-link.active { color: var(--black); border-left-color: var(--red); }
+
+.policy-content { padding: 72px 80px 100px 80px; max-width: 820px; }
+
+/* Section styles */
+.pol-section { margin-bottom: 64px; scroll-margin-top: 80px; }
+.pol-n { font-size: 10px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.pol-n::before { content: ''; width: 16px; height: 1px; background: var(--red); }
+.pol-h { font-family: 'Libre Baskerville', serif; font-size: clamp(20px,2vw,28px); font-weight: 400; margin-bottom: 24px; }
+.pol-h em { font-style: italic; color: var(--red); }
+.pol-text { font-size: 14.5px; font-weight: 300; line-height: 1.9; color: var(--grey-text); }
+.pol-text p { margin-bottom: 18px; }
+.pol-text strong { color: var(--black); font-weight: 500; }
+.pol-text a { color: var(--red); text-decoration: none; }
+.pol-text a:hover { text-decoration: underline; }
+
+.pol-list { margin: 16px 0 20px 0; padding: 0; list-style: none; }
+.pol-list li { font-size: 14px; font-weight: 300; color: var(--grey-text); padding: 10px 0 10px 24px; border-bottom: 1px solid var(--grey-light); line-height: 1.7; position: relative; }
+.pol-list li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-size: 12px; top: 12px; }
+.pol-list li:last-child { border-bottom: none; }
+
+.pol-box { background: var(--off); border-left: 3px solid var(--red); padding: 22px 28px; margin: 24px 0; }
+.pol-box p { font-size: 13.5px; font-weight: 300; color: var(--grey-text); line-height: 1.8; margin: 0; }
+.pol-box strong { color: var(--black); }
+
+.divider { height: 1px; background: var(--grey-light); margin-bottom: 64px; }
+
+/* Footer */
+footer { background: var(--black); padding: 40px 64px; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--white); }
+.footer-logo span { color: var(--red); }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 11px; color: rgba(255,255,255,.3); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--red); }
+
+/* Hamburger */
+.hamburger { display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--black); border: none; padding: 13px; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 190; }
+
+@media (max-width: 1024px) {
+  :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-300px); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar { left: 0; padding: 0 20px 0 70px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .page-header { padding: 100px 32px 60px; }
+  .toc-strip { padding: 0 32px; }
+  .policy-body { grid-template-columns: 1fr; }
+  .policy-sticky { display: none; }
+  .policy-content { padding: 48px 32px 72px; max-width: 100%; }
+  footer { flex-direction: column; gap: 16px; align-items: flex-start; padding: 36px 32px; }
+  * { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="services/management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="services/talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:hq@origennt.com">hq@origennt.com</a></div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a href="index.html" class="back-link">Home</a>
+    <a href="contact.html" class="topbar-cta">Contact Us</a>
+  </header>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="page-breadcrumb">ORIGENNT <span>/</span> Legal <span>/</span> Privacy Policy</div>
+    <h1 class="page-h1">Privacy<br><em>Policy.</em></h1>
+    <p class="effective-date">Effective Date: 1 January 2026 &nbsp;·&nbsp; Last Updated: 29 March 2026</p>
+  </div>
+
+  <!-- TOC Strip -->
+  <div class="toc-strip">
+    <a href="#introduction" class="toc-link">Introduction</a>
+    <a href="#information" class="toc-link">Information We Collect</a>
+    <a href="#use" class="toc-link">How We Use It</a>
+    <a href="#sharing" class="toc-link">Sharing</a>
+    <a href="#security" class="toc-link">Data Security</a>
+    <a href="#retention" class="toc-link">Retention</a>
+    <a href="#rights" class="toc-link">Your Rights</a>
+    <a href="#cookies" class="toc-link">Cookies</a>
+    <a href="#children" class="toc-link">Children</a>
+    <a href="#changes" class="toc-link">Changes</a>
+    <a href="#contact-us" class="toc-link">Contact</a>
+  </div>
+
+  <!-- Body -->
+  <div class="policy-body">
+    <!-- Sticky sidebar -->
+    <div class="policy-sticky">
+      <div class="sticky-title">Contents</div>
+      <a href="#introduction" class="sticky-link">1. Introduction</a>
+      <a href="#information" class="sticky-link">2. Information We Collect</a>
+      <a href="#use" class="sticky-link">3. How We Use Information</a>
+      <a href="#sharing" class="sticky-link">4. Sharing of Information</a>
+      <a href="#security" class="sticky-link">5. Data Security</a>
+      <a href="#retention" class="sticky-link">6. Data Retention</a>
+      <a href="#rights" class="sticky-link">7. Your Rights</a>
+      <a href="#cookies" class="sticky-link">8. Cookies & Tracking</a>
+      <a href="#children" class="sticky-link">9. Children's Privacy</a>
+      <a href="#changes" class="sticky-link">10. Policy Changes</a>
+      <a href="#contact-us" class="sticky-link">11. Contact Us</a>
+    </div>
+
+    <!-- Content -->
+    <div class="policy-content">
+
+      <div class="pol-section" id="introduction">
+        <div class="pol-n">Section 01</div>
+        <h2 class="pol-h">Introduction & <em>Applicability</em></h2>
+        <div class="pol-text">
+          <p>Origennt Private Limited ("ORIGENNT", "we", "our", or "us") is a management consulting and HR services firm incorporated under the Companies Act, 2013, with its registered office in Bhubaneswar, Odisha, India.</p>
+          <p>This Privacy Policy explains how we collect, use, disclose, and protect personal information obtained from individuals and organisations who interact with our website, services, platforms, or communications.</p>
+          <p>By accessing our website or engaging our services, you agree to the practices described in this Privacy Policy. If you do not agree, please discontinue use of our services immediately.</p>
+        </div>
+        <div class="pol-box"><p><strong>Governing Law:</strong> This policy is governed by the Information Technology Act, 2000, the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, and applicable provisions of the Digital Personal Data Protection Act, 2023 (India).</p></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="information">
+        <div class="pol-n">Section 02</div>
+        <h2 class="pol-h">Information <em>We Collect</em></h2>
+        <div class="pol-text">
+          <p>We collect information you voluntarily provide, as well as information generated through your use of our website and services.</p>
+          <p><strong>Personal Information You Provide:</strong></p>
+        </div>
+        <ul class="pol-list">
+          <li>Name, email address, phone number, and postal address when you contact us, submit enquiries, or register for services</li>
+          <li>Professional details such as company name, job title, industry, and LinkedIn profile when engaging B2B services</li>
+          <li>Resume, career history, educational qualifications, and skills when using career counselling, placement, or internship services</li>
+          <li>Payment information processed through secure third-party gateways (we do not store card details)</li>
+          <li>Feedback, survey responses, and communications with our team</li>
+        </ul>
+        <div class="pol-text" style="margin-top:20px">
+          <p><strong>Information Collected Automatically:</strong></p>
+        </div>
+        <ul class="pol-list">
+          <li>IP address, browser type, operating system, and device identifiers</li>
+          <li>Pages visited, time spent on pages, and referral sources via analytics tools</li>
+          <li>Cookie and tracking data as detailed in Section 8</li>
+        </ul>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="use">
+        <div class="pol-n">Section 03</div>
+        <h2 class="pol-h">How We <em>Use</em> Your Information</h2>
+        <div class="pol-text"><p>We use your information only for lawful purposes directly related to our services:</p></div>
+        <ul class="pol-list">
+          <li>To deliver the specific service or engagement you have requested from ORIGENNT</li>
+          <li>To process enquiries, respond to communications, and schedule consultations</li>
+          <li>To match candidates with relevant employment, internship, or training opportunities</li>
+          <li>To send transactional communications including confirmations, invoices, and service updates</li>
+          <li>To send service-related marketing communications where you have opted in (with easy opt-out)</li>
+          <li>To improve our website, platform, and service quality through analytics</li>
+          <li>To comply with legal obligations under Indian law</li>
+          <li>To detect, prevent, and address fraud, security issues, or policy violations</li>
+        </ul>
+        <div class="pol-box" style="margin-top:24px"><p><strong>We do not:</strong> sell, rent, or trade your personal data to any third party for their own marketing purposes. We do not use your data for automated decision-making that produces legal effects without human oversight.</p></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="sharing">
+        <div class="pol-n">Section 04</div>
+        <h2 class="pol-h">Sharing of <em>Information</em></h2>
+        <div class="pol-text"><p>We do not share your personal data with third parties except in the following limited circumstances:</p></div>
+        <ul class="pol-list">
+          <li><strong>Client Organisations:</strong> When you are a candidate, your profile may be shared with client companies solely for recruitment or placement purposes — only with your explicit consent</li>
+          <li><strong>Service Providers:</strong> Trusted vendors who help us operate our business (e.g., cloud hosting, email delivery, payment processing) — bound by confidentiality agreements</li>
+          <li><strong>Legal Compliance:</strong> When required by court orders, regulators, or applicable Indian law</li>
+          <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or restructuring of ORIGENNT — subject to equivalent privacy protections</li>
+          <li><strong>With Your Consent:</strong> Any other sharing with your explicit, informed consent</li>
+        </ul>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="security">
+        <div class="pol-n">Section 05</div>
+        <h2 class="pol-h">Data <em>Security</em></h2>
+        <div class="pol-text">
+          <p>We implement industry-standard security measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction. These include:</p>
+        </div>
+        <ul class="pol-list">
+          <li>SSL/TLS encryption for all data transmitted via our website</li>
+          <li>Access controls — personal data is accessible only to authorised personnel on a need-to-know basis</li>
+          <li>Regular security assessments and vulnerability reviews</li>
+          <li>Secure password policies and two-factor authentication for internal systems</li>
+        </ul>
+        <div class="pol-text" style="margin-top:16px">
+          <p>Despite these measures, no system is completely immune to security risks. In the event of a data breach that affects your personal information, we will notify you in accordance with applicable legal requirements.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="retention">
+        <div class="pol-n">Section 06</div>
+        <h2 class="pol-h">Data <em>Retention</em></h2>
+        <div class="pol-text">
+          <p>We retain your personal information only for as long as necessary to fulfil the purposes outlined in this policy, or as required by law.</p>
+        </div>
+        <ul class="pol-list">
+          <li><strong>Active Clients / Candidates:</strong> For the duration of the engagement plus 3 years</li>
+          <li><strong>Website Enquiries:</strong> Up to 12 months from last interaction</li>
+          <li><strong>Financial / Invoice Records:</strong> 7 years as required under Indian tax law</li>
+          <li><strong>Marketing Communications:</strong> Until you unsubscribe or request deletion</li>
+        </ul>
+        <div class="pol-text" style="margin-top:16px">
+          <p>After the applicable retention period, your data will be securely deleted or anonymised so that it can no longer be associated with you.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="rights">
+        <div class="pol-n">Section 07</div>
+        <h2 class="pol-h">Your <em>Rights</em></h2>
+        <div class="pol-text"><p>Under the Digital Personal Data Protection Act, 2023 and applicable Indian regulations, you have the following rights regarding your personal data:</p></div>
+        <ul class="pol-list">
+          <li><strong>Right to Access:</strong> Request a copy of the personal information we hold about you</li>
+          <li><strong>Right to Correction:</strong> Request correction of inaccurate or incomplete data</li>
+          <li><strong>Right to Erasure:</strong> Request deletion of your personal data (subject to legal retention requirements)</li>
+          <li><strong>Right to Withdraw Consent:</strong> Withdraw consent to processing where consent was the legal basis</li>
+          <li><strong>Right to Grievance Redressal:</strong> Lodge a complaint with our Data Protection Officer or the appropriate regulatory body</li>
+        </ul>
+        <div class="pol-text" style="margin-top:16px">
+          <p>To exercise any of these rights, please contact us at <a href="mailto:privacy@origennt.com">privacy@origennt.com</a>. We will respond to verified requests within 30 days.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="cookies">
+        <div class="pol-n">Section 08</div>
+        <h2 class="pol-h">Cookies & <em>Tracking</em></h2>
+        <div class="pol-text">
+          <p>Our website uses cookies and similar technologies to improve user experience and analyse site performance. Cookies are small text files stored on your device.</p>
+        </div>
+        <ul class="pol-list">
+          <li><strong>Essential Cookies:</strong> Required for the website to function — cannot be disabled</li>
+          <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our site (e.g., Google Analytics) — can be opted out</li>
+          <li><strong>Preference Cookies:</strong> Remember your settings and preferences across sessions</li>
+        </ul>
+        <div class="pol-text" style="margin-top:16px">
+          <p>You can control cookie preferences through your browser settings. Disabling cookies may affect certain website functionality. We do not use cookies for cross-site advertising or tracking outside our website.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="children">
+        <div class="pol-n">Section 09</div>
+        <h2 class="pol-h">Children's <em>Privacy</em></h2>
+        <div class="pol-text">
+          <p>ORIGENNT's services are intended for individuals aged 18 and above. We do not knowingly collect personal information from individuals under the age of 18. If you are under 18, please do not submit any personal information through our website or services.</p>
+          <p>If we become aware that we have inadvertently collected data from a minor, we will take prompt steps to delete such information from our records.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="changes">
+        <div class="pol-n">Section 10</div>
+        <h2 class="pol-h">Changes to This <em>Policy</em></h2>
+        <div class="pol-text">
+          <p>We may update this Privacy Policy periodically to reflect changes in our practices, services, or applicable law. When we make material changes, we will update the "Last Updated" date at the top of this policy and, where appropriate, notify you via email or a prominent notice on our website.</p>
+          <p>Your continued use of our services after changes are posted constitutes your acceptance of the updated policy. We encourage you to review this policy periodically.</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="pol-section" id="contact-us">
+        <div class="pol-n">Section 11</div>
+        <h2 class="pol-h">Contact <em>Us</em></h2>
+        <div class="pol-text">
+          <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact our Data Protection Officer:</p>
+        </div>
+        <div class="pol-box">
+          <p>
+            <strong>Data Protection Officer</strong><br>
+            Origennt Private Limited<br>
+            Bhubaneswar, Odisha — 751001, India<br><br>
+            Email: <a href="mailto:privacy@origennt.com" style="color:var(--red)">privacy@origennt.com</a><br>
+            General Enquiries: <a href="mailto:hq@origennt.com" style="color:var(--red)">hq@origennt.com</a>
+          </p>
+        </div>
+        <div class="pol-text" style="margin-top:16px">
+          <p>You may also raise a grievance with the <strong>Data Protection Board of India</strong> under the Digital Personal Data Protection Act, 2023, if you believe your data rights have been violated and your complaint has not been satisfactorily addressed by us.</p>
+        </div>
+      </div>
+
+    </div><!-- /policy-content -->
+  </div><!-- /policy-body -->
+
+  <footer>
+    <div class="footer-logo">ORIGENNT<span>.</span></div>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+      <a href="services.html">Services</a>
+    </div>
+    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function tick(){ cursor.style.left=mx+'px'; cursor.style.top=my+'px'; rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('show');
+});
+document.getElementById('overlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+});
+
+// Active sticky nav on scroll
+const sections = document.querySelectorAll('.pol-section');
+const stickyLinks = document.querySelectorAll('.sticky-link');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      stickyLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.sticky-link[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-64px 0px -60% 0px', threshold: 0 });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
