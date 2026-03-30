@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy & Transformation — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #CC2229; --red-dark: #a31a20; --black: #0d0d0d; --white: #ffffff;
+  --off: #f7f6f4; --grey-light: #eeecea; --grey-mid: #c2bfba; --grey-text: #6b6660; --sidebar: 300px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+* { cursor: none !important; }
+.cursor { position: fixed; width: 10px; height: 10px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s,height .2s; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(204,34,41,.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s,height .35s; }
+
+/* Sidebar */
+.sidebar { position: fixed; top: 0; left: 0; width: var(--sidebar); height: 100vh; background: var(--black); z-index: 200; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.86,0,.07,1); }
+.sidebar-top { padding: 36px 40px 32px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.logo { font-family: 'Libre Baskerville', serif; font-size: 19px; color: var(--white); letter-spacing: .06em; text-decoration: none; display: flex; align-items: center; gap: 2px; }
+.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+.sidebar-scroll { flex: 1; overflow-y: auto; padding: 32px 40px; scrollbar-width: none; }
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+.nav-section { margin-bottom: 36px; }
+.nav-section-label { font-size: 9px; letter-spacing: .35em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; font-weight: 500; }
+.nav-link { display: flex; align-items: center; justify-content: space-between; font-size: 13.5px; color: rgba(255,255,255,.6); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.04); transition: color .2s; }
+.nav-link:hover, .nav-link.active { color: var(--white); }
+.nav-link svg { opacity: 0; transition: opacity .2s, transform .2s; }
+.nav-link:hover svg, .nav-link.active svg { opacity: 1; }
+.sidebar-bottom { padding: 24px 40px 32px; border-top: 1px solid rgba(255,255,255,.06); }
+.sidebar-contact-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 12px; }
+.sidebar-contact-info { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.8; }
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; }
+.sidebar-contact-info a:hover { color: var(--red); }
+
+/* Main */
+.main { margin-left: var(--sidebar); }
+.topbar { position: fixed; top: 0; left: var(--sidebar); right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; z-index: 100; background: rgba(255,255,255,.94); backdrop-filter: blur(16px); border-bottom: 1px solid var(--grey-light); }
+.back-link { font-size: 12.5px; color: var(--grey-text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color .2s, gap .2s; }
+.back-link:hover { color: var(--black); gap: 14px; }
+.back-link::before { content: '←'; }
+.topbar-cta { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--white); background: var(--red); text-decoration: none; padding: 10px 28px; transition: background .2s; }
+.topbar-cta:hover { background: var(--red-dark); }
+
+/* ── HERO: Split layout with diagonal divider ── */
+.page-hero {
+  padding-top: 64px;
+  min-height: 540px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 49%;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(204,34,41,.4), transparent);
+}
+
+/* Animated grid lines in background */
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-left {
+  padding: 80px 64px 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-right {
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.page-breadcrumb { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+.page-breadcrumb span { color: var(--red); }
+.page-h1 { font-family: 'Libre Baskerville', serif; font-size: clamp(38px, 4.5vw, 66px); font-weight: 400; color: var(--white); line-height: 1.06; letter-spacing: -.02em; opacity: 0; animation: up .8s .1s forwards; transform: translateY(24px); }
+.page-h1 em { font-style: italic; color: var(--red); }
+.page-intro { font-size: 15px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.8; margin-top: 28px; opacity: 0; animation: up .8s .25s forwards; transform: translateY(20px); }
+@keyframes up { to { opacity: 1; transform: none; } }
+
+/* Right side: 4 pillars */
+.hero-pillars { display: flex; flex-direction: column; gap: 1px; opacity: 0; animation: up .9s .35s forwards; transform: translateY(16px); }
+.pillar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.pillar:last-child { border-bottom: none; }
+.pillar-icon {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+.pillar-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.8); }
+.pillar-sub { font-size: 11.5px; font-weight: 300; color: rgba(255,255,255,.35); margin-top: 2px; }
+
+/* Meta bar */
+.page-meta-bar {
+  background: var(--red);
+  padding: 0 64px;
+  display: flex;
+  gap: 0;
+}
+.meta-cell { padding: 22px 48px 22px 0; border-right: 1px solid rgba(255,255,255,.15); margin-right: 48px; }
+.meta-cell:last-child { border-right: none; }
+.meta-label { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 4px; }
+.meta-val { font-family: 'Libre Baskerville', serif; font-size: 22px; font-weight: 400; color: var(--white); }
+
+/* Label / H2 */
+.label { font-size: 10px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+.label::before { content: ''; width: 22px; height: 1px; background: var(--red); }
+.h2 { font-family: 'Libre Baskerville', serif; font-size: clamp(30px, 3.2vw, 46px); font-weight: 400; line-height: 1.12; letter-spacing: -.02em; }
+.h2 em { font-style: italic; color: var(--red); }
+.body-text { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--grey-text); }
+.body-text p { margin-bottom: 20px; }
+
+/* ── SECTION: What we do — horizontal scroll timeline ── */
+.section { padding: 90px 64px; }
+
+.offerings-timeline { margin-top: 56px; display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; }
+.ot-card {
+  padding: 40px 32px;
+  background: var(--off);
+  position: relative;
+  overflow: hidden;
+  transition: background .25s;
+}
+.ot-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.77,0,.18,1);
+}
+.ot-card:hover { background: var(--grey-light); }
+.ot-card:hover::after { transform: scaleX(1); }
+.ot-num { font-family: 'Libre Baskerville', serif; font-size: 48px; font-weight: 400; color: var(--grey-light); line-height: 1; margin-bottom: 24px; }
+.ot-title { font-size: 14px; font-weight: 600; color: var(--black); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .05em; }
+.ot-desc { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--grey-text); }
+
+/* ── TRANSFORMATION ROADMAP ── */
+.roadmap-section {
+  background: var(--black);
+  padding: 90px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.roadmap-section::before {
+  content: '';
+  position: absolute;
+  bottom: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: var(--red);
+  border-radius: 50%;
+  opacity: .05;
+  pointer-events: none;
+  animation: float 20s ease-in-out infinite;
+}
+@keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-40px,30px); } }
+.roadmap-label { font-size: 10px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.roadmap-label::before { content: ''; width: 22px; height: 1px; background: rgba(255,255,255,.2); }
+.roadmap-h2 { font-family: 'Libre Baskerville', serif; font-size: clamp(28px, 3vw, 42px); font-weight: 400; color: var(--white); margin-bottom: 60px; }
+.roadmap-h2 em { font-style: italic; color: rgba(255,255,255,.35); }
+
+.roadmap-track {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  position: relative;
+}
+/* Connecting line */
+.roadmap-track::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: rgba(255,255,255,.08);
+  z-index: 0;
+}
+
+.rm-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  z-index: 1;
+}
+.rm-circle {
+  width: 56px; height: 56px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,.4);
+  background: var(--black);
+  margin-bottom: 24px;
+  transition: border-color .3s, color .3s, background .3s;
+  position: relative;
+  z-index: 1;
+}
+.rm-step:hover .rm-circle {
+  border-color: var(--red);
+  color: var(--white);
+  background: var(--red);
+}
+.rm-title { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.rm-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,.3); line-height: 1.7; }
+
+/* ── SECTORS ── */
+.sectors-section { padding: 90px 64px; background: var(--off); }
+.sectors-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin-top: 48px; }
+.sector-pill {
+  background: var(--white);
+  padding: 28px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: background .2s;
+}
+.sector-pill::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transition: transform .35s cubic-bezier(.77,0,.18,1);
+}
+.sector-pill:hover { background: var(--grey-light); }
+.sector-pill:hover::before { transform: scaleX(1); }
+.sector-icon { font-size: 24px; margin-bottom: 12px; }
+.sector-name { font-size: 12px; font-weight: 500; color: var(--black); }
+
+/* ── IMPACT NUMBERS ── */
+.impact-section {
+  background: var(--white);
+  padding: 90px 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.impact-left .body-text { margin-top: 28px; max-width: 480px; }
+.impact-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.impact-cell {
+  padding: 40px 36px;
+  background: var(--off);
+  position: relative;
+  overflow: hidden;
+}
+.impact-cell::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 3px; height: 100%;
+  background: var(--red);
+  opacity: 0;
+  transition: opacity .2s;
+}
+.impact-cell:hover::before { opacity: 1; }
+.impact-n { font-family: 'Libre Baskerville', serif; font-size: 52px; font-weight: 400; color: var(--black); line-height: 1; }
+.impact-n sup { font-size: 22px; color: var(--red); vertical-align: super; font-family: 'Outfit', sans-serif; }
+.impact-l { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--grey-text); margin-top: 10px; }
+
+/* ── CASE EXAMPLES ── */
+.cases-section { background: var(--black); padding: 90px 64px; }
+.cases-label { font-size: 10px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.cases-label::before { content: ''; width: 22px; height: 1px; background: rgba(255,255,255,.15); }
+.cases-h2 { font-family: 'Libre Baskerville', serif; font-size: clamp(28px,3vw,42px); font-weight: 400; color: var(--white); margin-bottom: 52px; }
+.cases-h2 em { font-style: italic; color: rgba(255,255,255,.3); }
+.cases-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.case-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.06);
+  padding: 36px 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s, background .3s;
+}
+.case-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.77,0,.18,1);
+}
+.case-card:hover { border-color: rgba(255,255,255,.12); background: rgba(255,255,255,.05); }
+.case-card:hover::before { transform: scaleX(1); }
+.case-sector { font-size: 9px; letter-spacing: .28em; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.case-title { font-size: 15px; font-weight: 500; color: rgba(255,255,255,.85); margin-bottom: 14px; line-height: 1.45; }
+.case-outcome { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.4); line-height: 1.7; }
+.case-metric { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.06); font-family: 'Libre Baskerville', serif; font-size: 28px; color: var(--white); }
+.case-metric-l { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.25); margin-top: 4px; font-family: 'Outfit', sans-serif; }
+
+/* ── CTA ── */
+.cta { background: var(--red); padding: 90px 64px; display: flex; justify-content: space-between; align-items: center; gap: 48px; position: relative; overflow: hidden; }
+.cta::before { content: ''; position: absolute; right: -150px; top: -150px; width: 400px; height: 400px; background: rgba(255,255,255,.05); border-radius: 50%; pointer-events: none; }
+.cta-h { font-family: 'Libre Baskerville', serif; font-size: clamp(26px, 2.8vw, 40px); font-weight: 400; color: var(--white); max-width: 440px; line-height: 1.2; position: relative; z-index: 1; }
+.cta-h em { font-style: italic; opacity: .7; }
+.cta-btns { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+.btn-w { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--red); background: var(--white); text-decoration: none; padding: 14px 36px; transition: background .2s; text-align: center; }
+.btn-w:hover { background: var(--off); }
+.btn-text { font-size: 12px; color: rgba(255,255,255,.65); text-decoration: none; text-align: center; transition: color .2s; }
+.btn-text:hover { color: var(--white); }
+
+/* Footer */
+footer { background: var(--black); padding: 40px 64px; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: 'Libre Baskerville', serif; font-size: 17px; color: var(--white); }
+.footer-logo span { color: var(--red); }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* Mobile */
+.hamburger { display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--black); border: none; padding: 13px; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 190; }
+
+@media (max-width: 1024px) {
+  :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-300px); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .topbar { left: 0; padding: 0 20px 0 70px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .page-hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 80px 32px; }
+  .section, .roadmap-section, .sectors-section, .cases-section, .cta { padding-left: 32px; padding-right: 32px; }
+  .impact-section { grid-template-columns: 1fr; gap: 48px; padding: 70px 32px; }
+  .offerings-timeline { grid-template-columns: 1fr 1fr; }
+  .roadmap-track { grid-template-columns: 1fr 1fr; }
+  .roadmap-track::before { display: none; }
+  .sectors-grid { grid-template-columns: repeat(3,1fr); }
+  .impact-numbers { grid-template-columns: 1fr 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .cta { flex-direction: column; align-items: flex-start; }
+  footer { flex-direction: column; gap: 16px; align-items: flex-start; padding: 36px 32px; }
+  .page-meta-bar { padding: 0 32px; flex-wrap: wrap; }
+  * { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none; }
+}
+
+@media (max-width: 600px) {
+  .offerings-timeline { grid-template-columns: 1fr; }
+  .sectors-grid { grid-template-columns: repeat(2,1fr); }
+  .roadmap-track { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link active">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a></div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a href="../index.html" class="back-link">Home</a>
+    <a href="../contact.html" class="topbar-cta">Engage Us</a>
+  </header>
+
+  <!-- HERO: Split layout -->
+  <div class="page-hero">
+    <div class="hero-left">
+      <div class="page-breadcrumb">ORIGENNT <span>/</span> Consulting <span>/</span> Strategy & Transformation</div>
+      <h1 class="page-h1">Strategy that<br>moves at the<br>speed of <em>ambition.</em></h1>
+      <p class="page-intro">We help India's enterprises define where they want to go — and build the roadmaps, capabilities and momentum to get there, faster than they imagined.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">◎</div>
+          <div><div class="pillar-name">Vision Architecture</div><div class="pillar-sub">Long-range strategic direction setting</div></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⬡</div>
+          <div><div class="pillar-name">Growth Strategy</div><div class="pillar-sub">Market expansion & competitive positioning</div></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⟳</div>
+          <div><div class="pillar-name">Business Transformation</div><div class="pillar-sub">End-to-end enterprise change programmes</div></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">⊕</div>
+          <div><div class="pillar-name">M&A Integration</div><div class="pillar-sub">Post-merger strategy & synergy realisation</div></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">◈</div>
+          <div><div class="pillar-name">Digital Strategy</div><div class="pillar-sub">Technology-enabled business model design</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- META BAR -->
+  <div class="page-meta-bar">
+    <div class="meta-cell">
+      <div class="meta-label">Engagements Delivered</div>
+      <div class="meta-val">80+</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Sectors Covered</div>
+      <div class="meta-val">IT · BFSI · Mfg · E-com</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Avg. Engagement</div>
+      <div class="meta-val">9–24 months</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Avg. Revenue Impact</div>
+      <div class="meta-val">+28%</div>
+    </div>
+  </div>
+
+  <!-- OFFERINGS -->
+  <section class="section reveal">
+    <div class="label">Practice Overview</div>
+    <h2 class="h2">From ambition to <em>execution.</em></h2>
+    <p class="body-text" style="max-width:620px; margin-top:20px">ORIGENNT's Strategy & Transformation practice works at the highest level of enterprise decision-making. We combine rigorous analytical frameworks with deep sector experience to build strategies that are not just visionary — but executable, measurable and owned by your teams.</p>
+    <div class="offerings-timeline">
+      <div class="ot-card">
+        <div class="ot-num">01</div>
+        <div class="ot-title">Growth Strategy</div>
+        <div class="ot-desc">Market sizing, opportunity mapping, competitive positioning and go-to-market strategy across new and existing segments.</div>
+      </div>
+      <div class="ot-card">
+        <div class="ot-num">02</div>
+        <div class="ot-title">Business Model Innovation</div>
+        <div class="ot-desc">Rethinking revenue models, value propositions and operating structures to capture emerging market opportunities.</div>
+      </div>
+      <div class="ot-card">
+        <div class="ot-num">03</div>
+        <div class="ot-title">Transformation Programmes</div>
+        <div class="ot-desc">Large-scale enterprise change across people, process and technology — with structured workstreams and accountability at every level.</div>
+      </div>
+      <div class="ot-card">
+        <div class="ot-num">04</div>
+        <div class="ot-title">Corporate Portfolio Strategy</div>
+        <div class="ot-desc">Business unit rationalisation, M&A strategy, divestiture analysis and portfolio optimisation for conglomerates and holding companies.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORMATION ROADMAP -->
+  <div class="roadmap-section reveal">
+    <div class="roadmap-label">How We Drive Transformation</div>
+    <h2 class="roadmap-h2">A disciplined path from <em>vision to value.</em></h2>
+    <div class="roadmap-track">
+      <div class="rm-step">
+        <div class="rm-circle">01</div>
+        <div class="rm-title">Ambition Setting</div>
+        <div class="rm-desc">Align leadership on strategic intent, aspirations and non-negotiables for the transformation.</div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-circle">02</div>
+        <div class="rm-title">Diagnostic</div>
+        <div class="rm-desc">Deep analysis of current state — capabilities, gaps, market position and performance drivers.</div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-circle">03</div>
+        <div class="rm-title">Strategy Design</div>
+        <div class="rm-desc">Develop and stress-test strategic options. Align on the preferred path with clear hypotheses.</div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-circle">04</div>
+        <div class="rm-title">Roadmap Build</div>
+        <div class="rm-desc">Translate strategy into a 12–36 month executable roadmap with owners, milestones and KPIs.</div>
+      </div>
+      <div class="rm-step">
+        <div class="rm-circle">05</div>
+        <div class="rm-title">Embed & Sustain</div>
+        <div class="rm-desc">Build internal capability to own and adapt the strategy. Governance cadence and review mechanisms.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTORS -->
+  <div class="sectors-section reveal">
+    <div class="label">Industries We Serve</div>
+    <h2 class="h2">Sector-deep, <em>cross-industry.</em></h2>
+    <div class="sectors-grid">
+      <div class="sector-pill"><div class="sector-icon">💻</div><div class="sector-name">IT / ITES</div></div>
+      <div class="sector-pill"><div class="sector-icon">🏦</div><div class="sector-name">BFSI</div></div>
+      <div class="sector-pill"><div class="sector-icon">🏭</div><div class="sector-name">Manufacturing</div></div>
+      <div class="sector-pill"><div class="sector-icon">🛒</div><div class="sector-name">E-commerce</div></div>
+      <div class="sector-pill"><div class="sector-icon">🏥</div><div class="sector-name">Healthcare</div></div>
+      <div class="sector-pill"><div class="sector-icon">📦</div><div class="sector-name">Logistics</div></div>
+    </div>
+  </div>
+
+  <!-- IMPACT NUMBERS -->
+  <div class="impact-section reveal">
+    <div class="impact-left">
+      <div class="label">Measured Impact</div>
+      <h2 class="h2">We measure ourselves by <em>your results.</em></h2>
+      <div class="body-text">
+        <p>Every strategy engagement is designed with measurable outcomes agreed at the outset. We track, report and course-correct — so value creation is never ambiguous.</p>
+        <p>Our clients routinely see step-change improvements in revenue, margin and market position within 18 months of engagement.</p>
+      </div>
+    </div>
+    <div class="impact-numbers">
+      <div class="impact-cell">
+        <div class="impact-n">28<sup>%</sup></div>
+        <div class="impact-l">Avg. Revenue Uplift</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">3.4<sup>x</sup></div>
+        <div class="impact-l">ROI on Engagement</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">92<sup>%</sup></div>
+        <div class="impact-l">Milestones On-time</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-n">80<sup>+</sup></div>
+        <div class="impact-l">Strategies Delivered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE EXAMPLES -->
+  <div class="cases-section reveal">
+    <div class="cases-label">Client Impact</div>
+    <h2 class="cases-h2">Strategy in <em>practice.</em></h2>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-sector">IT / ITES</div>
+        <div class="case-title">Market Entry Strategy for a SaaS Platform Expanding into Tier-2 India</div>
+        <div class="case-outcome">Developed a 3-year growth strategy covering segment prioritisation, pricing architecture and partner channel design. Executed alongside the leadership team over 14 months.</div>
+        <div class="case-metric">2.1<sup style="font-size:14px;color:var(--red);font-family:'Outfit',sans-serif">x</sup></div>
+        <div class="case-metric-l">ARR Growth within 18 months</div>
+      </div>
+      <div class="case-card">
+        <div class="case-sector">BFSI</div>
+        <div class="case-title">Digital Transformation Programme for a Regional NBFC</div>
+        <div class="case-outcome">Led end-to-end transformation covering core systems modernisation, digital lending strategy and workforce capability building across 6 business units.</div>
+        <div class="case-metric">₹42Cr</div>
+        <div class="case-metric-l">Operational savings in year one</div>
+      </div>
+      <div class="case-card">
+        <div class="case-sector">Manufacturing</div>
+        <div class="case-title">Post-Merger Integration for an Industrial Components Group</div>
+        <div class="case-outcome">Designed and delivered the integration playbook for a 3-entity merger — covering operating model, leadership structure and culture alignment across 1,200 employees.</div>
+        <div class="case-metric">9<sup style="font-size:14px;color:var(--red);font-family:'Outfit',sans-serif">mo</sup></div>
+        <div class="case-metric-l">Integration completed ahead of schedule</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta reveal">
+    <h2 class="cta-h">Let's build your next chapter <em>together.</em></h2>
+    <div class="cta-btns">
+      <a href="../contact.html" class="btn-w">Begin a Strategy Engagement</a>
+      <a href="../services/" class="btn-text">View All Services →</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ORIGENNT<span>.</span></div>
+    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+  </footer>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+(function tick(){ cursor.style.left=mx+'px'; cursor.style.top=my+'px'; rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('show'); });
+document.getElementById('overlay').addEventListener('click', () => { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); });
+const obs = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting) x.target.classList.add('vis'); }), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

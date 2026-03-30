@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organisational Design — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--black:#0d0d0d;--white:#ffffff;
+  --off:#f7f6f4;--grey-light:#eeecea;--grey-mid:#c2bfba;--grey-text:#6b6660;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+
+/* ── CURSOR ── */
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;background:var(--red-dark);}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:60px;height:60px;border-color:rgba(204,34,41,.2);}
+
+/* ── SIDEBAR ── */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-section{margin-bottom:36px;}
+.nav-section-label{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:16px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;color:rgba(255,255,255,.6);text-decoration:none;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sidebar-bottom{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sidebar-contact-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px;}
+.sidebar-contact-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sidebar-contact-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sidebar-contact-info a:hover{color:var(--red);}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 64px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--grey-light);}
+.back-link{font-size:12.5px;color:var(--grey-text);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;letter-spacing:.02em;}
+.back-link:hover{color:var(--black);gap:14px;}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 30px;transition:background .2s;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* ═══════════════════════════════════════
+   HERO — Full-bleed image with editorial overlay
+═══════════════════════════════════════ */
+.hero{
+  padding-top:64px;
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.hero-image{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80&fit=crop') center/cover no-repeat;
+  filter:brightness(.25) saturate(.6);
+  z-index:0;
+  transform:scale(1.04);
+  animation:heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom{to{transform:scale(1);}}
+
+/* Bain-style red accent bar on left */
+.hero::before{
+  content:'';
+  position:absolute;
+  left:0;top:64px;bottom:0;
+  width:5px;
+  background:var(--red);
+  z-index:2;
+}
+
+.hero-inner{
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:0;
+  position:relative;
+  z-index:1;
+  align-items:flex-end;
+  padding:80px 64px 72px 80px;
+}
+.hero-text{align-self:flex-end;}
+.hero-breadcrumb{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px;}
+.hero-breadcrumb span{color:var(--red);}
+
+.hero-h1{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(44px,5.5vw,80px);
+  font-weight:400;
+  color:var(--white);
+  line-height:1.04;
+  letter-spacing:-.025em;
+  opacity:0;
+  transform:translateY(32px);
+  animation:fadeUp .9s .1s var(--ease) forwards;
+}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-h1 .thin{font-weight:400;opacity:.45;}
+
+.hero-intro{
+  font-size:16px;font-weight:300;
+  color:rgba(255,255,255,.6);
+  max-width:560px;
+  line-height:1.85;
+  margin-top:28px;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp .9s .28s var(--ease) forwards;
+}
+
+.hero-actions{
+  display:flex;gap:24px;align-items:center;
+  margin-top:44px;
+  opacity:0;
+  transform:translateY(16px);
+  animation:fadeUp .9s .42s var(--ease) forwards;
+}
+.btn-primary{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 38px;transition:background .2s,transform .2s;}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-outline{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s,gap .2s;}
+.btn-outline:hover{color:var(--white);border-color:rgba(255,255,255,.6);gap:16px;}
+
+/* Hero right: live stat card */
+.hero-stat-card{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(16px);
+  padding:40px 36px;
+  align-self:flex-end;
+  opacity:0;
+  transform:translateX(24px);
+  animation:fadeLeft .9s .5s var(--ease) forwards;
+}
+@keyframes fadeLeft{to{opacity:1;transform:none;}}
+.hsc-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:28px;}
+.hsc-row{padding:18px 0;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;}
+.hsc-row:last-child{border-bottom:none;}
+.hsc-name{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.6);}
+.hsc-val{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);}
+.hsc-val span{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+
+/* Scroll indicator */
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4;z-index:2;}
+.scroll-hint-line{width:1px;height:44px;background:var(--white);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:.4;}50%{transform:scaleY(.5);opacity:.8;}}
+.scroll-hint-text{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--white);}
+
+@keyframes fadeUp{to{opacity:1;transform:none;}}
+
+/* ── META BAR (Bain-style red ribbon) ── */
+.meta-ribbon{
+  background:var(--red);
+  padding:0 80px;
+  display:flex;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.meta-cell{padding:24px 52px 24px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:52px;white-space:nowrap;flex-shrink:0;}
+.meta-cell:last-child{border-right:none;margin-right:0;}
+.meta-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.meta-val{font-family:'Libre Baskerville',serif;font-size:24px;font-weight:400;color:var(--white);}
+
+/* ── SHARED COMPONENTS ── */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.light{color:rgba(255,255,255,.4);}
+.chip.light::before{background:rgba(255,255,255,.2);}
+
+h2.display{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.display em{font-style:italic;color:var(--red);}
+h2.display.white{color:var(--white);}
+h2.display.white em{color:rgba(255,255,255,.38);}
+
+.body{font-size:15.5px;font-weight:300;line-height:1.9;color:var(--grey-text);}
+.body p{margin-bottom:18px;}
+
+/* ── SECTION 1: THE PROBLEM (editorial split) ── */
+.editorial{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:600px;
+}
+.ed-image{
+  position:relative;
+  overflow:hidden;
+}
+.ed-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease;}
+.ed-image:hover img{transform:scale(1.04);}
+.ed-image-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:28px 32px;
+  background:linear-gradient(transparent,rgba(0,0,0,.7));
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);
+}
+.ed-content{
+  padding:80px 72px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:var(--off);
+}
+.ed-content .body{margin-top:24px;max-width:480px;}
+.ed-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;}
+.tag{font-size:11px;font-weight:500;letter-spacing:.08em;padding:8px 18px;border:1px solid var(--grey-light);color:var(--grey-text);transition:background .2s,color .2s,border-color .2s;}
+.tag:hover{background:var(--red);color:var(--white);border-color:var(--red);}
+
+/* ── SECTION 2: OFFERINGS (Bain-style card grid) ── */
+.offerings-section{padding:100px 80px;background:var(--white);}
+.offerings-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:72px;}
+.offerings-intro .body{max-width:440px;}
+
+.offerings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.off-card{
+  background:var(--off);
+  padding:44px 36px 40px;
+  position:relative;
+  overflow:hidden;
+  transition:background .25s;
+}
+.off-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.off-card:hover{background:var(--grey-light);}
+.off-card:hover::after{transform:scaleX(1);}
+.off-icon{font-size:28px;margin-bottom:24px;display:block;}
+.off-num{font-family:'Libre Baskerville',serif;font-size:11px;letter-spacing:.2em;color:var(--grey-mid);margin-bottom:16px;}
+.off-title{font-size:15px;font-weight:600;color:var(--black);margin-bottom:12px;line-height:1.3;}
+.off-desc{font-size:13px;font-weight:300;line-height:1.8;color:var(--grey-text);}
+.off-link{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);transition:gap .2s;text-decoration:none;}
+.off-link:hover{gap:14px;}
+
+/* ── SECTION 3: DATA VIZ — "Why org design fails" ── */
+.data-section{
+  background:var(--black);
+  padding:100px 80px;
+  position:relative;
+  overflow:hidden;
+}
+.data-section::after{
+  content:'';
+  position:absolute;
+  right:-200px;top:-200px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(204,34,41,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.data-inner{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;position:relative;z-index:1;}
+.data-left h2{margin-bottom:20px;}
+.data-left .body{color:rgba(255,255,255,.45);max-width:420px;}
+.data-left .body p{margin-bottom:16px;}
+
+/* Animated bar chart */
+.barchart{margin-top:48px;}
+.bc-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;}
+.bc-row{margin-bottom:20px;}
+.bc-label{font-size:12.5px;font-weight:400;color:rgba(255,255,255,.65);margin-bottom:7px;display:flex;justify-content:space-between;}
+.bc-label span{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--white);}
+.bc-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.bc-fill{height:100%;background:var(--red);border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.bc-fill.animate{width:var(--w);}
+
+/* Donut chart */
+.donut-wrap{display:flex;align-items:center;gap:36px;margin-top:36px;}
+.donut-svg{flex-shrink:0;}
+.donut-legend{display:flex;flex-direction:column;gap:14px;}
+.dl-item{display:flex;align-items:center;gap:12px;}
+.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.dl-name{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.55);}
+.dl-pct{font-size:13px;font-weight:600;color:var(--white);margin-left:auto;font-family:'Libre Baskerville',serif;}
+
+/* ── SECTION 4: IMAGE CAROUSEL (testimonials + visuals) ── */
+.carousel-section{padding:100px 0;background:var(--white);overflow:hidden;}
+.carousel-header{padding:0 80px 60px;}
+
+.carousel-track-wrap{position:relative;}
+.carousel-track{
+  display:flex;
+  transition:transform .7s var(--ease);
+  will-change:transform;
+}
+.carousel-slide{
+  min-width:calc(100vw - 300px);
+  padding:0 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  box-sizing:border-box;
+}
+.cs-image{
+  position:relative;
+  overflow:hidden;
+  height:480px;
+}
+.cs-image img{width:100%;height:100%;object-fit:cover;display:block;}
+.cs-image-overlay{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:32px;
+  background:linear-gradient(transparent,rgba(0,0,0,.75));
+}
+.cs-sector-badge{
+  display:inline-block;
+  font-size:9px;letter-spacing:.25em;text-transform:uppercase;
+  padding:5px 14px;
+  background:var(--red);
+  color:var(--white);
+  margin-bottom:10px;
+}
+.cs-image-title{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);font-weight:400;line-height:1.4;}
+
+.cs-content{padding:20px 0;}
+.cs-quote-mark{font-family:'Libre Baskerville',serif;font-size:72px;color:var(--red);line-height:.7;opacity:.3;margin-bottom:12px;}
+.cs-quote{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:400;font-style:italic;line-height:1.55;color:var(--black);margin-bottom:28px;}
+.cs-body{font-size:14px;font-weight:300;line-height:1.85;color:var(--grey-text);}
+.cs-author{margin-top:32px;padding-top:28px;border-top:1px solid var(--grey-light);}
+.cs-author-name{font-size:14px;font-weight:600;color:var(--black);}
+.cs-author-role{font-size:12px;color:var(--grey-text);margin-top:3px;}
+.cs-metric{margin-top:28px;display:flex;gap:32px;}
+.cs-met{padding:20px 24px;background:var(--off);}
+.cs-met-n{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--black);line-height:1;}
+.cs-met-n sup{font-size:16px;color:var(--red);font-family:'Outfit',sans-serif;vertical-align:super;}
+.cs-met-l{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--grey-text);margin-top:6px;}
+
+/* Carousel controls */
+.carousel-controls{padding:40px 80px 0;display:flex;align-items:center;gap:20px;}
+.carousel-btn{
+  width:52px;height:52px;
+  border:1.5px solid var(--grey-light);
+  background:transparent;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--black);
+  transition:background .2s,border-color .2s,color .2s;
+}
+.carousel-btn:hover{background:var(--red);border-color:var(--red);color:var(--white);}
+.carousel-dots{display:flex;gap:8px;}
+.cdot{width:8px;height:8px;border-radius:50%;background:var(--grey-light);transition:background .3s,transform .3s;}
+.cdot.active{background:var(--red);transform:scale(1.3);}
+.carousel-counter{margin-left:auto;font-family:'Libre Baskerville',serif;font-size:14px;color:var(--grey-mid);}
+.carousel-counter span{color:var(--black);}
+
+/* ── SECTION 5: PROCESS — Bain-style horizontal stepper ── */
+.process-section{background:var(--off);padding:100px 80px;}
+.process-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:72px;}
+.process-head .body{max-width:420px;}
+
+.stepper{position:relative;display:grid;grid-template-columns:repeat(4,1fr);}
+/* Connecting track */
+.stepper::before{
+  content:'';
+  position:absolute;
+  top:30px;left:calc(12.5%);right:calc(12.5%);
+  height:1px;
+  background:var(--grey-light);
+  z-index:0;
+}
+.step-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;position:relative;z-index:1;}
+.step-circle{
+  width:60px;height:60px;
+  border-radius:50%;
+  background:var(--white);
+  border:1.5px solid var(--grey-light);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Libre Baskerville',serif;
+  font-size:18px;
+  color:var(--grey-mid);
+  margin-bottom:24px;
+  transition:background .3s,border-color .3s,color .3s,transform .3s;
+  position:relative;z-index:1;
+}
+.step-item.active .step-circle,.step-item:hover .step-circle{
+  background:var(--red);border-color:var(--red);color:var(--white);
+  transform:scale(1.1);
+  box-shadow:0 8px 32px rgba(204,34,41,.3);
+}
+.step-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:8px;}
+.step-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.step-desc{font-size:12.5px;font-weight:300;line-height:1.75;color:var(--grey-text);}
+
+/* ── SECTION 6: INSIGHT PULL (Bain editorial box) ── */
+.insight-band{
+  background:var(--red);
+  padding:72px 80px;
+  display:flex;
+  gap:80px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.insight-band::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;pointer-events:none;}
+.insight-band::after{content:'';position:absolute;left:-100px;bottom:-200px;width:400px;height:400px;background:rgba(0,0,0,.06);border-radius:50%;pointer-events:none;}
+.insight-quote{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(22px,2.4vw,34px);
+  font-weight:400;
+  font-style:italic;
+  color:var(--white);
+  flex:1;
+  max-width:600px;
+  line-height:1.5;
+  position:relative;z-index:1;
+}
+.insight-quote::before{content:'"';font-size:80px;line-height:.5;opacity:.2;display:block;margin-bottom:12px;}
+.insight-source{flex-shrink:0;position:relative;z-index:1;}
+.insight-source-name{font-size:14px;font-weight:600;color:rgba(255,255,255,.9);}
+.insight-source-role{font-size:12px;color:rgba(255,255,255,.55);margin-top:4px;}
+.insight-source-company{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:8px;}
+
+/* ── SECTION 7: BY THE NUMBERS (animated counters) ── */
+.numbers-section{padding:100px 80px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;}
+.numbers-left h2{margin-bottom:20px;}
+.numbers-left .body{max-width:460px;}
+.numbers-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.num-card{
+  padding:48px 40px;
+  background:var(--off);
+  position:relative;
+  overflow:hidden;
+  transition:background .25s;
+}
+.num-card::before{content:'';position:absolute;left:0;top:0;width:4px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--ease);}
+.num-card:hover{background:var(--grey-light);}
+.num-card:hover::before{transform:scaleY(1);}
+.num-val{font-family:'Libre Baskerville',serif;font-size:58px;font-weight:400;color:var(--black);line-height:1;}
+.num-val sup{font-size:24px;color:var(--red);vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.num-label{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey-text);margin-top:10px;line-height:1.6;}
+
+/* ── SECTION 8: PHOTO GRID ── */
+.photo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:320px 320px;gap:3px;}
+.pg-item{overflow:hidden;position:relative;}
+.pg-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s var(--ease),filter .4s;}
+.pg-item:hover img{transform:scale(1.05);filter:brightness(.8);}
+.pg-item:first-child{grid-row:span 2;}
+.pg-overlay{
+  position:absolute;inset:0;
+  background:rgba(204,34,41,.85);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  opacity:0;
+  transition:opacity .35s;
+  padding:32px;
+  text-align:center;
+}
+.pg-item:hover .pg-overlay{opacity:1;}
+.pg-overlay-title{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);margin-bottom:10px;}
+.pg-overlay-sub{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.75);}
+
+/* ── CTA ── */
+.cta-section{
+  background:var(--black);
+  padding:100px 80px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.cta-section::before{content:'';position:absolute;left:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.08) 0%,transparent 60%);pointer-events:none;}
+.cta-left{position:relative;z-index:1;}
+.cta-left .body{color:rgba(255,255,255,.45);max-width:440px;margin-top:24px;}
+.cta-left .body p{margin-bottom:14px;}
+.cta-right{display:flex;flex-direction:column;gap:16px;position:relative;z-index:1;}
+.btn-w{font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--red);background:var(--white);text-decoration:none;padding:16px 40px;transition:background .2s;text-align:center;display:block;}
+.btn-w:hover{background:var(--off);}
+.btn-outline-white{font-size:12px;font-weight:400;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;text-align:center;border:1px solid rgba(255,255,255,.15);padding:15px 40px;transition:border-color .2s,color .2s;display:block;}
+.btn-outline-white:hover{border-color:rgba(255,255,255,.4);color:var(--white);}
+
+/* ── FOOTER ── */
+footer{background:var(--black);padding:36px 80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.footer-logo{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);}
+.footer-logo span{color:var(--red);}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+
+/* ── HAMBURGER / MOBILE ── */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+@media(max-width:1100px){
+  .offerings-grid{grid-template-columns:1fr 1fr;}
+  .photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:260px 260px 260px;}
+  .pg-item:first-child{grid-row:span 1;}
+}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 60px;}
+  .hero-stat-card{display:none;}
+  .hero::before{display:none;}
+  .editorial{grid-template-columns:1fr;}
+  .ed-image{height:340px;}
+  .offerings-section{padding:70px 32px;}
+  .offerings-intro{grid-template-columns:1fr;gap:32px;}
+  .data-section{padding:70px 32px;}
+  .data-inner{grid-template-columns:1fr;gap:52px;}
+  .carousel-slide{grid-template-columns:1fr;min-width:100vw;padding:0 32px;}
+  .cs-image{height:280px;}
+  .carousel-header,.carousel-controls{padding-left:32px;padding-right:32px;}
+  .process-section,.insight-band,.numbers-section,.cta-section{padding:70px 32px;}
+  .process-head{grid-template-columns:1fr;gap:28px;}
+  .stepper{grid-template-columns:1fr 1fr;}
+  .stepper::before{display:none;}
+  .numbers-section{grid-template-columns:1fr;gap:48px;}
+  .cta-section{grid-template-columns:1fr;gap:40px;}
+  .photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .pg-item:first-child{grid-row:span 1;}
+  footer{flex-direction:column;gap:16px;align-items:flex-start;padding:32px;}
+  .meta-ribbon{padding:0 32px;}
+  .insight-band{flex-direction:column;gap:32px;}
+}
+@media(max-width:600px){
+  .offerings-grid{grid-template-columns:1fr;}
+  .numbers-grid{grid-template-columns:1fr;}
+  .stepper{grid-template-columns:1fr;}
+  .photo-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link active">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <a href="../index.html" class="back-link">Home</a>
+    <a href="../contact.html" class="topbar-cta">Engage Us</a>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-breadcrumb">ORIGENNT <span>/</span> Consulting <span>/</span> Organisational Design</div>
+        <h1 class="hero-h1">
+          Structure is<br>
+          <span class="thin">not the answer.</span><br>
+          The <em>right</em> structure is.
+        </h1>
+        <p class="hero-intro">Most organisations outgrow their structure before they realise it. We help India's leading enterprises design organisations that are built for their strategy — not inherited from their history.</p>
+        <div class="hero-actions">
+          <a href="../contact.html" class="btn-primary">Start a Conversation</a>
+          <a href="#offerings" class="btn-outline">Our Approach</a>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="hsc-label">Practice at a Glance</div>
+        <div class="hsc-row">
+          <span class="hsc-name">Redesigns Completed</span>
+          <span class="hsc-val">65<span>+</span></span>
+        </div>
+        <div class="hsc-row">
+          <span class="hsc-name">Avg. Efficiency Gain</span>
+          <span class="hsc-val">31<span>%</span></span>
+        </div>
+        <div class="hsc-row">
+          <span class="hsc-name">Decision Speed Improvement</span>
+          <span class="hsc-val">2.6<span>x</span></span>
+        </div>
+        <div class="hsc-row">
+          <span class="hsc-name">Employee Clarity Score Uplift</span>
+          <span class="hsc-val">+44<span>pts</span></span>
+        </div>
+        <div class="hsc-row">
+          <span class="hsc-name">Avg. Engagement Length</span>
+          <span class="hsc-val">6–12<span>mo</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span class="scroll-hint-text">Scroll</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- META RIBBON -->
+  <div class="meta-ribbon">
+    <div class="meta-cell"><div class="meta-label">Engagements Delivered</div><div class="meta-val">65+</div></div>
+    <div class="meta-cell"><div class="meta-label">Avg. Efficiency Gain</div><div class="meta-val">31%</div></div>
+    <div class="meta-cell"><div class="meta-label">Sectors Served</div><div class="meta-val">IT · BFSI · Mfg · FMCG</div></div>
+    <div class="meta-cell"><div class="meta-label">Typical Engagement</div><div class="meta-val">6–12 months</div></div>
+  </div>
+
+  <!-- ═══ EDITORIAL: THE PROBLEM ═══ -->
+  <div class="editorial reveal">
+    <div class="ed-image">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80&fit=crop" alt="Leaders in a boardroom discussing organisational structure" loading="lazy">
+      <div class="ed-image-caption">Leadership teams across India grappling with organisational complexity</div>
+    </div>
+    <div class="ed-content">
+      <div class="chip">The Challenge</div>
+      <h2 class="display">When structure becomes the <em>obstacle.</em></h2>
+      <div class="body">
+        <p>Rapid growth, M&A activity, digital transformation and new market entry all stress-test an organisation's design. Reporting lines blur, accountability becomes diffuse, decision-making slows, and talented people leave because they don't see a clear path.</p>
+        <p>The cost is significant — McKinsey research indicates that poor organisational design accounts for up to 20% of productivity loss in growing enterprises. We help you eliminate that drag.</p>
+      </div>
+      <div class="ed-tags">
+        <div class="tag">Role Clarity</div>
+        <div class="tag">Spans & Layers</div>
+        <div class="tag">Governance Design</div>
+        <div class="tag">Decision Rights</div>
+        <div class="tag">Matrix Structures</div>
+        <div class="tag">Operating Model</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ OFFERINGS ═══ -->
+  <section class="offerings-section reveal" id="offerings">
+    <div class="offerings-intro">
+      <div>
+        <div class="chip">What We Deliver</div>
+        <h2 class="display">Six ways we rebuild your <em>foundation.</em></h2>
+      </div>
+      <div class="body" style="padding-top:48px;">
+        <p>Our organisational design work spans the full architecture — from enterprise-level operating model redesign to targeted interventions around spans of control, decision rights, and capability frameworks.</p>
+      </div>
+    </div>
+    <div class="offerings-grid">
+      <div class="off-card">
+        <span class="off-icon">🏛️</span>
+        <div class="off-num">01</div>
+        <div class="off-title">Operating Model Design</div>
+        <div class="off-desc">End-to-end redesign of how your business creates and delivers value — aligning structure, process, technology and talent to your strategic intent.</div>
+        <a href="../contact.html" class="off-link">Discuss this →</a>
+      </div>
+      <div class="off-card">
+        <span class="off-icon">🔀</span>
+        <div class="off-num">02</div>
+        <div class="off-title">Spans & Layers Optimisation</div>
+        <div class="off-desc">Data-led analysis of management layers, reporting lines and spans of control — removing unnecessary complexity and accelerating decisions.</div>
+        <a href="../contact.html" class="off-link">Discuss this →</a>
+      </div>
+      <div class="off-card">
+        <span class="off-icon">⚖️</span>
+        <div class="off-num">03</div>
+        <div class="off-title">Decision Rights & Governance</div>
+        <div class="off-desc">Clarity on who decides what, at which level. We design RACI frameworks, delegation authorities and governance forums that cut through confusion.</div>
+        <a href="../contact.html" class="off-link">Discuss this →</a>
+      </div>
+      <div class="off-card">
+        <span class="off-icon">🧩</span>
+        <div class="off-num">04</div>
+        <div class="off-title">Role Architecture & JD Framework</div>
+        <div class="off-desc">Comprehensive role design — job families, career ladders, competency levels and role profiles that support hiring, development and retention.</div>
+        <a href="../contact.html" class="off-link">Discuss this →</a>
+      </div>
+      <div class="off-card">
+        <span class="off-icon">🔗</span>
+        <div class="off-num">05</div>
+        <div class="off-title">Post-Merger Integration Design</div>
+        <div class="off-desc">Structuring merged entities for synergy realisation — from Day-1 operating model to 18-month integration roadmap and cultural alignment.</div>
+        <a href="../contact.html" class="off-link">Discuss this →</a>
+      </div>
+      <div class="off-card">
+        <span class="off-icon">📐</span>
+        <div class="off-num">06</div>
+        <div class="off-title">Shared Services Design</div>
+        <div class="off-desc">Building centralised capability centres for finance, HR, IT and legal — enabling scale without proportional headcount growth.</div>
+        <a href="../contact.html" class="off-link">Discuss this →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DATA VIZ SECTION ═══ -->
+  <section class="data-section reveal">
+    <div class="data-inner">
+      <div class="data-left">
+        <div class="chip light">The Data</div>
+        <h2 class="display white">Why most redesigns <em>don't stick.</em></h2>
+        <div class="body">
+          <p>Research across 200+ Indian enterprise transformations reveals a consistent pattern: most organisations fail at organisational redesign not because of poor strategy — but because of poor execution of the human and structural dimensions.</p>
+          <p>ORIGENNT's methodology is specifically designed to address each of these failure points.</p>
+        </div>
+
+        <!-- Bar chart -->
+        <div class="barchart">
+          <div class="bc-title">Primary Causes of Redesign Failure</div>
+          <div class="bc-row">
+            <div class="bc-label">Leadership misalignment <span>68%</span></div>
+            <div class="bc-track"><div class="bc-fill" style="--w:68%"></div></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-label">Poor change communication <span>54%</span></div>
+            <div class="bc-track"><div class="bc-fill" style="--w:54%"></div></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-label">Role ambiguity post-launch <span>47%</span></div>
+            <div class="bc-track"><div class="bc-fill" style="--w:47%"></div></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-label">Insufficient capability building <span>39%</span></div>
+            <div class="bc-track"><div class="bc-fill" style="--w:39%"></div></div>
+          </div>
+          <div class="bc-row">
+            <div class="bc-label">Technology not aligned to new model <span>31%</span></div>
+            <div class="bc-track"><div class="bc-fill" style="--w:31%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donut + additional data -->
+      <div class="data-right">
+        <!-- SVG Donut Chart -->
+        <div class="bc-title" style="color:rgba(255,255,255,.3);font-size:10px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:28px;">Where Redesign Value Is Created</div>
+        <div class="donut-wrap">
+          <svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="24"/>
+            <!-- Segments: rotate to start at top (-90deg = -251.3 offset at r=60 circumference=376.99) -->
+            <!-- Segment 1: Structure 38% -->
+            <circle cx="80" cy="80" r="60" fill="none" stroke="#CC2229" stroke-width="24"
+              stroke-dasharray="143.3 233.7" stroke-dashoffset="94.25" transform="rotate(-90 80 80)"
+              class="donut-seg" style="--dash:143.3"/>
+            <!-- Segment 2: People 29% -->
+            <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(204,34,41,.5)" stroke-width="24"
+              stroke-dasharray="109.3 267.7" stroke-dashoffset="-49.05" transform="rotate(-90 80 80)"
+              class="donut-seg" style="--dash:109.3"/>
+            <!-- Segment 3: Process 21% -->
+            <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="24"
+              stroke-dasharray="79.2 297.8" stroke-dashoffset="-158.3" transform="rotate(-90 80 80)"
+              class="donut-seg" style="--dash:79.2"/>
+            <!-- Segment 4: Tech 12% -->
+            <circle cx="80" cy="80" r="60" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="24"
+              stroke-dasharray="45.2 331.8" stroke-dashoffset="-237.5" transform="rotate(-90 80 80)"
+              class="donut-seg" style="--dash:45.2"/>
+            <text x="80" y="75" text-anchor="middle" fill="white" font-family="'Libre Baskerville',serif" font-size="22">100</text>
+            <text x="80" y="94" text-anchor="middle" fill="rgba(255,255,255,.3)" font-family="'Outfit',sans-serif" font-size="9" letter-spacing="1">PERCENT</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="dl-item"><div class="dl-dot" style="background:#CC2229"></div><span class="dl-name">Structural Design</span><span class="dl-pct">38%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:rgba(204,34,41,.5)"></div><span class="dl-name">People & Talent</span><span class="dl-pct">29%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:rgba(255,255,255,.25)"></div><span class="dl-name">Process Design</span><span class="dl-pct">21%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:rgba(255,255,255,.1)"></div><span class="dl-name">Technology Fit</span><span class="dl-pct">12%</span></div>
+          </div>
+        </div>
+
+        <!-- Stat pull-outs -->
+        <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+          <div style="background:rgba(255,255,255,.04);padding:28px 24px;border:1px solid rgba(255,255,255,.06);">
+            <div style="font-family:'Libre Baskerville',serif;font-size:40px;color:white;line-height:1;">72<sup style="font-size:18px;color:#CC2229;font-family:'Outfit',sans-serif;">%</sup></div>
+            <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:8px;">of companies redesign within 3 years of major growth</div>
+          </div>
+          <div style="background:rgba(204,34,41,.12);padding:28px 24px;border:1px solid rgba(204,34,41,.2);">
+            <div style="font-family:'Libre Baskerville',serif;font-size:40px;color:white;line-height:1;">4.2<sup style="font-size:18px;color:#CC2229;font-family:'Outfit',sans-serif;">x</sup></div>
+            <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:8px;">faster execution in well-designed organisations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CAROUSEL ═══ -->
+  <section class="carousel-section">
+    <div class="carousel-header reveal">
+      <div class="chip">Client Impact</div>
+      <h2 class="display">Results that <em>redefine</em> what's possible.</h2>
+    </div>
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- Slide 1 -->
+        <div class="carousel-slide">
+          <div class="cs-image">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&fit=crop" alt="Leadership team in discussion" loading="lazy">
+            <div class="cs-image-overlay">
+              <div class="cs-sector-badge">IT / ITES — Bengaluru</div>
+              <div class="cs-image-title">Operating Model Redesign for a 2,400-Person Technology Firm</div>
+            </div>
+          </div>
+          <div class="cs-content">
+            <div class="cs-quote-mark">"</div>
+            <div class="cs-quote">ORIGENNT didn't just deliver a new org chart. They rebuilt how we think about accountability — and the results were immediate.</div>
+            <div class="cs-body">A hypergrowth IT services firm had doubled headcount in 18 months. Decision-making had become painfully slow — everything escalated to the CXO level. We redesigned the entire operating model, compressed 7 management layers to 4, and introduced clear decision rights at each level. Within 90 days, escalations dropped by 61%.</div>
+            <div class="cs-author">
+              <div class="cs-author-name">Vikram Shenoy</div>
+              <div class="cs-author-role">Chief Operating Officer</div>
+            </div>
+            <div class="cs-metric">
+              <div class="cs-met"><div class="cs-met-n">61<sup>%</sup></div><div class="cs-met-l">Fewer escalations</div></div>
+              <div class="cs-met"><div class="cs-met-n">4<sup>mo</sup></div><div class="cs-met-l">To full implementation</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-slide">
+          <div class="cs-image">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&fit=crop" alt="Corporate team collaboration" loading="lazy">
+            <div class="cs-image-overlay">
+              <div class="cs-sector-badge">BFSI — Mumbai</div>
+              <div class="cs-image-title">Post-Merger Integration for a Regional NBFC Group</div>
+            </div>
+          </div>
+          <div class="cs-content">
+            <div class="cs-quote-mark">"</div>
+            <div class="cs-quote">The integration could have taken two years. ORIGENNT's clarity of process and deep understanding of financial services got us live in seven months.</div>
+            <div class="cs-body">Following the merger of three lending entities, we designed and executed the post-merger integration structure — covering unified role architecture, shared services consolidation, governance framework, and a 90-day cultural integration programme spanning 800+ employees across three cities.</div>
+            <div class="cs-author">
+              <div class="cs-author-name">Deepa Nair</div>
+              <div class="cs-author-role">Group CEO, Financial Services</div>
+            </div>
+            <div class="cs-metric">
+              <div class="cs-met"><div class="cs-met-n">7<sup>mo</sup></div><div class="cs-met-l">Full integration</div></div>
+              <div class="cs-met"><div class="cs-met-n">₹3.2<sup>Cr</sup></div><div class="cs-met-l">Annual cost savings</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+          <div class="cs-image">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80&fit=crop" alt="Factory and manufacturing operations" loading="lazy">
+            <div class="cs-image-overlay">
+              <div class="cs-sector-badge">Manufacturing — Odisha</div>
+              <div class="cs-image-title">Shared Services Centre Design for an Industrial Conglomerate</div>
+            </div>
+          </div>
+          <div class="cs-content">
+            <div class="cs-quote-mark">"</div>
+            <div class="cs-quote">We'd tried to centralise before and failed. ORIGENNT understood why — and designed something that actually worked for our operational realities.</div>
+            <div class="cs-body">A diversified manufacturing group with 6 business units needed to build shared services for finance, HR and procurement. We designed the service delivery model, SLA framework, governance structure and transition roadmap — achieving ₹4.7Cr in annualised savings without disrupting operations.</div>
+            <div class="cs-author">
+              <div class="cs-author-name">Ravi Pattnaik</div>
+              <div class="cs-author-role">Group Managing Director</div>
+            </div>
+            <div class="cs-metric">
+              <div class="cs-met"><div class="cs-met-n">₹4.7<sup>Cr</sup></div><div class="cs-met-l">Annual savings</div></div>
+              <div class="cs-met"><div class="cs-met-n">28<sup>%</sup></div><div class="cs-met-l">Headcount optimised</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn">←</button>
+      <button class="carousel-btn" id="nextBtn">→</button>
+      <div class="carousel-dots">
+        <div class="cdot active" data-idx="0"></div>
+        <div class="cdot" data-idx="1"></div>
+        <div class="cdot" data-idx="2"></div>
+      </div>
+      <div class="carousel-counter"><span id="slideNum">01</span> / 03</div>
+    </div>
+  </section>
+
+  <!-- ═══ PROCESS STEPPER ═══ -->
+  <section class="process-section reveal">
+    <div class="process-head">
+      <div>
+        <div class="chip">Our Method</div>
+        <h2 class="display">A proven path to <em>structural clarity.</em></h2>
+      </div>
+      <div class="body" style="padding-top:42px;">
+        <p>Our four-phase methodology is built on the belief that organisational design is a human endeavour, not a structural exercise. Stakeholder engagement, communication and capability building are embedded throughout — not bolted on at the end.</p>
+      </div>
+    </div>
+    <div class="stepper">
+      <div class="step-item active">
+        <div class="step-circle">01</div>
+        <div class="step-tag">Weeks 1–4</div>
+        <div class="step-name">Discover</div>
+        <div class="step-desc">Comprehensive diagnostic — interviews, data analysis, workflow mapping, and spans & layers audit across the full organisation.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">02</div>
+        <div class="step-tag">Weeks 5–10</div>
+        <div class="step-name">Design</div>
+        <div class="step-desc">Co-create the target operating model with leadership. Prototype structural options, stress-test with scenarios, build the to-be blueprint.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">03</div>
+        <div class="step-tag">Weeks 11–20</div>
+        <div class="step-name">Transition</div>
+        <div class="step-desc">Sequence and execute the transition. Role placements, governance activation, communication cascade, and team restructuring.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-circle">04</div>
+        <div class="step-tag">Ongoing</div>
+        <div class="step-name">Embed</div>
+        <div class="step-desc">90-day pulse checks, manager capability uplift, and structural fine-tuning to ensure the new design delivers its intended outcomes.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INSIGHT PULL QUOTE ═══ -->
+  <div class="insight-band reveal">
+    <div class="insight-quote">
+      The best organisational design is invisible — people stop thinking about structure and start focusing entirely on the work.
+    </div>
+    <div class="insight-source">
+      <div class="insight-source-name">ORIGENNT Practice Lead</div>
+      <div class="insight-source-role">Organisational Design & Effectiveness</div>
+      <div class="insight-source-company">ORIGENNT Private Limited</div>
+    </div>
+  </div>
+
+  <!-- ═══ NUMBERS ═══ -->
+  <section class="numbers-section">
+    <div class="numbers-left reveal">
+      <div class="chip">Measured Outcomes</div>
+      <h2 class="display">Numbers that tell the <em>full story.</em></h2>
+      <div class="body">
+        <p>Every ORIGENNT organisational design engagement is governed by an outcomes framework agreed at kickoff. We track and report against your specific KPIs throughout — and stay accountable to them long after we've left.</p>
+        <p>The averages below are drawn from across our completed redesign portfolio.</p>
+      </div>
+    </div>
+    <div class="numbers-grid reveal" style="transition-delay:.15s">
+      <div class="num-card">
+        <div class="num-val">31<sup>%</sup></div>
+        <div class="num-label">Average efficiency improvement across redesigned units</div>
+      </div>
+      <div class="num-card">
+        <div class="num-val">2.6<sup>x</sup></div>
+        <div class="num-label">Faster decision-making in restructured governance models</div>
+      </div>
+      <div class="num-card">
+        <div class="num-val">44<sup>pts</sup></div>
+        <div class="num-label">Average uplift in employee role clarity scores (survey-based)</div>
+      </div>
+      <div class="num-card">
+        <div class="num-val">89<sup>%</sup></div>
+        <div class="num-label">Of engagements delivered within agreed scope and timeline</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PHOTO GRID ═══ -->
+  <div class="photo-grid">
+    <div class="pg-item">
+      <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80&fit=crop" alt="Modern office space India" loading="lazy">
+      <div class="pg-overlay"><div class="pg-overlay-title">Operating Model Work</div><div class="pg-overlay-sub">Enterprise-wide structural redesigns</div></div>
+    </div>
+    <div class="pg-item">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&fit=crop" alt="Team workshop" loading="lazy">
+      <div class="pg-overlay"><div class="pg-overlay-title">Co-Design Workshops</div><div class="pg-overlay-sub">Collaborative leadership sessions</div></div>
+    </div>
+    <div class="pg-item">
+      <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&fit=crop" alt="Handshake partnership" loading="lazy">
+      <div class="pg-overlay"><div class="pg-overlay-title">Client Partnership</div><div class="pg-overlay-sub">Long-term embedded relationships</div></div>
+    </div>
+    <div class="pg-item">
+      <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&q=80&fit=crop" alt="Data and analytics" loading="lazy">
+      <div class="pg-overlay"><div class="pg-overlay-title">Data-Led Diagnostics</div><div class="pg-overlay-sub">Evidence-based redesign decisions</div></div>
+    </div>
+    <div class="pg-item">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80&fit=crop" alt="Team collaboration tech" loading="lazy">
+      <div class="pg-overlay"><div class="pg-overlay-title">Implementation Support</div><div class="pg-overlay-sub">Hands-on transition execution</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section reveal">
+    <div class="cta-left">
+      <div class="chip light">Get Started</div>
+      <h2 class="display white">Is your structure holding your strategy <em>back?</em></h2>
+      <div class="body">
+        <p>A 60-minute diagnostic conversation with our Organisational Design practice lead will identify your three most critical structural constraints — at no cost.</p>
+        <p>We work with boards, CEOs and CHROs across India's growth economy. If you're scaling, restructuring or integrating — we should talk.</p>
+      </div>
+    </div>
+    <div class="cta-right">
+      <a href="../contact.html" class="btn-w">Schedule a Free Diagnostic</a>
+      <a href="../services/" class="btn-outline-white">View All Services</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">ORIGENNT<span>.</span></div>
+    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved.</div>
+  </footer>
+</div><!-- /main -->
+
+<script>
+/* ── CURSOR ── */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function tick(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick);})();
+
+/* ── MOBILE SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');});
+document.getElementById('overlay').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');});
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── BAR CHART ANIMATION ── */
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bc-fill').forEach((fill,i)=>{
+        setTimeout(()=>fill.classList.add('animate'),i*120);
+      });
+      barObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.barchart').forEach(el=>barObs.observe(el));
+
+/* ── COUNTER ANIMATION ── */
+function animateCounter(el,target,suffix=''){
+  const start=performance.now();
+  const dur=1600;
+  const isFloat=target%1!==0;
+  function frame(now){
+    const p=Math.min((now-start)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    const val=isFloat?(target*ease).toFixed(1):(Math.round(target*ease));
+    el.innerHTML=val+'<sup>'+suffix+'</sup>';
+    if(p<1)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+const numObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.num-val').forEach(el=>{
+        const full=el.textContent;
+        const num=parseFloat(full);
+        const suffix=el.querySelector('sup')?.textContent||'';
+        animateCounter(el,num,suffix);
+      });
+      numObs.unobserve(e.target);
+    }
+  });
+},{threshold:.4});
+document.querySelectorAll('.numbers-grid').forEach(el=>numObs.observe(el));
+
+/* ── DONUT ANIMATION ── */
+const donutObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('.donut-seg').forEach((seg,i)=>{
+        const dashval=parseFloat(seg.style.getPropertyValue('--dash'));
+        const circ=376.99;
+        const orig=seg.getAttribute('stroke-dasharray');
+        seg.setAttribute('stroke-dasharray',`0 ${circ}`);
+        setTimeout(()=>{
+          seg.style.transition=`stroke-dasharray 1.2s cubic-bezier(.77,0,.18,1) ${i*0.15}s`;
+          seg.setAttribute('stroke-dasharray',orig);
+        },200);
+      });
+      donutObs.unobserve(e.target);
+    }
+  });
+},{threshold:.4});
+document.querySelectorAll('.data-section').forEach(el=>donutObs.observe(el));
+
+/* ── CAROUSEL ── */
+const track=document.getElementById('carouselTrack');
+const dots=document.querySelectorAll('.cdot');
+const slideNumEl=document.getElementById('slideNum');
+let current=0;
+const total=3;
+
+function goTo(idx){
+  current=idx;
+  const slideW=track.parentElement.offsetWidth;
+  track.style.transform=`translateX(-${idx*slideW}px)`;
+  dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+  slideNumEl.textContent=String(idx+1).padStart(2,'0');
+}
+
+document.getElementById('nextBtn').addEventListener('click',()=>goTo((current+1)%total));
+document.getElementById('prevBtn').addEventListener('click',()=>goTo((current-1+total)%total));
+dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.idx)));
+
+/* Touch swipe */
+let touchX=0;
+track.addEventListener('touchstart',e=>touchX=e.touches[0].clientX,{passive:true});
+track.addEventListener('touchend',e=>{
+  const dx=touchX-e.changedTouches[0].clientX;
+  if(Math.abs(dx)>50)goTo(dx>0?(current+1)%total:(current-1+total)%total);
+});
+
+window.addEventListener('resize',()=>goTo(current));
+</script>
+</body>
+</html>
