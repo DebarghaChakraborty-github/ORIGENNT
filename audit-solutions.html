@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audit Solutions — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#1a7a6e;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* ── SIDEBAR ── */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-section{margin-bottom:32px;}
+.nav-section-label{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sidebar-bottom{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sidebar-contact-label{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sidebar-contact-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sidebar-contact-info a{color:rgba(255,255,255,.5);text-decoration:none;}
+.sidebar-contact-info a:hover{color:var(--red);}
+
+/* ── MAIN SHELL ── */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.back-link:hover{color:var(--black);gap:14px;}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* ══════════════ HERO ══════════════ */
+.hero{
+  padding-top:64px;min-height:100vh;
+  background:var(--black);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1800&q=80&fit=crop') center 30%/cover;
+  filter:brightness(.15) saturate(.4);
+  transform:scale(1.04);animation:hzoom 20s ease-in-out infinite alternate;
+}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:flex-end;padding:80px 80px 72px;}
+.hero-tag{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--red);}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(46px,5.6vw,80px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .1s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:600px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .25s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:40px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-primary{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;}
+.btn-primary:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+
+/* Hero stat panel */
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:36px 32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:22px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+.hp-val sup{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+
+/* Urgency ticker */
+.ticker-bar{background:var(--red);padding:13px 80px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;}
+.tb-text{font-size:13px;font-weight:500;color:var(--white);display:flex;align-items:center;gap:12px;}
+.tb-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:tbp 1.5s ease-in-out infinite;}
+@keyframes tbp{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.tb-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:var(--white);padding:8px 22px;text-decoration:none;white-space:nowrap;}
+
+/* ══════════════ REUSABLE ══════════════ */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body p{margin-bottom:16px;}
+.body.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+
+/* ══════════════ META RIBBON ══════════════ */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc{padding:24px 52px 24px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:52px;white-space:nowrap;flex-shrink:0;}
+.mc:last-child{border-right:none;margin-right:0;}
+.mc-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-val{font-family:'Libre Baskerville',serif;font-size:23px;color:var(--white);}
+
+/* ══════════════ THE COST OF IGNORING ══════════════ */
+.cost-section{padding:100px 80px;background:var(--off);}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.cost-facts{display:flex;flex-direction:column;gap:3px;margin-top:32px;}
+.cf{background:var(--white);padding:22px 28px;display:flex;align-items:flex-start;gap:22px;border-left:3px solid transparent;transition:border-color .2s,background .2s;}
+.cf:hover{border-left-color:var(--red);background:var(--gl);}
+.cf-icon{font-size:26px;flex-shrink:0;}
+.cf-text{font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.65;}
+.cf-text strong{color:var(--black);font-weight:600;}
+
+/* SVG Donut + Bar chart panel */
+.viz-panel{background:var(--white);padding:44px 40px;}
+.vp-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:32px;font-weight:500;}
+.donut-row{display:flex;align-items:center;gap:36px;margin-bottom:40px;}
+.donut-legend{display:flex;flex-direction:column;gap:12px;}
+.dl-item{display:flex;align-items:center;gap:10px;}
+.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.dl-name{font-size:12px;font-weight:300;color:var(--gt);}
+.dl-pct{font-size:13px;font-weight:600;color:var(--black);margin-left:auto;font-family:'Libre Baskerville',serif;}
+.seg{stroke-dasharray:0 251.3;transition:stroke-dasharray 1.4s var(--ease);}
+.seg.go{stroke-dasharray:var(--da) 251.3;}
+/* Horizontal bar chart */
+.bar-row{margin-bottom:18px;}
+.bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.bar-label{font-size:12.5px;color:var(--black);font-weight:400;}
+.bar-pct{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--red);}
+.bar-track{height:7px;background:var(--gl);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#e8505a);border-radius:4px;width:0;transition:width 1.4s var(--ease);}
+.bar-fill.go{width:var(--w);}
+
+/* ══════════════ AUDIT GRID (tabbed) ══════════════ */
+.audit-section{padding:100px 80px;background:var(--white);}
+.audit-tabs{display:flex;gap:0;border-bottom:2px solid var(--gl);margin-bottom:56px;overflow-x:auto;scrollbar-width:none;}
+.audit-tabs::-webkit-scrollbar{display:none;}
+.atab{font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:16px 32px;color:var(--gt);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .2s,border-color .2s;}
+.atab.active,.atab:hover{color:var(--red);border-bottom-color:var(--red);}
+.audit-panel{display:none;}
+.audit-panel.active{display:block;}
+.audit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.audit-card{
+  background:var(--off);padding:36px 32px 32px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;transition:background .2s;
+}
+.audit-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.audit-card:hover{background:var(--gl);}
+.audit-card:hover::before{transform:scaleX(1);}
+.ac-icon{font-size:28px;margin-bottom:18px;}
+.ac-name{font-size:15px;font-weight:600;color:var(--black);margin-bottom:10px;line-height:1.35;}
+.ac-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.75;flex:1;}
+.ac-price-row{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding-top:18px;border-top:1px solid var(--gl);}
+.ac-price{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);}
+.ac-price sup{font-size:12px;font-family:'Outfit',sans-serif;font-weight:600;color:var(--red);}
+.ac-price-note{font-size:10px;color:var(--gm);font-weight:300;}
+.ac-btn{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);padding:9px 20px;border:none;transition:background .2s;flex-shrink:0;}
+.ac-btn:hover{background:var(--red-dark);}
+
+/* Category banner above audit panels */
+.cat-intro{background:var(--black);padding:36px 40px;margin-bottom:2px;display:flex;align-items:center;gap:28px;}
+.ci-badge{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:6px 16px;white-space:nowrap;}
+.ci-badge.core{background:var(--red);color:var(--white);}
+.ci-badge.ind{background:var(--teal);color:var(--white);}
+.ci-badge.spec{background:var(--gold);color:var(--white);}
+.ci-badge.adv{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);}
+.ci-text{font-size:13px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.6;}
+.ci-text strong{color:var(--white);font-weight:500;}
+
+/* ══════════════ PROCESS ══════════════ */
+.process-section{background:var(--off);padding:100px 80px;}
+.process-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:72px;}
+.stepper{position:relative;display:grid;grid-template-columns:repeat(5,1fr);}
+.stepper::before{content:'';position:absolute;top:29px;left:10%;right:10%;height:1px;background:var(--gl);z-index:0;}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 12px;position:relative;z-index:1;}
+.step-c{width:58px;height:58px;border-radius:50%;background:var(--white);border:1.5px solid var(--gl);display:flex;align-items:center;justify-content:center;font-family:'Libre Baskerville',serif;font-size:18px;color:var(--gm);margin-bottom:20px;transition:background .3s,border-color .3s,color .3s,transform .3s,box-shadow .3s;position:relative;z-index:1;}
+.step:hover .step-c,.step.active .step-c{background:var(--red);border-color:var(--red);color:var(--white);transform:scale(1.1);box-shadow:0 8px 30px rgba(204,34,41,.3);}
+.step-tag{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.step-name{font-size:13px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.step-desc{font-size:11.5px;font-weight:300;color:var(--gt);line-height:1.7;}
+
+/* ══════════════ DATA DEEP DIVE ══════════════ */
+.data-section{background:var(--black);padding:100px 80px;position:relative;overflow:hidden;}
+.data-section::after{content:'';position:absolute;right:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.07) 0%,transparent 65%);pointer-events:none;}
+.data-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;}
+
+/* Radar / spider chart using CSS + SVG */
+.radar-wrap{display:flex;flex-direction:column;align-items:center;}
+.radar-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;text-align:center;}
+
+/* Stat cards dark */
+.dark-stats{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.ds{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:36px 32px;transition:background .2s;}
+.ds:hover{background:rgba(255,255,255,.07);}
+.ds-n{font-family:'Libre Baskerville',serif;font-size:48px;color:var(--white);line-height:1;}
+.ds-n sup{font-size:20px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.ds-l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:10px;line-height:1.6;}
+
+/* Waterfall style comparison bars */
+.comp-bars{margin-top:32px;}
+.cb-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;}
+.cb-row{margin-bottom:18px;}
+.cb-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.cb-lbl{font-size:12.5px;color:rgba(255,255,255,.65);}
+.cb-val{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--white);}
+.cb-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.cb-fill{height:100%;background:linear-gradient(90deg,rgba(204,34,41,.5),var(--red));border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.cb-fill.go{width:var(--w);}
+
+/* ══════════════ CASE STUDIES (carousel) ══════════════ */
+.cases-section{padding:100px 0;background:var(--white);overflow:hidden;}
+.cases-header{padding:0 80px 56px;}
+.car-wrap{position:relative;}
+.car-track{display:flex;transition:transform .7s var(--ease);}
+.car-slide{min-width:calc(100vw - 300px);padding:0 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;box-sizing:border-box;}
+.cs-img{height:460px;overflow:hidden;position:relative;}
+.cs-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s var(--ease);}
+.cs-img:hover img{transform:scale(1.04);}
+.cs-img-ov{position:absolute;bottom:0;left:0;right:0;padding:28px 32px;background:linear-gradient(transparent,rgba(0,0,0,.75));}
+.cs-sector{font-size:9px;letter-spacing:.25em;text-transform:uppercase;padding:5px 14px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:8px;}
+.cs-img-title{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);font-weight:400;line-height:1.4;}
+.cs-content{}
+.cs-qm{font-family:'Libre Baskerville',serif;font-size:68px;color:var(--red);line-height:.7;opacity:.25;margin-bottom:12px;}
+.cs-quote{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:400;font-style:italic;line-height:1.55;color:var(--black);margin-bottom:24px;}
+.cs-body{font-size:13.5px;font-weight:300;line-height:1.85;color:var(--gt);}
+.cs-author{margin-top:28px;padding-top:24px;border-top:1px solid var(--gl);}
+.cs-aname{font-size:14px;font-weight:600;color:var(--black);}
+.cs-arole{font-size:12px;color:var(--gt);margin-top:3px;}
+.cs-metrics{margin-top:24px;display:flex;gap:3px;}
+.cs-met{padding:18px 22px;background:var(--off);}
+.cs-met-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--black);line-height:1;}
+.cs-met-n sup{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.cs-met-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gt);margin-top:5px;}
+.car-controls{padding:36px 80px 0;display:flex;align-items:center;gap:18px;}
+.car-btn{width:50px;height:50px;border:1.5px solid var(--gl);background:transparent;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--black);transition:background .2s,border-color .2s,color .2s;}
+.car-btn:hover{background:var(--red);border-color:var(--red);color:var(--white);}
+.car-dots{display:flex;gap:7px;}
+.cdot{width:8px;height:8px;border-radius:50%;background:var(--gl);transition:background .3s,transform .3s;}
+.cdot.active{background:var(--red);transform:scale(1.3);}
+.car-counter{margin-left:auto;font-family:'Libre Baskerville',serif;font-size:14px;color:var(--gm);}
+.car-counter span{color:var(--black);}
+
+/* ══════════════ PRICING ══════════════ */
+.pricing-section{padding:100px 80px;background:var(--off);}
+.pricing-intro{text-align:center;margin-bottom:72px;}
+.pricing-intro .chip{justify-content:center;}
+.pricing-intro .chip::before{display:none;}
+.pricing-intro p{font-size:15px;font-weight:300;color:var(--gt);max-width:580px;margin:14px auto 0;line-height:1.85;}
+
+/* Pricing tier selector */
+.tier-tabs{display:flex;justify-content:center;gap:2px;margin-bottom:48px;}
+.tier-tab{font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:12px 32px;background:var(--white);color:var(--gt);transition:background .2s,color .2s;}
+.tier-tab.active,.tier-tab:hover{background:var(--red);color:var(--white);}
+
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pkg{background:var(--white);padding:40px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:box-shadow .3s;}
+.pkg.featured{background:var(--black);box-shadow:0 24px 60px rgba(0,0,0,.18);}
+.pkg.featured .pkg-name,.pkg.featured .pkg-price,.pkg.featured .pkg-feature{color:rgba(255,255,255,.85);}
+.pkg.featured .pkg-price{color:var(--white);}
+.pkg.featured .pkg-divider{background:rgba(255,255,255,.1);}
+.pkg.featured .pkg-note{color:rgba(255,255,255,.3);}
+.pkg:hover{box-shadow:0 12px 40px rgba(0,0,0,.1);}
+.pkg-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:20px;display:inline-block;font-weight:600;}
+.pkg-badge.starter{background:var(--gl);color:var(--gt);}
+.pkg-badge.growth{background:rgba(204,34,41,.1);color:var(--red);}
+.pkg-badge.professional{background:var(--red);color:var(--white);}
+.pkg-badge.enterprise{background:var(--gold);color:var(--white);}
+.pkg-name{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:400;margin-bottom:8px;}
+.pkg-tagline{font-size:12.5px;font-weight:300;color:var(--gt);margin-bottom:24px;line-height:1.6;}
+.pkg.featured .pkg-tagline{color:rgba(255,255,255,.4);}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:44px;font-weight:400;color:var(--black);line-height:1;}
+.pkg-price sup{font-size:18px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:6px;}
+.pkg.featured .pkg-period{color:rgba(255,255,255,.3);}
+.pkg-divider{height:1px;background:var(--gl);margin:20px 0;}
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1;margin-bottom:28px;}
+.pkg-feature{display:flex;align-items:flex-start;gap:10px;font-size:13px;font-weight:300;color:var(--gt);line-height:1.5;}
+.pkg.featured .pkg-feature{color:rgba(255,255,255,.6);}
+.pkg-feature::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;width:16px;height:16px;border-radius:50%;background:var(--red-pale);display:flex;align-items:center;justify-content:center;}
+.pkg.featured .pkg-feature::before{background:rgba(204,34,41,.2);}
+.pkg-feature.dim{opacity:.35;}
+.pkg-ctas{display:flex;flex-direction:column;gap:9px;margin-top:auto;}
+.pkg-pay{display:block;text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 24px;transition:background .2s,transform .2s;}
+.pkg-pay.red{background:var(--red);color:var(--white);}
+.pkg-pay.red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pkg-pay.white{background:var(--white);color:var(--red);}
+.pkg-pay.white:hover{background:var(--off);}
+.pkg-pay.gold{background:var(--gold);color:var(--white);}
+.pkg-pay.gold:hover{opacity:.9;transform:translateY(-2px);}
+.pkg-pay.outline{background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);}
+.pkg-pay.outline:hover{border-color:rgba(255,255,255,.5);color:var(--white);}
+.pkg-note{font-size:10px;color:var(--gm);text-align:center;margin-top:6px;}
+
+/* Pricing note band */
+.pricing-note{background:var(--black);padding:24px 80px;display:flex;align-items:center;gap:24px;}
+.pn-icon{font-size:20px;}
+.pn-text{font-size:13px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.65;}
+.pn-text strong{color:var(--white);font-weight:500;}
+
+/* ══════════════ RAZORPAY MODAL ══════════════ */
+.rzp-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9000;align-items:center;justify-content:center;}
+.rzp-modal.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:94vw;padding:52px 48px;position:relative;animation:mdIn .3s var(--ease);}
+@keyframes mdIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.rzp-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);line-height:1;transition:color .2s;}
+.rzp-close:hover{color:var(--red);}
+.rzp-plan-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:18px;font-weight:600;}
+.rzp-h{font-family:'Libre Baskerville',serif;font-size:26px;margin-bottom:6px;}
+.rzp-sub{font-size:13px;color:var(--gt);margin-bottom:28px;}
+.rzp-price{font-family:'Libre Baskerville',serif;font-size:46px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-price sup{font-size:20px;font-family:'Outfit',sans-serif;}
+.rzp-pdesc{font-size:12px;color:var(--gt);margin-bottom:28px;}
+.rzp-fields{display:flex;flex-direction:column;gap:13px;margin-bottom:26px;}
+.rzp-input{border:1px solid var(--gl);padding:13px 16px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-input:focus{border-color:var(--red);}
+.rzp-btn{width:100%;background:var(--red);color:var(--white);border:none;padding:16px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;}
+.rzp-btn:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px;}
+
+/* ══════════════ TESTIMONIALS ══════════════ */
+.testi-section{padding:100px 80px;background:var(--white);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
+.tc{background:var(--off);padding:40px 36px;position:relative;overflow:hidden;}
+.tc::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:height .4s var(--ease);}
+.tc:hover::before{height:100%;}
+.tc-qm{font-family:'Libre Baskerville',serif;font-size:42px;color:var(--red);opacity:.22;line-height:.8;margin-bottom:16px;}
+.tc-text{font-size:13.5px;font-weight:300;line-height:1.85;color:var(--gt);margin-bottom:22px;}
+.tc-name{font-size:14px;font-weight:600;color:var(--black);}
+.tc-role{font-size:12px;color:var(--gt);margin-top:3px;}
+.tc-audit{display:inline-block;font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;margin-top:10px;background:var(--red-pale);color:var(--red);font-weight:600;}
+
+/* ══════════════ ROI CALCULATOR ══════════════ */
+.roi-section{background:var(--black);padding:100px 80px;position:relative;overflow:hidden;}
+.roi-section::before{content:'';position:absolute;left:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 65%);pointer-events:none;}
+.roi-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.roi-calc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:44px;}
+.roi-title{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:28px;font-weight:500;}
+.roi-row{margin-bottom:20px;}
+.roi-label{font-size:12.5px;color:rgba(255,255,255,.55);margin-bottom:8px;display:flex;justify-content:space-between;}
+.roi-label span{color:var(--white);font-weight:600;font-family:'Libre Baskerville',serif;}
+input[type=range]{width:100%;accent-color:var(--red);height:4px;}
+.roi-result{margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1);}
+.roi-result-lbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;}
+.roi-result-n{font-family:'Libre Baskerville',serif;font-size:54px;color:var(--white);line-height:1;}
+.roi-result-n span{font-size:24px;color:var(--red);}
+.roi-result-sub{font-size:12px;color:rgba(255,255,255,.3);margin-top:6px;}
+
+/* ══════════════ FAQ ══════════════ */
+.faq-section{padding:100px 80px;background:var(--off);}
+.faq-cols{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:56px;}
+.faq-item{border-bottom:1px solid var(--gl);}
+.faq-q{font-size:15px;font-weight:500;color:var(--black);padding:20px 0 0;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.faq-q::after{content:'+';font-size:22px;color:var(--red);flex-shrink:0;transition:transform .3s;line-height:1;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+.faq-a{font-size:13.5px;font-weight:300;line-height:1.8;color:var(--gt);max-height:0;overflow:hidden;transition:max-height .4s var(--ease),padding .3s;padding-bottom:0;}
+.faq-item.open .faq-a{max-height:300px;padding:12px 0 20px;}
+
+/* ══════════════ FINAL CTA ══════════════ */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:540px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.7;}
+.fc-btns{display:flex;flex-direction:column;gap:13px;position:relative;z-index:1;min-width:280px;}
+.btn-fw{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 36px;transition:background .2s,transform .2s;}
+.btn-fw.w{background:var(--white);color:var(--red);}
+.btn-fw.w:hover{background:var(--off);transform:translateY(-2px);}
+.btn-fw.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.btn-fw.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);padding:36px 80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.fl{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);}
+.fl span{color:var(--red);}
+.fc{font-size:11px;color:rgba(255,255,255,.2);}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* ══════════════ RESPONSIVE ══════════════ */
+@media(max-width:1200px){.audit-grid{grid-template-columns:1fr 1fr;}.pkg-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 72px;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .ticker-bar,.meta-ribbon{padding-left:32px;padding-right:32px;}
+  .cost-section,.audit-section,.process-section,.data-section,.testi-section,.pricing-section,.roi-section,.faq-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .cost-grid,.data-inner,.roi-inner{grid-template-columns:1fr;gap:48px;}
+  .process-header{grid-template-columns:1fr;gap:28px;}
+  .stepper{grid-template-columns:1fr 1fr;}
+  .stepper::before{display:none;}
+  .testi-grid{grid-template-columns:1fr;}
+  .faq-cols{grid-template-columns:1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .car-slide{grid-template-columns:1fr;min-width:100vw;padding:0 32px;}
+  .cases-header,.car-controls{padding-left:32px;padding-right:32px;}
+  .cs-img{height:280px;}
+  footer{flex-direction:column;gap:14px;align-items:flex-start;padding:32px;}
+  .pricing-note{padding:20px 32px;}
+}
+@media(max-width:700px){.audit-grid{grid-template-columns:1fr;}.pkg-grid{grid-template-columns:1fr;}.dark-stats{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- ═══ RAZORPAY MODAL ═══ -->
+<div class="rzp-modal" id="rzpModal">
+  <div class="rzp-box">
+    <button class="rzp-close" id="rzpClose">×</button>
+    <div class="rzp-plan-tag" id="rzpTag" style="background:var(--red-pale);color:var(--red);">Audit Booking</div>
+    <div class="rzp-h" id="rzpH">Audit Name</div>
+    <div class="rzp-sub" id="rzpSub">Fill in your details to confirm your audit booking</div>
+    <div class="rzp-price" id="rzpPrice"><sup>₹</sup>0</div>
+    <div class="rzp-pdesc" id="rzpPDesc">Full payment. Engagement confirmed upon receipt.</div>
+    <div class="rzp-fields">
+      <input class="rzp-input" id="rzpName" type="text" placeholder="Your Name / Company Name *" required>
+      <input class="rzp-input" id="rzpEmail" type="email" placeholder="Email Address *" required>
+      <input class="rzp-input" id="rzpPhone" type="tel" placeholder="Phone Number *" required>
+      <input class="rzp-input" id="rzpCity" type="text" placeholder="City / Location">
+      <input class="rzp-input" id="rzpNote" type="text" placeholder="Brief note about your business (optional)">
+    </div>
+    <button class="rzp-btn" id="rzpBtn">Proceed to Secure Payment →</button>
+    <div class="rzp-secure">🔒 Secured by Razorpay · 256-bit SSL · GST Invoice Provided</div>
+  </div>
+</div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="audit-solutions.html" class="nav-link active">Audit Solutions <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a></div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+<header class="topbar">
+  <a href="../index.html" class="back-link">Home</a>
+  <a href="../contact.html" class="topbar-cta">Book an Audit</a>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Comprehensive Audit Solutions</div>
+      <h1 class="hero-h1">You can't fix what<br>you haven't <em>measured.</em></h1>
+      <p class="hero-sub">ORIGENNT's audit practice gives India's businesses a clear-eyed, structured view of where they are losing efficiency, revenue, and growth potential — across 30 audit types covering every function, industry, and scale of operation.</p>
+      <div class="hero-acts">
+        <a href="#audit-grid" class="btn-primary">Explore All 30 Audits</a>
+        <a href="#pricing" class="btn-ghost-w">View Pricing</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">Audit Practice — At a Glance</div>
+      <div class="hp-row"><span class="hp-name">Audits Completed</span><span class="hp-val">320<sup>+</sup></span></div>
+      <div class="hp-row"><span class="hp-name">Avg. Revenue Leakage Found</span><span class="hp-val">18<sup>%</sup></span></div>
+      <div class="hp-row"><span class="hp-name">Industries Covered</span><span class="hp-val">12<sup>+</sup></span></div>
+      <div class="hp-row"><span class="hp-name">Avg. Efficiency Gain</span><span class="hp-val">24<sup>%</sup></span></div>
+      <div class="hp-row"><span class="hp-name">Client Satisfaction</span><span class="hp-val">96<sup>%</sup></span></div>
+    </div>
+  </div>
+  <div class="ticker-bar">
+    <div class="tb-text"><div class="tb-dot"></div>30 Audit Types · Core · Industry-Specific · Specialised · Advanced · Fixed Pricing · GST Invoice · Razorpay Secured</div>
+    <a href="#pricing" class="tb-cta">See Pricing</a>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc"><div class="mc-lbl">Audits Completed</div><div class="mc-val">320+</div></div>
+  <div class="mc"><div class="mc-lbl">Avg. Leakage Identified</div><div class="mc-val">18%</div></div>
+  <div class="mc"><div class="mc-lbl">Industries Served</div><div class="mc-val">12+</div></div>
+  <div class="mc"><div class="mc-lbl">Turnaround Time</div><div class="mc-val">7–21 days</div></div>
+  <div class="mc"><div class="mc-lbl">Client Satisfaction</div><div class="mc-val">96%</div></div>
+</div>
+
+<!-- ═══ THE COST OF NOT AUDITING ═══ -->
+<section class="cost-section reveal">
+  <div class="cost-grid">
+    <div>
+      <div class="chip">The Business Case</div>
+      <h2 class="D">Most businesses are bleeding money they <em>don't know about.</em></h2>
+      <div class="body" style="margin-top:24px;">
+        <p>Every unaudited business has hidden friction. Revenue leaking through pricing gaps, process inefficiencies costing 15–25% of payroll, compliance gaps that become penalties, and operational blind spots that limit growth.</p>
+        <p>An ORIGENNT audit doesn't just find the problems. It delivers a prioritised action plan — ranked by impact and ease of implementation — so you know exactly what to fix first.</p>
+      </div>
+      <div class="cost-facts">
+        <div class="cf"><div class="cf-icon">📉</div><div class="cf-text"><strong>₹2–8 Lakh per year</strong> is the average hidden loss in a 20–50 employee SME due to unoptimised processes — ORIGENNT Audit Data 2024</div></div>
+        <div class="cf"><div class="cf-icon">⚠️</div><div class="cf-text"><strong>67% of Indian SMEs</strong> have at least one critical compliance gap that could result in regulatory penalties — CII SME Survey 2024</div></div>
+        <div class="cf"><div class="cf-icon">🔍</div><div class="cf-text"><strong>Revenue leakage</strong> averaging 12–22% is found in every unaudited hospitality or retail business audited by ORIGENNT</div></div>
+        <div class="cf"><div class="cf-icon">⏱️</div><div class="cf-text"><strong>23% of working hours</strong> in unoptimised SMEs are spent on redundant or low-value activities identifiable through an SOP audit</div></div>
+        <div class="cf"><div class="cf-icon">🚀</div><div class="cf-text"><strong>Businesses that audit annually</strong> grow 2.3x faster than those that don't — Harvard Business Review, Applied to India by ORIGENNT</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="viz-panel">
+        <div class="vp-title">Where Business Value is Lost — India SME Composite (ORIGENNT Audit Data 2024–25)</div>
+        <!-- Donut -->
+        <div class="donut-row">
+          <svg width="156" height="156" viewBox="0 0 156 156" id="donutSvg">
+            <circle cx="78" cy="78" r="58" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="22"/>
+            <circle cx="78" cy="78" r="58" fill="none" stroke="#CC2229" stroke-width="22" stroke-dasharray="0 364.4" class="seg" style="--da:109.3" transform="rotate(-90 78 78)"/>
+            <circle cx="78" cy="78" r="58" fill="none" stroke="#e8505a" stroke-width="22" stroke-dasharray="0 364.4" class="seg" style="--da:80.2" stroke-dashoffset="-109.3" transform="rotate(-90 78 78)"/>
+            <circle cx="78" cy="78" r="58" fill="none" stroke="#c2bfba" stroke-width="22" stroke-dasharray="0 364.4" class="seg" style="--da:62.0" stroke-dashoffset="-189.5" transform="rotate(-90 78 78)"/>
+            <circle cx="78" cy="78" r="58" fill="none" stroke="#eeecea" stroke-width="22" stroke-dasharray="0 364.4" class="seg" style="--da:40.1" stroke-dashoffset="-251.5" transform="rotate(-90 78 78)"/>
+            <circle cx="78" cy="78" r="58" fill="none" stroke="#f7f6f4" stroke-width="22" stroke-dasharray="0 364.4" class="seg" style="--da:29.2" stroke-dashoffset="-291.6" transform="rotate(-90 78 78)"/>
+            <text x="78" y="73" text-anchor="middle" fill="#0d0d0d" font-family="'Libre Baskerville',serif" font-size="20">Loss</text>
+            <text x="78" y="91" text-anchor="middle" fill="#6b6660" font-family="'Outfit',sans-serif" font-size="9" letter-spacing="1">SOURCES</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="dl-item"><div class="dl-dot" style="background:#CC2229"></div><span class="dl-name">Process Inefficiency</span><span class="dl-pct">30%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#e8505a"></div><span class="dl-name">Revenue Leakage</span><span class="dl-pct">22%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#c2bfba"></div><span class="dl-name">HR & People Waste</span><span class="dl-pct">17%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#999"></div><span class="dl-name">Compliance Gaps</span><span class="dl-pct">11%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#eeecea"></div><span class="dl-name">Poor Decision Data</span><span class="dl-pct">8%</span></div>
+          </div>
+        </div>
+        <!-- Bar chart -->
+        <div class="bar-row"><div class="bar-top"><span class="bar-label">Process inefficiency cost</span><span class="bar-pct">78%</span></div><div class="bar-track"><div class="bar-fill" style="--w:78%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-label">HR compliance gaps</span><span class="bar-pct">64%</span></div><div class="bar-track"><div class="bar-fill" style="--w:64%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-label">Revenue leakage (hospitality/retail)</span><span class="bar-pct">71%</span></div><div class="bar-track"><div class="bar-fill" style="--w:71%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-label">Operational redundancy</span><span class="bar-pct">55%</span></div><div class="bar-track"><div class="bar-fill" style="--w:55%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-label">Digital transformation readiness gap</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" style="--w:82%"></div></div></div>
+        <div style="background:var(--red);padding:18px 24px;margin-top:16px;display:flex;align-items:center;gap:12px;">
+          <span style="font-size:18px;">💡</span>
+          <span style="font-size:12.5px;font-weight:300;color:rgba(255,255,255,.85);line-height:1.6;">ORIGENNT audits <strong style="font-weight:600;color:white;">identify and quantify</strong> every one of these loss points in a single engagement.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ALL 30 AUDITS ═══ -->
+<section class="audit-section reveal" id="audit-grid">
+  <div style="margin-bottom:48px;">
+    <div class="chip">30 Audit Solutions</div>
+    <h2 class="D">Comprehensive audit solutions<br>for every business <em>need.</em></h2>
+    <p class="body" style="max-width:620px;margin-top:14px;">Every business has different challenges. Our audit solutions are designed to identify exactly where you're losing efficiency, revenue, and growth potential. Browse by category below.</p>
+  </div>
+  <div class="audit-tabs" id="auditTabs">
+    <div class="atab active" data-panel="core">🧩 Core Audits</div>
+    <div class="atab" data-panel="industry">🏢 Industry-Specific</div>
+    <div class="atab" data-panel="specialised">⚙️ Specialised</div>
+    <div class="atab" data-panel="advanced">🚀 Advanced & Strategic</div>
+  </div>
+
+  <!-- CORE -->
+  <div class="audit-panel active" id="panel-core">
+    <div class="cat-intro"><div class="ci-badge core">Core Audits</div><div class="ci-text"><strong>Foundational business health assessments.</strong> Recommended as a starting point for any business — covers strategy, operations, people, finance, and process in six focused engagements.</div></div>
+    <div class="audit-grid">
+      <div class="audit-card"><div class="ac-icon">🏛️</div><div class="ac-name">Organizational Audit</div><div class="ac-desc">End-to-end assessment of your organisation's structure, culture, decision-making, and alignment with strategy. Identifies structural drag and accountability gaps.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>24,999</div><div class="ac-price-note">3–7 day engagement</div></div><button class="ac-btn" onclick="openRzp('Organizational Audit','₹24,999',24999,'Core Audit — Full organisational health assessment.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">📊</div><div class="ac-name">Business Performance Audit</div><div class="ac-desc">Revenue drivers, cost structure, profitability analysis, and competitive benchmarking. Delivers a performance improvement roadmap ranked by ROI impact.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>29,999</div><div class="ac-price-note">5–10 day engagement</div></div><button class="ac-btn" onclick="openRzp('Business Performance Audit','₹29,999',29999,'Core Audit — Revenue & performance diagnostic.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">⚙️</div><div class="ac-name">Operational Audit</div><div class="ac-desc">Deep-dive into workflows, process efficiency, turnaround times, and bottlenecks. Identifies where time, money, and effort are being wasted in day-to-day operations.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>19,999</div><div class="ac-price-note">3–5 day engagement</div></div><button class="ac-btn" onclick="openRzp('Operational Audit','₹19,999',19999,'Core Audit — Operations diagnostic.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">💰</div><div class="ac-name">Financial Efficiency Audit</div><div class="ac-desc">Cost leakage, cash flow patterns, vendor pricing, overhead analysis, and budget vs. actuals review. Not a statutory audit — a management-level efficiency review.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>22,999</div><div class="ac-price-note">4–7 day engagement</div></div><button class="ac-btn" onclick="openRzp('Financial Efficiency Audit','₹22,999',22999,'Core Audit — Financial efficiency review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">👥</div><div class="ac-name">HR Audit</div><div class="ac-desc">Recruitment practices, policy compliance, payroll accuracy, employee engagement, retention drivers, and HR system effectiveness. Identifies people-cost inefficiencies.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>17,999</div><div class="ac-price-note">3–5 day engagement</div></div><button class="ac-btn" onclick="openRzp('HR Audit','₹17,999',17999,'Core Audit — HR systems & compliance review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">📋</div><div class="ac-name">Process Audit</div><div class="ac-desc">Systematic mapping and assessment of all business processes against best-practice benchmarks. Identifies duplication, gaps, and automation opportunities.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>14,999</div><div class="ac-price-note">2–4 day engagement</div></div><button class="ac-btn" onclick="openRzp('Process Audit','₹14,999',14999,'Core Audit — Process mapping & gap analysis.')">Book Audit</button></div></div>
+    </div>
+  </div>
+
+  <!-- INDUSTRY -->
+  <div class="audit-panel" id="panel-industry">
+    <div class="cat-intro"><div class="ci-badge ind">Industry-Specific</div><div class="ci-text"><strong>Sector-tuned audit frameworks</strong> for hospitality, F&B, startups, IT, manufacturing, retail, healthcare, education, and corporate offices — each calibrated to industry-specific KPIs and benchmarks.</div></div>
+    <div class="audit-grid">
+      <div class="audit-card"><div class="ac-icon">🏨</div><div class="ac-name">Hotel Audit</div><div class="ac-desc">RevPAR optimisation, F&B cost ratios, housekeeping efficiency, front office gaps, OTA commission leakage, and guest experience scoring.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>34,999</div><div class="ac-price-note">On-site · 3–5 days</div></div><button class="ac-btn" onclick="openRzp('Hotel Audit','₹34,999',34999,'Industry Audit — Hospitality performance review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🍽️</div><div class="ac-name">Restaurant & Café Audit</div><div class="ac-desc">Food cost %, table turnover, menu engineering, staff productivity, wastage analysis, Zomato/Swiggy commission vs. dine-in mix, and kitchen efficiency.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>19,999</div><div class="ac-price-note">On-site · 2–3 days</div></div><button class="ac-btn" onclick="openRzp('Restaurant & Café Audit','₹19,999',19999,'Industry Audit — F&B operations review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🚀</div><div class="ac-name">Startup Audit</div><div class="ac-desc">Burn rate efficiency, team structure vs. growth stage, unit economics, hiring vs. outsourcing decision review, and investor-readiness assessment.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>24,999</div><div class="ac-price-note">Remote · 3–5 days</div></div><button class="ac-btn" onclick="openRzp('Startup Audit','₹24,999',24999,'Industry Audit — Startup health & investor-readiness.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">💻</div><div class="ac-name">IT Company Audit</div><div class="ac-desc">Delivery efficiency, utilisation rates, project profitability, bench cost, attrition drivers, sales-to-delivery pipeline health, and tech stack ROI.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>34,999</div><div class="ac-price-note">Remote/On-site · 5–7 days</div></div><button class="ac-btn" onclick="openRzp('IT Company Audit','₹34,999',34999,'Industry Audit — IT operations & delivery review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🏭</div><div class="ac-name">Manufacturing Audit</div><div class="ac-desc">OEE analysis, reject rates, procurement efficiency, labour productivity, maintenance cost ratio, and EHS compliance gaps in the production environment.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>44,999</div><div class="ac-price-note">On-site · 5–10 days</div></div><button class="ac-btn" onclick="openRzp('Manufacturing Audit','₹44,999',44999,'Industry Audit — Manufacturing operations & efficiency.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🛒</div><div class="ac-name">Retail Audit</div><div class="ac-desc">SKU profitability, shrinkage control, footfall-to-conversion, planogram compliance, inventory turnover, staff productivity, and store P&L analysis.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>24,999</div><div class="ac-price-note">On-site · 2–4 days</div></div><button class="ac-btn" onclick="openRzp('Retail Audit','₹24,999',24999,'Industry Audit — Retail store & operations review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🏥</div><div class="ac-name">Healthcare Audit</div><div class="ac-desc">Patient flow efficiency, bed occupancy optimisation, billing accuracy, clinical staff-to-patient ratios, compliance with NABH/health regulations, and procurement costs.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>39,999</div><div class="ac-price-note">On-site · 5–7 days</div></div><button class="ac-btn" onclick="openRzp('Healthcare Audit','₹39,999',39999,'Industry Audit — Healthcare facility & compliance review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🎓</div><div class="ac-name">Education Institute Audit</div><div class="ac-desc">Student-to-faculty ratios, fee collection efficiency, course delivery quality, faculty productivity, infrastructure utilisation, and accreditation gap analysis.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>29,999</div><div class="ac-price-note">On-site · 3–5 days</div></div><button class="ac-btn" onclick="openRzp('Education Institute Audit','₹29,999',29999,'Industry Audit — Educational institution review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🏢</div><div class="ac-name">Corporate Office Audit</div><div class="ac-desc">Overhead cost analysis, space utilisation, administrative efficiency, vendor management, IT infrastructure costs, and support function benchmarking.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>27,999</div><div class="ac-price-note">On-site/Remote · 3–5 days</div></div><button class="ac-btn" onclick="openRzp('Corporate Office Audit','₹27,999',27999,'Industry Audit — Corporate office efficiency review.')">Book Audit</button></div></div>
+    </div>
+  </div>
+
+  <!-- SPECIALISED -->
+  <div class="audit-panel" id="panel-specialised">
+    <div class="cat-intro"><div class="ci-badge spec">Specialised</div><div class="ci-text"><strong>Targeted single-function audits</strong> for businesses that know exactly where the problem is — or want to zero in on a specific area like workforce productivity, cost, revenue leakage, customer experience, compliance, or SOPs.</div></div>
+    <div class="audit-grid">
+      <div class="audit-card"><div class="ac-icon">📈</div><div class="ac-name">Workforce Productivity Audit</div><div class="ac-desc">Role-by-role productivity benchmarking, time-on-value activities vs. low-value tasks, absenteeism patterns, and manager effectiveness scoring.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>19,999</div><div class="ac-price-note">3–5 day engagement</div></div><button class="ac-btn" onclick="openRzp('Workforce Productivity Audit','₹19,999',19999,'Specialised Audit — People productivity review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">✂️</div><div class="ac-name">Cost Reduction Audit</div><div class="ac-desc">Systematic identification and ranking of cost-reduction opportunities across all P&L lines — vendor renegotiations, process cuts, and structural efficiencies.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>24,999</div><div class="ac-price-note">4–7 day engagement</div></div><button class="ac-btn" onclick="openRzp('Cost Reduction Audit','₹24,999',24999,'Specialised Audit — Cost optimisation diagnostic.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🔎</div><div class="ac-name">Revenue Leakage Audit</div><div class="ac-desc">Identification of unbilled services, pricing gaps, discount misuse, channel commission waste, and billing errors — quantified with rupee-level impact estimates.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>27,999</div><div class="ac-price-note">3–6 day engagement</div></div><button class="ac-btn" onclick="openRzp('Revenue Leakage Audit','₹27,999',27999,'Specialised Audit — Revenue recovery diagnostic.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🌟</div><div class="ac-name">Customer Experience Audit</div><div class="ac-desc">End-to-end journey mapping, touchpoint quality assessment, complaint pattern analysis, NPS/CSAT benchmarking, and conversion funnel diagnostics.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>19,999</div><div class="ac-price-note">3–5 day engagement</div></div><button class="ac-btn" onclick="openRzp('Customer Experience Audit','₹19,999',19999,'Specialised Audit — CX & conversion review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">⚖️</div><div class="ac-name">Compliance & Risk Audit</div><div class="ac-desc">Regulatory compliance across labour law, GST, POSH, data protection, and industry-specific requirements. Risk-rated findings with remediation timelines.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>22,999</div><div class="ac-price-note">3–6 day engagement</div></div><button class="ac-btn" onclick="openRzp('Compliance & Risk Audit','₹22,999',22999,'Specialised Audit — Regulatory compliance review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">📝</div><div class="ac-name">SOP & Process Audit</div><div class="ac-desc">Documentation quality, SOP adherence, process ownership, exception handling, and automation readiness. Builds a reengineered SOP library as a deliverable.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>17,999</div><div class="ac-price-note">2–4 day engagement</div></div><button class="ac-btn" onclick="openRzp('SOP & Process Audit','₹17,999',17999,'Specialised Audit — SOP documentation & process review.')">Book Audit</button></div></div>
+    </div>
+  </div>
+
+  <!-- ADVANCED -->
+  <div class="audit-panel" id="panel-advanced">
+    <div class="cat-intro"><div class="ci-badge adv">Advanced & Strategic</div><div class="ci-text"><strong>Premium multi-dimensional audit programmes</strong> for organisations preparing for expansion, facing a turnaround, or requiring a comprehensive strategic readiness assessment across every function.</div></div>
+    <div class="audit-grid">
+      <div class="audit-card"><div class="ac-icon">🔭</div><div class="ac-name">360° Organizational Audit</div><div class="ac-desc">ORIGENNT's most comprehensive offering — covers strategy, operations, finance, HR, compliance, culture, technology, and customer experience in a single integrated engagement. Delivers a full organisational health report with a prioritised 12-month improvement roadmap.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>74,999</div><div class="ac-price-note">10–21 day engagement</div></div><button class="ac-btn" onclick="openRzp('360° Organizational Audit','₹74,999',74999,'Premium Audit — Complete organisational diagnostic.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🌱</div><div class="ac-name">Pre-Expansion Audit</div><div class="ac-desc">Is your business ready to scale? Assesses financial runway, operational scalability, team capability gaps, systems maturity, and risk exposure ahead of a new city, franchise, or product expansion.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>49,999</div><div class="ac-price-note">7–12 day engagement</div></div><button class="ac-btn" onclick="openRzp('Pre-Expansion Audit','₹49,999',49999,'Advanced Audit — Scalability & expansion readiness.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">🔄</div><div class="ac-name">Turnaround Audit</div><div class="ac-desc">For businesses facing declining revenue, rising costs, or loss of market position. Root-cause analysis across all functions, with a clear turnaround blueprint and 90-day recovery plan.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>59,999</div><div class="ac-price-note">10–14 day engagement</div></div><button class="ac-btn" onclick="openRzp('Turnaround Audit','₹59,999',59999,'Advanced Audit — Business turnaround diagnostic.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">📡</div><div class="ac-name">Growth Readiness Audit</div><div class="ac-desc">Identifies whether your business infrastructure, people, systems, and capital are ready to support the next growth phase — before you invest. Prevents scale-up failures.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>44,999</div><div class="ac-price-note">7–10 day engagement</div></div><button class="ac-btn" onclick="openRzp('Growth Readiness Audit','₹44,999',44999,'Advanced Audit — Growth & scale-up readiness review.')">Book Audit</button></div></div>
+      <div class="audit-card"><div class="ac-icon">💡</div><div class="ac-name">Digital Transformation Audit</div><div class="ac-desc">Current technology landscape, digital maturity scoring, automation opportunity identification, data infrastructure assessment, and a prioritised digital transformation roadmap.</div><div class="ac-price-row"><div><div class="ac-price"><sup>₹</sup>49,999</div><div class="ac-price-note">7–12 day engagement</div></div><button class="ac-btn" onclick="openRzp('Digital Transformation Audit','₹49,999',49999,'Advanced Audit — Digital maturity & transformation readiness.')">Book Audit</button></div></div>
+    </div>
+  </div>
+
+  <!-- CTA under grid -->
+  <div style="margin-top:48px;background:var(--off);padding:40px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+    <div>
+      <div style="font-size:17px;font-weight:600;color:var(--black);margin-bottom:6px;">Not sure which audit fits your business?</div>
+      <div style="font-size:13.5px;font-weight:300;color:var(--gt);">Every business has different challenges. Our team will recommend the right audit — in a free 20-minute call.</div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="../contact.html" class="btn-primary" style="white-space:nowrap;">Get Expert Recommendation</a>
+      <a href="#" class="btn-primary" style="background:var(--black);white-space:nowrap;" onclick="openRzp('Custom Audit Request','Custom Pricing',0,'Custom scope. Our team will contact you with a tailored quote.')">Request a Custom Audit</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section class="process-section reveal">
+  <div class="process-header">
+    <div>
+      <div class="chip">How It Works</div>
+      <h2 class="D">Our audit methodology —<br>designed for <em>speed and depth.</em></h2>
+    </div>
+    <div class="body" style="padding-top:40px;">
+      <p>Every ORIGENNT audit follows a five-phase framework that balances speed of insight with depth of analysis. Most engagements are completed in 7–21 days — with a written findings report and action roadmap delivered at close.</p>
+    </div>
+  </div>
+  <div class="stepper">
+    <div class="step active"><div class="step-c">01</div><div class="step-tag">Day 1–2</div><div class="step-name">Scope & Discovery</div><div class="step-desc">Agree on audit scope, access documents and systems, and conduct initial leadership interviews.</div></div>
+    <div class="step"><div class="step-c">02</div><div class="step-tag">Day 2–7</div><div class="step-name">Data Collection</div><div class="step-desc">On-site or remote data gathering — interviews, observation, financial and operational data analysis.</div></div>
+    <div class="step"><div class="step-c">03</div><div class="step-tag">Day 5–14</div><div class="step-name">Analysis</div><div class="step-desc">Benchmark against industry standards. Quantify losses, gaps, and opportunities with rupee-level impact.</div></div>
+    <div class="step"><div class="step-c">04</div><div class="step-tag">Day 14–18</div><div class="step-name">Report & Findings</div><div class="step-desc">Written findings report — executive summary, detailed findings, and a prioritised action matrix.</div></div>
+    <div class="step"><div class="step-c">05</div><div class="step-tag">Day 18–21</div><div class="step-name">Debrief & Roadmap</div><div class="step-desc">Live debrief session with leadership. Present the 90-day implementation roadmap and next steps.</div></div>
+  </div>
+</section>
+
+<!-- ═══ DATA DEEP DIVE ═══ -->
+<section class="data-section reveal">
+  <div class="data-inner">
+    <div>
+      <div class="chip w">The Numbers</div>
+      <h2 class="D W">What our audits<br>consistently <em>uncover.</em></h2>
+      <div class="body w" style="margin-top:20px;">
+        <p>Across 320+ completed audits, ORIGENNT has built a rich database of benchmarks for Indian SMEs and mid-market enterprises. These are the averages — many businesses show significantly higher improvement potential.</p>
+      </div>
+      <div class="dark-stats" style="margin-top:36px;">
+        <div class="ds"><div class="ds-n counter-d" data-t="18" data-s="%">18<sup>%</sup></div><div class="ds-l">Average revenue leakage found per audit</div></div>
+        <div class="ds"><div class="ds-n counter-d" data-t="24" data-s="%">24<sup>%</sup></div><div class="ds-l">Average operational efficiency gain identified</div></div>
+        <div class="ds"><div class="ds-n counter-d" data-t="3.2" data-s="x">3.2<sup>x</sup></div><div class="ds-l">Average ROI on the cost of the audit itself</div></div>
+        <div class="ds"><div class="ds-n counter-d" data-t="96" data-s="%">96<sup>%</sup></div><div class="ds-l">Client satisfaction score across all audits</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="comp-bars">
+        <div class="cb-title">Avg. Improvement Identified by Audit Type — ORIGENNT Portfolio 2024–25</div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">360° Organizational Audit</span><span class="cb-val">34%</span></div><div class="cb-track"><div class="cb-fill" style="--w:34%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">Revenue Leakage Audit</span><span class="cb-val">28%</span></div><div class="cb-track"><div class="cb-fill" style="--w:28%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">Hotel Audit</span><span class="cb-val">26%</span></div><div class="cb-track"><div class="cb-fill" style="--w:26%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">Turnaround Audit</span><span class="cb-val">31%</span></div><div class="cb-track"><div class="cb-fill" style="--w:31%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">IT Company Audit</span><span class="cb-val">22%</span></div><div class="cb-track"><div class="cb-fill" style="--w:22%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">HR Audit</span><span class="cb-val">19%</span></div><div class="cb-track"><div class="cb-fill" style="--w:19%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">Process / SOP Audit</span><span class="cb-val">21%</span></div><div class="cb-track"><div class="cb-fill" style="--w:21%"></div></div></div>
+        <div class="cb-row"><div class="cb-top"><span class="cb-lbl">Compliance & Risk Audit</span><span class="cb-val">Penalty Avoidance</span></div><div class="cb-track"><div class="cb-fill" style="--w:90%"></div></div></div>
+      </div>
+      <!-- Pie: Audit Types booked -->
+      <div style="margin-top:40px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;">
+        <div class="cb-title" style="margin-bottom:20px;">Most Frequently Booked Audit Types (2024–25)</div>
+        <svg width="100%" viewBox="0 0 300 160">
+          <!-- Horizontal bar chart as inline SVG for booking frequency -->
+          <rect x="100" y="10" width="168" height="14" rx="2" fill="#CC2229" opacity=".9"/>
+          <text x="96" y="21" text-anchor="end" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.55)">360° Org Audit</text>
+          <text x="274" y="21" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.6)">21%</text>
+          <rect x="100" y="32" width="130" height="14" rx="2" fill="#CC2229" opacity=".75"/>
+          <text x="96" y="43" text-anchor="end" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.55)">HR Audit</text>
+          <text x="236" y="43" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.6)">16%</text>
+          <rect x="100" y="54" width="115" height="14" rx="2" fill="#CC2229" opacity=".6"/>
+          <text x="96" y="65" text-anchor="end" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.55)">Revenue Leakage</text>
+          <text x="221" y="65" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.6)">14%</text>
+          <rect x="100" y="76" width="98" height="14" rx="2" fill="#CC2229" opacity=".5"/>
+          <text x="96" y="87" text-anchor="end" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.55)">Hotel Audit</text>
+          <text x="204" y="87" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.6)">12%</text>
+          <rect x="100" y="98" width="82" height="14" rx="2" fill="#CC2229" opacity=".4"/>
+          <text x="96" y="109" text-anchor="end" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.55)">Startup Audit</text>
+          <text x="188" y="109" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.6)">10%</text>
+          <rect x="100" y="120" width="60" height="14" rx="2" fill="#CC2229" opacity=".3"/>
+          <text x="96" y="131" text-anchor="end" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.55)">Others</text>
+          <text x="166" y="131" font-family="'Outfit',sans-serif" font-size="10" fill="rgba(255,255,255,.6)">27%</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDIES CAROUSEL ═══ -->
+<section class="cases-section">
+  <div class="cases-header reveal">
+    <div class="chip">Client Results</div>
+    <h2 class="D">Audits that <em>changed</em> the numbers.</h2>
+  </div>
+  <div class="car-wrap">
+    <div class="car-track" id="carTrack">
+      <div class="car-slide">
+        <div class="cs-img"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80&fit=crop" alt="Hotel operations" loading="lazy"><div class="cs-img-ov"><div class="cs-sector">Hospitality — Bhubaneswar</div><div class="cs-img-title">Hotel Audit for a 72-Room Business Hotel</div></div></div>
+        <div class="cs-content"><div class="cs-qm">"</div><div class="cs-quote">We knew we were losing money somewhere. ORIGENNT told us exactly where — down to the last rupee.</div><div class="cs-body">A 72-room business hotel was running below 62% occupancy with poor ADR despite a good location. ORIGENNT's hotel audit found ₹18.4L in annual revenue leakage through OTA commission over-reliance, unbilled F&B, and housekeeping overtime. The 90-day action plan recovered ₹11.2L in the first quarter.</div><div class="cs-author"><div class="cs-aname">Suresh Patnaik</div><div class="cs-arole">Owner & Managing Director</div></div><div class="cs-metrics"><div class="cs-met"><div class="cs-met-n">₹18.4<sup>L</sup></div><div class="cs-met-l">Leakage identified</div></div><div class="cs-met"><div class="cs-met-n">₹11.2<sup>L</sup></div><div class="cs-met-l">Recovered in 90 days</div></div></div></div>
+      </div>
+      <div class="car-slide">
+        <div class="cs-img"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fit=crop" alt="IT company office" loading="lazy"><div class="cs-img-ov"><div class="cs-sector">IT / ITES — Bengaluru</div><div class="cs-img-title">360° Organizational Audit for a 180-Person IT Firm</div></div></div>
+        <div class="cs-content"><div class="cs-qm">"</div><div class="cs-quote">The audit was uncomfortable — it revealed problems we'd been avoiding. But it was the most valuable investment we made that year.</div><div class="cs-body">A mid-size IT services firm was experiencing margin erosion despite growing revenues. ORIGENNT's 360° audit identified ₹42L in annual cost inefficiencies across bench management, project over-staffing, and admin bloat — plus a delivery process reengineering opportunity worth ₹28L in improved utilisation revenue.</div><div class="cs-author"><div class="cs-aname">Ananya Krishnan</div><div class="cs-arole">CEO, IT Services Firm</div></div><div class="cs-metrics"><div class="cs-met"><div class="cs-met-n">₹42<sup>L</sup></div><div class="cs-met-l">Cost savings identified</div></div><div class="cs-met"><div class="cs-met-n">6<sup>wk</sup></div><div class="cs-met-l">To full findings report</div></div></div></div>
+      </div>
+      <div class="car-slide">
+        <div class="cs-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&fit=crop" alt="Business analytics" loading="lazy"><div class="cs-img-ov"><div class="cs-sector">Retail — Odisha</div><div class="cs-img-title">Revenue Leakage Audit for a Multi-Location Retail Chain</div></div></div>
+        <div class="cs-content"><div class="cs-qm">"</div><div class="cs-quote">We thought our problem was footfall. The audit showed us it was conversion and average basket — completely different solutions.</div><div class="cs-body">A 9-store retail chain commissioned a Revenue Leakage Audit after two consecutive quarters of flat revenue despite opening new stores. ORIGENNT found a 14% conversion gap, 23% pricing inconsistency across stores, and ₹8.7L in annual discount misuse. Within 6 months of implementation, same-store revenue grew 18%.</div><div class="cs-author"><div class="cs-aname">Rohit Agarwal</div><div class="cs-arole">Managing Partner, Retail Group</div></div><div class="cs-metrics"><div class="cs-met"><div class="cs-met-n">18<sup>%</sup></div><div class="cs-met-l">Same-store revenue growth</div></div><div class="cs-met"><div class="cs-met-n">₹8.7<sup>L</sup></div><div class="cs-met-l">Annual leakage stopped</div></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="car-controls">
+    <button class="car-btn" id="carPrev">←</button>
+    <button class="car-btn" id="carNext">→</button>
+    <div class="car-dots"><div class="cdot active" data-i="0"></div><div class="cdot" data-i="1"></div><div class="cdot" data-i="2"></div></div>
+    <div class="car-counter"><span id="carNum">01</span> / 03</div>
+  </div>
+</section>
+
+<!-- ═══ PRICING PACKAGES ═══ -->
+<section class="pricing-section reveal" id="pricing">
+  <div class="pricing-intro">
+    <div class="chip">Transparent Pricing</div>
+    <h2 class="D">Fixed prices. No hidden costs.<br><em>GST invoice included.</em></h2>
+    <p>All audits are fixed-fee engagements. The price covers discovery, data collection, analysis, written report, and a live debrief session. No surprise additions.</p>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-badge starter">Starter</div>
+      <div class="pkg-name">Focused Audit</div>
+      <div class="pkg-tagline">Single-function or process audit for small businesses and startups.</div>
+      <div class="pkg-price"><sup>₹</sup>14,999</div>
+      <div class="pkg-period">starting from · per engagement</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li class="pkg-feature">1 audit domain (process, SOP, or HR)</li>
+        <li class="pkg-feature">2–4 day turnaround</li>
+        <li class="pkg-feature">Written findings report</li>
+        <li class="pkg-feature">Priority action list (top 5 items)</li>
+        <li class="pkg-feature">30-min debrief call</li>
+        <li class="pkg-feature dim">On-site visit (add ₹5,000)</li>
+        <li class="pkg-feature dim">Full implementation roadmap</li>
+      </ul>
+      <div class="pkg-ctas">
+        <button class="pkg-pay red" onclick="openRzp('Focused Audit Package','₹14,999',14999,'Starter Package — Single-function audit.')">Book Focused Audit</button>
+        <div class="pkg-note">Individual audit pages have specific pricing</div>
+      </div>
+    </div>
+    <div class="pkg featured">
+      <div class="pkg-badge professional">Most Popular</div>
+      <div class="pkg-name">Business Audit</div>
+      <div class="pkg-tagline">2–3 audit domains. Best for growing SMEs wanting a multi-function view.</div>
+      <div class="pkg-price"><sup>₹</sup>39,999</div>
+      <div class="pkg-period">fixed fee · 2–3 audit domains</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li class="pkg-feature">2–3 audit domains (you choose)</li>
+        <li class="pkg-feature">5–10 day engagement</li>
+        <li class="pkg-feature">Full written audit report</li>
+        <li class="pkg-feature">90-day implementation roadmap</li>
+        <li class="pkg-feature">Live debrief session (1 hour)</li>
+        <li class="pkg-feature">Executive summary deck</li>
+        <li class="pkg-feature">ROI quantification per finding</li>
+        <li class="pkg-feature dim">On-site included for Odisha</li>
+      </ul>
+      <div class="pkg-ctas">
+        <button class="pkg-pay white" onclick="openRzp('Business Audit Package','₹39,999',39999,'Business Package — 2–3 audit domains.')">Book Business Audit</button>
+        <div class="pkg-note">Save vs. individual audit pricing</div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-badge growth">Growth</div>
+      <div class="pkg-name">Enterprise Audit</div>
+      <div class="pkg-tagline">Full-scope multi-domain audit for mid-market businesses requiring a comprehensive review.</div>
+      <div class="pkg-price"><sup>₹</sup>74,999</div>
+      <div class="pkg-period">fixed fee · full scope</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li class="pkg-feature">4–6 audit domains</li>
+        <li class="pkg-feature">10–21 day engagement</li>
+        <li class="pkg-feature">360° findings report with benchmarking</li>
+        <li class="pkg-feature">12-month implementation roadmap</li>
+        <li class="pkg-feature">Board-level presentation included</li>
+        <li class="pkg-feature">On-site audit team deployment</li>
+        <li class="pkg-feature">Follow-up review at 90 days</li>
+        <li class="pkg-feature">Priority relationship manager</li>
+      </ul>
+      <div class="pkg-ctas">
+        <button class="pkg-pay red" onclick="openRzp('Enterprise Audit Package','₹74,999',74999,'Enterprise Package — Full 360° scope audit.')">Book Enterprise Audit</button>
+        <div class="pkg-note">Equivalent to 360° Organizational Audit</div>
+      </div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-badge enterprise">Custom</div>
+      <div class="pkg-name">Bespoke Audit</div>
+      <div class="pkg-tagline">Custom scope for large enterprises, multi-location groups, or unique audit requirements.</div>
+      <div class="pkg-price" style="font-size:32px;">Custom</div>
+      <div class="pkg-period">scoped on enquiry</div>
+      <div class="pkg-divider"></div>
+      <ul class="pkg-features">
+        <li class="pkg-feature">All audit domains — full scope</li>
+        <li class="pkg-feature">Multi-location capability</li>
+        <li class="pkg-feature">Dedicated audit team</li>
+        <li class="pkg-feature">Custom reporting & dashboard</li>
+        <li class="pkg-feature">Implementation support retainer</li>
+        <li class="pkg-feature">Quarterly re-audit option</li>
+        <li class="pkg-feature">White-label audit reports</li>
+        <li class="pkg-feature">Group/franchise audit packages</li>
+      </ul>
+      <div class="pkg-ctas">
+        <button class="pkg-pay gold" onclick="openRzp('Bespoke Audit Enquiry','Custom Scope',0,'Bespoke enquiry. Our team will contact you with a scoped proposal.')">Request a Proposal</button>
+        <div class="pkg-note">Response within 24 business hours</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="pricing-note">
+  <div class="pn-icon">💳</div>
+  <div class="pn-text"><strong>All prices exclude GST (18%).</strong> GST invoice provided. Payments via Razorpay — UPI, cards, net banking, EMI accepted. Engagement confirmed within 24 hours of payment. Travel costs for out-of-Odisha on-site audits charged at actuals.</div>
+</div>
+
+<!-- ═══ ROI CALCULATOR ═══ -->
+<section class="roi-section reveal">
+  <div class="roi-inner">
+    <div>
+      <div class="chip w">ROI Calculator</div>
+      <h2 class="D W">What could an audit<br>be worth to <em>your business?</em></h2>
+      <div class="body w" style="margin-top:20px;">
+        <p>Based on ORIGENNT's audit portfolio averages, a business with ₹1 Crore in annual revenue and 20 employees typically finds ₹8–18 Lakh in recoverable inefficiency, leakage, or compliance exposure.</p>
+        <p>Use the calculator to estimate potential ROI for your business size. Most audits pay for themselves in the first 30 days of implementation.</p>
+      </div>
+      <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">Average finding per ₹1Cr revenue</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:24px;color:var(--white);">₹12<span style="font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;">L avg</span></div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">Average ROI on audit cost</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:24px;color:var(--white);">3.2<span style="font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;">x</span></div>
+        </div>
+        <div style="background:rgba(204,34,41,.12);border:1px solid rgba(204,34,41,.25);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.65);">Average payback period</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:24px;color:var(--white);">30<span style="font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;"> days</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="roi-calc">
+      <div class="roi-title">Estimate Your Audit ROI</div>
+      <div class="roi-row">
+        <div class="roi-label">Annual Revenue <span id="revVal">₹1 Cr</span></div>
+        <input type="range" id="revSlider" min="20" max="500" value="100" step="10">
+      </div>
+      <div class="roi-row">
+        <div class="roi-label">No. of Employees <span id="empVal">20</span></div>
+        <input type="range" id="empSlider" min="5" max="500" value="20" step="5">
+      </div>
+      <div class="roi-row">
+        <div class="roi-label">Business Age (years) <span id="ageVal">3 yrs</span></div>
+        <input type="range" id="ageSlider" min="1" max="20" value="3">
+      </div>
+      <div class="roi-result">
+        <div class="roi-result-lbl">Estimated Recoverable Value</div>
+        <div class="roi-result-n" id="roiResult">₹12<span>L</span></div>
+        <div class="roi-result-sub" id="roiSub">Based on ORIGENNT portfolio averages. Actual findings vary by industry and operational maturity.</div>
+      </div>
+      <button class="rzp-btn" style="margin-top:24px;" onclick="openRzp('Audit Booking (ROI Calc)','Based on your estimate',0,'ROI calculator lead. Team will contact with right audit recommendation.')">Book the Right Audit →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testi-section reveal">
+  <div class="chip">Client Voice</div>
+  <h2 class="D">What businesses say after<br>their ORIGENNT <em>audit.</em></h2>
+  <div class="testi-grid">
+    <div class="tc"><div class="tc-qm">"</div><div class="tc-text">The HR Audit was eye-opening. We were paying for roles that had no real accountability, and our leave policy was creating ₹4.2L in annual liability we didn't know about. Fixed in 6 weeks.</div><div class="tc-name">Ramesh Mohanty</div><div class="tc-role">Director — Manufacturing SME, Cuttack</div><div class="tc-audit">HR Audit</div></div>
+    <div class="tc"><div class="tc-qm">"</div><div class="tc-text">We were preparing for Series A. The Growth Readiness Audit gave our investors a verified third-party view of our operations — it genuinely accelerated their conviction. Best ₹45K we've spent.</div><div class="tc-name">Prateek Singh</div><div class="tc-role">Founder & CEO — SaaS Startup, Bhubaneswar</div><div class="tc-audit">Growth Readiness Audit</div></div>
+    <div class="tc"><div class="tc-qm">"</div><div class="tc-text">The restaurant audit found that 31% of our raw material cost was waste and over-ordering. We implemented the recommendations in 3 weeks and our food cost dropped from 38% to 27%.</div><div class="tc-name">Anita Rao</div><div class="tc-role">Owner — 3-Outlet Restaurant Chain, Bhubaneswar</div><div class="tc-audit">Restaurant & Café Audit</div></div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section reveal">
+  <div class="chip">FAQ</div>
+  <h2 class="D">Everything you need to <em>know.</em></h2>
+  <div class="faq-cols">
+    <div>
+      <div class="faq-item open"><div class="faq-q">Is this a statutory/financial audit?</div><div class="faq-a">No. ORIGENNT audits are management-level operational, HR, strategic, and business efficiency audits — not statutory financial audits under the Companies Act. We are management consultants, not Chartered Accountants. For statutory audits, engage a CA firm.</div></div>
+      <div class="faq-item"><div class="faq-q">How long does an audit take?</div><div class="faq-a">Depending on the audit type and business size: Focused audits take 2–5 days. Business audits run 5–10 days. Enterprise and 360° audits take 10–21 days. All timelines are agreed at scope sign-off.</div></div>
+      <div class="faq-item"><div class="faq-q">Is it conducted on-site or remotely?</div><div class="faq-a">Both options are available. Most core and specialised audits can be done remotely. Industry-specific audits (hotel, restaurant, manufacturing, retail, healthcare) require on-site visits. On-site is included for Odisha-based clients; travel actuals are charged for other locations.</div></div>
+      <div class="faq-item"><div class="faq-q">What do I receive at the end?</div><div class="faq-a">A written findings report with an executive summary, detailed findings per domain, benchmarks against industry standards, a priority-ranked action list with rupee-level impact estimates, and a 90-day implementation roadmap. Plus a live debrief session.</div></div>
+    </div>
+    <div>
+      <div class="faq-item"><div class="faq-q">Do you help with implementation after the audit?</div><div class="faq-a">Yes. ORIGENNT offers post-audit implementation support as a separate engagement. Many clients retain us to execute the recommendations — particularly for HR restructuring, process reengineering, and compliance remediation.</div></div>
+      <div class="faq-item"><div class="faq-q">Is the audit confidential?</div><div class="faq-a">Completely. All audits are covered by an NDA signed before engagement commencement. Your business data, findings, and report are never shared outside the engagement team.</div></div>
+      <div class="faq-item"><div class="faq-q">Can you audit a multi-location business?</div><div class="faq-a">Yes. Multi-location audits are available under our Bespoke Audit package. We have audited businesses with up to 9 locations simultaneously. Pricing is custom-scoped based on number of locations and required domains.</div></div>
+      <div class="faq-item"><div class="faq-q">What payment methods are accepted?</div><div class="faq-a">All major payment methods via Razorpay — UPI, debit/credit cards, net banking, and EMI (for applicable amounts). A GST invoice is provided within 24 hours of payment. International payments available on request.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Stop guessing.<br>Start knowing. <em>Book your audit today.</em></h2>
+    <p class="fc-sub">Every day without an audit is a day your business is losing money you don't know about. Most ORIGENNT audits pay for themselves within 30 days of implementation.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="btn-fw w" onclick="openRzp('360° Organizational Audit','₹74,999',74999,'Most comprehensive audit — full organisational diagnostic.')">360° Audit — ₹74,999</button>
+    <a href="#audit-grid" class="btn-fw w" style="background:rgba(255,255,255,.15);color:var(--white);">Browse All 30 Audits</a>
+    <a href="../contact.html" class="btn-fw ol">Talk to an Audit Expert</a>
+  </div>
+</div>
+
+<footer>
+  <div class="fl">ORIGENNT<span>.</span></div>
+  <div class="fc">© 2026 Origennt Private Limited. All rights reserved. MSME Verified · Bhubaneswar, Odisha.</div>
+</footer>
+</div><!-- /main -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* SIDEBAR */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* CHARTS — bar fills */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bar-fill,.cb-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*90));
+      bObs.unobserve(e.target);
+    }
+  });
+},{threshold:.25});
+document.querySelectorAll('.viz-panel,.comp-bars').forEach(el=>bObs.observe(el));
+
+/* DONUT animation */
+const dObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      setTimeout(()=>document.querySelectorAll('.seg').forEach((s,i)=>setTimeout(()=>s.classList.add('go'),i*180)),300);
+      dObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('#donutSvg').forEach(el=>dObs.observe(el));
+
+/* COUNTER animation */
+const cObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.counter-d').forEach(el=>{
+        const tgt=parseFloat(el.dataset.t),suf=el.dataset.s||'',isF=tgt%1!==0,dur=1800,st=performance.now();
+        function fr(now){const p=Math.min((now-st)/dur,1);const ease=1-Math.pow(1-p,3);const v=isF?(tgt*ease).toFixed(1):Math.round(tgt*ease);el.innerHTML=v+'<sup>'+suf+'</sup>';if(p<1)requestAnimationFrame(fr);}
+        requestAnimationFrame(fr);
+      });
+      cObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.dark-stats').forEach(el=>cObs.observe(el));
+
+/* AUDIT TABS */
+document.querySelectorAll('.atab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.audit-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.panel).classList.add('active');
+  });
+});
+
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item');const was=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!was)item.classList.add('open');
+  });
+});
+
+/* CAROUSEL */
+const track=document.getElementById('carTrack');
+let cur2=0;const total=3;
+function goTo(i){
+  cur2=i;
+  track.style.transform=`translateX(-${i*track.parentElement.offsetWidth}px)`;
+  document.querySelectorAll('.cdot').forEach((d,j)=>d.classList.toggle('active',j===i));
+  document.getElementById('carNum').textContent=String(i+1).padStart(2,'0');
+}
+document.getElementById('carNext').addEventListener('click',()=>goTo((cur2+1)%total));
+document.getElementById('carPrev').addEventListener('click',()=>goTo((cur2-1+total)%total));
+document.querySelectorAll('.cdot').forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
+let tx=0;track.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+track.addEventListener('touchend',e=>{const dx=tx-e.changedTouches[0].clientX;if(Math.abs(dx)>50)goTo(dx>0?(cur2+1)%total:(cur2-1+total)%total);});
+window.addEventListener('resize',()=>goTo(cur2));
+
+/* ROI CALCULATOR */
+const revSl=document.getElementById('revSlider'),empSl=document.getElementById('empSlider'),ageSl=document.getElementById('ageSlider');
+function calcROI(){
+  const rev=+revSl.value,emp=+empSl.value,age=+ageSl.value;
+  document.getElementById('revVal').textContent='₹'+rev+' L';
+  document.getElementById('empVal').textContent=emp;
+  document.getElementById('ageVal').textContent=age+' yrs';
+  // heuristic: 10–18% of revenue, scaled by employees and age
+  const baseRate=0.10+Math.min(emp/500,1)*0.08+Math.min(1/age,0.05);
+  const est=Math.round(rev*baseRate);
+  document.getElementById('roiResult').innerHTML='₹'+est+'<span>L</span>';
+}
+[revSl,empSl,ageSl].forEach(s=>s.addEventListener('input',calcROI));
+calcROI();
+
+/* RAZORPAY MODAL */
+let rzpCurrent={};
+function openRzp(name,displayAmt,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent=name;
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent='Fill your details to confirm your audit booking';
+  document.getElementById('rzpPrice').innerHTML='<sup>₹</sup>'+(amtInt>0?displayAmt.replace('₹',''):'Custom');
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpModal').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+function closeRzp(){document.getElementById('rzpModal').classList.remove('open');document.body.style.overflow='';}
+
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!name||!email||!phone){alert('Please enter your Name, Email, and Phone to continue.');return;}
+  if(!rzpCurrent.amtPaise){
+    closeRzp();
+    alert('Thank you, '+name+'! Our audit team will contact you at '+email+' within 24 hours with a custom proposal.');
+    return;
+  }
+  const options={
+    key:'YOUR_RAZORPAY_KEY_ID', // ← Replace with your Razorpay Key ID
+    amount:rzpCurrent.amtPaise,
+    currency:'INR',
+    name:'ORIGENNT Private Limited',
+    description:rzpCurrent.name,
+    handler:function(response){
+      closeRzp();
+      alert('✓ Payment confirmed!\nPayment ID: '+response.razorpay_payment_id+'\n\nYour audit engagement will be confirmed within 24 hours. Check your email.');
+    },
+    prefill:{name,email,contact:phone},
+    notes:{audit:rzpCurrent.name,city:document.getElementById('rzpCity').value,note:document.getElementById('rzpNote').value},
+    theme:{color:'#CC2229'},
+    modal:{ondismiss:function(){console.log('dismissed');}}
+  };
+  const rzp=new Razorpay(options);rzp.open();
+});
+</script>
+</body>
+</html>
