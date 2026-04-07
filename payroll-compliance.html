@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payroll & Compliance — ORIGENNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --navy:#0f1f3d;--gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.back-link:hover{color:var(--black);gap:14px;}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* HERO */
+.hero{
+  padding-top:64px;min-height:100vh;
+  background:var(--black);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1800&q=80&fit=crop') center 40%/cover;
+  filter:brightness(.14) saturate(.4);
+  transform:scale(1.04);animation:hzoom 20s ease-in-out infinite alternate;
+}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:600px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+/* MOA badge */
+.moa-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:10px 20px;margin-top:28px;opacity:0;animation:fu .9s .38s var(--ease) forwards;}
+.moa-badge-icon{font-size:18px;}
+.moa-badge-text{font-size:11.5px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.4;}
+.moa-badge-text strong{color:rgba(255,255,255,.85);font-weight:600;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .5s var(--ease) forwards;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+
+/* Hero stat panel */
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:36px 32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .56s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:22px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+
+/* Bottom strip */
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:24px 36px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:7px;}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.bar-row{margin-bottom:20px;}
+.bar-top{display:flex;justify-content:space-between;margin-bottom:7px;}
+.bar-lbl{font-size:13px;color:var(--black);}
+.bar-pct{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--red);}
+.bar-track{height:7px;background:var(--gl);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#e8505a);border-radius:4px;width:0;transition:width 1.4s var(--ease);}
+.bar-fill.go{width:var(--w);}
+.bar-fill.amber{background:linear-gradient(90deg,var(--amber),#f0a030);}
+.bar-fill.teal{background:linear-gradient(90deg,var(--teal),#1a9c8a);}
+
+/* ═══ META RIBBON ═══ */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc{padding:24px 52px 24px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:52px;white-space:nowrap;flex-shrink:0;}
+.mc:last-child{border-right:none;margin-right:0;}
+.mc-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-val{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);}
+
+/* ═══ URGENCY STRIP ═══ */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);display:flex;align-items:center;gap:12px;flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* ═══ STATUTORY OVERVIEW ═══ */
+.statutory-section{padding:100px 80px;background:var(--off);}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.stat-cards{display:flex;flex-direction:column;gap:3px;margin-top:32px;}
+.sc{background:var(--white);padding:24px 28px;display:flex;gap:20px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .25s,background .2s;}
+.sc:hover{border-left-color:var(--red);background:var(--gl);}
+.sc-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.sc-body{}
+.sc-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.sc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.65;}
+.sc-rate{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.rate-pill{padding:3px 10px;font-size:10px;font-weight:700;letter-spacing:.1em;}
+.rate-pill.emp{background:rgba(13,107,94,.12);color:var(--teal);}
+.rate-pill.er{background:var(--red-pale);color:var(--red);}
+.rate-pill.note{background:var(--gl);color:var(--gt);}
+
+/* Donut chart */
+.donut-wrap{display:flex;align-items:center;gap:32px;}
+.donut-legend{display:flex;flex-direction:column;gap:14px;}
+.dl-item{display:flex;align-items:center;gap:10px;}
+.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.dl-name{font-size:12px;font-weight:300;color:var(--gt);}
+.dl-pct{font-size:13px;font-weight:600;color:var(--black);margin-left:auto;font-family:'Libre Baskerville',serif;}
+.dseg{stroke-dasharray:0 251.3;transition:stroke-dasharray 1.4s var(--ease);}
+.dseg.go{stroke-dasharray:var(--da) 251.3;}
+
+/* ═══ COMPLIANCE CALENDAR ═══ */
+.calendar-section{padding:100px 80px;background:var(--white);}
+.calendar-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:64px;}
+
+/* Monthly calendar grid */
+.cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.cal-month{background:var(--off);padding:28px 24px;position:relative;overflow:hidden;transition:background .2s;}
+.cal-month::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.cal-month:hover{background:var(--gl);}
+.cal-month:hover::before{transform:scaleX(1);}
+.cm-month{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
+.cm-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:10px;}
+.cm-item:last-child{margin-bottom:0;}
+.cm-date{font-size:11px;font-weight:700;color:var(--black);flex-shrink:0;width:24px;}
+.cm-text{font-size:12px;font-weight:300;color:var(--gt);line-height:1.5;}
+.cm-badge{font-size:9px;padding:2px 8px;font-weight:600;letter-spacing:.1em;display:inline-block;margin-top:3px;}
+.cm-badge.critical{background:var(--red);color:var(--white);}
+.cm-badge.normal{background:var(--gl);color:var(--gt);}
+.cm-badge.quarterly{background:rgba(201,168,76,.2);color:var(--gold);font-weight:700;}
+.cm-badge.annual{background:rgba(13,107,94,.15);color:var(--teal);font-weight:700;}
+
+/* Deadline tracker — interactive */
+.deadline-tracker{background:var(--black);padding:48px 52px;margin-top:3px;}
+.dt-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:28px;font-weight:500;}
+.dt-row{display:flex;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.dt-row:last-child{border-bottom:none;}
+.dt-urgency{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dt-urgency.red{background:var(--red);animation:upulse 1.5s infinite;}
+.dt-urgency.amber{background:var(--amber);}
+.dt-urgency.green{background:var(--teal);}
+.dt-label{font-size:13.5px;font-weight:400;color:rgba(255,255,255,.75);flex:1;}
+.dt-sub{font-size:11.5px;font-weight:300;color:rgba(255,255,255,.35);}
+.dt-date{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--white);white-space:nowrap;flex-shrink:0;}
+.dt-penalty{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;flex-shrink:0;}
+.dt-penalty.high{background:rgba(204,34,41,.2);color:rgba(255,100,100,.9);}
+.dt-penalty.med{background:rgba(224,123,32,.2);color:rgba(224,123,32,.9);}
+.dt-penalty.low{background:rgba(13,107,94,.2);color:rgba(13,107,94,.9);}
+
+/* ═══ PENALTY COST SECTION ═══ */
+.penalty-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.penalty-section::after{content:'';position:absolute;right:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 65%);pointer-events:none;}
+.penalty-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;}
+/* Penalty cards */
+.penalty-cards{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.pc-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:22px 26px;display:flex;align-items:center;gap:20px;transition:background .2s;}
+.pc-card:hover{background:rgba(255,255,255,.07);}
+.pc-law{font-size:11px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.45);width:120px;flex-shrink:0;}
+.pc-penalty{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.pc-penalty sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.pc-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.6;flex:1;}
+.pc-severity{width:6px;height:44px;border-radius:3px;flex-shrink:0;}
+.pc-severity.high{background:var(--red);}
+.pc-severity.med{background:var(--amber);}
+.pc-severity.low{background:var(--teal);}
+/* Bar charts dark */
+.dc-bar-row{margin-bottom:18px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12.5px;color:rgba(255,255,255,.65);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.6),var(--red));}
+.dc-bar-fill.amber{background:linear-gradient(90deg,rgba(224,123,32,.5),var(--amber));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+
+/* ═══ SERVICES GRID ═══ */
+.services-section{padding:100px 80px;background:var(--off);}
+.svc-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border-bottom:2px solid var(--gl);margin-bottom:52px;}
+.svc-tabs::-webkit-scrollbar{display:none;}
+.stab{font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:16px 28px;color:var(--gt);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .2s,border-color .2s;}
+.stab.active,.stab:hover{color:var(--red);border-bottom-color:var(--red);}
+.svc-panel{display:none;}
+.svc-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.svc-card{background:var(--white);padding:36px 32px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .2s;}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.svc-card:hover{background:var(--gl);}
+.svc-card:hover::before{transform:scaleX(1);}
+.sc-icon2{font-size:28px;margin-bottom:18px;display:block;}
+.sc-n{font-family:'Libre Baskerville',serif;font-size:11px;letter-spacing:.18em;color:var(--gm);margin-bottom:10px;}
+.sc-name{font-size:15px;font-weight:600;color:var(--black);margin-bottom:10px;line-height:1.3;}
+.sc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;flex:1;}
+.sc-pr{display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid var(--gl);}
+.sc-price{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--black);}
+.sc-price sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.sc-price-note{font-size:10px;color:var(--gm);font-weight:300;}
+.sc-btn{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);padding:8px 16px;border:none;transition:background .2s;flex-shrink:0;}
+.sc-btn:hover{background:var(--red-dark);}
+
+/* ═══ PRICING ═══ */
+.pricing-section{padding:100px 80px;background:var(--white);}
+.pricing-intro{text-align:center;margin-bottom:64px;}
+.pricing-intro .chip{justify-content:center;}
+.pricing-intro .chip::before{display:none;}
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pkg{background:var(--off);padding:40px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.pkg.featured{background:var(--black);box-shadow:0 24px 60px rgba(0,0,0,.18);}
+.pkg-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:20px;display:inline-block;font-weight:600;}
+.pkg-badge.s{background:var(--gl);color:var(--gt);}
+.pkg-badge.p{background:var(--red);color:var(--white);}
+.pkg-badge.g{background:var(--gold);color:var(--white);}
+.pkg-badge.e{background:var(--teal);color:var(--white);}
+.pkg-name{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:400;margin-bottom:6px;}
+.pkg.featured .pkg-name{color:var(--white);}
+.pkg-tagline{font-size:12.5px;font-weight:300;color:var(--gt);margin-bottom:20px;line-height:1.6;}
+.pkg.featured .pkg-tagline{color:rgba(255,255,255,.45);}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:40px;font-weight:400;color:var(--black);line-height:1;}
+.pkg.featured .pkg-price{color:var(--white);}
+.pkg-price sup{font-size:16px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:20px;}
+.pkg.featured .pkg-period{color:rgba(255,255,255,.3);}
+.pkg-div{height:1px;background:var(--gl);margin:0 0 20px;}
+.pkg.featured .pkg-div{background:rgba(255,255,255,.1);}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1;margin-bottom:28px;}
+.pkg-feat{display:flex;align-items:flex-start;gap:9px;font-size:13px;font-weight:300;color:var(--gt);line-height:1.5;}
+.pkg.featured .pkg-feat{color:rgba(255,255,255,.6);}
+.pkg-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pkg-feat.dim{opacity:.35;}
+.pkg-cta{display:block;text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s,transform .2s;border:none;margin-top:auto;}
+.pkg-cta.red{background:var(--red);color:var(--white);}
+.pkg-cta.red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pkg-cta.white{background:var(--white);color:var(--red);}
+.pkg-cta.white:hover{background:var(--off);}
+.pkg-cta.gold{background:var(--gold);color:var(--white);}
+.pkg-cta.gold:hover{opacity:.9;transform:translateY(-2px);}
+.pkg-cta.teal{background:var(--teal);color:var(--white);}
+.pkg-cta.teal:hover{opacity:.9;}
+.pkg-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;}
+.pkg.featured .pkg-note{color:rgba(255,255,255,.25);}
+
+/* ═══ LABOUR CODE 2026 EXPLAINER ═══ */
+.code-section{padding:100px 80px;background:var(--off);}
+.code-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.code-cards{display:flex;flex-direction:column;gap:3px;margin-top:32px;}
+.cc{background:var(--white);padding:24px 28px;display:flex;gap:18px;border-left:4px solid var(--red);}
+.cc-num{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--red);flex-shrink:0;line-height:1;}
+.cc-content{}
+.cc-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.cc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.7;}
+.cc-impact{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;background:var(--red-pale);color:var(--red);margin-top:10px;}
+/* Timeline items */
+.change-timeline{display:flex;flex-direction:column;gap:0;}
+.ct-item{display:grid;grid-template-columns:80px 1fr;gap:24px;position:relative;}
+.ct-item::before{content:'';position:absolute;left:39px;top:52px;bottom:0;width:1px;background:var(--gl);}
+.ct-item:last-child::before{display:none;}
+.ct-date{padding:20px 0;}
+.ct-date-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;background:var(--black);color:var(--white);text-align:center;}
+.ct-content{padding:20px 0 36px;}
+.ct-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.ct-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.7;}
+.ct-tag{display:inline-block;font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:3px 10px;margin-top:8px;font-weight:600;}
+.ct-tag.new{background:rgba(204,34,41,.1);color:var(--red);}
+.ct-tag.updated{background:rgba(224,123,32,.15);color:var(--amber);}
+.ct-tag.enforce{background:rgba(13,107,94,.12);color:var(--teal);}
+
+/* ═══ PAYROLL CALCULATOR ═══ */
+.calc-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.calc-section::before{content:'';position:absolute;left:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 65%);pointer-events:none;}
+.calc-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;}
+.payroll-calc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:44px;}
+.pc-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:28px;font-weight:500;}
+.pc-field{margin-bottom:20px;}
+.pc-label{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:7px;display:flex;justify-content:space-between;}
+.pc-label span{color:var(--white);font-weight:600;font-family:'Libre Baskerville',serif;}
+input[type=range]{width:100%;accent-color:var(--red);height:4px;}
+.pc-breakdown{margin-top:28px;border-top:1px solid rgba(255,255,255,.1);padding-top:28px;}
+.pb-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.pb-row:last-child{border-bottom:none;}
+.pb-label{font-size:13px;font-weight:300;color:rgba(255,255,255,.55);}
+.pb-val{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--white);}
+.pb-val.red{color:rgba(255,100,100,.9);}
+.pb-val.green{color:rgba(100,200,150,.9);}
+.pb-val.dim{font-size:13px;color:rgba(255,255,255,.35);}
+.pb-total{background:rgba(204,34,41,.15);border:1px solid rgba(204,34,41,.3);padding:20px 24px;margin-top:16px;display:flex;justify-content:space-between;align-items:center;}
+.pb-total-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.pb-total-val{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);}
+.pb-total-val sub{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+
+/* ═══ CASE STUDIES ═══ */
+.cases-section{padding:100px 80px;background:var(--off);}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
+.case-card{background:var(--white);padding:40px 36px;position:relative;overflow:hidden;transition:background .2s;}
+.case-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:height .4s var(--ease);}
+.case-card:hover{background:var(--gl);}
+.case-card:hover::before{height:100%;}
+.case-sector{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:16px;}
+.case-title{font-size:16px;font-weight:600;color:var(--black);margin-bottom:12px;line-height:1.4;}
+.case-body{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;margin-bottom:20px;}
+.case-outcome{padding:16px 20px;background:var(--off);border-left:3px solid var(--red);}
+.case-outcome-n{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--black);line-height:1;}
+.case-outcome-n sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.case-outcome-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gt);margin-top:5px;}
+
+/* ═══ FAQ ═══ */
+.faq-section{padding:100px 80px;background:var(--white);}
+.faq-cols{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:56px;}
+.faq-item{border-bottom:1px solid var(--gl);}
+.faq-q{font-size:15px;font-weight:500;color:var(--black);padding:20px 0 0;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;}
+.faq-q::after{content:'+';font-size:22px;color:var(--red);flex-shrink:0;transition:transform .3s;line-height:1;}
+.faq-item.open .faq-q::after{transform:rotate(45deg);}
+.faq-a{font-size:13.5px;font-weight:300;line-height:1.8;color:var(--gt);max-height:0;overflow:hidden;transition:max-height .4s var(--ease),padding .3s;}
+.faq-item.open .faq-a{max-height:400px;padding:12px 0 20px;}
+
+/* ═══ RAZORPAY MODAL ═══ */
+.rzp-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9000;align-items:center;justify-content:center;}
+.rzp-modal.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:94vw;padding:52px 48px;position:relative;animation:mdIn .3s var(--ease);}
+@keyframes mdIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.rzp-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);line-height:1;transition:color .2s;}
+.rzp-close:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:18px;font-weight:600;background:var(--red-pale);color:var(--red);}
+.rzp-h{font-family:'Libre Baskerville',serif;font-size:24px;margin-bottom:6px;}
+.rzp-sub{font-size:13px;color:var(--gt);margin-bottom:24px;}
+.rzp-price{font-family:'Libre Baskerville',serif;font-size:44px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-price sup{font-size:18px;font-family:'Outfit',sans-serif;}
+.rzp-pdesc{font-size:12px;color:var(--gt);margin-bottom:26px;}
+.rzp-fields{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+.rzp-input{border:1px solid var(--gl);padding:13px 16px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-input:focus{border-color:var(--red);}
+.rzp-btn{width:100%;background:var(--red);color:var(--white);border:none;padding:16px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;}
+.rzp-btn:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px;}
+
+/* FINAL CTA */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s,transform .2s;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+footer{background:var(--black);padding:36px 80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.fl{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);}
+.fl span{color:var(--red);}
+.fcopy{font-size:11px;color:rgba(255,255,255,.2);}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.pkg-grid{grid-template-columns:1fr 1fr;}.svc-panel.active{grid-template-columns:1fr 1fr;}.cal-grid{grid-template-columns:1fr 1fr;}.cases-grid{grid-template-columns:1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  section,.statutory-section,.calendar-section,.penalty-section,.services-section,.pricing-section,.code-section,.calc-section,.cases-section,.faq-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .stat-grid,.penalty-inner,.calendar-header,.code-inner,.calc-inner{grid-template-columns:1fr;gap:48px;}
+  .svc-panel.active{grid-template-columns:1fr;}
+  .pkg-grid{grid-template-columns:1fr;}
+  .faq-cols{grid-template-columns:1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{flex-direction:column;gap:14px;align-items:flex-start;padding:32px;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.cal-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-modal" id="rzpModal">
+  <div class="rzp-box">
+    <button class="rzp-close" id="rzpClose">×</button>
+    <div class="rzp-tag" id="rzpTag">Payroll & Compliance</div>
+    <div class="rzp-h" id="rzpH">Service Booking</div>
+    <div class="rzp-sub" id="rzpSub">Our team confirms and begins engagement within 24 hours.</div>
+    <div class="rzp-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-pdesc" id="rzpPDesc">Final scope and pricing confirmed after a brief discovery call.</div>
+    <div class="rzp-fields">
+      <input class="rzp-input" id="rzpCompany" type="text" placeholder="Company / Organisation Name *" required>
+      <input class="rzp-input" id="rzpName" type="text" placeholder="Your Name & Designation *" required>
+      <input class="rzp-input" id="rzpEmail" type="email" placeholder="Email Address *" required>
+      <input class="rzp-input" id="rzpPhone" type="tel" placeholder="Phone Number *" required>
+      <input class="rzp-input" id="rzpEmp" type="number" placeholder="Number of Employees on Payroll" min="1">
+      <input class="rzp-input" id="rzpStates" type="text" placeholder="States of Operation (e.g. Odisha, West Bengal)">
+    </div>
+    <button class="rzp-btn" id="rzpBtn">Submit Enquiry →</button>
+    <div class="rzp-secure">🔒 Confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 Registered</div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link active">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 11/11/2025</small></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+<header class="topbar">
+  <a href="../index.html" class="back-link">Home</a>
+  <button class="topbar-cta" onclick="openRzp('Payroll & Compliance Enquiry','Custom',0,'General payroll outsourcing enquiry.')">Get a Quote</button>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Payroll & Statutory Compliance</div></div>
+      <h1 class="hero-h1">
+        Miss a deadline.<br>
+        Pay the <em>price.</em><br>
+        Or don't.
+      </h1>
+      <p class="hero-sub">India's payroll compliance framework — 29 laws now consolidated into 4 Labour Codes, active from November 2025 — is more demanding than ever. Penalties up to ₹3 lakh, imprisonment for repeat violations, and monthly deadlines that don't forgive spreadsheet errors. ORIGENNT handles all of it — so you don't have to.</p>
+      <!-- MOA credibility badge -->
+      <div class="moa-badge">
+        <span class="moa-badge-icon">📜</span>
+        <div class="moa-badge-text">
+          <strong>ORIGENNT PRIVATE LIMITED</strong> — Registered under the Companies Act 2013. Our MOA explicitly authorises payroll processing, compliance management, and HR operations on behalf of clients. Incorporated 11 November 2025 · Odisha.
+        </div>
+      </div>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="openRzp('Payroll Outsourcing','Custom',0,'Payroll outsourcing mandate submission.')">Outsource Your Payroll</button>
+        <a href="#calendar" class="btn-ghost-w">View Compliance Calendar</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">Practice at a Glance</div>
+      <div class="hp-row"><span class="hp-name">Employee Payrolls Managed</span><span class="hp-val">3,200<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Companies Served</span><span class="hp-val">140<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">States Covered</span><span class="hp-val">12<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Filing Accuracy Rate</span><span class="hp-val">99.8<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Zero-Penalty Track Record</span><span class="hp-val">100<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Savings Secured for Clients</span><span class="hp-val">₹2.8<sub>Cr</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">3,200<sup>+</sup></div><div class="hsc-l">Payrolls Managed</div></div>
+    <div class="hs-cell"><div class="hsc-n">99.8<sup>%</sup></div><div class="hsc-l">Filing Accuracy</div></div>
+    <div class="hs-cell"><div class="hsc-n">29<sup>→4</sup></div><div class="hsc-l">Labour Codes 2025</div></div>
+    <div class="hs-cell"><div class="hsc-n">₹3<sup>L</sup></div><div class="hsc-l">Max Penalty Avoided</div></div>
+    <div class="hs-cell"><div class="hsc-n">12<sup>+</sup></div><div class="hsc-l">States Covered</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc"><div class="mc-lbl">Payrolls Managed Monthly</div><div class="mc-val">3,200+</div></div>
+  <div class="mc"><div class="mc-lbl">Filing Accuracy</div><div class="mc-val">99.8%</div></div>
+  <div class="mc"><div class="mc-lbl">Labour Codes Active</div><div class="mc-val">Nov 2025</div></div>
+  <div class="mc"><div class="mc-lbl">States of Operation</div><div class="mc-val">12+</div></div>
+  <div class="mc"><div class="mc-lbl">Client Penalty Record</div><div class="mc-val">Zero</div></div>
+</div>
+
+<!-- URGENCY STRIP -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">⚠️ April 2026 Update: New Income Tax Act 2025 effective from 1 April 2026. Form 24Q formats, TDS calculation methods, and payroll systems must be updated immediately. Non-compliant employers face backdated penalties.</div>
+  <a href="#" class="us-cta" onclick="openRzp('April 2026 Compliance Review','Custom',0,'Urgency: April 2026 IT Act compliance review.')">Get Compliant Now</a>
+</div>
+
+<!-- ══════ STATUTORY OVERVIEW ══════ -->
+<section class="statutory-section reveal">
+  <div class="stat-grid">
+    <div>
+      <div class="chip">The Statutory Framework</div>
+      <h2 class="D">6 laws. Every month.<br>No room for <em>error.</em></h2>
+      <div class="body-t" style="margin-top:22px;">
+        <p>India's payroll compliance framework requires employers to navigate six major statutory obligations every single month — plus quarterly TDS returns, annual Form 16 issuance, state-specific professional tax, and labour welfare fund contributions that vary by state.</p>
+        <p>The November 2025 Labour Codes consolidated 29 laws into 4 codes — but the obligations didn't shrink. They changed, and the penalties for getting them wrong got steeper. ORIGENNT manages all of it on your behalf, with a 99.8% filing accuracy rate and a zero-penalty track record across all client engagements.</p>
+      </div>
+      <div class="stat-cards">
+        <div class="sc">
+          <div class="sc-icon">🏦</div>
+          <div class="sc-body">
+            <div class="sc-name">Provident Fund (EPF)</div>
+            <div class="sc-desc">Mandatory for companies with 20+ employees. Calculated on basic salary + DA. Deadline: 15th of following month.</div>
+            <div class="sc-rate">
+              <span class="rate-pill emp">Employee: 12%</span>
+              <span class="rate-pill er">Employer: 12%</span>
+              <span class="rate-pill note">EPS: 8.33% of ₹15K cap</span>
+            </div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon">🏥</div>
+          <div class="sc-body">
+            <div class="sc-name">Employee State Insurance (ESI)</div>
+            <div class="sc-desc">Mandatory for companies with 10+ employees. Applies to employees earning ≤₹21,000/month. Deadline: 15th of following month.</div>
+            <div class="sc-rate">
+              <span class="rate-pill emp">Employee: 0.75%</span>
+              <span class="rate-pill er">Employer: 3.25%</span>
+              <span class="rate-pill note">On gross wages</span>
+            </div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon">📊</div>
+          <div class="sc-body">
+            <div class="sc-name">Tax Deducted at Source (TDS)</div>
+            <div class="sc-desc">Monthly deduction from salary as per applicable income tax slab. Deposit by 7th of following month. Quarterly Form 24Q. Annual Form 16 by June 15.</div>
+            <div class="sc-rate">
+              <span class="rate-pill emp">Slab-based</span>
+              <span class="rate-pill er">New IT Act 2025</span>
+              <span class="rate-pill note">Form 16 by June 15</span>
+            </div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon">📍</div>
+          <div class="sc-body">
+            <div class="sc-name">Professional Tax (PT)</div>
+            <div class="sc-desc">State-level tax on employment. Rates and deadlines vary by state. Odisha PT is ₹200/month for salaries above ₹15,000/month. Not applicable in all states.</div>
+            <div class="sc-rate">
+              <span class="rate-pill emp">Max ₹2,500/yr</span>
+              <span class="rate-pill er">State-specific</span>
+              <span class="rate-pill note">Odisha: ₹200/mo</span>
+            </div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon">🎁</div>
+          <div class="sc-body">
+            <div class="sc-name">Gratuity & Bonus</div>
+            <div class="sc-desc">Gratuity: 15 days salary per year of service (now 1 year for fixed-term under 2025 codes, previously 5 years). Bonus: 8.33–20% for companies with 20+ employees.</div>
+            <div class="sc-rate">
+              <span class="rate-pill emp">Gratuity: 1yr eligible</span>
+              <span class="rate-pill er">Bonus: 8.33–20%</span>
+              <span class="rate-pill note">Annual obligation</span>
+            </div>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon">🛡️</div>
+          <div class="sc-body">
+            <div class="sc-name">Labour Welfare Fund (LWF)</div>
+            <div class="sc-desc">State-specific. Not applicable in all states. Odisha LWF contributions vary. Typically bi-annual or annual. Often overlooked — and penalised when missed.</div>
+            <div class="sc-rate">
+              <span class="rate-pill emp">State-specific</span>
+              <span class="rate-pill er">Varies by state</span>
+              <span class="rate-pill note">Often missed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- Statutory cost breakdown donut -->
+      <div style="background:var(--white);padding:40px 36px;margin-bottom:3px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:28px;font-weight:500;">Total Employer Cost Breakdown — Per Employee (₹30,000 Gross Salary Example)</div>
+        <div class="donut-wrap">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="58" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="22"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#CC2229" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:124" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#e8505a" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:73" stroke-dashoffset="-124" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#c9a84c" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:51" stroke-dashoffset="-197" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#c2bfba" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:37" stroke-dashoffset="-248" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#eeecea" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:22" stroke-dashoffset="-285" transform="rotate(-90 80 80)"/>
+            <text x="80" y="74" text-anchor="middle" fill="#0d0d0d" font-family="'Libre Baskerville',serif" font-size="16">₹30K</text>
+            <text x="80" y="91" text-anchor="middle" fill="var(--gm)" font-family="'Outfit',sans-serif" font-size="9">GROSS</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="dl-item"><div class="dl-dot" style="background:#CC2229"></div><span class="dl-name">Net Take-Home</span><span class="dl-pct" style="margin-left:16px;">~₹24,200</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#e8505a"></div><span class="dl-name">EPF (Emp. + Er.)</span><span class="dl-pct" style="margin-left:16px;">₹3,600</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#c9a84c"></div><span class="dl-name">ESI (Emp. + Er.)</span><span class="dl-pct" style="margin-left:16px;">₹1,200</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#c2bfba"></div><span class="dl-name">TDS (Slab-based)</span><span class="dl-pct" style="margin-left:16px;">~₹600</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#eeecea"></div><span class="dl-name">PT + LWF</span><span class="dl-pct" style="margin-left:16px;">₹200+</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- SME compliance struggle data -->
+      <div style="background:var(--white);padding:40px 36px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:28px;font-weight:500;">Why Indian SMEs Struggle with Payroll Compliance — 2025 (% of SMEs affected)</div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-lbl">Still using spreadsheets</span><span class="bar-pct">43%</span></div><div class="bar-track"><div class="bar-fill" style="--w:43%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-lbl">Missed at least 1 filing in 12 months</span><span class="bar-pct">38%</span></div><div class="bar-track"><div class="bar-fill" style="--w:38%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-lbl">Unaware of state-specific PT/LWF</span><span class="bar-pct">61%</span></div><div class="bar-track"><div class="bar-fill" style="--w:61%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-lbl">Wrong wage definition for PF/ESI</span><span class="bar-pct">29%</span></div><div class="bar-track"><div class="bar-fill" style="--w:29%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-lbl">Not updated on Nov 2025 Labour Codes</span><span class="bar-pct">72%</span></div><div class="bar-track"><div class="bar-fill" style="--w:72%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-lbl">Not compliant with new IT Act 2025</span><span class="bar-pct">68%</span></div><div class="bar-track"><div class="bar-fill" style="--w:68%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ COMPLIANCE CALENDAR ══════ -->
+<section class="calendar-section reveal" id="calendar">
+  <div class="calendar-header">
+    <div>
+      <div class="chip">Compliance Calendar</div>
+      <h2 class="D">Every deadline.<br>Every month.<br><em>Without exception.</em></h2>
+    </div>
+    <div class="body-t" style="padding-top:36px;">
+      <p>India's payroll compliance is a continuous calendar of monthly, quarterly, and annual deadlines. Missing even one — TDS by the 7th, EPF/ESI by the 15th — triggers interest, penalties, and government notices. ORIGENNT manages every filing on your behalf.</p>
+    </div>
+  </div>
+  <div class="cal-grid">
+    <div class="cal-month">
+      <div class="cm-month">Monthly — Every Month</div>
+      <div class="cm-item"><div class="cm-date">7th</div><div><div class="cm-text">TDS deposit with government<div class="cm-badge critical">Critical</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">15th</div><div><div class="cm-text">EPF contribution remittance<div class="cm-badge critical">Critical</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">15th</div><div><div class="cm-text">ESI contribution remittance<div class="cm-badge critical">Critical</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">7–10</div><div><div class="cm-text">Salary disbursement to employees<div class="cm-badge normal">Payroll</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Month</div><div><div class="cm-text">Professional Tax deposit (state-specific)<div class="cm-badge normal">PT</div></div></div></div>
+    </div>
+    <div class="cal-month">
+      <div class="cm-month">Quarterly</div>
+      <div class="cm-item"><div class="cm-date">Q1</div><div><div class="cm-text">Form 24Q — TDS return (Apr–Jun)<div class="cm-badge quarterly">Quarterly</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Q2</div><div><div class="cm-text">Form 24Q — TDS return (Jul–Sep)<div class="cm-badge quarterly">Quarterly</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Q3</div><div><div class="cm-text">Form 24Q — TDS return (Oct–Dec)<div class="cm-badge quarterly">Quarterly</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Q4</div><div><div class="cm-text">Form 24Q — TDS return (Jan–Mar)<div class="cm-badge quarterly">Quarterly</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Mar 15</div><div><div class="cm-text">Final advance tax installment<div class="cm-badge critical">Critical</div></div></div></div>
+    </div>
+    <div class="cal-month">
+      <div class="cm-month">Annual Deadlines</div>
+      <div class="cm-item"><div class="cm-date">Jun 15</div><div><div class="cm-text">Form 16 to all employees<div class="cm-badge annual">Annual</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Apr 30</div><div><div class="cm-text">EPF annual return (Form 3A/6A)<div class="cm-badge annual">Annual</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Nov 30</div><div><div class="cm-text">Payment of Bonus (eligible employees)<div class="cm-badge annual">Annual</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Mar 31</div><div><div class="cm-text">FY close — salary reconciliation<div class="cm-badge normal">FY Close</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Varies</div><div><div class="cm-text">Gratuity liability calculation & provision<div class="cm-badge annual">Annual</div></div></div></div>
+    </div>
+    <div class="cal-month">
+      <div class="cm-month">2026 Critical Dates</div>
+      <div class="cm-item"><div class="cm-date">Apr 1</div><div><div class="cm-text">New Income Tax Act 2025 — effective. Update all payroll systems.<div class="cm-badge critical">Urgent</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Apr 1</div><div><div class="cm-text">New Form 24Q format — mandatory<div class="cm-badge critical">Urgent</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Apr 1</div><div><div class="cm-text">50% wage rule under Wage Code — validate salary structures<div class="cm-badge critical">Urgent</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Ongoing</div><div><div class="cm-text">Digital record-keeping mandatory under Nov 2025 Labour Codes<div class="cm-badge normal">Ongoing</div></div></div></div>
+      <div class="cm-item"><div class="cm-date">Ongoing</div><div><div class="cm-text">2-day separation wage settlement rule (new Wage Code)<div class="cm-badge normal">New</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- Deadline tracker -->
+  <div class="deadline-tracker">
+    <div class="dt-title">Live Compliance Deadlines — April 2026 (Current Month)</div>
+    <div class="dt-row">
+      <div class="dt-urgency red"></div>
+      <div><div class="dt-label">TDS Deposit — March 2026 Salaries</div><div class="dt-sub">Income Tax Act 2025 · New formats apply</div></div>
+      <div class="dt-date">7 April 2026</div>
+      <div class="dt-penalty high">₹1,000/day penalty</div>
+    </div>
+    <div class="dt-row">
+      <div class="dt-urgency red"></div>
+      <div><div class="dt-label">EPF Contribution Remittance</div><div class="dt-sub">EPFO · Both employer & employee share</div></div>
+      <div class="dt-date">15 April 2026</div>
+      <div class="dt-penalty high">12% interest p.a.</div>
+    </div>
+    <div class="dt-row">
+      <div class="dt-urgency red"></div>
+      <div><div class="dt-label">ESI Contribution Remittance</div><div class="dt-sub">ESIC · All eligible employees ≤₹21K/mo</div></div>
+      <div class="dt-date">15 April 2026</div>
+      <div class="dt-penalty high">12% interest p.a.</div>
+    </div>
+    <div class="dt-row">
+      <div class="dt-urgency amber"></div>
+      <div><div class="dt-label">Professional Tax — Odisha</div><div class="dt-sub">State tax · ₹200/employee above ₹15K</div></div>
+      <div class="dt-date">30 April 2026</div>
+      <div class="dt-penalty med">State penalty</div>
+    </div>
+    <div class="dt-row">
+      <div class="dt-urgency amber"></div>
+      <div><div class="dt-label">Q4 FY2026 Form 24Q Filing</div><div class="dt-sub">TDS quarterly return · Jan–Mar 2026</div></div>
+      <div class="dt-date">31 May 2026</div>
+      <div class="dt-penalty med">₹200/day late fee</div>
+    </div>
+    <div class="dt-row">
+      <div class="dt-urgency green"></div>
+      <div><div class="dt-label">Form 16 Issuance to Employees</div><div class="dt-sub">Annual TDS certificate · All employees</div></div>
+      <div class="dt-date">15 June 2026</div>
+      <div class="dt-penalty low">₹100/day penalty</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PENALTY COST DATA ══════ -->
+<section class="penalty-section reveal">
+  <div class="penalty-inner">
+    <div>
+      <div class="chip w">The Cost of Non-Compliance</div>
+      <h2 class="D W">Getting it wrong costs<br>more than <em>getting it right.</em></h2>
+      <div class="body-t w" style="margin-top:22px;">
+        <p>The November 2025 Labour Codes and the new Income Tax Act 2025 significantly escalated penalties for payroll non-compliance. Penalties are no longer a minor inconvenience — they can reach ₹3 lakh per violation, with imprisonment for repeat offences and personal liability for company directors.</p>
+      </div>
+      <div class="penalty-cards">
+        <div class="pc-card">
+          <div class="pc-severity high"></div>
+          <div class="pc-law">TDS Late</div>
+          <div><div class="pc-penalty">₹1,000<sub>/day</sub></div><div class="pc-desc">Per day of delay in TDS deposit after the 7th. Plus 1.5% interest per month on outstanding amount.</div></div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-severity high"></div>
+          <div class="pc-law">EPF Default</div>
+          <div><div class="pc-penalty">12%<sub> p.a.</sub></div><div class="pc-desc">Simple interest on outstanding EPF amount. Repeat defaults: additional damage of ₹5,000 + up to 3 years imprisonment.</div></div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-severity high"></div>
+          <div class="pc-law">Labour Code</div>
+          <div><div class="pc-penalty">₹3,00,000<sub> max</sub></div><div class="pc-desc">Maximum penalty under the November 2025 Labour Codes for digital record non-maintenance or systematic non-compliance.</div></div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-severity high"></div>
+          <div class="pc-law">ESI Default</div>
+          <div><div class="pc-penalty">₹10,000<sub> min</sub></div><div class="pc-desc">Minimum penalty for not registering under ESI when mandatory. Additional 12% interest on unpaid contributions.</div></div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-severity med"></div>
+          <div class="pc-law">Form 24Q</div>
+          <div><div class="pc-penalty">₹200<sub>/day</sub></div><div class="pc-desc">Late fee under Section 234E for each day of delay in TDS return filing. Maximum fee capped at TDS amount.</div></div>
+        </div>
+        <div class="pc-card">
+          <div class="pc-severity low"></div>
+          <div class="pc-law">Form 16</div>
+          <div><div class="pc-penalty">₹100<sub>/day</sub></div><div class="pc-desc">Per day penalty for delay in issuing Form 16 to employees after June 15. Reputational risk with employees.</div></div>
+        </div>
+      </div>
+      <div style="margin-top:3px;background:rgba(204,34,41,.12);border:1px solid rgba(204,34,41,.3);padding:24px 28px;">
+        <div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:8px;">Director Personal Liability (New Labour Codes 2025)</div>
+        <div style="font-size:12.5px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.7;">Under the November 2025 Labour Codes, company directors and authorised signatories can be held personally liable for systematic payroll non-compliance — including potential imprisonment. Outsourcing to ORIGENNT transfers the compliance responsibility to a qualified entity.</div>
+      </div>
+    </div>
+    <div>
+      <!-- Cost comparison chart -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:40px 36px;margin-bottom:3px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:28px;font-weight:500;">Annual Cost of Compliance Failure vs. Outsourcing — SME with 50 Employees</div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Interest on missed EPF (1 month)</span><span class="dc-bar-val">₹43,200</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:60%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">TDS delay penalty (10 days)</span><span class="dc-bar-val">₹10,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:15%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">HR time cost (8 hrs/month)</span><span class="dc-bar-val">₹36,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill amber" style="--w:50%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Error rectification & reconciliation</span><span class="dc-bar-val">₹24,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill amber" style="--w:33%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">ORIGENNT outsourcing (annual)</span><span class="dc-bar-val">₹24,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:33%"></div></div></div>
+        <div style="margin-top:20px;background:rgba(13,107,94,.15);border:1px solid rgba(13,107,94,.3);padding:16px 20px;">
+          <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(13,107,94,.9);margin-bottom:6px;font-weight:600;">Net Saving with ORIGENNT</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">₹89,200<span style="font-size:14px;color:var(--teal);font-family:'Outfit',sans-serif;font-weight:600;"> / year</span></div>
+          <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.4);margin-top:4px;">Based on conservative estimates for a 50-employee company making typical payroll errors</div>
+        </div>
+      </div>
+      <!-- Compliance risk radar -->
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:40px 36px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:28px;font-weight:500;">Compliance Risk by Company Size — India 2025</div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">1–10 employees (unregistered)</span><span class="dc-bar-val">Very High</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:90%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">11–20 employees (partial compliance)</span><span class="dc-bar-val">High</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:75%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">21–50 employees (manual payroll)</span><span class="dc-bar-val">High</span></div><div class="dc-bar-track"><div class="dc-bar-fill amber" style="--w:65%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">51–200 employees (basic software)</span><span class="dc-bar-val">Moderate</span></div><div class="dc-bar-track"><div class="dc-bar-fill amber" style="--w:45%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">200+ employees (ORIGENNT managed)</span><span class="dc-bar-val">Low</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:10%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SERVICES ══════ -->
+<section class="services-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">All Payroll & Compliance Services</div>
+    <h2 class="D">Every service you need.<br>One <em>trusted partner.</em></h2>
+    <p class="body-t" style="max-width:600px;margin-top:14px;">From monthly payroll processing to annual compliance audits — ORIGENNT's payroll & compliance practice, authorised under our MOA, covers every obligation your business has to its employees and the government.</p>
+  </div>
+  <div class="svc-tabs" id="svcTabs">
+    <div class="stab active" data-tab="payroll">Payroll Processing</div>
+    <div class="stab" data-tab="statutory">Statutory Compliance</div>
+    <div class="stab" data-tab="tax">Tax & TDS</div>
+    <div class="stab" data-tab="audit">Compliance Audit</div>
+    <div class="stab" data-tab="setup">Setup & Structuring</div>
+  </div>
+
+  <!-- PAYROLL -->
+  <div class="svc-panel active" id="tab-payroll">
+    <div class="svc-card"><span class="sc-icon2">💰</span><div class="sc-n">01</div><div class="sc-name">Monthly Payroll Processing</div><div class="sc-desc">End-to-end monthly payroll — gross salary calculation, all statutory deductions (PF, ESI, PT, TDS, LWF), net pay computation, payslip generation, and bank transfer coordination.</div><div class="sc-pr"><div><div class="sc-price">₹150<sub>/emp/mo</sub></div><div class="sc-price-note">Minimum ₹3,000/mo · 10+ employees</div></div><button class="sc-btn" onclick="openRzp('Monthly Payroll Processing','₹150/employee/month (min ₹3,000)',0,'Monthly payroll outsourcing.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📄</span><div class="sc-n">02</div><div class="sc-name">Payslip Generation & Distribution</div><div class="sc-desc">Digital payslips generated for every employee every month — password-protected, compliant with all statutory requirements, delivered via email or employee portal.</div><div class="sc-pr"><div><div class="sc-price">₹50<sub>/emp/mo</sub></div><div class="sc-price-note">Add-on to payroll processing</div></div><button class="sc-btn" onclick="openRzp('Payslip Generation','₹50/employee/month',0,'Digital payslip generation.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🏖️</span><div class="sc-n">03</div><div class="sc-name">Leave & Attendance Integration</div><div class="sc-desc">Integrate your attendance system with payroll — leave deductions, LOP calculations, overtime, and shift allowances automatically factored into monthly processing.</div><div class="sc-pr"><div><div class="sc-price">₹75<sub>/emp/mo</sub></div><div class="sc-price-note">Includes attendance reconciliation</div></div><button class="sc-btn" onclick="openRzp('Leave & Attendance Integration','₹75/employee/month',0,'Attendance-payroll integration.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🔁</span><div class="sc-n">04</div><div class="sc-name">Full & Final Settlement</div><div class="sc-desc">Complete F&F processing for exiting employees — pending salary, earned leave encashment, gratuity calculation, TDS on final payment, and Form 16 Part B within the new 2-day wage settlement rule.</div><div class="sc-pr"><div><div class="sc-price">₹2,500<sub>/employee</sub></div><div class="sc-price-note">Per F&F processed</div></div><button class="sc-btn" onclick="openRzp('Full & Final Settlement','₹2,500 per employee',0,'F&F settlement processing.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🌐</span><div class="sc-n">05</div><div class="sc-name">Multi-State Payroll</div><div class="sc-desc">Payroll for companies operating across multiple states — different minimum wages, PT rates, LWF rules, and filing deadlines managed centrally by ORIGENNT across 12+ states.</div><div class="sc-pr"><div><div class="sc-price">₹200<sub>/emp/mo</sub></div><div class="sc-price-note">Multi-state premium · 2+ states</div></div><button class="sc-btn" onclick="openRzp('Multi-State Payroll','₹200/employee/month (multi-state)',0,'Multi-state payroll management.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🏦</span><div class="sc-n">06</div><div class="sc-name">Contractor & Freelancer Payroll</div><div class="sc-desc">Payroll for gig workers, independent contractors, and project-based consultants — including TDS under Section 194C/194J, monthly invoicing, and Form 16A generation.</div><div class="sc-pr"><div><div class="sc-price">₹300<sub>/contractor/mo</sub></div><div class="sc-price-note">TDS + payment included</div></div><button class="sc-btn" onclick="openRzp('Contractor Payroll','₹300/contractor/month',0,'Contractor and freelancer payroll.')">Enquire</button></div></div>
+  </div>
+
+  <!-- STATUTORY -->
+  <div class="svc-panel" id="tab-statutory">
+    <div class="svc-card"><span class="sc-icon2">🏦</span><div class="sc-n">07</div><div class="sc-name">EPF Registration & Management</div><div class="sc-desc">EPFO registration, UAN generation for new employees, monthly challan submission by 15th, annual return filing (Form 3A/6A), and member withdrawal/transfer processing.</div><div class="sc-pr"><div><div class="sc-price">₹5,000<sub>/mo</sub></div><div class="sc-price-note">Up to 50 employees</div></div><button class="sc-btn" onclick="openRzp('EPF Registration & Management','₹5,000/month (up to 50 employees)',0,'EPF compliance management.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🏥</span><div class="sc-n">08</div><div class="sc-name">ESI Registration & Management</div><div class="sc-desc">ESIC registration, IP number generation, monthly challan by 15th, half-yearly return filing, and employee ESI card coordination. Includes employer and employee share management.</div><div class="sc-pr"><div><div class="sc-price">₹3,500<sub>/mo</sub></div><div class="sc-price-note">Up to 50 employees</div></div><button class="sc-btn" onclick="openRzp('ESI Registration & Management','₹3,500/month (up to 50 employees)',0,'ESI compliance management.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📍</span><div class="sc-n">09</div><div class="sc-name">Professional Tax Compliance</div><div class="sc-desc">PT registration, monthly/quarterly deduction and remittance as per state rules, and annual certificate filing. Currently active in Odisha, West Bengal, Karnataka, and 8 other states.</div><div class="sc-pr"><div><div class="sc-price">₹1,500<sub>/mo</sub></div><div class="sc-price-note">Per state of operation</div></div><button class="sc-btn" onclick="openRzp('Professional Tax Compliance','₹1,500/month per state',0,'Professional tax management.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🛡️</span><div class="sc-n">10</div><div class="sc-name">Labour Welfare Fund (LWF)</div><div class="sc-desc">State-specific LWF contribution calculation, deduction, and deposit. Often the most overlooked — and penalised — compliance obligation for multi-state employers.</div><div class="sc-pr"><div><div class="sc-price">₹1,000<sub>/state/qtr</sub></div><div class="sc-price-note">Bi-annual or annual as applicable</div></div><button class="sc-btn" onclick="openRzp('Labour Welfare Fund','₹1,000/state/quarter',0,'LWF compliance management.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🎁</span><div class="sc-n">11</div><div class="sc-name">Gratuity & Bonus Management</div><div class="sc-desc">Annual gratuity liability calculation and provisioning, bonus calculation and disbursement per Payment of Bonus Act (8.33–20%), and compliance documentation.</div><div class="sc-pr"><div><div class="sc-price">₹8,000<sub>/engagement</sub></div><div class="sc-price-note">Annual calculation + filing</div></div><button class="sc-btn" onclick="openRzp('Gratuity & Bonus Management','₹8,000/year',0,'Gratuity and bonus compliance.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📋</span><div class="sc-n">12</div><div class="sc-name">Statutory Register Maintenance</div><div class="sc-desc">Digital maintenance of all mandatory statutory registers — attendance register, wage register, muster roll, accident register — as required under the November 2025 Labour Codes for digital inspection readiness.</div><div class="sc-pr"><div><div class="sc-price">₹3,000<sub>/mo</sub></div><div class="sc-price-note">Full register maintenance</div></div><button class="sc-btn" onclick="openRzp('Statutory Register Maintenance','₹3,000/month',0,'Statutory register digital maintenance.')">Enquire</button></div></div>
+  </div>
+
+  <!-- TAX -->
+  <div class="svc-panel" id="tab-tax">
+    <div class="svc-card"><span class="sc-icon2">📊</span><div class="sc-n">13</div><div class="sc-name">Monthly TDS Calculation & Deposit</div><div class="sc-desc">Per-employee TDS calculation under the new Income Tax Act 2025, challan preparation, and deposit by the 7th of each month. New regime and old regime both handled.</div><div class="sc-pr"><div><div class="sc-price">₹100<sub>/emp/mo</sub></div><div class="sc-price-note">Min ₹2,000/month</div></div><button class="sc-btn" onclick="openRzp('Monthly TDS Management','₹100/employee/month (min ₹2,000)',0,'Monthly TDS calculation and deposit.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📁</span><div class="sc-n">14</div><div class="sc-name">Quarterly Form 24Q Filing</div><div class="sc-desc">Quarterly TDS return filing (Form 24Q) with updated 2026 formats under the new IT Act 2025. Four filings per year, deadline-managed and submitted by ORIGENNT.</div><div class="sc-pr"><div><div class="sc-price">₹4,500<sub>/quarter</sub></div><div class="sc-price-note">Per quarter · All employees included</div></div><button class="sc-btn" onclick="openRzp('Form 24Q Filing','₹4,500/quarter',0,'Quarterly TDS return filing.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🗒️</span><div class="sc-n">15</div><div class="sc-name">Form 16 Generation & Distribution</div><div class="sc-desc">Annual TDS certificate (Form 16 Part A + Part B) generation for all employees by June 15. Password-protected PDFs delivered digitally. Compliant with revised formats.</div><div class="sc-pr"><div><div class="sc-price">₹150<sub>/employee</sub></div><div class="sc-price-note">Annual · Per employee</div></div><button class="sc-btn" onclick="openRzp('Form 16 Generation','₹150/employee annually',0,'Form 16 generation and distribution.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🧾</span><div class="sc-n">16</div><div class="sc-name">Salary Structure Redesign (Tax-Optimised)</div><div class="sc-desc">Restructure employee salary components to legally minimise TDS liability — HRA, LTA, medical allowance, food allowance, NPS — under the new Income Tax Act 2025 framework.</div><div class="sc-pr"><div><div class="sc-price">₹500<sub>/emp</sub></div><div class="sc-price-note">One-time restructuring per employee</div></div><button class="sc-btn" onclick="openRzp('Tax-Optimised Salary Structure','₹500/employee (one-time)',0,'Salary structure tax optimisation.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🧮</span><div class="sc-n">17</div><div class="sc-name">Investment Declaration Processing</div><div class="sc-desc">Collect and process employee investment declarations (Section 80C, 80D, HRA, LTA) at year start and collect proofs at year-end for accurate TDS finalisation.</div><div class="sc-pr"><div><div class="sc-price">₹75<sub>/emp/yr</sub></div><div class="sc-price-note">Declaration + proof processing</div></div><button class="sc-btn" onclick="openRzp('Investment Declaration Processing','₹75/employee/year',0,'Tax investment declaration management.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🏛️</span><div class="sc-n">18</div><div class="sc-name">TAN Registration & Management</div><div class="sc-desc">Tax Deduction Account Number (TAN) application, registration with Income Tax Department, and ongoing management of TAN-related filings and correspondence.</div><div class="sc-pr"><div><div class="sc-price">₹3,500<sub>/one-time</sub></div><div class="sc-price-note">Registration + first-year management</div></div><button class="sc-btn" onclick="openRzp('TAN Registration','₹3,500 one-time',0,'TAN registration and management.')">Enquire</button></div></div>
+  </div>
+
+  <!-- AUDIT -->
+  <div class="svc-panel" id="tab-audit">
+    <div class="svc-card"><span class="sc-icon2">🔍</span><div class="sc-n">19</div><div class="sc-name">Payroll Compliance Audit</div><div class="sc-desc">Comprehensive audit of your existing payroll — checking PF/ESI calculation accuracy, TDS correctness, salary structure compliance with new Wage Code, and filing status. Delivers written findings with remediation roadmap.</div><div class="sc-pr"><div><div class="sc-price">₹18,000<sub>–45,000</sub></div><div class="sc-price-note">Based on headcount & complexity</div></div><button class="sc-btn" onclick="openRzp('Payroll Compliance Audit','₹18,000–45,000',0,'Payroll compliance audit.')">Book Audit</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📊</span><div class="sc-n">20</div><div class="sc-name">HR Compliance Audit</div><div class="sc-desc">Broader HR compliance review — employment contracts, POSH compliance, minimum wage adherence, working hours, overtime policies, and all Labour Code 2025 obligations.</div><div class="sc-pr"><div><div class="sc-price">₹22,000<sub>–60,000</sub></div><div class="sc-price-note">Written report + debrief</div></div><button class="sc-btn" onclick="openRzp('HR Compliance Audit','₹22,000–60,000',0,'HR compliance audit.')">Book Audit</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">⚠️</span><div class="sc-n">21</div><div class="sc-name">Labour Code 2025 Gap Assessment</div><div class="sc-desc">Specific assessment against the November 2025 Labour Codes — 50% wage rule, digital record requirements, fixed-term gratuity, separation wage settlement, and ESI threshold changes.</div><div class="sc-pr"><div><div class="sc-price">₹12,000<sub>–28,000</sub></div><div class="sc-price-note">Fast-track · 5–7 day turnaround</div></div><button class="sc-btn" onclick="openRzp('Labour Code Gap Assessment','₹12,000–28,000',0,'Labour Code 2025 compliance gap assessment.')">Book Now</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🏛️</span><div class="sc-n">22</div><div class="sc-name">Pre-Inspection Readiness Review</div><div class="sc-desc">Prepare for a government Labour Inspector visit — review all statutory registers, contribution challans, wages records, and compliance documentation before authorities arrive.</div><div class="sc-pr"><div><div class="sc-price">₹15,000<sub>–35,000</sub></div><div class="sc-price-note">Full documentation review</div></div><button class="sc-btn" onclick="openRzp('Pre-Inspection Readiness','₹15,000–35,000',0,'Pre-inspection compliance readiness review.')">Book Review</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🔧</span><div class="sc-n">23</div><div class="sc-name">Compliance Rectification</div><div class="sc-desc">After an audit finds gaps — we fix them. Historical PF/ESI reconciliation, filing of delayed returns, penalty negotiation, and documentation correction across past periods.</div><div class="sc-pr"><div><div class="sc-price">₹25,000<sub>+</sub></div><div class="sc-price-note">Scope-dependent · Minimum engagement</div></div><button class="sc-btn" onclick="openRzp('Compliance Rectification','₹25,000+ scope-based',0,'Historical compliance gap rectification.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📅</span><div class="sc-n">24</div><div class="sc-name">Ongoing Compliance Retainer</div><div class="sc-desc">Monthly retainer with ORIGENNT for ongoing compliance monitoring — track deadlines, review filings, flag regulatory changes, and maintain a compliance calendar for your business.</div><div class="sc-pr"><div><div class="sc-price">₹8,000<sub>–25,000/mo</sub></div><div class="sc-price-note">Ongoing monitoring & advisory</div></div><button class="sc-btn" onclick="openRzp('Compliance Retainer','₹8,000–25,000/month',0,'Ongoing compliance monitoring retainer.')">Enquire</button></div></div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="svc-panel" id="tab-setup">
+    <div class="svc-card"><span class="sc-icon2">🚀</span><div class="sc-n">25</div><div class="sc-name">New Company Payroll Setup</div><div class="sc-desc">Complete payroll infrastructure setup for new companies — EPFO registration, ESIC registration, TAN application, salary structure design, and first payroll run. Ideal for companies like ORIGENNT at incorporation.</div><div class="sc-pr"><div><div class="sc-price">₹18,000<sub>/one-time</sub></div><div class="sc-price-note">Full setup incl. first payroll run</div></div><button class="sc-btn" onclick="openRzp('New Company Payroll Setup','₹18,000 one-time',0,'New company payroll and compliance setup.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🏗️</span><div class="sc-n">26</div><div class="sc-name">Salary Structure Design</div><div class="sc-desc">Design optimal salary structures for your roles — basic, HRA, special allowance, LTA, food allowance, NPS — balancing tax efficiency with compliance under the 50% wage rule of the new Wage Code.</div><div class="sc-pr"><div><div class="sc-price">₹350<sub>/employee</sub></div><div class="sc-price-note">Per role structured</div></div><button class="sc-btn" onclick="openRzp('Salary Structure Design','₹350/employee structured',0,'Tax-compliant salary structure design.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📝</span><div class="sc-n">27</div><div class="sc-name">Employment Contract Templates</div><div class="sc-desc">Legally compliant employment contract templates for permanent, fixed-term, and contractual employees — aligned with the November 2025 Labour Codes and applicable state laws.</div><div class="sc-pr"><div><div class="sc-price">₹12,000<sub>/set</sub></div><div class="sc-price-note">3 templates (permanent/FT/contract)</div></div><button class="sc-btn" onclick="openRzp('Employment Contract Templates','₹12,000 for 3 templates',0,'Labour law compliant employment contracts.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🔄</span><div class="sc-n">28</div><div class="sc-name">Payroll Software Migration</div><div class="sc-desc">Migrate from spreadsheets or legacy software to a compliant payroll system — data migration, configuration, staff training, and first 3-month parallel run support.</div><div class="sc-pr"><div><div class="sc-price">₹22,000<sub>–55,000</sub></div><div class="sc-price-note">One-time migration + training</div></div><button class="sc-btn" onclick="openRzp('Payroll Software Migration','₹22,000–55,000',0,'Payroll software migration and setup.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">📋</span><div class="sc-n">29</div><div class="sc-name">HR Policy Handbook (Compliant)</div><div class="sc-desc">Comprehensive HR policy handbook — leave policy, attendance policy, code of conduct, POSH policy, payroll policy, and grievance redressal — compliant with all 2025–26 Labour Codes.</div><div class="sc-pr"><div><div class="sc-price">₹28,000<sub>–65,000</sub></div><div class="sc-price-note">Complete policy documentation set</div></div><button class="sc-btn" onclick="openRzp('HR Policy Handbook','₹28,000–65,000',0,'Labour law compliant HR policy documentation.')">Enquire</button></div></div>
+    <div class="svc-card"><span class="sc-icon2">🎓</span><div class="sc-n">30</div><div class="sc-name">HR Team Compliance Training</div><div class="sc-desc">Structured compliance training for your internal HR team — covering EPF, ESI, TDS, new Labour Codes 2025, payroll processing best practices, and deadline management.</div><div class="sc-pr"><div><div class="sc-price">₹15,000<sub>/session</sub></div><div class="sc-price-note">Half-day workshop · Up to 8 participants</div></div><button class="sc-btn" onclick="openRzp('HR Compliance Training','₹15,000/session (up to 8 participants)',0,'HR team payroll compliance training.')">Enquire</button></div></div>
+  </div>
+</section>
+
+<!-- ══════ PRICING ══════ -->
+<section class="pricing-section reveal">
+  <div class="pricing-intro">
+    <div class="chip">Pricing Plans</div>
+    <h2 class="D">Simple, transparent pricing.<br><em>No surprises.</em></h2>
+    <p class="body-t" style="max-width:560px;margin:14px auto 0;">All plans include monthly processing, statutory filings, payslip generation, and a dedicated compliance manager. GST extra. Prices scale with employee count.</p>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-badge s">Starter</div>
+      <div class="pkg-name">Essentials</div>
+      <div class="pkg-tagline">For startups and micro-businesses getting payroll right from Day 1.</div>
+      <div class="pkg-price"><sup>₹</sup>3,000</div>
+      <div class="pkg-period">per month · up to 10 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Monthly payroll processing</li>
+        <li class="pkg-feat">EPF + ESI deductions & deposits</li>
+        <li class="pkg-feat">TDS calculation & monthly challan</li>
+        <li class="pkg-feat">Digital payslip generation</li>
+        <li class="pkg-feat">Quarterly Form 24Q filing</li>
+        <li class="pkg-feat">Annual Form 16 (₹150/emp add-on)</li>
+        <li class="pkg-feat dim">Multi-state — Not included</li>
+        <li class="pkg-feat dim">Compliance Audit — Not included</li>
+      </ul>
+      <button class="pkg-cta red" onclick="openRzp('Essentials Payroll Plan','₹3,000/month',3000,'Up to 10 employees · Monthly payroll & compliance.')">Get Started — ₹3,000/mo</button>
+      <div class="pkg-note">+₹200/employee above 10</div>
+    </div>
+    <div class="pkg featured">
+      <div class="pkg-badge p">Most Popular</div>
+      <div class="pkg-name">Professional</div>
+      <div class="pkg-tagline">For growing SMEs needing full-stack payroll + compliance management.</div>
+      <div class="pkg-price"><sup>₹</sup>8,500</div>
+      <div class="pkg-period">per month · up to 50 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Essentials</li>
+        <li class="pkg-feat">Professional Tax management</li>
+        <li class="pkg-feat">Leave & attendance integration</li>
+        <li class="pkg-feat">Salary structure optimisation</li>
+        <li class="pkg-feat">Investment declaration processing</li>
+        <li class="pkg-feat">F&F settlement processing</li>
+        <li class="pkg-feat">Dedicated compliance manager</li>
+        <li class="pkg-feat">Annual compliance review</li>
+        <li class="pkg-feat">Statutory register maintenance</li>
+      </ul>
+      <button class="pkg-cta white" onclick="openRzp('Professional Payroll Plan','₹8,500/month',8500,'Up to 50 employees · Full payroll & compliance.')">Enroll — ₹8,500/mo</button>
+      <div class="pkg-note">+₹150/employee above 50</div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-badge g">Enterprise</div>
+      <div class="pkg-name">Enterprise</div>
+      <div class="pkg-tagline">For 100–500 employee companies needing multi-state compliance management.</div>
+      <div class="pkg-price"><sup>₹</sup>18,000</div>
+      <div class="pkg-period">per month · up to 200 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Professional</li>
+        <li class="pkg-feat">Multi-state payroll (up to 5 states)</li>
+        <li class="pkg-feat">Labour Welfare Fund management</li>
+        <li class="pkg-feat">Contractor/freelancer payroll</li>
+        <li class="pkg-feat">Semi-annual payroll audit</li>
+        <li class="pkg-feat">Pre-inspection readiness support</li>
+        <li class="pkg-feat">Priority turnaround (24-hr SLA)</li>
+        <li class="pkg-feat">Senior consultant oversight</li>
+      </ul>
+      <button class="pkg-cta red" onclick="openRzp('Enterprise Payroll Plan','₹18,000/month',18000,'Up to 200 employees · Enterprise payroll & compliance.')">Enroll — ₹18,000/mo</button>
+      <div class="pkg-note">+₹120/employee above 200</div>
+    </div>
+    <div class="pkg">
+      <div class="pkg-badge e">Custom</div>
+      <div class="pkg-name">Bespoke</div>
+      <div class="pkg-tagline">For large enterprises, multi-entity groups, and organisations with complex payroll needs.</div>
+      <div class="pkg-price" style="font-size:28px;">Custom</div>
+      <div class="pkg-period">scoped on enquiry</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">All Enterprise features</li>
+        <li class="pkg-feat">Unlimited states</li>
+        <li class="pkg-feat">Multi-entity / holding company payroll</li>
+        <li class="pkg-feat">ERP/HRMS integration</li>
+        <li class="pkg-feat">Dedicated payroll team</li>
+        <li class="pkg-feat">Monthly compliance board report</li>
+        <li class="pkg-feat">500+ employee capability</li>
+        <li class="pkg-feat">White-label payslips & reports</li>
+      </ul>
+      <button class="pkg-cta teal" onclick="openRzp('Bespoke Payroll Enquiry','Custom',0,'Large enterprise payroll and compliance proposal.')">Request a Proposal</button>
+      <div class="pkg-note">Response within 24 business hours</div>
+    </div>
+  </div>
+  <div style="margin-top:4px;background:var(--off);padding:24px 40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <span style="font-size:14px;font-weight:500;color:var(--black);">All prices exclude GST (18%). Minimum 3-month contract. No lock-in after initial period.</span>
+    <span style="font-size:13px;font-weight:300;color:var(--gt);">ORIGENNT PRIVATE LIMITED is authorised under our MOA to provide payroll processing and compliance management on behalf of clients.</span>
+  </div>
+</section>
+
+<!-- ══════ LABOUR CODE EXPLAINER ══════ -->
+<section class="code-section reveal">
+  <div class="code-inner">
+    <div>
+      <div class="chip">November 2025 Labour Codes</div>
+      <h2 class="D">29 laws became 4.<br>Your obligations <em>didn't shrink.</em></h2>
+      <div class="body-t" style="margin-top:22px;">
+        <p>India's four Labour Codes — Code on Wages, Social Security Code, Industrial Relations Code, and Occupational Safety Code — came into force in November 2025, replacing 29 older laws. The consolidation simplified the framework — but introduced new obligations that many employers haven't yet implemented.</p>
+        <p>ORIGENNT's payroll practice is fully updated to the November 2025 regime and the new Income Tax Act 2025 effective April 1, 2026.</p>
+      </div>
+      <div class="code-cards">
+        <div class="cc"><div class="cc-num">1</div><div class="cc-content"><div class="cc-title">Code on Wages 2019 (Active Nov 2025)</div><div class="cc-desc">Redefines "wages" — basic pay must be at least 50% of total CTC. Impacts PF and ESI calculation. Companies with high-allowance salary structures must restructure immediately.</div><div class="cc-impact">Affects every employer with 1+ employees</div></div></div>
+        <div class="cc"><div class="cc-num">2</div><div class="cc-content"><div class="cc-title">Social Security Code (Active Nov 2025)</div><div class="cc-desc">Consolidates EPF, ESI, gratuity, maternity benefit, and labour welfare fund. Extends gratuity to fixed-term employees after 1 year (previously 5 years). Platform workers now covered.</div><div class="cc-impact">Gratuity liability now starts at 1 year</div></div></div>
+        <div class="cc"><div class="cc-num">3</div><div class="cc-content"><div class="cc-title">Industrial Relations Code (Active Nov 2025)</div><div class="cc-desc">Increases threshold for retrenchment permissions. Introduces fixed-term employment at par with permanent workers — same benefits, no retrenchment notice required at contract end.</div><div class="cc-impact">Fixed-term workers get all permanent benefits</div></div></div>
+        <div class="cc"><div class="cc-num">4</div><div class="cc-content"><div class="cc-title">Occupational Safety, Health & Working Conditions Code (Active Nov 2025)</div><div class="cc-desc">Mandates digital maintenance of all statutory registers. Real-time digital inspections enabled. Non-maintenance: penalty up to ₹3 lakh. Working hours: 48/week max, double pay for overtime.</div><div class="cc-impact">Digital records mandatory — paper registers insufficient</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div style="margin-bottom:28px;"><div class="chip">Key Changes Timeline</div><h2 class="D" style="font-size:24px;">What changed & <em>when.</em></h2></div>
+      <div class="change-timeline">
+        <div class="ct-item">
+          <div class="ct-date"><div class="ct-date-badge">Nov<br>2025</div></div>
+          <div class="ct-content">
+            <div class="ct-title">Four Labour Codes Enforced</div>
+            <div class="ct-desc">All four codes came into force simultaneously. Companies had to update salary structures, employment contracts, and statutory registration.</div>
+            <div class="ct-tag enforce">Enforced</div>
+          </div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date"><div class="ct-date-badge">Nov<br>2025</div></div>
+          <div class="ct-content">
+            <div class="ct-title">50% Wage Rule Activated</div>
+            <div class="ct-desc">Basic pay must constitute minimum 50% of gross CTC. Companies using high-allowance structures must restructure — impacting PF and ESI liability significantly.</div>
+            <div class="ct-tag new">New</div>
+          </div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date"><div class="ct-date-badge">Nov<br>2025</div></div>
+          <div class="ct-content">
+            <div class="ct-title">Gratuity at 1 Year for Fixed-Term Employees</div>
+            <div class="ct-desc">Previously, gratuity required 5 continuous years of service. Now, fixed-term employees are eligible after just 1 year — significantly increasing liability for project-based employers.</div>
+            <div class="ct-tag new">New Rule</div>
+          </div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date"><div class="ct-date-badge">Apr<br>2026</div></div>
+          <div class="ct-content">
+            <div class="ct-title">New Income Tax Act 2025 — Live</div>
+            <div class="ct-desc">Replaces the Income Tax Act 1961. New TDS calculation formats, revised Form 24Q, updated Form 16 formats, and new payroll system compatibility requirements.</div>
+            <div class="ct-tag updated">Updated Now</div>
+          </div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date"><div class="ct-date-badge">2026</div></div>
+          <div class="ct-content">
+            <div class="ct-title">2-Day Wage Settlement on Exit</div>
+            <div class="ct-desc">Under the new Wage Code, employers must settle all wages within 2 working days of an employee's separation — replacing the previous 30-day norm for contract workers.</div>
+            <div class="ct-tag new">New</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ PAYROLL CALCULATOR ══════ -->
+<section class="calc-section reveal">
+  <div class="calc-inner">
+    <div>
+      <div class="chip w">Payroll Calculator</div>
+      <h2 class="D W">Know exactly what<br>your payroll <em>really</em> costs.</h2>
+      <div class="body-t w" style="margin-top:22px;">
+        <p>Most employers focus on gross salary. The true cost includes employer-side EPF (12%), ESI (3.25%), gratuity provisioning, and professional tax. Use our calculator to understand your full cost-to-company.</p>
+        <p>For 2026, remember: the new 50% wage rule means basic pay can't be less than 50% of gross — recalculate if your salary structure doesn't meet this threshold.</p>
+      </div>
+      <!-- Visual breakdown of employer vs employee costs -->
+      <div style="margin-top:36px;display:flex;flex-direction:column;gap:3px;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">EPF — Employee side (12% basic)</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);">Deducted from salary</div>
+        </div>
+        <div style="background:rgba(204,34,41,.1);border:1px solid rgba(204,34,41,.2);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.65);">EPF — Employer side (12% basic) — <strong style="color:white;">YOUR EXTRA COST</strong></div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);">Added to CTC</div>
+        </div>
+        <div style="background:rgba(204,34,41,.1);border:1px solid rgba(204,34,41,.2);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.65);">ESI — Employer side (3.25% gross) — <strong style="color:white;">YOUR EXTRA COST</strong></div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);">Added to CTC</div>
+        </div>
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">TDS — Slab-based, deducted from gross</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);">Deducted from salary</div>
+        </div>
+      </div>
+    </div>
+    <div class="payroll-calc">
+      <div class="pc-title">Employee Cost Calculator — FY 2026–27</div>
+      <div class="pc-field">
+        <div class="pc-label">Gross Monthly Salary <span id="grossLabel">₹30,000</span></div>
+        <input type="range" id="grossSlider" min="10000" max="200000" value="30000" step="1000" oninput="calcPayroll()">
+      </div>
+      <div class="pc-field">
+        <div class="pc-label">Basic Pay % of Gross <span id="basicLabel">50% (New Wage Code min)</span></div>
+        <input type="range" id="basicSlider" min="40" max="70" value="50" oninput="calcPayroll()">
+      </div>
+      <div class="pc-field">
+        <div class="pc-label">ESI Applicable? <span id="esiLabel">Yes (salary ≤₹21,000)</span></div>
+        <input type="range" id="esiSlider" min="0" max="1" value="1" step="1" oninput="calcPayroll()">
+      </div>
+      <div class="pc-breakdown">
+        <div class="pb-row"><span class="pb-label">Gross Monthly Salary</span><span class="pb-val" id="pbGross">₹30,000</span></div>
+        <div class="pb-row"><span class="pb-label">Basic Pay (50% of gross)</span><span class="pb-val" id="pbBasic">₹15,000</span></div>
+        <div class="pb-row"><span class="pb-label">EPF — Employee (12% basic)</span><span class="pb-val red" id="pbEpfEmp">−₹1,800</span></div>
+        <div class="pb-row"><span class="pb-label">ESI — Employee (0.75% gross)</span><span class="pb-val red" id="pbEsiEmp">−₹225</span></div>
+        <div class="pb-row"><span class="pb-label">TDS (estimated slab)</span><span class="pb-val red" id="pbTds">−₹0</span></div>
+        <div class="pb-row"><span class="pb-label">Professional Tax (Odisha)</span><span class="pb-val red">−₹200</span></div>
+        <div class="pb-row"><span class="pb-label">Approx. Net Take-Home</span><span class="pb-val green" id="pbNet">~₹27,775</span></div>
+        <div class="pb-row"><span class="pb-label">EPF — Employer (12% basic)</span><span class="pb-val dim" id="pbEpfEr">+₹1,800 (your cost)</span></div>
+        <div class="pb-row"><span class="pb-label">ESI — Employer (3.25% gross)</span><span class="pb-val dim" id="pbEsiEr">+₹975 (your cost)</span></div>
+        <div class="pb-total">
+          <span class="pb-total-label">Total CTC (Monthly)</span>
+          <span class="pb-total-val" id="pbCtc">₹32,775<sub>/mo</sub></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ CASE STUDIES ══════ -->
+<section class="cases-section reveal">
+  <div class="chip">Client Outcomes</div>
+  <h2 class="D">What happens when<br>payroll is done <em>right.</em></h2>
+  <div class="cases-grid">
+    <div class="case-card">
+      <div class="case-sector">Manufacturing — Odisha</div>
+      <div class="case-title">Saved ₹2.1 Lakh in Penalties for a 120-Employee Factory</div>
+      <div class="case-body">A manufacturing unit in Cuttack had been processing payroll on Excel for 3 years. A routine EPFO inspection found 14 months of incorrect PF wage base calculations. ORIGENNT conducted a full payroll compliance audit, rectified the historical filings, negotiated with EPFO, and migrated the entire payroll — avoiding ₹2.1 lakh in projected penalties.</div>
+      <div class="case-outcome">
+        <div class="case-outcome-n">₹2.1<sub>L</sub></div>
+        <div class="case-outcome-l">Penalties avoided</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-sector">IT Startup — Multi-City</div>
+      <div class="case-title">Zero-Error Payroll for a 45-Person SaaS Company Across 3 States</div>
+      <div class="case-body">A Bhubaneswar-headquartered SaaS startup with employees in Odisha, West Bengal, and Karnataka needed compliant payroll across three different PT regimes, minimum wage structures, and LWF rules. ORIGENNT set up their multi-state payroll from scratch — zero penalties, zero errors across 18 months of engagement.</div>
+      <div class="case-outcome">
+        <div class="case-outcome-n">18<sub>mo</sub></div>
+        <div class="case-outcome-l">Zero penalties, zero errors</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-sector">BFSI — West Bengal</div>
+      <div class="case-title">Full Labour Code 2025 Transition for an NBFC with 280 Employees</div>
+      <div class="case-body">A regional NBFC needed to transition its salary structures to comply with the new 50% wage rule, update its fixed-term employment contracts to reflect new gratuity provisions, and implement digital statutory registers. ORIGENNT delivered the complete transition in 45 days — ahead of the November 2025 enforcement deadline.</div>
+      <div class="case-outcome">
+        <div class="case-outcome-n">45<sub>days</sub></div>
+        <div class="case-outcome-l">Full Labour Code 2025 transition</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FAQ ══════ -->
+<section class="faq-section reveal">
+  <div class="chip">Common Questions</div>
+  <h2 class="D">Everything you need to <em>know.</em></h2>
+  <div class="faq-cols">
+    <div>
+      <div class="faq-item open"><div class="faq-q">Is ORIGENNT authorised to process payroll on behalf of clients?</div><div class="faq-a">Yes. ORIGENNT PRIVATE LIMITED is registered under the Companies Act 2013 (incorporated 11 November 2025, Odisha). Our Memorandum of Association explicitly authorises us to "undertake the provision and management of human resources functions, including payroll processing, employee engagement, performance management, compliance management, and related HR operations on behalf of clients." We operate fully within our MOA objects.</div></div>
+      <div class="faq-item"><div class="faq-q">What changed with the November 2025 Labour Codes?</div><div class="faq-a">The four Labour Codes (Code on Wages, Social Security Code, Industrial Relations Code, and OSH Code) consolidated 29 older laws. Key changes include: (1) Basic pay must be minimum 50% of gross CTC; (2) Fixed-term employees eligible for gratuity after 1 year instead of 5; (3) All statutory registers must be maintained digitally; (4) Separation wages must be paid within 2 working days of exit. ORIGENNT manages all of these for our clients.</div></div>
+      <div class="faq-item"><div class="faq-q">What penalties apply for late EPF/ESI filing?</div><div class="faq-a">EPF defaults attract 12% simple interest per annum on outstanding amounts. Repeat defaults can result in additional damages up to ₹5,000 plus imprisonment up to 3 years. ESI defaults start at ₹10,000 minimum penalty. The November 2025 Labour Codes added penalties up to ₹3 lakh for systematic non-compliance with digital record requirements. ORIGENNT's track record with clients is zero penalties.</div></div>
+      <div class="faq-item"><div class="faq-q">What is the impact of the new Income Tax Act 2025?</div><div class="faq-a">Effective April 1, 2026, the Income Tax Act 2025 replaces the 1961 Act. Key payroll impacts: new TDS calculation methods, revised Form 24Q formats, updated Form 16 templates, and stricter audit trail requirements. All ORIGENNT-managed payrolls are fully updated to the new regime. Employers still running DIY payroll need to update their systems immediately to avoid non-compliance.</div></div>
+    </div>
+    <div>
+      <div class="faq-item"><div class="faq-q">What is the 50% wage rule and does it affect my company?</div><div class="faq-a">The Wage Code 2019 (enforced November 2025) mandates that the "wages" component (basic + DA + retaining allowance) must constitute at least 50% of the total gross CTC. This matters because EPF and ESI are calculated on this wage base — a lower basic means lower statutory contributions, which is now illegal. If your salary structure has high allowances and low basic, you must restructure. ORIGENNT audits and redesigns salary structures from ₹350/employee.</div></div>
+      <div class="faq-item"><div class="faq-q">Can you handle payroll for employees in multiple states?</div><div class="faq-a">Yes. ORIGENNT manages multi-state payroll across 12+ states including Odisha, West Bengal, Jharkhand, Karnataka, Maharashtra, Telangana, Tamil Nadu, and others. Each state has different Professional Tax rates, deadlines, and LWF rules. Our multi-state payroll plan covers up to 5 states — above that, we scope a custom engagement.</div></div>
+      <div class="faq-item"><div class="faq-q">How do you handle confidential salary data?</div><div class="faq-a">Employee payroll data is processed under strict confidentiality — NDA signed at engagement start, access limited to the assigned ORIGENNT payroll team, data stored in encrypted systems, and never shared with third parties. We follow emerging data protection norms under India's DPDP Act 2023 and maintain digital records as required by the November 2025 Labour Codes.</div></div>
+      <div class="faq-item"><div class="faq-q">How quickly can ORIGENNT take over an existing payroll?</div><div class="faq-a">For 50 employees or fewer, we can take over an existing payroll within 7–10 working days — including data migration, employee master setup, and first processed payroll run. For larger companies, we typically run a parallel payroll in month one before going live. We also handle historical reconciliation if your previous payroll had errors.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FINAL CTA ══════ -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Your payroll should<br>run like clockwork.<br><em>Ours does.</em></h2>
+    <p class="fc-sub">ORIGENNT PRIVATE LIMITED — incorporated under the Companies Act 2013, registered in Odisha, MOA-authorised for payroll processing and compliance management. 3,200+ employee payrolls. 99.8% accuracy. Zero penalties. From ₹3,000/month.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="fca w" onclick="openRzp('Payroll Outsourcing Enquiry','Custom',0,'General payroll outsourcing enquiry.')">Outsource Your Payroll</button>
+    <button class="fca ol" onclick="openRzp('Payroll Compliance Audit','₹18,000',18000,'Payroll compliance audit booking.')">Book a Compliance Audit</button>
+    <a href="talent-acquisition.html" class="fca ol">Talent Acquisition →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="fl">ORIGENNT<span>.</span></div>
+  <div class="fcopy">© 2026 Origennt Private Limited · CIN Registered under Companies Act 2013 · Est. 11/11/2025 · Bhubaneswar, Odisha.</div>
+</footer>
+</div><!-- /main -->
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* SIDEBAR */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* BAR CHARTS */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill,.dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*100));bObs.unobserve(e.target);}});
+},{threshold:.2});
+document.querySelectorAll('.statutory-section,.penalty-section,.chart-panel').forEach(el=>bObs.observe(el));
+
+/* DONUT */
+const dObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.querySelectorAll('.dseg').forEach((s,i)=>setTimeout(()=>s.classList.add('go'),i*160)),200);dObs.unobserve(e.target);}});
+},{threshold:.3});
+document.querySelectorAll('.donut-wrap').forEach(el=>dObs.observe(el));
+
+/* SERVICES TABS */
+document.querySelectorAll('.stab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.svc-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* FAQ */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item'),was=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!was)item.classList.add('open');
+  });
+});
+
+/* PAYROLL CALCULATOR */
+function fmtINR(n){if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';if(n>=1000)return'₹'+(n/1000).toFixed(1)+'K';return'₹'+Math.round(n);}
+function calcPayroll(){
+  const gross=+document.getElementById('grossSlider').value;
+  const basicPct=+document.getElementById('basicSlider').value/100;
+  const esiApplicable=+document.getElementById('esiSlider').value===1&&gross<=21000;
+  document.getElementById('grossLabel').textContent='₹'+gross.toLocaleString();
+  document.getElementById('basicLabel').textContent=Math.round(basicPct*100)+'% '+(basicPct===.5?'(New Wage Code min)':basicPct<.5?'(⚠ Below new minimum!)':'');
+  document.getElementById('esiLabel').textContent=gross<=21000?'Yes (salary ≤₹21,000)':'No (salary >₹21,000)';
+
+  const basic=Math.round(gross*basicPct);
+  const epfEmp=Math.round(basic*0.12);
+  const epfEr=Math.round(basic*0.12);
+  const esiEmp=esiApplicable?Math.round(gross*0.0075):0;
+  const esiEr=esiApplicable?Math.round(gross*0.0325):0;
+  // Simple TDS estimate (new tax regime FY26-27)
+  const annualGross=gross*12;
+  let annualTds=0;
+  if(annualGross>700000)annualTds=Math.max(0,(annualGross-700000)*0.05);
+  if(annualGross>1000000)annualTds=25000+(annualGross-1000000)*0.1;
+  if(annualGross>1200000)annualTds=45000+(annualGross-1200000)*0.15;
+  if(annualGross>1500000)annualTds=90000+(annualGross-1500000)*0.2;
+  const monthlyTds=Math.round(annualTds/12);
+  const pt=200;
+
+  const net=gross-epfEmp-esiEmp-monthlyTds-pt;
+  const totalCtc=gross+epfEr+esiEr;
+
+  document.getElementById('pbGross').textContent='₹'+gross.toLocaleString();
+  document.getElementById('pbBasic').textContent='₹'+basic.toLocaleString();
+  document.getElementById('pbEpfEmp').textContent='−₹'+epfEmp.toLocaleString();
+  document.getElementById('pbEsiEmp').textContent=esiApplicable?'−₹'+esiEmp.toLocaleString():'Not applicable';
+  document.getElementById('pbTds').textContent='−₹'+monthlyTds.toLocaleString();
+  document.getElementById('pbNet').textContent='~₹'+net.toLocaleString();
+  document.getElementById('pbEpfEr').textContent='+₹'+epfEr.toLocaleString()+' (your cost)';
+  document.getElementById('pbEsiEr').textContent=esiApplicable?'+₹'+esiEr.toLocaleString()+' (your cost)':'Not applicable';
+  document.getElementById('pbCtc').innerHTML='₹'+totalCtc.toLocaleString()+'<sub>/mo</sub>';
+}
+calcPayroll();
+
+/* RAZORPAY */
+let rzpC={};
+function openRzp(name,displayAmt,amtInt,desc){
+  rzpC={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent=name;
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent='Fill in your details — our team confirms within 24 hours.';
+  document.getElementById('rzpPrice').innerHTML='<sup>₹</sup>'+(amtInt>0?displayAmt.replace('₹',''):'Custom');
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpModal').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+function closeRzp(){document.getElementById('rzpModal').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpC.amtPaise>0){
+    const options={
+      key:'YOUR_RAZORPAY_KEY_ID', // ← Replace with your Razorpay Key ID
+      amount:rzpC.amtPaise,currency:'INR',
+      name:'ORIGENNT Private Limited',description:rzpC.name,
+      handler:function(response){closeRzp();alert('✓ Payment confirmed! ID: '+response.razorpay_payment_id+'\n\nORIGENNT will contact you within 24 hours to begin your payroll engagement.');},
+      prefill:{name,email,contact:phone},
+      notes:{company,employees:document.getElementById('rzpEmp').value,states:document.getElementById('rzpStates').value},
+      theme:{color:'#CC2229'}
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent(`Hi ORIGENNT,\n\nPayroll & Compliance Enquiry:\n\nService: ${rzpC.name}\nCompany: ${company}\nContact: ${name}\nEmail: ${email}\nPhone: ${phone}\nEmployees: ${document.getElementById('rzpEmp').value}\nStates: ${document.getElementById('rzpStates').value}`);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+</script>
+</body>
+</html>
