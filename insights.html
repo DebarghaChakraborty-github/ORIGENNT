@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIGENNT Insights — Execution Intelligence for MSMEs & SMEs</title>
+<meta name="description" content="ORIGENNT Insights is a structured thinking system on MSME & SME execution. Workforce, operations, and growth frameworks. Businesses fail due to execution systems, not ideas.">
+<meta name="keywords" content="MSME execution, SME operations, workforce management, execution diagnostic, business systems, ORIGENNT insights, execution framework">
+<meta property="og:title" content="ORIGENNT Insights — Execution Intelligence for MSMEs & SMEs">
+<meta property="og:description" content="Structured thinking on business execution. Workforce. Operations. Growth. One diagnostic that shows where your business is broken.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Crect x='8' y='14' width='16' height='1' fill='%23CC2229'/%3E%3Crect x='8' y='10' width='10' height='1' fill='%231a1a1a'/%3E%3C/svg%3E">
+<style>
+:root {
+  --red: #CC2229;
+  --red-light: #f8e8e8;
+  --black: #0d0d0d;
+  --ink: #1a1a1a;
+  --ink2: #2f2f2f;
+  --text: #333333;
+  --text2: #555555;
+  --text3: #888888;
+  --rule: #e4e2de;
+  --rule2: #f0eeeb;
+  --warm: #faf9f7;
+  --white: #ffffff;
+  --gold: #b8941e;
+  --ease: cubic-bezier(.25,.1,.25,1);
+  --ease2: cubic-bezier(.77,0,.18,1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ═══ TOPBAR ═══ */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 58px;
+  background: rgba(255,255,255,.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; z-index: 900;
+}
+.tb-left { display: flex; align-items: center; gap: 24px; }
+.tb-wordmark {
+  font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;
+  letter-spacing: .04em; color: var(--black);
+}
+.tb-wordmark span { color: var(--red); }
+.tb-sep { width: 1px; height: 20px; background: var(--rule); }
+.tb-section { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); }
+.tb-right { display: flex; align-items: center; gap: 28px; }
+.tb-nav-link { font-size: 12.5px; font-weight: 400; color: var(--text2); transition: color .2s; }
+.tb-nav-link:hover { color: var(--black); }
+.tb-diagnostic-btn {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 8px 20px; transition: background .2s;
+  white-space: nowrap;
+}
+.tb-diagnostic-btn:hover { background: #a31a20; }
+
+/* ═══ HERO ═══ */
+.hero {
+  padding-top: 58px;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.hero-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 58px);
+}
+.hero-left {
+  padding: 88px 72px 88px 60px;
+  border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.hero-right {
+  padding: 88px 60px 88px 72px;
+  background: var(--warm);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.h-overline {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 300; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.h-overline::before { content: ''; width: 28px; height: 1px; background: var(--red); }
+h1.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(46px, 5.2vw, 76px);
+  font-weight: 400; line-height: 1.04; letter-spacing: -.02em;
+  color: var(--black);
+}
+h1.hero-h1 em { font-style: italic; }
+.hero-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px; font-weight: 300;
+  color: var(--text3); margin-top: 32px; line-height: 1.6;
+  border-left: 2px solid var(--rule); padding-left: 18px;
+  letter-spacing: .02em;
+}
+.hero-tagline strong {
+  color: var(--red); font-weight: 400;
+  font-style: normal;
+}
+.hero-acts { display: flex; gap: 12px; margin-top: 48px; align-items: center; flex-wrap: wrap; }
+.btn-p {
+  font-size: 11.5px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 13px 28px; transition: background .2s;
+  display: inline-block;
+}
+.btn-p:hover { background: #a31a20; }
+.btn-s {
+  font-size: 11.5px; font-weight: 500; letter-spacing: .04em;
+  color: var(--text2); border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px; transition: color .2s, border-color .2s;
+  display: inline-block;
+}
+.btn-s:hover { color: var(--black); border-color: var(--black); }
+
+/* Hero right — doctrine block */
+.h-doctrine-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 28px;
+}
+.h-doctrine-statement {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 2.4vw, 34px); font-weight: 400; line-height: 1.3;
+  color: var(--black); margin-bottom: 36px;
+}
+.h-doctrine-statement em { font-style: italic; color: var(--red); }
+.doctrine-pillars { display: flex; flex-direction: column; gap: 0; }
+.dp-row {
+  display: grid; grid-template-columns: 32px 1fr;
+  gap: 20px; padding: 20px 0; border-top: 1px solid var(--rule);
+  align-items: start;
+}
+.dp-row:last-child { border-bottom: 1px solid var(--rule); }
+.dp-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 300; color: var(--red);
+  margin-top: 3px;
+}
+.dp-content {}
+.dp-title { font-size: 13.5px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.dp-desc { font-size: 12.5px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+.h-metric-strip {
+  display: flex; gap: 0; margin-top: 48px;
+  border-top: 1px solid var(--rule); padding-top: 32px;
+}
+.hm { flex: 1; border-right: 1px solid var(--rule); padding-right: 24px; margin-right: 24px; }
+.hm:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.hm-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 400; color: var(--black); line-height: 1;
+}
+.hm-n sup { font-size: 16px; color: var(--red); font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.hm-l { font-size: 10.5px; font-weight: 500; color: var(--text3); margin-top: 5px; letter-spacing: .04em; }
+
+/* ═══ SECTION PRIMITIVES ═══ */
+.section { padding: 96px 60px; }
+.section.warm { background: var(--warm); }
+.section.black { background: var(--black); }
+.section.red-pale { background: var(--red-light); }
+
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow.red { color: var(--red); }
+.sec-eyebrow::before { content: attr(data-n); }
+
+h2.sec-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.2vw, 48px); font-weight: 400;
+  line-height: 1.1; letter-spacing: -.02em; color: var(--black);
+}
+h2.sec-h em { font-style: italic; color: var(--red); }
+h2.sec-h.w { color: var(--white); }
+h2.sec-h.w em { color: rgba(255,255,255,.35); }
+
+.sec-lead { font-size: 15px; font-weight: 300; line-height: 1.88; color: var(--text2); max-width: 540px; margin-top: 14px; }
+.sec-lead.w { color: rgba(255,255,255,.5); }
+
+.sec-header-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; padding-bottom: 36px; border-bottom: 1px solid var(--rule); }
+.sec-header-grid.dark-rule { border-bottom-color: rgba(255,255,255,.08); }
+
+/* ═══ POSITIONING BLOCK ═══ */
+.lens-block {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid var(--rule);
+}
+.lens-left {
+  padding: 56px 52px;
+  border-right: 1px solid var(--rule);
+}
+.lens-right { padding: 56px 52px; }
+.lens-formula {
+  display: flex; align-items: center; gap: 0;
+  margin: 40px 0;
+}
+.lf-block {
+  flex: 1; padding: 20px 18px; background: var(--warm);
+  border: 1px solid var(--rule); text-align: center;
+}
+.lf-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.lf-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--black);
+}
+.lf-sub { font-size: 10.5px; font-weight: 300; color: var(--text3); margin-top: 3px; }
+.lf-op {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--text3); padding: 0 14px; flex-shrink: 0;
+}
+.lf-equals { padding: 0 18px; }
+.lf-result {
+  padding: 20px 20px; background: var(--black); text-align: center; flex-shrink: 0;
+}
+.lf-result .lf-label { color: var(--white); font-size: 10px; }
+.lf-result .lf-sub { color: rgba(255,255,255,.35); }
+.lens-right-body { font-size: 14.5px; font-weight: 300; line-height: 1.9; color: var(--text2); }
+.lens-right-body p { margin-bottom: 16px; }
+.lens-right-body strong { color: var(--black); font-weight: 600; }
+.lens-right-body em { font-style: italic; color: var(--red); }
+.lens-principle {
+  background: var(--red); color: var(--white);
+  padding: 20px 22px; margin-top: 28px;
+}
+.lp-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-style: italic; line-height: 1.5;
+}
+.lp-attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); margin-top: 12px;
+}
+
+/* ═══ CATEGORY CARDS ═══ */
+.cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.cat-card {
+  padding: 44px 36px; border: 1px solid var(--rule); border-right: none;
+  position: relative; overflow: hidden; transition: background .3s;
+  cursor: default;
+}
+.cat-card:last-child { border-right: 1px solid var(--rule); }
+.cat-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: var(--red);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--ease2);
+}
+.cat-card:hover { background: var(--warm); }
+.cat-card:hover::before { transform: scaleX(1); }
+.cc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px; display: block;
+}
+.cc-icon { font-size: 28px; margin-bottom: 18px; display: block; }
+.cc-title { font-size: 16.5px; font-weight: 600; color: var(--black); margin-bottom: 10px; }
+.cc-desc { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.78; margin-bottom: 20px; }
+.cc-topics { display: flex; flex-direction: column; gap: 6px; }
+.cc-topic {
+  font-size: 11.5px; font-weight: 300; color: var(--text3);
+  display: flex; gap: 8px; align-items: center;
+}
+.cc-topic::before { content: '→'; color: var(--red); font-size: 10px; flex-shrink: 0; }
+.cc-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .14em; color: var(--text3);
+  margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--rule2);
+}
+
+/* ═══ FEATURED INSIGHT ═══ */
+.featured-wrap {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid var(--rule);
+}
+.fi-left {
+  padding: 64px 60px; background: var(--black);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.fi-right { padding: 64px 60px; }
+.fi-category {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.fi-category::before { content: ''; width: 16px; height: 1px; background: var(--red); }
+h3.fi-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 2.8vw, 40px); font-weight: 400;
+  line-height: 1.15; color: var(--white); margin-bottom: 20px;
+}
+h3.fi-title em { font-style: italic; }
+.fi-lead { font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(255,255,255,.5); margin-bottom: 32px; }
+.fi-read-btn {
+  font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  color: var(--white); border-bottom: 1px solid rgba(255,255,255,.25);
+  padding-bottom: 3px; display: inline-flex; align-items: center; gap: 8px;
+  transition: gap .2s, border-color .2s;
+}
+.fi-read-btn:hover { gap: 14px; border-color: rgba(255,255,255,.6); }
+.fi-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.2); margin-top: 48px;
+  display: flex; gap: 24px;
+}
+.fi-right-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 24px;
+}
+.fi-points { display: flex; flex-direction: column; gap: 0; }
+.fip {
+  padding: 20px 0; border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: 24px 1fr; gap: 16px;
+}
+.fip:last-child { border-bottom: none; }
+.fip-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--red); margin-top: 2px; }
+.fip-t { font-size: 13.5px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.fip-d { font-size: 12.5px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+.fi-diagnostic-nudge {
+  background: var(--red-light); border: 1px solid rgba(204,34,41,.15);
+  padding: 20px 22px; margin-top: 28px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.fdn-text { font-size: 13px; font-weight: 500; color: var(--black); }
+.fdn-sub { font-size: 11.5px; font-weight: 300; color: var(--text2); margin-top: 2px; }
+.fdn-btn {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 9px 18px; white-space: nowrap; flex-shrink: 0;
+  transition: background .2s;
+}
+.fdn-btn:hover { background: #a31a20; }
+
+/* ═══ INSIGHTS GRID ═══ */
+.insights-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.insight-card {
+  border: 1px solid var(--rule); border-right: none; border-top: none;
+  padding: 36px 30px; transition: background .25s;
+  position: relative;
+}
+.insight-card:hover { background: var(--warm); }
+.insight-card:nth-child(3n) { border-right: 1px solid var(--rule); }
+.insight-card:nth-child(-n+3) { border-top: 1px solid var(--rule); }
+.ic-category {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase;
+  margin-bottom: 14px; display: inline-block; padding: 3px 8px;
+}
+.ic-category.wf { background: rgba(204,34,41,.08); color: var(--red); }
+.ic-category.op { background: rgba(26,26,26,.06); color: var(--ink2); }
+.ic-category.gr { background: rgba(184,148,30,.1); color: var(--gold); }
+h4.ic-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 400; line-height: 1.25;
+  color: var(--black); margin-bottom: 12px;
+}
+h4.ic-title em { font-style: italic; }
+.ic-preview { font-size: 12.5px; font-weight: 300; color: var(--text2); line-height: 1.75; margin-bottom: 20px; }
+.ic-read {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .06em;
+  color: var(--red); display: inline-flex; align-items: center; gap: 6px;
+  transition: gap .2s;
+}
+.insight-card:hover .ic-read { gap: 10px; }
+.ic-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .12em; color: var(--text3);
+  margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rule2);
+  display: flex; gap: 16px;
+}
+/* Wide card — spans 2 */
+.insight-card.wide { grid-column: span 2; }
+.insight-card.wide h4.ic-title { font-size: 22px; }
+
+/* ═══ FRAMEWORK SECTION ═══ */
+.framework-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 0; border: 1px solid var(--rule); }
+.fw-left {
+  padding: 56px 48px; border-right: 1px solid var(--rule);
+  background: var(--warm);
+}
+.fw-right { padding: 56px 52px; }
+.fw-layers { display: flex; flex-direction: column; gap: 0; margin-top: 20px; }
+.fw-layer {
+  padding: 22px 0; border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: 48px 1fr; gap: 16px;
+  transition: background .2s; cursor: default;
+}
+.fw-layer:first-child { border-top: 1px solid var(--rule); }
+.fw-layer:hover .fwl-bar { transform: scaleX(1); }
+.fwl-n {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 300; color: var(--red); margin-top: 3px;
+}
+.fwl-title { font-size: 13.5px; font-weight: 600; color: var(--black); margin-bottom: 3px; }
+.fwl-sub { font-size: 12px; font-weight: 300; color: var(--text2); }
+.fwl-bar {
+  height: 2px; background: var(--red); margin-top: 8px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s var(--ease2);
+}
+.fw-failure-model { margin-top: 32px; }
+.ffm-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 16px;
+}
+.ffm-chain { display: flex; align-items: center; gap: 0; }
+.ffm-block {
+  flex: 1; padding: 14px 12px; border: 1px solid var(--rule); text-align: center;
+  font-size: 11px; font-weight: 600; color: var(--black);
+}
+.ffm-block.broken { border-color: var(--red); background: rgba(204,34,41,.05); color: var(--red); }
+.ffm-arrow { padding: 0 8px; color: var(--text3); font-size: 14px; flex-shrink: 0; }
+.fw-right-body { font-size: 14.5px; font-weight: 300; line-height: 1.9; color: var(--text2); }
+.fw-right-body p { margin-bottom: 16px; }
+.fw-right-body strong { color: var(--black); font-weight: 600; }
+.fw-insight-pull {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-style: italic; font-weight: 400; line-height: 1.5;
+  color: var(--black); border-left: 3px solid var(--red);
+  padding-left: 22px; margin: 28px 0;
+}
+.fw-breakdown-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 28px; }
+.fwbg {
+  padding: 16px; border: 1px solid var(--rule);
+  text-align: center;
+}
+.fwbg-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 400; color: var(--black); line-height: 1;
+}
+.fwbg-n sup { font-size: 14px; color: var(--red); font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.fwbg-l { font-size: 10px; font-weight: 500; color: var(--text3); margin-top: 4px; letter-spacing: .04em; }
+
+/* ═══ DIAGNOSTIC SECTION ═══ */
+.diag-wrap {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.diag-left {
+  padding: 80px 72px 80px 60px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.diag-right {
+  padding: 80px 60px 80px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.diag-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.diag-tag::before { content: ''; width: 16px; height: 1px; background: var(--red); }
+h2.diag-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 3.8vw, 56px); font-weight: 400;
+  line-height: 1.08; color: var(--white); margin-bottom: 20px;
+}
+h2.diag-h em { font-style: italic; color: rgba(255,255,255,.3); }
+.diag-lead { font-size: 14.5px; font-weight: 300; line-height: 1.85; color: rgba(255,255,255,.5); margin-bottom: 48px; }
+.diag-deliverables { display: flex; flex-direction: column; gap: 0; }
+.dd {
+  padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  display: grid; grid-template-columns: 28px 1fr; gap: 16px;
+}
+.dd:first-child { border-top: 1px solid rgba(255,255,255,.07); }
+.dd-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 300; color: var(--red); margin-top: 3px;
+}
+.dd-t { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); margin-bottom: 3px; }
+.dd-d { font-size: 12px; font-weight: 300; color: rgba(255,255,255,.38); line-height: 1.6; }
+
+/* Diagnostic outcome panel */
+.diag-outcome-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.25); margin-bottom: 20px;
+}
+.diag-outcome-statement {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2vw, 28px); font-weight: 400; line-height: 1.4;
+  color: var(--white); margin-bottom: 36px;
+}
+.diag-outcome-statement em { font-style: italic; color: rgba(255,255,255,.35); }
+.diag-cta-block { display: flex; flex-direction: column; gap: 12px; }
+.diag-cta-main {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 16px 28px; display: flex; align-items: center;
+  justify-content: space-between; transition: background .2s;
+}
+.diag-cta-main:hover { background: #a31a20; }
+.diag-cta-wa {
+  font-size: 12px; font-weight: 600; letter-spacing: .04em;
+  color: var(--white); background: #25D366;
+  padding: 14px 28px; display: flex; align-items: center; gap: 10px;
+  transition: background .2s;
+}
+.diag-cta-wa:hover { background: #1da851; }
+.diag-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .1em; color: rgba(255,255,255,.2);
+  margin-top: 12px; line-height: 1.65;
+}
+/* Diagnostic stats */
+.diag-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,.06); margin-top: 48px; }
+.ds {
+  background: var(--black); padding: 26px 20px;
+}
+.ds-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; font-weight: 400; color: var(--white); line-height: 1;
+}
+.ds-n sup { font-size: 14px; color: var(--red); font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.ds-l { font-size: 10px; font-weight: 500; color: rgba(255,255,255,.28); margin-top: 4px; letter-spacing: .04em; }
+
+/* ═══ WHY THIS PAGE ═══ */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--rule); margin-top: 48px; }
+.why-col { padding: 40px 32px; border-right: 1px solid var(--rule); }
+.why-col:last-child { border-right: none; }
+.wc-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 16px;
+}
+.wc-h { font-size: 15px; font-weight: 600; color: var(--black); margin-bottom: 12px; }
+.wc-body { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.78; }
+
+/* ═══ FINAL CTA ═══ */
+.final-cta {
+  padding: 100px 60px; text-align: center;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.final-cta::before {
+  content: 'EXECUTE'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Playfair Display', serif; font-size: 200px; font-weight: 700; color: rgba(0,0,0,.02);
+  pointer-events: none; letter-spacing: -.04em; white-space: nowrap;
+}
+.final-overline {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 20px;
+}
+h2.final-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 4.5vw, 64px); font-weight: 400;
+  line-height: 1.1; letter-spacing: -.02em; color: var(--black);
+  max-width: 700px; margin: 0 auto 28px;
+}
+h2.final-h em { font-style: italic; color: var(--red); }
+.final-sub { font-size: 15px; font-weight: 300; color: var(--text2); max-width: 480px; margin: 0 auto 44px; line-height: 1.8; }
+.final-acts { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.final-mono {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text3); margin-top: 24px;
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: var(--black); padding: 40px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+}
+.ft-left {}
+.ft-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 4px;
+}
+.ft-brand span { color: var(--red); }
+.ft-usp { font-size: 12px; font-weight: 300; color: rgba(255,255,255,.35); max-width: 380px; line-height: 1.6; }
+.ft-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.ft-l { font-size: 12px; color: rgba(255,255,255,.3); transition: color .2s; }
+.ft-l:hover { color: rgba(255,255,255,.7); }
+.ft-copy { font-size: 11px; color: rgba(255,255,255,.18); }
+
+/* ═══ REVEAL ANIMATIONS ═══ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.vis { opacity: 1; transform: none; }
+.reveal-l { opacity: 0; transform: translateX(-16px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal-l.vis { opacity: 1; transform: none; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1100px) {
+  .hero-main, .lens-block, .featured-wrap, .framework-grid, .diag-wrap { grid-template-columns: 1fr; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--rule); }
+  .lens-left { border-right: none; border-bottom: 1px solid var(--rule); }
+  .fi-left { border-right: none; border-bottom: 1px solid var(--rule); }
+  .fw-left { border-right: none; border-bottom: 1px solid var(--rule); }
+  .diag-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .cat-grid, .insights-grid, .why-grid { grid-template-columns: 1fr 1fr; }
+  .cat-card:nth-child(2) { border-right: 1px solid var(--rule) !important; }
+  .insight-card.wide { grid-column: span 1; }
+  .diag-stats { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .topbar { padding: 0 24px; }
+  .tb-right .tb-nav-link { display: none; }
+  .section { padding: 64px 28px; }
+  .hero-left, .hero-right { padding: 48px 28px; }
+  .diag-left, .diag-right { padding: 56px 28px; }
+  .lens-left, .lens-right, .fi-left, .fi-right, .fw-left, .fw-right { padding: 40px 28px; }
+  .cat-grid, .insights-grid, .why-grid, .diag-stats, .fw-breakdown-grid { grid-template-columns: 1fr; }
+  .insight-card:nth-child(3n) { border-right: none !important; }
+  footer { padding: 36px 28px; flex-direction: column; align-items: flex-start; }
+  .lens-formula { flex-direction: column; gap: 8px; }
+  .lf-op, .lf-equals { padding: 4px 0; }
+  .final-cta { padding: 72px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ TOPBAR ════ -->
+<header class="topbar">
+  <div class="tb-left">
+    <div class="tb-wordmark">ORIGENNT<span>.</span></div>
+    <div class="tb-sep"></div>
+    <div class="tb-section">Insights</div>
+  </div>
+  <nav class="tb-right">
+    <a href="#workforce" class="tb-nav-link">Workforce</a>
+    <a href="#operations" class="tb-nav-link">Operations</a>
+    <a href="#growth" class="tb-nav-link">Growth</a>
+    <a href="#diagnostic" class="tb-nav-link">Diagnostic</a>
+    <a href="#diagnostic" class="tb-diagnostic-btn">Execution Diagnostic →</a>
+  </nav>
+</header>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="hero-main">
+    <div class="hero-left">
+      <div>
+        <div class="h-overline">Structured Intelligence</div>
+        <h1 class="hero-h1">
+          Orígennt<br>
+          <em>Insights.</em>
+        </h1>
+        <p class="hero-tagline">
+          A structured thinking system on MSME &amp; SME execution.<br>
+          Workforce, operations, and growth — analyzed as systems.<br><br>
+          <strong>Businesses fail due to execution systems, not ideas.</strong>
+        </p>
+        <div class="hero-acts">
+          <a href="#insights" class="btn-p">Read Insights</a>
+          <a href="#diagnostic" class="btn-s">Get Execution Diagnostic</a>
+        </div>
+      </div>
+      <div class="h-metric-strip">
+        <div class="hm">
+          <div class="hm-n">3<sup>×</sup></div>
+          <div class="hm-l">Execution Layers Analyzed</div>
+        </div>
+        <div class="hm">
+          <div class="hm-n">82<sup>%</sup></div>
+          <div class="hm-l">MSMEs with Execution Gaps</div>
+        </div>
+        <div class="hm">
+          <div class="hm-n">1</div>
+          <div class="hm-l">Diagnostic. One Report. Clarity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div>
+        <div class="h-doctrine-label">Core Doctrine · ORIGENNT</div>
+        <div class="h-doctrine-statement">
+          Most businesses have <em>strategies</em>.<br>Few have <em>systems.</em>
+        </div>
+        <div class="doctrine-pillars">
+          <div class="dp-row">
+            <div class="dp-num">P</div>
+            <div class="dp-content">
+              <div class="dp-title">People — Workforce Execution</div>
+              <div class="dp-desc">Hiring is not recruitment. It is a system. When the system is absent, every hire is a gamble.</div>
+            </div>
+          </div>
+          <div class="dp-row">
+            <div class="dp-num">P</div>
+            <div class="dp-content">
+              <div class="dp-title">Process — Operational Systems</div>
+              <div class="dp-desc">Operations without structure don't scale. They drain. Every inefficiency compounds at growth stage.</div>
+            </div>
+          </div>
+          <div class="dp-row">
+            <div class="dp-num">P</div>
+            <div class="dp-content">
+              <div class="dp-title">Performance — Growth Execution</div>
+              <div class="dp-desc">Growth that feels random is random. Without measurable execution, scaling is controlled chaos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--rule);">
+        <div class="h-doctrine-label">This is not a blog. It is a thinking system.</div>
+        <div style="font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.8;">Every article is structured around a single lens: where does execution break, and what does the system need to hold together?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ POSITIONING LENS ════ -->
+<section class="section warm">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="01 —">The Analytical Lens</div>
+      <h2 class="sec-h">Every insight analyzed<br>through <em>one framework.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">All ORIGENNT insights are built on a single analytical model: Workforce + Operations + Performance = Execution System. This is not opinion. This is structured diagnosis.</p>
+    </div>
+  </div>
+
+  <div class="lens-block reveal">
+    <div class="lens-left">
+      <div style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">The Execution Equation</div>
+      <div class="lens-formula">
+        <div class="lf-block">
+          <span class="lf-icon">👥</span>
+          <div class="lf-label">Workforce</div>
+          <div class="lf-sub">People & Hiring</div>
+        </div>
+        <div class="lf-op">+</div>
+        <div class="lf-block">
+          <span class="lf-icon">⚙️</span>
+          <div class="lf-label">Operations</div>
+          <div class="lf-sub">Process & Systems</div>
+        </div>
+        <div class="lf-op">+</div>
+        <div class="lf-block">
+          <span class="lf-icon">📈</span>
+          <div class="lf-label">Performance</div>
+          <div class="lf-sub">Growth & Scale</div>
+        </div>
+        <div class="lf-equals">=</div>
+        <div class="lf-result">
+          <span class="lf-icon">🔄</span>
+          <div class="lf-label">Execution System</div>
+          <div class="lf-sub">Structured. Measurable.</div>
+        </div>
+      </div>
+      <div class="lens-principle">
+        <div class="lp-quote">"When one layer of the execution system fails, the entire business feels broken — even if everything else is working."</div>
+        <div class="lp-attr">— ORIGENNT Execution Framework, 2025</div>
+      </div>
+    </div>
+    <div class="lens-right">
+      <div class="lens-right-body">
+        <p>The problem with MSME and SME business advice is that it exists in silos. Hiring consultants talk about hiring. Operations experts talk about process. Growth hackers talk about scale. <strong>Nobody talks about how these three systems interact — and break — together.</strong></p>
+        <p>ORIGENNT Insights is built differently. Every article, analysis, and observation on this platform is structured around the execution system model: how do your people systems, operational systems, and growth systems interact? Where do they support each other, and where does one failure cascade into two?</p>
+        <p>This is <em>not a blog</em>. It is a structured intelligence platform for business owners, operators, and leaders who want to understand execution — not just be inspired by it.</p>
+        <p>Every insight published here meets a single standard: <strong>does it help a business leader identify a specific execution gap and understand what system is responsible for it?</strong> If not, it doesn't belong here.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ INSIGHT CATEGORIES ════ -->
+<section class="section" id="insights">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="02 —">Insight Categories</div>
+      <h2 class="sec-h">Three systems.<br>Every <em>business failure</em><br>fits one.</h2>
+    </div>
+    <div>
+      <p class="sec-lead">ORIGENNT does not publish general business advice. Every insight is categorized by the specific execution layer it addresses. Find your failure. Understand your system.</p>
+    </div>
+  </div>
+  <div class="cat-grid reveal" id="workforce">
+    <div class="cat-card">
+      <span class="cc-tag">Category · 01</span>
+      <span class="cc-icon">👥</span>
+      <div class="cc-title">Workforce Execution</div>
+      <div class="cc-desc">Hiring, onboarding, manpower structure, and retention — analyzed as systems, not events. When workforce execution fails, every other system suffers.</div>
+      <div class="cc-topics">
+        <div class="cc-topic">Why MSMEs hire reactively instead of systematically</div>
+        <div class="cc-topic">The cost of inconsistent hiring criteria</div>
+        <div class="cc-topic">Manpower planning vs. manpower management</div>
+        <div class="cc-topic">When attrition is a system problem, not a people problem</div>
+      </div>
+      <div class="cc-count">12 Insights Published</div>
+    </div>
+    <div class="cat-card" id="operations">
+      <span class="cc-tag">Category · 02</span>
+      <span class="cc-icon">⚙️</span>
+      <div class="cc-title">Operational Systems</div>
+      <div class="cc-desc">Process design, workflow efficiency, delegation frameworks, and operational debt. Operations without structure don't scale — they fracture.</div>
+      <div class="cc-topics">
+        <div class="cc-topic">The compounding cost of undocumented processes</div>
+        <div class="cc-topic">Why SME delegation always fails at the same point</div>
+        <div class="cc-topic">Operational debt vs. technical debt in services firms</div>
+        <div class="cc-topic">Standard Operating Procedures that actually get followed</div>
+      </div>
+      <div class="cc-count">9 Insights Published</div>
+    </div>
+    <div class="cat-card" id="growth">
+      <span class="cc-tag">Category · 03</span>
+      <span class="cc-icon">📈</span>
+      <div class="cc-title">Growth Execution</div>
+      <div class="cc-desc">Revenue growth, scaling strategy, and performance measurement — structured as execution problems, not ambition problems. Growth that feels random is a systems failure.</div>
+      <div class="cc-topics">
+        <div class="cc-topic">Why revenue growth stalls at the same revenue band</div>
+        <div class="cc-topic">The structural difference between growth and scale</div>
+        <div class="cc-topic">Measuring execution, not just output</div>
+        <div class="cc-topic">When performance management fails before it starts</div>
+      </div>
+      <div class="cc-count">7 Insights Published</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FEATURED INSIGHT ════ -->
+<section class="section warm">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="03 —">Featured Insight</div>
+      <h2 class="sec-h">The defining idea<br>behind everything<br>we <em>publish.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">This is not ORIGENNT's most recent article. It is the most important one. Everything else we publish is an elaboration of this single idea — examined from different angles, through different systems.</p>
+    </div>
+  </div>
+  <div class="featured-wrap reveal">
+    <div class="fi-left">
+      <div>
+        <div class="fi-category">Execution Framework · Foundational</div>
+        <h3 class="fi-title">Execution is not effort.<br><em>It is a system.</em></h3>
+        <p class="fi-lead">Every failed MSME has stories of effort. Long hours. Hard decisions. Motivated teams. The effort was real. And yet, the business still failed. Not because the people stopped trying — but because the system they were trying within was never built. Execution is not a synonym for hard work. It is the architecture within which hard work produces predictable results.</p>
+        <a href="#diagnostic" class="fi-read-btn">Read Full Insight <span>→</span></a>
+      </div>
+      <div class="fi-meta">
+        <span>Execution Framework</span>
+        <span>·</span>
+        <span>ORIGENNT Intelligence</span>
+        <span>·</span>
+        <span>2025</span>
+      </div>
+    </div>
+    <div class="fi-right">
+      <div class="fi-right-label">Core Arguments</div>
+      <div class="fi-points">
+        <div class="fip">
+          <div class="fip-num">01</div>
+          <div>
+            <div class="fip-t">Effort without system is activity, not execution</div>
+            <div class="fip-d">When there is no measurable system beneath the effort, you cannot identify what is working, what is failing, or why. You can only observe outcomes — and hope they improve.</div>
+          </div>
+        </div>
+        <div class="fip">
+          <div class="fip-num">02</div>
+          <div>
+            <div class="fip-t">Every execution failure has a structural cause</div>
+            <div class="fip-d">Missed revenue targets, hiring failures, operational chaos — none of these are random. Each traces back to a specific structural gap in workforce, operations, or growth execution.</div>
+          </div>
+        </div>
+        <div class="fip">
+          <div class="fip-num">03</div>
+          <div>
+            <div class="fip-t">Systems convert effort into consistent results</div>
+            <div class="fip-d">A business with good systems and average talent outperforms a business with great talent and no systems — consistently, predictably, and at scale.</div>
+          </div>
+        </div>
+      </div>
+      <div class="fi-diagnostic-nudge">
+        <div>
+          <div class="fdn-text">Is your business running on effort or on systems?</div>
+          <div class="fdn-sub">One diagnostic answers the question with data, not intuition.</div>
+        </div>
+        <a href="#diagnostic" class="fdn-btn">Get Diagnostic</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ INSIGHTS GRID ════ -->
+<section class="section">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="04 —">Insights Library</div>
+      <h2 class="sec-h">Structured thinking<br>on the <em>problems that matter.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">These are not motivational pieces. Each article identifies a specific execution failure, names the system responsible, and outlines what structural change is required.</p>
+    </div>
+  </div>
+
+  <div class="insights-grid reveal">
+    <div class="insight-card wide">
+      <span class="ic-category wf">Workforce Execution</span>
+      <h4 class="ic-title">Why MSMEs Fail at <em>Hiring Consistency</em></h4>
+      <p class="ic-preview">Inconsistent hiring is not a skill problem. It is a system problem. When your criteria change with each hire, you cannot build a team — you can only collect individuals. The result is a workforce with no common performance baseline, unpredictable output, and constant management overhead that prevents the business from scaling.</p>
+      <a href="#diagnostic" class="ic-read">Read Insight <span>→</span></a>
+      <div class="ic-meta">
+        <span>Workforce Execution</span>
+        <span>·</span>
+        <span>8 min read</span>
+        <span>·</span>
+        <span>ORIGENNT Intelligence</span>
+      </div>
+    </div>
+    <div class="insight-card">
+      <span class="ic-category op">Operational Systems</span>
+      <h4 class="ic-title">Operations Don't Scale Without <em>Structure</em></h4>
+      <p class="ic-preview">Every SME has operational chaos at some scale. The businesses that survive it are not the ones that hired better people — they are the ones that built documented systems before the chaos became permanent.</p>
+      <a href="#diagnostic" class="ic-read">Read Insight <span>→</span></a>
+      <div class="ic-meta"><span>Operational Systems</span><span>·</span><span>6 min read</span></div>
+    </div>
+    <div class="insight-card">
+      <span class="ic-category gr">Growth Execution</span>
+      <h4 class="ic-title">Why Growth Feels Random in <em>SMEs</em></h4>
+      <p class="ic-preview">Revenue peaks and valleys in SMEs are not market-driven. They are system-driven. When you cannot trace a revenue result to a specific execution behavior, growth will always feel unpredictable — because it is.</p>
+      <a href="#diagnostic" class="ic-read">Read Insight <span>→</span></a>
+      <div class="ic-meta"><span>Growth Execution</span><span>·</span><span>7 min read</span></div>
+    </div>
+    <div class="insight-card">
+      <span class="ic-category op">Operational Systems</span>
+      <h4 class="ic-title">The Hidden Cost of <em>Unstructured Execution</em></h4>
+      <p class="ic-preview">The most expensive cost in your business is probably invisible on your P&amp;L. Unstructured execution — repeated mistakes, unclear delegation, informal processes — drains resources in ways that never appear as a line item but compound into existential risk.</p>
+      <a href="#diagnostic" class="ic-read">Read Insight <span>→</span></a>
+      <div class="ic-meta"><span>Operational Systems</span><span>·</span><span>5 min read</span></div>
+    </div>
+    <div class="insight-card">
+      <span class="ic-category wf">Workforce Execution</span>
+      <h4 class="ic-title">When Attrition Is a <em>System Problem</em></h4>
+      <p class="ic-preview">High attrition is almost never about compensation. It is about the experience of working in a system that doesn't function. People leave when the system around them prevents them from doing good work.</p>
+      <a href="#diagnostic" class="ic-read">Read Insight <span>→</span></a>
+      <div class="ic-meta"><span>Workforce Execution</span><span>·</span><span>6 min read</span></div>
+    </div>
+    <div class="insight-card">
+      <span class="ic-category gr">Growth Execution</span>
+      <h4 class="ic-title">The Revenue Band Problem in <em>MSMEs</em></h4>
+      <p class="ic-preview">Most MSMEs stall at the same revenue figure, year after year. This stall is not a market limitation. It is the point at which the current execution system hits its structural ceiling — and refuses to move without redesign.</p>
+      <a href="#diagnostic" class="ic-read">Read Insight <span>→</span></a>
+      <div class="ic-meta"><span>Growth Execution</span><span>·</span><span>9 min read</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FRAMEWORK SECTION ════ -->
+<section class="section warm">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="05 —">Execution Framework</div>
+      <h2 class="sec-h">The three layers<br>of every business<br><em>failure.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">Business failures are almost never single-cause events. They are cascade failures — one system weakens, creates pressure on the next, until the entire execution structure collapses. Understanding the layers prevents the cascade.</p>
+    </div>
+  </div>
+
+  <div class="framework-grid reveal">
+    <div class="fw-left">
+      <div style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:16px;">The Three-Layer Model</div>
+      <div class="fw-layers">
+        <div class="fw-layer">
+          <div class="fwl-n">P1</div>
+          <div>
+            <div class="fwl-title">People — Workforce Layer</div>
+            <div class="fwl-sub">Hiring, onboarding, team structure, retention, accountability systems</div>
+            <div class="fwl-bar"></div>
+          </div>
+        </div>
+        <div class="fw-layer">
+          <div class="fwl-n">P2</div>
+          <div>
+            <div class="fwl-title">Process — Operational Layer</div>
+            <div class="fwl-sub">Workflows, SOPs, delegation, quality, operational infrastructure</div>
+            <div class="fwl-bar"></div>
+          </div>
+        </div>
+        <div class="fw-layer">
+          <div class="fwl-n">P3</div>
+          <div>
+            <div class="fwl-title">Performance — Growth Layer</div>
+            <div class="fwl-sub">Revenue systems, measurement, scaling mechanisms, strategic execution</div>
+            <div class="fwl-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fw-failure-model" style="margin-top:32px;">
+        <div class="ffm-label">When One Layer Fails →</div>
+        <div class="ffm-chain">
+          <div class="ffm-block broken">People Fails</div>
+          <div class="ffm-arrow">→</div>
+          <div class="ffm-block">Process Strains</div>
+          <div class="ffm-arrow">→</div>
+          <div class="ffm-block">Growth Stops</div>
+        </div>
+        <div style="margin-top:8px;">
+          <div class="ffm-chain">
+            <div class="ffm-block">Hiring Works</div>
+            <div class="ffm-arrow">→</div>
+            <div class="ffm-block broken">Ops Fails</div>
+            <div class="ffm-arrow">→</div>
+            <div class="ffm-block">Growth Capped</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fw-right">
+      <div class="fw-right-body">
+        <p>The three-layer execution model is not a management consulting abstraction. It is a diagnostic tool built from observed patterns in MSME and SME businesses across hiring, operations, and growth contexts.</p>
+        <div class="fw-insight-pull">"If one layer fails, execution fails. The failure may appear in a different layer — but it originates in the one that broke first."</div>
+        <p>Most business interventions target symptoms, not systems. A company hires a sales trainer because revenue is flat — without examining whether the operational system can actually support the sales volume the trainer generates. A company redesigns its hiring process — without examining whether the operational workflows exist to onboard and deploy those hires effectively.</p>
+        <p><strong>ORIGENNT's framework treats all three layers as interdependent systems.</strong> Intervention at one layer without diagnosing the others is, at best, temporary. At worst, it accelerates failure in the layer that was already under pressure.</p>
+      </div>
+      <div class="fw-breakdown-grid">
+        <div class="fwbg">
+          <div class="fwbg-n">82<sup>%</sup></div>
+          <div class="fwbg-l">MSMEs with at least one broken execution layer</div>
+        </div>
+        <div class="fwbg">
+          <div class="fwbg-n">3.4<sup>×</sup></div>
+          <div class="fwbg-l">Faster growth in businesses with structured execution</div>
+        </div>
+        <div class="fwbg">
+          <div class="fwbg-n">67<sup>%</sup></div>
+          <div class="fwbg-l">Of failures originate in workforce layer first</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXECUTION DIAGNOSTIC ════ -->
+<section class="section black" id="diagnostic">
+  <div class="diag-wrap">
+    <div class="diag-left">
+      <div class="diag-tag">Single Service Offer</div>
+      <h2 class="diag-h">Execution<br><em>Diagnostic.</em></h2>
+      <p class="diag-lead">One structured analysis across all three execution layers of your business. We do not offer general business advice. We identify the specific structural gaps that are preventing your business from performing as it should — and we show you where they are, in a single report.</p>
+      <div class="diag-deliverables">
+        <div class="dd">
+          <div class="dd-num">01</div>
+          <div>
+            <div class="dd-t">Workforce Efficiency Review</div>
+            <div class="dd-d">Analysis of your hiring process, criteria consistency, onboarding structure, and team accountability systems. Identifies where your workforce system is creating drag instead of momentum.</div>
+          </div>
+        </div>
+        <div class="dd">
+          <div class="dd-num">02</div>
+          <div>
+            <div class="dd-t">Operational Structure Analysis</div>
+            <div class="dd-d">Examination of your process documentation, delegation infrastructure, operational workflows, and system dependencies. Shows where your operations are creating systemic inefficiency.</div>
+          </div>
+        </div>
+        <div class="dd">
+          <div class="dd-num">03</div>
+          <div>
+            <div class="dd-t">Growth Execution Mapping</div>
+            <div class="dd-d">Review of your revenue systems, growth measurement practices, and scaling mechanisms. Identifies why growth feels inconsistent or has stalled at a specific performance ceiling.</div>
+          </div>
+        </div>
+        <div class="dd">
+          <div class="dd-num">04</div>
+          <div>
+            <div class="dd-t">Bottleneck Identification Report</div>
+            <div class="dd-d">A structured report naming the specific execution gaps across all three layers, their interdependencies, and a sequenced recommendation for which to address first and why.</div>
+          </div>
+        </div>
+      </div>
+      <div class="diag-stats">
+        <div class="ds">
+          <div class="ds-n">3<sup>L</sup></div>
+          <div class="ds-l">Execution Layers Audited</div>
+        </div>
+        <div class="ds">
+          <div class="ds-n">1</div>
+          <div class="ds-l">Structured Report</div>
+        </div>
+        <div class="ds">
+          <div class="ds-n">7<sup>d</sup></div>
+          <div class="ds-l">Typical Turnaround</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diag-right">
+      <div class="diag-outcome-label">What You Receive</div>
+      <div class="diag-outcome-statement">
+        A structured report showing exactly where your execution is broken —
+        and a sequenced plan for <em>how to fix it.</em>
+      </div>
+      <div style="font-size:13.5px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.85;margin-bottom:36px;">
+        <p style="margin-bottom:14px;">The Execution Diagnostic is not a general business review. It is a targeted structural analysis designed to answer one question: <strong style="color:rgba(255,255,255,.8);font-weight:600;">where, exactly, is your execution system failing?</strong></p>
+        <p>The output is a prioritized action framework — not generic recommendations, but specific structural changes mapped to your business's current execution state. You will know which layer to fix first, why it matters, and what the fix looks like in practice.</p>
+      </div>
+      <div class="diag-cta-block">
+        <a href="https://wa.me/919861168291?text=Hi%20ORIGENNT%2C%20I%20want%20to%20request%20the%20Execution%20Diagnostic%20for%20my%20business.%20My%20name%20is%20_%20and%20my%20business%20is%20_." target="_blank" class="diag-cta-wa">
+          <span>💬</span>
+          <span>Request Diagnostic via WhatsApp</span>
+        </a>
+        <a href="mailto:origennt@gmail.com?subject=Execution Diagnostic Request&body=Hi ORIGENNT,%0A%0AI'd like to request an Execution Diagnostic for my business.%0A%0ABusiness Name:%0AIndustry:%0ATeam Size:%0ACore Challenge:%0A%0AThank you." class="diag-cta-main">
+          <span>Request Execution Diagnostic</span>
+          <span>→</span>
+        </a>
+        <a href="https://forms.gle/YOUR_GFORM_ID" target="_blank" class="diag-cta-main" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);">
+          <span>Apply via Google Form</span>
+          <span style="opacity:.5;">→</span>
+        </a>
+      </div>
+      <div class="diag-note">
+        The Execution Diagnostic is a paid professional service. Initial consultation to scope the engagement is at no charge. ORIGENNT works with MSMEs and SMEs across manufacturing, services, consulting, retail, and logistics sectors. Minimum team size: 5 employees.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ WHY THIS PAGE EXISTS ════ -->
+<section class="section">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow" data-n="06 —">Why This Page Exists</div>
+      <h2 class="sec-h">Structured thinking<br>is the <em>product.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">ORIGENNT Insights is not a content marketing exercise. It is built for one specific purpose: to help MSME and SME owners understand that their problems have structural causes — and structural solutions.</p>
+    </div>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-col">
+      <div class="wc-label">Purpose · 01</div>
+      <div class="wc-h">Replace opinion with analysis</div>
+      <div class="wc-body">The business advice industry is dominated by general principles dressed up as insights. ORIGENNT publishes structured analysis — specific, systemic, and rooted in observed execution patterns across real businesses. Every article either identifies a gap, names its system, or explains the structural intervention required.</div>
+    </div>
+    <div class="why-col">
+      <div class="wc-label">Purpose · 02</div>
+      <div class="wc-h">Build your own diagnostic capacity</div>
+      <div class="wc-body">A business leader who reads ORIGENNT Insights regularly should, over time, develop the ability to identify execution failures in their own business before they become crises. The goal is not dependency on our diagnostic — it is the development of structured thinking as an operational muscle.</div>
+    </div>
+    <div class="why-col">
+      <div class="wc-label">Purpose · 03</div>
+      <div class="wc-h">Create the conditions for intervention</div>
+      <div class="wc-body">The Execution Diagnostic is a professional service that works best when the business owner already understands the three-layer execution model. These insights prepare you for that conversation — so that when we diagnose your business, we are speaking the same structural language.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FINAL CTA ════ -->
+<section class="final-cta">
+  <div class="final-overline">The Single Conversion Point</div>
+  <h2 class="final-h">Understand your<br>execution <em>structure.</em></h2>
+  <p class="final-sub">One structured analysis. Three execution layers. A report that tells you exactly where your business is broken and what to fix first.</p>
+  <div class="final-acts">
+    <a href="https://wa.me/919861168291?text=Hi%20ORIGENNT%2C%20I%20want%20to%20request%20the%20Execution%20Diagnostic." target="_blank" class="btn-p">Request Diagnostic</a>
+    <a href="mailto:origennt@gmail.com?subject=Execution Diagnostic Enquiry" class="btn-s">Send an Enquiry</a>
+  </div>
+  <div class="final-mono">ORIGENNT · Execution Systems · Bhubaneswar, Odisha · +91 98611 68291</div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="ft-left">
+    <div class="ft-brand">ORIGENNT<span>.</span></div>
+    <div class="ft-usp">ORIGENNT builds execution systems for MSMEs and SMEs that transform business operations into structured, measurable, and scalable systems across workforce, operations, and growth.</div>
+  </div>
+  <div class="ft-links">
+    <a href="index.html" class="ft-l">Home</a>
+    <a href="services/talent-acquisition.html" class="ft-l">Talent Acquisition</a>
+    <a href="services/payroll-compliance.html" class="ft-l">Payroll & Compliance</a>
+    <a href="affiliate.html" class="ft-l">Affiliate Program</a>
+    <a href="campus-ambassador.html" class="ft-l">Campus Ambassador</a>
+    <a href="internship.html" class="ft-l">Internship Programs</a>
+  </div>
+  <div class="ft-copy">© 2025 ORIGENNT Private Limited · Companies Act 2013 · Odisha</div>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      // Trigger framework bar animations
+      e.target.querySelectorAll('.fwl-bar').forEach((b, i) => {
+        setTimeout(() => {
+          b.style.transform = 'scaleX(1)';
+          b.style.transition = 'transform .6s cubic-bezier(.77,0,.18,1)';
+        }, i * 150);
+      });
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .reveal-l').forEach(el => ro.observe(el));
+
+// ── TOPBAR SCROLL SHADOW ──
+const tb = document.querySelector('.topbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    tb.style.boxShadow = '0 1px 20px rgba(0,0,0,.06)';
+  } else {
+    tb.style.boxShadow = 'none';
+  }
+}, { passive: true });
+
+// ── SMOOTH ANCHORS ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) {
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── ANIMATE HERO METRICS ON LOAD ──
+(function () {
+  const els = document.querySelectorAll('.hm-n');
+  els.forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(12px)';
+    el.style.transition = `opacity .6s ${.6 + i * .15}s ease, transform .6s ${.6 + i * .15}s ease`;
+    setTimeout(() => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }, 100);
+  });
+})();
+
+// ── CATEGORY CARD HOVER COUNTER ──
+document.querySelectorAll('.cat-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    const count = card.querySelector('.cc-count');
+    if (count) count.style.color = 'var(--red)';
+  });
+  card.addEventListener('mouseleave', () => {
+    const count = card.querySelector('.cc-count');
+    if (count) count.style.color = '';
+  });
+});
+</script>
+</body>
+</html>
