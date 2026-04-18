@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiliate Partner Program — ORIGENNT | Partner. Earn. Scale.</title>
+<meta name="description" content="ORIGENNT's Affiliate Partner Program. Industry-best commission rates, real-time tracking, lifetime cookies, and projected earnings dashboards. Join India's fastest-growing HR consultancy's partner network.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23CC2229'/%3E%3Ctext x='4' y='24' font-family='serif' font-size='20' fill='white' font-weight='bold'%3EO%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --red: #CC2229;
+  --red-dark: #a31a20;
+  --red-deep: #7a1016;
+  --black: #0d0d0d;
+  --white: #ffffff;
+  --off: #f7f6f4;
+  --grey-light: #eeecea;
+  --grey-mid: #c2bfba;
+  --grey-text: #6b6660;
+  --sidebar: 300px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─────────────────────────── */
+* { cursor: none !important; }
+.cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s, background .2s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(204,34,41,.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .35s, height .35s, border-color .3s;
+}
+body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 18px; height: 18px; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: rgba(204,34,41,.25); }
+
+/* ─── FLOATING BLOBS ─────────────────── */
+.blob-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.045;
+  animation: blobFloat linear infinite;
+  will-change: transform;
+}
+.blob-1 { width: 600px; height: 600px; background: var(--red); top: -100px; left: -100px; animation-duration: 25s; }
+.blob-2 { width: 500px; height: 500px; background: #ff6b35; top: 40%; right: -150px; animation-duration: 30s; animation-delay: -10s; }
+.blob-3 { width: 400px; height: 400px; background: var(--red); bottom: -100px; left: 30%; animation-duration: 20s; animation-delay: -5s; }
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(40px, -60px) scale(1.05); }
+  66%  { transform: translate(-30px, 40px) scale(0.97); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* ─── SIDEBAR ────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar);
+  height: 100vh;
+  background: var(--black);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  transition: transform .5s cubic-bezier(.86,0,.07,1);
+}
+
+.sidebar-top {
+  padding: 36px 40px 32px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 19px;
+  color: var(--white);
+  letter-spacing: .06em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 40px;
+  scrollbar-width: none;
+}
+.sidebar-scroll::-webkit-scrollbar { display: none; }
+
+.nav-section { margin-bottom: 36px; }
+
+.nav-section-label {
+  font-size: 9px;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,.6);
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  transition: color .2s;
+  letter-spacing: .01em;
+}
+.nav-link:hover, .nav-link.active { color: var(--white); }
+.nav-link svg { opacity: 0; transition: opacity .2s, transform .2s; }
+.nav-link:hover svg { opacity: 1; transform: translateX(4px); }
+
+.sidebar-bottom {
+  padding: 24px 40px 32px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.sidebar-contact-label {
+  font-size: 9px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 12px;
+}
+.sidebar-contact-info {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.8;
+}
+.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.sidebar-contact-info a:hover { color: var(--red); }
+
+/* ─── MAIN ───────────────────────────── */
+.main {
+  margin-left: var(--sidebar);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── TOP NAV ────────────────────────── */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar);
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  z-index: 100;
+  transition: background .4s, border-color .4s;
+}
+.topnav.scrolled {
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--grey-light);
+}
+.topnav-links { display: flex; align-items: center; gap: 40px; }
+.topnav-link {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--grey-text);
+  text-decoration: none;
+  letter-spacing: .04em;
+  transition: color .2s;
+}
+.topnav-link:hover { color: var(--black); }
+.topnav-cta {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  background: var(--red);
+  text-decoration: none;
+  padding: 11px 32px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: background .2s;
+}
+.topnav-cta:hover { background: var(--red-dark); }
+
+
+/* ── HERO ── */
+.hero{padding:120px 0 0;min-height:100vh;display:flex;flex-direction:column;}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 120px);}
+.hero-left{padding:60px 80px 80px;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;}
+.hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+.hero-eye-num{font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--text3);}
+.hero-eye-line{flex:1;height:1px;background:var(--rule);}
+.hero-eye-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--red);}
+h1.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,5.5vw,80px);font-weight:500;line-height:1.05;letter-spacing:-.02em;color:var(--black);}
+h1.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-lead{font-size:16px;font-weight:300;line-height:1.85;color:var(--text2);max-width:460px;margin-top:28px;border-left:2px solid var(--rule);padding-left:20px;}
+.hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;border-top:1px solid var(--rule);}
+.hm{padding:24px 0 0;border-right:1px solid var(--rule);padding-right:28px;margin-right:28px;}
+.hm:last-child{border-right:none;padding-right:0;margin-right:0;}
+.hm-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:500;color:var(--black);line-height:1;}
+.hm-n sup{font-size:20px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:600;vertical-align:top;margin-top:6px;display:inline-block;}
+.hm-l{font-size:10.5px;font-weight:500;letter-spacing:.08em;color:var(--text3);margin-top:6px;text-transform:uppercase;}
+.hero-acts{display:flex;gap:14px;align-items:center;margin-top:40px;}
+.btn-primary{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--white);background:var(--red);padding:14px 32px;transition:background .2s,transform .15s;display:inline-block;}
+.btn-primary:hover{background:var(--red-d);transform:translateY(-1px);}
+.btn-secondary{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--text2);padding:14px 0;border-bottom:1px solid var(--rule);transition:color .2s,border-color .2s;display:inline-block;}
+.btn-secondary:hover{color:var(--black);border-color:var(--black);}
+
+/* Hero right — live dashboard preview */
+.hero-right{padding:60px 80px;background:var(--off);position:relative;overflow:hidden;}
+.hero-right::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(204,34,41,.04),transparent 65%);pointer-events:none;}
+.dashboard-preview{position:relative;z-index:1;}
+.dp-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.dp-label::before{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.dp-header{margin-bottom:28px;}
+.dp-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--black);}
+.dp-sub{font-size:12px;color:var(--text3);margin-top:4px;}
+.chart-wrap{background:var(--white);border:1px solid var(--rule);padding:24px;margin-bottom:16px;position:relative;}
+.chart-wrap canvas{max-height:180px;}
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ms{background:var(--white);border:1px solid var(--rule);padding:16px 18px;}
+.ms-n{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:var(--black);}
+.ms-n .u{font-size:14px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:600;}
+.ms-l{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-top:4px;}
+.ms-trend{font-size:11px;color:#16a34a;font-weight:600;margin-top:6px;}
+
+/* ── SECTION PRIMITIVES ── */
+.section-wrap{padding:100px 80px;}
+.section-wrap.off{background:var(--off);}
+.section-wrap.dark{background:var(--black);}
+.section-wrap.warm{background:var(--warm);}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:72px;padding-bottom:36px;border-bottom:1px solid var(--rule);}
+.sec-head.dark-border{border-bottom-color:rgba(255,255,255,.08);}
+.sh-left{}
+.sh-chapter{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.sh-chapter.red{color:var(--red);}
+.sh-chapter::before{content:attr(data-n);font-size:9px;width:20px;height:20px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:.6;}
+h2.sh-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.5vw,52px);font-weight:500;line-height:1.08;letter-spacing:-.02em;color:var(--black);}
+h2.sh-h em{font-style:italic;color:var(--red);}
+h2.sh-h.w{color:var(--white);}
+h2.sh-h.w em{color:rgba(255,255,255,.3);}
+.sh-right p{font-size:15px;font-weight:300;line-height:1.85;color:var(--text2);}
+.sh-right.w p{color:rgba(255,255,255,.5);}
+
+/* ── HOW IT WORKS ── */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--rule);}
+.how-step{padding:40px 36px;border-right:1px solid var(--rule);position:relative;transition:background .3s;}
+.how-step:last-child{border-right:none;}
+.how-step:hover{background:var(--red-pale);}
+.how-step:hover .hs-arrow{opacity:1;transform:translateX(4px);}
+.hs-num{font-family:'Cormorant Garamond',serif;font-size:54px;font-weight:400;color:var(--rule);line-height:1;margin-bottom:20px;}
+.hs-ic{font-size:28px;margin-bottom:18px;display:block;}
+.hs-t{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.hs-d{font-size:13px;font-weight:300;color:var(--text2);line-height:1.75;}
+.hs-arrow{font-size:18px;color:var(--red);margin-top:16px;display:block;opacity:0;transition:opacity .3s,transform .3s;}
+
+/* ── COMMISSION TIERS ── */
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.tier-card{border:1px solid var(--rule);border-right:none;padding:40px 32px;position:relative;transition:border-color .3s,box-shadow .3s;}
+.tier-card:last-child{border-right:1px solid var(--rule);}
+.tier-card:hover{border-color:var(--red);box-shadow:0 0 0 1px var(--red);z-index:1;}
+.tier-card.featured{background:var(--black);border-color:var(--black)!important;box-shadow:none!important;}
+.tc-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;margin-bottom:18px;}
+.tc-badge.std{background:rgba(0,0,0,.06);color:var(--text2);}
+.tc-badge.pro{background:rgba(204,34,41,.1);color:var(--red);}
+.tc-badge.elite{background:rgba(201,168,76,.15);color:#8a6a20;}
+.tc-badge.corp{background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);}
+.tc-tier{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;}
+.tier-card.featured .tc-tier{color:rgba(255,255,255,.5);}
+.tc-rate{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:500;line-height:1;color:var(--black);}
+.tc-rate sup{font-size:24px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:700;vertical-align:top;margin-top:8px;display:inline-block;}
+.tier-card.featured .tc-rate{color:var(--white);}
+.tc-sub{font-size:11.5px;color:var(--text3);margin-bottom:24px;margin-top:4px;}
+.tier-card.featured .tc-sub{color:rgba(255,255,255,.35);}
+.tc-divider{height:1px;background:var(--rule);margin-bottom:24px;}
+.tier-card.featured .tc-divider{background:rgba(255,255,255,.1);}
+.tc-perks{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.tc-perk{display:flex;align-items:flex-start;gap:10px;font-size:12.5px;font-weight:300;color:var(--text2);}
+.tc-perk::before{content:'→';color:var(--red);font-weight:600;flex-shrink:0;font-size:11px;margin-top:2px;}
+.tier-card.featured .tc-perk{color:rgba(255,255,255,.6);}
+.tc-threshold{margin-top:24px;padding-top:20px;border-top:1px solid var(--rule);font-size:11px;color:var(--text3);}
+.tier-card.featured .tc-threshold{border-top-color:rgba(255,255,255,.1);color:rgba(255,255,255,.3);}
+.tc-threshold strong{color:var(--text2);font-weight:600;}
+.tier-card.featured .tc-threshold strong{color:rgba(255,255,255,.6);}
+
+/* ── INTERACTIVE CALCULATOR ── */
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);}
+.calc-controls{padding:52px 48px;border-right:1px solid var(--rule);}
+.calc-results{padding:52px 48px;background:var(--off);}
+.calc-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;color:var(--black);margin-bottom:8px;}
+.calc-sub{font-size:13px;color:var(--text3);margin-bottom:36px;}
+.slider-group{margin-bottom:28px;}
+.sl-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+.sl-name{font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--black);}
+.sl-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--red);}
+input[type=range]{width:100%;-webkit-appearance:none;height:2px;background:var(--rule);outline:none;margin-bottom:4px;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--red);border-radius:50%;cursor:pointer;transition:transform .15s;}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
+.sl-range{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);}
+.calc-tier-select{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:28px;}
+.cts{padding:10px 14px;border:1px solid var(--rule);font-size:11.5px;font-weight:500;color:var(--text2);background:var(--white);cursor:pointer;transition:all .2s;text-align:center;}
+.cts.active{background:var(--red);border-color:var(--red);color:var(--white);}
+.cts:hover:not(.active){border-color:var(--black);color:var(--black);}
+
+/* Results panel */
+.res-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.res-label::after{content:'LIVE';font-size:8px;background:var(--red);color:var(--white);padding:2px 6px;letter-spacing:.12em;}
+.res-main{margin-bottom:28px;}
+.res-big-label{font-size:11px;font-weight:500;color:var(--text3);margin-bottom:8px;letter-spacing:.04em;}
+.res-big-n{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:500;line-height:1;color:var(--black);}
+.res-big-n sup{font-size:28px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:700;vertical-align:top;margin-top:10px;display:inline-block;}
+.res-period{font-size:12px;color:var(--text3);margin-top:4px;}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px;}
+.rg{padding:16px;background:var(--white);border:1px solid var(--rule);}
+.rg-l{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.rg-n{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--black);}
+.rg-n sup{font-size:12px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:600;}
+.proj-chart-wrap{background:var(--white);border:1px solid var(--rule);padding:20px;margin-top:12px;}
+.proj-chart-wrap canvas{max-height:140px;}
+.proj-note{font-size:11px;color:var(--text3);margin-top:10px;line-height:1.6;}
+
+/* ── MARKET IMPACT CHART ── */
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.impact-left{}
+.impact-chart-wrap{border:1px solid var(--rule);padding:32px;margin-bottom:16px;}
+.impact-chart-wrap canvas{max-height:280px;}
+.impact-legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;}
+.il-item{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:500;color:var(--text2);}
+.il-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.impact-right{display:flex;flex-direction:column;gap:0;}
+.impact-stat{padding:28px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;}
+.impact-stat:last-child{border-bottom:none;}
+.is-n{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:500;color:var(--black);white-space:nowrap;}
+.is-n sup{font-size:18px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:700;}
+.is-body{}
+.is-t{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.is-d{font-size:13px;font-weight:300;color:var(--text2);line-height:1.7;}
+.progress-bar{height:3px;background:var(--rule);margin-top:10px;overflow:hidden;}
+.pb-fill{height:100%;background:var(--red);transition:width 1.5s var(--ease2);width:0;}
+.pb-fill.go{width:var(--w);}
+
+/* ── VS COMPETITORS ── */
+.comp-table{width:100%;border-collapse:collapse;margin-top:48px;}
+.comp-table th,.comp-table td{padding:0;text-align:left;font-size:13px;}
+.comp-table thead tr{border-bottom:2px solid var(--black);}
+.comp-table th{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);padding-bottom:16px;}
+.comp-table th.highlight{color:var(--red);}
+.comp-table tbody tr{border-bottom:1px solid var(--rule);transition:background .2s;}
+.comp-table tbody tr:hover{background:var(--off);}
+.comp-table td{padding:18px 0;color:var(--text2);font-weight:300;}
+.comp-table td.highlight{font-weight:600;color:var(--black);}
+.comp-table td.na{color:var(--text3);}
+.check{color:#16a34a;font-size:15px;font-weight:700;}
+.cross{color:#dc2626;font-size:13px;}
+.partial{color:#ca8a04;font-size:12px;}
+.comp-table td:first-child{font-weight:500;color:var(--black);}
+.comp-table .or-row td{background:rgba(204,34,41,.04);font-weight:600 !important;}
+.comp-table .or-row td.highlight{color:var(--red);}
+
+/* ── PERKS GRID ── */
+.perks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.08);}
+.perk-card{padding:44px 36px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);transition:background .3s;}
+.perk-card:hover{background:rgba(255,255,255,.04);}
+.perk-card:nth-child(3n){border-right:none;}
+.perk-card:nth-child(n+4){border-bottom:none;}
+.pk-ic{font-size:28px;margin-bottom:18px;display:block;}
+.pk-t{font-size:15px;font-weight:600;color:var(--white);margin-bottom:10px;}
+.pk-d{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.8;}
+.pk-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;background:rgba(204,34,41,.2);color:rgba(204,34,41,.9);margin-top:14px;}
+
+/* ── AFFILIATE IMPACT / HOW AFFILIATES HELP US ── */
+.impact-model{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;}
+.im-cell{padding:44px 40px;border-right:1px solid var(--rule);}
+.im-cell:last-child{border-right:none;}
+.im-chain{display:flex;flex-direction:column;gap:12px;}
+.im-node{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:var(--white);border:1px solid var(--rule);transition:border-color .2s,box-shadow .2s;}
+.im-node:hover{border-color:var(--red);box-shadow:2px 2px 0 var(--red);}
+.im-node-ic{font-size:18px;flex-shrink:0;margin-top:2px;}
+.im-node-body{}
+.im-node-t{font-size:12.5px;font-weight:600;color:var(--black);}
+.im-node-d{font-size:11.5px;font-weight:300;color:var(--text2);margin-top:2px;line-height:1.5;}
+.im-arrow{text-align:center;font-size:16px;color:var(--red);padding:4px 0;flex-shrink:0;}
+.im-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--rule);}
+
+/* ── APPLY SECTION ── */
+.apply-wrap{background:var(--black);padding:100px 80px;display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.apply-left{padding-right:64px;border-right:1px solid rgba(255,255,255,.08);}
+.apply-right{padding-left:64px;display:flex;flex-direction:column;justify-content:center;}
+.apply-chapter{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:20px;}
+.apply-h{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4vw,58px);font-weight:500;line-height:1.08;color:var(--white);margin-bottom:20px;}
+.apply-h em{font-style:italic;color:rgba(255,255,255,.3);}
+.apply-body{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.85;margin-bottom:36px;}
+.apply-process{display:flex;flex-direction:column;gap:0;margin-bottom:48px;}
+.ap-step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.ap-step:last-child{border-bottom:none;}
+.ap-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:rgba(255,255,255,.12);line-height:1;width:32px;flex-shrink:0;}
+.ap-t{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px;}
+.ap-d{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.6;}
+.apply-cta-grid{display:flex;flex-direction:column;gap:12px;}
+.cta-primary{display:flex;align-items:center;justify-content:space-between;background:var(--red);color:var(--white);padding:18px 24px;font-size:13px;font-weight:600;letter-spacing:.04em;transition:background .2s;}
+.cta-primary:hover{background:var(--red-d);}
+.cta-primary-arrow{font-size:18px;opacity:.7;}
+.cta-whatsapp{display:flex;align-items:center;gap:12px;background:#25D366;color:var(--white);padding:16px 24px;font-size:13px;font-weight:600;transition:background .2s;}
+.cta-whatsapp:hover{background:#1da851;}
+.wa-ic{font-size:20px;}
+.cta-gform{display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:15px 24px;font-size:13px;font-weight:500;transition:all .2s;}
+.cta-gform:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.9);}
+.apply-footnote{font-size:11px;color:rgba(255,255,255,.2);margin-top:16px;line-height:1.6;}
+.apply-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-top:40px;}
+.as-cell{background:var(--black);padding:28px 24px;}
+.as-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;color:var(--white);}
+.as-n sup{font-size:16px;color:var(--red);font-family:'DM Sans',sans-serif;font-weight:700;}
+.as-l{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:4px;}
+
+/* ─── FOOTER ─────────────────────────── */
+footer {
+  background: var(--black);
+  padding: 56px 64px 40px;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.footer-brand .logo { margin-bottom: 16px; }
+.footer-desc { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.3); line-height: 1.8; max-width: 260px; }
+.footer-col-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-weight: 500; }
+.footer-col-link { display: block; font-size: 12.5px; color: rgba(255,255,255,.4); text-decoration: none; padding: 5px 0; transition: color .2s; }
+.footer-col-link:hover { color: rgba(255,255,255,.8); }
+.footer-bottom {
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy { font-size: 11.5px; color: rgba(255,255,255,.2); }
+.footer-legal { display: flex; gap: 28px; }
+.footer-legal-link { font-size: 11px; color: rgba(255,255,255,.2); text-decoration: none; transition: color .2s; }
+.footer-legal-link:hover { color: rgba(255,255,255,.5); }
+
+/* ─── SCROLL REVEAL ──────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.vis { opacity: 1; transform: none; }
+
+/* ─── ANIMATIONS ─────────────────────── */
+@keyframes slideIn {
+  to { opacity: 1; transform: none; }
+}
+
+/* ─── HAMBURGER (mobile) ─────────────── */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 20px; left: 20px;
+  z-index: 300;
+  background: var(--black);
+  border: none;
+  padding: 13px;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: .3s; }
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 190;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+   :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-300px); }
+  .sidebar.open { transform: translateX(0); --sidebar: 300px; }
+  .main { margin-left: 0; }
+  .topnav { left: 0; padding: 0 24px 0 72px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .hero-inner,.calc-wrap,.apply-wrap,.impact-grid{grid-template-columns:1fr;}
+  .hero-left{border-right:none;border-bottom:1px solid var(--rule);padding:40px 48px;}
+  .hero-right{padding:40px 48px;}
+  .sec-head{grid-template-columns:1fr;gap:20px;}
+  .calc-controls{border-right:none;border-bottom:1px solid var(--rule);}
+  .apply-left{border-right:none;border-bottom:1px solid rgba(255,255,255,.08);padding-right:0;padding-bottom:48px;margin-bottom:0;}
+  .apply-right{padding-left:0;padding-top:48px;}
+  .how-grid{grid-template-columns:1fr 1fr;}
+  .how-step:nth-child(2){border-right:none;}
+  .how-step:nth-child(3){border-right:1px solid var(--rule);}
+  .tier-grid{grid-template-columns:1fr 1fr;}
+  .tier-card:nth-child(2){border-right:1px solid var(--rule)!important;}
+  .perks-grid{grid-template-columns:1fr 1fr;}
+  .perk-card:nth-child(2n){border-right:none;}
+  .impact-model{grid-template-columns:1fr;}
+  .im-cell{border-right:none;border-bottom:1px solid var(--rule);padding:36px 0;}
+  .im-cell:last-child{border-bottom:none;}
+}
+@media(max-width:1024px){
+  .topbar{padding:0 24px;}
+  .tb-nav{display:none;}
+  .section-wrap{padding:72px 32px;}
+  .hero-left,.hero-right,.apply-left,.apply-right{padding:40px 32px;}
+  .how-grid,.tier-grid,.perks-grid{grid-template-columns:1fr;}
+  .how-step,.tier-card{border-right:none!important;}
+  .tier-card{border-bottom:1px solid var(--rule);}
+  .impact-grid{grid-template-columns:1fr;}
+  footer{padding:48px 32px 32px;}
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Floating blobs -->
+<div class="blob-container">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- Mobile hamburger -->
+<button class="hamburger" id="hamburger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="overlay" id="overlay"></div>
+
+<!-- ─── SIDEBAR ─── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="#" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/career-services.html" class="nav-link">Career Services <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">
+      Bhubaneswar, Odisha<br>
+      <a href="mailto:origennt@gmail.com">origennt@gmail.com</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ─── MAIN ─── -->
+<div class="main">
+
+  <!-- Top Nav -->
+  <nav class="topnav" id="topnav">
+    <div class="topnav-links">
+      <a href="about.html" class="topnav-link">About</a>
+      <a href="services.html" class="topnav-link">Services</a>
+      <a href="approach.html" class="topnav-link">Our Approach</a>
+      <a href="insights.html" class="topnav-link">Insights</a>
+    </div>
+    <a href="contact.html" class="topnav-cta">Become a Partner</a>
+  </nav>
+
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+ <section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="hero-eye-num">AF–01</span>
+          <div class="hero-eye-line"></div>
+          <span class="hero-eye-label">Affiliate Partner Program</span>
+        </div>
+        <h1 class="hero-h1">
+          Partner with<br>
+          India's Own<br>
+          <em>Management Consulting</em><br>
+          growth engine.
+        </h1>
+        <p class="hero-lead">
+          ORIGENNT's Affiliate Program offers industry-best commissions, lifetime tracking cookies, real-time dashboards, and a partner network growing 40% month-over-month. Open to individuals, agencies, content creators, HR professionals, and businesses of any size.
+        </p>
+      </div>
+      <div>
+        <div class="hero-metrics">
+          <div class="hm">
+            <div class="hm-n">30<sup>%</sup></div>
+            <div class="hm-l">Max Commission Rate</div>
+          </div>
+          <div class="hm">
+            <div class="hm-n">90</div>
+            <div class="hm-l">Day Cookie Window</div>
+          </div>
+          <div class="hm">
+            <div class="hm-n">₹0</div>
+            <div class="hm-l">Cost to Join</div>
+          </div>
+        </div>
+        <div class="hero-acts">
+          <a href="#apply" class="btn-primary">Become a Partner →</a>
+          <a href="#calculator" class="btn-secondary">Calculate my earnings</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="dashboard-preview">
+        <div class="dp-label">Partner Dashboard · Live Preview</div>
+        <div class="dp-header">
+          <div class="dp-h">Monthly Earnings Projection</div>
+          <div class="dp-sub">Based on 10 referrals · Advanced tier · Standard mix</div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="heroChart"></canvas>
+        </div>
+        <div class="mini-stats">
+          <div class="ms">
+            <div class="ms-n">₹<span class="u">4,800</span></div>
+            <div class="ms-l">This Month</div>
+            <div class="ms-trend">↑ +23% MoM</div>
+          </div>
+          <div class="ms">
+            <div class="ms-n"><span class="u">12</span></div>
+            <div class="ms-l">Conversions</div>
+            <div class="ms-trend">↑ +4 this week</div>
+          </div>
+          <div class="ms">
+            <div class="ms-n">₹<span class="u">38K</span></div>
+            <div class="ms-l">YTD Earnings</div>
+            <div class="ms-trend">↑ On Track</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+  <section class="section-wrap" id="how">
+  <div class="sec-head">
+    <div class="sh-left">
+      <div class="sh-chapter red" data-n="01">How It Works</div>
+      <h2 class="sh-h">Four steps from<br>sign-up to <em>earnings.</em></h2>
+    </div>
+    <div class="sh-right">
+      <p>ORIGENNT's affiliate system is built for simplicity. No hidden terms, no delayed payments, no minimum thresholds for standard partners. You refer. We convert. You earn. Every step is tracked in real time with full transparency.</p>
+    </div>
+  </div>
+  <div class="how-grid reveal">
+    <div class="how-step">
+      <div class="hs-num">01</div>
+      <span class="hs-ic">📝</span>
+      <div class="hs-t">Apply & Get Approved</div>
+      <div class="hs-d">Submit your application via Google Form or WhatsApp. Our team reviews within 48 hours. Approval is free. No fee, no minimum audience requirement, no complex vetting.</div>
+      <span class="hs-arrow">→</span>
+    </div>
+    <div class="how-step">
+      <div class="hs-num">02</div>
+      <span class="hs-ic">🔗</span>
+      <div class="hs-t">Receive Your Unique Link</div>
+      <div class="hs-d">Get a personalised referral link with 90-day cookie tracking. Share it anywhere — social media, WhatsApp, email newsletters, YouTube descriptions, LinkedIn posts, or your website.</div>
+      <span class="hs-arrow">→</span>
+    </div>
+    <div class="how-step">
+      <div class="hs-num">03</div>
+      <span class="hs-ic">📊</span>
+      <div class="hs-t">Track in Real Time</div>
+      <div class="hs-d">Access your partner dashboard to see clicks, leads, conversion status, pending commissions, and payout history. All data refreshes every 24 hours.</div>
+      <span class="hs-arrow">→</span>
+    </div>
+    <div class="how-step">
+      <div class="hs-num">04</div>
+      <span class="hs-ic">💸</span>
+      <div class="hs-t">Get Paid Every Month</div>
+      <div class="hs-d">Commissions are calculated and disbursed monthly via bank transfer, UPI, or PayPal. Minimum payout: ₹500. No delays. No hidden deductions. Transparent statements provided.</div>
+      <span class="hs-arrow">→</span>
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ COMMISSION TIERS ═══════════════════ -->
+  <section class="section-wrap off" id="commission">
+  <div class="sec-head">
+    <div class="sh-left">
+      <div class="sh-chapter red" data-n="02">Commission Structure</div>
+      <h2 class="sh-h">Earn more as<br>you <em>scale up.</em></h2>
+    </div>
+    <div class="sh-right">
+      <p>Four tiers designed to reward performance. Start at 12% on your first referral. Scale to 30% as a top-performing Corporate Partner. Every verified conversion at every tier is tracked and credited within 72 hours of payment confirmation.</p>
+    </div>
+  </div>
+  <div class="tier-grid reveal">
+    <div class="tier-card">
+      <div class="tc-badge std">Starter</div>
+      <div class="tc-tier">Standard Partner</div>
+      <div class="tc-rate">12<sup>%</sup></div>
+      <div class="tc-sub">Per verified conversion</div>
+      <div class="tc-divider"></div>
+      <ul class="tc-perks">
+        <li class="tc-perk">All ORIGENNT B2C services</li>
+        <li class="tc-perk">90-day cookie tracking</li>
+        <li class="tc-perk">Monthly payouts</li>
+        <li class="tc-perk">Basic dashboard access</li>
+        <li class="tc-perk">Dedicated onboarding email</li>
+      </ul>
+      <div class="tc-threshold">Threshold: <strong>1–4 conversions/month</strong></div>
+    </div>
+    <div class="tier-card">
+      <div class="tc-badge pro">Pro</div>
+      <div class="tc-tier">Pro Partner</div>
+      <div class="tc-rate">18<sup>%</sup></div>
+      <div class="tc-sub">Per verified conversion</div>
+      <div class="tc-divider"></div>
+      <ul class="tc-perks">
+        <li class="tc-perk">Everything in Standard</li>
+        <li class="tc-perk">Priority support channel</li>
+        <li class="tc-perk">Co-marketing materials</li>
+        <li class="tc-perk">Advanced analytics dashboard</li>
+        <li class="tc-perk">Bonus on high-value plans</li>
+      </ul>
+      <div class="tc-threshold">Threshold: <strong>5–9 conversions/month</strong></div>
+    </div>
+    <div class="tier-card featured">
+      <div class="tc-badge elite">Elite</div>
+      <div class="tc-tier">Elite Partner</div>
+      <div class="tc-rate">25<sup>%</sup></div>
+      <div class="tc-sub">Per verified conversion</div>
+      <div class="tc-divider"></div>
+      <ul class="tc-perks">
+        <li class="tc-perk">Everything in Pro</li>
+        <li class="tc-perk">Dedicated account manager</li>
+        <li class="tc-perk">Custom landing page</li>
+        <li class="tc-perk">Real-time conversion alerts</li>
+        <li class="tc-perk">Quarterly performance bonus</li>
+        <li class="tc-perk">ORIGENNT brand ambassador credit</li>
+      </ul>
+      <div class="tc-threshold">Threshold: <strong>10–24 conversions/month</strong></div>
+    </div>
+    <div class="tier-card">
+      <div class="tc-badge corp">Corporate</div>
+      <div class="tc-tier">Corporate Partner</div>
+      <div class="tc-rate">30<sup>%</sup></div>
+      <div class="tc-sub">+ Revenue share model</div>
+      <div class="tc-divider"></div>
+      <ul class="tc-perks">
+        <li class="tc-perk">All Elite benefits</li>
+        <li class="tc-perk">White-label options</li>
+        <li class="tc-perk">Custom B2B commission structure</li>
+        <li class="tc-perk">Co-branded placements</li>
+        <li class="tc-perk">Joint marketing campaigns</li>
+        <li class="tc-perk">Strategic partnership agreement</li>
+      </ul>
+      <div class="tc-threshold">Threshold: <strong>25+ conversions/month</strong></div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ EARNINGS CALCULATOR ═══════════════════ -->
+  <section class="section-wrap" id="calculator">
+  <div class="sec-head">
+    <div class="sh-left">
+      <div class="sh-chapter red" data-n="03">Earnings Calculator</div>
+      <h2 class="sh-h">Project your<br><em>monthly income.</em></h2>
+    </div>
+    <div class="sh-right">
+      <p>Adjust the sliders to model your real earning potential. Calculations are based on ORIGENNT's live service pricing and verified conversion rate data. Switch tiers to see how scaling your referrals unlocks higher commissions.</p>
+    </div>
+  </div>
+  <div class="calc-wrap reveal">
+    <div class="calc-controls">
+      <div class="calc-title">Your Parameters</div>
+      <div class="calc-sub">Drag sliders to model different scenarios</div>
+
+      <div style="margin-bottom:20px;">
+        <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">Select Your Tier</div>
+        <div class="calc-tier-select">
+          <div class="cts" data-rate="0.12" onclick="setTier(this,0.12)">Standard · 12%</div>
+          <div class="cts active" data-rate="0.18" onclick="setTier(this,0.18)">Pro · 18%</div>
+          <div class="cts" data-rate="0.25" onclick="setTier(this,0.25)">Elite · 25%</div>
+          <div class="cts" data-rate="0.30" onclick="setTier(this,0.30)">Corporate · 30%</div>
+        </div>
+      </div>
+
+      <div class="slider-group">
+        <div class="sl-label">
+          <span class="sl-name">Monthly Referrals</span>
+          <span class="sl-val" id="sl-refs-val">8</span>
+        </div>
+        <input type="range" id="sl-refs" min="1" max="50" value="8" oninput="updateCalc()">
+        <div class="sl-range"><span>1</span><span>50</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="sl-label">
+          <span class="sl-name">Conversion Rate</span>
+          <span class="sl-val" id="sl-conv-val">35%</span>
+        </div>
+        <input type="range" id="sl-conv" min="10" max="70" value="35" oninput="updateCalc()">
+        <div class="sl-range"><span>10%</span><span>70%</span></div>
+      </div>
+
+      <div class="slider-group">
+        <div class="sl-label">
+          <span class="sl-name">Average Order Value (₹)</span>
+          <span class="sl-val" id="sl-aov-val">₹4,999</span>
+        </div>
+        <input type="range" id="sl-aov" min="599" max="9999" value="4999" step="200" oninput="updateCalc()">
+        <div class="sl-range"><span>₹599</span><span>₹9,999</span></div>
+      </div>
+
+      <div style="padding:20px;background:var(--off);border:1px solid var(--rule);margin-top:8px;">
+        <div style="font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">Service Mix Assumption</div>
+        <div style="display:flex;flex-direction:column;gap:8px;" id="mix-display">
+          <div style="display:flex;justify-content:space-between;font-size:12px;">
+            <span style="color:var(--text2);">Internship Programs</span>
+            <span style="font-weight:600;color:var(--black);">45%</span>
+          </div>
+          <div style="height:2px;background:var(--rule);overflow:hidden;"><div style="height:100%;width:45%;background:var(--red);"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;">
+            <span style="color:var(--text2);">Career Services</span>
+            <span style="font-weight:600;color:var(--black);">35%</span>
+          </div>
+          <div style="height:2px;background:var(--rule);overflow:hidden;"><div style="height:100%;width:35%;background:var(--ink2);"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;">
+            <span style="color:var(--text2);">B2B Consulting</span>
+            <span style="font-weight:600;color:var(--black);">20%</span>
+          </div>
+          <div style="height:2px;background:var(--rule);overflow:hidden;"><div style="height:100%;width:20%;background:var(--gold);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-results">
+      <div class="res-label">Projected Earnings</div>
+      <div class="res-main">
+        <div class="res-big-label">Monthly Commission</div>
+        <div class="res-big-n"><sup>₹</sup><span id="res-monthly">5,039</span></div>
+        <div class="res-period">Based on your current parameters</div>
+      </div>
+      <div class="res-grid">
+        <div class="rg">
+          <div class="rg-l">Quarterly</div>
+          <div class="rg-n"><sup>₹</sup><span id="res-quarterly">15,117</span></div>
+        </div>
+        <div class="rg">
+          <div class="rg-l">Annual</div>
+          <div class="rg-n"><sup>₹</sup><span id="res-annual">60,470</span></div>
+        </div>
+        <div class="rg">
+          <div class="rg-l">Conversions/Mo</div>
+          <div class="rg-n"><span id="res-convs">3</span></div>
+        </div>
+        <div class="rg">
+          <div class="rg-l">Revenue Generated</div>
+          <div class="rg-n"><sup>₹</sup><span id="res-rev">27,993</span></div>
+        </div>
+      </div>
+      <div class="proj-chart-wrap">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">12-Month Projection (with 15% growth)</div>
+        <canvas id="projChart"></canvas>
+      </div>
+      <div class="proj-note">Projection assumes 15% month-over-month growth in referral volume based on ORIGENNT's observed affiliate partner ramp-up data. Actual results depend on channel quality, audience fit, and product-market resonance. Commission rates are guaranteed per current tier agreement.</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ AFFILIATE IMPACT ═══════════════════ -->
+  <section class="section-wrap warm" id="impact">
+  <div class="sec-head">
+    <div class="sh-left">
+      <div class="sh-chapter red" data-n="04">Affiliate Impact Model</div>
+      <h2 class="sh-h">How affiliates<br>power ORIGENNT's <em>growth.</em></h2>
+    </div>
+    <div class="sh-right">
+      <p>Affiliates are not just a marketing channel — they are ORIGENNT's distributed growth infrastructure. Every active affiliate expands reach into networks ORIGENNT cannot directly access. The compounding effect of a 100-partner network is equivalent to 8× our current direct sales capacity.</p>
+    </div>
+  </div>
+
+  <div class="impact-grid reveal">
+    <div class="impact-left" style="grid-column:1 / -1;">
+      <div class="impact-chart-wrap">
+        <canvas id="impactChart" style="max-height:300px;"></canvas>
+      </div>
+      <div class="impact-legend">
+        <div class="il-item"><div class="il-dot" style="background:#CC2229;"></div>Affiliate-Driven Revenue (₹L)</div>
+        <div class="il-item"><div class="il-dot" style="background:#1a1a1a;"></div>Direct Sales Revenue (₹L)</div>
+        <div class="il-item"><div class="il-dot" style="background:#c9a84c;"></div>Total Partner Network Size</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="impact-model reveal" style="margin-top:64px;">
+    <div class="im-cell">
+      <div class="im-label">Affiliate Contribution Flow</div>
+      <div class="im-chain">
+        <div class="im-node"><div class="im-node-ic">👥</div><div class="im-node-body"><div class="im-node-t">Affiliate shares referral link</div><div class="im-node-d">In social, WhatsApp, blog, or direct outreach</div></div></div>
+        <div class="im-arrow">↓</div>
+        <div class="im-node"><div class="im-node-ic">🖱️</div><div class="im-node-body"><div class="im-node-t">Lead clicks & explores ORIGENNT</div><div class="im-node-d">90-day cookie captures the attribution</div></div></div>
+        <div class="im-arrow">↓</div>
+        <div class="im-node"><div class="im-node-ic">💳</div><div class="im-node-body"><div class="im-node-t">Lead purchases a service</div><div class="im-node-d">Conversion confirmed, commission credited</div></div></div>
+        <div class="im-arrow">↓</div>
+        <div class="im-node"><div class="im-node-ic">📈</div><div class="im-node-body"><div class="im-node-t">ORIGENNT scales, affiliate earns more</div><div class="im-node-d">Growth loops back into higher affiliate payouts</div></div></div>
+      </div>
+    </div>
+    <div class="im-cell">
+      <div class="im-label">Market Penetration via Affiliates</div>
+      <div style="display:flex;flex-direction:column;gap:20px;margin-top:8px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="font-weight:600;color:var(--black);">Tier 1 Cities</span><span style="font-weight:600;color:var(--red);">68%</span></div>
+          <div class="progress-bar"><div class="pb-fill" style="--w:68%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="font-weight:600;color:var(--black);">Tier 2 Cities</span><span style="font-weight:600;color:var(--red);">22%</span></div>
+          <div class="progress-bar"><div class="pb-fill" style="--w:22%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;"><span style="font-weight:600;color:var(--black);">Tier 3+ / Rural</span><span style="font-weight:600;color:var(--red);">10%</span></div>
+          <div class="progress-bar"><div class="pb-fill" style="--w:10%"></div></div>
+        </div>
+        <div style="padding:20px;background:var(--white);border:1px solid var(--rule);margin-top:8px;">
+          <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:14px;">New Markets Opened by Affiliates</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:11px;padding:4px 10px;background:var(--off);border:1px solid var(--rule);color:var(--text2);">Kolkata</span>
+            <span style="font-size:11px;padding:4px 10px;background:var(--off);border:1px solid var(--rule);color:var(--text2);">Patna</span>
+            <span style="font-size:11px;padding:4px 10px;background:var(--off);border:1px solid var(--rule);color:var(--text2);">Ranchi</span>
+            <span style="font-size:11px;padding:4px 10px;background:rgba(204,34,41,.08);border:1px solid rgba(204,34,41,.2);color:var(--red);">Hyderabad ↑</span>
+            <span style="font-size:11px;padding:4px 10px;background:var(--off);border:1px solid var(--rule);color:var(--text2);">Raipur</span>
+            <span style="font-size:11px;padding:4px 10px;background:rgba(204,34,41,.08);border:1px solid rgba(204,34,41,.2);color:var(--red);">Chennai ↑</span>
+            <span style="font-size:11px;padding:4px 10px;background:var(--off);border:1px solid var(--rule);color:var(--text2);">Jaipur</span>
+            <span style="font-size:11px;padding:4px 10px;background:var(--off);border:1px solid var(--rule);color:var(--text2);">Indore</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="im-cell">
+      <div class="im-label">Revenue Attribution Data</div>
+      <div class="impact-right" style="display:flex;flex-direction:column;gap:0;">
+        <div class="impact-stat">
+          <div class="is-n">38<sup>%</sup></div>
+          <div class="is-body">
+            <div class="is-t">Revenue from Affiliate Channel</div>
+            <div class="is-d">Growing to a projected 55% by Q4 2026 as partner network matures and conversion data improves targeting.</div>
+          </div>
+        </div>
+        <div class="impact-stat">
+          <div class="is-n">4.2<sup>×</sup></div>
+          <div class="is-body">
+            <div class="is-t">ROI vs Direct Marketing</div>
+            <div class="is-d">Affiliate-driven leads convert at 4.2× the efficiency of cold outreach, with 2.8× higher lifetime value per client.</div>
+          </div>
+        </div>
+        <div class="impact-stat">
+          <div class="is-n">22<sup>d</sup></div>
+          <div class="is-body">
+            <div class="is-t">Average Days to First Conversion</div>
+            <div class="is-d">New affiliates typically see their first verified conversion within 22 days of going live — faster than industry average of 45 days.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ PERKS ═══════════════════ -->
+  <section class="section-wrap dark" id="perks">
+  <div class="sec-head dark-border">
+    <div class="sh-left">
+      <div class="sh-chapter" style="color:rgba(255,255,255,.3);" data-n="05">Partner Benefits</div>
+      <h2 class="sh-h w">Everything you get<br>as an ORIGENNT <em>partner.</em></h2>
+    </div>
+    <div class="sh-right w">
+      <p>Beyond the commission structure, ORIGENNT partners receive a full stack of tools, support, and preferential treatment that makes growing your affiliate income straightforward and sustainable.</p>
+    </div>
+  </div>
+  <div class="perks-grid reveal">
+    <div class="perk-card">
+      <span class="pk-ic">🍪</span>
+      <div class="pk-t">90-Day Cookie Lifetime</div>
+      <div class="pk-d">Industry-leading 90-day attribution window. If your lead returns within 3 months and purchases, you earn the commission — no exceptions, no decay.</div>
+      <div class="pk-tag">3× Industry Avg</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">📊</span>
+      <div class="pk-t">Real-Time Analytics Dashboard</div>
+      <div class="pk-d">Track clicks, leads, conversion funnels, earnings, and payout status in one clean dashboard. Data refreshes every 24 hours. Exportable CSV reports available.</div>
+      <div class="pk-tag">Full Transparency</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">🎯</span>
+      <div class="pk-t">Dedicated Marketing Kit</div>
+      <div class="pk-d">Branded banners, email templates, WhatsApp message scripts, social captions, and product one-pagers — everything you need to promote without creating content from scratch.</div>
+      <div class="pk-tag">Ready to Use</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">🔁</span>
+      <div class="pk-t">Recurring Commission on Upsells</div>
+      <div class="pk-d">If your referred client upgrades from a Basic to a Premium plan, or buys additional services within their 90-day window, you earn commission on the upsell too. One referral, multiple earnings.</div>
+      <div class="pk-tag">Compound Earnings</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">🤝</span>
+      <div class="pk-t">Co-Marketing Opportunities</div>
+      <div class="pk-d">Top-performing affiliates (Pro+) are featured in ORIGENNT's partner spotlights, email newsletters, and social channels — growing your personal or business brand alongside ours.</div>
+      <div class="pk-tag">Brand Visibility</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">⚡</span>
+      <div class="pk-t">72-Hour Commission Verification</div>
+      <div class="pk-d">Once a referred payment clears, commissions are verified and added to your account within 72 hours — not the 14–30 days typical of legacy affiliate programs in India.</div>
+      <div class="pk-tag">Fast Tracking</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">🌍</span>
+      <div class="pk-t">Multi-Channel Attribution</div>
+      <div class="pk-d">Referrals tracked across web, mobile, WhatsApp clicks, and QR code scans. Even if your lead switches devices before purchasing, the sale is still attributed to you.</div>
+      <div class="pk-tag">Cross-Device</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">📞</span>
+      <div class="pk-t">Dedicated Partner Support</div>
+      <div class="pk-d">Pro and Elite partners receive a named account manager reachable via WhatsApp. Standard partners have access to our affiliate support email with 24-hour response SLA.</div>
+      <div class="pk-tag">Real Humans</div>
+    </div>
+    <div class="perk-card">
+      <span class="pk-ic">🏆</span>
+      <div class="pk-t">Quarterly Performance Bonuses</div>
+      <div class="pk-d">Elite and Corporate partners receive quarterly bonus payments based on total volume and growth rate. Q3 2025 bonuses ranged from ₹5,000 to ₹40,000 for qualifying partners.</div>
+      <div class="pk-tag">Bonus Income</div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ VS COMPETITORS ═══════════════════ -->
+  <section class="section-wrap" id="compare">
+  <div class="sec-head">
+    <div class="sh-left">
+      <div class="sh-chapter red" data-n="06">Competitive Analysis</div>
+      <h2 class="sh-h">Why ORIGENNT's program<br>outperforms <em>the market.</em></h2>
+    </div>
+    <div class="sh-right">
+      <p>Most Indian HR and career service affiliate programs offer 5–8% commission, 30-day cookies, and opaque tracking systems. ORIGENNT was designed from day one to be the most partner-friendly program in the HR consultancy space.</p>
+    </div>
+  </div>
+  <div class="reveal">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="highlight">ORIGENNT</th>
+          <th>Naukri Affiliate</th>
+          <th>Shine Referral</th>
+          <th>HR Consulting Co.</th>
+          <th>Generic SaaS HR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="or-row">
+          <td>Max Commission Rate</td>
+          <td class="highlight">30%</td>
+          <td>8%</td>
+          <td>6%</td>
+          <td>10–15%</td>
+          <td>12–20%</td>
+        </tr>
+        <tr>
+          <td>Cookie Window</td>
+          <td class="highlight">90 days</td>
+          <td>30 days</td>
+          <td>7 days</td>
+          <td>30 days</td>
+          <td>60 days</td>
+        </tr>
+        <tr class="or-row">
+          <td>Minimum Payout</td>
+          <td class="highlight">₹500</td>
+          <td>₹2,000</td>
+          <td>₹5,000</td>
+          <td>₹1,000</td>
+          <td>₹2,500</td>
+        </tr>
+        <tr>
+          <td>Payout Frequency</td>
+          <td class="highlight">Monthly</td>
+          <td>Quarterly</td>
+          <td>Monthly</td>
+          <td>Monthly</td>
+          <td>Monthly</td>
+        </tr>
+        <tr class="or-row">
+          <td>Real-Time Dashboard</td>
+          <td class="highlight"><span class="check">✓ Full</span></td>
+          <td><span class="partial">∼ Basic</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">∼ Limited</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Upsell Commission</td>
+          <td class="highlight"><span class="check">✓ Yes</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">∼ Sometimes</span></td>
+        </tr>
+        <tr class="or-row">
+          <td>Marketing Kit Provided</td>
+          <td class="highlight"><span class="check">✓ Full Kit</span></td>
+          <td><span class="partial">∼ Basic</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">∼ Limited</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Performance Bonuses</td>
+          <td class="highlight"><span class="check">✓ Quarterly</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">∼ Annual</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr class="or-row">
+          <td>Dedicated Account Manager</td>
+          <td class="highlight"><span class="check">✓ Pro+</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">∼ Enterprise</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Join Cost</td>
+          <td class="highlight">Free</td>
+          <td>Free</td>
+          <td>Free</td>
+          <td>Free</td>
+          <td>Free</td>
+        </tr>
+        <tr class="or-row">
+          <td>Commission Verification Speed</td>
+          <td class="highlight">72 hours</td>
+          <td>7–14 days</td>
+          <td>30 days</td>
+          <td class="na">N/A</td>
+          <td>7 days</td>
+        </tr>
+        <tr>
+          <td>Co-Marketing Opportunities</td>
+          <td class="highlight"><span class="check">✓</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="partial">∼</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:20px;padding:16px 20px;background:rgba(204,34,41,.04);border-left:3px solid var(--red);font-size:12.5px;font-weight:300;color:var(--text2);line-height:1.7;">
+      <strong style="font-weight:600;color:var(--black);">Methodology:</strong> Comparison data sourced from publicly available program terms as of Q4 2024 – Q1 2025. "HR Consulting Co." represents the average of three anonymised regional Indian HR firm affiliate programs. Figures subject to change; ORIGENNT terms are contractually fixed at signup.
+    </div>
+  </div>
+  </section>
+
+  <!-- ═══════════════════ APPLY ═══════════════════ -->
+  <section class="apply-wrap" id="apply">
+  <div class="apply-left">
+    <div class="apply-chapter">Join the Program</div>
+    <h2 class="apply-h">Begin your<br>partnership<br>with <em>ORIGENNT.</em></h2>
+    <p class="apply-body">Applications take under 3 minutes. Approval within 48 hours. Your referral link goes live immediately upon approval. No application fees, no minimum follower counts, no agency requirements.</p>
+
+    <div class="apply-process">
+      <div class="ap-step">
+        <div class="ap-num">01</div>
+        <div>
+          <div class="ap-t">Submit Your Application</div>
+          <div class="ap-d">Via Google Form (below) or WhatsApp. Name, contact, channel/platform, and monthly reach estimate — that's all we need to start.</div>
+        </div>
+      </div>
+      <div class="ap-step">
+        <div class="ap-num">02</div>
+        <div>
+          <div class="ap-t">48-Hour Approval Process</div>
+          <div class="ap-d">Our partner team reviews every application personally. No automated rejections. You'll hear back within 2 business days via WhatsApp or email.</div>
+        </div>
+      </div>
+      <div class="ap-step">
+        <div class="ap-num">03</div>
+        <div>
+          <div class="ap-t">Onboarding & Link Activation</div>
+          <div class="ap-d">Receive your welcome kit, unique referral link, tracking access, and marketing materials. You're ready to share within 24 hours of approval.</div>
+        </div>
+      </div>
+      <div class="ap-step">
+        <div class="ap-num">04</div>
+        <div>
+          <div class="ap-t">Earn from Day One</div>
+          <div class="ap-d">Start referring immediately. Your first commission is credited within 72 hours of the first confirmed conversion — no waiting period, no probation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="apply-stats">
+      <div class="as-cell">
+        <div class="as-n">48<sup>hr</sup></div>
+        <div class="as-l">Approval Time</div>
+      </div>
+      <div class="as-cell">
+        <div class="as-n">₹0</div>
+        <div class="as-l">To Join</div>
+      </div>
+      <div class="as-cell">
+        <div class="as-n">72<sup>hr</sup></div>
+        <div class="as-l">Commission Credit</div>
+      </div>
+      <div class="as-cell">
+        <div class="as-n">90<sup>d</sup></div>
+        <div class="as-l">Cookie Window</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="apply-right">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;">Apply via your preferred channel</div>
+    <div class="apply-cta-grid">
+      <a href="https://forms.gle/YOUR_GOOGLE_FORM_ID" target="_blank" class="cta-primary">
+        <span>Apply via Google Form</span>
+        <span class="cta-primary-arrow">→</span>
+      </a>
+      <a href="https://wa.me/919861168291?text=Hi%20ORIGENNT%21%20I%20want%20to%20apply%20for%20the%20Affiliate%20Partner%20Program.%20My%20name%20is%20_%20and%20my%20platform%2Fchannel%20is%20_." target="_blank" class="cta-whatsapp">
+        <span class="wa-ic">💬</span>
+        <span>Apply via WhatsApp · +91 98611 68291</span>
+      </a>
+      <a href="mailto:origennt@gmail.com?subject=Affiliate Partner Application&body=Hi ORIGENNT Team,%0A%0AI'd like to apply for the Affiliate Partner Program.%0A%0AName:%0APlatform/Channel:%0AMonthly Reach:%0APreferred Tier:%0A%0AThank you." class="cta-gform">
+        <span>✉️</span>
+        <span>Apply via Email · origennt@gmail.com</span>
+      </a>
+    </div>
+    <div class="apply-footnote">By applying, you confirm that you have read and agree to ORIGENNT's Affiliate Partner Terms. Commission rates are guaranteed at tier level for a minimum of 6 months from onboarding. ORIGENNT Private Limited is incorporated under Companies Act 2013, Odisha. · CIN: U70200OR2025PTC048xxxx</div>
+
+    <div style="margin-top:40px;padding-top:40px;border-top:1px solid rgba(255,255,255,.08);">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;">Who is this program for?</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> HR professionals & career coaches
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> Education & placement consultants
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> LinkedIn & YouTube content creators
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> College TPOs & alumni networks
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> WhatsApp community managers
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> B2B agencies & staffing firms
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:300;color:rgba(255,255,255,.55);">
+          <span style="color:var(--red);font-weight:700;font-size:11px;">→</span> Anyone with a relevant audience
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+        <p class="footer-desc">Strategic management consultancy and HR firm headquartered in Bhubaneswar, Odisha. Registered under the Companies Act 2013.</p>
+      </div>
+      <div>
+        <div class="footer-col-label">Consulting</div>
+        <a href="management-consulting.html" class="footer-col-link">Management Consulting</a>
+        <a href="strategy.html" class="footer-col-link">Strategy & Transformation</a>
+        <a href="organizational-design.html" class="footer-col-link">Organisational Design</a>
+        <a href="change-management.html" class="footer-col-link">Change Management</a>
+      </div>
+      <div>
+        <div class="footer-col-label">HR Practice</div>
+        <a href="talent-acquisition.html" class="footer-col-link">Talent Acquisition</a>
+        <a href="executive-search.html" class="footer-col-link">Executive Search</a>
+        <a href="payroll-compliance.html" class="footer-col-link">Payroll & Compliance</a>
+        <a href="hr-analytics.html" class="footer-col-link">HR Analytics</a>
+      </div>
+      <div>
+        <div class="footer-col-label">Company</div>
+        <a href="about.html" class="footer-col-link">About Us</a>
+        <a href="insights.html" class="footer-col-link">Insights</a>
+        <a href="contact.html" class="footer-col-link">Contact</a>
+        <a href="#app" class="footer-col-link">Download App</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved. MSME Verified · Bhubaneswar, Odisha.</div>
+      <div class="footer-legal">
+        <a href="privacy-policy.html" class="footer-legal-link">Privacy Policy</a>
+        <a href="terms.html" class="footer-legal-link">Terms of Use</a>
+        <a href="#" class="footer-legal-link">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</div><!--main-->
+
+<script>
+// ── HERO CHART ──
+(function(){
+  const ctx = document.getElementById('heroChart').getContext('2d');
+  new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      datasets:[{
+        label:'Earnings (₹)',
+        data:[1200,1800,2400,2800,3200,3800,4200,4800,5400,6200,7100,8200],
+        borderColor:'#CC2229',backgroundColor:'rgba(204,34,41,.06)',
+        borderWidth:2,fill:true,tension:.4,pointRadius:0,pointHoverRadius:4,
+        pointHoverBackgroundColor:'#CC2229'
+      }]
+    },
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:v=>'₹'+v.raw.toLocaleString('en-IN')}}},scales:{x:{grid:{display:false},ticks:{font:{family:'DM Sans',size:10},color:'#7a7a7a'}},y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{family:'DM Sans',size:10},color:'#7a7a7a',callback:v=>'₹'+v.toLocaleString('en-IN')}}}}
+  });
+})();
+
+// ── IMPACT CHART ──
+(function(){
+  const ctx = document.getElementById('impactChart').getContext('2d');
+  new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Q1 2025','Q2 2025','Q3 2025','Q4 2025','Q1 2026','Q2 2026','Q3 2026 (Proj)','Q4 2026 (Proj)'],
+      datasets:[
+        {label:'Affiliate Revenue (₹L)',data:[1.2,2.8,5.4,8.9,13.2,18.5,25.0,33.0],backgroundColor:'rgba(204,34,41,.85)',borderRadius:0,yAxisID:'y'},
+        {label:'Direct Sales (₹L)',data:[3.8,4.2,5.0,5.8,6.4,7.2,8.0,9.0],backgroundColor:'rgba(26,26,26,.7)',borderRadius:0,yAxisID:'y'},
+        {label:'Partner Network',data:[8,22,48,80,135,210,320,450],type:'line',borderColor:'#c9a84c',backgroundColor:'rgba(201,168,76,.1)',borderWidth:2,fill:false,tension:.4,pointRadius:3,yAxisID:'y2'}
+      ]
+    },
+    options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>{if(v.dataset.yAxisID==='y2')return'Partners: '+v.raw;return v.dataset.label+': ₹'+v.raw+'L';}}}},scales:{x:{grid:{display:false},ticks:{font:{family:'DM Sans',size:10},color:'#7a7a7a'}},y:{grid:{color:'rgba(0,0,0,.05)'},position:'left',ticks:{font:{family:'DM Sans',size:10},color:'#7a7a7a',callback:v=>'₹'+v+'L'}},y2:{position:'right',grid:{display:false},ticks:{font:{family:'DM Sans',size:10},color:'#c9a84c',callback:v=>v+' pts'}}}}
+  });
+})();
+
+// ── PROJECTION CHART ──
+let projChart = null;
+function buildProjChart(data){
+  const ctx = document.getElementById('projChart').getContext('2d');
+  if(projChart) projChart.destroy();
+  projChart = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'],
+      datasets:[{
+        label:'Projected Monthly (₹)',
+        data:data,
+        backgroundColor:data.map((_,i)=>i<3?'rgba(204,34,41,.5)':'rgba(204,34,41,.85)'),
+        borderRadius:0
+      }]
+    },
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'₹'+Math.round(v.raw).toLocaleString('en-IN')}}},scales:{x:{grid:{display:false},ticks:{font:{family:'DM Sans',size:9},color:'#7a7a7a'}},y:{grid:{color:'rgba(0,0,0,.05)'},ticks:{font:{family:'DM Sans',size:9},color:'#7a7a7a',callback:v=>'₹'+v.toLocaleString('en-IN')}}}}
+  });
+}
+
+// ── CALCULATOR ──
+let currentRate = 0.18;
+function setTier(el, rate){
+  document.querySelectorAll('.cts').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  currentRate = rate;
+  updateCalc();
+}
+function fmt(n){return Math.round(n).toLocaleString('en-IN');}
+function updateCalc(){
+  const refs = +document.getElementById('sl-refs').value;
+  const conv = +document.getElementById('sl-conv').value / 100;
+  const aov  = +document.getElementById('sl-aov').value;
+  document.getElementById('sl-refs-val').textContent = refs;
+  document.getElementById('sl-conv-val').textContent = (conv*100)+'%';
+  document.getElementById('sl-aov-val').textContent = '₹'+aov.toLocaleString('en-IN');
+  const conversions = Math.max(1, Math.round(refs * conv));
+  const monthly = conversions * aov * currentRate;
+  const quarterly = monthly * 3;
+  const annual = monthly * 12;
+  const rev = conversions * aov;
+  document.getElementById('res-monthly').textContent = fmt(monthly);
+  document.getElementById('res-quarterly').textContent = fmt(quarterly);
+  document.getElementById('res-annual').textContent = fmt(annual);
+  document.getElementById('res-convs').textContent = conversions;
+  document.getElementById('res-rev').textContent = fmt(rev);
+  // 12-month projection with 15% growth
+  const proj = Array.from({length:12},(_,i)=>monthly * Math.pow(1.15, i));
+  buildProjChart(proj);
+}
+updateCalc();
+
+// ── SCROLL REVEAL ──
+const ro = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      e.target.querySelectorAll('.pb-fill').forEach(b=>b.classList.add('go'));
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// Also trigger on the static stats
+const ro2 = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.querySelectorAll('.pb-fill').forEach(b=>b.classList.add('go'));
+  });
+},{threshold:.2});
+document.querySelectorAll('.impact-right,.im-cell').forEach(el=>ro2.observe(el));
+
+//added
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Topnav scroll
+const topnav = document.getElementById('topnav');
+window.addEventListener('scroll', () => {
+  topnav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile sidebar
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+hamburger.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+// Stagger steps
+document.querySelectorAll('.step').forEach((s, i) => {
+  s.style.transitionDelay = `${i * 0.12}s`;
+});
+
+</script>
+</body>
+</html>
