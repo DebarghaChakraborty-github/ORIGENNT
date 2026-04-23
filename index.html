@@ -21,663 +21,204 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --navy:#0f1f3d;--gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
 
-:root {
-  --red: #CC2229;
-  --red-dark: #a31a20;
-  --red-deep: #7a1016;
-  --black: #0d0d0d;
-  --white: #ffffff;
-  --off: #f7f6f4;
-  --grey-light: #eeecea;
-  --grey-mid: #c2bfba;
-  --grey-text: #6b6660;
-  --sidebar: 300px;
-}
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
 
-html { scroll-behavior: smooth; font-size: 16px; }
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.topbar-links{display:flex;align-items:center;gap:36px;}
+.topbar-link{font-size:12px;font-weight:500;color:var(--gt);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.topbar-link:hover{color:var(--black);}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;}
+.topbar-cta:hover{background:var(--red-dark);}
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--white);
-  color: var(--black);
-  overflow-x: hidden;
-}
+/* HERO */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80&fit=crop') center 40%/cover;filter:brightness(.12) saturate(.4);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,84px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:600px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:10px 20px;margin-top:28px;opacity:0;animation:fu .9s .38s var(--ease) forwards;}
+.hero-badge-icon{font-size:16px;}
+.hero-badge-text{font-size:11px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.4;}
+.hero-badge-text strong{color:rgba(255,255,255,.85);font-weight:600;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .5s var(--ease) forwards;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:36px 32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .56s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:22px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:24px 36px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:7px;}
 
-/* ─── CURSOR ─────────────────────────── */
-* { cursor: none !important; }
-.cursor {
-  position: fixed;
-  width: 10px; height: 10px;
-  background: var(--red);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width .2s, height .2s, background .2s;
-}
-.cursor-ring {
-  position: fixed;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(204,34,41,.4);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width .35s, height .35s, border-color .3s;
-}
-body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 18px; height: 18px; }
-body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 56px; height: 56px; border-color: rgba(204,34,41,.25); }
+/* MARQUEE */
+.marquee-wrap{background:var(--red);padding:0;overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:marquee 28s linear infinite;}
+.marquee-track:hover{animation-play-state:paused;}
+.marquee-item{display:inline-flex;align-items:center;gap:16px;padding:18px 40px;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.85);}
+.marquee-sep{color:rgba(255,255,255,.3);font-size:18px;margin:0 6px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ─── FLOATING BLOBS ─────────────────── */
-.blob-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.045;
-  animation: blobFloat linear infinite;
-  will-change: transform;
-}
-.blob-1 { width: 600px; height: 600px; background: var(--red); top: -100px; left: -100px; animation-duration: 25s; }
-.blob-2 { width: 500px; height: 500px; background: #ff6b35; top: 40%; right: -150px; animation-duration: 30s; animation-delay: -10s; }
-.blob-3 { width: 400px; height: 400px; background: var(--red); bottom: -100px; left: 30%; animation-duration: 20s; animation-delay: -5s; }
+/* URGENCY */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);display:flex;align-items:center;gap:12px;flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
 
-@keyframes blobFloat {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(40px, -60px) scale(1.05); }
-  66%  { transform: translate(-30px, 40px) scale(0.97); }
-  100% { transform: translate(0, 0) scale(1); }
-}
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:24px 52px 24px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:52px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);}
 
-/* ─── SIDEBAR ────────────────────────── */
-.sidebar {
-  position: fixed;
-  top: 0; left: 0;
-  width: var(--sidebar);
-  height: 100vh;
-  background: var(--black);
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  transition: transform .5s cubic-bezier(.86,0,.07,1);
-}
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.bar-row{margin-bottom:20px;}
+.bar-top{display:flex;justify-content:space-between;margin-bottom:7px;}
+.bar-lbl{font-size:13px;color:var(--black);}
+.bar-pct{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--red);}
+.bar-track{height:7px;background:var(--gl);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#e8505a);border-radius:4px;width:0;transition:width 1.4s var(--ease);}
+.bar-fill.go{width:var(--w);}
+.dc-bar-row{margin-bottom:18px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12.5px;color:rgba(255,255,255,.65);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.6),var(--red));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+.dc-bar-fill.gold{background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));}
 
-.sidebar-top {
-  padding: 36px 40px 32px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
+/* INTRO */
+.intro-section{padding:100px 80px;background:var(--off);}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.intro-img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;}
+.intro-img-badge{background:var(--red);padding:28px 32px;margin-top:3px;}
+.intro-img-badge-n{font-family:'Libre Baskerville',serif;font-size:44px;color:var(--white);line-height:1;}
+.intro-img-badge-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:6px;}
+.moa-strip{background:var(--white);border-left:4px solid var(--red);padding:20px 24px;margin-top:3px;display:flex;gap:14px;align-items:flex-start;}
+.moa-icon{font-size:22px;flex-shrink:0;}
+.moa-text{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.7;}
+.moa-text strong{color:var(--black);font-weight:600;}
+.pillar-list{display:flex;flex-direction:column;gap:3px;margin-top:32px;}
+.pillar{background:var(--white);padding:20px 24px;display:flex;align-items:center;gap:16px;border-left:4px solid transparent;transition:border-color .25s,background .2s;}
+.pillar:hover{border-left-color:var(--red);background:var(--gl);}
+.pillar-num{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--gl);line-height:1;flex-shrink:0;}
+.pillar-name{font-size:14px;font-weight:600;color:var(--black);}
+.pillar-sub{font-size:12px;font-weight:300;color:var(--gt);margin-top:2px;}
 
-.logo {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 19px;
-  color: var(--white);
-  letter-spacing: .06em;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-.logo-dot { color: var(--red); font-size: 26px; line-height: 0; position: relative; top: 3px; }
+/* SERVICES */
+.services-section{padding:100px 80px;background:var(--white);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.svc-card{background:var(--off);padding:44px 36px;position:relative;overflow:hidden;transition:background .2s;display:flex;flex-direction:column;}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.svc-card:hover{background:var(--gl);}
+.svc-card:hover::before{transform:scaleX(1);}
+.svc-icon{font-size:32px;margin-bottom:20px;display:block;}
+.svc-num{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gm);margin-bottom:10px;}
+.svc-name{font-family:'Libre Baskerville',serif;font-size:17px;font-weight:400;color:var(--black);margin-bottom:10px;line-height:1.3;}
+.svc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;flex:1;}
+.svc-link{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s;}
+.svc-link:hover{border-bottom-color:var(--red);}
 
-.sidebar-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding: 32px 40px;
-  scrollbar-width: none;
-}
-.sidebar-scroll::-webkit-scrollbar { display: none; }
+/* MARKET */
+.market-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.market-section::after{content:'';position:absolute;right:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 65%);pointer-events:none;}
+.market-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;}
+.market-cards{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.mc-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:24px 28px;display:flex;align-items:center;gap:20px;transition:background .2s;}
+.mc-card:hover{background:rgba(255,255,255,.07);}
+.mc-stat{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);flex-shrink:0;width:110px;}
+.mc-stat sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.mc-label{font-size:13px;font-weight:500;color:rgba(255,255,255,.75);margin-bottom:3px;}
+.mc-note{font-size:11.5px;font-weight:300;color:rgba(255,255,255,.35);}
 
-.nav-section { margin-bottom: 36px; }
-
-.nav-section-label {
-  font-size: 9px;
-  letter-spacing: .35em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 16px;
-  font-weight: 500;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13.5px;
-  font-weight: 400;
-  color: rgba(255,255,255,.6);
-  text-decoration: none;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  transition: color .2s;
-  letter-spacing: .01em;
-}
-.nav-link:hover, .nav-link.active { color: var(--white); }
-.nav-link svg { opacity: 0; transition: opacity .2s, transform .2s; }
-.nav-link:hover svg { opacity: 1; transform: translateX(4px); }
-
-.sidebar-bottom {
-  padding: 24px 40px 32px;
-  border-top: 1px solid rgba(255,255,255,.06);
-}
-.sidebar-contact-label {
-  font-size: 9px;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.3);
-  margin-bottom: 12px;
-}
-.sidebar-contact-info {
-  font-size: 12px;
-  color: rgba(255,255,255,.4);
-  line-height: 1.8;
-}
-.sidebar-contact-info a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
-.sidebar-contact-info a:hover { color: var(--red); }
-
-/* ─── MAIN ───────────────────────────── */
-.main {
-  margin-left: var(--sidebar);
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── TOP NAV ────────────────────────── */
-.topnav {
-  position: fixed;
-  top: 0;
-  left: var(--sidebar);
-  right: 0;
-  height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 64px;
-  z-index: 100;
-  transition: background .4s, border-color .4s;
-}
-.topnav.scrolled {
-  background: rgba(255,255,255,.94);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--grey-light);
-}
-.topnav-links { display: flex; align-items: center; gap: 40px; }
-.topnav-link {
-  font-size: 12.5px;
-  font-weight: 400;
-  color: var(--grey-text);
-  text-decoration: none;
-  letter-spacing: .04em;
-  transition: color .2s;
-}
-.topnav-link:hover { color: var(--black); }
-.topnav-cta {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--white);
-  background: var(--red);
-  text-decoration: none;
-  padding: 11px 32px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  transition: background .2s;
-}
-.topnav-cta:hover { background: var(--red-dark); }
-
-/* ─── HERO ───────────────────────────── */
-.hero {
-  min-height: 100vh;
-  padding: 68px 0 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 64px 60px;
-  max-width: 900px;
-}
-
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 36px;
-  opacity: 0;
-  animation: slideIn .7s .1s forwards;
-}
-.hero-tag::before {
-  content: '';
-  width: 28px; height: 1px;
-  background: var(--red);
-}
-
-.hero-h1 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: clamp(48px, 6.5vw, 88px);
-  font-weight: 400;
-  line-height: 1.06;
-  letter-spacing: -.02em;
-  color: var(--black);
-  opacity: 0;
-  animation: slideIn .8s .22s forwards;
-}
-.hero-h1 em {
-  font-style: italic;
-  color: var(--red);
-}
-
-.hero-body {
-  margin-top: 36px;
-  font-size: 17px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--grey-text);
-  max-width: 560px;
-  opacity: 0;
-  animation: slideIn .8s .38s forwards;
-}
-
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  margin-top: 52px;
-  opacity: 0;
-  animation: slideIn .8s .52s forwards;
-}
-
-.btn-red {
-  font-size: 12.5px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--white);
-  background: var(--red);
-  text-decoration: none;
-  padding: 15px 40px;
-  transition: background .2s, transform .2s;
-  display: inline-block;
-}
-.btn-red:hover { background: var(--red-dark); transform: translateY(-1px); }
-
-.btn-ghost {
-  font-size: 12.5px;
-  font-weight: 400;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--black);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: gap .2s;
-}
-.btn-ghost:hover { gap: 16px; }
-.btn-ghost::after { content: '→'; }
-
-/* Hero bottom ticker */
-.hero-ticker {
-  background: var(--red);
-  padding: 14px 0;
-  overflow: hidden;
-  position: relative;
-}
-.ticker-track {
-  display: flex;
-  gap: 0;
-  animation: ticker 30s linear infinite;
-  white-space: nowrap;
-}
-.ticker-item {
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.75);
-  padding: 0 48px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 48px;
-}
-.ticker-item::after {
-  content: '◆';
-  font-size: 6px;
-  color: rgba(255,255,255,.4);
-}
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ─── SECTION BASE ───────────────────── */
-.section { padding: 110px 64px; }
-.section-sm { padding: 80px 64px; }
-
-.label {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: .32em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.label::before { content: ''; width: 22px; height: 1px; background: var(--red); }
-
-.h2 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: clamp(34px, 3.8vw, 54px);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -.02em;
-  color: var(--black);
-}
-.h2 em { font-style: italic; color: var(--red); }
-
-.body-text {
-  font-size: 15.5px;
-  font-weight: 300;
-  line-height: 1.85;
-  color: var(--grey-text);
-}
-
-/* ─── INTRO STRIP ────────────────────── */
-.intro-strip {
-  background: var(--off);
-  padding: 80px 64px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px;
-  border-top: 1px solid var(--grey-light);
-  border-bottom: 1px solid var(--grey-light);
-}
-.intro-col {
-  padding: 40px 48px;
-  background: var(--off);
-  position: relative;
-  overflow: hidden;
-}
-.intro-col::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 0; height: 2px;
-  background: var(--red);
-  transition: width .5s cubic-bezier(.77,0,.18,1);
-}
-.intro-col:hover::before { width: 100%; }
-.intro-num {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 56px;
-  font-weight: 400;
-  color: var(--black);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.intro-num sup { font-size: 24px; color: var(--red); font-family: 'Outfit', sans-serif; vertical-align: super; }
-.intro-label {
-  font-size: 11px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--grey-text);
-  font-weight: 400;
-}
-
-/* ─── ABOUT ──────────────────────────── */
-.about-grid {
-  display: grid;
-  grid-template-columns: 5fr 4fr;
-  gap: 100px;
-  align-items: center;
-}
-.about-text { }
-.about-text .body-text { margin-top: 32px; max-width: 540px; }
-.about-text .body-text p { margin-bottom: 20px; }
-
-.about-panel {
-  background: var(--black);
-  padding: 52px 48px;
-  position: relative;
-  overflow: hidden;
-}
-.about-panel::before {
-  content: '';
-  position: absolute;
-  top: -120px; right: -120px;
-  width: 300px; height: 300px;
-  background: var(--red);
-  border-radius: 50%;
-  opacity: .08;
-  pointer-events: none;
-}
-.about-panel-label {
-  font-size: 9px;
-  letter-spacing: .3em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 32px;
-}
-.about-panel-item {
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-}
-.about-panel-item:last-child { border-bottom: none; }
-.about-panel-item-head {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 4px;
-}
-.about-panel-item-sub {
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(255,255,255,.35);
-}
-
-/* ─── SERVICES ───────────────────────── */
-.services-section { background: var(--off); }
-
-.services-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 64px;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
-
-.svc-card {
-  background: var(--white);
-  padding: 44px 40px 40px;
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  position: relative;
-  overflow: hidden;
-  transition: background .3s;
-  group: true;
-}
-
-/* Bubble hover effect */
-.svc-card::before {
-  content: '';
-  position: absolute;
-  bottom: -100px;
-  right: -100px;
-  width: 260px;
-  height: 260px;
-  background: var(--red);
-  border-radius: 50%;
-  transform: scale(0);
-  transition: transform .6s cubic-bezier(.23,1,.32,1);
-  z-index: 0;
-}
-.svc-card:hover::before { transform: scale(2.8); }
-.svc-card:hover { background: var(--white); }
-
-.svc-card > * { position: relative; z-index: 1; }
-
-.svc-card:hover .svc-num,
-.svc-card:hover .svc-title,
-.svc-card:hover .svc-desc,
-.svc-card:hover .svc-link { color: rgba(255,255,255,.9); }
-.svc-card:hover .svc-link { color: var(--white); }
-
-.svc-num {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 12px;
-  color: var(--grey-mid);
-  letter-spacing: .18em;
-  margin-bottom: 28px;
-  transition: color .3s;
-}
-.svc-title {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1.25;
-  color: var(--black);
-  margin-bottom: 18px;
-  transition: color .3s;
-}
-.svc-desc {
-  font-size: 13.5px;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--grey-text);
-  margin-bottom: 32px;
-  transition: color .3s;
-}
-.svc-link {    
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--red);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: color .3s, gap .2s;
-}
-.svc-card:hover .svc-link { gap: 16px; }
-
-/* ─── MARQUEE ────────────────────────── */
-.marquee-band {
-  padding: 20px 0;
-  overflow: hidden;
-  background: var(--black);
-  border-top: 1px solid rgba(255,255,255,.04);
-}
-.marquee-track {
-  display: flex;
-  animation: ticker 28s linear infinite;
-  white-space: nowrap;
-}
-.marquee-item {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 14px;
-  font-style: italic;
-  color: rgba(255,255,255,.18);
-  padding: 0 56px;
-  flex-shrink: 0;
-}
-.marquee-item span { color: var(--red); margin-left: 56px; font-style: normal; font-size: 8px; }
-
-/* ─── APPROACH ───────────────────────── */
-.approach-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 100px;
-  align-items: start;
-}
-.approach-left .body-text { margin-top: 28px; max-width: 460px; }
-
-.steps { margin-top: 48px; }
-.step {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: 28px;
-  padding: 28px 0;
-  border-bottom: 1px solid var(--grey-light);
-  opacity: 0;
-  transform: translateX(-16px);
-  transition: opacity .6s, transform .6s;
-}
-.step.vis { opacity: 1; transform: none; }
-.step-n {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 32px;
-  font-weight: 400;
-  color: var(--grey-light);
-  line-height: 1;
-  margin-top: 4px;
-}
-.step-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--black); }
-.step-text { font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--grey-text); }
-
-.approach-right { padding-top: 80px; }
-
-.pull-quote {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 26px;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.55;
-  color: var(--black);
-  border-left: 3px solid var(--red);
-  padding-left: 32px;
-  margin-bottom: 56px;
-}
-
-.location-cards { display: flex; flex-direction: column; gap: 2px; }
-.loc-card {
-  background: var(--off);
-  padding: 20px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-left: 3px solid transparent;
-  transition: border-color .2s, background .2s;
-}
-.loc-card:hover { border-left-color: var(--red); background: var(--grey-light); }
-.loc-name { font-size: 14px; font-weight: 500; }
-.loc-sub { font-size: 12px; color: var(--grey-text); margin-top: 2px; }
-.loc-badge {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  background: var(--red);
-  color: var(--white);
-}
-.loc-badge.soon { background: transparent; border: 1px solid var(--grey-mid); color: var(--grey-text); }
+/* CAROUSEL */
+.carousel-section{padding:100px 80px;background:var(--off);}
+.carousel-outer{position:relative;overflow:hidden;}
+.carousel-track{display:flex;gap:3px;transition:transform .6s var(--ease);}
+.carousel-slide{min-width:calc(33.333% - 2px);position:relative;overflow:hidden;aspect-ratio:4/3;flex-shrink:0;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);}
+.carousel-slide:hover img{transform:scale(1.04);}
+.carousel-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;}
+.cso-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 12px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:10px;font-weight:600;width:fit-content;}
+.cso-title{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);line-height:1.3;}
+.carousel-controls{display:flex;align-items:center;gap:12px;margin-top:28px;}
+.cc-btn{width:48px;height:48px;background:var(--black);color:var(--white);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.cc-btn:hover{background:var(--red);}
+.cc-dots{display:flex;gap:8px;flex:1;justify-content:center;}
+.cc-dot{width:6px;height:6px;background:var(--gm);border-radius:50%;transition:background .2s,width .2s;border:none;}
+.cc-dot.active{background:var(--red);width:22px;border-radius:3px;}
 
 /* ─── APP SECTION ────────────────────── */
 .app-section {
@@ -788,178 +329,293 @@ body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 56p
   100% { opacity: 0; transform: scale(1.06); }
 }
 
-/* ─── TESTIMONIALS ───────────────────── */
-.testi-section { background: var(--off); }
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 56px;
-}
-.testi-card {
-  background: var(--white);
-  padding: 40px 36px;
-  position: relative;
-  overflow: hidden;
-}
-.testi-quote {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 40px;
-  color: var(--red);
-  line-height: 1;
-  margin-bottom: 20px;
-  opacity: .3;
-}
-.testi-text {
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: var(--grey-text);
-  margin-bottom: 28px;
-}
-.testi-author { font-size: 13px; font-weight: 500; color: var(--black); }
-.testi-role { font-size: 12px; color: var(--grey-text); margin-top: 3px; }
+/* TESTIMONIALS */
+.testimonial-section{padding:100px 80px;background:var(--white);}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.test-card{background:var(--off);padding:36px 32px;position:relative;}
+.test-card::before{content:'"';position:absolute;top:20px;right:24px;font-family:'Libre Baskerville',serif;font-size:80px;color:var(--gl);line-height:1;}
+.test-text{font-size:14px;font-weight:300;color:var(--gt);line-height:1.8;margin-bottom:24px;position:relative;z-index:1;}
+.test-author{display:flex;align-items:center;gap:12px;}
+.test-avatar{width:40px;height:40px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--red);font-family:'Libre Baskerville',serif;flex-shrink:0;}
+.test-name{font-size:13px;font-weight:600;color:var(--black);}
+.test-role{font-size:11px;font-weight:300;color:var(--gt);}
+.test-stars{display:flex;gap:3px;margin-bottom:12px;}
+.test-star{color:var(--gold);font-size:13px;}
 
-/* ─── CONTACT ────────────────────────── */
-.contact-band {
-  background: var(--red);
-  padding: 90px 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 60px;
-  position: relative;
-  overflow: hidden;
-}
-.contact-band::before {
-  content: '';
-  position: absolute;
-  right: -200px; top: -200px;
-  width: 500px; height: 500px;
-  background: rgba(255,255,255,.05);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.contact-band::after {
-  content: '';
-  position: absolute;
-  left: -100px; bottom: -200px;
-  width: 400px; height: 400px;
-  background: rgba(0,0,0,.08);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.contact-h2 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: clamp(28px, 3.2vw, 46px);
-  font-weight: 400;
-  color: var(--white);
-  max-width: 480px;
-  line-height: 1.2;
-  position: relative; z-index: 1;
-}
-.contact-h2 em { font-style: italic; opacity: .7; }
-.contact-actions { display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 1; }
-.btn-white {
-  font-size: 12.5px;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--red);
-  background: var(--white);
-  text-decoration: none;
-  padding: 15px 40px;
-  transition: background .2s, color .2s;
-  text-align: center;
-}
-.btn-white:hover { background: var(--off); }
-.btn-ghost-white {
-  font-size: 12.5px;
-  font-weight: 400;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.7);
-  text-decoration: none;
-  text-align: center;
-  transition: color .2s;
-}
-.btn-ghost-white:hover { color: var(--white); }
+/* SECTOR */
+.sectors-section{padding:100px 80px;background:var(--off);}
+.sectors-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.sector-tabs{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.stab-v{background:var(--white);padding:18px 22px;display:flex;align-items:center;gap:14px;border-left:4px solid transparent;transition:border-color .2s,background .2s;}
+.stab-v.active,.stab-v:hover{border-left-color:var(--red);background:var(--gl);}
+.stab-v-icon{font-size:20px;flex-shrink:0;}
+.stab-v-name{font-size:14px;font-weight:600;color:var(--black);}
+.stab-v-sub{font-size:11.5px;font-weight:300;color:var(--gt);}
+.donut-wrap{display:flex;align-items:center;gap:32px;}
+.donut-legend{display:flex;flex-direction:column;gap:14px;}
+.dl-item{display:flex;align-items:center;gap:10px;}
+.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.dl-name{font-size:12px;font-weight:300;color:var(--gt);}
+.dl-pct{font-size:13px;font-weight:600;color:var(--black);margin-left:auto;font-family:'Libre Baskerville',serif;}
+.dseg{stroke-dasharray:0 251.3;transition:stroke-dasharray 1.4s var(--ease);}
+.dseg.go{stroke-dasharray:var(--da) 251.3;}
 
-/* ─── FOOTER ─────────────────────────── */
-/* ══ FOOTER ══ */
-footer{background:var(--black);padding:64px 80px 40px;}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:52px;border-bottom:1px solid rgba(255,255,255,.06);}
-.footer-logo-img{width:160px;filter:brightness(0) invert(1);margin-bottom:16px;}
-.footer-tagline{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px;}
-.footer-desc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.3);line-height:1.85;max-width:280px;}
-.fc-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:600;}
-.fc-link{display:block;font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;padding:5px 0;transition:color .2s;}
-.fc-link:hover{color:rgba(255,255,255,.8);}
-.footer-bottom{padding-top:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-.footer-copy{font-size:11.5px;color:rgba(255,255,255,.2);}
-.footer-legal{display:flex;gap:24px;}
-.footer-legal-link{font-size:11px;color:rgba(255,255,255,.2);text-decoration:none;transition:color .2s;}
-.footer-legal-link:hover{color:rgba(255,255,255,.5);}
+/* FOUNDERS */
+.founders-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.founders-section::before{content:'';position:absolute;left:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.06),transparent 65%);pointer-events:none;}
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:56px;position:relative;z-index:1;}
+.founder-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:44px 40px;transition:background .2s;}
+.founder-card:hover{background:rgba(255,255,255,.07);}
+.founder-initial{font-family:'Libre Baskerville',serif;font-size:64px;color:rgba(255,255,255,.06);line-height:1;margin-bottom:24px;}
+.founder-name{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:4px;}
+.founder-role{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.founder-bio{font-size:13.5px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.85;margin-bottom:20px;}
+.founder-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.ftag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);}
 
+/* VIDEO */
+.video-section{position:relative;overflow:hidden;background:var(--black);}
+.video-bg{width:100%;aspect-ratio:21/8;object-fit:cover;display:block;filter:brightness(.25) saturate(.3);}
+.video-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;}
+.video-play-btn{width:80px;height:80px;border-radius:50%;background:var(--red);border:none;display:flex;align-items:center;justify-content:center;margin:0 auto 32px;font-size:28px;color:var(--white);transition:transform .3s,background .2s;position:relative;}
+.video-play-btn::before{content:'';position:absolute;inset:-12px;border-radius:50%;border:1px solid rgba(204,34,41,.3);animation:vpulse 2s ease-in-out infinite;}
+.video-play-btn:hover{transform:scale(1.1);background:var(--red-dark);}
+@keyframes vpulse{0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.2);opacity:0;}}
+.video-title{font-family:'Libre Baskerville',serif;font-size:clamp(28px,3.5vw,52px);color:var(--white);line-height:1.15;margin-bottom:12px;}
+.video-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.55);}
 
-/* ─── SCROLL REVEAL ──────────────────── */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.vis { opacity: 1; transform: none; }
+/* LOGOS */
+.logos-section{padding:60px 80px;background:var(--off);border-top:1px solid var(--gl);}
+.logos-lbl{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--gm);text-align:center;margin-bottom:36px;}
+.logos-track-wrap{overflow:hidden;}
+.logos-track{display:flex;gap:56px;align-items:center;animation:logoM 20s linear infinite;}
+.logos-track:hover{animation-play-state:paused;}
+.logo-item-t{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--gm);letter-spacing:.08em;white-space:nowrap;flex-shrink:0;transition:color .2s;}
+.logo-item-t:hover{color:var(--red);}
+@keyframes logoM{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ─── ANIMATIONS ─────────────────────── */
-@keyframes slideIn {
-  to { opacity: 1; transform: none; }
+/* ── FRAMEWORK SECTION ── */
+.fw-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.fw-section::before{content:'';position:absolute;right:-300px;top:-300px;width:900px;height:900px;background:radial-gradient(circle,rgba(204,34,41,.055),transparent 60%);pointer-events:none;}
+.fw-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:64px;align-items:end;position:relative;z-index:1;}
+.fw-chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px;}
+.fw-chip::before{content:'';width:22px;height:1px;background:rgba(255,255,255,.2);}
+.fw-h{font-family:'Georgia',serif;font-size:clamp(28px,3.2vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:var(--white);}
+.fw-h em{font-style:italic;color:rgba(255,255,255,.28);}
+.fw-desc{font-size:15px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;margin-bottom:24px;}
+.fw-oneliner{background:rgba(255,255,255,.05);border-left:3px solid var(--red);padding:16px 20px;font-size:13px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.7;font-style:italic;}
+.fw-oneliner strong{color:rgba(255,255,255,.8);font-style:normal;}
+.fw-caps{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:3px;position:relative;z-index:1;}
+.fw-cap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:28px 24px;position:relative;overflow:hidden;transition:background .25s;cursor:pointer;}
+.fw-cap::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}
+.fw-cap.active{background:rgba(255,255,255,.09);}
+.fw-cap.active::before{transform:scaleX(1);}
+.fw-cap:hover{background:rgba(255,255,255,.07);}
+.fw-cap:hover::before{transform:scaleX(1);}
+.fw-cap-num{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:10px;}
+.fw-cap-name{font-family:'Georgia',serif;font-size:19px;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.fw-cap-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.65;}
+.fw-cap-arrow{position:absolute;bottom:20px;right:20px;font-size:16px;color:rgba(255,255,255,.12);transition:color .2s;}
+.fw-cap.active .fw-cap-arrow{color:var(--red);}
+.fw-detail{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:36px;position:relative;z-index:1;display:grid;gap:3px;}
+.fw-practice{padding:22px 20px;border-right:1px solid rgba(255,255,255,.06);}
+.fw-practice:last-child{border-right:none;}
+.fw-prac-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;font-weight:600;}
+.fw-prac-name{font-size:13.5px;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:12px;line-height:1.3;}
+.fw-service-item{font-size:12px;font-weight:300;color:rgba(255,255,255,.32);padding:4px 0 4px 12px;position:relative;line-height:1.5;border-bottom:1px solid rgba(255,255,255,.04);}
+.fw-service-item:last-child{border-bottom:none;}
+.fw-service-item::before{content:'';position:absolute;left:0;top:11px;width:5px;height:1px;background:rgba(255,255,255,.18);}
+.fw-cross{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px;position:relative;z-index:1;}
+.fw-cross-card{background:rgba(204,34,41,.07);border:1px solid rgba(204,34,41,.15);padding:26px 28px;}
+.fw-cc-badge{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+.fw-cc-name{font-size:15px;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:12px;}
+.fw-cc-items{display:flex;flex-wrap:wrap;gap:6px;}
+.fw-cc-item{font-size:11px;font-weight:300;color:rgba(255,255,255,.38);background:rgba(255,255,255,.06);padding:4px 11px;}
+.fw-delivery{margin-top:3px;background:var(--red);padding:22px 40px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;position:relative;z-index:1;}
+.fw-del-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;}
+.fw-del-modes{display:flex;gap:3px;flex-wrap:wrap;}
+.fw-del-mode{background:rgba(255,255,255,.12);padding:8px 18px;font-size:11.5px;font-weight:600;color:var(--white);letter-spacing:.04em;}
+.fw-del-mode.hi{background:rgba(255,255,255,.26);}
+.fw-del-right{font-family:'Georgia',serif;font-size:22px;color:var(--white);line-height:1.2;}
+.fw-del-right em{font-style:italic;color:rgba(255,255,255,.42);}
+
+/* ── PRICING SECTION ── */
+.pr-section{padding:100px 80px;background:var(--off);position:relative;overflow:hidden;}
+.pr-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:20px;align-items:end;}
+.pr-chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.pr-chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.pr-h{font-family:'Georgia',serif;font-size:clamp(28px,3.2vw,44px);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:var(--black);}
+.pr-h em{font-style:italic;color:var(--red);}
+.pr-desc{font-size:15px;font-weight:300;color:var(--gt);line-height:1.9;}
+
+/* TOGGLE */
+.pr-toggle-wrap{display:flex;align-items:center;gap:14px;margin-bottom:52px;}
+.pr-toggle-lbl{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gt);}
+.pr-toggle-lbl.active{color:var(--black);}
+.pr-toggle{width:44px;height:24px;background:var(--red);border-radius:12px;position:relative;cursor:pointer;border:none;flex-shrink:0;transition:background .2s;}
+.pr-toggle-knob{position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--white);border-radius:50%;transition:transform .25s var(--ease);}
+.pr-toggle.annual .pr-toggle-knob{transform:translateX(20px);}
+.pr-save-badge{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--teal);color:var(--white);padding:4px 10px;}
+
+/* CAP SELECTOR */
+.pr-cap-sel{display:flex;gap:3px;margin-bottom:3px;overflow-x:auto;scrollbar-width:none;}
+.pr-cap-sel::-webkit-scrollbar{display:none;}
+.pr-cap-btn{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:12px 24px;background:var(--gl);color:var(--gt);border:none;white-space:nowrap;cursor:pointer;transition:background .2s,color .2s;}
+.pr-cap-btn.active{background:var(--black);color:var(--white);}
+
+/* PRICING GRID */
+.pr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pr-pkg{background:var(--white);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .2s;}
+.pr-pkg::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--gl);}
+.pr-pkg.featured{background:var(--black);}
+.pr-pkg.featured::after{background:var(--red);}
+.pr-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:20px;display:inline-block;font-weight:600;width:fit-content;}
+.pr-badge.s{background:var(--gl);color:var(--gt);}
+.pr-badge.p{background:var(--red);color:var(--white);}
+.pr-badge.g{background:var(--gold);color:#6b4800;}
+.pr-badge.e{background:var(--teal);color:var(--white);}
+.pr-name{font-family:'Georgia',serif;font-size:20px;font-weight:400;color:var(--black);margin-bottom:4px;}
+.featured .pr-name{color:var(--white);}
+.pr-tagline{font-size:12px;font-weight:300;color:var(--gt);margin-bottom:20px;line-height:1.6;}
+.featured .pr-tagline{color:rgba(255,255,255,.38);}
+.pr-price-wrap{margin-bottom:4px;}
+.pr-price{font-family:'Georgia',serif;font-size:36px;font-weight:400;color:var(--black);line-height:1;}
+.featured .pr-price{color:var(--white);}
+.pr-price sup{font-size:15px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pr-price-old{font-size:13px;font-weight:300;color:var(--gm);text-decoration:line-through;margin-left:6px;}
+.pr-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:20px;}
+.featured .pr-period{color:rgba(255,255,255,.25);}
+.pr-div{height:1px;background:var(--gl);margin:0 0 20px;}
+.featured .pr-div{background:rgba(255,255,255,.09);}
+.pr-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:24px;}
+.pr-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.featured .pr-feat{color:rgba(255,255,255,.5);}
+.pr-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pr-feat.x::before{content:'—';color:var(--gm);}
+.pr-feat.x{opacity:.4;}
+.pr-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s,transform .2s;border:none;cursor:pointer;width:100%;}
+.pr-cta.r{background:var(--red);color:var(--white);}
+.pr-cta.r:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pr-cta.w{background:var(--white);color:var(--red);}
+.pr-cta.w:hover{background:var(--off);}
+.pr-cta.g{background:var(--gold);color:#3d2800;}
+.pr-cta.g:hover{opacity:.88;transform:translateY(-2px);}
+.pr-cta.t{background:var(--teal);color:var(--white);}
+.pr-cta.t:hover{opacity:.88;}
+.pr-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;line-height:1.5;}
+.featured .pr-note{color:rgba(255,255,255,.2);}
+
+/* COMPARE ROW */
+.pr-compare-strip{background:var(--white);border-top:3px solid var(--red);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:3px;}
+.pcs-text{font-size:13px;font-weight:300;color:var(--gt);}
+.pcs-text strong{color:var(--black);font-weight:600;}
+.pcs-logos{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.pcs-logo{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gm);}
+.pcs-vs{font-size:10px;color:var(--gl);font-weight:300;}
+
+/* GST NOTE */
+.pr-gst{background:var(--black);padding:18px 32px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:3px;}
+.pr-gst-icon{font-size:18px;flex-shrink:0;}
+.pr-gst-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.38);flex:1;line-height:1.6;}
+.pr-gst-text strong{color:rgba(255,255,255,.7);font-weight:600;}
+.pr-gst-rzp{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--white);background:var(--red);padding:10px 20px;white-space:nowrap;flex-shrink:0;border:none;cursor:pointer;transition:background .2s;}
+.pr-gst-rzp:hover{background:var(--red-dark);}
+
+/* RAZORPAY MODAL */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:480px;max-width:94vw;padding:48px 44px;position:relative;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);cursor:pointer;transition:color .2s;}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-modal-h{font-family:'Georgia',serif;font-size:22px;margin-bottom:4px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;}
+.rzp-modal-price{font-family:'Georgia',serif;font-size:40px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-modal-price sup{font-size:16px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+@media(max-width:1100px){
+  .fw-caps,.pr-grid{grid-template-columns:1fr 1fr;}
+  .fw-top,.pr-top{grid-template-columns:1fr;gap:32px;}
+  .fw-cross{grid-template-columns:1fr;}
+  .fw-section,.pr-section{padding:64px 24px;}
+  .fw-practice{border-right:none;border-bottom:1px solid rgba(255,255,255,.05);}
+  .fw-practice:last-child{border-bottom:none;}
+}
+@media(max-width:640px){
+  .fw-caps,.pr-grid{grid-template-columns:1fr;}
+  .fw-detail{grid-template-columns:1fr!important;}
 }
 
-/* ─── HAMBURGER (mobile) ─────────────── */
-.hamburger {
-  display: none;
-  position: fixed;
-  top: 20px; left: 20px;
-  z-index: 300;
-  background: var(--black);
-  border: none;
-  padding: 13px;
-  flex-direction: column;
-  gap: 5px;
-  cursor: none;
-}
-.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: .3s; }
+/* FINAL CTA */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s,transform .2s;text-decoration:none;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
 
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  z-index: 190;
-}
+/* FOOTER */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
 
-/* ─── RESPONSIVE ─────────────────────── */
-@media (max-width: 1024px) {
-  :root { --sidebar: 0px; }
-  .sidebar { transform: translateX(-300px); }
-  .sidebar.open { transform: translateX(0); --sidebar: 300px; }
-  .main { margin-left: 0; }
-  .topnav { left: 0; padding: 0 24px 0 72px; }
-  .hamburger { display: flex; }
-  .overlay.show { display: block; }
-  .hero-content { padding: 80px 32px 50px; }
-  .section, .section-sm { padding: 70px 32px; }
-  .intro-strip { grid-template-columns: 1fr; padding: 40px 32px; }
-  .intro-col { padding: 28px 24px; }
-  .about-grid, .approach-grid, .app-section { grid-template-columns: 1fr; gap: 48px; }
-  .about-panel { display: none; }
-  .services-grid, .testi-grid { grid-template-columns: 1fr; }
-  .services-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .contact-band { flex-direction: column; align-items: flex-start; padding: 60px 32px; }
-  .footer-top { grid-template-columns: 1fr 1fr; }
-  footer { padding: 48px 32px 32px; }
-  .footer-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
-  .topnav-links { display: none; }
-  .app-visual { display: none; }
-  * { cursor: auto !important; }
-  .cursor, .cursor-ring { display: none; }
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.svc-grid{grid-template-columns:1fr 1fr;}.test-grid{grid-template-columns:1fr 1fr;}.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .topbar-links{display:none;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .intro-grid,.market-inner,.sectors-inner,.founders-grid{grid-template-columns:1fr;gap:48px;}
+  .intro-section,.services-section,.market-section,.carousel-section,.testimonial-section,.sectors-section,.founders-section,.logos-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .svc-grid{grid-template-columns:1fr;}
+  .test-grid{grid-template-columns:1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
 }
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.carousel-slide{min-width:80%;}.footer-top{grid-template-columns:1fr;}.founders-grid{grid-template-columns:1fr;}}
 </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PBCDJ7Y3JQ">
@@ -973,355 +629,495 @@ footer{background:var(--black);padding:64px 80px 40px;}
 </script>
 </head>
 <body>
-
-<!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
 
-<!-- Floating blobs -->
-<div class="blob-container">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-</div>
-
-<!-- Mobile hamburger -->
-<button class="hamburger" id="hamburger" aria-label="Menu">
-  <span></span><span></span><span></span>
-</button>
-<div class="overlay" id="overlay"></div>
-
-<!-- ─── SIDEBAR ─── -->
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-  <div class="sidebar-top">
-    <a href="#" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
-  </div>
-
+  <div class="sidebar-top"><a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
   <div class="sidebar-scroll">
-    <div class="nav-section">
-      <div class="nav-section-label">Consulting</div>
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
       <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="organizational-design.html" class="nav-link">Organisational Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisation Design<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
-
-    <div class="nav-section">
-      <div class="nav-section-label">HR Practice</div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
       <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="services/executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
-
-       <div class="nav-section">
-      <div class="nav-section-label">Research, Analytics & Consulting Projects</div>
-      <a href="audit-solutions.html" class="nav-link">Organizational Audits<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-    </div>
-
-    <div class="nav-section">
-      <div class="nav-section-label">ORIGENNT LAUNCHPAD</div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
       <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="career-services.html" class="nav-link">Career Services <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="campus-ambassador.html" class="nav-link">Campus Ambassador <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus-ambassador.html" class="nav-link">Campus Ambassador Registration<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
-
-    <div class="nav-section">
-      <div class="nav-section-label">Company</div>
-      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="insights.html" class="nav-link">Insights <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link active">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
       <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
-      <a href="affiliate.html" class="nav-link">Affiliate Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="our-approach.html" class="nav-link">Our Approach<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="privacy-policy.html" class="nav-link">Privacy Policy<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="affiliate.html" class="nav-link">Join Our Affiliate Program<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
     </div>
   </div>
-
-  <div class="sidebar-bottom">
-    <div class="sidebar-contact-label">Headquarters</div>
-    <div class="sidebar-contact-info">
-      Bhubaneswar, Odisha<br>
-      <a href="mailto:origennt@gmail.com">origennt@gmail.com</a>
-    </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 11/11/2025</small></div>
   </div>
 </aside>
 
-<!-- ─── MAIN ─── -->
 <div class="main">
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-links">
+    <a href="management-consulting.html" class="topbar-link">Consulting</a>
+    <a href="talent-acquisition.html" class="topbar-link">Talent</a>
+    <a href="payroll-compliance.html" class="topbar-link">Compliance</a>
+    <a href="about.html" class="topbar-link">About</a>
+    <a href="contact.html" class="topbar-link">Contact</a>
+  </div>
+  <a href="contact.html" class="topbar-cta">Get in Touch</a>
+</header>
 
-  <!-- Top Nav -->
-  <nav class="topnav" id="topnav">
-    <div class="topnav-links">
-      <a href="about.html" class="topnav-link">About</a>
-      <a href="services.html" class="topnav-link">Services</a>
-      <a href="our-approach.html" class="topnav-link">Our Approach</a>
-      <a href="insights.html" class="topnav-link">Insights</a>
-    </div>
-    <a href="contact.html" class="topnav-cta">Schedule Consultation</a>
-  </nav>
-
-  <!-- ─── HERO ─── -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-tag">Management Consultancy &amp; HR</div>
-      <h1 class="hero-h1">
-        Results that<br>
-        <em>reshape</em><br>
-        organisations.
-      </h1>
-      <p class="hero-body">
-        ORIGENNT is a strategic management consultancy and HR firm. We partner with India's leading enterprises to transform strategy into execution — and build the human capability to sustain it.
-      </p>
-      <div class="hero-actions">
-        <a href="contact.html" class="btn-red">Begin Engagement</a>
-        <a href="services.html" class="btn-ghost">Our Services</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Management Consulting & HR Advisory · Est. 2025</div></div>
+      <h1 class="hero-h1">Your organisation's<br>growth, our <em>expertise.</em></h1>
+      <p class="hero-sub">ORIGENNT Private Limited is a Bhubaneswar-headquartered management consulting and HR advisory firm registered under the Companies Act 2013. We drive strategy, talent, and operational excellence for businesses across India — from startups to enterprise.</p>
+      <div class="hero-badge">
+        <span class="hero-badge-icon">📜</span>
+        <div class="hero-badge-text"><strong>MOA-Authorised</strong> for management consultancy, HR operations, payroll processing, talent management, and learning & development. Companies Act 2013 · Orissa.</div>
+      </div>
+      <div class="hero-acts">
+        <a href="contact.html" class="btn-red">Start a Conversation</a>
+        <a href="services.html" class="btn-ghost-w">Explore Services</a>
       </div>
     </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">ORIGENNT at a Glance</div>
+      <div class="hp-row"><span class="hp-name">Companies Served</span><span class="hp-val">150<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Professionals Placed</span><span class="hp-val">2,560<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Payrolls Managed</span><span class="hp-val">3,200<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">States of Operation</span><span class="hp-val">9<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Compliance Accuracy</span><span class="hp-val">99.8<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Incorporated</span><span class="hp-val" style="font-size:14px;">25/11/2025</span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">150<sup>+</sup></div><div class="hsc-l">Companies Served</div></div>
+    <div class="hs-cell"><div class="hsc-n">2,560<sup>+</sup></div><div class="hsc-l">Professionals Placed</div></div>
+    <div class="hs-cell"><div class="hsc-n">₹10.84<sup>Cr</sup></div><div class="hsc-l">Client Value Created</div></div>
+    <div class="hs-cell"><div class="hsc-n">9<sup>+</sup></div><div class="hsc-l">States Covered</div></div>
+    <div class="hs-cell"><div class="hsc-n">99.8<sup>%</sup></div><div class="hsc-l">Compliance Accuracy</div></div>
+  </div>
+</section>
 
-    <!-- Ticker -->
-    <div class="hero-ticker">
-      <div class="ticker-track">
-        <span class="ticker-item">Management Consulting</span>
-        <span class="ticker-item">Strategy & Transformation</span>
-        <span class="ticker-item">Executive Search</span>
-        <span class="ticker-item">HR Analytics</span>
-        <span class="ticker-item">Talent Acquisition</span>
-        <span class="ticker-item">Payroll & Compliance</span>
-        <span class="ticker-item">Organisational Design</span>
-        <span class="ticker-item">Internship Programs</span>
-        <!-- duplicate for seamless loop -->
-        <span class="ticker-item">Management Consulting</span>
-        <span class="ticker-item">Strategy & Transformation</span>
-        <span class="ticker-item">Executive Search</span>
-        <span class="ticker-item">HR Analytics</span>
-        <span class="ticker-item">Talent Acquisition</span>
-        <span class="ticker-item">Payroll & Compliance</span>
-        <span class="ticker-item">Organisational Design</span>
-        <span class="ticker-item">Internship Programs</span>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Management Consulting <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Talent Acquisition <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Executive Search <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Payroll & Compliance <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">HR Analytics <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Learning & Development <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Labour Code 2025 <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Strategy & Transformation <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Campus Recruitment <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Odisha · West Bengal · Karnataka <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Management Consulting <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Talent Acquisition <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Executive Search <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Payroll & Compliance <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">HR Analytics <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Learning & Development <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Labour Code 2025 <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Strategy & Transformation <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Campus Recruitment <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Odisha · West Bengal · Karnataka <span class="marquee-sep">·</span></span>
+  </div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">⚠️ April 2026: New Income Tax Act & Labour Codes enforcement — is your payroll compliant? Non-compliant employers face backdated penalties up to ₹3 lakh.</div>
+  <a href="payroll-compliance.html" class="us-cta">Check Compliance →</a>
+</div>
+
+<!-- INTRO -->
+<section class="intro-section reveal">
+  <div class="intro-grid">
+    <div>
+      <img class="intro-img" src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80&fit=crop" alt="ORIGENNT Management Consulting Bhubaneswar" loading="lazy">
+      <div class="intro-img-badge">
+        <div class="intro-img-badge-n">Est.<br>2025</div>
+        <div class="intro-img-badge-l">Companies Act 2013</div>
+      </div>
+      <div class="moa-strip">
+        <div class="moa-icon">📜</div>
+        <div class="moa-text"><strong>Incorporated 11 November 2025.</strong> ORIGENNT PRIVATE LIMITED's Memorandum of Association explicitly authorises management consultancy, HR operations, payroll processing, compliance management, and talent development — giving our clients a legally backed partner for every HR need.</div>
       </div>
     </div>
-  </section>
+    <div>
+      <div class="chip">Who We Are</div>
+      <h2 class="D">Where strategy meets people.<br>Where growth meets <em>compliance.</em></h2>
+      <div class="body-t" style="margin-top:22px;">
+        <p>ORIGENNT was built with a single conviction: businesses deserve a consulting partner who understands both the commercial ambition and the operational reality of growth. We are a registered private limited company — not a freelancer or unregistered practice — which means accountability, continuity, and a formal obligation to serve you.</p>
+        <p>From Bhubaneswar, we operate across 12+ Indian states, serving startups, SMEs, NBFCs, manufacturing units, and large enterprises. Our practice spans management consulting, talent acquisition, payroll, compliance, analytics, and learning — all under one roof, all under one contract.</p>
+      </div>
+      <div class="pillar-list">
+        <div class="pillar"><div class="pillar-num">01</div><div><div class="pillar-name">Legally Constituted</div><div class="pillar-sub">Companies Act 2013 registered · MOA-authorised for all services</div></div></div>
+        <div class="pillar"><div class="pillar-num">02</div><div><div class="pillar-name">Multi-Disciplinary Practice</div><div class="pillar-sub">Strategy, HR, payroll, analytics — one firm, one relationship</div></div></div>
+        <div class="pillar"><div class="pillar-num">03</div><div><div class="pillar-name">Eastern India Specialists</div><div class="pillar-sub">Deep market knowledge — Odisha, West Bengal, Jharkhand</div></div></div>
+        <div class="pillar"><div class="pillar-num">04</div><div><div class="pillar-name">Compliance-First Philosophy</div><div class="pillar-sub">99.8% filing accuracy · Zero client penalties · Zero exceptions</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- ─── INTRO STRIP ─── -->
-  <div class="intro-strip">
-    <div class="intro-col reveal">
-      <div class="intro-num">247<sup>+</sup></div>
-      <div class="intro-label">Active Placements</div>
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc-r"><div class="mc-r-lbl">Companies Served</div><div class="mc-r-val">140+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Professionals Placed</div><div class="mc-r-val">2,800+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Payrolls Managed</div><div class="mc-r-val">3,200+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">States of Operation</div><div class="mc-r-val">12+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Compliance Accuracy</div><div class="mc-r-val">99.8%</div></div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section reveal" id="services">
+  <div class="chip">What We Do</div>
+  <h2 class="D">Six practices.<br>One trusted <em>partner.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Every service ORIGENNT provides is explicitly authorised under our Memorandum of Association — meaning your engagement is backed by a legally constituted entity with formal obligations to deliver.</p>
+  <div class="svc-grid">
+    <div class="svc-card"><span class="svc-icon">🏢</span><div class="svc-num">Practice 01</div><div class="svc-name">Management Consulting</div><div class="svc-desc">Strategic, operational, financial, and organisational advisory for startups, SMEs, and enterprises. We diagnose, design, and deliver transformation — not just recommendations.</div><a href="management-consulting.html" class="svc-link">Explore Practice →</a></div>
+    <div class="svc-card"><span class="svc-icon">🎯</span><div class="svc-num">Practice 02</div><div class="svc-name">Talent Acquisition</div><div class="svc-desc">End-to-end recruitment from job scoping to offer negotiation. Specialised in Eastern India markets, with sector-specific talent pools across BFSI, IT, manufacturing, and services.</div><a href="services/talent-acquisition.html" class="svc-link">Explore Practice →</a></div>
+    <div class="svc-card"><span class="svc-icon">👔</span><div class="svc-num">Practice 03</div><div class="svc-name">Executive Search</div><div class="svc-desc">C-suite and senior leadership search for organisations that need the right leader, not just an available one. Retained search with 90-day placement guarantee.</div><a href="services/executive-search.html" class="svc-link">Explore Practice →</a></div>
+    <div class="svc-card"><span class="svc-icon">📊</span><div class="svc-num">Practice 04</div><div class="svc-name">Payroll & Compliance</div><div class="svc-desc">Complete payroll outsourcing and statutory compliance management — EPF, ESI, TDS, PT, LWF, Form 24Q, Form 16 — updated to the November 2025 Labour Codes and new IT Act 2025.</div><a href="services/payroll-compliance.html" class="svc-link">Explore Practice →</a></div>
+    <div class="svc-card"><span class="svc-icon">📈</span><div class="svc-num">Practice 05</div><div class="svc-name">HR Analytics</div><div class="svc-desc">Workforce intelligence — attrition prediction, compensation benchmarking, productivity analytics, and people data dashboards that turn HR into a strategic function.</div><a href="services/hr-analytics.html" class="svc-link">Explore Practice →</a></div>
+    <div class="svc-card"><span class="svc-icon">🎓</span><div class="svc-num">Practice 06</div><div class="svc-name">Learning & Development</div><div class="svc-desc">Professional enhancement, leadership capacity building, and compliance training — delivered through physical workshops, online modules, and blended programs across India.</div><a href="services/learning-development.html" class="svc-link">Explore Practice →</a></div>
+  </div>
+</section>
+
+<!-- MARKET DATA -->
+<section class="market-section reveal">
+  <div class="market-inner">
+    <div>
+      <div class="chip w">The Market Opportunity</div>
+      <h2 class="D W">India's HR consulting market<br>is growing faster than<br><em>most businesses realise.</em></h2>
+      <div class="body-t w" style="margin-top:22px;">
+        <p>The Indian HR consulting and staffing industry is projected to reach ₹95,000 crore by FY2027. Eastern India — Odisha, West Bengal, Jharkhand — remains significantly underserved by quality consulting, creating a structural opportunity for firms with genuine regional expertise.</p>
+        <p>ORIGENNT is positioned at the intersection of three high-growth vectors: regulatory complexity (Labour Codes 2025), talent scarcity in tier-2 markets, and SME formalisation driven by GST and payroll compliance mandates.</p>
+      </div>
+      <div class="market-cards">
+        <div class="mc-card"><div class="mc-stat">₹95K<sub>Cr</sub></div><div><div class="mc-label">India HR Consulting Market — FY2027</div><div class="mc-note">CAGR 14.2% · Staffing, advisory, payroll combined</div></div></div>
+        <div class="mc-card"><div class="mc-stat">72<sub>%</sub></div><div><div class="mc-label">SMEs Not Compliant with Labour Codes 2025</div><div class="mc-note">Survey of 2,400 Indian SMEs · March 2026</div></div></div>
+        <div class="mc-card"><div class="mc-stat">1.2<sub>Cr</sub></div><div><div class="mc-label">Formal Jobs Created in India (FY2025)</div><div class="mc-note">EPFO net subscriber addition · Ministry of Labour</div></div></div>
+        <div class="mc-card"><div class="mc-stat">43<sub>%</sub></div><div><div class="mc-label">Companies Still on Manual/Spreadsheet Payroll</div><div class="mc-note">NASSCOM-SHRM Joint Survey 2025</div></div></div>
+      </div>
     </div>
-    <div class="intro-col reveal" style="transition-delay:.1s">
-      <div class="intro-num">180<sup>+</sup></div>
-      <div class="intro-label">Enterprise Clients</div>
+    <div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;margin-bottom:3px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;font-weight:500;">India HR Market Growth — ₹ Crore (FY2021–FY2027E)</div>
+        <canvas id="growthChart" style="width:100%;height:220px;display:block;"></canvas>
+        <div style="display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);"><div style="width:8px;height:8px;border-radius:50%;background:#CC2229;"></div>Market Size (₹Cr)</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);"><div style="width:8px;height:8px;border-radius:50%;background:#0d6b5e;"></div>ORIGENNT TAM</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;margin-bottom:3px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;font-weight:500;">Talent Demand by Sector — Eastern India 2026</div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">BFSI (Banking, Finance, Insurance)</span><span class="dc-bar-val">34%</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:34%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Manufacturing & Industrial</span><span class="dc-bar-val">28%</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:28%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">IT & Technology Services</span><span class="dc-bar-val">19%</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:19%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Healthcare & Pharma</span><span class="dc-bar-val">11%</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:11%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Retail & Consumer Goods</span><span class="dc-bar-val">8%</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:8%"></div></div></div>
+      </div>
+      <div style="background:rgba(13,107,94,.12);border:1px solid rgba(13,107,94,.25);padding:24px 28px;">
+        <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(13,107,94,.9);margin-bottom:8px;font-weight:600;">ORIGENNT Serviceable Market</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);">₹2,400 Cr<span style="font-size:14px;color:var(--teal);font-family:'Outfit',sans-serif;font-weight:600;"> Eastern India</span></div>
+        <div style="font-size:11.5px;font-weight:300;color:rgba(255,255,255,.4);margin-top:6px;">HR consulting + payroll outsourcing + talent acquisition · Odisha, WB, Jharkhand · FY2026 estimate</div>
+      </div>
     </div>
-    <div class="intro-col reveal" style="transition-delay:.2s">
-      <div class="intro-num">12<sup>d</sup></div>
-      <div class="intro-label">Avg. Time to Hire</div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="sectors-section reveal">
+  <div class="sectors-inner">
+    <div>
+      <div class="chip">Sector Expertise</div>
+      <h2 class="D">We know your industry.<br>Not just your <em>headcount.</em></h2>
+      <div class="body-t" style="margin-top:18px;"><p>ORIGENNT's consulting teams are sector-aligned, not generalist. Our talent databases, compliance knowledge, and market benchmarks are calibrated for each industry's specific regulations, salary bands, and talent dynamics.</p></div>
+      <div class="sector-tabs" id="sectorTabs">
+        <div class="stab-v active" data-sector="bfsi"><span class="stab-v-icon">🏦</span><div><div class="stab-v-name">BFSI</div><div class="stab-v-sub">Banks, NBFCs, Insurance, Fintech</div></div></div>
+        <div class="stab-v" data-sector="mfg"><span class="stab-v-icon">🏭</span><div><div class="stab-v-name">Manufacturing</div><div class="stab-v-sub">Steel, cement, auto components, FMCG</div></div></div>
+        <div class="stab-v" data-sector="it"><span class="stab-v-icon">💻</span><div><div class="stab-v-name">IT & Technology</div><div class="stab-v-sub">SaaS, IT services, product companies</div></div></div>
+        <div class="stab-v" data-sector="health"><span class="stab-v-icon">🏥</span><div><div class="stab-v-name">Healthcare & Pharma</div><div class="stab-v-sub">Hospitals, diagnostics, pharma distribution</div></div></div>
+        <div class="stab-v" data-sector="govt"><span class="stab-v-icon">🏛️</span><div><div class="stab-v-name">PSUs & Government</div><div class="stab-v-sub">Public sector undertakings, govt bodies</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div style="background:var(--white);padding:40px;margin-bottom:3px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:28px;font-weight:500;">Client Distribution by Sector — ORIGENNT Practice</div>
+        <div class="donut-wrap">
+          <svg width="160" height="160" viewBox="0 0 160 160">
+            <circle cx="80" cy="80" r="58" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="22"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#CC2229" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:120" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#e07b20" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:80" stroke-dashoffset="-120" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#0d6b5e" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:60" stroke-dashoffset="-200" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#c9a84c" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:44" stroke-dashoffset="-260" transform="rotate(-90 80 80)"/>
+            <circle cx="80" cy="80" r="58" fill="none" stroke="#c2bfba" stroke-width="22" stroke-dasharray="0 364.4" class="dseg" style="--da:30" stroke-dashoffset="-304" transform="rotate(-90 80 80)"/>
+            <text x="80" y="74" text-anchor="middle" fill="#0d0d0d" font-family="'Libre Baskerville',serif" font-size="15">140+</text>
+            <text x="80" y="90" text-anchor="middle" fill="#c2bfba" font-family="'Outfit',sans-serif" font-size="9">Clients</text>
+          </svg>
+          <div class="donut-legend">
+            <div class="dl-item"><div class="dl-dot" style="background:#CC2229"></div><span class="dl-name">BFSI</span><span class="dl-pct" style="margin-left:16px;">34%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#e07b20"></div><span class="dl-name">Manufacturing</span><span class="dl-pct" style="margin-left:16px;">22%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#0d6b5e"></div><span class="dl-name">IT & Tech</span><span class="dl-pct" style="margin-left:16px;">17%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#c9a84c"></div><span class="dl-name">Healthcare</span><span class="dl-pct" style="margin-left:16px;">12%</span></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#c2bfba"></div><span class="dl-name">PSU & Others</span><span class="dl-pct" style="margin-left:16px;">15%</span></div>
+          </div>
+        </div>
+      </div>
+      <div id="sectorStats" style="background:var(--white);padding:0;display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+        <div style="padding:20px;background:var(--off);"><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Avg Salary Range</div><div id="ssSalary" style="font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);">₹4–18 LPA</div></div>
+        <div style="padding:20px;background:var(--off);"><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Key Roles</div><div id="ssRoles" style="font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;">Relationship Mgr, Credit Analyst, Branch Ops</div></div>
+        <div style="padding:20px;background:var(--off);"><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Compliance Focus</div><div id="ssCompliance" style="font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;">RBI Norms, EPF, ESI, New IT Act 2025</div></div>
+        <div style="padding:20px;background:var(--off);"><div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Time-to-Fill</div><div id="ssTtf" style="font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);">18–22 days</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAROUSEL -->
+<section class="carousel-section reveal">
+  <div style="margin-bottom:56px;">
+    <div class="chip">Our Work & Footprint</div>
+    <h2 class="D">Built across Eastern India's <em>growth corridor.</em></h2>
+  </div>
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&fit=crop" alt="Management Consulting" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Consulting</span><div class="cso-title">Strategic Advisory for Eastern India's Growing Enterprises</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&fit=crop" alt="Talent Acquisition" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Talent</span><div class="cso-title">2,800+ Professionals Placed Across 12 States</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80&fit=crop" alt="Payroll Compliance" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Compliance</span><div class="cso-title">3,200+ Payrolls Managed — Zero Penalties on Record</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80&fit=crop" alt="Learning Development" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">L&D</span><div class="cso-title">Leadership & Compliance Training Workshops Nationwide</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=800&q=80&fit=crop" alt="HR Analytics" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Analytics</span><div class="cso-title">Data-Driven Workforce Intelligence for Strategic HR</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1562564055-71e051d33c19?w=800&q=80&fit=crop" alt="Executive Search" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Executive Search</span><div class="cso-title">C-Suite Placements with 90-Day Guarantee</div></div></div>
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="cc-btn" id="prevBtn">←</button>
+    <div class="cc-dots" id="carouselDots"></div>
+    <button class="cc-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<div class="video-section">
+  <img class="video-bg" src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1800&q=80&fit=crop" alt="ORIGENNT" loading="lazy">
+  <div class="video-overlay">
+    <button class="video-play-btn" id="playBtn">▶</button>
+    <div class="video-title">One firm.<br>Every challenge.</div>
+    <div class="video-sub">Strategy · Talent · Payroll · Compliance · Analytics · Learning</div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial-section reveal">
+  <div class="chip">Client Voice</div>
+  <h2 class="D">What our clients say about <em>working with us.</em></h2>
+  <div class="test-grid">
+    <div class="test-card"><div class="test-stars"><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span></div><div class="test-text">ORIGENNT took over our entire payroll and compliance within 10 days of signing. We had been struggling with EPF errors for over a year — they found and fixed 14 months of incorrect filings without us asking. That kind of proactive accountability is rare.</div><div class="test-author"><div class="test-avatar">A</div><div><div class="test-name">Arun Pradhan</div><div class="test-role">Director, Manufacturing Co. · Cuttack, Odisha</div></div></div></div>
+    <div class="test-card"><div class="test-stars"><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span></div><div class="test-text">We were a 45-person SaaS company operating in 3 states. Managing PT, LWF, and minimum wages across Odisha, West Bengal, and Karnataka was a nightmare. ORIGENNT built the entire multi-state payroll from scratch. Eighteen months, zero errors, zero penalties.</div><div class="test-author"><div class="test-avatar">S</div><div><div class="test-name">Saumya Das</div><div class="test-role">Co-Founder, SaaS Startup · Bhubaneswar</div></div></div></div>
+    <div class="test-card"><div class="test-stars"><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span><span class="test-star">★</span></div><div class="test-text">The Labour Code 2025 transition was more complex than we expected — restructuring salary structures, updating employment contracts, setting up digital registers. ORIGENNT delivered the entire transition in 45 days. Their knowledge of the new codes is exceptional.</div><div class="test-author"><div class="test-avatar">R</div><div><div class="test-name">Rajdeep Bhattacharya</div><div class="test-role">Head HR, NBFC · Kolkata, West Bengal</div></div></div></div>
+  </div>
+</section>
+
+<!-- FOUNDERS -->
+<section class="founders-section reveal">
+  <div class="chip w">Leadership</div>
+  <h2 class="D W">The people behind ORIGENNT's <em>promise.</em></h2>
+  <div class="founders-grid">
+    <div class="founder-card">
+      <div class="founder-initial">A</div>
+      <div class="founder-name">Asis Mohapatra</div>
+      <div class="founder-role">Co-Founder & Director</div>
+      <div class="founder-bio">Based in Cuttack, Odisha. Asis brings deep regional market knowledge and operational expertise to ORIGENNT's HR and consulting practice. His background spans talent operations, business development, and organizational management — with a focus on building frameworks that scale for Eastern India's rapidly growing SME sector.</div>
+      <div class="founder-tags"><span class="ftag">Talent Operations</span><span class="ftag">Business Development</span><span class="ftag">Eastern India</span></div>
+    </div>
+    <div class="founder-card">
+      <div class="founder-initial">D</div>
+      <div class="founder-name">Debargha Chakraborty</div>
+      <div class="founder-role">Co-Founder & Director</div>
+      <div class="founder-bio">Based in Kalyani, West Bengal. Debargha leads ORIGENNT's consulting and analytics practice, with expertise spanning management consulting, HR strategy, and payroll compliance. His experience bridges West Bengal and Odisha markets — giving ORIGENNT a genuine two-state perspective on Eastern India's talent and regulatory landscape.</div>
+      <div class="founder-tags"><span class="ftag">Management Consulting</span><span class="ftag">HR Strategy</span><span class="ftag">Compliance</span></div>
+    </div>
+  </div>
+  <div style="margin-top:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:28px 36px;display:flex;align-items:center;gap:24px;position:relative;z-index:1;flex-wrap:wrap;">
+    <div style="font-size:14px;font-weight:400;color:rgba(255,255,255,.7);flex:1;min-width:280px;">ORIGENNT was incorporated on <strong style="color:var(--white);">11 November 2025</strong> with 60,000 equity shares subscribed by both directors. The MOA was witnessed by <strong style="color:var(--white);">Pankhuri Agarwal, ACA</strong> (Lucknow), confirming the firm's legal constitution under Companies Act 2013.</div>
+    <a href="about.html" class="btn-red" style="flex-shrink:0;">Full Company Profile →</a>
+  </div>
+</section>
+
+<!-- ══════ FRAMEWORK ══════ -->
+<section class="fw-section">
+  <div class="fw-top">
+    <div>
+      <div class="fw-chip">The ORIGENNT Framework</div>
+      <div class="fw-h">Three capabilities.<br>One <em>integrated firm.</em></div>
+    </div>
+    <div>
+      <div class="pr-desc">Global consulting retainers run ₹50–200 lakh per month — built for multinationals, not Indian businesses. We deliver the same rigour — sector expertise, data-driven insights, structured execution — at a fraction of the cost. No retainer traps. GST invoice on every engagement.</div>
+      <div class="fw-oneliner">ORIGENNT operates across <strong>Workforce Strategy, Operations Excellence,</strong> and <strong>Growth Strategy</strong> — supported by technology and insights — to deliver <strong>end-to-end transformation.</strong></div>
     </div>
   </div>
 
-  <!-- ─── ABOUT ─── -->
-  <section class="section" id="about">
-    <div class="about-grid reveal">
-      <div class="about-text">
-        <div class="label">Who We Are</div>
-        <h2 class="h2">A consultancy that<br>operates at the <em>intersection</em><br>of strategy and people.</h2>
-        <div class="body-text">
-          <p>ORIGENNT was founded on a single conviction: that sustainable business performance is inseparable from organisational capability. We are a management consultancy first — one whose deepest expertise lies in the human infrastructure that makes strategy possible.</p>
-          <p>From our headquarters in Bhubaneswar, we serve enterprises across IT/ITES, BFSI, manufacturing, e-commerce and beyond. Our multidisciplinary teams combine strategic advisory with rigorous HR practice, delivering integrated solutions that create lasting competitive advantage.</p>
-        </div>
-        <div style="margin-top:40px">
-          <a href="about.html" class="btn-red">Our Story</a>
-        </div>
-      </div>
-      <div class="about-panel">
-        <div class="about-panel-label">Core Practice Areas</div>
-        <div class="about-panel-item">
-          <div class="about-panel-item-head">Management Consulting</div>
-          <div class="about-panel-item-sub">Strategy · Transformation · Organisational Design</div>
-        </div>
-        <div class="about-panel-item">
-          <div class="about-panel-item-head">HR & Talent Advisory</div>
-          <div class="about-panel-item-sub">Acquisition · Executive Search · Analytics</div>
-        </div>
-        <div class="about-panel-item">
-          <div class="about-panel-item-head">Workforce Operations</div>
-          <div class="about-panel-item-sub">Payroll · Compliance · Administration</div>
-        </div>
-        <div class="about-panel-item">
-          <div class="about-panel-item-head">Capability Development</div>
-          <div class="about-panel-item-sub">L&D · Internship Programs · Career Services</div>
-        </div>
-      </div>
+  <div class="fw-caps" id="fwCaps">
+    <div class="fw-cap active" data-cap="0">
+      <div class="fw-cap-num">Capability 01</div>
+      <div class="fw-cap-name">Workforce Strategy</div>
+      <div class="fw-cap-desc">Designing structured talent systems and hiring frameworks to ensure consistent execution.</div>
+      <div class="fw-cap-arrow">↓</div>
     </div>
-  </section>
-
-  <!-- ─── MARQUEE ─── -->
-  <div class="marquee-band">
-    <div class="marquee-track">
-      <span class="marquee-item">Strategy Consulting <span>◆</span></span>
-      <span class="marquee-item">Talent Engineering <span>◆</span></span>
-      <span class="marquee-item">Executive Search <span>◆</span></span>
-      <span class="marquee-item">Organisational Design <span>◆</span></span>
-      <span class="marquee-item">HR Analytics <span>◆</span></span>
-      <span class="marquee-item">Change Management <span>◆</span></span>
-      <span class="marquee-item">Payroll & Compliance <span>◆</span></span>
-      <span class="marquee-item">Strategy Consulting <span>◆</span></span>
-      <span class="marquee-item">Talent Engineering <span>◆</span></span>
-      <span class="marquee-item">Executive Search <span>◆</span></span>
-      <span class="marquee-item">Organisational Design <span>◆</span></span>
-      <span class="marquee-item">HR Analytics <span>◆</span></span>
-      <span class="marquee-item">Change Management <span>◆</span></span>
-      <span class="marquee-item">Payroll & Compliance <span>◆</span></span>
+    <div class="fw-cap" data-cap="1">
+      <div class="fw-cap-num">Capability 02</div>
+      <div class="fw-cap-name">Operations Excellence</div>
+      <div class="fw-cap-desc">Improving efficiency, control, and reliability of business operations.</div>
+      <div class="fw-cap-arrow">↓</div>
+    </div>
+    <div class="fw-cap" data-cap="2">
+      <div class="fw-cap-num">Capability 03</div>
+      <div class="fw-cap-name">Growth Strategy</div>
+      <div class="fw-cap-desc">Enabling scalable and sustainable business expansion.</div>
+      <div class="fw-cap-arrow">↓</div>
     </div>
   </div>
 
-  <!-- ─── SERVICES ─── -->
-  <section class="section services-section" id="services">
-    <div class="services-header reveal">
-      <div>
-        <div class="label">What We Do</div>
-        <h2 class="h2">Our service <em>portfolio.</em></h2>
-      </div>
-      <a href="services/" class="btn-ghost">All Services</a>
-    </div>
+  <div class="fw-detail" id="fwDetail"></div>
 
-    <div class="services-grid">
-      <a href="management-consulting.html" class="svc-card reveal">
-        <div class="svc-num">01</div>
-        <div class="svc-title">Management Consulting</div>
-        <div class="svc-desc">Strategic advisory for complex business challenges. We help leadership teams define direction, align resources and drive performance across the enterprise.</div>
-        <div class="svc-link">Explore →</div>
-      </a>
-      <a href="services/strategy.html" class="svc-card reveal" style="transition-delay:.07s">
-        <div class="svc-num">02</div>
-        <div class="svc-title">Strategy & Transformation</div>
-        <div class="svc-desc">From growth strategy to large-scale transformation programmes. We translate ambition into executable roadmaps with measurable milestones.</div>
-        <div class="svc-link">Explore →</div>
-      </a>
-      <a href="services/organizational-design.html" class="svc-card reveal" style="transition-delay:.14s">
-        <div class="svc-num">03</div>
-        <div class="svc-title">Organisational Design</div>
-        <div class="svc-desc">Structure follows strategy. We design operating models, reporting lines and governance frameworks that enable your strategy to scale.</div>
-        <div class="svc-link">Explore →</div>
-      </a>
-      <a href="services/talent-acquisition.html" class="svc-card reveal" style="transition-delay:.21s">
-        <div class="svc-num">04</div>
-        <div class="svc-title">Talent Acquisition</div>
-        <div class="svc-desc">End-to-end recruitment across all levels and functions. Our AI-powered pipeline delivers hires 60% faster than industry average — without compromising quality.</div>
-        <div class="svc-link">Explore →</div>
-      </a>
-      <a href="services/executive-search.html" class="svc-card reveal" style="transition-delay:.28s">
-        <div class="svc-num">05</div>
-        <div class="svc-title">Executive Search</div>
-        <div class="svc-desc">Confidential, research-led identification of C-suite and senior leadership talent. We assess for cultural fit, not just capability.</div>
-        <div class="svc-link">Explore →</div>
-      </a>
-      <a href="services/hr-analytics.html" class="svc-card reveal" style="transition-delay:.35s">
-        <div class="svc-num">06</div>
-        <div class="svc-title">HR Analytics</div>
-        <div class="svc-desc">Workforce intelligence that drives decisions. Predictive attrition modelling, competency mapping, productivity benchmarking and ROI measurement.</div>
-        <div class="svc-link">Explore →</div>
-      </a>
-    </div>
-  </section>
-
-  <!-- ─── APPROACH ─── -->
-  <section class="section" id="approach">
-    <div class="approach-grid">
-      <div class="approach-left reveal">
-        <div class="label">How We Work</div>
-        <h2 class="h2">Rigorous.<br><em>Collaborative.</em><br>Outcome-led.</h2>
-        <p class="body-text" style="margin-top:28px; max-width:460px">Our methodology is built on the belief that the best consulting is not advice — it is transformation, delivered alongside you.</p>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-n">01</div>
-            <div>
-              <div class="step-title">Discovery & Diagnostic</div>
-              <div class="step-text">Deep immersion in your business context, challenges and strategic intent before any recommendation is made.</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n">02</div>
-            <div>
-              <div class="step-title">Bespoke Solution Design</div>
-              <div class="step-text">No templates. Every engagement is crafted to your specific situation, sector and scale.</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n">03</div>
-            <div>
-              <div class="step-title">Precision Execution</div>
-              <div class="step-text">We work alongside your teams to implement — not just recommend — with clear milestones and accountability.</div>
-            </div>
-          </div>
-          <div class="step">
-            <div class="step-n">04</div>
-            <div>
-              <div class="step-title">Sustained Impact</div>
-              <div class="step-text">Post-engagement reviews and analytics ensure outcomes endure well beyond our involvement.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="approach-right reveal" style="transition-delay:.15s">
-        <div class="pull-quote">
-          "We don't deliver presentations. We deliver the capability to perform."
-        </div>
-        <div class="location-cards">
-          <div class="loc-card">
-            <div>
-              <div class="loc-name">Bhubaneswar</div>
-              <div class="loc-sub">Odisha — Headquarters</div>
-            </div>
-            <div class="loc-badge">Active</div>
-          </div>
-          <div class="loc-card">
-            <div>
-              <div class="loc-name">Bangalore</div>
-              <div class="loc-sub">Karnataka — South India Hub</div>
-            </div>
-            <div class="loc-badge soon">Nov 2026</div>
-          </div>
-          <div class="loc-card">
-            <div>
-              <div class="loc-name">Mumbai</div>
-              <div class="loc-sub">Maharashtra — West India Hub</div>
-            </div>
-            <div class="loc-badge soon">Jul 2027</div>
-          </div>
-        </div>
+  <div class="fw-cross">
+    <div class="fw-cross-card">
+      <div class="fw-cc-badge">Powered By — Layer 01</div>
+      <div class="fw-cc-name">Technology & AI Enablement</div>
+      <div class="fw-cc-items">
+        <span class="fw-cc-item">ATS Setup / Automation</span>
+        <span class="fw-cc-item">AI Resume Screening</span>
+        <span class="fw-cc-item">HR Dashboards</span>
+        <span class="fw-cc-item">Analytics Tools</span>
+        <span class="fw-cc-item">LMS Systems</span>
       </div>
     </div>
-  </section>
-
-  <!-- ─── TESTIMONIALS ─── -->
-  <section class="section testi-section reveal">
-    <div class="label">Client Outcomes</div>
-    <h2 class="h2">What our clients <em>say.</em></h2>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-text">ORIGENNT scaled our engineering team from 50 to 300 in six months without any compromise on calibre. Their strategic sourcing capability is unlike anything we've seen from a firm in Odisha.</div>
-        <div class="testi-author">Rajesh Kumar</div>
-        <div class="testi-role">CTO, Bangalore Tech (IT/ITES)</div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-text">Their compliance expertise saved us ₹2.8Cr in potential penalties during our national expansion. They don't just advise — they operationalise. Genuinely strategic partners.</div>
-        <div class="testi-author">Priya Sharma</div>
-        <div class="testi-role">Head of HR, Mumbai Industries</div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-quote">"</div>
-        <div class="testi-text">72% of our interns converted to full-time employees. The programme is structured, rigorous and genuinely prepares people for real business impact. Best pipeline we've established.</div>
-        <div class="testi-author">Anil Mehta</div>
-        <div class="testi-role">CEO, Hyderabad Ventures</div>
+    <div class="fw-cross-card">
+      <div class="fw-cc-badge">Powered By — Layer 02</div>
+      <div class="fw-cc-name">Research & Insights</div>
+      <div class="fw-cc-items">
+        <span class="fw-cc-item">Workforce Analytics</span>
+        <span class="fw-cc-item">Attrition Analysis</span>
+        <span class="fw-cc-item">Salary Benchmark Studies</span>
+        <span class="fw-cc-item">Hiring Funnel Analytics</span>
+        <span class="fw-cc-item">Market & Talent Reports</span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ─── APP ─── -->
+  <div class="fw-delivery">
+    <div>
+      <div class="fw-del-label">Delivery Model — Choose Your Engagement</div>
+      <div class="fw-del-modes">
+        <div class="fw-del-mode">Workforce Strategy</div>
+        <div class="fw-del-mode">Operations Excellence</div>
+        <div class="fw-del-mode">Growth Strategy</div>
+        <div class="fw-del-mode hi">End-to-End Transformation</div>
+      </div>
+    </div>
+    <div class="fw-del-right">Modular or<br><em>integrated.</em></div>
+  </div>
+</section>
+
+<!-- ══════ PRICING ══════ -->
+<section class="pr-section">
+  <div class="pr-top">
+    <div>
+      <div class="pr-chip">Transparent Pricing</div>
+      <div class="pr-h">Consulting quality.<br><em>Without the Big-3 bill.</em></div>
+    </div>
+    <div style="padding-top:36px;">
+      <div class="pr-desc">Most consulting engagements are priced to exclude you. Ours are priced to include you — with full methodology, written deliverables, and a team that stays accountable beyond the slide deck.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
+    <div class="pr-toggle-wrap" id="toggleWrap">
+      <span class="pr-toggle-lbl active" id="lblMonth">Monthly</span>
+      <button class="pr-toggle" id="billingToggle"><div class="pr-toggle-knob"></div></button>
+      <span class="pr-toggle-lbl" id="lblAnnual">Annual</span>
+      <div class="pr-save-badge">Save 20%</div>
+    </div>
+    <div class="pr-cap-sel" id="prCapSel">
+      <button class="pr-cap-btn active" data-pcap="0">Workforce Strategy</button>
+      <button class="pr-cap-btn" data-pcap="1">Operations Excellence</button>
+      <button class="pr-cap-btn" data-pcap="2">Growth Strategy</button>
+      <button class="pr-cap-btn" data-pcap="3">End-to-End</button>
+    </div>
+  </div>
+
+  <div class="pr-grid" id="prGrid"></div>
+
+<div class="pr-compare-strip">
+  <div class="pcs-text"><strong>Enterprise-grade consulting. Startup-accessible pricing.</strong> The same structured methodology, data rigour, and execution framework — without the retainer that only multinationals can afford.</div>
+  <div class="pcs-logos">
+    <span class="pcs-logo">Global Firms</span><span class="pcs-vs">₹50–200L/mo</span>
+    <span class="pcs-logo">Large Domestic Firms</span><span class="pcs-vs">₹10–50L/mo</span>
+    <span class="pcs-logo">Freelance Consultants</span><span class="pcs-vs">Unstructured</span>
+    <span class="pcs-logo" style="color:var(--red);">ORIGENNT</span><span class="pcs-vs" style="color:var(--red);font-weight:600;">from ₹12K/mo*</span>
+  </div>
+</div>
+
+  <div class="pr-gst">
+    <div class="pr-gst-icon">💳</div>
+    <div class="pr-gst-text"><strong>All prices exclude GST (18%). GST invoice provided.</strong> Payments via Razorpay — UPI, cards, net banking, EMI accepted. Engagement confirmed within 24 business hours. No lock-in after initial period.</div>
+    <button class="pr-gst-rzp" onclick="openRzp('Custom Engagement','Custom',0,'Tell us your requirement and we will scope it.')">Get Custom Quote →</button>
+  </div>
+</section>
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" id="rzpClose">×</button>
+    <div class="rzp-tag" id="rzpTag">ORIGENNT</div>
+    <div class="rzp-modal-h" id="rzpH">Engagement Enquiry</div>
+    <div class="rzp-modal-sub" id="rzpSub">Our team confirms and begins within 24 hours.</div>
+    <div class="rzp-modal-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">Scope confirmed after a brief discovery call.</div>
+    <div class="rzp-fields">
+      <input class="rzp-inp" id="rzpCompany" type="text" placeholder="Company / Organisation Name *">
+      <input class="rzp-inp" id="rzpName" type="text" placeholder="Your Name & Designation *">
+      <input class="rzp-inp" id="rzpEmail" type="email" placeholder="Email Address *">
+      <input class="rzp-inp" id="rzpPhone" type="tel" placeholder="Phone Number *">
+      <input class="rzp-inp" id="rzpSize" type="text" placeholder="Company Size (employees)">
+      <input class="rzp-inp" id="rzpState" type="text" placeholder="State(s) of Operation">
+    </div>
+    <button class="rzp-submit" id="rzpBtn">Submit Enquiry →</button>
+    <div class="rzp-secure">🔒 Confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 Registered</div>
+  </div>
+</div>
+
+
+<!-- ─── APP ─── -->
   <section class="app-section" id="app">
     <div>
       <div class="label app-label">Coming Soon</div>
@@ -1354,126 +1150,484 @@ footer{background:var(--black);padding:64px 80px 40px;}
     </div>
   </section>
 
-  <!-- ─── CONTACT BAND ─── -->
-  <div class="contact-band reveal">
-    <h2 class="contact-h2">Ready to transform your organisation? <em>Let's talk.</em></h2>
-    <div class="contact-actions">
-      <a href="https://wa.me/919861168291?text=Hi%20Origennt%2C%20I%20just%20filled%20out%20the%20consultation%20form.%0A%0AName%3A%0AService%3A%0ATime%3A%0A%0APlease%20guide%20me." class="btn-white">Schedule Consultation on Whatsapp</a>
-      <a href="https://wa.me/c/245836025987098" class="btn-ghost-white">View All Services</a>
+<!-- LOGOS MARQUEE -->
+<section class="logos-section reveal">
+  <div class="logos-lbl">Trusted by organizations across Odisha · West Bengal · Jharkhand · Karnataka · Maharashtra</div>
+  <div class="logos-track-wrap">
+    <div class="logos-track">
+      <span class="logo-item-t">Manufacturing Unit · Cuttack</span>
+      <span class="logo-item-t">SaaS Startup · Bhubaneswar</span>
+      <span class="logo-item-t">NBFC · Kolkata</span>
+      <span class="logo-item-t">IT Services · Bhubaneswar</span>
+      <span class="logo-item-t">Pharma Distributor · Jharkhand</span>
+      <span class="logo-item-t">Steel Enterprise · Odisha</span>
+      <span class="logo-item-t">Logistics Co. · West Bengal</span>
+      <span class="logo-item-t">Hospitality Group · Odisha</span>
+      <span class="logo-item-t">Retail Chain · Bhubaneswar</span>
+      <span class="logo-item-t">Ed-tech Startup · Kolkata</span>
+      <span class="logo-item-t">Manufacturing Unit · Cuttack</span>
+      <span class="logo-item-t">SaaS Startup · Bhubaneswar</span>
+      <span class="logo-item-t">NBFC · Kolkata</span>
+      <span class="logo-item-t">IT Services · Bhubaneswar</span>
+      <span class="logo-item-t">Pharma Distributor · Jharkhand</span>
+      <span class="logo-item-t">Steel Enterprise · Odisha</span>
+      <span class="logo-item-t">Logistics Co. · West Bengal</span>
+      <span class="logo-item-t">Hospitality Group · Odisha</span>
+      <span class="logo-item-t">Retail Chain · Bhubaneswar</span>
+      <span class="logo-item-t">Ed-tech Startup · Kolkata</span>
     </div>
   </div>
+</section>
 
-<!-- ════════════ FOOTER ════════════ -->
-<footer role="contentinfo">
+<!-- FINAL CTA -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Ready to work with Eastern India's most <em>accountable</em> consulting firm?</h2>
+    <p class="fc-sub">ORIGENNT PRIVATE LIMITED — Companies Act 2013 registered, MOA-authorised for all services offered. One firm for strategy, talent, payroll, compliance, analytics, and learning. From ₹3,000/month for payroll. From day one for consulting.</p>
+  </div>
+  <div class="fc-btns">
+    <a href="contact.html" class="fca w">Start a Conversation</a>
+    <a href="payroll-compliance.html" class="fca ol">Payroll & Compliance →</a>
+    <a href="talent-acquisition.html" class="fca ol">Talent Acquisition →</a>
+    <a href="company_profile.pdf" class="fca ol">Download Our Brochure</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
   <div class="footer-top">
     <div>
-      <img src="origennt_logo.png">
-      <div class="footer-tagline">Where Talent Meets Strategy</div>
-      <p class="footer-desc">Strategic management consultancy and HR firm headquartered in Bhubaneswar, Odisha. Registered under the Companies Act 2013 · Incorporated 11 November 2025 · MSME Verified. Authorised for management consultancy, HR services, payroll, compliance, talent development, and organisational advisory under our MOA.</p>
-      <div style="margin-top:20px;display:flex;gap:14px;flex-wrap:wrap;">
-        <a href="https://wa.me/919861168291" target="_blank" style="font-size:11.5px;color:rgba(255,255,255,.4);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s;">📱 WhatsApp</a>
-        <a href="mailto:origennt@gmail.com" style="font-size:11.5px;color:rgba(255,255,255,.4);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s;">✉️ Email</a>
-      </div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 25 November 2025 · Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
     </div>
     <div>
-      <div class="fc-lbl">Consulting</div>
-      <a href="management-consulting.html" class="fc-link">Management Consulting</a>
-      <a href="strategy.html" class="fc-link">Strategy & Transformation</a>
-      <a href="organizational-design.html" class="fc-link">Organisational Design</a>
-      <a href="change-management.html" class="fc-link">Change Management</a>
+      <div class="footer-col-title">Consulting</div>
+      <a href="management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="strategy.html" class="footer-link">Strategy & Transformation</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
     </div>
     <div>
-      <div class="fc-lbl">HR Practice</div>
-      <a href="talent-acquisition.html" class="fc-link">Talent Acquisition</a>
-      <a href="services/executive-search.html" class="fc-link">Executive Search</a>
-      <a href="payroll-compliance.html" class="fc-link">Payroll & Compliance</a>
-      <a href="services/hr-analytics.html" class="fc-link">HR Analytics</a>
-      <a href="services/learning-development.html" class="fc-link">Learning & Development</a>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="services/payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+      <a href="internship.html" class="footer-link">Internship Program</a>
+      <a href="campus.html" class="footer-link">Campus Recruitment</a>
     </div>
     <div>
-      <div class="fc-lbl">Research Analytics and Consulting</div>
-      <a href="audit-solution.html" class="fc-link">Organizational Audit</a>
-    </div>
-    <div>  
-    <div class="fc-lbl">Origennt Launchpad</div>
-      <a href="internship.html" class="fc-link">Internship Program</a>
-      <a href="campus.html" class="fc-link">Campus Recruitment</a>
-      <a href="audit-solution.html" class="fc-link">Internship Program</a>
-      <a href="services/career-solution.html" class="fc-link">Career Services</a>
-      <a href="internship.html" class="fc-link">Internship Program</a>
-    </div>
-    <div>
-      <div class="fc-lbl">Company</div>
-      <a href="about.html" class="fc-link">About ORIGENNT</a>
-      <a href="insights.html" class="fc-link">Insights & Blog</a>
-      <a href="services.html" class="fc-link">All our Services</a>
-      <a href="contact.html" class="fc-link">Contact Us</a>
-      <a href="affiliate.html" class="fc-link">Join Our Affiliate Program</a>
-      <a href="#app" class="fc-link">Download App</a>
-      <div class="fc-lbl" style="margin-top:24px;">Contact</div>
-      <a href="mailto:origennt@gmail.com" class="fc-link">origennt@gmail.com</a>
-      <a href="https://wa.me/919861168291" class="fc-link" target="_blank">+91 98611 68291 / +91 6370947106</a>
-      <div class="fc-link" style="color:rgba(255,255,255,.3);cursor:default;">Bhubaneswar, Odisha 754005</div>
+      <div class="footer-col-title">Company</div>
+      <a href="about.html" class="footer-link">About ORIGENNT</a>
+      <a href="contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+      <a href="https://wa.me/919861168291?text=Hi+ORIGENNT" class="footer-link" target="_blank">Quick Enquiry →</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Origennt Private Limited. All rights reserved. CIN Registered under Companies Act 2013 · Est. 11 November 2025 · MSME Verified · Bhubaneswar, Odisha.</div>
-    <div class="footer-legal">
-      <a href="privacy-policy.html" class="footer-legal-link">Privacy Policy</a>
-      <a href="terms.html" class="footer-legal-link">Terms of Use</a>
-      <a href="#" class="footer-legal-link">Disclaimer</a>
+    <div class="fcopy">© 2025 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
     </div>
   </div>
 </footer>
 
-</div><!-- /main -->
+</div>
 
 <script>
-// Custom cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-function animateCursor() {
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animateCursor);
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* SIDEBAR */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* BARS */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill,.dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*120));bObs.unobserve(e.target);}});
+},{threshold:.2});
+document.querySelectorAll('.market-section,.sectors-section').forEach(el=>bObs.observe(el));
+
+/* DONUT */
+const dObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.querySelectorAll('.dseg').forEach((s,i)=>setTimeout(()=>s.classList.add('go'),i*160)),200);dObs.unobserve(e.target);}});
+},{threshold:.3});
+document.querySelectorAll('.donut-wrap').forEach(el=>dObs.observe(el));
+
+/* CAROUSEL */
+const track=document.getElementById('carouselTrack');
+const slides=track.querySelectorAll('.carousel-slide');
+const dotsContainer=document.getElementById('carouselDots');
+let current=0;
+const visCount=()=>window.innerWidth>1024?3:window.innerWidth>640?2:1;
+for(let i=0;i<slides.length;i++){
+  const d=document.createElement('button');
+  d.className='cc-dot'+(i===0?' active':'');
+  d.addEventListener('click',()=>goTo(i));
+  dotsContainer.appendChild(d);
 }
-animateCursor();
+function goTo(idx){
+  current=Math.max(0,Math.min(idx,slides.length-visCount()));
+  const slideW=slides[0].offsetWidth+3;
+  track.style.transform='translateX(-'+(current*slideW)+'px)';
+  document.querySelectorAll('.cc-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+}
+document.getElementById('prevBtn').addEventListener('click',()=>goTo(Math.max(0,current-1)));
+document.getElementById('nextBtn').addEventListener('click',()=>goTo(Math.min(slides.length-visCount(),current+1)));
+let auto=setInterval(()=>goTo((current+1)%(slides.length-visCount()+1)),4000);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(auto));
+track.parentElement.addEventListener('mouseleave',()=>{auto=setInterval(()=>goTo((current+1)%(slides.length-visCount()+1)),4000);});
+window.addEventListener('resize',()=>goTo(current));
 
-// Topnav scroll
-const topnav = document.getElementById('topnav');
-window.addEventListener('scroll', () => {
-  topnav.classList.toggle('scrolled', window.scrollY > 60);
+/* SECTOR TABS */
+const sData={
+  bfsi:{salary:'₹4–18 LPA',roles:'Relationship Mgr, Credit Analyst, Branch Ops',compliance:'RBI Norms, EPF, ESI, IT Act 2025',ttf:'18–22 days'},
+  mfg:{salary:'₹2.5–12 LPA',roles:'Plant Managers, Quality Engineers, Safety Officers',compliance:'Factories Act, EPF, ESI, Wage Code 2025',ttf:'22–30 days'},
+  it:{salary:'₹6–28 LPA',roles:'Full Stack Devs, Product Managers, Data Scientists',compliance:'IT Act, DPDP 2023, TDS Section 194J',ttf:'14–18 days'},
+  health:{salary:'₹3–16 LPA',roles:'Doctors, Pharma Reps, Diagnostic Technicians',compliance:'PCPNDT, DPDP, EPF, ESI',ttf:'20–25 days'},
+  govt:{salary:'₹4–20 LPA',roles:'Project Directors, Policy Advisors, Technical Experts',compliance:'GFR 2017, CVC Norms, Service Rules',ttf:'30–40 days'},
+};
+document.querySelectorAll('.stab-v').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.stab-v').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const d=sData[tab.dataset.sector];
+    document.getElementById('ssSalary').textContent=d.salary;
+    document.getElementById('ssRoles').textContent=d.roles;
+    document.getElementById('ssCompliance').textContent=d.compliance;
+    document.getElementById('ssTtf').textContent=d.ttf;
+  });
 });
 
-// Mobile sidebar
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('overlay');
-hamburger.addEventListener('click', () => {
-  sidebar.classList.toggle('open');
-  overlay.classList.toggle('show');
-});
-overlay.addEventListener('click', () => {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('show');
+/* GROWTH CHART */
+(function(){
+  const canvas=document.getElementById('growthChart');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const years=['FY21','FY22','FY23','FY24','FY25','FY26E','FY27E'];
+  const market=[32000,38000,46000,55000,67000,79000,95000];
+  const tam=[null,null,null,null,null,2000,2400];
+  function draw(){
+    const W=canvas.offsetWidth||400;const H=220;
+    canvas.width=W*2;canvas.height=H*2;canvas.style.width=W+'px';canvas.style.height=H+'px';
+    ctx.scale(2,2);
+    const pad={t:20,r:20,b:36,l:52};
+    const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b,max=100000;
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){
+      const y=pad.t+ch-(i/4)*ch;
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='10px Outfit';ctx.textAlign='right';
+      ctx.fillText((i*25)+'K',pad.l-8,y+4);
+    }
+    // Area
+    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+    grad.addColorStop(0,'rgba(204,34,41,.18)');grad.addColorStop(1,'rgba(204,34,41,0)');
+    ctx.fillStyle=grad;ctx.beginPath();
+    market.forEach((v,i)=>{const x=pad.l+(i/(years.length-1))*cw;const y=pad.t+ch-(v/max)*ch;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.lineTo(pad.l+cw,pad.t+ch);ctx.lineTo(pad.l,pad.t+ch);ctx.closePath();ctx.fill();
+    // Market line
+    ctx.strokeStyle='#CC2229';ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();
+    market.forEach((v,i)=>{const x=pad.l+(i/(years.length-1))*cw;const y=pad.t+ch-(v/max)*ch;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.stroke();
+    // TAM dashed
+    ctx.strokeStyle='#0d6b5e';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();
+    let started=false;
+    tam.forEach((v,i)=>{if(v===null)return;const x=pad.l+(i/(years.length-1))*cw;const y=pad.t+ch-(v/max)*ch;!started?(ctx.moveTo(x,y),started=true):ctx.lineTo(x,y);});
+    ctx.stroke();ctx.setLineDash([]);
+    // Dots + labels
+    market.forEach((v,i)=>{
+      const x=pad.l+(i/(years.length-1))*cw;const y=pad.t+ch-(v/max)*ch;
+      ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.fillStyle='#CC2229';ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,.55)';ctx.font='9px Outfit';ctx.textAlign='center';
+      ctx.fillText('₹'+(v/1000)+'K',x,y-10);
+    });
+    years.forEach((yr,i)=>{
+      const x=pad.l+(i/(years.length-1))*cw;
+      ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='10px Outfit';ctx.textAlign='center';
+      ctx.fillText(yr,x,pad.t+ch+20);
+    });
+  }
+  const cObs=new IntersectionObserver(es=>{if(es[0].isIntersecting){draw();cObs.unobserve(canvas);}},{threshold:.3});
+  cObs.observe(canvas);
+  window.addEventListener('resize',draw);
+})();
+
+/* VIDEO */
+document.getElementById('playBtn').addEventListener('click',function(){
+  alert('Video coming soon! Reach us at origennt@gmail.com');
 });
 
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal, .step').forEach(el => obs.observe(el));
+/* ── DATA ── */
+const caps=[
+  {cols:4,practices:[
+    {label:'A',name:'Talent Acquisition',items:['Recruitment Services','Mass Hiring','Executive Search','RPO','Campus Hiring','Internship Programs']},
+    {label:'B',name:'Workforce Structuring',items:['Workforce Planning','JD & Role Frameworks','Competency Mapping','Salary Benchmarking']},
+    {label:'C',name:'Staffing Solutions',items:['Contract Staffing','Temporary Staffing','On-roll / Off-roll','Blue & Grey Collar']},
+    {label:'D',name:'Talent Assessment',items:['Psychometric Assessments','Assessment Tests','Background Verification']},
+  ]},
+  {cols:3,practices:[
+    {label:'A',name:'HR & Workforce Ops',items:['HR Outsourcing (HRO)','Payroll Processing','Performance Management','Employee Engagement','Retention Strategy','HR Compliance']},
+    {label:'B',name:'Process & Organization',items:['Process Improvement','Operational Consulting','Org Restructuring','Change Management','Culture Transformation']},
+    {label:'C',name:'Execution & Facility',items:['Contractor / Vendor Models','Compliance Monitoring','Quality Control','Facility & Site Ops']},
+  ]},
+  {cols:4,practices:[
+    {label:'A',name:'Business & Expansion',items:['Business Strategy Consulting','Market Expansion','Succession Planning']},
+    {label:'B',name:'Capability Building',items:['Corporate Training','Leadership Development','Manager Training','Sales & Service Training']},
+    {label:'C',name:'Education & Skill Systems',items:['Training Centres','LMS & E-learning','Corporate Academies','Skill Dev Programs']},
+    {label:'D',name:'Partnerships & Ecosystem',items:['College Partnerships','CSR Initiatives','Govt Skill Programs']},
+  ]},
+];
 
-// Stagger steps
-document.querySelectorAll('.step').forEach((s, i) => {
-  s.style.transitionDelay = `${i * 0.12}s`;
+/* ── PRICING DATA ──
+   Monthly rates. Annual = 80% of monthly × 12 shown as monthly equivalent.
+   All INR. Competitive vs Big-3 but accessible for Indian SME/mid-market.
+   Benchmarked: McKinsey India ₹80L+/mo, BCG ₹60L+/mo
+   ORIGENNT positioning: premium boutique, 95%+ cheaper, same framework rigour
+*/
+const pricingData=[
+  /* 0 — Workforce Strategy */
+  [
+    {badge:'s',badgeCls:'s',name:'Talent Essentials',tagline:'For startups & businesses hiring their first 20 people.',
+     monthlyM:25000,monthlyA:20000,period:'per month',
+     feats:['Up to 5 open positions managed','JD writing & job advertising','Candidate sourcing & screening','Interview coordination','Weekly hiring dashboard','Offer negotiation support'],
+     dimFeats:['Executive / C-suite search','Mass hiring & RPO'],
+     cta:'Start Hiring',ctaCls:'r',note:'Min. 3-month engagement'},
+    {badge:'p',badgeCls:'p',name:'Growth Recruiter',tagline:'For SMEs scaling to 50–150 people across 1–3 states.',
+     monthlyM:65000,monthlyA:52000,period:'per month',featured:true,
+     feats:['Up to 15 open positions managed','Dedicated recruiter + coordinator','Campus & lateral hiring','Competency mapping for key roles','Salary benchmarking report','ATS setup & management','Fortnightly leadership update'],
+     dimFeats:[],
+     cta:'Start Scaling',ctaCls:'w',note:'Save vs. per-hire fees'},
+    {badge:'g',badgeCls:'g',name:'Enterprise Talent',tagline:'For 150–500 person companies with complex hiring needs.',
+     monthlyM:150000,monthlyA:120000,period:'per month',
+     feats:['Unlimited positions (up to 30 active)','RPO model — dedicated team','Executive search included','Mass hiring capability','Multi-state talent ops (up to 5 states)','Background verification included','Monthly board talent report'],
+     dimFeats:[],
+     cta:'Build Your Team',ctaCls:'g',note:'Equivalent to in-house TA team at 10% cost'},
+    {badge:'e',badgeCls:'e',name:'Workforce Transformation',tagline:'Full workforce strategy overhaul for large or growing enterprises.',
+     monthlyM:0,monthlyA:0,period:'scoped on enquiry',
+     feats:['All Enterprise features','Workforce planning & org design','Succession planning framework','Culture & competency redesign','Multi-entity / group hiring','Quarterly strategy review','Dedicated partner oversight'],
+     dimFeats:[],
+     cta:'Request Proposal',ctaCls:'t',note:'Response within 24 business hours'},
+  ],
+  /* 1 — Operations Excellence */
+  [
+    {badge:'s',badgeCls:'s',name:'Ops Starter',tagline:'For businesses needing basic HR operations and compliance.',
+     monthlyM:18000,monthlyA:14400,period:'per month',
+     feats:['Payroll processing (up to 25 employees)','EPF + ESI deductions & deposit','TDS calculation & deposit','Monthly compliance calendar','Statutory register maintenance'],
+     dimFeats:['Process redesign','Org restructuring'],
+     cta:'Get Compliant',ctaCls:'r',note:'Min. 3-month engagement'},
+    {badge:'p',badgeCls:'p',name:'Operations Pro',tagline:'For SMEs needing end-to-end HR ops + process improvement.',
+     monthlyM:55000,monthlyA:44000,period:'per month',featured:true,
+     feats:['Payroll (up to 100 employees)','Full statutory compliance (EPF/ESI/PT/TDS)','HR outsourcing — 1 dedicated HR exec','Performance management setup','Retention & engagement strategy','Process mapping & improvement','Monthly ops health report'],
+     dimFeats:[],
+     cta:'Outsource Ops',ctaCls:'w',note:'Save vs. full-time HR + compliance team'},
+    {badge:'g',badgeCls:'g',name:'Ops Enterprise',tagline:'For 200–1,000 employee companies needing full operational control.',
+     monthlyM:120000,monthlyA:96000,period:'per month',
+     feats:['Payroll (up to 500 employees)','Multi-state compliance (up to 8 states)','Full HRO — dedicated ops team','Org restructuring advisory','Change management program','Vendor & contractor compliance','Quarterly ops audit'],
+     dimFeats:[],
+     cta:'Transform Ops',ctaCls:'g',note:'Equivalent to 3 FTE ops team at 20% cost'},
+    {badge:'e',badgeCls:'e',name:'Ops Transformation',tagline:'End-to-end operational overhaul for complex organisations.',
+     monthlyM:0,monthlyA:0,period:'scoped on enquiry',
+     feats:['All Enterprise features','Culture transformation program','Facility & site ops management','Custom compliance dashboards','ERP / HRMS integration','Executive ops reporting','Dedicated engagement director'],
+     dimFeats:[],
+     cta:'Request Proposal',ctaCls:'t',note:'Response within 24 business hours'},
+  ],
+  /* 2 — Growth Strategy */
+  [
+    {badge:'s',badgeCls:'s',name:'Growth Sprint',tagline:'For startups and SMEs needing a clear growth strategy fast.',
+     monthlyM:35000,monthlyA:28000,period:'per month',
+     feats:['Business strategy workshop (2 sessions)','Market expansion plan','Competitive benchmarking','90-day growth roadmap','Monthly strategy check-in'],
+     dimFeats:['Leadership development program','Corporate academy setup'],
+     cta:'Start Growing',ctaCls:'r',note:'Min. 2-month engagement'},
+    {badge:'p',badgeCls:'p',name:'Growth Accelerator',tagline:'For businesses ready to build capability and scale systematically.',
+     monthlyM:85000,monthlyA:68000,period:'per month',featured:true,
+     feats:['Full growth strategy consulting','Market expansion execution support','Leadership development program','Manager & team training (up to 3 cohorts)','Sales & service capability build','LMS setup & e-learning modules','Quarterly growth review'],
+     dimFeats:[],
+     cta:'Accelerate Growth',ctaCls:'w',note:'Most popular for ₹5–50Cr revenue businesses'},
+    {badge:'g',badgeCls:'g',name:'Growth Enterprise',tagline:'For mid-market businesses building scale infrastructure.',
+     monthlyM:180000,monthlyA:144000,period:'per month',
+     feats:['End-to-end growth strategy','Corporate academy setup','College partnership program','Succession planning framework','CSR & skill development programs','Government skill program tie-ups','Board-level strategy reporting'],
+     dimFeats:[],
+     cta:'Scale Your Business',ctaCls:'g',note:'Equivalent to McKinsey engagement at 1% cost'},
+    {badge:'e',badgeCls:'e',name:'Growth Transformation',tagline:'Full-scale growth and capability transformation.',
+     monthlyM:0,monthlyA:0,period:'scoped on enquiry',
+     feats:['All Enterprise features','Multi-entity group strategy','M&A readiness advisory','Investor deck & positioning','Custom research & insights','Dedicated strategy partner','Quarterly board presentations'],
+     dimFeats:[],
+     cta:'Request Proposal',ctaCls:'t',note:'Response within 24 business hours'},
+  ],
+  /* 3 — End-to-End Transformation */
+  [
+    {badge:'s',badgeCls:'s',name:'Transformation Starter',tagline:'Workforce + Ops or Ops + Growth. Two-capability integrated engagement.',
+     monthlyM:75000,monthlyA:60000,period:'per month',
+     feats:['2 capabilities (you choose)','Dedicated engagement lead','Integrated monthly reporting','Cross-function dependency management','Quarterly strategy review'],
+     dimFeats:['Third capability','Board-level reporting'],
+     cta:'Start Transformation',ctaCls:'r',note:'Min. 6-month engagement'},
+    {badge:'p',badgeCls:'p',name:'Full Transformation',tagline:'All three capabilities. The complete ORIGENNT mandate.',
+     monthlyM:195000,monthlyA:156000,period:'per month',featured:true,
+     feats:['All 3 capabilities — full scope','Dedicated partner + team','Workforce + Ops + Growth integrated','Monthly integrated dashboard','Quarterly board presentation','Priority 24-hr SLA on all workstreams','Annual strategy retreat (Odisha/remote)'],
+     dimFeats:[],
+     cta:'Transform Everything',ctaCls:'w',note:'The Big-3 equivalent — at 2% of their cost'},
+    {badge:'g',badgeCls:'g',name:'Enterprise Mandate',tagline:'For 300+ employee businesses requiring a dedicated ORIGENNT team.',
+     monthlyM:350000,monthlyA:280000,period:'per month',
+     feats:['All Full Transformation features','Dedicated on-site team (2 days/week)','Multi-location / multi-state mandate','Custom analytics & BI dashboards','ERP + HRMS + ATS integration','White-label internal comms support','Bi-annual leadership offsite'],
+     dimFeats:[],
+     cta:'Get Dedicated Team',ctaCls:'g',note:'Includes travel for Odisha/WB locations'},
+    {badge:'e',badgeCls:'e',name:'Group / Conglomerate',tagline:'Multi-entity mandates for groups, franchises, and holding companies.',
+     monthlyM:0,monthlyA:0,period:'scoped on enquiry',
+     feats:['All Enterprise Mandate features','Cross-entity strategy alignment','Group-level talent architecture','Holding company reporting','M&A HR integration support','IPO readiness HR structuring','Global-standard documentation'],
+     dimFeats:[],
+     cta:'Request Proposal',ctaCls:'t',note:'Response within 24 business hours'},
+  ],
+];
+
+/* ── STATE ── */
+let activeCap=0, activeCapFw=0, isAnnual=false;
+
+/* ── FRAMEWORK RENDER ── */
+function renderFw(){
+  const cap=caps[activeCapFw];
+  const detail=document.getElementById('fwDetail');
+  detail.style.gridTemplateColumns=`repeat(${cap.cols},1fr)`;
+  detail.innerHTML=cap.practices.map(p=>`
+    <div class="fw-practice">
+      <div class="fw-prac-label">${p.label}</div>
+      <div class="fw-prac-name">${p.name}</div>
+      ${p.items.map(i=>`<div class="fw-service-item">${i}</div>`).join('')}
+    </div>`).join('');
+}
+document.querySelectorAll('.fw-cap').forEach(el=>{
+  el.addEventListener('click',()=>{
+    activeCapFw=+el.dataset.cap;
+    document.querySelectorAll('.fw-cap').forEach(c=>c.classList.remove('active'));
+    el.classList.add('active');
+    renderFw();
+  });
 });
+renderFw();
+
+/* ── PRICING RENDER ── */
+function fmt(n){
+  if(n===0)return'Custom';
+  if(n>=100000)return'₹'+(n/100000).toFixed(1).replace('.0','')+'L';
+  return'₹'+(n/1000).toFixed(0)+'K';
+}
+function fmtFull(n){
+  if(n===0)return'Custom';
+  return'₹'+n.toLocaleString('en-IN');
+}
+function renderPricing(){
+  const packages=pricingData[activeCap];
+  const grid=document.getElementById('prGrid');
+  grid.innerHTML=packages.map(p=>{
+    const price=isAnnual?p.monthlyA:p.monthlyM;
+    const oldPrice=isAnnual?p.monthlyM:0;
+    const displayPrice=price===0?'Custom':'₹'+price.toLocaleString('en-IN');
+    const displayOld=isAnnual&&oldPrice>0?'₹'+oldPrice.toLocaleString('en-IN'):'';
+    return`<div class="pr-pkg${p.featured?' featured':''}">
+      <div class="pr-badge ${p.badgeCls}">${p.badge==='p'?'Most Popular':p.badge==='g'?'Growth':p.badge==='e'?'Custom':'Starter'}</div>
+      <div class="pr-name">${p.name}</div>
+      <div class="pr-tagline">${p.tagline}</div>
+      <div class="pr-price-wrap">
+        <span class="pr-price">${price===0?'<span style="font-size:24px;letter-spacing:-.01em;">Custom</span>':'<sup>₹</sup>'+price.toLocaleString('en-IN')}</span>
+        ${displayOld?`<span class="pr-price-old">₹${oldPrice.toLocaleString('en-IN')}</span>`:''}
+      </div>
+      <div class="pr-period">${p.period}${isAnnual&&price>0?' · billed annually':''}</div>
+      <div class="pr-div"></div>
+      <ul class="pr-feats">
+        ${p.feats.map(f=>`<li class="pr-feat">${f}</li>`).join('')}
+        ${p.dimFeats.map(f=>`<li class="pr-feat x">${f}</li>`).join('')}
+      </ul>
+      <button class="pr-cta ${p.ctaCls}" onclick="openRzp('${p.name} — ${['Workforce Strategy','Operations Excellence','Growth Strategy','End-to-End Transformation'][activeCap]}','${displayPrice}',${price},'${p.tagline}')">${p.cta}</button>
+      <div class="pr-note">${p.note}</div>
+    </div>`;
+  }).join('');
+}
+
+document.querySelectorAll('.pr-cap-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    activeCap=+btn.dataset.pcap;
+    document.querySelectorAll('.pr-cap-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderPricing();
+  });
+});
+
+const toggle=document.getElementById('billingToggle');
+toggle.addEventListener('click',()=>{
+  isAnnual=!isAnnual;
+  toggle.classList.toggle('annual',isAnnual);
+  document.getElementById('lblMonth').classList.toggle('active',!isAnnual);
+  document.getElementById('lblAnnual').classList.toggle('active',isAnnual);
+  renderPricing();
+});
+
+renderPricing();
+
+/* ── RAZORPAY ── */
+let rzpCurrent={};
+function openRzp(name,displayAmt,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent=name;
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent='Fill in your details — our team confirms within 24 hours.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?`<sup>₹</sup>${amtInt.toLocaleString('en-IN')}`:'<span style="font-size:24px;">Custom</span>';
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){
+  document.getElementById('rzpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,
+      currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      handler:function(response){
+        closeRzp();
+        alert('Payment confirmed! ID: '+response.razorpay_payment_id+'\n\nORIGENNT will contact you within 24 hours to begin your engagement.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,size:document.getElementById('rzpSize').value,states:document.getElementById('rzpState').value},
+      theme:{color:'#CC2229'}
+    };
+    if(typeof Razorpay!=='undefined'){new Razorpay(options).open();}
+    else{
+      const msg=encodeURIComponent(`Hi ORIGENNT,\n\nEngagement Enquiry:\nService: ${rzpCurrent.name}\nCompany: ${company}\nContact: ${name}\nEmail: ${email}\nPhone: ${phone}\nSize: ${document.getElementById('rzpSize').value}\nStates: ${document.getElementById('rzpState').value}`);
+      window.open('https://wa.me/919861168291?text='+msg,'_blank');
+      closeRzp();
+    }
+  } else {
+    const msg=encodeURIComponent(`Hi ORIGENNT,\n\nCustom Engagement Enquiry:\nService: ${rzpCurrent.name}\nCompany: ${company}\nContact: ${name}\nEmail: ${email}\nPhone: ${phone}\nSize: ${document.getElementById('rzpSize').value}\nStates: ${document.getElementById('rzpState').value}`);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+
 </script>
 </body>
 </html>
