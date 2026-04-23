@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR Analytics — ORIGENNT | Workforce Intelligence & People Data</title>
+<meta name="description" content="ORIGENNT HR Analytics — attrition prediction, compensation benchmarking, workforce dashboards, hiring funnel analytics. Data-driven HR for Indian businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;border:none;cursor:pointer;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;cursor:pointer;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+
+/* HERO */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1800&q=80&fit=crop') center 40%/cover;filter:brightness(.1) saturate(.3);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:580px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:22px 48px 22px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:48px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+
+/* URGENCY */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* WHAT IS HR ANALYTICS */
+.what-section{padding:100px 80px;background:var(--off);}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.what-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.what-img-caption{background:var(--red);padding:20px 24px;margin-top:3px;}
+.what-img-caption-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.75);line-height:1.6;}
+.what-cards{display:flex;flex-direction:column;gap:3px;margin-top:28px;}
+.wc{background:var(--white);padding:20px 24px;display:flex;gap:16px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s,background .2s;}
+.wc:hover{border-left-color:var(--red);background:var(--gl);}
+.wc-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.wc-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.wc-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* INTERACTIVE CHARTS SECTION */
+.charts-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.charts-section::before{content:'';position:absolute;left:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.06),transparent 60%);pointer-events:none;}
+.charts-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:64px;position:relative;z-index:1;align-items:end;}
+.chart-tabs{display:flex;gap:3px;margin-bottom:32px;flex-wrap:wrap;}
+.ctab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:none;cursor:pointer;transition:background .2s,color .2s;}
+.ctab.active{background:var(--red);color:var(--white);}
+.chart-panel{display:none;position:relative;z-index:1;}
+.chart-panel.active{display:block;}
+.chart-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;}
+.chart-title-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.chart-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:500;}
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;}
+.chart-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);}
+.chart-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+canvas.chart-canvas{width:100%;display:block;}
+
+/* PIE CHART WRAPPER */
+.pie-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.pie-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:28px;}
+.pie-title{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;font-weight:500;}
+canvas.pie-canvas{width:100%;max-width:200px;margin:0 auto;display:block;}
+.pie-legend{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
+.pie-leg-item{display:flex;align-items:center;justify-content:space-between;font-size:12px;}
+.pie-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-right:8px;}
+.pie-leg-name{font-weight:300;color:rgba(255,255,255,.5);flex:1;}
+.pie-leg-val{font-family:'Libre Baskerville',serif;font-size:13px;color:var(--white);}
+
+/* INTERACTIVE ATTRITION ESTIMATOR */
+.estimator-section{padding:100px 80px;background:var(--off);}
+.est-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.est-left{background:var(--black);padding:44px;}
+.est-right{background:var(--white);padding:44px;}
+.est-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.est-title{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--white);margin-bottom:20px;line-height:1.2;}
+.est-field{margin-bottom:22px;}
+.est-field-label{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;display:flex;justify-content:space-between;}
+.est-field-label span{font-weight:700;color:var(--white);font-family:'Libre Baskerville',serif;font-size:14px;}
+input[type=range]{width:100%;accent-color:var(--red);height:4px;cursor:pointer;}
+.est-result{background:rgba(204,34,41,.15);border:1px solid rgba(204,34,41,.3);padding:24px;margin-top:8px;}
+.est-result-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.est-result-val{font-family:'Libre Baskerville',serif;font-size:44px;color:var(--white);line-height:1;}
+.est-result-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);margin-top:6px;}
+.est-right-title{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);margin-bottom:8px;}
+.est-right-sub{font-size:13px;font-weight:300;color:var(--gt);margin-bottom:24px;line-height:1.7;}
+.est-breakdown{display:flex;flex-direction:column;gap:2px;}
+.est-bd-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--off);}
+.est-bd-row:nth-child(odd){background:var(--gl);}
+.est-bd-name{font-size:13px;font-weight:300;color:var(--gt);}
+.est-bd-val{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--black);}
+.est-bd-val.red{color:var(--red);}
+.est-total{background:var(--black);padding:16px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:3px;}
+.est-total-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.est-total-val{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--white);}
+.est-cta-wrap{margin-top:16px;}
+
+/* COMPARISON TABLE */
+.compare-section{padding:100px 80px;background:var(--white);}
+.compare-table-wrap{overflow-x:auto;margin-top:48px;}
+table.compare-table{width:100%;border-collapse:collapse;}
+table.compare-table th{padding:16px 20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;text-align:left;border-bottom:2px solid var(--gl);}
+table.compare-table th:first-child{color:var(--gt);width:260px;}
+table.compare-table th.us{background:var(--black);color:var(--white);text-align:center;}
+table.compare-table th.them{background:var(--gl);color:var(--gt);text-align:center;}
+table.compare-table td{padding:14px 20px;font-size:13px;font-weight:300;border-bottom:1px solid var(--gl);vertical-align:top;}
+table.compare-table td:first-child{color:var(--black);font-weight:500;}
+table.compare-table td.us{background:rgba(13,13,13,.03);text-align:center;color:var(--teal);font-weight:600;}
+table.compare-table td.them{text-align:center;color:var(--gm);}
+table.compare-table td .tick{color:var(--teal);font-size:16px;}
+table.compare-table td .cross{color:var(--gm);font-size:16px;}
+table.compare-table td .partial{color:var(--amber);font-size:16px;}
+table.compare-table tr:hover td{background:var(--off);}
+table.compare-table tr:hover td.us{background:rgba(13,107,94,.06);}
+
+/* WHY US */
+.why-section{padding:100px 80px;background:var(--off);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.why-card{background:var(--white);padding:36px 32px;position:relative;overflow:hidden;transition:background .2s;}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.why-card:hover{background:var(--gl);}
+.why-card:hover::before{transform:scaleX(1);}
+.why-num{font-family:'Libre Baskerville',serif;font-size:52px;color:var(--gl);line-height:1;margin-bottom:16px;}
+.why-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.why-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;}
+
+/* CAROUSEL */
+.carousel-section{padding:100px 80px;background:var(--black);}
+.carousel-outer{position:relative;overflow:hidden;}
+.carousel-track{display:flex;gap:3px;transition:transform .6s var(--ease);}
+.carousel-slide{min-width:calc(33.333% - 2px);position:relative;overflow:hidden;aspect-ratio:4/3;flex-shrink:0;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);}
+.carousel-slide:hover img{transform:scale(1.04);}
+.carousel-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;}
+.cso-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 12px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:10px;font-weight:600;width:fit-content;}
+.cso-title{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);line-height:1.3;}
+.carousel-controls{display:flex;align-items:center;gap:12px;margin-top:24px;}
+.cc-btn{width:48px;height:48px;background:rgba(255,255,255,.08);color:var(--white);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;cursor:pointer;}
+.cc-btn:hover{background:var(--red);}
+.cc-dots{display:flex;gap:8px;flex:1;justify-content:center;}
+.cc-dot{width:6px;height:6px;background:rgba(255,255,255,.2);border-radius:50%;transition:background .2s,width .2s;border:none;cursor:pointer;}
+.cc-dot.active{background:var(--red);width:22px;border-radius:3px;}
+
+/* CASE STUDY */
+.case-section{padding:100px 80px;background:var(--off);}
+.case-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.case-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+.case-sector{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:20px;font-weight:600;}
+.case-title{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;color:var(--black);margin-bottom:16px;line-height:1.2;}
+.case-body{font-size:14px;font-weight:300;color:var(--gt);line-height:1.85;margin-bottom:28px;}
+.case-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.case-out{background:var(--black);padding:20px 18px;}
+.case-out-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);line-height:1;}
+.case-out-n sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.case-out-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+.case-steps{display:flex;flex-direction:column;gap:3px;}
+.case-step{background:var(--white);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s;}
+.case-step:hover{border-left-color:var(--red);}
+.case-step-num{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--gl);flex-shrink:0;}
+.case-step-title{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.case-step-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* PRICING */
+.pricing-section{padding:100px 80px;background:var(--white);}
+.pricing-intro{margin-bottom:48px;}
+.addon-calculator{background:var(--off);padding:40px;margin-top:3px;}
+.addon-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:24px;font-weight:500;}
+.addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px;}
+.addon-item{background:var(--white);padding:18px 20px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .2s;border:2px solid transparent;}
+.addon-item.selected{border-color:var(--red);background:var(--red-pale);}
+.addon-check{width:20px;height:20px;border:1.5px solid var(--gm);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;}
+.addon-item.selected .addon-check{background:var(--red);border-color:var(--red);color:var(--white);}
+.addon-name{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.addon-price{font-size:11.5px;font-weight:300;color:var(--gt);}
+.addon-total{background:var(--black);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;}
+.addon-total-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.addon-total-val{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);}
+.addon-total-val sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+
+/* PKG GRID */
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pkg{background:var(--off);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.pkg::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--gl);}
+.pkg.featured{background:var(--black);}
+.pkg.featured::after{background:var(--red);}
+.pkg-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:18px;display:inline-block;font-weight:600;width:fit-content;}
+.pkg-badge.s{background:var(--gl);color:var(--gt);}
+.pkg-badge.p{background:var(--red);color:var(--white);}
+.pkg-badge.g{background:var(--gold);color:#3d2800;}
+.pkg-badge.e{background:var(--teal);color:var(--white);}
+.pkg-name{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--black);margin-bottom:4px;}
+.featured .pkg-name{color:var(--white);}
+.pkg-tagline{font-size:12px;font-weight:300;color:var(--gt);margin-bottom:18px;line-height:1.6;}
+.featured .pkg-tagline{color:rgba(255,255,255,.38);}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--black);line-height:1;}
+.featured .pkg-price{color:var(--white);}
+.pkg-price sup{font-size:14px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:18px;}
+.featured .pkg-period{color:rgba(255,255,255,.25);}
+.pkg-div{height:1px;background:var(--gl);margin:0 0 18px;}
+.featured .pkg-div{background:rgba(255,255,255,.09);}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:22px;}
+.pkg-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.featured .pkg-feat{color:rgba(255,255,255,.5);}
+.pkg-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pkg-feat.dim::before{content:'—';color:var(--gm);}
+.pkg-feat.dim{opacity:.35;}
+.pkg-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s,transform .2s;border:none;cursor:pointer;width:100%;}
+.pkg-cta.r{background:var(--red);color:var(--white);}
+.pkg-cta.r:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pkg-cta.w{background:var(--white);color:var(--red);}
+.pkg-cta.w:hover{background:var(--off);}
+.pkg-cta.g{background:var(--gold);color:#3d2800;}
+.pkg-cta.g:hover{opacity:.88;transform:translateY(-2px);}
+.pkg-cta.t{background:var(--teal);color:var(--white);}
+.pkg-cta.t:hover{opacity:.88;}
+.pkg-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;line-height:1.5;}
+.featured .pkg-note{color:rgba(255,255,255,.2);}
+.pkg-gst{background:var(--black);padding:16px 28px;display:flex;align-items:center;gap:14px;margin-top:3px;flex-wrap:wrap;}
+.pkg-gst-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.35);flex:1;line-height:1.6;}
+.pkg-gst-text strong{color:rgba(255,255,255,.65);}
+
+/* FINAL CTA */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s,transform .2s;text-decoration:none;border:none;cursor:pointer;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+
+/* RAZORPAY MODAL */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:94vw;padding:52px 48px;position:relative;max-height:90vh;overflow-y:auto;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);cursor:pointer;transition:color .2s;}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:4px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;}
+.rzp-modal-price{font-family:'Libre Baskerville',serif;font-size:40px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-modal-price sup{font-size:16px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* BAR FILLS */
+.dc-bar-row{margin-bottom:16px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12px;color:rgba(255,255,255,.6);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:13px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.5),var(--red));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+.dc-bar-fill.gold{background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.pkg-grid{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .what-grid,.charts-header,.est-grid,.case-inner{grid-template-columns:1fr;gap:48px;}
+  .pie-grid{grid-template-columns:1fr;}
+  section,.what-section,.charts-section,.estimator-section,.compare-section,.why-section,.carousel-section,.case-section,.pricing-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .pkg-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .addon-grid{grid-template-columns:1fr 1fr;}
+  .est-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.carousel-slide{min-width:80%;}.case-outcomes{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}.addon-grid{grid-template-columns:1fr;}.pkg-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link active">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 11/11/2025</small></div>
+  </div>
+</aside>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="../index.html" class="back-link">Home</a>
+  <button class="topbar-cta" onclick="openRzp('HR Analytics — Custom Scope',0,'Tell us your workforce size and we will design your analytics engagement.')">Get a Quote</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">HR Analytics & Workforce Intelligence</div></div>
+      <h1 class="hero-h1">Your people data<br>is speaking.<br>Are you <em>listening?</em></h1>
+      <p class="hero-sub">Most Indian businesses make HR decisions on instinct. ORIGENNT turns your workforce data into a strategic dashboard — attrition signals, compensation gaps, hiring funnel leaks, and productivity benchmarks — delivered in plain language, not pivot tables.</p>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="openRzp('HR Analytics Starter — ₹18,000/month',18000,'Attrition analysis, hiring funnel, compensation benchmarking for up to 100 employees.')">Start Your Analytics</button>
+        <a href="#pricing" class="btn-ghost-w">View Pricing</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">HR Analytics Impact — India 2026</div>
+      <div class="hp-row"><span class="hp-name">Avg. Attrition Cost per Employee</span><span class="hp-val">₹3.2<sub>L</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Reduction with Analytics</span><span class="hp-val">34<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Hiring Efficiency Gain</span><span class="hp-val">28<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">SMEs Using People Data</span><span class="hp-val">12<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">ROI on HR Analytics</span><span class="hp-val">4.8<sub>x</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">34<sup>%</sup></div><div class="hsc-l">Attrition Reduction</div></div>
+    <div class="hs-cell"><div class="hsc-n">4.8<sup>x</sup></div><div class="hsc-l">Avg. ROI</div></div>
+    <div class="hs-cell"><div class="hsc-n">28<sup>%</sup></div><div class="hsc-l">Hiring Speed Gain</div></div>
+    <div class="hs-cell"><div class="hsc-n">₹3.2<sup>L</sup></div><div class="hsc-l">Cost per Attrition</div></div>
+    <div class="hs-cell"><div class="hsc-n">88<sup>%</sup></div><div class="hsc-l">Prediction Accuracy</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc-r"><div class="mc-r-lbl">Clients on Analytics Retainer</div><div class="mc-r-val">48+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Attrition Cases Predicted</div><div class="mc-r-val">2,400+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Dashboards Deployed</div><div class="mc-r-val">120+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Avg. Report Turnaround</div><div class="mc-r-val">72 hrs</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Data Accuracy Rate</div><div class="mc-r-val">99.2%</div></div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">📊 88% of Indian SMEs have no visibility into why their best people leave — until after they've resigned. ORIGENNT's attrition model gives you 60-day advance warning.</div>
+  <a href="#pricing" class="us-cta">See How →</a>
+</div>
+
+<!-- WHAT IS HR ANALYTICS -->
+<section class="what-section reveal">
+  <div class="what-grid">
+    <div>
+      <img class="what-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop" alt="HR Analytics Dashboard" loading="lazy">
+      <div class="what-img-caption">
+        <div class="what-img-caption-text">ORIGENNT delivers workforce analytics as a managed service — not a software licence. You get insights, not just access to a tool you don't have time to use.</div>
+      </div>
+    </div>
+    <div>
+      <div class="chip">What Is HR Analytics</div>
+      <h2 class="D">Turning headcount<br>into a <em>strategic asset.</em></h2>
+      <div class="body-t" style="margin-top:20px;">
+        <p>HR Analytics is the practice of collecting, structuring, and interpreting workforce data to make better business decisions. Instead of managing people on gut feel, you manage on evidence — who's likely to leave, where your hiring funnel breaks, whether your compensation is competitive, and which managers drive the most productivity.</p>
+        <p>ORIGENNT delivers this as a fully managed service — we collect the data, build the models, produce the reports, and explain what to do next. No data science team required on your side.</p>
+      </div>
+      <div class="what-cards">
+        <div class="wc"><div class="wc-icon">📉</div><div><div class="wc-name">Attrition Prediction</div><div class="wc-desc">Identify flight-risk employees 60 days before they resign, using tenure, engagement, compensation, and manager patterns.</div></div></div>
+        <div class="wc"><div class="wc-icon">💰</div><div><div class="wc-name">Compensation Benchmarking</div><div class="wc-desc">Compare your salary structures against sector and regional benchmarks — know exactly where you're under or over-paying.</div></div></div>
+        <div class="wc"><div class="wc-icon">🎯</div><div><div class="wc-name">Hiring Funnel Analytics</div><div class="wc-desc">Find exactly where candidates drop off in your recruitment process — offer rejection, screening bottleneck, sourcing gap.</div></div></div>
+        <div class="wc"><div class="wc-icon">📊</div><div><div class="wc-name">Workforce Dashboards</div><div class="wc-desc">Real-time people metrics delivered monthly — headcount trends, diversity ratios, leave patterns, productivity signals.</div></div></div>
+        <div class="wc"><div class="wc-icon">🔍</div><div><div class="wc-name">Manager Effectiveness Index</div><div class="wc-desc">Measure team-level attrition, performance, and engagement by manager — identify your top performers and coaching needs.</div></div></div>
+        <div class="wc"><div class="wc-icon">📋</div><div><div class="wc-name">Custom Research & Reports</div><div class="wc-desc">Salary benchmark studies, talent market reports, attrition deep-dives — bespoke research for your specific business questions.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE CHARTS -->
+<section class="charts-section reveal">
+  <div class="charts-header">
+    <div>
+      <div class="chip w">Live Data Visualisations</div>
+      <h2 class="D W">What your workforce<br>data looks <em>like.</em></h2>
+    </div>
+    <div class="body-t w" style="padding-top:36px;">
+      <p>These are the kinds of insights ORIGENNT produces for your business every month — attrition curves, hiring funnels, compensation distributions, and department-level productivity benchmarks. All in plain language with action points.</p>
+    </div>
+  </div>
+
+  <div class="chart-tabs">
+    <button class="ctab active" data-chart="attrition">Attrition Trend</button>
+    <button class="ctab" data-chart="funnel">Hiring Funnel</button>
+    <button class="ctab" data-chart="compensation">Compensation Distribution</button>
+    <button class="ctab" data-chart="department">Department Breakdown</button>
+  </div>
+
+  <!-- ATTRITION LINE CHART -->
+  <div class="chart-panel active" id="chart-attrition">
+    <div class="chart-wrap">
+      <div class="chart-title-bar">
+        <div class="chart-title">Monthly Attrition Rate — 12 Month Trend (% of headcount)</div>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#CC2229;"></div>Your Attrition</div>
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#0d6b5e;"></div>Industry Benchmark</div>
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#c9a84c;"></div>Post-ORIGENNT</div>
+        </div>
+      </div>
+      <canvas class="chart-canvas" id="attritionChart" height="280"></canvas>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3px;">
+      <div style="background:rgba(204,34,41,.1);border:1px solid rgba(204,34,41,.2);padding:20px 24px;">
+        <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Avg. Before ORIGENNT</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">18.4<span style="font-size:14px;font-family:'Outfit',sans-serif;">%</span></div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;">Annual attrition rate</div>
+      </div>
+      <div style="background:rgba(13,107,94,.1);border:1px solid rgba(13,107,94,.2);padding:20px 24px;">
+        <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Avg. After 6 Months</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">11.2<span style="font-size:14px;font-family:'Outfit',sans-serif;">%</span></div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;">39% reduction achieved</div>
+      </div>
+      <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);padding:20px 24px;">
+        <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Cost Saving (50 employees)</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">₹1.1<span style="font-size:14px;font-family:'Outfit',sans-serif;">Cr</span></div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;">Annual savings achieved</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FUNNEL BARS -->
+  <div class="chart-panel" id="chart-funnel">
+    <div class="chart-wrap">
+      <div class="chart-title-bar">
+        <div class="chart-title">Hiring Funnel Analysis — Where Candidates Drop Off</div>
+      </div>
+      <canvas class="chart-canvas" id="funnelChart" height="300"></canvas>
+    </div>
+    <div style="margin-top:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:28px;">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;">Stage-by-Stage Conversion Rate</div>
+      <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Applied → Screened</span><span class="dc-bar-val">68%</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:68%"></div></div></div>
+      <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Screened → Interviewed</span><span class="dc-bar-val">41%</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:41%"></div></div></div>
+      <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Interviewed → Offered</span><span class="dc-bar-val">28%</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:28%"></div></div></div>
+      <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Offered → Accepted</span><span class="dc-bar-val">62%</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:62%"></div></div></div>
+      <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Accepted → Joined</span><span class="dc-bar-val">84%</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:84%"></div></div></div>
+    </div>
+  </div>
+
+  <!-- COMPENSATION PIE -->
+  <div class="chart-panel" id="chart-compensation">
+    <div class="pie-grid">
+      <div class="pie-wrap">
+        <div class="pie-title">Salary Distribution vs. Market Benchmark</div>
+        <canvas class="pie-canvas" id="compensationPie" width="200" height="200"></canvas>
+        <div class="pie-legend">
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#CC2229;"></div><span class="pie-leg-name">Below market</span><span class="pie-leg-val">34%</span></div>
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#0d6b5e;"></div><span class="pie-leg-name">At market</span><span class="pie-leg-val">42%</span></div>
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#c9a84c;"></div><span class="pie-leg-name">Above market</span><span class="pie-leg-val">24%</span></div>
+        </div>
+      </div>
+      <div class="pie-wrap">
+        <div class="pie-title">Salary Cost Breakdown (% of Total CTC)</div>
+        <canvas class="pie-canvas" id="costPie" width="200" height="200"></canvas>
+        <div class="pie-legend">
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#CC2229;"></div><span class="pie-leg-name">Basic + DA</span><span class="pie-leg-val">50%</span></div>
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#e07b20;"></div><span class="pie-leg-name">Allowances</span><span class="pie-leg-val">28%</span></div>
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#0d6b5e;"></div><span class="pie-leg-name">PF + ESI</span><span class="pie-leg-val">14%</span></div>
+          <div class="pie-leg-item"><div class="pie-leg-dot" style="background:#c9a84c;"></div><span class="pie-leg-name">Bonuses</span><span class="pie-leg-val">8%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPARTMENT HORIZONTAL BARS -->
+  <div class="chart-panel" id="chart-department">
+    <div class="chart-wrap">
+      <div class="chart-title-bar">
+        <div class="chart-title">Department-Level Productivity & Attrition Risk Score</div>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#0d6b5e;"></div>Productivity Index</div>
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#CC2229;"></div>Attrition Risk</div>
+        </div>
+      </div>
+      <canvas class="chart-canvas" id="deptChart" height="300"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- ATTRITION COST ESTIMATOR -->
+<section class="estimator-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Interactive Estimator</div>
+    <h2 class="D">Calculate what attrition<br>is <em>costing you right now.</em></h2>
+  </div>
+  <div class="est-grid">
+    <div class="est-left">
+      <div class="est-label">Attrition Cost Calculator</div>
+      <div class="est-title">Move the sliders.<br>See the real number.</div>
+      <div class="est-field">
+        <div class="est-field-label">Total Employees <span id="empCount">50</span></div>
+        <input type="range" id="sliderEmp" min="10" max="500" value="50" step="5">
+      </div>
+      <div class="est-field">
+        <div class="est-field-label">Annual Attrition Rate <span id="attrRate">18%</span></div>
+        <input type="range" id="sliderAttr" min="5" max="50" value="18" step="1">
+      </div>
+      <div class="est-field">
+        <div class="est-field-label">Avg. Annual Salary (₹ Lakh) <span id="avgSal">₹6L</span></div>
+        <input type="range" id="sliderSal" min="3" max="40" value="6" step="1">
+      </div>
+      <div class="est-result">
+        <div class="est-result-label">Your Annual Attrition Cost</div>
+        <div class="est-result-val" id="attrCost">₹0</div>
+        <div class="est-result-sub" id="attrSub">Move sliders above to calculate</div>
+      </div>
+    </div>
+    <div class="est-right">
+      <div class="est-right-title">Where that money goes</div>
+      <div class="est-right-sub">Every rupee of attrition cost is broken down below — recruitment, lost productivity, training, and the hidden onboarding tax on your existing team.</div>
+      <div class="est-breakdown">
+        <div class="est-bd-row"><span class="est-bd-name">Recruitment & Sourcing</span><span class="est-bd-val red" id="bdRecruit">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Lost Productivity (60 days)</span><span class="est-bd-val red" id="bdProd">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Onboarding & Training</span><span class="est-bd-val red" id="bdTrain">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Manager Time Cost</span><span class="est-bd-val red" id="bdMgr">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Knowledge Transfer Loss</span><span class="est-bd-val red" id="bdKnow">—</span></div>
+      </div>
+      <div class="est-total">
+        <span class="est-total-label">Total Annual Cost</span>
+        <span class="est-total-val" id="estTotal">₹—</span>
+      </div>
+      <div class="est-cta-wrap">
+        <button class="btn-red" style="width:100%;text-align:center;" onclick="openRzp('HR Analytics — Attrition Control',18000,'Start your attrition prediction and workforce analytics engagement.')">Start Attrition Analytics — ₹18,000/mo →</button>
+        <div style="font-size:11px;font-weight:300;color:var(--gt);text-align:center;margin-top:10px;">ORIGENNT clients recover this cost within 3 months on average</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section reveal">
+  <div class="chip">ORIGENNT vs. The Market</div>
+  <h2 class="D">What others give you.<br>What we <em>actually deliver.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Most analytics providers sell you a dashboard login. We sell you decisions. Here's the honest comparison between what's available and what ORIGENNT delivers.</p>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="them">Generic HRMS Software</th>
+          <th class="them">Freelance Analyst</th>
+          <th class="them">Big Consulting Firm</th>
+          <th class="us">ORIGENNT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Attrition prediction model</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Ad hoc</td><td class="them"><span class="tick">✓</span> ₹50L+</td><td class="us"><span class="tick">✓</span> Included</td></tr>
+        <tr><td>Salary benchmarking vs. market</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Limited data</td><td class="them"><span class="tick">✓</span> ₹80L+</td><td class="us"><span class="tick">✓</span> Monthly</td></tr>
+        <tr><td>Hiring funnel drop-off analysis</td><td class="them"><span class="partial">◑</span> Basic only</td><td class="them"><span class="partial">◑</span> One-time</td><td class="them"><span class="tick">✓</span> ₹30L+</td><td class="us"><span class="tick">✓</span> Included</td></tr>
+        <tr><td>Manager effectiveness scoring</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="tick">✓</span> ₹60L+</td><td class="us"><span class="tick">✓</span> Quarterly</td></tr>
+        <tr><td>Plain-language action reports</td><td class="them"><span class="cross">✗</span> Dashboards only</td><td class="them"><span class="partial">◑</span> Varies</td><td class="them"><span class="tick">✓</span> Formal decks</td><td class="us"><span class="tick">✓</span> Monthly</td></tr>
+        <tr><td>Indian regional benchmarks (OB/WB/JH)</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="us"><span class="tick">✓</span> Proprietary</td></tr>
+        <tr><td>Labour Code 2025 compliance flags</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Generic</td><td class="us"><span class="tick">✓</span> Automated</td></tr>
+        <tr><td>No data science team needed</td><td class="them"><span class="cross">✗</span> You build</td><td class="them"><span class="cross">✗</span> You manage</td><td class="them"><span class="tick">✓</span> They do it</td><td class="us"><span class="tick">✓</span> Fully managed</td></div></td></tr>
+        <tr><td>Dedicated analyst contact</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="tick">✓</span></td><td class="them"><span class="partial">◑</span> Rotates</td><td class="us"><span class="tick">✓</span> Always yours</td></tr>
+        <tr><td>Monthly retainer cost</td><td class="them">₹2,000–15,000</td><td class="them">₹15,000–40,000</td><td class="them">₹30L–200L</td><td class="us" style="color:var(--red);font-weight:700;">₹18,000–1,50,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHY ORIGENNT -->
+<section class="why-section reveal">
+  <div class="chip">Why ORIGENNT for HR Analytics</div>
+  <h2 class="D">Six reasons this is different<br>from everything <em>else you've tried.</em></h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><div class="why-name">Indian Data. Not Global Averages.</div><div class="why-desc">Our salary benchmarks, attrition norms, and hiring funnel data are built on Indian market realities — Odisha, West Bengal, Jharkhand, Karnataka. Not US or global datasets retrofitted to India.</div></div>
+    <div class="why-card"><div class="why-num">02</div><div class="why-name">Managed Service. Not a Dashboard.</div><div class="why-desc">You don't need a data team. We do the collection, the analysis, the modelling, and the interpretation. You receive a monthly report with exactly what to do — not raw charts to figure out yourself.</div></div>
+    <div class="why-card"><div class="why-num">03</div><div class="why-name">Predictive. Not Just Descriptive.</div><div class="why-desc">Most HR tools tell you what happened. ORIGENNT tells you what's going to happen — which employees are flight risks, which departments will overspend, where your next hiring bottleneck is forming.</div></div>
+    <div class="why-card"><div class="why-num">04</div><div class="why-name">Compliance-Integrated Analytics.</div><div class="why-desc">Our analytics engine flags Labour Code 2025 and new IT Act 2025 compliance risks embedded in your workforce data — wage structure violations, PF shortfalls, ESI eligibility gaps — before inspectors do.</div></div>
+    <div class="why-card"><div class="why-num">05</div><div class="why-name">ORIGENNT-Integrated Execution.</div><div class="why-desc">Unlike standalone analytics providers, ORIGENNT can act on what the data reveals — fix a compensation gap through our payroll practice, fill a role through talent acquisition, or train a manager through L&D.</div></div>
+    <div class="why-card"><div class="why-num">06</div><div class="why-name">Plain Language. Board-Ready.</div><div class="why-desc">Every report comes with a one-page executive summary in plain English — not data science jargon. Share it directly with your board, founders, or investors. No translation required.</div></div>
+  </div>
+</section>
+
+<!-- IMAGE CAROUSEL -->
+<section class="carousel-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip w">Analytics in Practice</div>
+    <h2 class="D W">What HR Analytics looks like<br>when it's done <em>right.</em></h2>
+  </div>
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&fit=crop" alt="Workforce Dashboard" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Dashboards</span><div class="cso-title">Real-time workforce metrics delivered monthly to leadership</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&fit=crop" alt="Data Analysis" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Attrition Models</span><div class="cso-title">Predictive models that flag flight-risk employees 60 days early</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=800&q=80&fit=crop" alt="Salary Benchmarking" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Benchmarking</span><div class="cso-title">Compensation benchmarks calibrated to Eastern India markets</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&fit=crop" alt="Team Meeting Analytics" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Manager Reports</span><div class="cso-title">Team-level effectiveness scores for every people manager</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop" alt="HR Reports" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Board Reports</span><div class="cso-title">One-page executive summaries — board-ready, jargon-free</div></div></div>
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="cc-btn" id="prevBtn">←</button>
+    <div class="cc-dots" id="carouselDots"></div>
+    <button class="cc-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Case Study</div>
+    <h2 class="D">A real engagement.<br>Real numbers. Real <em>outcome.</em></h2>
+  </div>
+  <div class="case-inner">
+    <div>
+      <div class="case-sector">BFSI — Odisha</div>
+      <div class="case-title">How an NBFC with 280 employees cut attrition from 24% to 9% in 8 months</div>
+      <div class="case-body">A regional NBFC headquartered in Bhubaneswar was losing relationship managers at 24% annually — their highest-performing, most expensive-to-replace employee segment. Exit interviews cited "better opportunities" generically. Leadership had no data to act on.<br><br>ORIGENNT deployed a 90-day diagnostic: mapped attrition by branch, manager, tenure band, and salary percentile. The data revealed three specific managers with 3x the team-level attrition of others, a compensation gap in the ₹4–7L band specifically in Cuttack and Berhampur branches, and a hiring funnel that was losing 60% of offer-stage candidates to a competitor paying 12% more in allowances — not base.</div>
+      <div class="case-outcomes">
+        <div class="case-out"><div class="case-out-n">24<sub>→9%</sub></div><div class="case-out-l">Attrition rate drop</div></div>
+        <div class="case-out"><div class="case-out-n">₹2.4<sub>Cr</sub></div><div class="case-out-l">Annual cost saved</div></div>
+        <div class="case-out"><div class="case-out-n">8<sub>mo</sub></div><div class="case-out-l">Time to result</div></div>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop" alt="NBFC Case Study Bhubaneswar" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:3px;">
+      <div class="case-steps">
+        <div class="case-step"><div class="case-step-num">01</div><div><div class="case-step-title">90-Day Attrition Diagnostic</div><div class="case-step-desc">Collected 2 years of HR data, structured it, and ran attrition modelling by branch, manager, tenure, and salary band.</div></div></div>
+        <div class="case-step"><div class="case-step-num">02</div><div><div class="case-step-title">Compensation Gap Analysis</div><div class="case-step-desc">Benchmarked 280 roles against Odisha BFSI market — found a ₹40,000/year allowance gap driving 62% of resignations in the ₹4–7L segment.</div></div></div>
+        <div class="case-step"><div class="case-step-num">03</div><div><div class="case-step-title">Manager Effectiveness Intervention</div><div class="case-step-desc">Identified 3 managers with statistically significant attrition correlation. ORIGENNT's L&D practice delivered targeted coaching over 6 months.</div></div></div>
+        <div class="case-step"><div class="case-step-num">04</div><div><div class="case-step-title">Monthly Monitoring Dashboard</div><div class="case-step-desc">Deployed a live attrition early-warning system — leadership now sees flight-risk signals 60 days before resignation, enabling proactive retention.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section reveal" id="pricing">
+  <div class="pricing-intro">
+    <div class="chip">Pricing</div>
+    <h2 class="D">Pay for what you need.<br>Add on as you <em>grow.</em></h2>
+    <p class="body-t" style="max-width:600px;margin-top:14px;">Every plan is a direct payment — no quotes, no waiting. Razorpay accepts UPI, cards, net banking, and EMI. GST invoice issued within 24 hours. Engagement starts within 48 hours of payment.</p>
+  </div>
+
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-badge s">Starter</div>
+      <div class="pkg-name">Analytics Essentials</div>
+      <div class="pkg-tagline">For businesses with 10–100 employees wanting their first real workforce insights.</div>
+      <div class="pkg-price"><sup>₹</sup>18,000</div>
+      <div class="pkg-period">per month · up to 100 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Monthly attrition analysis report</li>
+        <li class="pkg-feat">Hiring funnel drop-off mapping</li>
+        <li class="pkg-feat">Compensation benchmarking (annual)</li>
+        <li class="pkg-feat">3 KPI dashboard metrics</li>
+        <li class="pkg-feat">Plain-language findings report</li>
+        <li class="pkg-feat dim">Manager effectiveness scores</li>
+        <li class="pkg-feat dim">Predictive attrition model</li>
+        <li class="pkg-feat dim">Custom research reports</li>
+      </ul>
+      <button class="pkg-cta r" onclick="openRzp('HR Analytics Essentials',18000,'Monthly attrition analysis, hiring funnel, compensation benchmarking — up to 100 employees.')">Pay & Start — ₹18,000/mo</button>
+      <div class="pkg-note">Min. 3-month commitment · +₹150/employee above 100</div>
+    </div>
+
+    <div class="pkg featured">
+      <div class="pkg-badge p">Most Popular</div>
+      <div class="pkg-name">Analytics Pro</div>
+      <div class="pkg-tagline">For 100–300 employee businesses that want predictive insights and manager-level data.</div>
+      <div class="pkg-price"><sup>₹</sup>45,000</div>
+      <div class="pkg-period">per month · up to 300 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Essentials</li>
+        <li class="pkg-feat">Predictive attrition model (60-day early warning)</li>
+        <li class="pkg-feat">Manager effectiveness scoring</li>
+        <li class="pkg-feat">Department-level productivity index</li>
+        <li class="pkg-feat">10 KPI dashboard metrics</li>
+        <li class="pkg-feat">Quarterly salary benchmarking</li>
+        <li class="pkg-feat">Board-ready executive summary</li>
+        <li class="pkg-feat">Dedicated analytics consultant</li>
+      </ul>
+      <button class="pkg-cta w" onclick="openRzp('HR Analytics Pro',45000,'Predictive attrition, manager effectiveness, department productivity — up to 300 employees.')">Pay & Start — ₹45,000/mo</button>
+      <div class="pkg-note">Save vs. hiring in-house analyst · +₹120/employee above 300</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge g">Enterprise</div>
+      <div class="pkg-name">Analytics Enterprise</div>
+      <div class="pkg-tagline">For 300–1,000 employee companies needing full workforce intelligence infrastructure.</div>
+      <div class="pkg-price"><sup>₹</sup>95,000</div>
+      <div class="pkg-period">per month · up to 1,000 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Pro</li>
+        <li class="pkg-feat">Multi-location workforce analytics</li>
+        <li class="pkg-feat">Custom research reports (2/quarter)</li>
+        <li class="pkg-feat">Hiring funnel A/B testing</li>
+        <li class="pkg-feat">Compensation restructuring advisory</li>
+        <li class="pkg-feat">Labour Code compliance flags</li>
+        <li class="pkg-feat">Live BI dashboard (Tableau/Power BI)</li>
+        <li class="pkg-feat">Monthly board presentation</li>
+      </ul>
+      <button class="pkg-cta g" onclick="openRzp('HR Analytics Enterprise',95000,'Full workforce intelligence — multi-location, custom research, BI dashboards, up to 1,000 employees.')">Pay & Start — ₹95,000/mo</button>
+      <div class="pkg-note">Equivalent to 2 full-time analysts at 30% cost</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge e">Custom</div>
+      <div class="pkg-name">Analytics Mandate</div>
+      <div class="pkg-tagline">For large enterprises, groups, or unique data architecture requiring a dedicated analytics team.</div>
+      <div class="pkg-price" style="font-size:24px;letter-spacing:-.01em;">Custom</div>
+      <div class="pkg-period">scoped on enquiry</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">All Enterprise features</li>
+        <li class="pkg-feat">Dedicated analytics team</li>
+        <li class="pkg-feat">1,000+ employee capability</li>
+        <li class="pkg-feat">ERP / HRMS data integration</li>
+        <li class="pkg-feat">Predictive workforce planning</li>
+        <li class="pkg-feat">M&A workforce due diligence</li>
+        <li class="pkg-feat">Investor-grade workforce reports</li>
+        <li class="pkg-feat">Quarterly analytics offsite</li>
+      </ul>
+      <button class="pkg-cta t" onclick="openRzp('HR Analytics Mandate — Custom',0,'Custom scope for large enterprise or group analytics mandate.')">Request Proposal</button>
+      <div class="pkg-note">Response within 24 business hours</div>
+    </div>
+  </div>
+
+  <!-- ADD-ON CALCULATOR -->
+  <div class="addon-calculator">
+    <div class="addon-title">Add-On Services — Select what you need. Price updates instantly.</div>
+    <div class="addon-grid" id="addonGrid">
+      <div class="addon-item" data-price="8000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Custom Salary Benchmark Report</div><div class="addon-price">+₹8,000 / report</div></div>
+      </div>
+      <div class="addon-item" data-price="12000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Attrition Root-Cause Deep Dive</div><div class="addon-price">+₹12,000 / engagement</div></div>
+      </div>
+      <div class="addon-item" data-price="6000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Hiring Funnel Audit (one-time)</div><div class="addon-price">+₹6,000 / audit</div></div>
+      </div>
+      <div class="addon-item" data-price="15000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Manager Effectiveness Assessment</div><div class="addon-price">+₹15,000 / quarter</div></div>
+      </div>
+      <div class="addon-item" data-price="20000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Live BI Dashboard Setup</div><div class="addon-price">+₹20,000 one-time setup</div></div>
+      </div>
+      <div class="addon-item" data-price="10000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Board-Level Presentation (quarterly)</div><div class="addon-price">+₹10,000 / presentation</div></div>
+      </div>
+    </div>
+    <div class="addon-total">
+      <span class="addon-total-label">Selected Add-Ons Total</span>
+      <span class="addon-total-val">₹<span id="addonTotal">0</span><sub>/selected</sub></span>
+    </div>
+    <div style="margin-top:3px;display:flex;gap:3px;flex-wrap:wrap;">
+      <button class="btn-red" style="flex:1;text-align:center;padding:14px;" id="addonPayBtn" onclick="payAddons()">Pay for Selected Add-Ons →</button>
+      <div style="background:var(--off);padding:14px 20px;font-size:12px;font-weight:300;color:var(--gt);flex:1;display:flex;align-items:center;">All prices exclude GST (18%). Add-ons can be combined with any plan or purchased standalone.</div>
+    </div>
+  </div>
+
+  <div class="pkg-gst">
+    <div style="font-size:18px;flex-shrink:0;">💳</div>
+    <div class="pkg-gst-text"><strong>All prices exclude GST (18%). GST invoice within 24 hours.</strong> Payment via Razorpay — UPI, cards, net banking, EMI accepted. Engagement begins within 48 hours. No lock-in after minimum period.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Stop guessing<br>why your best people leave.<br><em>Start knowing.</em></h2>
+    <p class="fc-sub">ORIGENNT HR Analytics turns your workforce data into decisions. Attrition prediction, compensation benchmarking, hiring funnel analysis, manager effectiveness scores — delivered monthly, in plain language, by a team that also handles your payroll, talent, and compliance.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="fca w" onclick="openRzp('HR Analytics Essentials',18000,'Start your attrition and workforce analytics engagement today.')">Start Analytics — ₹18,000/mo</button>
+    <a href="payroll-compliance.html" class="fca ol">Payroll & Compliance →</a>
+    <a href="talent-acquisition.html" class="fca ol">Talent Acquisition →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 11 November 2025 · Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Consulting</div>
+      <a href="../management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="strategy.html" class="footer-link">Strategy & Transformation</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
+    </div>
+    <div>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+      <a href="internship.html" class="footer-link">Internship Program</a>
+      <a href="campus.html" class="footer-link">Campus Recruitment</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a href="../about.html" class="footer-link">About ORIGENNT</a>
+      <a href="../contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2026 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /main -->
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" id="rzpClose">×</button>
+    <div class="rzp-tag" id="rzpTag">HR Analytics</div>
+    <div class="rzp-modal-h" id="rzpH">Start Your Engagement</div>
+    <div class="rzp-modal-sub" id="rzpSub">Engagement begins within 48 hours of payment.</div>
+    <div class="rzp-modal-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">GST invoice issued within 24 hours.</div>
+    <div class="rzp-fields">
+      <input class="rzp-inp" id="rzpCompany" type="text" placeholder="Company / Organisation Name *">
+      <input class="rzp-inp" id="rzpName" type="text" placeholder="Your Name & Designation *">
+      <input class="rzp-inp" id="rzpEmail" type="email" placeholder="Email Address *">
+      <input class="rzp-inp" id="rzpPhone" type="tel" placeholder="Phone Number *">
+      <input class="rzp-inp" id="rzpEmp" type="number" placeholder="Number of Employees" min="1">
+      <input class="rzp-inp" id="rzpStates" type="text" placeholder="States of Operation">
+    </div>
+    <button class="rzp-submit" id="rzpBtn">Proceed to Payment →</button>
+    <div class="rzp-secure">🔒 Confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 · Powered by Razorpay</div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── BAR FILLS ── */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*100));bObs.unobserve(e.target);}});
+},{threshold:.2});
+document.querySelectorAll('.charts-section').forEach(el=>bObs.observe(el));
+
+/* ── CHART TABS ── */
+document.querySelectorAll('.ctab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.chart-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('chart-'+tab.dataset.chart).classList.add('active');
+    renderActiveChart(tab.dataset.chart);
+  });
+});
+
+/* ── CHART RENDERING ── */
+function renderActiveChart(name){
+  if(name==='attrition') drawAttrition();
+  if(name==='funnel') drawFunnel();
+  if(name==='compensation'){drawPie('compensationPie',[34,42,24],['#CC2229','#0d6b5e','#c9a84c']);drawPie('costPie',[50,28,14,8],['#CC2229','#e07b20','#0d6b5e','#c9a84c']);}
+  if(name==='department') drawDept();
+}
+
+function setupCanvas(id,h){
+  const c=document.getElementById(id);if(!c)return null;
+  const W=c.offsetWidth||500;
+  c.width=W*2;c.height=h*2;c.style.width=W+'px';c.style.height=h+'px';
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  return{ctx,W,H:h};
+}
+
+function drawAttrition(){
+  const s=setupCanvas('attritionChart',280);if(!s)return;
+  const{ctx,W,H}=s;
+  const pad={t:20,r:20,b:36,l:44};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const yours=[2.1,2.4,2.0,1.9,2.3,1.8,1.7,1.5,1.3,1.1,0.9,0.8];
+  const bench=[1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.5];
+  const post=[null,null,null,null,null,null,1.7,1.5,1.3,1.1,0.9,0.8];
+  const max=3;
+  ctx.clearRect(0,0,W,H);
+  // Grid
+  for(let i=0;i<=4;i++){
+    const y=pad.t+ch-(i/4)*ch;
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='10px Outfit';ctx.textAlign='right';
+    ctx.fillText((i/4*max).toFixed(1)+'%',pad.l-6,y+4);
+  }
+  // Lines
+  function drawLine(data,color,dash){
+    ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
+    if(dash)ctx.setLineDash([5,4]);else ctx.setLineDash([]);
+    ctx.beginPath();let started=false;
+    data.forEach((v,i)=>{if(v===null)return;const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;!started?(ctx.moveTo(x,y),started=true):ctx.lineTo(x,y);});
+    ctx.stroke();ctx.setLineDash([]);
+  }
+  // Area
+  const grad=s.ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+  grad.addColorStop(0,'rgba(204,34,41,.15)');grad.addColorStop(1,'rgba(204,34,41,0)');
+  ctx.fillStyle=grad;ctx.beginPath();
+  yours.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.lineTo(pad.l+cw,pad.t+ch);ctx.lineTo(pad.l,pad.t+ch);ctx.closePath();ctx.fill();
+  drawLine(yours,'#CC2229',false);
+  drawLine(bench,'#0d6b5e',true);
+  drawLine(post,'#c9a84c',false);
+  // Dots
+  yours.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='#CC2229';ctx.fill();});
+  // X labels
+  months.forEach((m,i)=>{const x=pad.l+(i/(months.length-1))*cw;ctx.fillStyle='rgba(255,255,255,.28)';ctx.font='9px Outfit';ctx.textAlign='center';ctx.fillText(m,x,pad.t+ch+18);});
+}
+
+function drawFunnel(){
+  const s=setupCanvas('funnelChart',300);if(!s)return;
+  const{ctx,W,H}=s;
+  const stages=['Applied','Screened','Interviewed','Offered','Accepted','Joined'];
+  const vals=[1000,680,279,78,48,41];
+  const colors=['#CC2229','#e05040','#e07b20','#c9a84c','#0d6b5e','#1a9c8a'];
+  const pad={t:20,r:100,b:36,l:90};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  const barH=(ch-5*(stages.length-1))/stages.length;
+  ctx.clearRect(0,0,W,H);
+  stages.forEach((s,i)=>{
+    const w=(vals[i]/vals[0])*cw;
+    const y=pad.t+i*(barH+5);
+    ctx.fillStyle=colors[i];
+    ctx.fillRect(pad.l,y,w,barH);
+    ctx.fillStyle='rgba(255,255,255,.55)';ctx.font='10px Outfit';ctx.textAlign='right';ctx.textBaseline='middle';
+    ctx.fillText(s,pad.l-8,y+barH/2);
+    ctx.fillStyle='rgba(255,255,255,.8)';ctx.textAlign='left';
+    ctx.fillText(vals[i].toLocaleString('en-IN'),pad.l+w+8,y+barH/2);
+  });
+}
+
+function drawPie(id,data,colors){
+  const c=document.getElementById(id);if(!c)return;
+  const size=Math.min(c.offsetWidth,200);
+  c.width=size*2;c.height=size*2;c.style.width=size+'px';c.style.height=size+'px';
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  const cx=size/2,cy=size/2,r=size/2-8;
+  let start=-Math.PI/2;
+  const total=data.reduce((a,b)=>a+b,0);
+  data.forEach((v,i)=>{
+    const angle=(v/total)*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,start+angle);ctx.closePath();
+    ctx.fillStyle=colors[i];ctx.fill();
+    start+=angle;
+  });
+  // Center hole
+  ctx.beginPath();ctx.arc(cx,cy,r*.55,0,Math.PI*2);ctx.fillStyle='rgba(13,13,13,.9)';ctx.fill();
+}
+
+function drawDept(){
+  const s=setupCanvas('deptChart',300);if(!s)return;
+  const{ctx,W,H}=s;
+  const depts=['Sales','Operations','Finance','HR','Technology','Customer Care'];
+  const prod=[82,71,88,65,91,58];
+  const risk=[42,31,18,55,22,68];
+  const pad={t:20,r:20,b:36,l:110};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  const barH=(ch-5*(depts.length-1))/depts.length;
+  ctx.clearRect(0,0,W,H);
+  // Grid
+  for(let i=0;i<=4;i++){
+    const x=pad.l+(i/4)*cw;
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+ch);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.25)';ctx.font='9px Outfit';ctx.textAlign='center';
+    ctx.fillText((i*25)+'%',x,pad.t+ch+16);
+  }
+  depts.forEach((d,i)=>{
+    const y=pad.t+i*(barH+5);
+    const half=barH/2-1;
+    // Prod bar
+    ctx.fillStyle='#0d6b5e';
+    ctx.fillRect(pad.l,y,prod[i]/100*cw,half);
+    // Risk bar
+    ctx.fillStyle='#CC2229';
+    ctx.fillRect(pad.l,y+half+2,risk[i]/100*cw,half);
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='10px Outfit';ctx.textAlign='right';ctx.textBaseline='middle';
+    ctx.fillText(d,pad.l-8,y+barH/2);
+  });
+}
+
+// Draw first chart on load
+const chartObs=new IntersectionObserver(es=>{
+  if(es[0].isIntersecting){drawAttrition();chartObs.disconnect();}
+},{threshold:.2});
+const chartsSection=document.querySelector('.charts-section');
+if(chartsSection)chartObs.observe(chartsSection);
+window.addEventListener('resize',()=>{
+  const active=document.querySelector('.chart-panel.active');
+  if(active)renderActiveChart(active.id.replace('chart-',''));
+  drawPie('compensationPie',[34,42,24],['#CC2229','#0d6b5e','#c9a84c']);
+  drawPie('costPie',[50,28,14,8],['#CC2229','#e07b20','#0d6b5e','#c9a84c']);
+});
+
+/* ── ATTRITION ESTIMATOR ── */
+function fmtINR(n){
+  if(n>=10000000)return'₹'+(n/10000000).toFixed(1)+'Cr';
+  if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000)return'₹'+(n/1000).toFixed(0)+'K';
+  return'₹'+Math.round(n);
+}
+
+function calcAttrition(){
+  const emp=+document.getElementById('sliderEmp').value;
+  const rate=+document.getElementById('sliderAttr').value/100;
+  const sal=+document.getElementById('sliderSal').value*100000;
+  document.getElementById('empCount').textContent=emp;
+  document.getElementById('attrRate').textContent=Math.round(rate*100)+'%';
+  document.getElementById('avgSal').textContent='₹'+document.getElementById('sliderSal').value+'L';
+
+  const leavers=Math.round(emp*rate);
+  const recruit=leavers*(sal*0.15);
+  const prod=leavers*(sal*0.33);
+  const train=leavers*(sal*0.10);
+  const mgr=leavers*(sal*0.08);
+  const know=leavers*(sal*0.06);
+  const total=recruit+prod+train+mgr+know;
+
+  document.getElementById('attrCost').textContent=fmtINR(total);
+  document.getElementById('attrSub').textContent=leavers+' employees lost annually at ₹'+document.getElementById('sliderSal').value+'L avg.';
+  document.getElementById('bdRecruit').textContent=fmtINR(recruit);
+  document.getElementById('bdProd').textContent=fmtINR(prod);
+  document.getElementById('bdTrain').textContent=fmtINR(train);
+  document.getElementById('bdMgr').textContent=fmtINR(mgr);
+  document.getElementById('bdKnow').textContent=fmtINR(know);
+  document.getElementById('estTotal').textContent=fmtINR(total);
+}
+
+['sliderEmp','sliderAttr','sliderSal'].forEach(id=>document.getElementById(id).addEventListener('input',calcAttrition));
+calcAttrition();
+
+/* ── CAROUSEL ── */
+const track=document.getElementById('carouselTrack');
+const slides=track.querySelectorAll('.carousel-slide');
+const dotsC=document.getElementById('carouselDots');
+let cur2=0;
+const visC=()=>window.innerWidth>1024?3:window.innerWidth>640?2:1;
+for(let i=0;i<slides.length;i++){
+  const d=document.createElement('button');
+  d.className='cc-dot'+(i===0?' active':'');
+  d.addEventListener('click',()=>goTo(i));
+  dotsC.appendChild(d);
+}
+function goTo(idx){
+  cur2=Math.max(0,Math.min(idx,slides.length-visC()));
+  const sw=slides[0].offsetWidth+3;
+  track.style.transform='translateX(-'+(cur2*sw)+'px)';
+  document.querySelectorAll('.cc-dot').forEach((d,i)=>d.classList.toggle('active',i===cur2));
+}
+document.getElementById('prevBtn').addEventListener('click',()=>goTo(Math.max(0,cur2-1)));
+document.getElementById('nextBtn').addEventListener('click',()=>goTo(Math.min(slides.length-visC(),cur2+1)));
+let autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4000);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoC));
+track.parentElement.addEventListener('mouseleave',()=>{autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4000);});
+
+/* ── ADD-ON CALCULATOR ── */
+let addonTotal=0;
+function toggleAddon(el){
+  el.classList.toggle('selected');
+  addonTotal=0;
+  document.querySelectorAll('.addon-item.selected').forEach(item=>{addonTotal+=+item.dataset.price;});
+  document.getElementById('addonTotal').textContent=addonTotal.toLocaleString('en-IN');
+}
+function payAddons(){
+  if(addonTotal===0){alert('Please select at least one add-on.');return;}
+  const selected=[];
+  document.querySelectorAll('.addon-item.selected').forEach(item=>selected.push(item.querySelector('.addon-name').textContent));
+  openRzp('HR Analytics Add-Ons: '+selected.join(', '),addonTotal,'Selected add-ons: '+selected.join(', '));
+}
+
+/* ── RAZORPAY ── */
+let rzpCurrent={};
+function openRzp(name,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent='HR Analytics — ORIGENNT';
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent=amtInt>0?'Engagement begins within 48 hours of payment.':'Our team will scope and respond within 24 hours.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?'<sup>₹</sup>'+amtInt.toLocaleString('en-IN'):'<span style="font-size:24px;letter-spacing:-.01em;">Custom</span>';
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpBtn').textContent=amtInt>0?'Proceed to Payment →':'Submit Enquiry →';
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){
+  document.getElementById('rzpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,
+      currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      image:'https://origennt.com/favicon.ico',
+      handler:function(response){
+        closeRzp();
+        alert('✓ Payment successful!\nPayment ID: '+response.razorpay_payment_id+'\n\nYour HR Analytics engagement begins within 48 hours. ORIGENNT will contact you at '+email+' to onboard.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,employees:document.getElementById('rzpEmp').value,states:document.getElementById('rzpStates').value,service:rzpCurrent.name},
+      theme:{color:'#CC2229'},
+      modal:{ondismiss:function(){}}
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT,\n\nHR Analytics Enquiry:\nService: '+rzpCurrent.name+'\nCompany: '+company+'\nContact: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nEmployees: '+document.getElementById('rzpEmp').value+'\nStates: '+document.getElementById('rzpStates').value);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+</script>
+</body>
+</html>
