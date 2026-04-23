@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning & Development — ORIGENNT | Corporate Training & Capability Building</title>
+<meta name="description" content="ORIGENNT Learning & Development — training needs analysis, leadership development, compliance training, skills gap closing, and managed L&D programs for Indian businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;border:none;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+
+/* HERO */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1800&q=80&fit=crop') center 40%/cover;filter:brightness(.1) saturate(.3);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:580px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:22px 48px 22px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:48px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+
+/* URGENCY */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* WHAT IS L&D */
+.what-section{padding:100px 80px;background:var(--off);}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.what-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.what-img-caption{background:var(--red);padding:20px 24px;margin-top:3px;}
+.what-img-caption-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.75);line-height:1.6;}
+.what-cards{display:flex;flex-direction:column;gap:3px;margin-top:28px;}
+.wc{background:var(--white);padding:20px 24px;display:flex;gap:16px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s,background .2s;}
+.wc:hover{border-left-color:var(--red);background:var(--gl);}
+.wc-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.wc-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.wc-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* TRAINING NEEDS ASSESSMENT — INTERACTIVE */
+.tna-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.tna-section::before{content:'';position:absolute;left:-200px;bottom:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.05),transparent 60%);pointer-events:none;}
+.tna-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:56px;position:relative;z-index:1;}
+.tna-left{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:44px;}
+.tna-right{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:44px;}
+.tna-title{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.tna-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);margin-bottom:28px;line-height:1.7;}
+.tna-question{margin-bottom:20px;}
+.tna-q-label{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px;line-height:1.5;}
+.tna-slider-row{display:flex;align-items:center;gap:14px;}
+.tna-slider-row input[type=range]{flex:1;accent-color:var(--red);height:4px;}
+.tna-slider-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);width:48px;text-align:right;flex-shrink:0;}
+.tna-sector{margin-bottom:20px;}
+.tna-sector-label{font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px;}
+.tna-sector-opts{display:flex;gap:3px;flex-wrap:wrap;}
+.tna-opt{font-size:10.5px;font-weight:500;padding:7px 14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:none;transition:background .2s,color .2s;letter-spacing:.03em;}
+.tna-opt:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.tna-opt.sel{background:var(--red);color:var(--white);}
+/* SKILLS RADAR */
+.tna-radar-wrap{margin-bottom:24px;}
+.tna-radar-title{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px;font-weight:500;}
+canvas#radarChart{display:block;margin:0 auto;}
+.tna-priority-list{display:flex;flex-direction:column;gap:3px;margin-top:16px;}
+.tna-pri-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.04);}
+.tna-pri-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.6);}
+.tna-pri-badge{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;}
+.tna-pri-badge.high{background:rgba(204,34,41,.25);color:#ff8080;}
+.tna-pri-badge.med{background:rgba(201,168,76,.2);color:#e0c060;}
+.tna-pri-badge.low{background:rgba(13,107,94,.2);color:#40c090;}
+.tna-cta{margin-top:20px;}
+
+/* PROGRAMME CATALOGUE */
+.catalogue-section{padding:100px 80px;background:var(--off);}
+.cat-filters{display:flex;gap:3px;margin-top:48px;flex-wrap:wrap;}
+.cat-filter{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 22px;background:var(--white);color:var(--gt);border:none;transition:background .2s,color .2s;}
+.cat-filter:hover{background:var(--gl);}
+.cat-filter.active{background:var(--black);color:var(--white);}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3px;}
+.cat-card{background:var(--white);padding:28px 26px;position:relative;overflow:hidden;transition:background .2s;display:flex;flex-direction:column;}
+.cat-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease);}
+.cat-card:hover{background:var(--gl);}
+.cat-card:hover::before{transform:scaleY(1);}
+.cat-card.hidden{display:none;}
+.cat-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 12px;font-weight:600;display:inline-block;margin-bottom:14px;width:fit-content;}
+.cat-tag.leadership{background:rgba(201,168,76,.15);color:var(--gold);}
+.cat-tag.compliance{background:rgba(204,34,41,.1);color:var(--red);}
+.cat-tag.skills{background:rgba(13,107,94,.1);color:var(--teal);}
+.cat-tag.soft{background:rgba(224,123,32,.12);color:var(--amber);}
+.cat-tag.digital{background:rgba(13,13,13,.08);color:var(--black);}
+.cat-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:8px;line-height:1.3;}
+.cat-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.65;margin-bottom:16px;flex:1;}
+.cat-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.cat-meta-item{font-size:11px;font-weight:300;color:var(--gm);display:flex;align-items:center;gap:4px;}
+.cat-meta-item strong{color:var(--gt);font-weight:500;}
+.cat-price{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--red);margin-top:14px;}
+.cat-price sub{font-size:11px;font-family:'Outfit',sans-serif;color:var(--gm);}
+.cat-enroll{margin-top:14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:none;border:1px solid var(--red);padding:9px 20px;transition:background .2s,color .2s;width:100%;text-align:center;}
+.cat-enroll:hover{background:var(--red);color:var(--white);}
+
+/* LEARNING ROI CALCULATOR */
+.roi-section{padding:100px 80px;background:var(--white);}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:56px;}
+.roi-left{background:var(--black);padding:44px;}
+.roi-right{background:var(--off);padding:44px;}
+.roi-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.roi-title{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--white);margin-bottom:20px;line-height:1.2;}
+.roi-field{margin-bottom:22px;}
+.roi-field-label{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;display:flex;justify-content:space-between;}
+.roi-field-label span{font-weight:700;color:var(--white);font-family:'Libre Baskerville',serif;font-size:14px;}
+input[type=range]{width:100%;accent-color:var(--red);height:4px;}
+.roi-result{background:rgba(13,107,94,.15);border:1px solid rgba(13,107,94,.3);padding:24px;margin-top:8px;}
+.roi-result-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.roi-result-val{font-family:'Libre Baskerville',serif;font-size:44px;color:var(--white);line-height:1;}
+.roi-result-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);margin-top:6px;}
+.roi-right-title{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);margin-bottom:8px;}
+.roi-right-sub{font-size:13px;font-weight:300;color:var(--gt);margin-bottom:24px;line-height:1.7;}
+.roi-breakdown{display:flex;flex-direction:column;gap:2px;}
+.roi-bd-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--white);}
+.roi-bd-row:nth-child(odd){background:var(--gl);}
+.roi-bd-name{font-size:13px;font-weight:300;color:var(--gt);}
+.roi-bd-val{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--black);}
+.roi-bd-val.green{color:var(--teal);}
+.roi-bd-val.red{color:var(--red);}
+.roi-total{background:var(--black);padding:16px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:3px;}
+.roi-total-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.roi-total-val{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--white);}
+.roi-total-val.green{color:#40d090;}
+
+/* SKILLS GAP VISUALISER */
+.gap-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.gap-section::before{content:'';position:absolute;right:-180px;top:-180px;width:600px;height:600px;background:radial-gradient(circle,rgba(13,107,94,.06),transparent 60%);pointer-events:none;}
+.gap-tabs{display:flex;gap:3px;margin-top:48px;margin-bottom:3px;position:relative;z-index:1;flex-wrap:wrap;}
+.gtab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:none;transition:background .2s,color .2s;}
+.gtab.active{background:var(--red);color:var(--white);}
+.gap-panel{display:none;position:relative;z-index:1;}
+.gap-panel.active{display:block;}
+.gap-chart-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;}
+.gap-title-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.gap-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:500;}
+.gap-legend{display:flex;gap:16px;flex-wrap:wrap;}
+.gap-leg-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);}
+.gap-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+canvas.gap-canvas{width:100%;display:block;}
+.gap-insight{margin-top:3px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.gap-ins{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:20px 22px;}
+.gap-ins-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;}
+.gap-ins-val{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--white);}
+.gap-ins-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;}
+
+/* DC BAR (reusable) */
+.dc-bar-row{margin-bottom:16px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12px;color:rgba(255,255,255,.6);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:13px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.5),var(--red));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+.dc-bar-fill.gold{background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));}
+.dc-bar-fill.amber{background:linear-gradient(90deg,rgba(224,123,32,.5),var(--amber));}
+
+/* DELIVERY MODES */
+.delivery-section{padding:100px 80px;background:var(--off);}
+.delivery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:56px;}
+.delivery-card{background:var(--white);padding:32px 28px;position:relative;overflow:hidden;transition:background .2s;}
+.delivery-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.delivery-card:hover{background:var(--gl);}
+.delivery-card:hover::before{transform:scaleX(1);}
+.delivery-icon{font-size:36px;margin-bottom:16px;}
+.delivery-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.delivery-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.75;margin-bottom:16px;}
+.delivery-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.delivery-tag{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;background:var(--gl);color:var(--gt);}
+
+/* COMPARISON */
+.compare-section{padding:100px 80px;background:var(--white);}
+.compare-table-wrap{overflow-x:auto;margin-top:48px;}
+table.compare-table{width:100%;border-collapse:collapse;}
+table.compare-table th{padding:16px 20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;text-align:left;border-bottom:2px solid var(--gl);}
+table.compare-table th:first-child{color:var(--gt);width:240px;}
+table.compare-table th.us{background:var(--black);color:var(--white);text-align:center;}
+table.compare-table th.them{background:var(--gl);color:var(--gt);text-align:center;}
+table.compare-table td{padding:14px 20px;font-size:13px;font-weight:300;border-bottom:1px solid var(--gl);vertical-align:top;}
+table.compare-table td:first-child{color:var(--black);font-weight:500;}
+table.compare-table td.us{background:rgba(13,13,13,.03);text-align:center;color:var(--teal);font-weight:600;}
+table.compare-table td.them{text-align:center;color:var(--gm);}
+table.compare-table td .tick{color:var(--teal);font-size:16px;}
+table.compare-table td .cross{color:var(--gm);font-size:16px;}
+table.compare-table td .partial{color:var(--amber);font-size:16px;}
+table.compare-table tr:hover td{background:var(--off);}
+table.compare-table tr:hover td.us{background:rgba(13,107,94,.06);}
+
+/* WHY */
+.why-section{padding:100px 80px;background:var(--off);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.why-card{background:var(--white);padding:36px 32px;position:relative;overflow:hidden;transition:background .2s;}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.why-card:hover{background:var(--gl);}
+.why-card:hover::before{transform:scaleX(1);}
+.why-num{font-family:'Libre Baskerville',serif;font-size:52px;color:var(--gl);line-height:1;margin-bottom:16px;}
+.why-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.why-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;}
+
+/* CAROUSEL */
+.carousel-section{padding:100px 80px;background:var(--black);}
+.carousel-outer{position:relative;overflow:hidden;}
+.carousel-track{display:flex;gap:3px;transition:transform .6s var(--ease);}
+.carousel-slide{min-width:calc(33.333% - 2px);position:relative;overflow:hidden;aspect-ratio:4/3;flex-shrink:0;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);}
+.carousel-slide:hover img{transform:scale(1.04);}
+.carousel-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;}
+.cso-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 12px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:10px;font-weight:600;width:fit-content;}
+.cso-title{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);line-height:1.3;}
+.carousel-controls{display:flex;align-items:center;gap:12px;margin-top:24px;}
+.cc-btn{width:48px;height:48px;background:rgba(255,255,255,.08);color:var(--white);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.cc-btn:hover{background:var(--red);}
+.cc-dots{display:flex;gap:8px;flex:1;justify-content:center;}
+.cc-dot{width:6px;height:6px;background:rgba(255,255,255,.2);border-radius:50%;transition:background .2s,width .2s;border:none;}
+.cc-dot.active{background:var(--red);width:22px;border-radius:3px;}
+
+/* CASE STUDY */
+.case-section{padding:100px 80px;background:var(--off);}
+.case-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.case-sector{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:20px;font-weight:600;}
+.case-title{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;color:var(--black);margin-bottom:16px;line-height:1.2;}
+.case-body{font-size:14px;font-weight:300;color:var(--gt);line-height:1.85;margin-bottom:28px;}
+.case-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.case-out{background:var(--black);padding:20px 18px;}
+.case-out-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);line-height:1;}
+.case-out-n sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.case-out-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+.case-steps{display:flex;flex-direction:column;gap:3px;}
+.case-step{background:var(--white);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s;}
+.case-step:hover{border-left-color:var(--red);}
+.case-step-num{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--gl);flex-shrink:0;}
+.case-step-title{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.case-step-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* PRICING */
+.pricing-section{padding:100px 80px;background:var(--white);}
+.pricing-intro{margin-bottom:48px;}
+.addon-calculator{background:var(--off);padding:40px;margin-top:3px;}
+.addon-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:24px;font-weight:500;}
+.addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px;}
+.addon-item{background:var(--white);padding:18px 20px;display:flex;align-items:center;gap:14px;transition:background .2s;border:2px solid transparent;}
+.addon-item.selected{border-color:var(--red);background:var(--red-pale);}
+.addon-check{width:20px;height:20px;border:1.5px solid var(--gm);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;}
+.addon-item.selected .addon-check{background:var(--red);border-color:var(--red);color:var(--white);}
+.addon-name{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.addon-price{font-size:11.5px;font-weight:300;color:var(--gt);}
+.addon-total{background:var(--black);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;}
+.addon-total-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.addon-total-val{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);}
+.addon-total-val sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pkg{background:var(--off);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.pkg::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--gl);}
+.pkg.featured{background:var(--black);}
+.pkg.featured::after{background:var(--red);}
+.pkg-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:18px;display:inline-block;font-weight:600;width:fit-content;}
+.pkg-badge.s{background:var(--gl);color:var(--gt);}
+.pkg-badge.p{background:var(--red);color:var(--white);}
+.pkg-badge.g{background:var(--gold);color:#3d2800;}
+.pkg-badge.e{background:var(--teal);color:var(--white);}
+.pkg-name{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--black);margin-bottom:4px;}
+.featured .pkg-name{color:var(--white);}
+.pkg-tagline{font-size:12px;font-weight:300;color:var(--gt);margin-bottom:18px;line-height:1.6;}
+.featured .pkg-tagline{color:rgba(255,255,255,.38);}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--black);line-height:1;}
+.featured .pkg-price{color:var(--white);}
+.pkg-price sup{font-size:14px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:18px;}
+.featured .pkg-period{color:rgba(255,255,255,.25);}
+.pkg-div{height:1px;background:var(--gl);margin:0 0 18px;}
+.featured .pkg-div{background:rgba(255,255,255,.09);}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:22px;}
+.pkg-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.featured .pkg-feat{color:rgba(255,255,255,.5);}
+.pkg-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pkg-feat.dim::before{content:'—';color:var(--gm);}
+.pkg-feat.dim{opacity:.35;}
+.pkg-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s,transform .2s;border:none;width:100%;}
+.pkg-cta.r{background:var(--red);color:var(--white);}
+.pkg-cta.r:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pkg-cta.w{background:var(--white);color:var(--red);}
+.pkg-cta.w:hover{background:var(--off);}
+.pkg-cta.g{background:var(--gold);color:#3d2800;}
+.pkg-cta.g:hover{opacity:.88;transform:translateY(-2px);}
+.pkg-cta.t{background:var(--teal);color:var(--white);}
+.pkg-cta.t:hover{opacity:.88;}
+.pkg-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;line-height:1.5;}
+.featured .pkg-note{color:rgba(255,255,255,.2);}
+.pkg-gst{background:var(--black);padding:16px 28px;display:flex;align-items:center;gap:14px;margin-top:3px;flex-wrap:wrap;}
+.pkg-gst-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.35);flex:1;line-height:1.6;}
+.pkg-gst-text strong{color:rgba(255,255,255,.65);}
+
+/* FINAL CTA */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s,transform .2s;text-decoration:none;border:none;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+
+/* RAZORPAY MODAL */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:94vw;padding:52px 48px;position:relative;max-height:90vh;overflow-y:auto;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:4px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;}
+.rzp-modal-price{font-family:'Libre Baskerville',serif;font-size:40px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-modal-price sup{font-size:16px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.pkg-grid{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}.delivery-grid{grid-template-columns:1fr 1fr;}.cat-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .what-grid,.tna-grid,.roi-grid,.case-inner{grid-template-columns:1fr;gap:48px;}
+  section,.what-section,.tna-section,.catalogue-section,.roi-section,.gap-section,.delivery-section,.compare-section,.why-section,.carousel-section,.case-section,.pricing-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .pkg-grid,.delivery-grid,.cat-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .addon-grid{grid-template-columns:1fr 1fr;}
+  .gap-insight{grid-template-columns:1fr;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.carousel-slide{min-width:80%;}.case-outcomes{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}.addon-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link active">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 11/11/2025</small></div>
+  </div>
+</aside>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="../index.html" class="back-link">Home</a>
+  <button class="topbar-cta" onclick="openRzp('Learning & Development — Custom Scope',0,'Tell us your team size and learning priorities and we will design your L&D program.')">Get a Quote</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Learning & Development · Capability Building</div></div>
+      <h1 class="hero-h1">Skills are<br>perishable.<br><em>Training is not</em><br>optional.</h1>
+      <p class="hero-sub">Indian businesses lose ₹2.4L per year per untrained employee — in errors, rework, missed compliance, and departures. ORIGENNT L&D closes the skills gap before it becomes a performance gap: training needs analysis, bespoke programmes, and managed learning infrastructure for 50 to 5,000 employees.</p>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="openRzp('L&D Essentials — ₹24,000/month',24000,'Training needs analysis and managed learning programme for up to 100 employees.')">Start Building Capability</button>
+        <a href="#catalogue" class="btn-ghost-w">Browse Programmes</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">L&D Impact — India 2026</div>
+      <div class="hp-row"><span class="hp-name">Cost of Untrained Employee/Year</span><span class="hp-val">₹2.4<sub>L</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Attrition Reduction via L&D</span><span class="hp-val">41<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Productivity Gain Post-Training</span><span class="hp-val">22<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">SMEs with Structured L&D</span><span class="hp-val">9<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">ROI on Training Investment</span><span class="hp-val">5.6<sub>x</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">41<sup>%</sup></div><div class="hsc-l">Attrition Reduction</div></div>
+    <div class="hs-cell"><div class="hsc-n">5.6<sup>x</sup></div><div class="hsc-l">Training ROI</div></div>
+    <div class="hs-cell"><div class="hsc-n">22<sup>%</sup></div><div class="hsc-l">Productivity Gain</div></div>
+    <div class="hs-cell"><div class="hsc-n">₹2.4<sup>L</sup></div><div class="hsc-l">Cost of No Training</div></div>
+    <div class="hs-cell"><div class="hsc-n">94<sup>%</sup></div><div class="hsc-l">Completion Rate</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc-r"><div class="mc-r-lbl">Employees Trained</div><div class="mc-r-val">18,000+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Programmes Delivered</div><div class="mc-r-val">220+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Client Organisations</div><div class="mc-r-val">62+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Avg. Completion Rate</div><div class="mc-r-val">94%</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Avg. Learner Satisfaction</div><div class="mc-r-val">4.7 / 5</div></div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">📚 Labour Code 2025 mandates documented training records for POSH, safety, and compliance. Businesses without structured L&D face ₹5L–₹25L penalties per violation. ORIGENNT keeps you compliant and capable simultaneously.</div>
+  <a href="#pricing" class="us-cta">See Programmes →</a>
+</div>
+
+<!-- WHAT IS L&D -->
+<section class="what-section reveal">
+  <div class="what-grid">
+    <div>
+      <img class="what-img" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80&fit=crop" alt="Corporate Training Session" loading="lazy">
+      <div class="what-img-caption">
+        <div class="what-img-caption-text">ORIGENNT L&D is a managed service — we design the programme, train the trainers, deliver the sessions, and measure the impact. Your HR team administers; we build the capability.</div>
+      </div>
+    </div>
+    <div>
+      <div class="chip">What ORIGENNT L&D Delivers</div>
+      <h2 class="D">Your people can only perform<br>to the level of their <em>last training.</em></h2>
+      <div class="body-t" style="margin-top:20px;">
+        <p>Learning & Development is not an HR tick-box. It is the mechanism by which your organisation closes the gap between the skills you have and the skills you need — for today's roles and tomorrow's strategy. When done right, it reduces attrition, improves performance, accelerates promotions, and ensures compliance.</p>
+        <p>ORIGENNT delivers L&D as a fully managed service. We run the training needs analysis, design bespoke programmes, deliver them across formats — classroom, virtual, blended, on-the-job — and measure behaviour change at 30, 60, and 90 days post-training.</p>
+      </div>
+      <div class="what-cards">
+        <div class="wc"><div class="wc-icon">🎯</div><div><div class="wc-name">Training Needs Analysis (TNA)</div><div class="wc-desc">Structured diagnostic to identify the gap between current capability and required capability — by role, department, and individual. No guesswork, no generic programmes.</div></div></div>
+        <div class="wc"><div class="wc-icon">👑</div><div><div class="wc-name">Leadership Development</div><div class="wc-desc">First-time manager programmes, senior leadership coaching, succession pipeline building, and board-level facilitation for the leaders who make or break your organisation.</div></div></div>
+        <div class="wc"><div class="wc-icon">⚖️</div><div><div class="wc-name">Compliance & Statutory Training</div><div class="wc-desc">POSH, Labour Code 2025, workplace safety, data protection — delivered with documentation, assessments, and audit-ready certificates. No compliance risk.</div></div></div>
+        <div class="wc"><div class="wc-icon">🔧</div><div><div class="wc-name">Functional & Technical Skills</div><div class="wc-desc">Sales effectiveness, financial acumen, operations excellence, customer service — role-specific technical training designed for the Indian SME context.</div></div></div>
+        <div class="wc"><div class="wc-icon">🤝</div><div><div class="wc-name">Behavioural & Soft Skills</div><div class="wc-desc">Communication, emotional intelligence, conflict resolution, presentation, and team collaboration — the skills that determine how effectively people apply their technical knowledge.</div></div></div>
+        <div class="wc"><div class="wc-icon">📐</div><div><div class="wc-name">Learning Infrastructure Design</div><div class="wc-desc">L&D strategy, learning management system (LMS) setup, trainer accreditation, learning calendars, and post-training measurement frameworks for organisations building an internal L&D function.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING NEEDS ASSESSMENT — INTERACTIVE -->
+<section class="tna-section reveal">
+  <div style="position:relative;z-index:1;margin-bottom:16px;">
+    <div class="chip w">Interactive Tool</div>
+    <h2 class="D W">Where are your people's<br>skills <em>actually falling short?</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,.45);max-width:560px;margin-top:14px;line-height:1.85;">Rate your team's current capability across six dimensions. Get an instant gap map and a prioritised training recommendation.</p>
+  </div>
+  <div class="tna-grid">
+    <div class="tna-left">
+      <div class="tna-title">Capability Self-Assessment</div>
+      <div class="tna-sub">Rate your organisation's current capability from 1 (critical gap) to 10 (world-class).</div>
+
+      <div class="tna-question">
+        <div class="tna-q-label">Leadership & Management Quality</div>
+        <div class="tna-slider-row"><input type="range" class="tna-sl" id="sl0" min="1" max="10" value="5" oninput="updateTNA()"><span class="tna-slider-val" id="sv0">5</span></div>
+      </div>
+      <div class="tna-question">
+        <div class="tna-q-label">Sales & Business Development Skills</div>
+        <div class="tna-slider-row"><input type="range" class="tna-sl" id="sl1" min="1" max="10" value="5" oninput="updateTNA()"><span class="tna-slider-val" id="sv1">5</span></div>
+      </div>
+      <div class="tna-question">
+        <div class="tna-q-label">Compliance & Regulatory Knowledge</div>
+        <div class="tna-slider-row"><input type="range" class="tna-sl" id="sl2" min="1" max="10" value="5" oninput="updateTNA()"><span class="tna-slider-val" id="sv2">5</span></div>
+      </div>
+      <div class="tna-question">
+        <div class="tna-q-label">Communication & Presentation</div>
+        <div class="tna-slider-row"><input type="range" class="tna-sl" id="sl3" min="1" max="10" value="5" oninput="updateTNA()"><span class="tna-slider-val" id="sv3">5</span></div>
+      </div>
+      <div class="tna-question">
+        <div class="tna-q-label">Digital & Technology Literacy</div>
+        <div class="tna-slider-row"><input type="range" class="tna-sl" id="sl4" min="1" max="10" value="5" oninput="updateTNA()"><span class="tna-slider-val" id="sv4">5</span></div>
+      </div>
+      <div class="tna-question">
+        <div class="tna-q-label">Customer Service & Experience</div>
+        <div class="tna-slider-row"><input type="range" class="tna-sl" id="sl5" min="1" max="10" value="5" oninput="updateTNA()"><span class="tna-slider-val" id="sv5">5</span></div>
+      </div>
+
+      <div class="tna-sector">
+        <div class="tna-sector-label">Your Sector (shapes benchmarks)</div>
+        <div class="tna-sector-opts">
+          <button class="tna-opt sel" data-sector="BFSI" onclick="selectSector(this)">BFSI</button>
+          <button class="tna-opt" data-sector="Manufacturing" onclick="selectSector(this)">Manufacturing</button>
+          <button class="tna-opt" data-sector="IT/Tech" onclick="selectSector(this)">IT / Tech</button>
+          <button class="tna-opt" data-sector="Healthcare" onclick="selectSector(this)">Healthcare</button>
+          <button class="tna-opt" data-sector="Retail" onclick="selectSector(this)">Retail / FMCG</button>
+          <button class="tna-opt" data-sector="Other" onclick="selectSector(this)">Other</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tna-right">
+      <div class="tna-radar-title">Capability Gap Map</div>
+      <div class="tna-radar-wrap">
+        <canvas id="radarChart" width="320" height="280"></canvas>
+      </div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px;font-weight:500;">Priority Training Recommendations</div>
+      <div class="tna-priority-list" id="priorityList">
+        <div class="tna-pri-row"><span class="tna-pri-name">Loading...</span></div>
+      </div>
+      <div class="tna-cta">
+        <button class="btn-red" style="width:100%;text-align:center;" onclick="openRzp('Training Needs Analysis — TNA',12000,'Full TNA diagnostic: 20-page capability gap report with prioritised programme recommendations.')">Full TNA Report — ₹12,000 →</button>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.3);text-align:center;margin-top:10px;">Delivered in 21 days · Covers up to 200 employees · Role-level gap mapping</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME CATALOGUE -->
+<section class="catalogue-section reveal" id="catalogue">
+  <div class="chip">Programme Catalogue</div>
+  <h2 class="D">Eighteen programmes.<br>One partner. All <em>managed.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Every programme is delivered by ORIGENNT facilitators — not outsourced to freelancers. All programmes can be customised for your sector, your language (English/Odia/Hindi), and your specific business context.</p>
+  <div class="cat-filters">
+    <button class="cat-filter active" data-filter="all">All Programmes</button>
+    <button class="cat-filter" data-filter="leadership">Leadership</button>
+    <button class="cat-filter" data-filter="compliance">Compliance</button>
+    <button class="cat-filter" data-filter="skills">Functional Skills</button>
+    <button class="cat-filter" data-filter="soft">Behavioural</button>
+    <button class="cat-filter" data-filter="digital">Digital</button>
+  </div>
+  <div class="cat-grid">
+
+    <div class="cat-card" data-cat="leadership">
+      <span class="cat-tag leadership">Leadership</span>
+      <div class="cat-name">First-Time Manager Programme</div>
+      <div class="cat-desc">The jump from individual contributor to people manager is the most difficult transition in a career. This 3-module programme covers delegation, feedback, performance conversations, and team motivation for new and aspiring managers.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>3 days</strong> (modular)</span><span class="cat-meta-item">👥 <strong>8–16</strong> participants</span><span class="cat-meta-item">🎓 Certificate</span></div>
+      <div class="cat-price">₹48,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('First-Time Manager Programme',48000,'3-day leadership programme for new and aspiring managers — up to 16 participants per cohort.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="leadership">
+      <span class="cat-tag leadership">Leadership</span>
+      <div class="cat-name">Senior Leadership Coaching</div>
+      <div class="cat-desc">One-on-one executive coaching for senior leaders navigating complex business challenges — strategic decision-making, board relationships, succession planning, and leadership presence. Conducted by certified executive coaches.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>6 sessions</strong></span><span class="cat-meta-item">👤 <strong>Individual</strong></span><span class="cat-meta-item">📊 360° feedback</span></div>
+      <div class="cat-price">₹72,000 <sub>/ leader (6 months)</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Senior Leadership Coaching',72000,'6-month executive coaching programme with 360° feedback — per senior leader.')">Enrol →</button>
+    </div>
+
+    <div class="cat-card" data-cat="leadership">
+      <span class="cat-tag leadership">Leadership</span>
+      <div class="cat-name">Succession Pipeline Programme</div>
+      <div class="cat-desc">Identify, assess, and develop your next generation of leaders before you need them. 6-month structured programme combining psychometric assessment, leadership projects, mentoring, and stretch assignments.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>6 months</strong></span><span class="cat-meta-item">👥 <strong>5–10</strong> HiPos</span><span class="cat-meta-item">🧠 Psychometric</span></div>
+      <div class="cat-price">₹1,80,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Succession Pipeline Programme',180000,'6-month HiPo development programme with psychometrics, mentoring, and stretch projects.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="compliance">
+      <span class="cat-tag compliance">Compliance</span>
+      <div class="cat-name">POSH Act Training (IC Members + All Staff)</div>
+      <div class="cat-desc">Mandatory Prevention of Sexual Harassment training — delivered separately for Internal Committee members and all-staff awareness sessions. Includes documentation, policy review, and audit-ready certificates compliant with Labour Code 2025.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>Half day</strong></span><span class="cat-meta-item">📜 Statutory cert.</span><span class="cat-meta-item">📁 Audit docs</span></div>
+      <div class="cat-price">₹18,000 <sub>/ organisation</sub></div>
+      <button class="cat-enroll" onclick="openRzp('POSH Act Training',18000,'POSH training for IC members and all-staff — audit-ready certificates and documentation.')">Book Session →</button>
+    </div>
+
+    <div class="cat-card" data-cat="compliance">
+      <span class="cat-tag compliance">Compliance</span>
+      <div class="cat-name">Labour Code 2025 Compliance Workshop</div>
+      <div class="cat-desc">Navigate India's four new Labour Codes — Wages, Industrial Relations, Social Security, and Occupational Safety. Half-day workshop for HR managers and senior leadership covering obligations, timelines, and implementation roadmap.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>Half day</strong></span><span class="cat-meta-item">👥 <strong>Up to 20</strong></span><span class="cat-meta-item">📋 Action plan</span></div>
+      <div class="cat-price">₹22,000 <sub>/ session</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Labour Code 2025 Compliance Workshop',22000,'Half-day workshop on four Labour Codes for HR managers and leadership — with action plan.')">Book Session →</button>
+    </div>
+
+    <div class="cat-card" data-cat="compliance">
+      <span class="cat-tag compliance">Compliance</span>
+      <div class="cat-name">Workplace Safety & ESG Training</div>
+      <div class="cat-desc">OSHA-aligned workplace safety training for manufacturing, construction, and logistics organisations — including emergency procedures, PPE protocols, and ESG reporting basics for investor-facing businesses.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1 day</strong></span><span class="cat-meta-item">📜 Safety cert.</span><span class="cat-meta-item">🏭 Site-specific</span></div>
+      <div class="cat-price">₹28,000 <sub>/ batch</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Workplace Safety & ESG Training',28000,'Full-day safety and ESG training for manufacturing/logistics — site-specific with certificates.')">Book →</button>
+    </div>
+
+    <div class="cat-card" data-cat="skills">
+      <span class="cat-tag skills">Functional Skills</span>
+      <div class="cat-name">Sales Excellence Programme</div>
+      <div class="cat-desc">Structured sales training for B2B and B2C teams — prospecting, consultative selling, negotiation, objection handling, and CRM discipline. Customised for your product, your market, and your sales cycle.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>2 days</strong></span><span class="cat-meta-item">👥 <strong>10–20</strong></span><span class="cat-meta-item">🎯 Role-plays</span></div>
+      <div class="cat-price">₹42,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Sales Excellence Programme',42000,'2-day customised sales training for B2B/B2C teams — consultative selling and negotiation.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="skills">
+      <span class="cat-tag skills">Functional Skills</span>
+      <div class="cat-name">Finance for Non-Finance Managers</div>
+      <div class="cat-desc">Equip non-financial managers to read a P&L, understand cash flow, manage budgets, and participate meaningfully in financial decisions. Delivered in plain language with real business scenarios.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1.5 days</strong></span><span class="cat-meta-item">👥 <strong>8–15</strong></span><span class="cat-meta-item">📊 Case studies</span></div>
+      <div class="cat-price">₹36,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Finance for Non-Finance Managers',36000,'1.5-day financial literacy programme for non-finance managers — P&L, budgeting, cash flow.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="skills">
+      <span class="cat-tag skills">Functional Skills</span>
+      <div class="cat-name">Operations & Process Excellence</div>
+      <div class="cat-desc">Lean thinking, process mapping, waste elimination, and KPI management for operations teams. Grounded in manufacturing and service delivery contexts common to Eastern India businesses.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>2 days</strong></span><span class="cat-meta-item">👥 <strong>10–20</strong></span><span class="cat-meta-item">🔧 On-site tools</span></div>
+      <div class="cat-price">₹44,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Operations & Process Excellence',44000,'2-day lean operations and process improvement training for operations teams.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="soft">
+      <span class="cat-tag soft">Behavioural</span>
+      <div class="cat-name">Effective Communication & Presentation</div>
+      <div class="cat-desc">Business writing, structured verbal communication, and presentation skills — for professionals who need to communicate upwards, sideways, and with clients. Includes practice presentations with video feedback.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>2 days</strong></span><span class="cat-meta-item">👥 <strong>8–12</strong></span><span class="cat-meta-item">🎬 Video review</span></div>
+      <div class="cat-price">₹38,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Effective Communication & Presentation',38000,'2-day communication and presentation skills training — video feedback included.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="soft">
+      <span class="cat-tag soft">Behavioural</span>
+      <div class="cat-name">Emotional Intelligence at Work</div>
+      <div class="cat-desc">EQ assessment, self-awareness, empathy, and regulation skills for high-performance teams and managers. Particularly impactful for teams navigating rapid growth, change, or high-pressure environments.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1 day</strong></span><span class="cat-meta-item">👥 <strong>10–20</strong></span><span class="cat-meta-item">🧠 EQ assessment</span></div>
+      <div class="cat-price">₹32,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Emotional Intelligence at Work',32000,'1-day EQ training with assessment — self-awareness, empathy, and emotional regulation.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="soft">
+      <span class="cat-tag soft">Behavioural</span>
+      <div class="cat-name">Customer Service Excellence</div>
+      <div class="cat-desc">For frontline teams — how to handle difficult customers, resolve complaints, build loyalty, and communicate with empathy. Customised for retail, BFSI, healthcare, and hospitality contexts.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1 day</strong></span><span class="cat-meta-item">👥 <strong>15–25</strong></span><span class="cat-meta-item">🎭 Role-plays</span></div>
+      <div class="cat-price">₹24,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Customer Service Excellence',24000,'1-day frontline customer service training — complaint handling, empathy, loyalty building.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="digital">
+      <span class="cat-tag digital">Digital</span>
+      <div class="cat-name">Digital Literacy for the Modern Workplace</div>
+      <div class="cat-desc">Practical digital skills for non-technical employees — productivity tools (GSuite, Office 365), data basics, cybersecurity awareness, and AI tools orientation. The baseline every employee now needs.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1 day</strong></span><span class="cat-meta-item">👥 <strong>15–25</strong></span><span class="cat-meta-item">💻 Hands-on</span></div>
+      <div class="cat-price">₹22,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Digital Literacy for the Modern Workplace',22000,'1-day hands-on digital literacy for non-technical employees — tools, security, AI basics.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="digital">
+      <span class="cat-tag digital">Digital</span>
+      <div class="cat-name">Data-Driven Decision Making</div>
+      <div class="cat-desc">For managers and analysts — how to interpret data, build simple dashboards, challenge assumptions with evidence, and present data-backed recommendations to leadership. No coding required.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1.5 days</strong></span><span class="cat-meta-item">👥 <strong>8–15</strong></span><span class="cat-meta-item">📊 Excel / Sheets</span></div>
+      <div class="cat-price">₹34,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('Data-Driven Decision Making',34000,'1.5-day data literacy for managers — dashboards, analysis, evidence-based decisions.')">Enrol Cohort →</button>
+    </div>
+
+    <div class="cat-card" data-cat="digital">
+      <span class="cat-tag digital">Digital</span>
+      <div class="cat-name">AI Tools for Business Teams</div>
+      <div class="cat-desc">Practical AI literacy for business teams — how to use generative AI tools (Claude, ChatGPT, Gemini), prompt engineering, AI-assisted writing, and responsible AI use in the Indian regulatory context.</div>
+      <div class="cat-meta"><span class="cat-meta-item">⏱ <strong>1 day</strong></span><span class="cat-meta-item">👥 <strong>10–20</strong></span><span class="cat-meta-item">🤖 Hands-on</span></div>
+      <div class="cat-price">₹28,000 <sub>/ cohort</sub></div>
+      <button class="cat-enroll" onclick="openRzp('AI Tools for Business Teams',28000,'1-day practical AI literacy training — tools, prompting, responsible use for Indian businesses.')">Enrol Cohort →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEARNING ROI CALCULATOR -->
+<section class="roi-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Learning ROI Calculator</div>
+    <h2 class="D">Calculate what investing<br>in training <em>actually returns.</em></h2>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-left">
+      <div class="roi-label">Training Investment ROI</div>
+      <div class="roi-title">The business case for<br>L&D — in numbers.</div>
+      <div class="roi-field">
+        <div class="roi-field-label">Employees Being Trained <span id="roiEmp">50</span></div>
+        <input type="range" id="roiSliderEmp" min="10" max="500" value="50" step="5" oninput="calcROI()">
+      </div>
+      <div class="roi-field">
+        <div class="roi-field-label">Avg. Annual Salary (₹ Lakh) <span id="roiSal">₹6L</span></div>
+        <input type="range" id="roiSliderSal" min="3" max="40" value="6" step="1" oninput="calcROI()">
+      </div>
+      <div class="roi-field">
+        <div class="roi-field-label">Training Investment per Employee <span id="roiInvest">₹5,000</span></div>
+        <input type="range" id="roiSliderInvest" min="2000" max="80000" value="5000" step="1000" oninput="calcROI()">
+      </div>
+      <div class="roi-result">
+        <div class="roi-result-label">Estimated Annual ROI</div>
+        <div class="roi-result-val" id="roiResult">—</div>
+        <div class="roi-result-sub" id="roiSub">Adjust sliders above to calculate</div>
+      </div>
+    </div>
+    <div class="roi-right">
+      <div class="roi-right-title">The full return breakdown</div>
+      <div class="roi-right-sub">Training ROI comes from multiple sources — productivity gains, fewer errors, reduced attrition, and compliance cost avoidance. Here's the full picture for your inputs.</div>
+      <div class="roi-breakdown">
+        <div class="roi-bd-row"><span class="roi-bd-name">Training Cost (total)</span><span class="roi-bd-val red" id="roiBdCost">—</span></div>
+        <div class="roi-bd-row"><span class="roi-bd-name">Productivity Gain (22%)</span><span class="roi-bd-val green" id="roiBdProd">—</span></div>
+        <div class="roi-bd-row"><span class="roi-bd-name">Attrition Savings (41% reduction)</span><span class="roi-bd-val green" id="roiBdAttr">—</span></div>
+        <div class="roi-bd-row"><span class="roi-bd-name">Error & Rework Reduction</span><span class="roi-bd-val green" id="roiBdError">—</span></div>
+        <div class="roi-bd-row"><span class="roi-bd-name">Compliance Risk Avoidance</span><span class="roi-bd-val green" id="roiBdComp">—</span></div>
+      </div>
+      <div class="roi-total">
+        <span class="roi-total-label">Net Annual Return</span>
+        <span class="roi-total-val green" id="roiNet">₹—</span>
+      </div>
+      <div style="margin-top:16px;">
+        <button class="btn-red" style="width:100%;text-align:center;" onclick="openRzp('L&D Essentials',24000,'Start your managed L&D programme with TNA and programme design.')">Start L&D Programme — ₹24,000/mo →</button>
+        <div style="font-size:11px;font-weight:300;color:var(--gt);text-align:center;margin-top:10px;">Average ORIGENNT L&D ROI: 5.6x the engagement fee</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS GAP VISUALISER -->
+<section class="gap-section reveal">
+  <div style="position:relative;z-index:1;margin-bottom:16px;">
+    <div class="chip w">Skills Gap Analytics</div>
+    <h2 class="D W">How Indian SMEs compare<br>on workforce <em>capability.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,.45);max-width:560px;margin-top:14px;line-height:1.85;">Sector-level capability benchmarks built from ORIGENNT's 62+ client engagements across Odisha, West Bengal, and Jharkhand.</p>
+  </div>
+  <div class="gap-tabs">
+    <button class="gtab active" data-gap="bfsi">BFSI</button>
+    <button class="gtab" data-gap="manufacturing">Manufacturing</button>
+    <button class="gtab" data-gap="retail">Retail / FMCG</button>
+    <button class="gtab" data-gap="healthcare">Healthcare</button>
+  </div>
+
+  <div class="gap-panel active" id="gap-bfsi">
+    <div class="gap-chart-wrap">
+      <div class="gap-title-bar">
+        <div class="gap-title">BFSI Sector — Capability vs. Benchmark (Average client scores, n=18)</div>
+        <div class="gap-legend">
+          <div class="gap-leg-item"><div class="gap-leg-dot" style="background:#0d6b5e;"></div>Current Capability</div>
+          <div class="gap-leg-item"><div class="gap-leg-dot" style="background:rgba(255,255,255,.2);"></div>Sector Benchmark</div>
+          <div class="gap-leg-item"><div class="gap-leg-dot" style="background:#CC2229;"></div>Gap</div>
+        </div>
+      </div>
+      <div style="padding-top:8px;">
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Regulatory & Compliance Knowledge</span><span class="dc-bar-val">5.2 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:52%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Customer Relationship Management</span><span class="dc-bar-val">6.4 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:64%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Digital Banking & Fintech Literacy</span><span class="dc-bar-val">4.1 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:41%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Risk Assessment & Credit Underwriting</span><span class="dc-bar-val">5.8 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:58%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Sales & Business Development</span><span class="dc-bar-val">6.1 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:61%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Leadership & Management Quality</span><span class="dc-bar-val">4.8 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:48%"></div></div></div>
+      </div>
+    </div>
+    <div class="gap-insight">
+      <div class="gap-ins"><div class="gap-ins-lbl">Biggest Gap</div><div class="gap-ins-val" style="font-size:18px;">Digital Banking</div><div class="gap-ins-sub">4.1/10 vs 7.8 benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Avg. Gap Score</div><div class="gap-ins-val">2.9<span style="font-size:14px;font-family:'Outfit',sans-serif;"> pts</span></div><div class="gap-ins-sub">Below sector benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Priority Programme</div><div class="gap-ins-val" style="font-size:16px;">Compliance + Digital</div><div class="gap-ins-sub">Highest ROI combination</div></div>
+    </div>
+  </div>
+
+  <div class="gap-panel" id="gap-manufacturing">
+    <div class="gap-chart-wrap">
+      <div class="gap-title-bar"><div class="gap-title">Manufacturing Sector — Capability vs. Benchmark (n=14)</div></div>
+      <div style="padding-top:8px;">
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Workplace Safety Knowledge</span><span class="dc-bar-val">4.4 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:44%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Lean / Process Excellence</span><span class="dc-bar-val">5.0 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:50%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Quality Management (ISO / BIS)</span><span class="dc-bar-val">5.6 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:56%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Shop Floor Leadership</span><span class="dc-bar-val">4.2 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:42%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">ESG & Environmental Compliance</span><span class="dc-bar-val">3.8 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:38%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Digital & Automation Literacy</span><span class="dc-bar-val">3.2 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:32%"></div></div></div>
+      </div>
+    </div>
+    <div class="gap-insight">
+      <div class="gap-ins"><div class="gap-ins-lbl">Biggest Gap</div><div class="gap-ins-val" style="font-size:18px;">Digital / Automation</div><div class="gap-ins-sub">3.2/10 vs 7.5 benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Avg. Gap Score</div><div class="gap-ins-val">3.4<span style="font-size:14px;font-family:'Outfit',sans-serif;"> pts</span></div><div class="gap-ins-sub">Below sector benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Priority Programme</div><div class="gap-ins-val" style="font-size:16px;">Safety + Digital</div><div class="gap-ins-sub">Compliance + future-proofing</div></div>
+    </div>
+  </div>
+
+  <div class="gap-panel" id="gap-retail">
+    <div class="gap-chart-wrap">
+      <div class="gap-title-bar"><div class="gap-title">Retail / FMCG Sector — Capability vs. Benchmark (n=16)</div></div>
+      <div style="padding-top:8px;">
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Customer Service & Experience</span><span class="dc-bar-val">5.4 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:54%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Sales Conversion & Upselling</span><span class="dc-bar-val">4.8 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:48%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Inventory & Supply Chain Basics</span><span class="dc-bar-val">6.0 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:60%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Visual Merchandising & Retail Ops</span><span class="dc-bar-val">5.2 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:52%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Digital Commerce & Social Selling</span><span class="dc-bar-val">3.6 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:36%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Store Management Leadership</span><span class="dc-bar-val">4.4 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:44%"></div></div></div>
+      </div>
+    </div>
+    <div class="gap-insight">
+      <div class="gap-ins"><div class="gap-ins-lbl">Biggest Gap</div><div class="gap-ins-val" style="font-size:18px;">Digital Commerce</div><div class="gap-ins-sub">3.6/10 vs 7.2 benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Avg. Gap Score</div><div class="gap-ins-val">2.6<span style="font-size:14px;font-family:'Outfit',sans-serif;"> pts</span></div><div class="gap-ins-sub">Below sector benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Priority Programme</div><div class="gap-ins-val" style="font-size:16px;">Sales + Digital</div><div class="gap-ins-sub">Highest revenue impact</div></div>
+    </div>
+  </div>
+
+  <div class="gap-panel" id="gap-healthcare">
+    <div class="gap-chart-wrap">
+      <div class="gap-title-bar"><div class="gap-title">Healthcare Sector — Capability vs. Benchmark (n=14)</div></div>
+      <div style="padding-top:8px;">
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Clinical Documentation & HIS Systems</span><span class="dc-bar-val">4.6 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:46%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Patient Communication & Empathy</span><span class="dc-bar-val">5.8 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:58%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Infection Control & Safety Protocols</span><span class="dc-bar-val">6.2 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:62%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">NABH / Quality Accreditation Readiness</span><span class="dc-bar-val">4.2 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:42%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Medico-Legal & Compliance Awareness</span><span class="dc-bar-val">3.9 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:39%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Healthcare Leadership & Management</span><span class="dc-bar-val">4.4 / 10</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:44%"></div></div></div>
+      </div>
+    </div>
+    <div class="gap-insight">
+      <div class="gap-ins"><div class="gap-ins-lbl">Biggest Gap</div><div class="gap-ins-val" style="font-size:18px;">Medico-Legal</div><div class="gap-ins-sub">3.9/10 vs 7.6 benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Avg. Gap Score</div><div class="gap-ins-val">3.1<span style="font-size:14px;font-family:'Outfit',sans-serif;"> pts</span></div><div class="gap-ins-sub">Below sector benchmark</div></div>
+      <div class="gap-ins"><div class="gap-ins-lbl">Priority Programme</div><div class="gap-ins-val" style="font-size:16px;">Compliance + Leadership</div><div class="gap-ins-sub">Risk + performance combination</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY MODES -->
+<section class="delivery-section reveal">
+  <div class="chip">Delivery Formats</div>
+  <h2 class="D">Training that fits your<br>schedule, not <em>disrupts it.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Every ORIGENNT programme is available in four delivery formats — chosen based on your geography, team size, and operational constraints. All formats deliver the same outcomes; the packaging adapts to you.</p>
+  <div class="delivery-grid">
+    <div class="delivery-card">
+      <div class="delivery-icon">🏛️</div>
+      <div class="delivery-name">In-Person Classroom</div>
+      <div class="delivery-desc">Facilitator-led sessions at your premises or an ORIGENNT training centre in Bhubaneswar. Highest engagement and retention rates. Ideal for behavioural programmes and leadership development.</div>
+      <div class="delivery-tags"><span class="delivery-tag">Highest retention</span><span class="delivery-tag">Group dynamics</span><span class="delivery-tag">On-site or venue</span></div>
+    </div>
+    <div class="delivery-card">
+      <div class="delivery-icon">💻</div>
+      <div class="delivery-name">Live Virtual (VILT)</div>
+      <div class="delivery-desc">Real-time facilitator-led training via Zoom or Teams — with breakout rooms, polls, and role-plays. Ideal for multi-location teams or programmes requiring frequent scheduling flexibility.</div>
+      <div class="delivery-tags"><span class="delivery-tag">Multi-location</span><span class="delivery-tag">Flexible timing</span><span class="delivery-tag">Recorded sessions</span></div>
+    </div>
+    <div class="delivery-card">
+      <div class="delivery-icon">🔄</div>
+      <div class="delivery-name">Blended Learning</div>
+      <div class="delivery-desc">Pre-work modules + live facilitation + post-work application tasks. The highest-impact format for complex skills — combines self-paced content with facilitated practice and real-work application assignments.</div>
+      <div class="delivery-tags"><span class="delivery-tag">Highest impact</span><span class="delivery-tag">3–4 week spread</span><span class="delivery-tag">Manager coaching</span></div>
+    </div>
+    <div class="delivery-card">
+      <div class="delivery-icon">📱</div>
+      <div class="delivery-name">On-the-Job Learning Sets</div>
+      <div class="delivery-desc">Structured 30-day on-the-job learning kits for managers — daily micro-tasks, observation guides, and reflection prompts. Ideal for compliance programmes and manager capability building without pulling people off-site.</div>
+      <div class="delivery-tags"><span class="delivery-tag">Zero downtime</span><span class="delivery-tag">Manager-led</span><span class="delivery-tag">Daily micro-tasks</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section reveal">
+  <div class="chip">ORIGENNT vs. The Market</div>
+  <h2 class="D">What training vendors offer.<br>What ORIGENNT <em>actually delivers.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Most training firms sell content. ORIGENNT sells capability change — and measures it. Here's the honest difference.</p>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="them">Online Course Platforms</th>
+          <th class="them">Freelance Trainers</th>
+          <th class="them">National Training Firms</th>
+          <th class="us">ORIGENNT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Training needs analysis (TNA)</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Informal</td><td class="them"><span class="partial">◑</span> Generic survey</td><td class="us"><span class="tick">✓</span> Structured diagnostic</td></tr>
+        <tr><td>India-contextualised content</td><td class="them"><span class="cross">✗</span> Global content</td><td class="them"><span class="partial">◑</span> Varies</td><td class="them"><span class="partial">◑</span> Mostly metro</td><td class="us"><span class="tick">✓</span> Eastern India-specific</td></tr>
+        <tr><td>30/60/90-day behaviour measurement</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Basic survey</td><td class="us"><span class="tick">✓</span> Structured measurement</td></tr>
+        <tr><td>Odia / Hindi delivery option</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span></td><td class="them"><span class="cross">✗</span></td><td class="us"><span class="tick">✓</span> All programmes</td></tr>
+        <tr><td>Labour Code 2025 compliant docs</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span></td><td class="us"><span class="tick">✓</span> Every programme</td></tr>
+        <tr><td>Integrated with HR (payroll, TA, analytics)</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="us"><span class="tick">✓</span> Full ORIGENNT suite</td></tr>
+        <tr><td>Manager effectiveness coaching integrated</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Add-on only</td><td class="us"><span class="tick">✓</span> Built-in</td></tr>
+        <tr><td>Managed retainer (not one-off events)</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Some</td><td class="us"><span class="tick">✓</span> Monthly retainer</td></tr>
+        <tr><td>Per-employee annual cost</td><td class="them">₹500–5,000</td><td class="them">₹2,000–8,000</td><td class="them">₹5,000–25,000</td><td class="us" style="color:var(--red);font-weight:700;">₹3,000–20,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHY ORIGENNT -->
+<section class="why-section reveal">
+  <div class="chip">Why ORIGENNT for L&D</div>
+  <h2 class="D">Six things that separate<br>ORIGENNT from <em>every training vendor.</em></h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><div class="why-name">We Measure Behaviour. Not Smiles.</div><div class="why-desc">Every ORIGENNT programme includes post-training behaviour measurement at 30, 60, and 90 days. We measure what actually changed — not how participants felt in the room on the day. You get proof that learning transferred.</div></div>
+    <div class="why-card"><div class="why-num">02</div><div class="why-name">Context-First Design.</div><div class="why-desc">Generic programmes fail because they use global case studies nobody recognises. Every ORIGENNT programme is built around Indian business contexts — Odisha NBFCs, Jamshedpur manufacturers, Bhubaneswar retailers. Your people see themselves in the content.</div></div>
+    <div class="why-card"><div class="why-num">03</div><div class="why-name">Language Is Not a Barrier.</div><div class="why-desc">ORIGENNT delivers in English, Odia, and Hindi — across all programmes. For frontline workforce training in Odisha and Jharkhand, Odia-language delivery dramatically increases comprehension and retention. No other firm offers this.</div></div>
+    <div class="why-card"><div class="why-num">04</div><div class="why-name">Compliance-Ready Documentation.</div><div class="why-desc">Every programme generates audit-ready training records, attendance sheets, assessment scores, and completion certificates formatted for Labour Code 2025 compliance. Your POSH, safety, and statutory training is documented before the inspector arrives.</div></div>
+    <div class="why-card"><div class="why-num">05</div><div class="why-name">Integrated with Everything Else.</div><div class="why-desc">ORIGENNT L&D connects to your attrition analytics (HR Analytics), your change programmes (Change Management), and your hiring pipeline (Talent Acquisition). When you train someone, ORIGENNT knows their profile — and training is targeted accordingly.</div></div>
+    <div class="why-card"><div class="why-num">06</div><div class="why-name">We Stay. We Don't Deliver and Disappear.</div><div class="why-desc">One-off training is the most expensive form of corporate learning — 80% is forgotten within a week. ORIGENNT's managed L&D retainer ensures reinforcement, application coaching, and programme recurrence on a calendar that's built for long-term capability building, not event-based learning.</div></div>
+  </div>
+</section>
+
+<!-- CAROUSEL -->
+<section class="carousel-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip w">L&D in Practice</div>
+    <h2 class="D W">What serious corporate learning<br>looks like when it's <em>done right.</em></h2>
+  </div>
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80&fit=crop" alt="Training Session" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Classroom Training</span><div class="cso-title">Facilitator-led sessions designed for engagement, not passive listening</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1552581234-26160f608093?w=800&q=80&fit=crop" alt="Leadership Development" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Leadership Programmes</span><div class="cso-title">First-time managers built into effective people leaders in 3 months</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop" alt="Virtual Training" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Virtual Delivery</span><div class="cso-title">Live virtual programmes with breakout rooms and real-time facilitation</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&fit=crop" alt="Compliance Training" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Compliance Training</span><div class="cso-title">POSH, Labour Code, and safety training — audit-ready from day one</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1542626991-cbc4e32524cc?w=800&q=80&fit=crop" alt="Skills Assessment" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Skills Measurement</span><div class="cso-title">Pre and post-training assessments that prove capability change</div></div></div>
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="cc-btn" id="prevBtn">←</button>
+    <div class="cc-dots" id="carouselDots"></div>
+    <button class="cc-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Case Study</div>
+    <h2 class="D">A sales team that forgot how to sell.<br>And <em>learned again in 90 days.</em></h2>
+  </div>
+  <div class="case-inner">
+    <div>
+      <div class="case-sector">Retail FMCG — Odisha & West Bengal</div>
+      <div class="case-title">How a 180-person FMCG distributor increased sales conversion by 34% through a structured L&D programme</div>
+      <div class="case-body">A Bhubaneswar-headquartered FMCG distributor with 180 frontline sales representatives across Odisha and West Bengal was seeing declining conversion rates — from 38% two years ago to 24% — despite the same product quality and competitive pricing. Leadership assumed it was a market problem. ORIGENNT's Training Needs Analysis revealed it was entirely a capability problem.<br><br>Exit interview data showed that 60% of their recent sales hires had received no structured training — they were learning by watching. ORIGENNT designed and delivered a 3-module, 4-week blended sales excellence programme in Odia and English, covering consultative selling, objection handling, and CRM discipline. Field coaches reinforced learning through weekly joint calls for 8 weeks post-training.</div>
+      <div class="case-outcomes">
+        <div class="case-out"><div class="case-out-n">+34<sub>%</sub></div><div class="case-out-l">Sales conversion lift</div></div>
+        <div class="case-out"><div class="case-out-n">₹1.8<sub>Cr</sub></div><div class="case-out-l">Incremental revenue</div></div>
+        <div class="case-out"><div class="case-out-n">90<sub>days</sub></div><div class="case-out-l">Time to full impact</div></div>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&fit=crop" alt="FMCG Sales Training Odisha" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:3px;">
+      <div class="case-steps">
+        <div class="case-step"><div class="case-step-num">01</div><div><div class="case-step-title">Training Needs Analysis (3 weeks)</div><div class="case-step-desc">Observed 24 sales calls across Odisha and WB. Identified specific skill failures — poor needs discovery, weak objection responses, and zero CRM discipline as root causes of conversion decline.</div></div></div>
+        <div class="case-step"><div class="case-step-num">02</div><div><div class="case-step-title">Bespoke Programme Design (2 weeks)</div><div class="case-step-desc">Designed a 3-module sales programme using actual ORIGENNT-observed sales scenarios from their territory. Odia-language delivery for 140 reps; English for 40 supervisors. Role-plays used real product categories.</div></div></div>
+        <div class="case-step"><div class="case-step-num">03</div><div><div class="case-step-title">Blended Delivery (4 weeks)</div><div class="case-step-desc">Two classroom days per module interspersed with field application tasks. Post-module supervisor observations used structured checklists. Completion rate: 97%.</div></div></div>
+        <div class="case-step"><div class="case-step-num">04</div><div><div class="case-step-title">Field Coaching & 90-Day Measurement</div><div class="case-step-desc">ORIGENNT field coaches attended 8 joint sales calls per rep over 8 weeks. Conversion tracked weekly. 34% improvement confirmed by 90-day data, not self-reported scores.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section reveal" id="pricing">
+  <div class="pricing-intro">
+    <div class="chip">Pricing</div>
+    <h2 class="D">Managed L&D programmes.<br>Transparent pricing.<br><em>Measured outcomes.</em></h2>
+    <p class="body-t" style="max-width:600px;margin-top:14px;">Monthly retainers or one-off programme payments — all via Razorpay. GST invoice within 24 hours. Programme kickoff within 48 hours of payment.</p>
+  </div>
+
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-badge s">Essentials</div>
+      <div class="pkg-name">L&D Starter</div>
+      <div class="pkg-tagline">For businesses with 10–100 employees running their first structured learning programme.</div>
+      <div class="pkg-price"><sup>₹</sup>24,000</div>
+      <div class="pkg-period">per month · up to 100 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Training needs analysis (annual)</li>
+        <li class="pkg-feat">2 programmes per quarter (from catalogue)</li>
+        <li class="pkg-feat">POSH compliance training included</li>
+        <li class="pkg-feat">Post-training assessment reports</li>
+        <li class="pkg-feat">Digital attendance & certificate records</li>
+        <li class="pkg-feat">Odia / Hindi delivery option</li>
+        <li class="pkg-feat dim">Bespoke programme design</li>
+        <li class="pkg-feat dim">Behaviour measurement (30/60/90 day)</li>
+      </ul>
+      <button class="pkg-cta r" onclick="openRzp('L&D Essentials',24000,'Monthly managed L&D programme — 2 programmes/quarter, TNA, POSH, up to 100 employees.')">Pay & Start — ₹24,000/mo</button>
+      <div class="pkg-note">Min. 6-month commitment · +₹180/employee above 100</div>
+    </div>
+
+    <div class="pkg featured">
+      <div class="pkg-badge p">Most Popular</div>
+      <div class="pkg-name">L&D Professional</div>
+      <div class="pkg-tagline">For 100–300 employee businesses wanting bespoke programmes and measured capability change.</div>
+      <div class="pkg-price"><sup>₹</sup>52,000</div>
+      <div class="pkg-period">per month · up to 300 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Essentials</li>
+        <li class="pkg-feat">1 bespoke programme design per quarter</li>
+        <li class="pkg-feat">Behaviour measurement (30/60/90 day)</li>
+        <li class="pkg-feat">Leadership development programme (annual)</li>
+        <li class="pkg-feat">4 programmes per quarter</li>
+        <li class="pkg-feat">Learning calendar managed by ORIGENNT</li>
+        <li class="pkg-feat">Monthly L&D impact report</li>
+        <li class="pkg-feat">Dedicated L&D consultant</li>
+      </ul>
+      <button class="pkg-cta w" onclick="openRzp('L&D Professional',52000,'Managed L&D with bespoke programmes, behaviour measurement, leadership development — up to 300 employees.')">Pay & Start — ₹52,000/mo</button>
+      <div class="pkg-note">Equivalent to a part-time L&D manager at 40% cost · +₹150/employee above 300</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge g">Enterprise</div>
+      <div class="pkg-name">L&D Enterprise</div>
+      <div class="pkg-tagline">For 300–1,000 employee businesses building a full internal learning infrastructure.</div>
+      <div class="pkg-price"><sup>₹</sup>1,10,000</div>
+      <div class="pkg-period">per month · up to 1,000 employees</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Professional</li>
+        <li class="pkg-feat">LMS setup and management</li>
+        <li class="pkg-feat">Trainer accreditation programme</li>
+        <li class="pkg-feat">Multi-location delivery coordination</li>
+        <li class="pkg-feat">Executive coaching (up to 3 leaders)</li>
+        <li class="pkg-feat">Succession pipeline programme (annual)</li>
+        <li class="pkg-feat">Board-level L&D investment report</li>
+        <li class="pkg-feat">Skills gap dashboard (integrated with HR Analytics)</li>
+      </ul>
+      <button class="pkg-cta g" onclick="openRzp('L&D Enterprise',110000,'Full L&D infrastructure — LMS, trainer accreditation, multi-location, executive coaching, up to 1,000 employees.')">Pay & Start — ₹1,10,000/mo</button>
+      <div class="pkg-note">Equivalent to 2 full-time L&D managers at 35% cost</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge e">Custom</div>
+      <div class="pkg-name">L&D Mandate</div>
+      <div class="pkg-tagline">For large enterprises, group companies, or organisations needing a dedicated L&D team and custom academy.</div>
+      <div class="pkg-price" style="font-size:24px;letter-spacing:-.01em;">Custom</div>
+      <div class="pkg-period">scoped on enquiry</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">All Enterprise features</li>
+        <li class="pkg-feat">Corporate university / academy design</li>
+        <li class="pkg-feat">1,000+ employee capability</li>
+        <li class="pkg-feat">Custom content development</li>
+        <li class="pkg-feat">Competency framework design</li>
+        <li class="pkg-feat">L&D team embedded on-site (part-time)</li>
+        <li class="pkg-feat">Investor-grade workforce capability reports</li>
+        <li class="pkg-feat">Annual L&D strategy review</li>
+      </ul>
+      <button class="pkg-cta t" onclick="openRzp('L&D Mandate — Custom',0,'Custom L&D mandate for large enterprise or group company.')">Request Proposal</button>
+      <div class="pkg-note">Response within 24 business hours</div>
+    </div>
+  </div>
+
+  <!-- ADD-ON CALCULATOR -->
+  <div class="addon-calculator">
+    <div class="addon-title">Add-On Programmes — Select and pay instantly. No waiting for a quote.</div>
+    <div class="addon-grid" id="addonGrid">
+      <div class="addon-item" data-price="12000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Training Needs Analysis (Standalone)</div><div class="addon-price">+₹12,000 / TNA</div></div>
+      </div>
+      <div class="addon-item" data-price="48000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">First-Time Manager Programme</div><div class="addon-price">+₹48,000 / cohort</div></div>
+      </div>
+      <div class="addon-item" data-price="18000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">POSH Act Training</div><div class="addon-price">+₹18,000 / organisation</div></div>
+      </div>
+      <div class="addon-item" data-price="22000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Labour Code 2025 Workshop</div><div class="addon-price">+₹22,000 / session</div></div>
+      </div>
+      <div class="addon-item" data-price="42000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Sales Excellence Programme</div><div class="addon-price">+₹42,000 / cohort</div></div>
+      </div>
+      <div class="addon-item" data-price="72000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Senior Leadership Coaching (6 months)</div><div class="addon-price">+₹72,000 / leader</div></div>
+      </div>
+    </div>
+    <div class="addon-total">
+      <span class="addon-total-label">Selected Programmes Total</span>
+      <span class="addon-total-val">₹<span id="addonTotal">0</span><sub>/selected</sub></span>
+    </div>
+    <div style="margin-top:3px;display:flex;gap:3px;flex-wrap:wrap;">
+      <button class="btn-red" style="flex:1;text-align:center;padding:14px;" onclick="payAddons()">Pay for Selected Programmes →</button>
+      <div style="background:var(--off);padding:14px 20px;font-size:12px;font-weight:300;color:var(--gt);flex:1;display:flex;align-items:center;">All prices exclude GST (18%). Programmes can be booked standalone or combined with any retainer plan.</div>
+    </div>
+  </div>
+
+  <div class="pkg-gst">
+    <div style="font-size:18px;flex-shrink:0;">💳</div>
+    <div class="pkg-gst-text"><strong>All prices exclude GST (18%). GST invoice within 24 hours.</strong> Payment via Razorpay — UPI, cards, net banking, EMI accepted. Programme kickoff call within 48 hours. No lock-in after minimum period.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Stop watching your best<br>people plateau.<br><em>Build them up.</em></h2>
+    <p class="fc-sub">ORIGENNT L&D turns your workforce's potential into measurable performance. Training needs analysis, bespoke programmes in Odia/English/Hindi, behaviour-change measurement, compliance documentation — managed monthly by an L&D team that stays for the long term.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="fca w" onclick="openRzp('L&D Professional',52000,'Start your managed L&D programme today.')">Start L&D Programme — ₹52,000/mo</button>
+    <a href="hr-analytics.html" class="fca ol">HR Analytics →</a>
+    <a href="change-management.html" class="fca ol">Change Management →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 11 November 2025 · Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Consulting</div>
+      <a href="../management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="strategy.html" class="footer-link">Strategy & Transformation</a>
+      <a href="change-management.html" class="footer-link">Change Management</a>
+    </div>
+    <div>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a href="../about.html" class="footer-link">About ORIGENNT</a>
+      <a href="../contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2026 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /main -->
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" id="rzpClose">×</button>
+    <div class="rzp-tag" id="rzpTag">Learning & Development</div>
+    <div class="rzp-modal-h" id="rzpH">Start Your Programme</div>
+    <div class="rzp-modal-sub" id="rzpSub">Programme kickoff within 48 hours of payment.</div>
+    <div class="rzp-modal-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">GST invoice issued within 24 hours.</div>
+    <div class="rzp-fields">
+      <input class="rzp-inp" id="rzpCompany" type="text" placeholder="Company / Organisation Name *">
+      <input class="rzp-inp" id="rzpName" type="text" placeholder="Your Name & Designation *">
+      <input class="rzp-inp" id="rzpEmail" type="email" placeholder="Email Address *">
+      <input class="rzp-inp" id="rzpPhone" type="tel" placeholder="Phone Number *">
+      <input class="rzp-inp" id="rzpEmp" type="number" placeholder="Number of Employees" min="1">
+      <input class="rzp-inp" id="rzpFocus" type="text" placeholder="Training Focus (e.g. sales, compliance, leadership)">
+    </div>
+    <button class="rzp-submit" id="rzpBtn">Proceed to Payment →</button>
+    <div class="rzp-secure">🔒 Confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 · Powered by Razorpay</div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── BAR FILLS ── */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*120));bObs.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.tna-section,.gap-section').forEach(el=>bObs.observe(el));
+
+/* ── TNA RADAR CHART ── */
+const dims=['Leadership','Sales','Compliance','Communication','Digital','Customer Svc'];
+const benchmarks=[7.5,7.2,8.0,7.0,7.8,7.5];
+let currentSector='BFSI';
+
+function selectSector(btn){
+  document.querySelectorAll('.tna-opt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  currentSector=btn.dataset.sector;
+  updateTNA();
+}
+
+function updateTNA(){
+  dims.forEach((_,i)=>{
+    const v=+document.getElementById('sl'+i).value;
+    document.getElementById('sv'+i).textContent=v;
+  });
+  drawRadar();
+  updatePriorities();
+}
+
+function drawRadar(){
+  const c=document.getElementById('radarChart');
+  if(!c)return;
+  const W=320,H=280;
+  c.width=W*2;c.height=H*2;c.style.width=W+'px';c.style.height=H+'px';
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  const cx=W/2,cy=H/2,r=100,n=dims.length;
+  const angles=dims.map((_,i)=>-Math.PI/2+(i/n)*Math.PI*2);
+
+  // Grid rings
+  for(let g=2;g<=10;g+=2){
+    ctx.beginPath();
+    angles.forEach((a,i)=>{
+      const x=cx+Math.cos(a)*(r*g/10);
+      const y=cy+Math.sin(a)*(r*g/10);
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.15)';ctx.font='8px Outfit';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(g,cx+3,cy-r*g/10-2);
+  }
+  // Spokes
+  angles.forEach(a=>{
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);
+    ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;ctx.stroke();
+  });
+  // Benchmark polygon
+  ctx.beginPath();
+  angles.forEach((a,i)=>{
+    const x=cx+Math.cos(a)*(r*benchmarks[i]/10);
+    const y=cy+Math.sin(a)*(r*benchmarks[i]/10);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.closePath();
+  ctx.fillStyle='rgba(255,255,255,.05)';ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1.5;ctx.stroke();
+  // Current capability polygon
+  ctx.beginPath();
+  angles.forEach((a,i)=>{
+    const v=+document.getElementById('sl'+i).value;
+    const x=cx+Math.cos(a)*(r*v/10);
+    const y=cy+Math.sin(a)*(r*v/10);
+    i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  });
+  ctx.closePath();
+  const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+  grad.addColorStop(0,'rgba(204,34,41,.35)');grad.addColorStop(1,'rgba(204,34,41,.08)');
+  ctx.fillStyle=grad;ctx.fill();
+  ctx.strokeStyle='#CC2229';ctx.lineWidth=2;ctx.stroke();
+  // Dots
+  angles.forEach((a,i)=>{
+    const v=+document.getElementById('sl'+i).value;
+    const x=cx+Math.cos(a)*(r*v/10);
+    const y=cy+Math.sin(a)*(r*v/10);
+    ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);ctx.fillStyle='#CC2229';ctx.fill();
+  });
+  // Labels
+  angles.forEach((a,i)=>{
+    const x=cx+Math.cos(a)*(r+18);
+    const y=cy+Math.sin(a)*(r+18);
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='9px Outfit';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(dims[i],x,y);
+  });
+}
+
+function updatePriorities(){
+  const gaps=dims.map((d,i)=>{const v=+document.getElementById('sl'+i).value;return{name:d,score:v,gap:benchmarks[i]-v};});
+  gaps.sort((a,b)=>b.gap-a.gap);
+  const list=document.getElementById('priorityList');
+  list.innerHTML='';
+  gaps.slice(0,4).forEach(g=>{
+    const badge=g.gap>3?'high':g.gap>1.5?'med':'low';
+    const label=g.gap>3?'Critical Gap':g.gap>1.5?'Moderate Gap':'On Track';
+    list.innerHTML+=`<div class="tna-pri-row"><span class="tna-pri-name">${g.name}</span><span class="tna-pri-badge ${badge}">${label}</span></div>`;
+  });
+}
+
+// Init
+setTimeout(()=>{drawRadar();updatePriorities();},200);
+window.addEventListener('resize',()=>{drawRadar();});
+
+/* ── CATALOGUE FILTERS ── */
+document.querySelectorAll('.cat-filter').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter=btn.dataset.filter;
+    document.querySelectorAll('.cat-card').forEach(card=>{
+      if(filter==='all'||card.dataset.cat===filter){card.classList.remove('hidden');}
+      else{card.classList.add('hidden');}
+    });
+  });
+});
+
+/* ── LEARNING ROI CALCULATOR ── */
+function fmtINR(n){
+  if(n>=10000000)return'₹'+(n/10000000).toFixed(1)+'Cr';
+  if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000)return'₹'+(n/1000).toFixed(0)+'K';
+  return'₹'+Math.round(n);
+}
+
+function calcROI(){
+  const emp=+document.getElementById('roiSliderEmp').value;
+  const sal=+document.getElementById('roiSliderSal').value*100000;
+  const invest=+document.getElementById('roiSliderInvest').value;
+  document.getElementById('roiEmp').textContent=emp;
+  document.getElementById('roiSal').textContent='₹'+document.getElementById('roiSliderSal').value+'L';
+  document.getElementById('roiInvest').textContent='₹'+invest.toLocaleString('en-IN');
+
+  const totalInvest=emp*invest;
+  const prodGain=emp*sal*0.22;
+  const attrSaving=emp*sal*0.18*0.41*0.32; // attrition rate * reduction * cost factor
+  const errorReduction=emp*sal*0.04;
+  const complianceAvoid=emp*2500;
+  const totalReturn=prodGain+attrSaving+errorReduction+complianceAvoid;
+  const netReturn=totalReturn-totalInvest;
+  const roiPct=totalInvest>0?Math.round((netReturn/totalInvest)*100):0;
+
+  document.getElementById('roiResult').textContent=roiPct+'%';
+  document.getElementById('roiSub').textContent='Net return of '+fmtINR(netReturn)+' on '+fmtINR(totalInvest)+' investment';
+  document.getElementById('roiBdCost').textContent=fmtINR(totalInvest);
+  document.getElementById('roiBdProd').textContent='+'+fmtINR(prodGain);
+  document.getElementById('roiBdAttr').textContent='+'+fmtINR(attrSaving);
+  document.getElementById('roiBdError').textContent='+'+fmtINR(errorReduction);
+  document.getElementById('roiBdComp').textContent='+'+fmtINR(complianceAvoid);
+  document.getElementById('roiNet').textContent=fmtINR(netReturn);
+}
+calcROI();
+
+/* ── SKILLS GAP TABS ── */
+document.querySelectorAll('.gtab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.gap-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('gap-'+tab.dataset.gap).classList.add('active');
+    // Re-trigger bar fills
+    document.querySelectorAll('#gap-'+tab.dataset.gap+' .dc-bar-fill').forEach((f,i)=>{
+      f.classList.remove('go');
+      setTimeout(()=>f.classList.add('go'),i*100+50);
+    });
+  });
+});
+// Trigger initial bars
+setTimeout(()=>{
+  document.querySelectorAll('#gap-bfsi .dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*100));
+},400);
+
+/* ── CAROUSEL ── */
+const track=document.getElementById('carouselTrack');
+const slides=track.querySelectorAll('.carousel-slide');
+const dotsC=document.getElementById('carouselDots');
+let cur2=0;
+const visC=()=>window.innerWidth>1024?3:window.innerWidth>640?2:1;
+for(let i=0;i<slides.length;i++){
+  const d=document.createElement('button');d.className='cc-dot'+(i===0?' active':'');
+  d.addEventListener('click',()=>goTo(i));dotsC.appendChild(d);
+}
+function goTo(idx){
+  cur2=Math.max(0,Math.min(idx,slides.length-visC()));
+  const sw=slides[0].offsetWidth+3;
+  track.style.transform='translateX(-'+(cur2*sw)+'px)';
+  document.querySelectorAll('.cc-dot').forEach((d,i)=>d.classList.toggle('active',i===cur2));
+}
+document.getElementById('prevBtn').addEventListener('click',()=>goTo(Math.max(0,cur2-1)));
+document.getElementById('nextBtn').addEventListener('click',()=>goTo(Math.min(slides.length-visC(),cur2+1)));
+let autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4000);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoC));
+track.parentElement.addEventListener('mouseleave',()=>{autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4000);});
+
+/* ── ADD-ON CALCULATOR ── */
+let addonTotal=0;
+function toggleAddon(el){
+  el.classList.toggle('selected');
+  addonTotal=0;
+  document.querySelectorAll('.addon-item.selected').forEach(item=>{addonTotal+=+item.dataset.price;});
+  document.getElementById('addonTotal').textContent=addonTotal.toLocaleString('en-IN');
+}
+function payAddons(){
+  if(addonTotal===0){alert('Please select at least one programme.');return;}
+  const selected=[];
+  document.querySelectorAll('.addon-item.selected').forEach(item=>selected.push(item.querySelector('.addon-name').textContent));
+  openRzp('L&D Programmes: '+selected.join(', '),addonTotal,'Selected programmes: '+selected.join(', '));
+}
+
+/* ── RAZORPAY ── */
+let rzpCurrent={};
+function openRzp(name,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent='Learning & Development — ORIGENNT';
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent=amtInt>0?'Programme kickoff within 48 hours of payment.':'Our team will scope and respond within 24 hours.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?'<sup>₹</sup>'+amtInt.toLocaleString('en-IN'):'<span style="font-size:24px;letter-spacing:-.01em;">Custom</span>';
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpBtn').textContent=amtInt>0?'Proceed to Payment →':'Submit Enquiry →';
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){
+  document.getElementById('rzpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      image:'https://origennt.com/favicon.ico',
+      handler:function(response){
+        closeRzp();
+        alert('✓ Payment successful!\nPayment ID: '+response.razorpay_payment_id+'\n\nYour L&D programme begins within 48 hours. ORIGENNT will contact you at '+email+' to schedule the kickoff call.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,employees:document.getElementById('rzpEmp').value,focus:document.getElementById('rzpFocus').value,service:rzpCurrent.name},
+      theme:{color:'#CC2229'},
+      modal:{ondismiss:function(){}}
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT,\n\nL&D Enquiry:\nService: '+rzpCurrent.name+'\nCompany: '+company+'\nContact: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nEmployees: '+document.getElementById('rzpEmp').value+'\nTraining Focus: '+document.getElementById('rzpFocus').value);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+</script>
+</body>
+</html>

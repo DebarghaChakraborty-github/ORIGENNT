@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Change Management — ORIGENNT | Organisational Transformation & Change Advisory</title>
+<meta name="description" content="ORIGENNT Change Management — structured transformation advisory, change readiness diagnostics, stakeholder engagement, and resistance mitigation for Indian businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;border:none;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+
+/* HERO */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1800&q=80&fit=crop') center 40%/cover;filter:brightness(.1) saturate(.3);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:580px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:22px 48px 22px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:48px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+
+/* URGENCY */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* WHAT IS CHANGE MANAGEMENT */
+.what-section{padding:100px 80px;background:var(--off);}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.what-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.what-img-caption{background:var(--red);padding:20px 24px;margin-top:3px;}
+.what-img-caption-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.75);line-height:1.6;}
+.what-cards{display:flex;flex-direction:column;gap:3px;margin-top:28px;}
+.wc{background:var(--white);padding:20px 24px;display:flex;gap:16px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s,background .2s;}
+.wc:hover{border-left-color:var(--red);background:var(--gl);}
+.wc-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.wc-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.wc-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* CHANGE READINESS DIAGNOSTIC — INTERACTIVE */
+.diagnostic-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.diagnostic-section::before{content:'';position:absolute;right:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.05),transparent 60%);pointer-events:none;}
+.diag-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:56px;}
+.diag-left{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:44px;position:relative;z-index:1;}
+.diag-right{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:44px;position:relative;z-index:1;}
+.diag-title{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.diag-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);margin-bottom:32px;line-height:1.7;}
+.diag-question{margin-bottom:22px;}
+.diag-q-text{font-size:13px;font-weight:400;color:rgba(255,255,255,.7);margin-bottom:12px;line-height:1.55;}
+.diag-options{display:flex;gap:3px;flex-wrap:wrap;}
+.diag-opt{font-size:11px;font-weight:500;letter-spacing:.04em;padding:8px 16px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:none;transition:background .2s,color .2s;}
+.diag-opt:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);}
+.diag-opt.sel{background:var(--red);color:var(--white);}
+.diag-score-wrap{margin-top:8px;}
+.diag-score-lbl{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.diag-gauge{position:relative;width:180px;height:90px;margin:0 auto 24px;}
+.diag-gauge canvas{width:180px;height:90px;}
+.diag-gauge-val{position:absolute;bottom:0;left:50%;transform:translateX(-50%);font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;}
+.diag-gauge-sub{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-bottom:24px;}
+.diag-readiness-label{font-family:'Libre Baskerville',serif;font-size:20px;text-align:center;margin-bottom:20px;}
+.diag-breakdown{display:flex;flex-direction:column;gap:10px;}
+.diag-bd-row{display:flex;align-items:center;gap:12px;}
+.diag-bd-name{font-size:11px;font-weight:300;color:rgba(255,255,255,.45);width:130px;flex-shrink:0;}
+.diag-bd-track{flex:1;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;}
+.diag-bd-fill{height:100%;border-radius:2px;width:0;transition:width 1s var(--ease);}
+.diag-bd-fill.go{width:var(--w);}
+.diag-bd-val{font-size:12px;font-weight:600;color:var(--white);width:36px;text-align:right;}
+.diag-cta{margin-top:28px;}
+
+/* KOTTER'S 8-STEP VISUAL */
+.kotter-section{padding:100px 80px;background:var(--off);}
+.kotter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:56px;}
+.kotter-card{background:var(--white);padding:28px 24px;position:relative;overflow:hidden;transition:background .2s;}
+.kotter-card:hover{background:var(--gl);}
+.kotter-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.kotter-card:hover::before{transform:scaleX(1);}
+.kotter-card.phase-b{background:var(--black);}
+.kotter-card.phase-b:hover{background:#1a1a1a;}
+.kotter-phase{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.kotter-num{font-family:'Libre Baskerville',serif;font-size:48px;color:var(--gl);line-height:1;margin-bottom:10px;}
+.kotter-card.phase-b .kotter-num{color:rgba(255,255,255,.08);}
+.kotter-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.kotter-card.phase-b .kotter-name{color:var(--white);}
+.kotter-desc{font-size:12px;font-weight:300;color:var(--gt);line-height:1.7;}
+.kotter-card.phase-b .kotter-desc{color:rgba(255,255,255,.4);}
+.kotter-origennt{font-size:10.5px;font-weight:500;color:var(--red);margin-top:12px;line-height:1.5;}
+.kotter-divider{grid-column:1/-1;background:var(--red);padding:18px 28px;display:flex;align-items:center;gap:16px;}
+.kotter-div-text{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:500;}
+.kotter-div-arrow{font-size:20px;color:var(--white);}
+
+/* CHANGE IMPACT MATRIX — VISUAL TABLE */
+.matrix-section{padding:100px 80px;background:var(--white);}
+.matrix-wrap{margin-top:48px;overflow-x:auto;}
+.impact-matrix{width:100%;border-collapse:collapse;}
+.impact-matrix th{padding:16px 20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;text-align:left;border-bottom:2px solid var(--gl);}
+.impact-matrix th.area{color:var(--gt);width:220px;}
+.impact-matrix th.high{background:var(--black);color:var(--white);text-align:center;}
+.impact-matrix th.med{background:var(--gl);color:var(--gt);text-align:center;}
+.impact-matrix th.low{background:var(--off);color:var(--gt);text-align:center;}
+.impact-matrix td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--gl);vertical-align:middle;}
+.impact-matrix td:first-child{font-weight:500;color:var(--black);}
+.impact-matrix td.high{background:rgba(204,34,41,.05);text-align:center;}
+.impact-matrix td.med{background:rgba(201,168,76,.06);text-align:center;}
+.impact-matrix td.low{text-align:center;}
+.impact-matrix tr:hover td{background:var(--off);}
+.impact-matrix tr:hover td.high{background:rgba(204,34,41,.1);}
+.impact-dot{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;}
+.impact-dot::before{content:'';width:8px;height:8px;border-radius:50%;}
+.impact-dot.h::before{background:var(--red);}
+.impact-dot.m::before{background:var(--gold);}
+.impact-dot.l::before{background:var(--gm);}
+.impact-dot.tick::before{content:'✓';width:auto;height:auto;background:none;color:var(--teal);font-size:14px;}
+
+/* CHANGE COST ESTIMATOR */
+.estimator-section{padding:100px 80px;background:var(--off);}
+.est-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.est-left{background:var(--black);padding:44px;}
+.est-right{background:var(--white);padding:44px;}
+.est-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.est-title{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--white);margin-bottom:20px;line-height:1.2;}
+.est-field{margin-bottom:22px;}
+.est-field-label{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;display:flex;justify-content:space-between;}
+.est-field-label span{font-weight:700;color:var(--white);font-family:'Libre Baskerville',serif;font-size:14px;}
+input[type=range]{width:100%;accent-color:var(--red);height:4px;}
+select.est-select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-family:'Outfit',sans-serif;font-size:13px;padding:10px 14px;outline:none;appearance:none;}
+select.est-select option{background:var(--black);color:var(--white);}
+.est-result{background:rgba(204,34,41,.15);border:1px solid rgba(204,34,41,.3);padding:24px;margin-top:8px;}
+.est-result-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px;}
+.est-result-val{font-family:'Libre Baskerville',serif;font-size:44px;color:var(--white);line-height:1;}
+.est-result-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);margin-top:6px;}
+.est-right-title{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);margin-bottom:8px;}
+.est-right-sub{font-size:13px;font-weight:300;color:var(--gt);margin-bottom:24px;line-height:1.7;}
+.est-breakdown{display:flex;flex-direction:column;gap:2px;}
+.est-bd-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--off);}
+.est-bd-row:nth-child(odd){background:var(--gl);}
+.est-bd-name{font-size:13px;font-weight:300;color:var(--gt);}
+.est-bd-val{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--black);}
+.est-bd-val.red{color:var(--red);}
+.est-total{background:var(--black);padding:16px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:3px;}
+.est-total-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.est-total-val{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--white);}
+
+/* COMPARISON */
+.compare-section{padding:100px 80px;background:var(--white);}
+.compare-table-wrap{overflow-x:auto;margin-top:48px;}
+table.compare-table{width:100%;border-collapse:collapse;}
+table.compare-table th{padding:16px 20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;text-align:left;border-bottom:2px solid var(--gl);}
+table.compare-table th:first-child{color:var(--gt);width:260px;}
+table.compare-table th.us{background:var(--black);color:var(--white);text-align:center;}
+table.compare-table th.them{background:var(--gl);color:var(--gt);text-align:center;}
+table.compare-table td{padding:14px 20px;font-size:13px;font-weight:300;border-bottom:1px solid var(--gl);vertical-align:top;}
+table.compare-table td:first-child{color:var(--black);font-weight:500;}
+table.compare-table td.us{background:rgba(13,13,13,.03);text-align:center;color:var(--teal);font-weight:600;}
+table.compare-table td.them{text-align:center;color:var(--gm);}
+table.compare-table td .tick{color:var(--teal);font-size:16px;}
+table.compare-table td .cross{color:var(--gm);font-size:16px;}
+table.compare-table td .partial{color:var(--amber);font-size:16px;}
+table.compare-table tr:hover td{background:var(--off);}
+table.compare-table tr:hover td.us{background:rgba(13,107,94,.06);}
+
+/* WHY ORIGENNT */
+.why-section{padding:100px 80px;background:var(--off);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.why-card{background:var(--white);padding:36px 32px;position:relative;overflow:hidden;transition:background .2s;}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.why-card:hover{background:var(--gl);}
+.why-card:hover::before{transform:scaleX(1);}
+.why-num{font-family:'Libre Baskerville',serif;font-size:52px;color:var(--gl);line-height:1;margin-bottom:16px;}
+.why-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.why-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;}
+
+/* CAROUSEL */
+.carousel-section{padding:100px 80px;background:var(--black);}
+.carousel-outer{position:relative;overflow:hidden;}
+.carousel-track{display:flex;gap:3px;transition:transform .6s var(--ease);}
+.carousel-slide{min-width:calc(33.333% - 2px);position:relative;overflow:hidden;aspect-ratio:4/3;flex-shrink:0;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);}
+.carousel-slide:hover img{transform:scale(1.04);}
+.carousel-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;}
+.cso-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 12px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:10px;font-weight:600;width:fit-content;}
+.cso-title{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);line-height:1.3;}
+.carousel-controls{display:flex;align-items:center;gap:12px;margin-top:24px;}
+.cc-btn{width:48px;height:48px;background:rgba(255,255,255,.08);color:var(--white);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.cc-btn:hover{background:var(--red);}
+.cc-dots{display:flex;gap:8px;flex:1;justify-content:center;}
+.cc-dot{width:6px;height:6px;background:rgba(255,255,255,.2);border-radius:50%;transition:background .2s,width .2s;border:none;}
+.cc-dot.active{background:var(--red);width:22px;border-radius:3px;}
+
+/* CASE STUDY */
+.case-section{padding:100px 80px;background:var(--off);}
+.case-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.case-sector{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:20px;font-weight:600;}
+.case-title{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;color:var(--black);margin-bottom:16px;line-height:1.2;}
+.case-body{font-size:14px;font-weight:300;color:var(--gt);line-height:1.85;margin-bottom:28px;}
+.case-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.case-out{background:var(--black);padding:20px 18px;}
+.case-out-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);line-height:1;}
+.case-out-n sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.case-out-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+.case-steps{display:flex;flex-direction:column;gap:3px;}
+.case-step{background:var(--white);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s;}
+.case-step:hover{border-left-color:var(--red);}
+.case-step-num{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--gl);flex-shrink:0;}
+.case-step-title{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.case-step-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* PRICING */
+.pricing-section{padding:100px 80px;background:var(--white);}
+.pricing-intro{margin-bottom:48px;}
+.addon-calculator{background:var(--off);padding:40px;margin-top:3px;}
+.addon-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:24px;font-weight:500;}
+.addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px;}
+.addon-item{background:var(--white);padding:18px 20px;display:flex;align-items:center;gap:14px;transition:background .2s;border:2px solid transparent;}
+.addon-item.selected{border-color:var(--red);background:var(--red-pale);}
+.addon-check{width:20px;height:20px;border:1.5px solid var(--gm);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;}
+.addon-item.selected .addon-check{background:var(--red);border-color:var(--red);color:var(--white);}
+.addon-name{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.addon-price{font-size:11.5px;font-weight:300;color:var(--gt);}
+.addon-total{background:var(--black);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;}
+.addon-total-label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.addon-total-val{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);}
+.addon-total-val sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+
+/* PKG GRID */
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.pkg{background:var(--off);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.pkg::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--gl);}
+.pkg.featured{background:var(--black);}
+.pkg.featured::after{background:var(--red);}
+.pkg-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:18px;display:inline-block;font-weight:600;width:fit-content;}
+.pkg-badge.s{background:var(--gl);color:var(--gt);}
+.pkg-badge.p{background:var(--red);color:var(--white);}
+.pkg-badge.g{background:var(--gold);color:#3d2800;}
+.pkg-badge.e{background:var(--teal);color:var(--white);}
+.pkg-name{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--black);margin-bottom:4px;}
+.featured .pkg-name{color:var(--white);}
+.pkg-tagline{font-size:12px;font-weight:300;color:var(--gt);margin-bottom:18px;line-height:1.6;}
+.featured .pkg-tagline{color:rgba(255,255,255,.38);}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--black);line-height:1;}
+.featured .pkg-price{color:var(--white);}
+.pkg-price sup{font-size:14px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:18px;}
+.featured .pkg-period{color:rgba(255,255,255,.25);}
+.pkg-div{height:1px;background:var(--gl);margin:0 0 18px;}
+.featured .pkg-div{background:rgba(255,255,255,.09);}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:22px;}
+.pkg-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.featured .pkg-feat{color:rgba(255,255,255,.5);}
+.pkg-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pkg-feat.dim::before{content:'—';color:var(--gm);}
+.pkg-feat.dim{opacity:.35;}
+.pkg-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s,transform .2s;border:none;width:100%;}
+.pkg-cta.r{background:var(--red);color:var(--white);}
+.pkg-cta.r:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pkg-cta.w{background:var(--white);color:var(--red);}
+.pkg-cta.w:hover{background:var(--off);}
+.pkg-cta.g{background:var(--gold);color:#3d2800;}
+.pkg-cta.g:hover{opacity:.88;transform:translateY(-2px);}
+.pkg-cta.t{background:var(--teal);color:var(--white);}
+.pkg-cta.t:hover{opacity:.88;}
+.pkg-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;line-height:1.5;}
+.featured .pkg-note{color:rgba(255,255,255,.2);}
+.pkg-gst{background:var(--black);padding:16px 28px;display:flex;align-items:center;gap:14px;margin-top:3px;flex-wrap:wrap;}
+.pkg-gst-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.35);flex:1;line-height:1.6;}
+.pkg-gst-text strong{color:rgba(255,255,255,.65);}
+
+/* FINAL CTA */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s,transform .2s;text-decoration:none;border:none;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+
+/* RAZORPAY MODAL */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:94vw;padding:52px 48px;position:relative;max-height:90vh;overflow-y:auto;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:4px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;}
+.rzp-modal-price{font-family:'Libre Baskerville',serif;font-size:40px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-modal-price sup{font-size:16px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* DC BAR */
+.dc-bar-row{margin-bottom:16px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12px;color:rgba(255,255,255,.6);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:13px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.5),var(--red));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+.dc-bar-fill.gold{background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.pkg-grid{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}.kotter-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .what-grid,.diag-grid,.est-grid,.case-inner{grid-template-columns:1fr;gap:48px;}
+  section,.what-section,.diagnostic-section,.kotter-section,.matrix-section,.estimator-section,.compare-section,.why-section,.carousel-section,.case-section,.pricing-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .pkg-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .kotter-grid{grid-template-columns:1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .addon-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.carousel-slide{min-width:80%;}.case-outcomes{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}.addon-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="../index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="../management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link active">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="../about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="../contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 11/11/2025</small></div>
+  </div>
+</aside>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="../index.html" class="back-link">Home</a>
+  <button class="topbar-cta" onclick="openRzp('Change Management — Custom Scope',0,'Tell us your transformation challenge and we will design your change engagement.')">Get a Quote</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Change Management & Organisational Transformation</div></div>
+      <h1 class="hero-h1">Change is certain.<br>Resistance is<br><em>optional.</em></h1>
+      <p class="hero-sub">70% of organisational transformations fail — not because the strategy is wrong, but because people aren't brought along. ORIGENNT makes change land: structured stakeholder engagement, resistance mitigation, and cultural alignment for Indian businesses navigating transformation.</p>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="openRzp('Change Management Essentials — ₹32,000/month',32000,'Change readiness diagnostic, stakeholder mapping, and 3-month change program for up to 200 employees.')">Start Your Change Program</button>
+        <a href="#pricing" class="btn-ghost-w">View Pricing</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">Change Management — India Reality 2026</div>
+      <div class="hp-row"><span class="hp-name">Transformations That Fail</span><span class="hp-val">70<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Primary Cause of Failure</span><span class="hp-val">People<sub>≠plan</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Productivity Loss During Change</span><span class="hp-val">22<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Attrition Spike Post-Restructure</span><span class="hp-val">38<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">ROI with Structured Change Mgmt</span><span class="hp-val">6.1<sub>x</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">70<sup>%</sup></div><div class="hsc-l">Transformations Fail</div></div>
+    <div class="hs-cell"><div class="hsc-n">6.1<sup>x</sup></div><div class="hsc-l">ROI with Change Mgmt</div></div>
+    <div class="hs-cell"><div class="hsc-n">38<sup>%</sup></div><div class="hsc-l">Attrition Spike Risk</div></div>
+    <div class="hs-cell"><div class="hsc-n">22<sup>%</sup></div><div class="hsc-l">Productivity at Stake</div></div>
+    <div class="hs-cell"><div class="hsc-n">92<sup>%</sup></div><div class="hsc-l">Adoption Rate Achieved</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc-r"><div class="mc-r-lbl">Change Programs Delivered</div><div class="mc-r-val">34+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Employees Navigated Through Change</div><div class="mc-r-val">12,000+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Avg. Adoption Rate Achieved</div><div class="mc-r-val">92%</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Change Readiness Diagnostics Run</div><div class="mc-r-val">80+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Avg. Program Duration</div><div class="mc-r-val">4 months</div></div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">⚠️ The average Indian SME loses ₹1.8 Cr in productivity during an unmanaged restructure. ORIGENNT's 30-day change readiness diagnostic tells you exactly where the resistance will come from — before you announce anything.</div>
+  <a href="#pricing" class="us-cta">See How →</a>
+</div>
+
+<!-- WHAT IS CHANGE MANAGEMENT -->
+<section class="what-section reveal">
+  <div class="what-grid">
+    <div>
+      <img class="what-img" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&fit=crop" alt="Change Management Workshop" loading="lazy">
+      <div class="what-img-caption">
+        <div class="what-img-caption-text">ORIGENNT manages the human side of transformation — not the PowerPoint. We run the stakeholder sessions, the resistance workshops, the communication cadence, and the adoption tracking so your leadership team can focus on strategy.</div>
+      </div>
+    </div>
+    <div>
+      <div class="chip">What Is Change Management</div>
+      <h2 class="D">It's not about<br>announcing the change.<br>It's about making it <em>stick.</em></h2>
+      <div class="body-t" style="margin-top:20px;">
+        <p>Change Management is the structured practice of transitioning people, teams, and organisations from a current state to a desired future state — in a way that minimises resistance, maintains productivity, and builds lasting adoption. Strategy without change management is a plan on paper. With it, the plan becomes reality.</p>
+        <p>ORIGENNT delivers this as a fully managed engagement — we run the diagnostics, design the communication, facilitate the stakeholder sessions, train the change champions, and measure adoption throughout. Your leadership leads; we orchestrate the journey.</p>
+      </div>
+      <div class="what-cards">
+        <div class="wc"><div class="wc-icon">🔍</div><div><div class="wc-name">Change Readiness Diagnostic</div><div class="wc-desc">Assess your organisation's capacity and willingness to change — by department, level, and function — before the program launches.</div></div></div>
+        <div class="wc"><div class="wc-icon">🗺️</div><div><div class="wc-name">Stakeholder Mapping & Engagement</div><div class="wc-desc">Identify sponsors, advocates, neutrals, and resistors. Build targeted engagement plans for each cohort — not a one-size-fits-all announcement.</div></div></div>
+        <div class="wc"><div class="wc-icon">📣</div><div><div class="wc-name">Change Communication Design</div><div class="wc-desc">Craft the messages, channels, timing, and tone of your change narrative — from the all-hands announcement to the team-level conversations.</div></div></div>
+        <div class="wc"><div class="wc-icon">🛡️</div><div><div class="wc-name">Resistance Mitigation</div><div class="wc-desc">Structured workshops and individual interventions to surface, understand, and resolve the resistance before it becomes attrition or sabotage.</div></div></div>
+        <div class="wc"><div class="wc-icon">🏆</div><div><div class="wc-name">Change Champion Network</div><div class="wc-desc">Train and activate internal advocates at every level — the frontline managers and informal leaders who make change real on the ground.</div></div></div>
+        <div class="wc"><div class="wc-icon">📊</div><div><div class="wc-name">Adoption Measurement</div><div class="wc-desc">Track adoption milestones, pulse survey sentiment, and behaviour indicators monthly — so you know if the change is actually landing.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGE READINESS DIAGNOSTIC — INTERACTIVE -->
+<section class="diagnostic-section reveal">
+  <div style="position:relative;z-index:1;margin-bottom:16px;">
+    <div class="chip w">Interactive Tool</div>
+    <h2 class="D W">Is your organisation<br>ready to <em>change?</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,.45);max-width:560px;margin-top:14px;line-height:1.85;">Answer 5 quick questions about your upcoming change. Get an instant readiness score and a breakdown of where you're most at risk.</p>
+  </div>
+  <div class="diag-grid">
+    <div class="diag-left">
+      <div class="diag-title">Change Readiness Self-Assessment</div>
+      <div class="diag-sub">Select the option that best describes your current situation for each dimension.</div>
+
+      <div class="diag-question">
+        <div class="diag-q-text">1. Leadership alignment on the change vision</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-dim="0" data-val="20" onclick="selectOpt(this)">Divided</button>
+          <button class="diag-opt" data-dim="0" data-val="50" onclick="selectOpt(this)">Partial</button>
+          <button class="diag-opt" data-dim="0" data-val="80" onclick="selectOpt(this)">Mostly aligned</button>
+          <button class="diag-opt" data-dim="0" data-val="100" onclick="selectOpt(this)">Fully aligned</button>
+        </div>
+      </div>
+      <div class="diag-question">
+        <div class="diag-q-text">2. Clarity of the "why" communicated to employees</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-dim="1" data-val="20" onclick="selectOpt(this)">Not communicated</button>
+          <button class="diag-opt" data-dim="1" data-val="50" onclick="selectOpt(this)">Vaguely shared</button>
+          <button class="diag-opt" data-dim="1" data-val="80" onclick="selectOpt(this)">Partially clear</button>
+          <button class="diag-opt" data-dim="1" data-val="100" onclick="selectOpt(this)">Crystal clear</button>
+        </div>
+      </div>
+      <div class="diag-question">
+        <div class="diag-q-text">3. History of previous change initiatives succeeding</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-dim="2" data-val="20" onclick="selectOpt(this)">Mostly failed</button>
+          <button class="diag-opt" data-dim="2" data-val="50" onclick="selectOpt(this)">Mixed track record</button>
+          <button class="diag-opt" data-dim="2" data-val="80" onclick="selectOpt(this)">Mostly succeeded</button>
+          <button class="diag-opt" data-dim="2" data-val="100" onclick="selectOpt(this)">Consistently successful</button>
+        </div>
+      </div>
+      <div class="diag-question">
+        <div class="diag-q-text">4. Manager capability to support their teams through change</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-dim="3" data-val="20" onclick="selectOpt(this)">Very low</button>
+          <button class="diag-opt" data-dim="3" data-val="50" onclick="selectOpt(this)">Some managers ready</button>
+          <button class="diag-opt" data-dim="3" data-val="80" onclick="selectOpt(this)">Most managers ready</button>
+          <button class="diag-opt" data-dim="3" data-val="100" onclick="selectOpt(this)">Fully equipped</button>
+        </div>
+      </div>
+      <div class="diag-question">
+        <div class="diag-q-text">5. Employee appetite for the specific change type</div>
+        <div class="diag-options">
+          <button class="diag-opt" data-dim="4" data-val="20" onclick="selectOpt(this)">High resistance</button>
+          <button class="diag-opt" data-dim="4" data-val="50" onclick="selectOpt(this)">Cautious</button>
+          <button class="diag-opt" data-dim="4" data-val="80" onclick="selectOpt(this)">Open</button>
+          <button class="diag-opt" data-dim="4" data-val="100" onclick="selectOpt(this)">Enthusiastic</button>
+        </div>
+      </div>
+    </div>
+    <div class="diag-right">
+      <div class="diag-score-lbl">Your Change Readiness Score</div>
+      <div class="diag-gauge">
+        <canvas id="gaugeCanvas" width="360" height="180"></canvas>
+        <div class="diag-gauge-val" id="gaugeVal">—</div>
+      </div>
+      <div class="diag-gauge-sub" id="gaugeLabel">Answer questions to see your score</div>
+      <div class="diag-readiness-label" id="readinessLabel" style="color:rgba(255,255,255,.35);">Select all five dimensions</div>
+      <div class="diag-breakdown">
+        <div class="diag-bd-row"><span class="diag-bd-name">Leadership Alignment</span><div class="diag-bd-track"><div class="diag-bd-fill red" id="bd0" style="--w:0%"></div></div><span class="diag-bd-val" id="bv0">—</span></div>
+        <div class="diag-bd-row"><span class="diag-bd-name">Communication Clarity</span><div class="diag-bd-track"><div class="diag-bd-fill gold" id="bd1" style="--w:0%"></div></div><span class="diag-bd-val" id="bv1">—</span></div>
+        <div class="diag-bd-row"><span class="diag-bd-name">Change History</span><div class="diag-bd-track"><div class="diag-bd-fill teal" id="bd2" style="--w:0%"></div></div><span class="diag-bd-val" id="bv2">—</span></div>
+        <div class="diag-bd-row"><span class="diag-bd-name">Manager Capability</span><div class="diag-bd-track"><div class="diag-bd-fill gold" id="bd3" style="--w:0%"></div></div><span class="diag-bd-val" id="bv3">—</span></div>
+        <div class="diag-bd-row"><span class="diag-bd-name">Employee Appetite</span><div class="diag-bd-track"><div class="diag-bd-fill red" id="bd4" style="--w:0%"></div></div><span class="diag-bd-val" id="bv4">—</span></div>
+      </div>
+      <div class="diag-cta">
+        <button class="btn-red" style="width:100%;text-align:center;" onclick="openRzp('Change Readiness Diagnostic',18000,'30-day diagnostic to assess your organisation\'s readiness for transformation.')">Get Full Diagnostic — ₹18,000 →</button>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.3);text-align:center;margin-top:10px;">Full diagnostic delivers a 40-page readiness report in 30 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KOTTER'S 8-STEP ORIGENNT FRAMEWORK -->
+<section class="kotter-section reveal">
+  <div class="chip">ORIGENNT Change Framework</div>
+  <h2 class="D">How we make change<br>actually <em>happen.</em></h2>
+  <p class="body-t" style="max-width:640px;margin-top:14px;margin-bottom:0;">Built on Kotter's 8-step model — adapted for Indian organisational culture, SME resource constraints, and the specific dynamics of Eastern India workforces.</p>
+  <div class="kotter-grid" style="margin-top:48px;">
+
+    <!-- PHASE 1: CREATE CLIMATE -->
+    <div class="kotter-divider" style="grid-column:1/-1;background:var(--red);"><span class="kotter-div-arrow">→</span><span class="kotter-div-text">Phase 1 — Create the Climate for Change</span></div>
+    <div class="kotter-card">
+      <div class="kotter-phase">Step 1</div>
+      <div class="kotter-num">01</div>
+      <div class="kotter-name">Create Urgency</div>
+      <div class="kotter-desc">Identify and articulate the burning platform — the market reality, competitive threat, or internal inefficiency that makes the status quo unsustainable.</div>
+      <div class="kotter-origennt">ORIGENNT: Market analysis, leadership alignment sessions, urgency narrative design</div>
+    </div>
+    <div class="kotter-card">
+      <div class="kotter-phase">Step 2</div>
+      <div class="kotter-num">02</div>
+      <div class="kotter-name">Build the Coalition</div>
+      <div class="kotter-desc">Assemble a powerful coalition of leaders, influencers, and change champions across functions — not just the C-suite. Change needs advocates at every level.</div>
+      <div class="kotter-origennt">ORIGENNT: Stakeholder mapping, coalition design, champion identification & activation</div>
+    </div>
+    <div class="kotter-card">
+      <div class="kotter-phase">Step 3</div>
+      <div class="kotter-num">03</div>
+      <div class="kotter-name">Form a Strategic Vision</div>
+      <div class="kotter-desc">Translate the change into a clear, compelling, and emotionally resonant vision — one that every employee can understand, connect with, and act on.</div>
+      <div class="kotter-origennt">ORIGENNT: Vision workshops, narrative design, vision-to-action roadmap</div>
+    </div>
+
+    <!-- PHASE 2: ENGAGE & ENABLE -->
+    <div class="kotter-divider" style="grid-column:1/-1;background:#1a1a1a;border-top:1px solid rgba(255,255,255,.06);"><span class="kotter-div-arrow" style="color:var(--red);">→</span><span class="kotter-div-text" style="color:rgba(255,255,255,.5);">Phase 2 — Engage & Enable the Organisation</span></div>
+    <div class="kotter-card phase-b">
+      <div class="kotter-phase">Step 4</div>
+      <div class="kotter-num">04</div>
+      <div class="kotter-name">Communicate the Vision</div>
+      <div class="kotter-desc">Deploy a multi-channel, multi-frequency communication cadence — with different messages for different audiences, not a single all-hands broadcast.</div>
+      <div class="kotter-origennt" style="color:rgba(204,34,41,.8);">ORIGENNT: Communication strategy, content creation, channel management, pulse tracking</div>
+    </div>
+    <div class="kotter-card phase-b">
+      <div class="kotter-phase">Step 5</div>
+      <div class="kotter-num">05</div>
+      <div class="kotter-name">Remove Barriers</div>
+      <div class="kotter-desc">Identify and eliminate structural, process, or managerial obstacles that prevent people from embracing and acting on the change — the blockers nobody talks about.</div>
+      <div class="kotter-origennt" style="color:rgba(204,34,41,.8);">ORIGENNT: Resistance workshops, barrier mapping, structural redesign advisory</div>
+    </div>
+    <div class="kotter-card phase-b">
+      <div class="kotter-phase">Step 6</div>
+      <div class="kotter-num">06</div>
+      <div class="kotter-name">Generate Quick Wins</div>
+      <div class="kotter-desc">Identify, create, and celebrate short-term wins — concrete proof that the change is working. Quick wins build momentum and silence the loudest resistors.</div>
+      <div class="kotter-origennt" style="color:rgba(204,34,41,.8);">ORIGENNT: Quick-win identification, progress rituals, internal communications</div>
+    </div>
+
+    <!-- PHASE 3: SUSTAIN & EMBED -->
+    <div class="kotter-divider" style="grid-column:1/-1;background:var(--teal);"><span class="kotter-div-arrow">→</span><span class="kotter-div-text">Phase 3 — Sustain Acceleration & Embed Change</span></div>
+    <div class="kotter-card">
+      <div class="kotter-phase">Step 7</div>
+      <div class="kotter-num">07</div>
+      <div class="kotter-name">Sustain Acceleration</div>
+      <div class="kotter-desc">Build on the momentum from quick wins. Expand the coalition. Launch second and third waves of change. Don't declare victory too early — the most common mistake.</div>
+      <div class="kotter-origennt">ORIGENNT: Momentum reviews, wave planning, adoption analytics</div>
+    </div>
+    <div class="kotter-card">
+      <div class="kotter-phase">Step 8</div>
+      <div class="kotter-num">08</div>
+      <div class="kotter-name">Anchor in Culture</div>
+      <div class="kotter-desc">Embed the change in processes, systems, performance management, onboarding, and leadership behaviour — so the new way becomes the only way.</div>
+      <div class="kotter-origennt">ORIGENNT: Culture audit, process embedding, HR system realignment, final adoption report</div>
+    </div>
+    <!-- Empty cell for balance -->
+    <div style="background:transparent;"></div>
+  </div>
+</section>
+
+<!-- CHANGE IMPACT MATRIX -->
+<section class="matrix-section reveal">
+  <div class="chip">Change Impact Matrix</div>
+  <h2 class="D">Not all change is equal.<br>Know what you're <em>actually dealing with.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Different types of organisational change carry different risk profiles. ORIGENNT calibrates the engagement depth, timeline, and communication strategy to your specific change type — not a generic playbook.</p>
+  <div class="matrix-wrap">
+    <table class="impact-matrix">
+      <thead>
+        <tr>
+          <th class="area">Change Type</th>
+          <th class="high">High Complexity</th>
+          <th class="med">Medium Complexity</th>
+          <th class="low">Lower Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mergers & Acquisitions</td>
+          <td class="high"><span class="impact-dot h">Culture clash, role duplication, attrition spike risk</span></td>
+          <td class="med"></td>
+          <td class="low"></td>
+        </tr>
+        <tr>
+          <td>Restructuring / Reorg</td>
+          <td class="high"><span class="impact-dot h">High resistance, trust damage, productivity drop</span></td>
+          <td class="med"></td>
+          <td class="low"></td>
+        </tr>
+        <tr>
+          <td>ERP / Technology Rollout</td>
+          <td class="high"></td>
+          <td class="med"><span class="impact-dot m">Workflow disruption, adoption lag, skill gaps</span></td>
+          <td class="low"></td>
+        </tr>
+        <tr>
+          <td>Leadership Transition</td>
+          <td class="high"></td>
+          <td class="med"><span class="impact-dot m">Culture uncertainty, loyalty gaps, team anxiety</span></td>
+          <td class="low"></td>
+        </tr>
+        <tr>
+          <td>Policy / Process Change</td>
+          <td class="high"></td>
+          <td class="med"></td>
+          <td class="low"><span class="impact-dot l">Compliance risk, habit inertia</span></td>
+        </tr>
+        <tr>
+          <td>Workforce Expansion</td>
+          <td class="high"></td>
+          <td class="med"></td>
+          <td class="low"><span class="impact-dot l">Onboarding speed, culture dilution</span></td>
+        </tr>
+        <tr>
+          <td>ORIGENNT Intervention Level</td>
+          <td class="high"><span class="impact-dot tick">Full mandate — 4–8 months</span></td>
+          <td class="med"><span class="impact-dot tick">Focused program — 2–4 months</span></td>
+          <td class="low"><span class="impact-dot tick">Advisory sprint — 30–60 days</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CHANGE COST ESTIMATOR -->
+<section class="estimator-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Interactive Estimator</div>
+    <h2 class="D">Calculate what an<br><em>unmanaged change costs</em> you.</h2>
+  </div>
+  <div class="est-grid">
+    <div class="est-left">
+      <div class="est-label">Change Cost Calculator</div>
+      <div class="est-title">The real price of doing<br>change without a plan.</div>
+      <div class="est-field">
+        <div class="est-field-label">Total Employees Affected <span id="empCount">100</span></div>
+        <input type="range" id="sliderEmp" min="20" max="1000" value="100" step="10">
+      </div>
+      <div class="est-field">
+        <div class="est-field-label">Avg. Annual Salary (₹ Lakh) <span id="avgSal">₹6L</span></div>
+        <input type="range" id="sliderSal" min="3" max="40" value="6" step="1">
+      </div>
+      <div class="est-field">
+        <div class="est-field-label">Change Type</div>
+        <select class="est-select" id="changeType" onchange="calcChange()">
+          <option value="0.35">Merger / Acquisition</option>
+          <option value="0.28" selected>Restructuring / Reorg</option>
+          <option value="0.18">Technology / ERP Rollout</option>
+          <option value="0.15">Leadership Transition</option>
+          <option value="0.08">Policy / Process Change</option>
+        </select>
+      </div>
+      <div class="est-result">
+        <div class="est-result-label">Estimated Cost of Unmanaged Change</div>
+        <div class="est-result-val" id="changeCost">₹0</div>
+        <div class="est-result-sub" id="changeSub">Select change type and adjust employees</div>
+      </div>
+    </div>
+    <div class="est-right">
+      <div class="est-right-title">Where the money bleeds out</div>
+      <div class="est-right-sub">Unmanaged change costs are invisible until they've already happened. ORIGENNT recovers 60–80% of these costs through structured change management — typically returning 4–6x the engagement fee.</div>
+      <div class="est-breakdown">
+        <div class="est-bd-row"><span class="est-bd-name">Productivity Loss (12 weeks)</span><span class="est-bd-val red" id="bdProd">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Attrition During Change</span><span class="est-bd-val red" id="bdAttr">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Adoption Failure Rework</span><span class="est-bd-val red" id="bdRework">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Manager Time Overhead</span><span class="est-bd-val red" id="bdMgr">—</span></div>
+        <div class="est-bd-row"><span class="est-bd-name">Morale & Engagement Cost</span><span class="est-bd-val red" id="bdMorale">—</span></div>
+      </div>
+      <div class="est-total">
+        <span class="est-total-label">Total Cost of Unmanaged Change</span>
+        <span class="est-total-val" id="estTotal">₹—</span>
+      </div>
+      <div style="margin-top:16px;">
+        <button class="btn-red" style="width:100%;text-align:center;" onclick="openRzp('Change Management Essentials',32000,'Start your 3-month change program including readiness diagnostic and stakeholder engagement.')">Start Your Change Program — ₹32,000/mo →</button>
+        <div style="font-size:11px;font-weight:300;color:var(--gt);text-align:center;margin-top:10px;">ORIGENNT clients recover the engagement fee within 6 weeks on average</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section reveal">
+  <div class="chip">ORIGENNT vs. The Market</div>
+  <h2 class="D">What they call change management.<br>What we <em>actually do.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Most firms present a slide deck and call it change management. ORIGENNT is on the ground — running sessions, measuring adoption, and adjusting course in real time.</p>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="them">HR Generalist / HRBP</th>
+          <th class="them">Generic Training Firm</th>
+          <th class="them">Big 4 Consulting</th>
+          <th class="us">ORIGENNT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Change readiness diagnostic</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="tick">✓</span> ₹40L+</td><td class="us"><span class="tick">✓</span> Included</td></tr>
+        <tr><td>Stakeholder mapping & engagement plans</td><td class="them"><span class="partial">◑</span> Informal</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="tick">✓</span> ₹60L+</td><td class="us"><span class="tick">✓</span> Structured</td></tr>
+        <tr><td>Resistance workshops</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Generic</td><td class="them"><span class="tick">✓</span> ₹80L+</td><td class="us"><span class="tick">✓</span> Included</td></tr>
+        <tr><td>Change champion activation</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Training only</td><td class="them"><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span> Built-in</td></tr>
+        <tr><td>Monthly adoption measurement</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Milestones only</td><td class="us"><span class="tick">✓</span> Monthly</td></tr>
+        <tr><td>Indian cultural context</td><td class="them"><span class="partial">◑</span></td><td class="them"><span class="partial">◑</span></td><td class="them"><span class="cross">✗</span> Global framework</td><td class="us"><span class="tick">✓</span> Designed for India</td></tr>
+        <tr><td>Integrated with HR (payroll, L&D, TA)</td><td class="them"><span class="partial">◑</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="us"><span class="tick">✓</span> Full ORIGENNT suite</td></tr>
+        <tr><td>Board-level change status reporting</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span> Monthly</td></tr>
+        <tr><td>Monthly engagement cost</td><td class="them">₹30,000–80,000 salary</td><td class="them">₹20,000–60,000</td><td class="them">₹40L–200L</td><td class="us" style="color:var(--red);font-weight:700;">₹32,000–1,80,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHY ORIGENNT -->
+<section class="why-section reveal">
+  <div class="chip">Why ORIGENNT for Change Management</div>
+  <h2 class="D">Six things that make us<br>different from every <em>other firm.</em></h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><div class="why-name">We Speak Indian Workplace Culture.</div><div class="why-desc">Change management in India is different — hierarchy matters, relationship trust precedes task trust, and middle managers are kingmakers. Our frameworks are designed for this reality, not imported from McKinsey global playbooks.</div></div>
+    <div class="why-card"><div class="why-num">02</div><div class="why-name">We Are on the Ground, Not on the Deck.</div><div class="why-desc">We run the sessions, facilitated the resistance workshops, interview the resistors, and track adoption week by week. Not a strategy delivered and abandoned — an active, managed engagement throughout the change lifecycle.</div></div>
+    <div class="why-card"><div class="why-num">03</div><div class="why-name">Integrated with Your HR Ecosystem.</div><div class="why-desc">Change management that doesn't connect to your hiring, payroll, L&D, and performance systems is incomplete. ORIGENNT is the only firm that can manage change end-to-end across the entire people function.</div></div>
+    <div class="why-card"><div class="why-num">04</div><div class="why-name">Measurement-Led, Not Feeling-Led.</div><div class="why-desc">We don't tell you change is going well — we prove it. Monthly pulse surveys, adoption scorecards, attrition leading indicators, and manager readiness scores give you real data, not consultant assurances.</div></div>
+    <div class="why-card"><div class="why-num">05</div><div class="why-name">SME-Calibrated Engagements.</div><div class="why-desc">Most change management is designed for 5,000-person enterprises. ORIGENNT's frameworks, team sizes, and pricing are calibrated for 50 to 1,000 employee businesses — where every rupee and every month matters.</div></div>
+    <div class="why-card"><div class="why-num">06</div><div class="why-name">We Handle the Conversations Nobody Wants.</div><div class="why-desc">The resistant senior manager. The rumour mill. The whisper campaign. ORIGENNT's practitioners are trained to navigate these — so your leadership team doesn't have to spend their political capital on them.</div></div>
+  </div>
+</section>
+
+<!-- IMAGE CAROUSEL -->
+<section class="carousel-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip w">Change in Practice</div>
+    <h2 class="D W">What structured change management<br>looks like when it <em>works.</em></h2>
+  </div>
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&fit=crop" alt="Stakeholder Workshop" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Stakeholder Sessions</span><div class="cso-title">Structured workshops that surface resistance before it becomes a problem</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&fit=crop" alt="Leadership Alignment" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Leadership Alignment</span><div class="cso-title">C-suite and senior leadership aligned on vision before it reaches the floor</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&q=80&fit=crop" alt="Change Champions" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Change Champions</span><div class="cso-title">Internal advocates activated at every level of the organisation</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop" alt="Adoption Dashboard" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Adoption Tracking</span><div class="cso-title">Real-time adoption dashboards — leadership knows where the change is stalling</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80&fit=crop" alt="Board Report" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Board Reporting</span><div class="cso-title">Monthly change status reports — board-ready, no jargon, clear next actions</div></div></div>
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="cc-btn" id="prevBtn">←</button>
+    <div class="cc-dots" id="carouselDots"></div>
+    <button class="cc-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Case Study</div>
+    <h2 class="D">A reorg that almost killed<br>a company. And <em>didn't.</em></h2>
+  </div>
+  <div class="case-inner">
+    <div>
+      <div class="case-sector">Manufacturing — Jharkhand</div>
+      <div class="case-title">How a 320-employee steel fabricator saved a ₹3.2 Cr restructure from collapsing into 31% attrition</div>
+      <div class="case-body">A Jamshedpur-based steel fabrication company announced a management restructure — consolidating three regional units into one central operations structure — without a change management plan. Within 8 weeks, 14 key managers had resigned or were actively looking, productivity had dropped 26%, and the two most senior resistors had begun a whisper campaign that was poisoning the frontline workforce.<br><br>ORIGENNT was engaged at the crisis point. We ran a 2-week emergency readiness diagnostic, identified the specific sources and reasons of resistance, and designed a stakeholder engagement plan that went individual-by-individual for the top 18 critical employees. The two resistor-leaders were given structured safe-to-speak sessions — both stayed after the underlying concerns (role ambiguity and compensation uncertainty) were addressed.</div>
+      <div class="case-outcomes">
+        <div class="case-out"><div class="case-out-n">31<sub>→6%</sub></div><div class="case-out-l">Attrition rate stabilised</div></div>
+        <div class="case-out"><div class="case-out-n">₹3.2<sub>Cr</sub></div><div class="case-out-l">Restructure rescued</div></div>
+        <div class="case-out"><div class="case-out-n">5<sub>mo</sub></div><div class="case-out-l">Full adoption achieved</div></div>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&fit=crop" alt="Manufacturing Plant Change Management" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:3px;">
+      <div class="case-steps">
+        <div class="case-step"><div class="case-step-num">01</div><div><div class="case-step-title">Emergency Readiness Diagnostic (2 weeks)</div><div class="case-step-desc">Interviewed 28 managers and 14 frontline leads. Mapped resistance sources, rumour nodes, and the specific fears driving departure intent.</div></div></div>
+        <div class="case-step"><div class="case-step-num">02</div><div><div class="case-step-title">Individual Stakeholder Engagement</div><div class="case-step-desc">18 critical employees received individual engagement sessions — addressing role clarity, compensation concerns, and career trajectory in the new structure.</div></div></div>
+        <div class="case-step"><div class="case-step-num">03</div><div><div class="case-step-title">Change Communication Redesign</div><div class="case-step-desc">Replaced the one-size-fits-all announcement with a tiered communication cascade — unit heads, then managers, then frontline. Each message calibrated to what that audience needed to hear.</div></div></div>
+        <div class="case-step"><div class="case-step-num">04</div><div><div class="case-step-title">Monthly Adoption Tracking</div><div class="case-step-desc">Deployed a bi-weekly pulse survey and adoption scorecard for 5 months. Leadership received a red/amber/green dashboard — knew exactly where the change was landing and where it wasn't.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section reveal" id="pricing">
+  <div class="pricing-intro">
+    <div class="chip">Pricing</div>
+    <h2 class="D">Structured programs.<br>Transparent pricing.<br><em>Real outcomes.</em></h2>
+    <p class="body-t" style="max-width:600px;margin-top:14px;">Every plan is a direct payment — UPI, cards, net banking, and EMI via Razorpay. GST invoice within 24 hours. Engagement kickoff call within 48 hours of payment.</p>
+  </div>
+
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-badge s">Diagnostic</div>
+      <div class="pkg-name">Readiness Sprint</div>
+      <div class="pkg-tagline">One-time 30-day diagnostic for businesses about to launch a change initiative and wanting to know the risks.</div>
+      <div class="pkg-price"><sup>₹</sup>18,000</div>
+      <div class="pkg-period">one-time · delivered in 30 days</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">40-page change readiness report</li>
+        <li class="pkg-feat">Stakeholder risk map (top 20 employees)</li>
+        <li class="pkg-feat">Resistance hotspot identification</li>
+        <li class="pkg-feat">Communication strategy outline</li>
+        <li class="pkg-feat">Change type & complexity scoring</li>
+        <li class="pkg-feat dim">Stakeholder engagement sessions</li>
+        <li class="pkg-feat dim">Resistance workshops</li>
+        <li class="pkg-feat dim">Monthly adoption tracking</li>
+      </ul>
+      <button class="pkg-cta r" onclick="openRzp('Change Readiness Sprint',18000,'30-day change readiness diagnostic — 40-page report, stakeholder risk map, communication strategy outline.')">Start Diagnostic — ₹18,000</button>
+      <div class="pkg-note">One-time engagement · No monthly commitment</div>
+    </div>
+
+    <div class="pkg featured">
+      <div class="pkg-badge p">Most Popular</div>
+      <div class="pkg-name">Change Essentials</div>
+      <div class="pkg-tagline">3-month managed program for businesses actively navigating a restructure, technology rollout, or leadership change.</div>
+      <div class="pkg-price"><sup>₹</sup>32,000</div>
+      <div class="pkg-period">per month · 3-month minimum</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Readiness diagnostic included (Month 1)</li>
+        <li class="pkg-feat">Stakeholder mapping & engagement plan</li>
+        <li class="pkg-feat">2 resistance workshops per month</li>
+        <li class="pkg-feat">Change communication design</li>
+        <li class="pkg-feat">Change champion identification & briefing</li>
+        <li class="pkg-feat">Monthly adoption pulse survey</li>
+        <li class="pkg-feat">Monthly board status report</li>
+        <li class="pkg-feat">Dedicated change consultant</li>
+      </ul>
+      <button class="pkg-cta w" onclick="openRzp('Change Management Essentials',32000,'3-month managed change program — readiness diagnostic, stakeholder engagement, resistance workshops, adoption tracking.')">Start Program — ₹32,000/mo</button>
+      <div class="pkg-note">Min. 3-month · Up to 200 employees · +₹100/employee above 200</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge g">Full Mandate</div>
+      <div class="pkg-name">Change Enterprise</div>
+      <div class="pkg-tagline">6-month full engagement for complex transformations — mergers, major restructures, or large-scale technology implementations.</div>
+      <div class="pkg-price"><sup>₹</sup>80,000</div>
+      <div class="pkg-period">per month · 6-month minimum</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Everything in Essentials</li>
+        <li class="pkg-feat">Individual executive coaching (top 5)</li>
+        <li class="pkg-feat">Full change champion network (20+ champions)</li>
+        <li class="pkg-feat">Weekly adoption dashboards</li>
+        <li class="pkg-feat">Multi-location change rollout</li>
+        <li class="pkg-feat">Culture audit & embedding plan</li>
+        <li class="pkg-feat">Monthly board presentation (live)</li>
+        <li class="pkg-feat">Post-program 90-day adoption review</li>
+      </ul>
+      <button class="pkg-cta g" onclick="openRzp('Change Management Enterprise',80000,'6-month full change mandate — executive coaching, champion network, multi-location, culture embedding.')">Start Mandate — ₹80,000/mo</button>
+      <div class="pkg-note">Up to 500 employees · Equivalent to in-house change team at 40% cost</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge e">Bespoke</div>
+      <div class="pkg-name">M&A Change Suite</div>
+      <div class="pkg-tagline">Purpose-built for mergers, acquisitions, and post-deal integration — where change management is business-critical.</div>
+      <div class="pkg-price" style="font-size:24px;letter-spacing:-.01em;">Custom</div>
+      <div class="pkg-period">scoped on enquiry</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Pre-deal culture due diligence</li>
+        <li class="pkg-feat">Day-1 communication playbook</li>
+        <li class="pkg-feat">Dual-culture integration framework</li>
+        <li class="pkg-feat">Retention risk identification & mitigation</li>
+        <li class="pkg-feat">Investor-grade integration reporting</li>
+        <li class="pkg-feat">Full ORIGENNT HR integration suite</li>
+        <li class="pkg-feat">12-month post-merger monitoring</li>
+        <li class="pkg-feat">Dedicated senior partner</li>
+      </ul>
+      <button class="pkg-cta t" onclick="openRzp('M&A Change Suite — Custom',0,'Custom scope for merger, acquisition, or post-deal integration change management.')">Request M&A Proposal</button>
+      <div class="pkg-note">Response within 24 business hours</div>
+    </div>
+  </div>
+
+  <!-- ADD-ON CALCULATOR -->
+  <div class="addon-calculator">
+    <div class="addon-title">Add-On Services — Combine with any plan. Price updates instantly.</div>
+    <div class="addon-grid" id="addonGrid">
+      <div class="addon-item" data-price="12000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Executive 1:1 Coaching (per session)</div><div class="addon-price">+₹12,000 / session</div></div>
+      </div>
+      <div class="addon-item" data-price="18000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Extra Resistance Workshop</div><div class="addon-price">+₹18,000 / workshop</div></div>
+      </div>
+      <div class="addon-item" data-price="8000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Change Communication Copywriting</div><div class="addon-price">+₹8,000 / pack</div></div>
+      </div>
+      <div class="addon-item" data-price="25000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Culture Audit (standalone)</div><div class="addon-price">+₹25,000 / audit</div></div>
+      </div>
+      <div class="addon-item" data-price="15000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Change Champion Training (group)</div><div class="addon-price">+₹15,000 / cohort</div></div>
+      </div>
+      <div class="addon-item" data-price="20000" onclick="toggleAddon(this)">
+        <div class="addon-check">✓</div>
+        <div><div class="addon-name">Board-Level Change Presentation</div><div class="addon-price">+₹20,000 / presentation</div></div>
+      </div>
+    </div>
+    <div class="addon-total">
+      <span class="addon-total-label">Selected Add-Ons Total</span>
+      <span class="addon-total-val">₹<span id="addonTotal">0</span><sub>/selected</sub></span>
+    </div>
+    <div style="margin-top:3px;display:flex;gap:3px;flex-wrap:wrap;">
+      <button class="btn-red" style="flex:1;text-align:center;padding:14px;" id="addonPayBtn" onclick="payAddons()">Pay for Selected Add-Ons →</button>
+      <div style="background:var(--off);padding:14px 20px;font-size:12px;font-weight:300;color:var(--gt);flex:1;display:flex;align-items:center;">All prices exclude GST (18%). Add-ons can be combined with any plan or purchased standalone.</div>
+    </div>
+  </div>
+
+  <div class="pkg-gst">
+    <div style="font-size:18px;flex-shrink:0;">💳</div>
+    <div class="pkg-gst-text"><strong>All prices exclude GST (18%). GST invoice within 24 hours.</strong> Payment via Razorpay — UPI, cards, net banking, EMI accepted. Engagement begins within 48 hours. No lock-in after minimum period.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Stop hoping your change<br>will land on its own.<br><em>Make it happen.</em></h2>
+    <p class="fc-sub">ORIGENNT Change Management turns your transformation from a leadership announcement into an organisational reality. Readiness diagnostics, stakeholder engagement, resistance workshops, champion networks, and adoption tracking — managed end-to-end by practitioners who've done this before, for Indian businesses like yours.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="fca w" onclick="openRzp('Change Management Essentials',32000,'Start your 3-month change management program today.')">Start Change Program — ₹32,000/mo</button>
+    <a href="hr-analytics.html" class="fca ol">HR Analytics →</a>
+    <a href="learning-development.html" class="fca ol">Learning & Development →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 11 November 2025 · Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Consulting</div>
+      <a href="../management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="strategy.html" class="footer-link">Strategy & Transformation</a>
+      <a href="change-management.html" class="footer-link">Change Management</a>
+    </div>
+    <div>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a href="../about.html" class="footer-link">About ORIGENNT</a>
+      <a href="../contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2026 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /main -->
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" id="rzpClose">×</button>
+    <div class="rzp-tag" id="rzpTag">Change Management</div>
+    <div class="rzp-modal-h" id="rzpH">Start Your Engagement</div>
+    <div class="rzp-modal-sub" id="rzpSub">Engagement begins within 48 hours of payment.</div>
+    <div class="rzp-modal-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">GST invoice issued within 24 hours.</div>
+    <div class="rzp-fields">
+      <input class="rzp-inp" id="rzpCompany" type="text" placeholder="Company / Organisation Name *">
+      <input class="rzp-inp" id="rzpName" type="text" placeholder="Your Name & Designation *">
+      <input class="rzp-inp" id="rzpEmail" type="email" placeholder="Email Address *">
+      <input class="rzp-inp" id="rzpPhone" type="tel" placeholder="Phone Number *">
+      <input class="rzp-inp" id="rzpEmp" type="number" placeholder="Number of Employees" min="1">
+      <input class="rzp-inp" id="rzpChange" type="text" placeholder="Type of Change (e.g. restructure, ERP rollout)">
+    </div>
+    <button class="rzp-submit" id="rzpBtn">Proceed to Payment →</button>
+    <div class="rzp-secure">🔒 Confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 · Powered by Razorpay</div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── BAR FILLS (diagnostic section) ── */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*100));bObs.unobserve(e.target);}});
+},{threshold:.2});
+document.querySelectorAll('.diagnostic-section').forEach(el=>bObs.observe(el));
+
+/* ── CHANGE READINESS DIAGNOSTIC ── */
+const scores=[null,null,null,null,null];
+const labels=['Leadership Alignment','Communication Clarity','Change History','Manager Capability','Employee Appetite'];
+
+function selectOpt(btn){
+  const dim=+btn.dataset.dim;
+  const val=+btn.dataset.val;
+  // deselect siblings
+  btn.closest('.diag-options').querySelectorAll('.diag-opt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  scores[dim]=val;
+  updateDiag();
+}
+
+function updateDiag(){
+  // update breakdown bars
+  scores.forEach((v,i)=>{
+    const fill=document.getElementById('bd'+i);
+    const valEl=document.getElementById('bv'+i);
+    if(v!==null){
+      fill.style.setProperty('--w',v+'%');
+      setTimeout(()=>fill.classList.add('go'),50);
+      valEl.textContent=v+'%';
+    }
+  });
+
+  const answered=scores.filter(s=>s!==null);
+  if(answered.length===0)return;
+  const avg=Math.round(answered.reduce((a,b)=>a+b,0)/answered.length);
+
+  document.getElementById('gaugeVal').textContent=avg;
+
+  const label=document.getElementById('readinessLabel');
+  const sub=document.getElementById('gaugeLabel');
+  if(avg>=80){label.textContent='High Readiness';label.style.color='#0d6b5e';sub.textContent='Strong foundation — launch with confidence';}
+  else if(avg>=60){label.textContent='Moderate Readiness';label.style.color='#c9a84c';sub.textContent='Some gaps — targeted preparation recommended';}
+  else if(avg>=40){label.textContent='Low Readiness';label.style.color='#e07b20';sub.textContent='Significant risk — structured program required';}
+  else{label.textContent='Critical Risk';label.style.color='#CC2229';sub.textContent='High failure probability — ORIGENNT diagnostic urgent';}
+
+  drawGauge(avg);
+}
+
+function drawGauge(score){
+  const c=document.getElementById('gaugeCanvas');
+  const W=180,H=90;
+  c.width=W*2;c.height=H*2;c.style.width=W+'px';c.style.height=H+'px';
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  const cx=W/2,cy=H-4,r=76;
+  const startAngle=Math.PI,endAngle=2*Math.PI;
+  // background arc
+  ctx.beginPath();ctx.arc(cx,cy,r,startAngle,endAngle);
+  ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=12;ctx.lineCap='round';ctx.stroke();
+  // colored arc
+  const fillAngle=startAngle+(score/100)*Math.PI;
+  const color=score>=80?'#0d6b5e':score>=60?'#c9a84c':score>=40?'#e07b20':'#CC2229';
+  const grad=ctx.createLinearGradient(cx-r,cy,cx+r,cy);
+  grad.addColorStop(0,color+'99');grad.addColorStop(1,color);
+  ctx.beginPath();ctx.arc(cx,cy,r,startAngle,fillAngle);
+  ctx.strokeStyle=grad;ctx.lineWidth=12;ctx.stroke();
+}
+
+/* ── CHANGE COST ESTIMATOR ── */
+function fmtINR(n){
+  if(n>=10000000)return'₹'+(n/10000000).toFixed(1)+'Cr';
+  if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000)return'₹'+(n/1000).toFixed(0)+'K';
+  return'₹'+Math.round(n);
+}
+
+function calcChange(){
+  const emp=+document.getElementById('sliderEmp').value;
+  const sal=+document.getElementById('sliderSal').value*100000;
+  const multiplier=+document.getElementById('changeType').value;
+  document.getElementById('empCount').textContent=emp;
+  document.getElementById('avgSal').textContent='₹'+document.getElementById('sliderSal').value+'L';
+
+  const base=emp*sal*multiplier;
+  const prod=base*0.38;
+  const attr=base*0.28;
+  const rework=base*0.16;
+  const mgr=base*0.11;
+  const morale=base*0.07;
+  const total=prod+attr+rework+mgr+morale;
+
+  document.getElementById('changeCost').textContent=fmtINR(total);
+  document.getElementById('changeSub').textContent=emp+' employees · ₹'+document.getElementById('sliderSal').value+'L avg. salary · Selected change type';
+  document.getElementById('bdProd').textContent=fmtINR(prod);
+  document.getElementById('bdAttr').textContent=fmtINR(attr);
+  document.getElementById('bdRework').textContent=fmtINR(rework);
+  document.getElementById('bdMgr').textContent=fmtINR(mgr);
+  document.getElementById('bdMorale').textContent=fmtINR(morale);
+  document.getElementById('estTotal').textContent=fmtINR(total);
+}
+['sliderEmp','sliderSal'].forEach(id=>document.getElementById(id).addEventListener('input',calcChange));
+calcChange();
+
+/* ── CAROUSEL ── */
+const track=document.getElementById('carouselTrack');
+const slides=track.querySelectorAll('.carousel-slide');
+const dotsC=document.getElementById('carouselDots');
+let cur2=0;
+const visC=()=>window.innerWidth>1024?3:window.innerWidth>640?2:1;
+for(let i=0;i<slides.length;i++){
+  const d=document.createElement('button');d.className='cc-dot'+(i===0?' active':'');
+  d.addEventListener('click',()=>goTo(i));dotsC.appendChild(d);
+}
+function goTo(idx){
+  cur2=Math.max(0,Math.min(idx,slides.length-visC()));
+  const sw=slides[0].offsetWidth+3;
+  track.style.transform='translateX(-'+(cur2*sw)+'px)';
+  document.querySelectorAll('.cc-dot').forEach((d,i)=>d.classList.toggle('active',i===cur2));
+}
+document.getElementById('prevBtn').addEventListener('click',()=>goTo(Math.max(0,cur2-1)));
+document.getElementById('nextBtn').addEventListener('click',()=>goTo(Math.min(slides.length-visC(),cur2+1)));
+let autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4000);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoC));
+track.parentElement.addEventListener('mouseleave',()=>{autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4000);});
+
+/* ── ADD-ON CALCULATOR ── */
+let addonTotal=0;
+function toggleAddon(el){
+  el.classList.toggle('selected');
+  addonTotal=0;
+  document.querySelectorAll('.addon-item.selected').forEach(item=>{addonTotal+=+item.dataset.price;});
+  document.getElementById('addonTotal').textContent=addonTotal.toLocaleString('en-IN');
+}
+function payAddons(){
+  if(addonTotal===0){alert('Please select at least one add-on.');return;}
+  const selected=[];
+  document.querySelectorAll('.addon-item.selected').forEach(item=>selected.push(item.querySelector('.addon-name').textContent));
+  openRzp('Change Management Add-Ons: '+selected.join(', '),addonTotal,'Selected add-ons: '+selected.join(', '));
+}
+
+/* ── RAZORPAY ── */
+let rzpCurrent={};
+function openRzp(name,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent='Change Management — ORIGENNT';
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent=amtInt>0?'Engagement begins within 48 hours of payment.':'Our team will scope and respond within 24 hours.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?'<sup>₹</sup>'+amtInt.toLocaleString('en-IN'):'<span style="font-size:24px;letter-spacing:-.01em;">Custom</span>';
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpBtn').textContent=amtInt>0?'Proceed to Payment →':'Submit Enquiry →';
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){
+  document.getElementById('rzpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      image:'https://origennt.com/favicon.ico',
+      handler:function(response){
+        closeRzp();
+        alert('✓ Payment successful!\nPayment ID: '+response.razorpay_payment_id+'\n\nYour Change Management engagement begins within 48 hours. ORIGENNT will contact you at '+email+' to schedule the kickoff call.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,employees:document.getElementById('rzpEmp').value,changeType:document.getElementById('rzpChange').value,service:rzpCurrent.name},
+      theme:{color:'#CC2229'},
+      modal:{ondismiss:function(){}}
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT,\n\nChange Management Enquiry:\nService: '+rzpCurrent.name+'\nCompany: '+company+'\nContact: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nEmployees: '+document.getElementById('rzpEmp').value+'\nChange Type: '+document.getElementById('rzpChange').value);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+</script>
+</body>
+</html>
