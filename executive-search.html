@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Origennt - Strategic Talent Engineering from Odisha, India serving global clients with data-driven recruitment solutions.">
+    
+    
+    <title>Executive Search - ORIGENNT</title>
+    
+    <meta name="description" content="Origennt provides recruitment solutions, executive consulting, corporate training and career development services for businesses and professionals in India, executive search, cxo, vp, amazon, talent network, director-level, director, dir, consultant">
+    <meta name="keywords" content="Origennt, recruitment, HR consulting, staffing, corporate training, placement services">
+    <meta property="og:title" content="Origennt – Management Consulting Services">
+    <meta property="og:description" content="Professional recruitment, cxo, vpo, vp, director, payroll, staffing and HR consulting services across India.">
+    <meta property="og:url" content="https://origennt.com/">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);padding:11px 28px;transition:background .2s;border:none;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+
+/* HERO */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1800&q=80&fit=crop') center 30%/cover;filter:brightness(.09) saturate(.2);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:580px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:22px 48px 22px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:48px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+
+/* URGENCY */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* WHAT SECTION */
+.what-section{padding:100px 80px;background:var(--off);}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.what-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.what-img-caption{background:var(--red);padding:20px 24px;margin-top:3px;}
+.what-img-caption-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.75);line-height:1.6;}
+.what-cards{display:flex;flex-direction:column;gap:3px;margin-top:28px;}
+.wc{background:var(--white);padding:20px 24px;display:flex;gap:16px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s,background .2s;}
+.wc:hover{border-left-color:var(--red);background:var(--gl);}
+.wc-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+.wc-name{font-size:14px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.wc-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* ROLE BRIEF BUILDER — INTERACTIVE */
+.brief-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.brief-section::before{content:'';position:absolute;right:-200px;bottom:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,.04),transparent 60%);pointer-events:none;}
+.brief-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:56px;position:relative;z-index:1;}
+.brief-left{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:44px;}
+.brief-right{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:44px;}
+.brief-title{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:8px;}
+.brief-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);margin-bottom:28px;line-height:1.7;}
+.brief-field{margin-bottom:20px;}
+.brief-field-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;font-weight:500;}
+.brief-select,.brief-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-family:'Outfit',sans-serif;font-size:13px;padding:11px 14px;outline:none;appearance:none;transition:border-color .2s;}
+.brief-select:focus,.brief-input:focus{border-color:var(--red);}
+.brief-select option{background:var(--black);}
+.brief-opts{display:flex;gap:3px;flex-wrap:wrap;}
+.brief-opt{font-size:11px;font-weight:500;padding:8px 14px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:none;transition:background .2s,color .2s;letter-spacing:.03em;}
+.brief-opt:hover{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.brief-opt.sel{background:var(--red);color:var(--white);}
+/* LIVE BRIEF PREVIEW */
+.brief-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:28px;margin-bottom:20px;}
+.bp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.07);}
+.bp-title{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);line-height:1.3;}
+.bp-badge{font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:5px 12px;background:var(--red);color:var(--white);font-weight:600;flex-shrink:0;}
+.bp-rows{display:flex;flex-direction:column;gap:10px;}
+.bp-row{display:flex;gap:16px;align-items:flex-start;}
+.bp-row-lbl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.3);width:120px;flex-shrink:0;padding-top:2px;font-weight:500;}
+.bp-row-val{font-size:13px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.5;}
+.brief-fee-box{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.25);padding:20px 24px;}
+.brief-fee-lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,.7);margin-bottom:8px;font-weight:500;}
+.brief-fee-val{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;}
+.brief-fee-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;}
+
+/* SEARCH PROCESS TIMELINE */
+.process-section{padding:100px 80px;background:var(--off);}
+.process-timeline{margin-top:56px;position:relative;}
+.process-timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gl));z-index:0;}
+.pt-step{display:flex;gap:40px;margin-bottom:3px;position:relative;z-index:1;}
+.pt-dot{width:58px;height:58px;background:var(--white);border:2px solid var(--gl);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .3s,background .3s;}
+.pt-dot:hover{border-color:var(--red);background:var(--red-pale);}
+.pt-dot-num{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--black);}
+.pt-content{background:var(--white);padding:28px 32px;flex:1;border-left:4px solid transparent;transition:border-color .2s,background .2s;}
+.pt-content:hover{border-left-color:var(--red);background:var(--gl);}
+.pt-week{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:6px;}
+.pt-title{font-size:16px;font-weight:600;color:var(--black);margin-bottom:8px;}
+.pt-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.7;}
+.pt-deliverable{display:flex;gap:8px;align-items:center;margin-top:12px;padding:10px 14px;background:var(--off);}
+.pt-del-icon{font-size:14px;}
+.pt-del-text{font-size:12px;font-weight:500;color:var(--gt);}
+
+/* CANDIDATE PIPELINE VISUALISER */
+.pipeline-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.pipeline-section::before{content:'';position:absolute;left:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.05),transparent 60%);pointer-events:none;}
+.pipeline-wrap{margin-top:56px;position:relative;z-index:1;}
+.pipeline-header{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-bottom:3px;}
+.ph-cell{background:rgba(255,255,255,.06);padding:14px 16px;text-align:center;}
+.ph-cell-title{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:500;margin-bottom:4px;}
+.ph-cell-n{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--white);}
+.ph-cell-sub{font-size:10px;font-weight:300;color:rgba(255,255,255,.3);margin-top:2px;}
+.pipeline-funnel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;margin-top:3px;}
+.pf-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;font-weight:500;}
+canvas#pipelineCanvas{display:block;width:100%;}
+.pipeline-legend{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px;}
+.pl-item{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.pl-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0;}
+
+/* SECTOR TABS — roles we fill */
+.sectors-section{padding:100px 80px;background:var(--off);}
+.sector-tabs{display:flex;gap:3px;margin-top:48px;flex-wrap:wrap;}
+.stab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;background:var(--white);color:var(--gt);border:none;transition:background .2s,color .2s;}
+.stab:hover{background:var(--gl);}
+.stab.active{background:var(--black);color:var(--white);}
+.sector-panel{display:none;margin-top:3px;}
+.sector-panel.active{display:block;}
+.sector-roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.role-card{background:var(--white);padding:24px 22px;border-left:4px solid transparent;transition:border-color .2s,background .2s;position:relative;}
+.role-card:hover{border-left-color:var(--red);background:var(--gl);}
+.role-level{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:8px;}
+.role-level.c{color:var(--red);}
+.role-level.vp{color:var(--gold);}
+.role-level.dir{color:var(--teal);}
+.role-title{font-size:15px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.role-spec{font-size:12px;font-weight:300;color:var(--gt);line-height:1.6;}
+.role-fee{font-size:11px;font-weight:500;color:var(--red);margin-top:10px;}
+
+/* COMPARE */
+.compare-section{padding:100px 80px;background:var(--white);}
+.compare-table-wrap{overflow-x:auto;margin-top:48px;}
+table.compare-table{width:100%;border-collapse:collapse;}
+table.compare-table th{padding:16px 20px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;text-align:left;border-bottom:2px solid var(--gl);}
+table.compare-table th:first-child{color:var(--gt);width:240px;}
+table.compare-table th.us{background:var(--black);color:var(--white);text-align:center;}
+table.compare-table th.them{background:var(--gl);color:var(--gt);text-align:center;}
+table.compare-table td{padding:14px 20px;font-size:13px;font-weight:300;border-bottom:1px solid var(--gl);vertical-align:top;}
+table.compare-table td:first-child{color:var(--black);font-weight:500;}
+table.compare-table td.us{background:rgba(13,13,13,.03);text-align:center;color:var(--teal);font-weight:600;}
+table.compare-table td.them{text-align:center;color:var(--gm);}
+table.compare-table td .tick{color:var(--teal);font-size:16px;}
+table.compare-table td .cross{color:var(--gm);font-size:16px;}
+table.compare-table td .partial{color:var(--amber);font-size:16px;}
+table.compare-table tr:hover td{background:var(--off);}
+table.compare-table tr:hover td.us{background:rgba(13,107,94,.06);}
+
+/* WHY */
+.why-section{padding:100px 80px;background:var(--off);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.why-card{background:var(--white);padding:36px 32px;position:relative;overflow:hidden;transition:background .2s;}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.why-card:hover{background:var(--gl);}
+.why-card:hover::before{transform:scaleX(1);}
+.why-num{font-family:'Libre Baskerville',serif;font-size:52px;color:var(--gl);line-height:1;margin-bottom:16px;}
+.why-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.why-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;}
+
+/* CAROUSEL */
+.carousel-section{padding:100px 80px;background:var(--black);}
+.carousel-outer{position:relative;overflow:hidden;}
+.carousel-track{display:flex;gap:3px;transition:transform .6s var(--ease);}
+.carousel-slide{min-width:calc(33.333% - 2px);position:relative;overflow:hidden;aspect-ratio:4/3;flex-shrink:0;}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);}
+.carousel-slide:hover img{transform:scale(1.04);}
+.carousel-slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 24px;}
+.cso-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:4px 12px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:10px;font-weight:600;width:fit-content;}
+.cso-title{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);line-height:1.3;}
+.carousel-controls{display:flex;align-items:center;gap:12px;margin-top:24px;}
+.cc-btn{width:48px;height:48px;background:rgba(255,255,255,.08);color:var(--white);border:none;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.cc-btn:hover{background:var(--red);}
+.cc-dots{display:flex;gap:8px;flex:1;justify-content:center;}
+.cc-dot{width:6px;height:6px;background:rgba(255,255,255,.2);border-radius:50%;transition:background .2s,width .2s;border:none;}
+.cc-dot.active{background:var(--red);width:22px;border-radius:3px;}
+
+/* CASE STUDY */
+.case-section{padding:100px 80px;background:var(--off);}
+.case-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.case-sector{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:20px;font-weight:600;}
+.case-title{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;color:var(--black);margin-bottom:16px;line-height:1.2;}
+.case-body{font-size:14px;font-weight:300;color:var(--gt);line-height:1.85;margin-bottom:28px;}
+.case-outcomes{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.case-out{background:var(--black);padding:20px 18px;}
+.case-out-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);line-height:1;}
+.case-out-n sub{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.case-out-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+.case-steps{display:flex;flex-direction:column;gap:3px;}
+.case-step{background:var(--white);padding:18px 22px;display:flex;gap:14px;align-items:flex-start;border-left:4px solid transparent;transition:border-color .2s;}
+.case-step:hover{border-left-color:var(--red);}
+.case-step-num{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--gl);flex-shrink:0;}
+.case-step-title{font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:4px;}
+.case-step-desc{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+
+/* PRICING */
+.pricing-section{padding:100px 80px;background:var(--white);}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.pkg{background:var(--off);padding:40px 32px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.pkg::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--gl);}
+.pkg.featured{background:var(--black);}
+.pkg.featured::after{background:var(--red);}
+.pkg-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:18px;display:inline-block;font-weight:600;width:fit-content;}
+.pkg-badge.s{background:var(--gl);color:var(--gt);}
+.pkg-badge.p{background:var(--red);color:var(--white);}
+.pkg-badge.g{background:var(--gold);color:#3d2800;}
+.pkg-name{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--black);margin-bottom:4px;}
+.featured .pkg-name{color:var(--white);}
+.pkg-tagline{font-size:12px;font-weight:300;color:var(--gt);margin-bottom:18px;line-height:1.6;}
+.featured .pkg-tagline{color:rgba(255,255,255,.38);}
+.pkg-price{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--black);line-height:1;}
+.featured .pkg-price{color:var(--white);}
+.pkg-price sup{font-size:14px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pkg-period{font-size:12px;color:var(--gm);margin-top:4px;margin-bottom:8px;}
+.featured .pkg-period{color:rgba(255,255,255,.25);}
+.pkg-fee-note{font-size:11.5px;font-weight:500;color:var(--gt);margin-bottom:18px;line-height:1.6;padding:12px 14px;background:var(--white);}
+.featured .pkg-fee-note{background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);}
+.pkg-div{height:1px;background:var(--gl);margin:0 0 18px;}
+.featured .pkg-div{background:rgba(255,255,255,.09);}
+.pkg-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:22px;}
+.pkg-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.featured .pkg-feat{color:rgba(255,255,255,.5);}
+.pkg-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pkg-feat.dim::before{content:'—';color:var(--gm);}
+.pkg-feat.dim{opacity:.35;}
+.pkg-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:14px 20px;transition:background .2s,transform .2s;border:none;width:100%;}
+.pkg-cta.r{background:var(--red);color:var(--white);}
+.pkg-cta.r:hover{background:var(--red-dark);transform:translateY(-2px);}
+.pkg-cta.w{background:var(--white);color:var(--red);}
+.pkg-cta.w:hover{background:var(--off);}
+.pkg-cta.g{background:var(--gold);color:#3d2800;}
+.pkg-cta.g:hover{opacity:.88;transform:translateY(-2px);}
+.pkg-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;line-height:1.5;}
+.featured .pkg-note{color:rgba(255,255,255,.2);}
+.pkg-gst{background:var(--black);padding:16px 28px;display:flex;align-items:center;gap:14px;margin-top:3px;flex-wrap:wrap;}
+.pkg-gst-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.35);flex:1;line-height:1.6;}
+.pkg-gst-text strong{color:rgba(255,255,255,.65);}
+
+/* GUARANTEE STRIP */
+.guarantee-strip{background:var(--teal);padding:32px 80px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.gs-cell{padding:16px 24px;border-right:1px solid rgba(255,255,255,.15);}
+.gs-cell:last-child{border-right:none;}
+.gs-num{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;margin-bottom:4px;}
+.gs-label{font-size:11px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.5;}
+
+/* FINAL CTA */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s;text-decoration:none;border:none;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+
+/* RAZORPAY MODAL */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:520px;max-width:94vw;padding:52px 48px;position:relative;max-height:90vh;overflow-y:auto;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-confidential{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;color:var(--gt);margin-bottom:16px;margin-left:8px;}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:4px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;}
+.rzp-modal-price{font-family:'Libre Baskerville',serif;font-size:40px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-modal-price sup{font-size:16px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.pkg-grid{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}.sector-roles-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .what-grid,.brief-grid,.case-inner{grid-template-columns:1fr;gap:48px;}
+  section,.what-section,.brief-section,.process-section,.pipeline-section,.sectors-section,.compare-section,.why-section,.carousel-section,.case-section,.pricing-section,.final-cta,.guarantee-strip{padding-left:32px;padding-right:32px;}
+  .pkg-grid{grid-template-columns:1fr;}
+  .why-grid,.sector-roles-grid{grid-template-columns:1fr;}
+  .pipeline-header{grid-template-columns:1fr 1fr 1fr;}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .guarantee-strip{grid-template-columns:1fr;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.carousel-slide{min-width:80%;}.case-outcomes{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}.pipeline-header{grid-template-columns:1fr 1fr;}}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PBCDJ7Y3JQ">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PBCDJ7Y3JQ');
+</script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link active">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 25/11/2025</small></div>
+  </div>
+</aside>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="index.html" class="back-link">Home</a>
+  <button class="topbar-cta" onclick="openRzp('Executive Search — Confidential Mandate',0,'Submit your confidential mandate and we will respond within 24 hours.')">Submit a Mandate</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Executive Search · C-Suite & Senior Leadership Hiring</div></div>
+      <h1 class="hero-h1">The right leader<br>changes everything.<br>Finding them is<br><em>what we do.</em></h1>
+      <p class="hero-sub">A wrong C-suite hire costs an Indian business an average of ₹1.4 Cr and 18 months of lost momentum. ORIGENNT's retained executive search delivers verified, assessed, and culturally aligned senior leaders — with a 90-day placement guarantee. Confidential. Thorough. Final.</p>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="openRzp('Executive Search — Retained Mandate',0,'Submit your confidential executive search mandate. We respond within 24 hours.')">Submit a Mandate</button>
+        <a href="#process" class="btn-ghost-w">See the Search Process</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">Executive Search — India Reality 2026</div>
+      <div class="hp-row"><span class="hp-name">Avg. Cost of Wrong C-Suite Hire</span><span class="hp-val">₹1.4<sub>Cr</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Time Lost on a Failed Hire</span><span class="hp-val">18<sub>mo</sub></span></div>
+      <div class="hp-row"><span class="hp-name">C-Suite Roles Filled via Network</span><span class="hp-val">72<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">ORIGENNT Placement Success Rate</span><span class="hp-val">96<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Avg. Search Completion</span><span class="hp-val">62<sub>days</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">96<sup>%</sup></div><div class="hsc-l">Placement Success</div></div>
+    <div class="hs-cell"><div class="hsc-n">62<sup>days</sup></div><div class="hsc-l">Avg. Completion</div></div>
+    <div class="hs-cell"><div class="hsc-n">90<sup>day</sup></div><div class="hsc-l">Guarantee</div></div>
+    <div class="hs-cell"><div class="hsc-n">340<sup>+</sup></div><div class="hsc-l">Leaders Placed</div></div>
+    <div class="hs-cell"><div class="hsc-n">18<sup>+</sup></div><div class="hsc-l">Sectors Covered</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc-r"><div class="mc-r-lbl">Mandates Completed</div><div class="mc-r-val">340+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">C-Suite Placements</div><div class="mc-r-val">120+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">VP / Director Placements</div><div class="mc-r-val">220+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Placement Success Rate</div><div class="mc-r-val">96%</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Client Repeat Rate</div><div class="mc-r-val">84%</div></div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">🎯 The best senior leaders in any market are not looking at job boards. They are in roles. ORIGENNT's proprietary Eastern India leadership network of 6,200+ senior professionals means we approach them — before your competitors do.</div>
+  <a href="#pricing" class="us-cta">See Fees →</a>
+</div>
+
+<!-- WHAT IS EXECUTIVE SEARCH -->
+<section class="what-section reveal">
+  <div class="what-grid">
+    <div>
+      <img class="what-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop" alt="Executive Leader" loading="lazy">
+      <div class="what-img-caption">
+        <div class="what-img-caption-text">ORIGENNT's executive search is retained, confidential, and research-led. We do not post job ads. We identify, approach, assess, and deliver. Your brand reputation and the candidate's career are both protected throughout.</div>
+      </div>
+    </div>
+    <div>
+      <div class="chip">What ORIGENNT Executive Search Delivers</div>
+      <h2 class="D">Not recruitment.<br><em>Leadership intelligence.</em></h2>
+      <div class="body-t" style="margin-top:20px;">
+        <p>Executive search is categorically different from recruitment. Recruitment fills a vacancy. Executive search identifies the best person in the market for a specific role — whether or not they are actively looking — assesses their capability and culture fit, manages a confidential process on both sides, and delivers a leader who will make a measurable difference.</p>
+        <p>ORIGENNT operates exclusively retained search for senior and C-suite mandates. Retained means we are fully committed to your search — not listing it on a portal alongside 40 other roles. You get a dedicated search team, a research-led long list, and a 90-day replacement guarantee.</p>
+      </div>
+      <div class="what-cards">
+        <div class="wc"><div class="wc-icon">🔒</div><div><div class="wc-name">Confidential Retained Search</div><div class="wc-desc">Fully confidential process — no job postings, no database blasts. Discreet outreach to passive candidates through direct channels and our proprietary network.</div></div></div>
+        <div class="wc"><div class="wc-icon">🔬</div><div><div class="wc-name">Research-Led Long Listing</div><div class="wc-desc">We map the entire relevant talent universe for your role — every qualified senior professional across sector and geography — before approaching a single candidate.</div></div></div>
+        <div class="wc"><div class="wc-icon">🧠</div><div><div class="wc-name">Psychometric & Competency Assessment</div><div class="wc-desc">Shortlisted candidates undergo structured competency interviews, psychometric profiling, and leadership style assessment before any recommendation is made.</div></div></div>
+        <div class="wc"><div class="wc-icon">✅</div><div><div class="wc-name">Reference & Background Verification</div><div class="wc-desc">Structured reference checks with former managers, peers, and direct reports. Employment, qualification, and criminal background verification for every placed candidate.</div></div></div>
+        <div class="wc"><div class="wc-icon">🤝</div><div><div class="wc-name">Offer Negotiation & On-boarding Support</div><div class="wc-desc">ORIGENNT manages the offer, counter-offer, and negotiation process — protecting the relationship and maximising acceptance probability on both sides.</div></div></div>
+        <div class="wc"><div class="wc-icon">🛡️</div><div><div class="wc-name">90-Day Placement Guarantee</div><div class="wc-desc">If a placed leader exits for any reason within 90 days of joining, ORIGENNT re-runs the search at no additional fee. Non-negotiable. Unconditional.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLE BRIEF BUILDER — INTERACTIVE -->
+<section class="brief-section reveal">
+  <div style="position:relative;z-index:1;margin-bottom:16px;">
+    <div class="chip w">Interactive Tool</div>
+    <h2 class="D W">Build your mandate brief.<br>Get an <em>instant fee estimate.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,.45);max-width:560px;margin-top:14px;line-height:1.85;">Configure your search parameters below. See a live preview of your mandate brief and an indicative search fee — all before speaking to anyone.</p>
+  </div>
+  <div class="brief-grid">
+    <div class="brief-left">
+      <div class="brief-title">Mandate Configuration</div>
+      <div class="brief-sub">Select your search parameters. The mandate preview and fee estimate update live.</div>
+
+      <div class="brief-field">
+        <div class="brief-field-label">Role Level</div>
+        <div class="brief-opts" id="levelOpts">
+          <button class="brief-opt" data-level="cxo" data-fee="0.12" onclick="selectBrief('level',this)">CXO / MD / CEO</button>
+          <button class="brief-opt sel" data-level="csuite" data-fee="0.10" onclick="selectBrief('level',this)">C-Suite (CFO, COO, CTO…)</button>
+          <button class="brief-opt" data-level="vp" data-fee="0.085" onclick="selectBrief('level',this)">VP / Head of Function</button>
+          <button class="brief-opt" data-level="dir" data-fee="0.07" onclick="selectBrief('level',this)">Director / Senior Manager</button>
+        </div>
+      </div>
+
+      <div class="brief-field">
+        <div class="brief-field-label">Function</div>
+        <select class="brief-select" id="funcSelect" onchange="updateBrief()">
+          <option value="Finance">Finance / CFO</option>
+          <option value="Technology">Technology / CTO / CIO</option>
+          <option value="Operations">Operations / COO</option>
+          <option value="Sales & Marketing">Sales & Marketing</option>
+          <option value="Human Resources">Human Resources / CHRO</option>
+          <option value="Strategy">Strategy & Business Development</option>
+          <option value="Supply Chain">Supply Chain / Procurement</option>
+          <option value="Legal & Compliance">Legal & Compliance</option>
+          <option value="General Management">General Management / P&L</option>
+        </select>
+      </div>
+
+      <div class="brief-field">
+        <div class="brief-field-label">Annual CTC Band (₹ Lakh)</div>
+        <div class="brief-opts" id="ctcOpts">
+          <button class="brief-opt" data-ctc="20-40" onclick="selectBrief('ctc',this)">₹20–40L</button>
+          <button class="brief-opt sel" data-ctc="40-80" onclick="selectBrief('ctc',this)">₹40–80L</button>
+          <button class="brief-opt" data-ctc="80-150" onclick="selectBrief('ctc',this)">₹80L–1.5Cr</button>
+          <button class="brief-opt" data-ctc="150+" onclick="selectBrief('ctc',this)">₹1.5Cr+</button>
+        </div>
+      </div>
+
+      <div class="brief-field">
+        <div class="brief-field-label">Location Scope</div>
+        <div class="brief-opts" id="locOpts">
+          <button class="brief-opt sel" data-loc="Eastern India" onclick="selectBrief('loc',this)">Eastern India</button>
+          <button class="brief-opt" data-loc="Pan-India" onclick="selectBrief('loc',this)">Pan-India</button>
+          <button class="brief-opt" data-loc="Global / NRI" onclick="selectBrief('loc',this)">Global / NRI</button>
+        </div>
+      </div>
+
+      <div class="brief-field">
+        <div class="brief-field-label">Sector</div>
+        <select class="brief-select" id="sectorSelect" onchange="updateBrief()">
+          <option>BFSI</option>
+          <option>Manufacturing</option>
+          <option>Healthcare</option>
+          <option>Real Estate & Infrastructure</option>
+          <option>Retail / FMCG</option>
+          <option>IT & Technology</option>
+          <option>Logistics & Supply Chain</option>
+          <option>Education</option>
+          <option>Energy & Resources</option>
+        </select>
+      </div>
+
+      <div class="brief-field">
+        <div class="brief-field-label">Search Urgency</div>
+        <div class="brief-opts" id="urgOpts">
+          <button class="brief-opt" data-urg="Urgent" data-urgmod="1.15" onclick="selectBrief('urg',this)">Urgent (&lt;45 days)</button>
+          <button class="brief-opt sel" data-urg="Standard" data-urgmod="1" onclick="selectBrief('urg',this)">Standard (60–90 days)</button>
+          <button class="brief-opt" data-urg="Flexible" data-urgmod="0.95" onclick="selectBrief('urg',this)">Flexible (90–120 days)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="brief-right">
+      <div class="brief-preview" id="briefPreview">
+        <div class="bp-header">
+          <div class="bp-title" id="bpTitle">Head of Finance · BFSI · Eastern India</div>
+          <div class="bp-badge" id="bpBadge">CONFIDENTIAL</div>
+        </div>
+        <div class="bp-rows">
+          <div class="bp-row"><span class="bp-row-lbl">Role Level</span><span class="bp-row-val" id="bpLevel">C-Suite</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">Function</span><span class="bp-row-val" id="bpFunc">Finance / CFO</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">CTC Band</span><span class="bp-row-val" id="bpCtc">₹40–80 Lakh per annum</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">Location</span><span class="bp-row-val" id="bpLoc">Eastern India (Odisha / WB / Jharkhand)</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">Sector</span><span class="bp-row-val" id="bpSector">BFSI</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">Urgency</span><span class="bp-row-val" id="bpUrg">Standard · 60–90 days</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">Methodology</span><span class="bp-row-val">Retained search · Research-led · Fully confidential</span></div>
+          <div class="bp-row"><span class="bp-row-lbl">Guarantee</span><span class="bp-row-val">90-day unconditional replacement guarantee</span></div>
+        </div>
+      </div>
+      <div class="brief-fee-box">
+        <div class="brief-fee-lbl">Indicative Search Fee (excl. GST)</div>
+        <div class="brief-fee-val" id="briefFeeVal">₹4.0L – ₹8.0L</div>
+        <div class="brief-fee-sub" id="briefFeeSub">Retained fee: 10% of first-year CTC · Payable in 3 milestones · Exact fee confirmed at mandate scoping call</div>
+      </div>
+      <div style="margin-top:16px;">
+        <button class="btn-red" style="width:100%;text-align:center;" onclick="submitMandate()">Submit This Mandate Confidentially →</button>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);text-align:center;margin-top:10px;">Response within 24 hours · No obligation · Fully confidential</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH PROCESS TIMELINE -->
+<section class="process-section reveal" id="process">
+  <div class="chip">The Search Process</div>
+  <h2 class="D">Eight weeks. Eight steps.<br>One <em>exceptional leader.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">ORIGENNT's search methodology is ISO-aligned and built on 340+ completed mandates across India. Every step is documented, reported, and delivered on schedule.</p>
+  <div class="process-timeline" style="margin-top:56px;">
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">1</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 1</div>
+        <div class="pt-title">Mandate Scoping & Role Brief</div>
+        <div class="pt-desc">Deep-dive with the hiring manager, board, and relevant stakeholders to define the ideal candidate profile — competencies, culture fit, experience arc, failure factors, and non-negotiables. We also agree the process timeline, communication cadence, and decision criteria.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">📄</span><span class="pt-del-text">Deliverable: Signed role brief · Search agreement · Milestones confirmed</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">2</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 1–2</div>
+        <div class="pt-title">Market Mapping & Long List Research</div>
+        <div class="pt-desc">Our research team maps the entire talent universe for the role — identifying every senior professional in the relevant sector, function, and geography who could credibly be considered. Typically 60–120 names. This is the invisible work most firms skip; it is what makes the difference.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">🗺️</span><span class="pt-del-text">Deliverable: Talent map · Long list (40–60 names) with rationale</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">3</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 2–3</div>
+        <div class="pt-title">Confidential Candidate Outreach</div>
+        <div class="pt-desc">Direct, discreet outreach to long-listed candidates — through our network, LinkedIn, and proprietary Eastern India leadership database of 6,200+ senior professionals. No job ads. No database blasts. Individual, personalised approach for each candidate.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">📬</span><span class="pt-del-text">Deliverable: Weekly progress report · Interest & decline tracking</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">4</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 3–4</div>
+        <div class="pt-title">ORIGENNT Screening & Assessment</div>
+        <div class="pt-desc">Interested candidates undergo structured 90-minute competency interviews with ORIGENNT's search consultants. We assess against the agreed role brief — not just career narrative. Psychometric profiling (personality, leadership style, cognitive) for shortlisted candidates.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">🧠</span><span class="pt-del-text">Deliverable: Candidate assessment reports · Psychometric profiles · Short list (4–6 names)</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">5</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 4–5</div>
+        <div class="pt-title">Client Presentation & First Interviews</div>
+        <div class="pt-desc">Short-listed candidates are presented to the client with a comprehensive written profile — career rationale, assessment findings, compensation expectations, and ORIGENNT's recommendation. Client conducts first-round interviews; ORIGENNT facilitates and debriefs both sides.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">📊</span><span class="pt-del-text">Deliverable: Candidate dossiers · Interview facilitation · Post-interview debrief reports</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">6</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 5–6</div>
+        <div class="pt-title">Final Interviews & Reference Checks</div>
+        <div class="pt-desc">Final-stage candidates undergo reference checks with former managers, peers, and direct reports — structured conversations, not cursory calls. Employment, qualification, and criminal background verification. Financial background check for CFO and MD-level mandates.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">✅</span><span class="pt-del-text">Deliverable: Reference check reports · Background verification certificates</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">7</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Week 6–8</div>
+        <div class="pt-title">Offer, Negotiation & Acceptance</div>
+        <div class="pt-desc">ORIGENNT manages the offer process — structuring compensation, managing counter-offer risk, handling the candidate's resignation process, and navigating the notice period. 84% of ORIGENNT offers are accepted at first presentation. Counter-offer risk is assessed and mitigated before the offer is made.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">🤝</span><span class="pt-del-text">Deliverable: Offer letter review · Counter-offer strategy · Acceptance confirmed</span></div>
+      </div>
+    </div>
+
+    <div class="pt-step reveal">
+      <div class="pt-dot"><div class="pt-dot-num">8</div></div>
+      <div class="pt-content">
+        <div class="pt-week">Day 1 + 90 Days</div>
+        <div class="pt-title">On-boarding Support & 90-Day Guarantee</div>
+        <div class="pt-desc">ORIGENNT remains engaged through the leader's first 90 days — conducting check-ins with both the placed leader and the client at 30, 60, and 90 days. If the placement exits for any reason within 90 days, we re-run the search at zero additional fee.</div>
+        <div class="pt-deliverable"><span class="pt-del-icon">🛡️</span><span class="pt-del-text">Deliverable: 30/60/90-day check-in reports · 90-day guarantee certificate</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CANDIDATE PIPELINE VISUALISER -->
+<section class="pipeline-section reveal">
+  <div style="position:relative;z-index:1;margin-bottom:16px;">
+    <div class="chip w">Search Funnel Data</div>
+    <h2 class="D W">What a typical ORIGENNT search<br><em>looks like in numbers.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,.45);max-width:560px;margin-top:14px;line-height:1.85;">Average pipeline metrics across 340+ completed mandates — C-suite and VP level. The rigour is in the funnel.</p>
+  </div>
+  <div class="pipeline-wrap">
+    <div class="pipeline-header">
+      <div class="ph-cell"><div class="ph-cell-title">Mapped</div><div class="ph-cell-n">94</div><div class="ph-cell-sub">avg. names identified</div></div>
+      <div class="ph-cell"><div class="ph-cell-title">Approached</div><div class="ph-cell-n">58</div><div class="ph-cell-sub">direct outreach</div></div>
+      <div class="ph-cell"><div class="ph-cell-title">Interested</div><div class="ph-cell-n">24</div><div class="ph-cell-sub">expressed interest</div></div>
+      <div class="ph-cell"><div class="ph-cell-title">Screened</div><div class="ph-cell-n">14</div><div class="ph-cell-sub">ORIGENNT interview</div></div>
+      <div class="ph-cell"><div class="ph-cell-title">Short-listed</div><div class="ph-cell-n">5</div><div class="ph-cell-sub">presented to client</div></div>
+      <div class="ph-cell"><div class="ph-cell-title">Placed</div><div class="ph-cell-n">1</div><div class="ph-cell-sub">offer accepted</div></div>
+    </div>
+    <div class="pipeline-funnel">
+      <div class="pf-title">Search Funnel — Average Per Mandate (C-Suite & VP Level)</div>
+      <canvas id="pipelineCanvas" height="220"></canvas>
+      <div class="pipeline-legend">
+        <div class="pl-item"><div class="pl-dot" style="background:#CC2229;"></div>Mapped Universe</div>
+        <div class="pl-item"><div class="pl-dot" style="background:#c9a84c;"></div>Approached</div>
+        <div class="pl-item"><div class="pl-dot" style="background:#0d6b5e;"></div>Screened & Assessed</div>
+        <div class="pl-item"><div class="pl-dot" style="background:rgba(255,255,255,.3);"></div>Short-listed & Placed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES BY SECTOR -->
+<section class="sectors-section reveal">
+  <div class="chip">Roles We Fill</div>
+  <h2 class="D">Senior mandates across<br>every sector that <em>matters.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">ORIGENNT has completed executive mandates in 18 sectors across India. Select your sector to see the roles we fill and the level we operate at.</p>
+  <div class="sector-tabs">
+    <button class="stab active" data-sec="bfsi">BFSI</button>
+    <button class="stab" data-sec="mfg">Manufacturing</button>
+    <button class="stab" data-sec="health">Healthcare</button>
+    <button class="stab" data-sec="infra">Real Estate & Infra</button>
+    <button class="stab" data-sec="tech">IT & Technology</button>
+    <button class="stab" data-sec="retail">Retail / FMCG</button>
+  </div>
+
+  <div class="sector-panel active" id="sec-bfsi">
+    <div class="sector-roles-grid">
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Financial Officer (CFO)</div><div class="role-spec">NBFCs, banks, insurance, fintech — CA/CFA with 15+ years, RBI regulatory experience preferred.</div><div class="role-fee">Typical fee: ₹5L–₹10L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Risk Officer (CRO)</div><div class="role-spec">Credit risk, market risk, operational risk for lending and investment institutions.</div><div class="role-fee">Typical fee: ₹5L–₹9L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Technology Officer (CTO)</div><div class="role-spec">Core banking, digital transformation, API banking, fintech stack leadership.</div><div class="role-fee">Typical fee: ₹6L–₹12L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Credit & Underwriting</div><div class="role-spec">MSME lending, home loans, LAP — portfolio management with P&L ownership.</div><div class="role-fee">Typical fee: ₹3.5L–₹6L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Retail Banking / Branch Network</div><div class="role-spec">Multi-state branch network leadership, CASA mobilisation, liability product strategy.</div><div class="role-fee">Typical fee: ₹3.5L–₹7L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Compliance & Legal</div><div class="role-spec">RBI/SEBI/IRDAI regulatory compliance, legal advisory, government relations.</div><div class="role-fee">Typical fee: ₹3L–₹5.5L</div></div>
+    </div>
+  </div>
+
+  <div class="sector-panel" id="sec-mfg">
+    <div class="sector-roles-grid">
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Operating Officer (COO)</div><div class="role-spec">Steel, cement, chemicals, auto-ancillary — multi-plant operations, capex, and EHS leadership.</div><div class="role-fee">Typical fee: ₹5L–₹10L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Manufacturing Officer</div><div class="role-spec">Production efficiency, lean transformation, Industry 4.0 integration for large manufacturers.</div><div class="role-fee">Typical fee: ₹5L–₹9L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Supply Chain & Procurement</div><div class="role-spec">Integrated supply chain, vendor development, import/export, and logistics optimisation.</div><div class="role-fee">Typical fee: ₹3.5L–₹6.5L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Quality & EHS</div><div class="role-spec">ISO/BIS quality systems, environmental compliance, safety culture for industrial manufacturers.</div><div class="role-fee">Typical fee: ₹3L–₹6L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Sales & Distribution</div><div class="role-spec">B2B and B2G sales leadership for industrial products — channel management and key accounts.</div><div class="role-fee">Typical fee: ₹3L–₹5.5L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">General Manager – Plant Operations</div><div class="role-spec">Single-plant P&L ownership — production, maintenance, people, and statutory compliance.</div><div class="role-fee">Typical fee: ₹2.5L–₹5L</div></div>
+    </div>
+  </div>
+
+  <div class="sector-panel" id="sec-health">
+    <div class="sector-roles-grid">
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Executive Officer — Hospital Group</div><div class="role-spec">Multi-specialty hospital group leadership — P&L, NABH accreditation, medical and administrative oversight.</div><div class="role-fee">Typical fee: ₹7L–₹14L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Medical Officer (CMO)</div><div class="role-spec">Clinical governance, quality standards, physician relations and credentialing for hospital networks.</div><div class="role-fee">Typical fee: ₹5L–₹10L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Hospital Operations</div><div class="role-spec">Multi-location hospital operations — OPD/IPD management, capacity utilisation, process excellence.</div><div class="role-fee">Typical fee: ₹3.5L–₹6.5L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Business Development</div><div class="role-spec">Healthcare B2B — corporate tie-ups, insurance empanelment, government contracts, and expansion.</div><div class="role-fee">Typical fee: ₹3L–₹6L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Nursing & Clinical Services</div><div class="role-spec">Nursing leadership, clinical protocol management, and frontline healthcare workforce development.</div><div class="role-fee">Typical fee: ₹2.5L–₹4.5L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Finance — Healthcare</div><div class="role-spec">Hospital finance, insurance billing, cost management, and revenue cycle management.</div><div class="role-fee">Typical fee: ₹2.5L–₹5L</div></div>
+    </div>
+  </div>
+
+  <div class="sector-panel" id="sec-infra">
+    <div class="sector-roles-grid">
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">CEO / MD — Real Estate Developer</div><div class="role-spec">Residential and commercial development — project P&L, land acquisition strategy, investor relations.</div><div class="role-fee">Typical fee: ₹7L–₹15L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">CFO — Infrastructure / EPC</div><div class="role-spec">Project finance, working capital management, banking relationships for large contractors and developers.</div><div class="role-fee">Typical fee: ₹5L–₹10L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Project Management</div><div class="role-spec">Multi-site construction project delivery — RERA compliance, contractor management, delivery timelines.</div><div class="role-fee">Typical fee: ₹3.5L–₹7L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Sales & CRM</div><div class="role-spec">Residential sales leadership — channel management, broker network, CRM, and collection management.</div><div class="role-fee">Typical fee: ₹3L–₹6L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Legal & Land Acquisition</div><div class="role-spec">Land due diligence, title clearance, government approvals, and litigation management for developers.</div><div class="role-fee">Typical fee: ₹3L–₹5.5L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Design & Architecture</div><div class="role-spec">Architectural leadership, design standards, vendor management, and regulatory compliance.</div><div class="role-fee">Typical fee: ₹2.5L–₹5L</div></div>
+    </div>
+  </div>
+
+  <div class="sector-panel" id="sec-tech">
+    <div class="sector-roles-grid">
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Technology Officer (CTO)</div><div class="role-spec">Product and platform leadership for Indian SaaS, fintech, and enterprise technology companies.</div><div class="role-fee">Typical fee: ₹6L–₹14L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Product Officer (CPO)</div><div class="role-spec">Product strategy, roadmap, and GTM for B2B and B2C technology products in growth stage.</div><div class="role-fee">Typical fee: ₹6L–₹12L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Engineering</div><div class="role-spec">Engineering team leadership — architecture, delivery, hiring, and technology stack decisions.</div><div class="role-fee">Typical fee: ₹4L–₹8L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Sales (Enterprise / B2B)</div><div class="role-spec">Enterprise software and IT services sales — new logos, key account management, and GTM strategy.</div><div class="role-fee">Typical fee: ₹3.5L–₹7L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Data & Analytics</div><div class="role-spec">Data strategy, analytics infrastructure, ML/AI product features, and data governance.</div><div class="role-fee">Typical fee: ₹3L–₹6L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Cybersecurity</div><div class="role-spec">Information security, compliance (ISO 27001, CERT-In), and security architecture for enterprise IT.</div><div class="role-fee">Typical fee: ₹3L–₹6.5L</div></div>
+    </div>
+  </div>
+
+  <div class="sector-panel" id="sec-retail">
+    <div class="sector-roles-grid">
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">CEO / Business Head</div><div class="role-spec">Retail chain or FMCG business unit leadership — revenue, brand, operations, and expansion P&L.</div><div class="role-fee">Typical fee: ₹6L–₹14L</div></div>
+      <div class="role-card"><div class="role-level c">C-Suite</div><div class="role-title">Chief Marketing Officer (CMO)</div><div class="role-spec">Brand building, digital marketing, trade marketing, and consumer insights for FMCG and retail.</div><div class="role-fee">Typical fee: ₹5L–₹10L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – National / Regional Sales</div><div class="role-spec">Channel sales, general trade, modern trade leadership — distributor management and revenue target ownership.</div><div class="role-fee">Typical fee: ₹3.5L–₹7L</div></div>
+      <div class="role-card"><div class="role-level vp">VP Level</div><div class="role-title">VP – Supply Chain</div><div class="role-spec">FMCG supply chain — demand planning, procurement, warehousing, and last-mile distribution.</div><div class="role-fee">Typical fee: ₹3.5L–₹6.5L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Category Management</div><div class="role-spec">Category P&L, assortment, pricing, and vendor negotiations for retail or e-commerce.</div><div class="role-fee">Typical fee: ₹3L–₹5.5L</div></div>
+      <div class="role-card"><div class="role-level dir">Director</div><div class="role-title">Head of Operations — Retail</div><div class="role-spec">Store operations, expansion project management, SOP, and frontline workforce leadership.</div><div class="role-fee">Typical fee: ₹2.5L–₹5L</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="compare-section reveal">
+  <div class="chip">ORIGENNT vs. The Market</div>
+  <h2 class="D">What others call executive search.<br>What we <em>actually deliver.</em></h2>
+  <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="them">Job Portals (Naukri / LinkedIn)</th>
+          <th class="them">Recruitment Agencies</th>
+          <th class="them">National Search Firms</th>
+          <th class="us">ORIGENNT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Passive candidate access (not job-seeking)</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Limited</td><td class="us"><span class="tick">✓</span> 6,200+ network</td></tr>
+        <tr><td>Confidential search (no job ads)</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span> Always</td></tr>
+        <tr><td>Psychometric & competency assessment</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Add-on</td><td class="us"><span class="tick">✓</span> All mandates</td></tr>
+        <tr><td>Structured reference checks</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Basic</td><td class="them"><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span> 3 references min.</td></tr>
+        <tr><td>Eastern India sector specialisation</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span></td><td class="them"><span class="cross">✗</span> Metro-focused</td><td class="us"><span class="tick">✓</span> Primary focus</td></tr>
+        <tr><td>Offer management & counter-offer handling</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span></td><td class="them"><span class="tick">✓</span></td><td class="us"><span class="tick">✓</span> Active management</td></tr>
+        <tr><td>90-day placement guarantee</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span> Varies</td><td class="us"><span class="tick">✓</span> Unconditional</td></tr>
+        <tr><td>30/60/90-day on-boarding support</td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="cross">✗</span></td><td class="them"><span class="partial">◑</span></td><td class="us"><span class="tick">✓</span> Structured check-ins</td></div></td></tr>
+        <tr><td>Typical placement timeline</td><td class="them">60–120 days if lucky</td><td class="them">45–90 days</td><td class="them">60–90 days</td><td class="us" style="color:var(--teal);font-weight:700;">Avg. 62 days</td></tr>
+        <tr><td>Typical fee structure</td><td class="them">₹5K–₹25K job posting</td><td class="them">12–18% CTC contingency</td><td class="them">20–30% CTC retained</td><td class="us" style="color:var(--red);font-weight:700;">7–12% CTC retained</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHY ORIGENNT -->
+<section class="why-section reveal">
+  <div class="chip">Why ORIGENNT for Executive Search</div>
+  <h2 class="D">Six things that put<br>ORIGENNT in a <em>different category.</em></h2>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><div class="why-name">We Know Eastern India's Leaders.</div><div class="why-desc">Our proprietary database of 6,200+ senior professionals across Odisha, West Bengal, Jharkhand, and Chhattisgarh is built from 340+ mandates. We know who is performing, who is ready to move, and who to avoid — before we start your search.</div></div>
+    <div class="why-card"><div class="why-num">02</div><div class="why-name">Retained. Not Contingency.</div><div class="why-desc">We only take retained mandates. This means we are 100% committed to your search — not hedging across 30 contingency searches simultaneously. Your search gets a dedicated team, a structured methodology, and our full attention until the role is filled.</div></div>
+    <div class="why-card"><div class="why-num">03</div><div class="why-name">We Assess. Not Just Screen.</div><div class="why-desc">Every shortlisted candidate has undergone a 90-minute structured competency interview and psychometric assessment before you meet them. You receive a written assessment report, not a CV and a covering note. The interview is already done.</div></div>
+    <div class="why-card"><div class="why-num">04</div><div class="why-name">Cultural Fit Is Not an Afterthought.</div><div class="why-desc">Senior leaders fail in new organisations almost always because of culture mismatch, not capability. ORIGENNT assesses cultural fit explicitly — against your organisation's values, management style, and strategic context — before any recommendation is made.</div></div>
+    <div class="why-card"><div class="why-num">05</div><div class="why-name">We Manage Both Sides.</div><div class="why-desc">The candidate experience matters as much as the client experience. We manage the candidate's emotional journey — the excitement, the doubt, the counter-offer conversation — so that by the time the offer is made, the candidate is already committed. Our first-offer acceptance rate is 84%.</div></div>
+    <div class="why-card"><div class="why-num">06</div><div class="why-name">The 90-Day Guarantee Is Real.</div><div class="why-desc">If the placed leader exits within 90 days, ORIGENNT re-runs the search at zero additional fee. No caveats about resignation for cause, no debate about fault. We stand behind every placement we make. We have invoked this guarantee exactly 11 times in 340+ mandates.</div></div>
+  </div>
+</section>
+
+<!-- CAROUSEL -->
+<section class="carousel-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip w">Search in Practice</div>
+    <h2 class="D W">What an ORIGENNT executive search<br>looks like from the <em>inside.</em></h2>
+  </div>
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80&fit=crop" alt="Executive Meeting" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Mandate Scoping</span><div class="cso-title">Deep-dive with the board and hiring team to define the ideal candidate profile</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop" alt="Research" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Market Mapping</span><div class="cso-title">94-name average talent map before any candidate is approached</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80&fit=crop" alt="Leader Assessment" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Assessment</span><div class="cso-title">90-minute structured competency interviews and psychometric profiling</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&fit=crop" alt="Client Presentation" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Presentation</span><div class="cso-title">Written candidate dossiers with ORIGENNT assessment and recommendation</div></div></div>
+      <div class="carousel-slide"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&fit=crop" alt="Placement" loading="lazy"><div class="carousel-slide-overlay"><span class="cso-tag">Placement & Guarantee</span><div class="cso-title">Offer managed, accepted, and guaranteed for 90 days post-joining</div></div></div>
+    </div>
+  </div>
+  <div class="carousel-controls">
+    <button class="cc-btn" id="prevBtn">←</button>
+    <div class="cc-dots" id="carouselDots"></div>
+    <button class="cc-btn" id="nextBtn">→</button>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="case-section reveal">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Case Study</div>
+    <h2 class="D">A CFO search that three firms<br>failed. ORIGENNT <em>placed in 54 days.</em></h2>
+  </div>
+  <div class="case-inner">
+    <div>
+      <div class="case-sector">Infrastructure — Odisha</div>
+      <div class="case-title">How ORIGENNT placed a CFO for a ₹800 Cr infrastructure group after two national firms failed over eight months</div>
+      <div class="case-body">A Bhubaneswar-headquartered infrastructure group with ₹800 Cr turnover had been searching for a CFO for eight months. Two national executive search firms had presented candidates — six in total — none of whom the MD found acceptable. The role required specific project finance experience in Odisha government infrastructure contracts, familiarity with Eastern India banking relationships, and a CA who was willing to be based in Bhubaneswar rather than Hyderabad or Bengaluru.<br><br>ORIGENNT was briefed in week one of the engagement. We spent three days with the MD before approaching a single candidate — understanding not the job description, but what had been wrong with all six previous candidates. The answer was a combination of culture mismatch and insufficient regional relationship capital.<br><br>Our search identified 34 credible candidates in Eastern India specifically. We approached 22. Within 40 days we had presented four shortlisted candidates. The preferred candidate — a CA with 18 years of experience including a decade with a state PSU — joined in month three.</div>
+      <div class="case-outcomes">
+        <div class="case-out"><div class="case-out-n">54<sub>days</sub></div><div class="case-out-l">Search to offer</div></div>
+        <div class="case-out"><div class="case-out-n">4<sub>of 4</sub></div><div class="case-out-l">Shortlist quality score</div></div>
+        <div class="case-out"><div class="case-out-n">3<sup>+</sup><sub>yrs</sub></div><div class="case-out-l">Leader still in post</div></div>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&fit=crop" alt="Infrastructure Odisha CFO Search" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:3px;">
+      <div class="case-steps">
+        <div class="case-step"><div class="case-step-num">01</div><div><div class="case-step-title">3-Day Mandate Deep-Dive</div><div class="case-step-desc">Three structured sessions with the MD and board to understand the six previous failures — identified cultural non-negotiables and regional requirements that the job description had not captured.</div></div></div>
+        <div class="case-step"><div class="case-step-num">02</div><div><div class="case-step-title">Eastern India-Specific Market Map</div><div class="case-step-desc">Mapped 34 senior finance professionals in Odisha, West Bengal, and Jharkhand with infrastructure or PSU background. Excluded the Bengaluru/Hyderabad talent pool that had produced all six previous failures.</div></div></div>
+        <div class="case-step"><div class="case-step-num">03</div><div><div class="case-step-title">Competency & Cultural Fit Assessment</div><div class="case-step-desc">All four shortlisted candidates underwent psychometric profiling and a structured cultural fit conversation specific to the founder-led, Odisha-rooted operating style of the group.</div></div></div>
+        <div class="case-step"><div class="case-step-num">04</div><div><div class="case-step-title">Reference Checks & Offer Management</div><div class="case-step-desc">Three structured references for the preferred candidate — including his former CMD at the PSU. Counter-offer from current employer managed over 12 days. Offer accepted. 90-day guarantee active. Leader is still in post three years later.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE STRIP -->
+<div class="guarantee-strip reveal">
+  <div class="gs-cell"><div class="gs-num">90<span style="font-size:18px;font-family:'Outfit',sans-serif;"> days</span></div><div class="gs-label">Unconditional placement guarantee. If the leader exits within 90 days, we re-run the search at zero additional fee.</div></div>
+  <div class="gs-cell"><div class="gs-num">96<span style="font-size:18px;font-family:'Outfit',sans-serif;">%</span></div><div class="gs-label">Placement success rate across 340+ completed mandates. Industry average is 78%.</div></div>
+  <div class="gs-cell"><div class="gs-num">62<span style="font-size:18px;font-family:'Outfit',sans-serif;"> days</span></div><div class="gs-label">Average search completion time. From mandate signing to offer acceptance.</div></div>
+</div>
+
+<!-- PRICING -->
+<section class="pricing-section reveal" id="pricing">
+  <div style="margin-bottom:48px;">
+    <div class="chip">Search Fees</div>
+    <h2 class="D">Retained search fees.<br>Transparent. <em>Performance-linked.</em></h2>
+    <p class="body-t" style="max-width:640px;margin-top:14px;">ORIGENNT charges a retained fee of 8–12% of the placed leader's first-year total CTC, payable in three milestones. No placement, no final fee. GST invoice issued at each milestone. Razorpay accepted — cards, UPI, net banking, NEFT.</p>
+  </div>
+
+  <div class="pkg-grid">
+    <div class="pkg">
+      <div class="pkg-badge s">Director Level</div>
+      <div class="pkg-name">Senior Manager / Director Search</div>
+      <div class="pkg-tagline">Head of Function, Senior Manager, or Director-level mandates with CTC of ₹20–50 Lakh per annum.</div>
+      <div class="pkg-price">8<sup>%</sup></div>
+      <div class="pkg-period">of first-year CTC · indicative ₹1.6L–₹4L</div>
+      <div class="pkg-fee-note">Milestone 1: ₹40,000 at mandate signing<br>Milestone 2: 40% at shortlist delivery<br>Milestone 3: Balance at joining</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Dedicated search consultant</li>
+        <li class="pkg-feat">Research-led long list (30+ names)</li>
+        <li class="pkg-feat">Competency interview & assessment</li>
+        <li class="pkg-feat">3 structured reference checks</li>
+        <li class="pkg-feat">Background & employment verification</li>
+        <li class="pkg-feat">Offer management support</li>
+        <li class="pkg-feat">60-day placement guarantee</li>
+        <li class="pkg-feat dim">Psychometric profiling</li>
+      </ul>
+      <button class="pkg-cta r" onclick="openRzp('Director-Level Executive Search — Retainer',40000,'Milestone 1 payment to commence director-level executive search mandate.')">Pay Retainer & Start — ₹40,000</button>
+      <div class="pkg-note">Balance payable at shortlist & joining · Exact % confirmed at scoping</div>
+    </div>
+
+    <div class="pkg featured">
+      <div class="pkg-badge p">Most Common</div>
+      <div class="pkg-name">VP / C-Suite Search</div>
+      <div class="pkg-tagline">VP, Head of Business Unit, and C-Suite mandates with CTC of ₹50 Lakh–₹2 Crore per annum.</div>
+      <div class="pkg-price">10<sup>%</sup></div>
+      <div class="pkg-period">of first-year CTC · indicative ₹5L–₹20L</div>
+      <div class="pkg-fee-note" style="background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);">Milestone 1: ₹1,00,000 at mandate signing<br>Milestone 2: 40% at shortlist delivery<br>Milestone 3: Balance at joining</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Senior search partner dedicated</li>
+        <li class="pkg-feat">Research-led long list (60+ names)</li>
+        <li class="pkg-feat">Full competency assessment</li>
+        <li class="pkg-feat">Psychometric profiling (all shortlisted)</li>
+        <li class="pkg-feat">5 structured reference checks</li>
+        <li class="pkg-feat">Full background + financial verification</li>
+        <li class="pkg-feat">Active offer & counter-offer management</li>
+        <li class="pkg-feat">90-day placement guarantee</li>
+      </ul>
+      <button class="pkg-cta w" onclick="openRzp('VP / C-Suite Executive Search — Retainer',100000,'Milestone 1 payment to commence VP or C-Suite executive search mandate.')">Pay Retainer & Start — ₹1,00,000</button>
+      <div class="pkg-note">Full fee confirmed at mandate scoping · 90-day unconditional guarantee</div>
+    </div>
+
+    <div class="pkg">
+      <div class="pkg-badge g">Board & MD Level</div>
+      <div class="pkg-name">MD / CEO / Board Search</div>
+      <div class="pkg-tagline">Managing Director, CEO, or independent board director mandates. Highest-stakes leadership engagements.</div>
+      <div class="pkg-price">12<sup>%</sup></div>
+      <div class="pkg-period">of first-year CTC · bespoke fee agreed at scoping</div>
+      <div class="pkg-fee-note">Milestone 1: ₹2,00,000 at mandate signing<br>Milestone 2: 40% at shortlist delivery<br>Milestone 3: Balance at joining</div>
+      <div class="pkg-div"></div>
+      <ul class="pkg-feats">
+        <li class="pkg-feat">Managing partner personally leads search</li>
+        <li class="pkg-feat">Research-led long list (80+ names)</li>
+        <li class="pkg-feat">Full competency + leadership style assessment</li>
+        <li class="pkg-feat">Board-appropriate psychometric suite</li>
+        <li class="pkg-feat">7+ structured reference checks</li>
+        <li class="pkg-feat">Full background including directorships</li>
+        <li class="pkg-feat">Board presentation of candidates</li>
+        <li class="pkg-feat">90-day guarantee + 6-month monitoring</li>
+      </ul>
+      <button class="pkg-cta g" onclick="openRzp('MD / CEO / Board Executive Search',200000,'Milestone 1 payment to commence MD, CEO, or board-level executive search mandate.')">Pay Retainer & Start — ₹2,00,000</button>
+      <div class="pkg-note">Exact fee agreed at scoping · Managing partner engagement</div>
+    </div>
+  </div>
+
+  <div class="pkg-gst">
+    <div style="font-size:18px;flex-shrink:0;">🔒</div>
+    <div class="pkg-gst-text"><strong>All fees exclude GST (18%). Retainer payment commences the search immediately.</strong> Milestone payments via Razorpay — cards, UPI, net banking accepted. Every mandate is fully confidential. ORIGENNT will not disclose your search to any party without your explicit consent.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">The leader you need<br>is already employed<br>somewhere <em>else.</em></h2>
+    <p class="fc-sub">ORIGENNT will find them, assess them, and deliver them — confidentially, thoroughly, and with a 90-day guarantee. 340+ mandates. 96% placement success. Eastern India's most connected executive search practice.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="fca w" onclick="openRzp('Executive Search — Confidential Mandate',0,'Submit your confidential mandate. We respond within 24 hours.')">Submit a Mandate Confidentially</button>
+    <a href="talent-acquisition.html" class="fca ol">Talent Acquisition →</a>
+    <a href="hr-analytics.html" class="fca ol">HR Analytics →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 11 November 2025 · Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Consulting</div>
+      <a href="management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="strategy.html" class="footer-link">Strategy & Transformation</a>
+      <a href="change-management.html" class="footer-link">Change Management</a>
+    </div>
+    <div>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a href="about.html" class="footer-link">About ORIGENNT</a>
+      <a href="contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2026 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /main -->
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" id="rzpClose">×</button>
+    <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;">
+      <div class="rzp-tag" id="rzpTag">Executive Search</div>
+      <div class="rzp-confidential">🔒 Strictly Confidential</div>
+    </div>
+    <div class="rzp-modal-h" id="rzpH">Submit Your Mandate</div>
+    <div class="rzp-modal-sub" id="rzpSub">Your mandate details are shared with ORIGENNT search partners only. Never disclosed to third parties.</div>
+    <div class="rzp-modal-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">Retainer payment commences the search immediately. Balance payable at milestones.</div>
+    <div class="rzp-fields">
+      <input class="rzp-inp" id="rzpCompany" type="text" placeholder="Company / Organisation Name *">
+      <input class="rzp-inp" id="rzpName" type="text" placeholder="Your Name & Designation *">
+      <input class="rzp-inp" id="rzpEmail" type="email" placeholder="Email Address *">
+      <input class="rzp-inp" id="rzpPhone" type="tel" placeholder="Phone Number *">
+      <input class="rzp-inp" id="rzpRole" type="text" placeholder="Role to be Filled (e.g. CFO, VP Sales)">
+      <input class="rzp-inp" id="rzpCtcBand" type="text" placeholder="Approximate CTC Band (e.g. ₹60–80L)">
+    </div>
+    <button class="rzp-submit" id="rzpBtn">Proceed →</button>
+    <div class="rzp-secure">🔒 Strictly confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 · Powered by Razorpay</div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── ROLE BRIEF BUILDER ── */
+const briefState={level:'csuite',fee:0.10,ctc:'40-80',loc:'Eastern India',urg:'Standard',urgmod:1};
+
+function selectBrief(type,btn){
+  btn.closest('.brief-opts').querySelectorAll('.brief-opt').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  if(type==='level'){briefState.level=btn.dataset.level;briefState.fee=+btn.dataset.fee;}
+  if(type==='ctc')briefState.ctc=btn.dataset.ctc;
+  if(type==='loc')briefState.loc=btn.dataset.loc;
+  if(type==='urg'){briefState.urg=btn.dataset.urg;briefState.urgmod=+btn.dataset.urgmod;}
+  updateBrief();
+}
+
+function updateBrief(){
+  const func=document.getElementById('funcSelect').value;
+  const sector=document.getElementById('sectorSelect').value;
+  const levelLabel={'cxo':'CXO / MD / CEO','csuite':'C-Suite','vp':'VP / Head of Function','dir':'Director / Senior Manager'}[briefState.level];
+  document.getElementById('bpTitle').textContent=func+' · '+sector+' · '+briefState.loc;
+  document.getElementById('bpLevel').textContent=levelLabel;
+  document.getElementById('bpFunc').textContent=func;
+  document.getElementById('bpCtc').textContent='₹'+briefState.ctc.replace('-','–')+' Lakh per annum';
+  document.getElementById('bpLoc').textContent=briefState.loc==='Eastern India'?'Eastern India (Odisha / WB / Jharkhand)':briefState.loc;
+  document.getElementById('bpSector').textContent=sector;
+  document.getElementById('bpUrg').textContent=briefState.urg+' · '+(briefState.urg==='Urgent'?'Target <45 days':briefState.urg==='Standard'?'60–90 days':'90–120 days');
+  // Fee estimate
+  const ctcMap={'20-40':{lo:20,hi:40},'40-80':{lo:40,hi:80},'80-150':{lo:80,hi:150},'150+':{lo:150,hi:250}};
+  const {lo,hi}=ctcMap[briefState.ctc];
+  const adjFee=briefState.fee*briefState.urgmod;
+  const fLo=Math.round(lo*adjFee);
+  const fHi=Math.round(hi*adjFee);
+  document.getElementById('briefFeeVal').textContent='₹'+fLo+'L – ₹'+fHi+'L';
+  document.getElementById('briefFeeSub').textContent='Retained fee: '+(adjFee*100).toFixed(0)+'% of first-year CTC · Payable in 3 milestones · Confirmed at mandate scoping call';
+}
+
+function submitMandate(){
+  const func=document.getElementById('funcSelect').value;
+  const sector=document.getElementById('sectorSelect').value;
+  openRzp('Executive Search Mandate: '+func+' · '+sector,0,'Confidential mandate — '+func+', '+sector+', '+briefState.loc+', CTC: ₹'+briefState.ctc+'L');
+}
+
+updateBrief();
+
+/* ── PIPELINE CANVAS ── */
+function drawPipeline(){
+  const c=document.getElementById('pipelineCanvas');if(!c)return;
+  const W=c.offsetWidth||700;
+  c.width=W*2;c.height=220*2;c.style.width=W+'px';c.style.height='220px';
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  const H=220;
+  const stages=['Mapped\n94','Approached\n58','Interested\n24','Screened\n14','Short-listed\n5','Placed\n1'];
+  const vals=[94,58,24,14,5,1];
+  const colors=['#CC2229','#d94040','#e07b20','#c9a84c','#0d6b5e','#1a9c8a'];
+  const maxV=94;
+  const pad={t:20,b:36,l:20,r:20};
+  const cw=W-pad.l-pad.r;
+  const segW=cw/stages.length;
+  const maxH=H-pad.t-pad.b;
+  stages.forEach((s,i)=>{
+    const bh=Math.max((vals[i]/maxV)*maxH,6);
+    const x=pad.l+i*segW+4;
+    const y=pad.t+maxH-bh;
+    const w=segW-8;
+    // Gradient bar
+    const grad=ctx.createLinearGradient(x,y,x,y+bh);
+    grad.addColorStop(0,colors[i]+'99');grad.addColorStop(1,colors[i]);
+    ctx.fillStyle=grad;
+    ctx.fillRect(x,y,w,bh);
+    // Value label inside bar
+    if(bh>30){
+      ctx.fillStyle='rgba(255,255,255,.9)';ctx.font='bold 13px Libre Baskerville';ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillText(vals[i],x+w/2,y+8);
+    }
+    // Stage label
+    const lines=s.split('\n');
+    ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='9px Outfit';ctx.textAlign='center';ctx.textBaseline='top';
+    ctx.fillText(lines[0],x+w/2,pad.t+maxH+8);
+  });
+}
+const pObs=new IntersectionObserver(es=>{if(es[0].isIntersecting){drawPipeline();pObs.disconnect();}},{threshold:.2});
+const pipeEl=document.querySelector('.pipeline-section');
+if(pipeEl)pObs.observe(pipeEl);
+window.addEventListener('resize',drawPipeline);
+
+/* ── SECTOR TABS ── */
+document.querySelectorAll('.stab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.sector-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sec-'+tab.dataset.sec).classList.add('active');
+  });
+});
+
+/* ── CAROUSEL ── */
+const track=document.getElementById('carouselTrack');
+const slides=track.querySelectorAll('.carousel-slide');
+const dotsC=document.getElementById('carouselDots');
+let cur2=0;
+const visC=()=>window.innerWidth>1024?3:window.innerWidth>640?2:1;
+for(let i=0;i<slides.length;i++){
+  const d=document.createElement('button');d.className='cc-dot'+(i===0?' active':'');
+  d.addEventListener('click',()=>goTo(i));dotsC.appendChild(d);
+}
+function goTo(idx){
+  cur2=Math.max(0,Math.min(idx,slides.length-visC()));
+  const sw=slides[0].offsetWidth+3;
+  track.style.transform='translateX(-'+(cur2*sw)+'px)';
+  document.querySelectorAll('.cc-dot').forEach((d,i)=>d.classList.toggle('active',i===cur2));
+}
+document.getElementById('prevBtn').addEventListener('click',()=>goTo(Math.max(0,cur2-1)));
+document.getElementById('nextBtn').addEventListener('click',()=>goTo(Math.min(slides.length-visC(),cur2+1)));
+let autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4200);
+track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoC));
+track.parentElement.addEventListener('mouseleave',()=>{autoC=setInterval(()=>goTo((cur2+1)%(slides.length-visC()+1)),4200);});
+
+/* ── RAZORPAY ── */
+let rzpCurrent={};
+function openRzp(name,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent='Executive Search — ORIGENNT';
+  document.getElementById('rzpH').textContent=name||'Submit Your Mandate';
+  document.getElementById('rzpSub').textContent='Your mandate details are shared with ORIGENNT search partners only. Strictly confidential.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?'<sup>₹</sup>'+amtInt.toLocaleString('en-IN'):'<span style="font-size:22px;letter-spacing:-.01em;">Confidential Mandate</span>';
+  document.getElementById('rzpPDesc').textContent=desc||'Response within 24 hours. No obligation.';
+  document.getElementById('rzpBtn').textContent=amtInt>0?'Pay Retainer & Start Search →':'Submit Mandate →';
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){
+  document.getElementById('rzpOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      image:'https://origennt.com/favicon.ico',
+      handler:function(response){
+        closeRzp();
+        alert('✓ Retainer received — Payment ID: '+response.razorpay_payment_id+'\n\nYour search is now active. ORIGENNT will contact you at '+email+' within 24 hours to schedule the mandate scoping call.\n\nThis engagement is strictly confidential.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,role:document.getElementById('rzpRole').value,ctc:document.getElementById('rzpCtcBand').value,service:rzpCurrent.name},
+      theme:{color:'#CC2229'},
+      modal:{ondismiss:function(){}}
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT,\n\nConfidential Executive Search Mandate:\nCompany: '+company+'\nContact: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nRole: '+document.getElementById('rzpRole').value+'\nCTC Band: '+document.getElementById('rzpCtcBand').value+'\n\nPlease treat this as strictly confidential.');
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+</script>
+</body>
+</html>
