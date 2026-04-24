@@ -1,0 +1,1442 @@
+cat > /mnt/user-data/outputs/services-for-businesses.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">    <link rel="icon" href="favicon.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Origennt - Strategic Talent Engineering from Odisha, India serving global clients with data-driven recruitment solutions.">
+<title>Services for Businesses — ORIGENNT | Execution Systems for MSMEs & SMEs</title>
+  <meta name="description" content="Origennt provides recruitment solutions, management, management-consulting, consulting, HR consulting, corporate training and career development services for businesses and professionals in India.">
+    <meta name="keywords" content="Origennt, india, global, ori, origennt, management consulting, startup, consulting, consultancy, consultation, job, management, recruitment, HR consulting, staffing, corporate training, placement services">
+    <meta property="og:title" content="Origennt – Management Consulting Services">
+    <meta property="og:description" content="Professional recruitment, training, staffing and HR consulting services across India.">
+    <meta property="og:url" content="https://origennt.com/">
+    <meta property="og:type" content="website">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;border:none;cursor:pointer;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;cursor:pointer;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+
+/* HERO */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1800&q=80&fit=crop') center 30%/cover;filter:brightness(.1) saturate(.3);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:580px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:22px 48px 22px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:48px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+
+/* EXECUTION MODEL INTRO */
+.model-intro{padding:100px 80px;background:var(--off);}
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.model-formula{display:flex;align-items:center;gap:0;margin-top:40px;}
+.mf-block{flex:1;padding:24px 18px;background:var(--white);border:1px solid var(--gl);text-align:center;transition:background .2s,border-color .2s;}
+.mf-block:hover{background:var(--black);border-color:var(--red);}
+.mf-block:hover .mf-label{color:var(--white);}
+.mf-block:hover .mf-sub{color:rgba(255,255,255,.4);}
+.mf-icon{font-size:26px;margin-bottom:10px;display:block;}
+.mf-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--black);transition:color .2s;}
+.mf-sub{font-size:11px;font-weight:300;color:var(--gt);margin-top:4px;transition:color .2s;}
+.mf-op{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--gm);padding:0 12px;flex-shrink:0;}
+.mf-result{padding:24px 22px;background:var(--red);text-align:center;flex-shrink:0;}
+.mf-result .mf-label{color:var(--white);font-size:11px;}
+.mf-result .mf-sub{color:rgba(255,255,255,.5);}
+.insight-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.isr{background:var(--white);padding:20px 18px;}
+.isr-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--black);line-height:1;}
+.isr-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.isr-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gt);margin-top:6px;}
+
+/* THREE PILLARS */
+.pillars-section{padding:100px 80px;background:var(--white);}
+.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.pillar{background:var(--off);padding:44px 36px;position:relative;overflow:hidden;transition:background .25s;}
+.pillar::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gl);transition:background .3s;}
+.pillar.wf::before{background:var(--red);}
+.pillar.op::before{background:var(--teal);}
+.pillar.gr::before{background:var(--gold);}
+.pillar:hover{background:var(--gl);}
+.pillar-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:16px;display:inline-block;padding:4px 12px;}
+.pillar-tag.wf{background:rgba(204,34,41,.1);color:var(--red);}
+.pillar-tag.op{background:rgba(13,107,94,.1);color:var(--teal);}
+.pillar-tag.gr{background:rgba(201,168,76,.1);color:var(--gold);}
+.pillar-icon{font-size:32px;margin-bottom:18px;display:block;}
+.pillar-name{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);margin-bottom:12px;line-height:1.2;}
+.pillar-desc{font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.8;margin-bottom:24px;}
+.pillar-topics{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.pt{font-size:12.5px;font-weight:300;color:var(--gt);display:flex;gap:8px;align-items:flex-start;}
+.pt::before{content:'→';color:var(--red);font-size:10px;flex-shrink:0;margin-top:2px;font-weight:700;}
+.pillar-count{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gm);padding-top:16px;border-top:1px solid var(--gl);}
+.pillar-services{display:flex;flex-direction:column;gap:3px;margin-top:20px;}
+.ps-item{background:var(--white);padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:12px;font-weight:500;color:var(--black);border-left:3px solid transparent;transition:border-color .2s,background .2s;}
+.ps-item:hover{border-left-color:var(--red);background:var(--gl);}
+.ps-item::before{content:'✓';color:var(--red);font-size:10px;font-weight:700;flex-shrink:0;}
+.pillar-brochure-btn{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;background:transparent;border:1.5px solid var(--gl);color:var(--gt);transition:background .2s,border-color .2s,color .2s;margin-top:16px;cursor:pointer;}
+.pillar-brochure-btn:hover{background:var(--black);border-color:var(--black);color:var(--white);}
+
+/* ANALYTICS DASHBOARD */
+.analytics-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.analytics-section::before{content:'';position:absolute;left:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.06),transparent 60%);pointer-events:none;}
+.analytics-header{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:64px;position:relative;z-index:1;align-items:end;}
+.analytics-tabs{display:flex;gap:3px;margin-bottom:32px;flex-wrap:wrap;position:relative;z-index:1;}
+.atab{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:none;cursor:pointer;transition:background .2s,color .2s;}
+.atab.active{background:var(--red);color:var(--white);}
+.analytics-panel{display:none;position:relative;z-index:1;}
+.analytics-panel.active{display:block;}
+.chart-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:32px;}
+.chart-title-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+.chart-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:500;}
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;}
+.chart-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);}
+.chart-legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+canvas.chart-canvas{width:100%;display:block;}
+.dc-bar-row{margin-bottom:16px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12px;color:rgba(255,255,255,.6);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:13px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.5),var(--red));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+.dc-bar-fill.gold{background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));}
+.before-after-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px;}
+.ba-panel{padding:28px;border:1px solid rgba(255,255,255,.08);}
+.ba-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:16px;}
+.ba-label.before{color:rgba(255,255,255,.35);}
+.ba-label.after{color:var(--teal);}
+.ba-metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.ba-metric:last-child{border-bottom:none;}
+.ba-metric-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.ba-metric-val{font-family:'Libre Baskerville',serif;font-size:18px;}
+.ba-metric-val.bad{color:rgba(255,255,255,.4);}
+.ba-metric-val.good{color:var(--teal);}
+
+/* ENGAGEMENT MODELS */
+.models-section{padding:100px 80px;background:var(--off);}
+.models-intro{margin-bottom:64px;}
+.models-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+
+/* selector pill for pillar */
+.sel-pill{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border:1.5px solid var(--gl);color:var(--gt);cursor:pointer;transition:all .2s;background:transparent;}
+.sel-pill:hover{border-color:var(--red);color:var(--red);}
+.sel-pill.active{border-color:var(--red);background:var(--red);color:var(--white);}
+.sel-pill-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+
+.model-card{background:var(--white);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:box-shadow .2s;}
+.model-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:4px;}
+.model-card.m1::after{background:var(--red);}
+.model-card.m2::after{background:var(--teal);}
+.model-card.m3::after{background:var(--gold);}
+.model-card.m4{background:var(--black);}
+.model-card.m4::after{background:linear-gradient(90deg,var(--red),var(--teal),var(--gold));}
+.model-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);}
+.model-badge{font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 13px;margin-bottom:18px;display:inline-block;font-weight:600;width:fit-content;}
+.model-badge.s{background:var(--gl);color:var(--gt);}
+.model-badge.p{background:var(--teal);color:var(--white);}
+.model-badge.g{background:var(--gold);color:#3d2800;}
+.model-badge.e{background:var(--red);color:var(--white);}
+.model-name{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--black);margin-bottom:6px;}
+.m4 .model-name{color:var(--white);}
+.model-tagline{font-size:12.5px;font-weight:300;color:var(--gt);margin-bottom:20px;line-height:1.6;}
+.m4 .model-tagline{color:rgba(255,255,255,.4);}
+.model-pillars-included{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.mpi{font-size:10px;font-weight:600;letter-spacing:.06em;padding:4px 10px;}
+.mpi.wf{background:rgba(204,34,41,.1);color:var(--red);}
+.mpi.op{background:rgba(13,107,94,.1);color:var(--teal);}
+.mpi.gr{background:rgba(201,168,76,.12);color:var(--gold);}
+.mpi.all{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.model-price{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--black);line-height:1;}
+.m4 .model-price{color:var(--white);}
+.model-price sup{font-size:14px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.model-period{font-size:11px;color:var(--gm);margin-top:4px;margin-bottom:20px;}
+.m4 .model-period{color:rgba(255,255,255,.25);}
+.model-div{height:1px;background:var(--gl);margin:0 0 20px;}
+.m4 .model-div{background:rgba(255,255,255,.09);}
+.model-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:24px;}
+.model-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.m4 .model-feat{color:rgba(255,255,255,.5);}
+.model-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.model-feat.dim::before{content:'—';color:var(--gm);}
+.model-feat.dim{opacity:.35;}
+.model-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s,transform .2s;border:none;cursor:pointer;width:100%;}
+.model-cta.r{background:var(--red);color:var(--white);}
+.model-cta.r:hover{background:var(--red-dark);transform:translateY(-2px);}
+.model-cta.t{background:var(--teal);color:var(--white);}
+.model-cta.t:hover{opacity:.88;transform:translateY(-2px);}
+.model-cta.g{background:var(--gold);color:#3d2800;}
+.model-cta.g:hover{opacity:.88;transform:translateY(-2px);}
+.model-cta.w{background:var(--white);color:var(--red);}
+.model-cta.w:hover{background:var(--off);}
+.model-note{font-size:10px;color:var(--gm);text-align:center;margin-top:8px;line-height:1.5;}
+.m4 .model-note{color:rgba(255,255,255,.2);}
+
+/* WHY PACKAGE BANNER */
+.why-package-banner{background:var(--red);padding:48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-top:3px;}
+.wpb-left h3{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.5vw,34px);color:var(--white);line-height:1.2;margin-bottom:14px;}
+.wpb-left h3 em{font-style:italic;opacity:.75;}
+.wpb-left p{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.8;}
+.wpb-right{display:flex;flex-direction:column;gap:3px;}
+.wpb-row{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;background:rgba(255,255,255,.1);padding:16px 20px;}
+.wpb-row-icon{font-size:18px;}
+.wpb-row-text{font-size:13px;font-weight:400;color:rgba(255,255,255,.85);}
+.wpb-row-save{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--white);white-space:nowrap;}
+.wpb-total{background:var(--white);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}
+.wpb-total-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gt);}
+.wpb-total-val{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--red);}
+
+/* ADD-ON BUILDER */
+.addon-section{padding:100px 80px;background:var(--white);}
+.addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:40px;}
+.addon-item{background:var(--off);padding:20px 22px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:background .2s;border:2px solid transparent;}
+.addon-item.selected{border-color:var(--red);background:var(--red-pale);}
+.addon-check{width:20px;height:20px;border:1.5px solid var(--gm);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;margin-top:2px;}
+.addon-item.selected .addon-check{background:var(--red);border-color:var(--red);color:var(--white);}
+.addon-icon{font-size:20px;flex-shrink:0;}
+.addon-name{font-size:13px;font-weight:600;color:var(--black);margin-bottom:3px;}
+.addon-desc{font-size:11.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.addon-price{font-size:12px;font-weight:700;color:var(--red);margin-top:6px;}
+.addon-checkout{background:var(--off);padding:32px 40px;display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;margin-top:3px;border:2px solid var(--gl);}
+.ac-total{display:flex;flex-direction:column;}
+.ac-total-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gt);margin-bottom:6px;}
+.ac-total-val{font-family:'Libre Baskerville',serif;font-size:42px;color:var(--black);}
+.ac-total-val sub{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.ac-right{display:flex;flex-direction:column;gap:10px;min-width:300px;}
+.ac-gst-note{font-size:11.5px;font-weight:300;color:var(--gt);line-height:1.6;}
+.ac-gst-note strong{color:var(--black);}
+
+/* BROCHURE MODAL */
+.brochure-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:8000;align-items:center;justify-content:center;}
+.brochure-overlay.open{display:flex;}
+.brochure-box{background:var(--white);width:620px;max-width:94vw;padding:0;position:relative;max-height:90vh;overflow-y:auto;}
+.brochure-header{background:var(--black);padding:40px 44px 36px;}
+.brochure-close{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:rgba(255,255,255,.4);cursor:pointer;transition:color .2s;}
+.brochure-close:hover{color:var(--white);}
+.brochure-tag{font-size:9px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;padding:4px 12px;background:var(--red);color:var(--white);display:inline-block;margin-bottom:14px;}
+.brochure-h{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--white);margin-bottom:8px;line-height:1.2;}
+.brochure-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.6;}
+.brochure-body{padding:40px 44px;}
+.brochure-section-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:16px;font-weight:500;margin-top:28px;}
+.brochure-section-title:first-child{margin-top:0;}
+.brochure-items{display:flex;flex-direction:column;gap:3px;margin-bottom:24px;}
+.brochure-item{display:flex;gap:12px;align-items:flex-start;background:var(--off);padding:14px 16px;}
+.brochure-item::before{content:'✓';color:var(--red);font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.brochure-item-text{font-size:13px;font-weight:300;color:var(--black);line-height:1.6;}
+.brochure-stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:24px;}
+.bsr{background:var(--black);padding:18px 16px;text-align:center;}
+.bsr-n{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--white);line-height:1;}
+.bsr-n sub{font-size:12px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.bsr-l{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:5px;}
+.brochure-cta{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:8px;}
+.brochure-cta:hover{background:var(--red-dark);}
+
+/* RAZORPAY MODAL */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:94vw;padding:52px 48px;position:relative;max-height:90vh;overflow-y:auto;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);cursor:pointer;transition:color .2s;}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:4px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;}
+.rzp-modal-price{font-family:'Libre Baskerville',serif;font-size:40px;color:var(--black);line-height:1;margin-bottom:4px;}
+.rzp-modal-price sup{font-size:16px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+/* WHAT-HOW SECTION */
+.whatwhy-section{padding:100px 80px;background:var(--black);}
+.whatwhy-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.why-cards{display:flex;flex-direction:column;gap:3px;margin-top:32px;}
+.why-c{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:22px 26px;display:flex;gap:16px;transition:background .2s;}
+.why-c:hover{background:rgba(255,255,255,.08);}
+.why-c-icon{font-size:22px;flex-shrink:0;}
+.why-c-title{font-size:14px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:5px;}
+.why-c-desc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.7;}
+.process-steps{display:flex;flex-direction:column;gap:3px;}
+.pstep{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:22px 26px;display:flex;gap:16px;}
+.pstep-num{font-family:'Libre Baskerville',serif;font-size:28px;color:rgba(255,255,255,.12);flex-shrink:0;line-height:1;}
+.pstep-title{font-size:14px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:5px;}
+.pstep-desc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;}
+
+/* SEE ALL SERVICES */
+.see-all-section{padding:80px 80px;background:var(--off);display:flex;justify-content:space-between;align-items:center;gap:60px;}
+.sas-left h2{font-family:'Libre Baskerville',serif;font-size:clamp(24px,2.8vw,38px);color:var(--black);line-height:1.15;margin-bottom:12px;}
+.sas-left h2 em{font-style:italic;color:var(--red);}
+.sas-left p{font-size:14px;font-weight:300;color:var(--gt);line-height:1.75;max-width:520px;}
+.sas-right{display:flex;flex-direction:column;gap:12px;flex-shrink:0;min-width:260px;}
+.sas-link{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:14px 36px;text-decoration:none;transition:background .2s;}
+.sas-link.r{background:var(--red);color:var(--white);}
+.sas-link.r:hover{background:var(--red-dark);}
+.sas-link.ol{background:transparent;color:var(--gt);border:1.5px solid var(--gl);}
+.sas-link.ol:hover{border-color:var(--black);color:var(--black);}
+
+/* FINAL CTA */
+.final-cta-section{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta-section::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta-section::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s;text-decoration:none;border:none;cursor:pointer;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* FOOTER */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+
+/* URGENCY STRIP */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* HAMBURGER */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* RESPONSIVE */
+@media(max-width:1200px){.models-grid{grid-template-columns:1fr 1fr;}.pillar-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .model-grid,.whatwhy-grid,.analytics-header,.why-package-banner,.see-all-section{grid-template-columns:1fr;gap:48px;}
+  section,.model-intro,.pillars-section,.analytics-section,.models-section,.addon-section,.whatwhy-section,.see-all-section,.final-cta-section{padding-left:32px;padding-right:32px;}
+  .models-grid,.pillar-grid{grid-template-columns:1fr;}
+  .addon-grid{grid-template-columns:1fr 1fr;}
+  .final-cta-section{flex-direction:column;align-items:flex-start;}
+  .meta-ribbon,.urgency-strip{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .before-after-grid{grid-template-columns:1fr;}
+  .why-package-banner{padding-left:32px;padding-right:32px;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.addon-grid{grid-template-columns:1fr;}.brochure-stat-row{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}}
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PBCDJ7Y3JQ">
+</script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisation Design<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus-ambassador.html" class="nav-link">Campus Ambassador Registration<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link active">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="our-approach.html" class="nav-link">Our Approach<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="privacy-policy.html" class="nav-link">Privacy Policy<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="affiliate.html" class="nav-link">Join Our Affiliate Program<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U70200OD2025PTC051453 · Est. 25/11/2025</small></div>
+  </div>
+</aside>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="index.html" class="back-link">Home</a>
+  <button class="topbar-cta" onclick="openRzp('ORIGENNT — Full Execution System',125000,'All three execution pillars. One integrated engagement.')">Get Started — Pay Now</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Services for Businesses · Execution Systems</div></div>
+      <h1 class="hero-h1">Your business has<br>a strategy. Does it<br>have a <em>system?</em></h1>
+      <p class="hero-sub">82% of MSMEs and SMEs fail not because of bad ideas — but because execution systems are never built. ORIGENNT structures your workforce, operations, and growth into measurable, repeatable systems that run without you having to carry them manually.</p>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="document.getElementById('models').scrollIntoView({behavior:'smooth'})">Choose Your Model</button>
+        <a href="services.html" class="btn-ghost-w">View All Services →</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">Execution Intelligence — India 2026</div>
+      <div class="hp-row"><span class="hp-name">MSMEs with execution gaps</span><span class="hp-val">82<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Failures from workforce system</span><span class="hp-val">67<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Growth with structured systems</span><span class="hp-val">3.4<sub>×</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Avg. engagement ROI</span><span class="hp-val">4.2<sub>x</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Client retention rate</span><span class="hp-val">87<sub>%</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">3</div><div class="hsc-l">Execution Systems</div></div>
+    <div class="hs-cell"><div class="hsc-n">28<sup>+</sup></div><div class="hsc-l">Services Available</div></div>
+    <div class="hs-cell"><div class="hsc-n">87<sup>%</sup></div><div class="hsc-l">Client Retention</div></div>
+    <div class="hs-cell"><div class="hsc-n">48<sup>hr</sup></div><div class="hsc-l">Engagement Start</div></div>
+    <div class="hs-cell"><div class="hsc-n">99<sup>%</sup></div><div class="hsc-l">Filing Accuracy</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc-r"><div class="mc-r-lbl">Businesses Served</div><div class="mc-r-val">140+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Execution Engagements</div><div class="mc-r-val">380+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">States of Operation</div><div class="mc-r-val">12+</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Avg. Time-to-Value</div><div class="mc-r-val">11 Days</div></div>
+  <div class="mc-r"><div class="mc-r-lbl">Payment to Start</div><div class="mc-r-val">48 Hours</div></div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">⚡ Every month without structured execution is a month of compounding inefficiency. ORIGENNT engagements start within 48 hours of payment — no queues, no pitches.</div>
+  <a href="#models" class="us-cta">Choose Model →</a>
+</div>
+
+<!-- EXECUTION MODEL INTRO -->
+<section class="model-intro reveal">
+  <div class="model-grid">
+    <div>
+      <div class="chip">The Execution Framework</div>
+      <h2 class="D">Three systems.<br>Every business failure<br>fits <em>one.</em></h2>
+      <div class="body-t" style="margin-top:20px;">
+        <p>ORIGENNT structures all business engagements around the three-layer execution model. Every service we offer — talent acquisition, payroll, analytics, L&D, strategy — maps to one of these layers. When one layer fails, the others feel it. We fix the system, not the symptom.</p>
+        <p>Our 5-phase methodology ensures we diagnose before we prescribe. You don't receive generic advice. You receive structural intervention — built for your specific execution gaps, delivered in plain language, and measured on outcomes.</p>
+      </div>
+      <div class="model-formula" style="margin-top:36px;">
+        <div class="mf-block">
+          <span class="mf-icon">👥</span>
+          <div class="mf-label">Workforce</div>
+          <div class="mf-sub">People & Hiring</div>
+        </div>
+        <div class="mf-op">+</div>
+        <div class="mf-block">
+          <span class="mf-icon">⚙️</span>
+          <div class="mf-label">Operations</div>
+          <div class="mf-sub">Process & Systems</div>
+        </div>
+        <div class="mf-op">+</div>
+        <div class="mf-block">
+          <span class="mf-icon">📈</span>
+          <div class="mf-label">Performance</div>
+          <div class="mf-sub">Growth & Scale</div>
+        </div>
+        <div class="mf-op" style="padding:0 8px;">=</div>
+        <div class="mf-result">
+          <span class="mf-icon" style="font-size:20px;">🔄</span>
+          <div class="mf-label">Execution<br>System</div>
+          <div class="mf-sub">Built. Measured.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="insight-stat-row">
+        <div class="isr"><div class="isr-n">82<sup>%</sup></div><div class="isr-l">MSMEs with at least one broken execution layer</div></div>
+        <div class="isr"><div class="isr-n">3.4<sup>×</sup></div><div class="isr-l">Faster growth in businesses with structured systems</div></div>
+        <div class="isr"><div class="isr-n">67<sup>%</sup></div><div class="isr-l">Of failures originate in workforce layer first</div></div>
+      </div>
+      <div style="background:var(--black);padding:36px;margin-top:3px;">
+        <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;font-weight:500;">How Our Engagements Work — 5 Phase Method</div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);"><div style="font-family:'Libre Baskerville',serif;font-size:13px;color:var(--red);flex-shrink:0;width:22px;">01</div><div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.6);">Discover — structured listening, no assumptions</div></div>
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);"><div style="font-family:'Libre Baskerville',serif;font-size:13px;color:var(--red);flex-shrink:0;width:22px;">02</div><div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.6);">Diagnose — root cause, not presenting symptom</div></div>
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);"><div style="font-family:'Libre Baskerville',serif;font-size:13px;color:var(--red);flex-shrink:0;width:22px;">03</div><div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.6);">Design — co-created with your team, not imposed</div></div>
+          <div style="display:flex;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);"><div style="font-family:'Libre Baskerville',serif;font-size:13px;color:var(--red);flex-shrink:0;width:22px;">04</div><div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.6);">Deploy — embedded with your team through execution</div></div>
+          <div style="display:flex;gap:16px;padding:12px 0;"><div style="font-family:'Libre Baskerville',serif;font-size:13px;color:var(--red);flex-shrink:0;width:22px;">05</div><div style="font-size:13px;font-weight:300;color:rgba(255,255,255,.6);">Deliver & Transfer — you own it. We exit cleanly.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section class="pillars-section reveal">
+  <div class="chip">The Three Execution Pillars</div>
+  <h2 class="D">Every service we offer<br>maps to one of <em>these three.</em></h2>
+  <p class="body-t" style="max-width:600px;margin-top:14px;">Select any pillar below to view its service components, download the brochure, and understand the analytics ORIGENNT delivers before and after engagement.</p>
+  <div class="pillar-grid">
+
+    <!-- PILLAR 1: WORKFORCE -->
+    <div class="pillar wf">
+      <span class="pillar-tag wf">Pillar 01 · Workforce Execution</span>
+      <span class="pillar-icon">👥</span>
+      <div class="pillar-name">Workforce<br>Execution System</div>
+      <div class="pillar-desc">Hiring is not recruitment — it is a system. When workforce execution fails, every other layer suffers. ORIGENNT builds your people system: consistent hiring criteria, structured onboarding, attrition prediction, and team accountability frameworks that run without manual management.</div>
+      <div class="pillar-topics">
+        <div class="pt">Why MSMEs hire reactively instead of systematically</div>
+        <div class="pt">The cost of inconsistent hiring criteria at scale</div>
+        <div class="pt">Manpower planning vs. manpower management</div>
+        <div class="pt">When attrition is a system problem, not a people problem</div>
+      </div>
+      <div class="pillar-count" style="margin-bottom:16px;">12 Workforce Insights Published — <a href="insights.html" style="color:var(--red);text-decoration:none;">Read All →</a></div>
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gt);margin-bottom:10px;font-weight:500;">Services Included</div>
+      <div class="pillar-services">
+        <div class="ps-item">Talent Acquisition (End-to-End)</div>
+        <div class="ps-item">Executive & Leadership Search</div>
+        <div class="ps-item">HR Analytics — Attrition & Flight Risk</div>
+        <div class="ps-item">Onboarding Programme Design</div>
+        <div class="ps-item">Campus & Early Careers Hiring</div>
+        <div class="ps-item">Manager Effectiveness Scoring</div>
+        <div class="ps-item">Internship Cohort Management</div>
+      </div>
+      <button class="pillar-brochure-btn" onclick="openBrochure('workforce')">📄 Download Workforce Brochure</button>
+      <button class="btn-red" style="width:100%;text-align:center;margin-top:10px;" onclick="openRzp('Workforce Execution System',42000,'Talent acquisition, HR analytics, onboarding, and workforce system design.')">Book Workforce Execution — ₹42,000/mo</button>
+    </div>
+
+    <!-- PILLAR 2: OPERATIONS -->
+    <div class="pillar op">
+      <span class="pillar-tag op">Pillar 02 · Operational Systems</span>
+      <span class="pillar-icon">⚙️</span>
+      <div class="pillar-name">Operational<br>Systems Design</div>
+      <div class="pillar-desc">Operations without structure don't scale — they drain. Every inefficiency compounds at growth stage. ORIGENNT builds your operational backbone: documented processes, payroll and compliance infrastructure, delegation frameworks, and the SOPs that actually get followed — not filed away.</div>
+      <div class="pillar-topics">
+        <div class="pt">The compounding cost of undocumented processes</div>
+        <div class="pt">Why delegation always fails at the same bottleneck</div>
+        <div class="pt">Operational debt vs. technical debt in services firms</div>
+        <div class="pt">Standard Operating Procedures that teams actually use</div>
+      </div>
+      <div class="pillar-count" style="margin-bottom:16px;">9 Operations Insights Published — <a href="insights.html" style="color:var(--teal);text-decoration:none;">Read All →</a></div>
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gt);margin-bottom:10px;font-weight:500;">Services Included</div>
+      <div class="pillar-services">
+        <div class="ps-item">Payroll Processing (EPF, ESI, TDS, PT, LWF)</div>
+        <div class="ps-item">Statutory & Labour Compliance Management</div>
+        <div class="ps-item">Process Documentation & SOP Design</div>
+        <div class="ps-item">Organisation Structure Design</div>
+        <div class="ps-item">Compliance Training (Labour Code 2025)</div>
+        <div class="ps-item">HR Policy Architecture</div>
+        <div class="ps-item">Full & Final Settlement Processing</div>
+      </div>
+      <button class="pillar-brochure-btn" onclick="openBrochure('operations')">📄 Download Operations Brochure</button>
+      <button class="btn-red" style="width:100%;text-align:center;margin-top:10px;background:var(--teal);" onclick="openRzp('Operational Systems Design',38000,'Payroll, compliance, SOP design, org structure, and operational infrastructure.')">Book Operations System — ₹38,000/mo</button>
+    </div>
+
+    <!-- PILLAR 3: GROWTH -->
+    <div class="pillar gr">
+      <span class="pillar-tag gr">Pillar 03 · Growth Execution</span>
+      <span class="pillar-icon">📈</span>
+      <div class="pillar-name">Growth Execution<br>Framework</div>
+      <div class="pillar-desc">Growth that feels random is random. Without measurable execution systems, scaling is controlled chaos. ORIGENNT builds your growth layer: performance measurement, revenue execution mapping, L&D programmes aligned to business outcomes, and the strategic framework that converts effort into scale.</div>
+      <div class="pillar-topics">
+        <div class="pt">Why revenue growth stalls at the same revenue band</div>
+        <div class="pt">The structural difference between growth and scale</div>
+        <div class="pt">Measuring execution, not just output</div>
+        <div class="pt">When performance management fails before it starts</div>
+      </div>
+      <div class="pillar-count" style="margin-bottom:16px;">7 Growth Insights Published — <a href="insights.html" style="color:var(--gold);text-decoration:none;">Read All →</a></div>
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gt);margin-bottom:10px;font-weight:500;">Services Included</div>
+      <div class="pillar-services">
+        <div class="ps-item">HR & Business Strategy Advisory</div>
+        <div class="ps-item">Learning & Development Programmes</div>
+        <div class="ps-item">Leadership Development & Coaching</div>
+        <div class="ps-item">Performance Management System Design</div>
+        <div class="ps-item">Workforce Planning & Analytics</div>
+        <div class="ps-item">Compensation Benchmarking & Restructuring</div>
+        <div class="ps-item">Organisation Transformation Roadmap</div>
+      </div>
+      <button class="pillar-brochure-btn" onclick="openBrochure('growth')">📄 Download Growth Brochure</button>
+      <button class="btn-red" style="width:100%;text-align:center;margin-top:10px;background:var(--gold);color:#3d2800;" onclick="openRzp('Growth Execution Framework',45000,'Strategy, L&D, performance management, and compensation benchmarking.')">Book Growth Framework — ₹45,000/mo</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ANALYTICS DASHBOARD -->
+<section class="analytics-section reveal">
+  <div class="analytics-header">
+    <div>
+      <div class="chip w">Before & After ORIGENNT</div>
+      <h2 class="D W">What structured execution<br>actually <em>changes.</em></h2>
+    </div>
+    <div class="body-t w" style="padding-top:36px;">
+      <p>These dashboards show the measurable difference ORIGENNT engagements produce across all three execution pillars. Real metrics. Tracked from day one. Every engagement starts with a baseline — so outcomes are never estimated, always measured.</p>
+    </div>
+  </div>
+
+  <div class="analytics-tabs">
+    <button class="atab active" data-panel="workforce">Workforce Metrics</button>
+    <button class="atab" data-panel="ops">Operational Efficiency</button>
+    <button class="atab" data-panel="growth">Growth Performance</button>
+  </div>
+
+  <!-- WORKFORCE PANEL -->
+  <div class="analytics-panel active" id="panel-workforce">
+    <div class="before-after-grid">
+      <div class="ba-panel" style="background:rgba(255,255,255,.04);">
+        <div class="ba-label before">BEFORE ORIGENNT — Typical MSME</div>
+        <div class="ba-metric"><span class="ba-metric-name">Annual Attrition Rate</span><span class="ba-metric-val bad">24%</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Time-to-Fill (avg. role)</span><span class="ba-metric-val bad">67 days</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Offer Acceptance Rate</span><span class="ba-metric-val bad">44%</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Hiring Criteria Consistency</span><span class="ba-metric-val bad">None</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Cost Per Hire (avg.)</span><span class="ba-metric-val bad">₹72,000</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">90-Day Retention of Hires</span><span class="ba-metric-val bad">61%</span></div>
+      </div>
+      <div class="ba-panel" style="background:rgba(13,107,94,.08);border:1px solid rgba(13,107,94,.2);">
+        <div class="ba-label after">AFTER 6 MONTHS — ORIGENNT Engagement</div>
+        <div class="ba-metric"><span class="ba-metric-name">Annual Attrition Rate</span><span class="ba-metric-val good">9% ↓</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Time-to-Fill (avg. role)</span><span class="ba-metric-val good">28 days ↓</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Offer Acceptance Rate</span><span class="ba-metric-val good">78% ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Hiring Criteria Consistency</span><span class="ba-metric-val good">Structured</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Cost Per Hire (avg.)</span><span class="ba-metric-val good">₹31,000 ↓</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">90-Day Retention of Hires</span><span class="ba-metric-val good">89% ↑</span></div>
+      </div>
+    </div>
+    <div class="chart-wrap" style="margin-top:3px;">
+      <div class="chart-title-bar">
+        <div class="chart-title">Attrition Rate Trend — Monthly (% Headcount) — Illustrative Engagement</div>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#CC2229;"></div>Before ORIGENNT</div>
+          <div class="chart-legend-item"><div class="chart-legend-dot" style="background:#0d6b5e;"></div>After Engagement</div>
+        </div>
+      </div>
+      <canvas class="chart-canvas" id="attritionChart" height="220"></canvas>
+    </div>
+  </div>
+
+  <!-- OPS PANEL -->
+  <div class="analytics-panel" id="panel-ops">
+    <div class="before-after-grid">
+      <div class="ba-panel" style="background:rgba(255,255,255,.04);">
+        <div class="ba-label before">BEFORE ORIGENNT — Typical MSME</div>
+        <div class="ba-metric"><span class="ba-metric-name">Payroll Filing Errors/Month</span><span class="ba-metric-val bad">4–6</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Documented Processes</span><span class="ba-metric-val bad">12%</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Compliance Penalty Risk</span><span class="ba-metric-val bad">₹3.8L/yr</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">HR Admin Hours/Week</span><span class="ba-metric-val bad">28 hrs</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Delegation Effectiveness</span><span class="ba-metric-val bad">Low</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">SOP Adoption Rate</span><span class="ba-metric-val bad">—</span></div>
+      </div>
+      <div class="ba-panel" style="background:rgba(13,107,94,.08);border:1px solid rgba(13,107,94,.2);">
+        <div class="ba-label after">AFTER 6 MONTHS — ORIGENNT Engagement</div>
+        <div class="ba-metric"><span class="ba-metric-name">Payroll Filing Errors/Month</span><span class="ba-metric-val good">0 ↓</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Documented Processes</span><span class="ba-metric-val good">94% ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Compliance Penalty Risk</span><span class="ba-metric-val good">₹0 avoided ↓</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">HR Admin Hours/Week</span><span class="ba-metric-val good">6 hrs ↓</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Delegation Effectiveness</span><span class="ba-metric-val good">Structured</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">SOP Adoption Rate</span><span class="ba-metric-val good">88% ↑</span></div>
+      </div>
+    </div>
+    <div class="chart-wrap" style="margin-top:3px;">
+      <div class="chart-title-bar">
+        <div class="chart-title">Process Documentation Coverage — Before vs. After (% of Core Processes)</div>
+      </div>
+      <div style="padding:8px 0;">
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Payroll & Compliance Processes</span><span class="dc-bar-val">Before: 18% → After: 100%</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:100%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Hiring & Onboarding SOPs</span><span class="dc-bar-val">Before: 8% → After: 96%</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:96%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Performance & Review Processes</span><span class="dc-bar-val">Before: 6% → After: 88%</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:88%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Exit & F&F Settlement</span><span class="dc-bar-val">Before: 22% → After: 100%</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:100%"></div></div></div>
+        <div class="dc-bar-row" style="margin-bottom:0;"><div class="dc-bar-top"><span class="dc-bar-lbl">Delegation & Approval Frameworks</span><span class="dc-bar-val">Before: 0% → After: 82%</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:82%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROWTH PANEL -->
+  <div class="analytics-panel" id="panel-growth">
+    <div class="before-after-grid">
+      <div class="ba-panel" style="background:rgba(255,255,255,.04);">
+        <div class="ba-label before">BEFORE ORIGENNT — Typical MSME</div>
+        <div class="ba-metric"><span class="ba-metric-name">Revenue Growth Consistency</span><span class="ba-metric-val bad">Irregular</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Training ROI Measured</span><span class="ba-metric-val bad">Never</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Compensation vs. Market</span><span class="ba-metric-val bad">Unknown</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Leadership Pipeline</span><span class="ba-metric-val bad">None</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Strategy Review Frequency</span><span class="ba-metric-val bad">Ad hoc</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Execution vs. Plan (gap)</span><span class="ba-metric-val bad">> 40%</span></div>
+      </div>
+      <div class="ba-panel" style="background:rgba(13,107,94,.08);border:1px solid rgba(13,107,94,.2);">
+        <div class="ba-label after">AFTER 6 MONTHS — ORIGENNT Engagement</div>
+        <div class="ba-metric"><span class="ba-metric-name">Revenue Growth Consistency</span><span class="ba-metric-val good">Measured ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Training ROI Measured</span><span class="ba-metric-val good">Monthly ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Compensation vs. Market</span><span class="ba-metric-val good">Benchmarked ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Leadership Pipeline</span><span class="ba-metric-val good">Structured ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Strategy Review Frequency</span><span class="ba-metric-val good">Quarterly ↑</span></div>
+        <div class="ba-metric"><span class="ba-metric-name">Execution vs. Plan (gap)</span><span class="ba-metric-val good">< 12% ↓</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-top:3px;">
+      <div style="background:rgba(204,34,41,.1);border:1px solid rgba(204,34,41,.2);padding:24px;">
+        <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;">Avg. Revenue Lift</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);">2.8<span style="font-size:14px;font-family:'Outfit',sans-serif;">×</span></div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;">Over 12-month engagement</div>
+      </div>
+      <div style="background:rgba(13,107,94,.1);border:1px solid rgba(13,107,94,.2);padding:24px;">
+        <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Execution Gap Closure</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);">74<span style="font-size:14px;font-family:'Outfit',sans-serif;">%</span></div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;">Reduction in plan-vs-actual variance</div>
+      </div>
+      <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);padding:24px;">
+        <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">L&D ROI (Kirkpatrick L3)</div>
+        <div style="font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);">4.1<span style="font-size:14px;font-family:'Outfit',sans-serif;">×</span></div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.35);margin-top:4px;">Measured behaviour change ROI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT MODELS -->
+<section class="models-section reveal" id="models">
+  <div class="models-intro">
+    <div class="chip">Three Engagement Models</div>
+    <h2 class="D">Choose any pillar.<br>Or take all three — and <em>save significantly.</em></h2>
+    <p class="body-t" style="max-width:640px;margin-top:14px;">Every model is a direct payment — no quotes, no waiting rooms, no pitch cycles. Razorpay accepts UPI, cards, net banking, and EMI. Engagement starts within 48 hours. GST invoice within 24 hours.</p>
+  </div>
+
+  <div class="models-grid">
+
+    <!-- MODEL 1 -->
+    <div class="model-card m1">
+      <div class="model-badge s">Workforce Only</div>
+      <div class="model-name">Workforce Execution</div>
+      <div class="model-tagline">For businesses whose primary bottleneck is people — hiring, attrition, team structure, or accountability.</div>
+      <div class="model-pillars-included"><span class="mpi wf">👥 Workforce</span></div>
+      <div class="model-price"><sup>₹</sup>42,000</div>
+      <div class="model-period">per month · up to 150 employees</div>
+      <div class="model-div"></div>
+      <ul class="model-feats">
+        <li class="model-feat">End-to-end talent acquisition (up to 5 roles/month)</li>
+        <li class="model-feat">HR analytics — attrition risk modelling</li>
+        <li class="model-feat">Structured hiring criteria & interview design</li>
+        <li class="model-feat">30/60/90 day onboarding programme</li>
+        <li class="model-feat">Campus / internship cohort management</li>
+        <li class="model-feat">Manager effectiveness scoring (quarterly)</li>
+        <li class="model-feat dim">Payroll & statutory compliance</li>
+        <li class="model-feat dim">SOP design & process documentation</li>
+        <li class="model-feat dim">L&D programmes & strategy advisory</li>
+      </ul>
+      <button class="model-cta r" onclick="openRzp('Workforce Execution Model',42000,'End-to-end talent acquisition, HR analytics, onboarding, and manager scoring — up to 150 employees.')">Pay & Start — ₹42,000/mo</button>
+      <div class="model-note">Min. 3-month commitment · +₹200/employee above 150</div>
+    </div>
+
+    <!-- MODEL 2 -->
+    <div class="model-card m2">
+      <div class="model-badge p">Operations Only</div>
+      <div class="model-name">Operational Systems</div>
+      <div class="model-tagline">For businesses with compliance exposure, payroll complexity, or operational processes that aren't documented or followed.</div>
+      <div class="model-pillars-included"><span class="mpi op">⚙️ Operations</span></div>
+      <div class="model-price"><sup>₹</sup>38,000</div>
+      <div class="model-period">per month · up to 100 employees</div>
+      <div class="model-div"></div>
+      <ul class="model-feats">
+        <li class="model-feat">Full payroll processing (EPF, ESI, TDS, PT, LWF)</li>
+        <li class="model-feat">Statutory compliance & filing management</li>
+        <li class="model-feat">Labour Code 2025 compliance audit</li>
+        <li class="model-feat">SOP design & process documentation</li>
+        <li class="model-feat">HR policy architecture</li>
+        <li class="model-feat">Organisation structure design</li>
+        <li class="model-feat">Full & Final settlement processing</li>
+        <li class="model-feat dim">Talent acquisition & executive search</li>
+        <li class="model-feat dim">L&D programmes & growth strategy</li>
+      </ul>
+      <button class="model-cta t" onclick="openRzp('Operational Systems Model',38000,'Payroll, compliance, SOP design, org structure — up to 100 employees.')">Pay & Start — ₹38,000/mo</button>
+      <div class="model-note">Min. 3-month commitment · +₹180/employee above 100</div>
+    </div>
+
+    <!-- MODEL 3 -->
+    <div class="model-card m3">
+      <div class="model-badge g">Growth Only</div>
+      <div class="model-name">Growth Execution</div>
+      <div class="model-tagline">For businesses hitting a revenue ceiling, lacking measurable performance systems, or needing L&D and strategy alignment.</div>
+      <div class="model-pillars-included"><span class="mpi gr">📈 Growth</span></div>
+      <div class="model-price"><sup>₹</sup>45,000</div>
+      <div class="model-period">per month · retainer</div>
+      <div class="model-div"></div>
+      <ul class="model-feats">
+        <li class="model-feat">HR & business strategy advisory (monthly sessions)</li>
+        <li class="model-feat">L&D programme design & delivery</li>
+        <li class="model-feat">Leadership development & high-potential coaching</li>
+        <li class="model-feat">Performance management system design</li>
+        <li class="model-feat">Compensation benchmarking (quarterly)</li>
+        <li class="model-feat">Workforce planning & analytics</li>
+        <li class="model-feat">Organisation transformation roadmap</li>
+        <li class="model-feat dim">Talent acquisition & payroll processing</li>
+        <li class="model-feat dim">SOP documentation & compliance filing</li>
+      </ul>
+      <button class="model-cta g" onclick="openRzp('Growth Execution Model',45000,'Strategy, L&D, leadership development, performance management, and compensation benchmarking.')">Pay & Start — ₹45,000/mo</button>
+      <div class="model-note">Min. 3-month commitment · scoped per engagement</div>
+    </div>
+
+    <!-- MODEL 4: FULL SYSTEM -->
+    <div class="model-card m4" style="grid-column:1 / -1;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;">
+        <div>
+          <div class="model-badge e">Full Execution System — Most Efficient</div>
+          <div class="model-name">Complete Execution System</div>
+          <div class="model-tagline">All three pillars. One integrated engagement. One point of accountability. Measurable across every execution layer simultaneously.</div>
+          <div class="model-pillars-included">
+            <span class="mpi all">👥 Workforce</span>
+            <span class="mpi all">⚙️ Operations</span>
+            <span class="mpi all">📈 Growth</span>
+          </div>
+          <div class="model-price"><sup>₹</sup>1,05,000</div>
+          <div class="model-period">per month · all three pillars · up to 200 employees · saves ₹20,000/mo vs. individual</div>
+          <div class="model-div"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:24px;">
+            <div style="background:rgba(255,255,255,.04);padding:16px 18px;">
+              <div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px;">Individual Total</div>
+              <div style="font-family:'Libre Baskerville',serif;font-size:22px;color:rgba(255,255,255,.4);text-decoration:line-through;">₹1,25,000/mo</div>
+            </div>
+            <div style="background:rgba(204,34,41,.15);border:1px solid rgba(204,34,41,.3);padding:16px 18px;">
+              <div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:6px;">You Pay</div>
+              <div style="font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);">₹1,05,000/mo</div>
+            </div>
+          </div>
+          <button class="model-cta w" onclick="openRzp('Complete Execution System',105000,'All three execution pillars — Workforce, Operations, Growth — integrated and measured.')">Pay & Start Full System — ₹1,05,000/mo</button>
+          <div class="model-note">Saves ₹20,000/month · One dedicated engagement lead · Integrated reporting across all layers</div>
+        </div>
+        <div>
+          <ul class="model-feats" style="margin-bottom:0;">
+            <li class="model-feat" style="font-weight:500;font-size:13px;color:rgba(255,255,255,.8);margin-bottom:14px;">Everything in all three models, plus:</li>
+            <li class="model-feat">Single dedicated ORIGENNT engagement lead</li>
+            <li class="model-feat">Integrated execution dashboard across all three layers</li>
+            <li class="model-feat">Monthly board-ready execution report</li>
+            <li class="model-feat">Cross-pillar root cause analysis (hiring gap → ops impact → growth ceiling)</li>
+            <li class="model-feat">Priority access for new service additions</li>
+            <li class="model-feat">Executive search (1 role/quarter included)</li>
+            <li class="model-feat">Quarterly strategy offsite (half-day)</li>
+            <li class="model-feat">Labour Code 2025 & IT Act compliance assurance</li>
+            <li class="model-feat">Multi-state payroll (up to 4 states)</li>
+            <li class="model-feat">L&D programme (1 cohort/quarter)</li>
+            <li class="model-feat">Compensation benchmarking (bi-annual)</li>
+            <li class="model-feat">Post-engagement 90-day support plan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WHY PACKAGE BANNER -->
+  <div class="why-package-banner">
+    <div class="wpb-left">
+      <h3>Why the Full System is more efficient than<br><em>booking pillars individually.</em></h3>
+      <p>The three execution layers are not independent. Workforce failures create operational drag. Operational chaos caps growth capacity. Growth misalignment creates workforce pressure. When all three are managed by one team with one view, problems are solved at origin — not after they've cascaded into the next layer.</p>
+    </div>
+    <div class="wpb-right">
+      <div class="wpb-row">
+        <div class="wpb-row-icon">🔗</div>
+        <div class="wpb-row-text">Single accountability — one engagement lead sees everything</div>
+        <div class="wpb-row-save">vs. 3 contacts</div>
+      </div>
+      <div class="wpb-row">
+        <div class="wpb-row-icon">📊</div>
+        <div class="wpb-row-text">Cross-pillar analytics — hiring data informs ops, ops data informs strategy</div>
+        <div class="wpb-row-save">vs. siloed data</div>
+      </div>
+      <div class="wpb-row">
+        <div class="wpb-row-icon">⚡</div>
+        <div class="wpb-row-text">Faster root-cause — cascade failures identified in days, not months</div>
+        <div class="wpb-row-save">vs. weeks</div>
+      </div>
+      <div class="wpb-row">
+        <div class="wpb-row-icon">💰</div>
+        <div class="wpb-row-text">Full System saves ₹20,000/month versus booking all three separately</div>
+        <div class="wpb-row-save">₹2.4L/yr saved</div>
+      </div>
+      <div class="wpb-total">
+        <span class="wpb-total-label">Annual System Saving</span>
+        <span class="wpb-total-val">₹2,40,000</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ADD-ON BUILDER -->
+<section class="addon-section reveal">
+  <div class="chip">Build Your Own Add-Ons</div>
+  <h2 class="D">Add specific services<br>to any model. Price updates <em>instantly.</em></h2>
+  <p class="body-t" style="max-width:640px;margin-top:14px;">Select add-ons below and the total updates in real time. These can be stacked on top of any monthly model or purchased as standalone services. All prices exclude GST (18%).</p>
+
+  <div class="addon-grid" id="addonGrid">
+    <div class="addon-item" data-price="12000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">📉</div>
+      <div>
+        <div class="addon-name">Attrition Root-Cause Deep Dive</div>
+        <div class="addon-desc">Structured analysis of attrition drivers — by branch, manager, tenure band, and salary percentile. Delivered in 7 days.</div>
+        <div class="addon-price">+₹12,000 / engagement</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="8000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">💰</div>
+      <div>
+        <div class="addon-name">Custom Salary Benchmark Report</div>
+        <div class="addon-desc">Role-by-role compensation benchmark against Indian market data — sector and state specific. Bespoke to your structure.</div>
+        <div class="addon-price">+₹8,000 / report</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="6000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">🎯</div>
+      <div>
+        <div class="addon-name">Hiring Funnel Audit</div>
+        <div class="addon-desc">Stage-by-stage analysis of your recruitment funnel — where candidates drop off and why. Includes conversion benchmarks.</div>
+        <div class="addon-price">+₹6,000 / audit</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="15000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">📋</div>
+      <div>
+        <div class="addon-name">Manager Effectiveness Assessment</div>
+        <div class="addon-desc">Team-level attrition, performance, and engagement scoring by manager. Identifies coaching needs and high performers.</div>
+        <div class="addon-price">+₹15,000 / quarter</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="10000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">📄</div>
+      <div>
+        <div class="addon-name">SOP Design (One Function)</div>
+        <div class="addon-desc">Full documentation of one business function — hiring, onboarding, payroll, or exit. Includes process map and adoption training.</div>
+        <div class="addon-price">+₹10,000 / function</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="20000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">📊</div>
+      <div>
+        <div class="addon-name">Live BI Dashboard Setup</div>
+        <div class="addon-desc">Tableau or Power BI dashboard with your HR and execution metrics. One-time setup and training for your team.</div>
+        <div class="addon-price">+₹20,000 one-time setup</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="18000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">🎓</div>
+      <div>
+        <div class="addon-name">L&D Workshop (One-Day)</div>
+        <div class="addon-desc">Instructor-led workshop for up to 30 participants — leadership, compliance, or function-specific. Includes pre- and post-assessment.</div>
+        <div class="addon-price">+₹18,000 / workshop</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="25000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">🔍</div>
+      <div>
+        <div class="addon-name">Compliance Audit (Labour Codes 2025)</div>
+        <div class="addon-desc">Full statutory compliance review against the four Labour Codes 2025 and IT Act. Includes risk register and remediation plan.</div>
+        <div class="addon-price">+₹25,000 / audit</div>
+      </div>
+    </div>
+    <div class="addon-item" data-price="10000" onclick="toggleAddon(this)">
+      <div class="addon-check">✓</div>
+      <div class="addon-icon">📑</div>
+      <div>
+        <div class="addon-name">Board-Level Execution Report</div>
+        <div class="addon-desc">One-page board-ready execution summary covering all three pillars. Plain language, no jargon. Shareable with investors.</div>
+        <div class="addon-price">+₹10,000 / report</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="addon-checkout">
+    <div class="ac-total">
+      <div class="ac-total-label">Selected Add-Ons Total</div>
+      <div class="ac-total-val">₹<span id="addonTotalDisplay">0</span><sub>/selected</sub></div>
+    </div>
+    <div class="ac-right">
+      <div class="ac-gst-note"><strong>All prices exclude GST (18%).</strong> GST invoice issued within 24 hours. Add-ons can be combined with any monthly model or purchased standalone. Payment via Razorpay — UPI, cards, net banking, EMI accepted.</div>
+      <button class="btn-red" style="width:100%;text-align:center;" id="addonPayBtn" onclick="payAddons()">Checkout Selected Add-Ons →</button>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK + WHY ORIGENNT -->
+<section class="whatwhy-section reveal">
+  <div class="whatwhy-grid">
+    <div>
+      <div class="chip w">How Every Engagement Works</div>
+      <h2 class="D W">Structured delivery.<br>No dependency. <em>Full transfer.</em></h2>
+      <div class="process-steps" style="margin-top:36px;">
+        <div class="pstep"><div class="pstep-num">01</div><div><div class="pstep-title">Payment → Engagement Brief (Day 1)</div><div class="pstep-desc">Payment confirmation triggers your engagement brief. We send a structured intake within 4 business hours — your team completes it at your pace.</div></div></div>
+        <div class="pstep"><div class="pstep-num">02</div><div><div class="pstep-title">Discovery Call (Day 2–4)</div><div class="pstep-desc">A structured 60-minute discovery call with your dedicated ORIGENNT engagement lead. We listen before we advise. No pitch, no template, no assumptions.</div></div></div>
+        <div class="pstep"><div class="pstep-num">03</div><div><div class="pstep-title">Diagnostic Report (Day 7–14)</div><div class="pstep-desc">A written diagnostic covering your current execution state — what's working, what's broken, and which layer to fix first. Root cause, not symptom.</div></div></div>
+        <div class="pstep"><div class="pstep-num">04</div><div><div class="pstep-title">Engagement Execution (Month 1–3+)</div><div class="pstep-desc">We embed with your team. Weekly check-ins, live reporting, and real-time problem resolution. Your KPIs are tracked from day one.</div></div></div>
+        <div class="pstep"><div class="pstep-num">05</div><div><div class="pstep-title">Handover & Transfer (End of Term)</div><div class="pstep-desc">Every process documented. Every system handed over. Your team owns the outcome. We exit cleanly. 30/60/90 day support plan included.</div></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="chip w">Why ORIGENNT for Your Business</div>
+      <h2 class="D W" style="margin-bottom:32px;">Built for Indian<br>businesses. Not<br><em>retrofitted for them.</em></h2>
+      <div class="why-cards">
+        <div class="why-c"><div class="why-c-icon">🇮🇳</div><div><div class="why-c-title">Indian Market Data. Not Global Averages.</div><div class="why-c-desc">Our salary benchmarks, attrition norms, and compliance frameworks are built on Indian market realities — Odisha, West Bengal, Karnataka. Not US datasets applied to India.</div></div></div>
+        <div class="why-c"><div class="why-c-icon">🔬</div><div><div class="why-c-title">Diagnostic Before Prescriptive.</div><div class="why-c-desc">No engagement begins with a solution. Every ORIGENNT engagement starts with structured listening — we identify the real problem before recommending anything.</div></div></div>
+        <div class="why-c"><div class="why-c-icon">⚡</div><div><div class="why-c-title">Direct Payment. 48-Hour Start.</div><div class="why-c-desc">No quotes, no pitch decks, no 2-week procurement cycles. Pay via Razorpay and your engagement begins within 48 hours. Execution is the product, not process.</div></div></div>
+        <div class="why-c"><div class="why-c-icon">🔄</div><div><div class="why-c-title">MOA-Authorised Across All Practice Areas.</div><div class="why-c-desc">Every service ORIGENNT offers is explicitly authorised in our Memorandum of Association — payroll, talent, analytics, L&D, and strategy. Registered under Companies Act 2013.</div></div></div>
+        <div class="why-c"><div class="why-c-icon">📤</div><div><div class="why-c-title">Capability Transfer, Not Dependency.</div><div class="why-c-desc">We are successful when you no longer need us. Every engagement is designed to transfer ownership to your team — not create a relationship of perpetual consultancy.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEE ALL SERVICES -->
+<div class="see-all-section reveal">
+  <div class="sas-left">
+    <h2>Looking for a specific service<br>not covered in the three models?</h2>
+    <p>ORIGENNT offers 28+ individual services across talent acquisition, executive search, payroll, compliance, HR analytics, learning & development, campus recruitment, internships, strategy, and transformation. Every service is available as a standalone engagement or as part of a model. View the complete service directory to find exactly what you need — with individual pricing for each.</p>
+  </div>
+  <div class="sas-right">
+    <a href="services.html" class="sas-link r">View All Services →</a>
+    <a href="our-approach.html" class="sas-link ol">Our 5-Phase Approach</a>
+    <a href="insights.html" class="sas-link ol">Read Execution Insights</a>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta-section reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Your business has<br>everything it needs<br><em>except the system.</em></h2>
+    <p class="fc-sub">ORIGENNT builds the execution infrastructure your business needs to grow without chaos — structured workforce systems, compliant operations, and measurable growth frameworks. Direct payment, 48-hour start, no lock-in after minimum term.</p>
+  </div>
+  <div class="fc-btns">
+    <button class="fca w" onclick="openRzp('Complete Execution System',105000,'All three execution pillars — Workforce, Operations, Growth — integrated and measured.')">Start Full System — ₹1,05,000/mo</button>
+    <button class="fca ol" onclick="openRzp('Workforce Execution Model',42000,'End-to-end talent acquisition, HR analytics, onboarding, manager scoring.')">Workforce Only — ₹42,000/mo</button>
+    <button class="fca ol" onclick="openRzp('Operational Systems Model',38000,'Payroll, compliance, SOP design, org structure.')">Operations Only — ₹38,000/mo</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India and Globally, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 25 November 2025 · Odisha<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Execution Models</div>
+      <a href="#models" class="footer-link">Workforce Execution</a>
+      <a href="#models" class="footer-link">Operational Systems</a>
+      <a href="#models" class="footer-link">Growth Execution</a>
+      <a href="#models" class="footer-link">Full System</a>
+    </div>
+    <div>
+      <div class="footer-col-title">All Services</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="services/hr-analytics.html" class="footer-link">HR Analytics</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+      <a href="services.html" class="footer-link">View All Services →</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a href="about.html" class="footer-link">About ORIGENNT</a>
+      <a href="our-approach.html" class="footer-link">Our Approach</a>
+      <a href="insights.html" class="footer-link">Insights</a>
+      <a href="contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2025 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /main -->
+
+<!-- BROCHURE MODAL -->
+<div class="brochure-overlay" id="brochureOverlay">
+  <div class="brochure-box">
+    <button class="brochure-close" id="brochureClose">×</button>
+    <div class="brochure-header">
+      <div class="brochure-tag" id="brochureTag">Brochure</div>
+      <div class="brochure-h" id="brochureH">Service Brochure</div>
+      <div class="brochure-sub" id="brochureSub">ORIGENNT Private Limited · Bhubaneswar, Odisha</div>
+    </div>
+    <div class="brochure-body" id="brochureBody"></div>
+  </div>
+</div>
+
+<!-- RAZORPAY MODAL -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" id="rzpClose">×</button>
+    <div class="rzp-tag" id="rzpTag">ORIGENNT — Services for Businesses</div>
+    <div class="rzp-modal-h" id="rzpH">Start Your Engagement</div>
+    <div class="rzp-modal-sub" id="rzpSub">Engagement begins within 48 hours of payment.</div>
+    <div class="rzp-modal-price" id="rzpPrice"><sup>₹</sup>Custom</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">GST invoice issued within 24 hours.</div>
+    <div class="rzp-fields">
+      <input class="rzp-inp" id="rzpCompany" type="text" placeholder="Company / Organisation Name *">
+      <input class="rzp-inp" id="rzpName" type="text" placeholder="Your Name & Designation *">
+      <input class="rzp-inp" id="rzpEmail" type="email" placeholder="Email Address *">
+      <input class="rzp-inp" id="rzpPhone" type="tel" placeholder="Phone Number *">
+      <input class="rzp-inp" id="rzpEmp" type="number" placeholder="Number of Employees" min="1">
+      <input class="rzp-inp" id="rzpStates" type="text" placeholder="States of Operation">
+      <input class="rzp-inp" id="rzpChallenge" type="text" placeholder="Primary execution challenge (optional)">
+    </div>
+    <button class="rzp-submit" id="rzpBtn">Proceed to Payment →</button>
+    <div class="rzp-secure">🔒 Confidential · ORIGENNT Pvt. Ltd. · Companies Act 2013 · Powered by Razorpay</div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── BAR FILLS ── */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dc-bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*100));bObs.unobserve(e.target);}});
+},{threshold:.2});
+document.querySelectorAll('.analytics-section').forEach(el=>bObs.observe(el));
+
+/* ── ANALYTICS TABS ── */
+document.querySelectorAll('.atab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.analytics-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.panel).classList.add('active');
+    if(tab.dataset.panel==='workforce')drawAttritionChart();
+  });
+});
+
+/* ── ATTRITION CHART ── */
+function setupCanvas(id,h){
+  const c=document.getElementById(id);if(!c)return null;
+  const W=c.offsetWidth||600;
+  c.width=W*2;c.height=h*2;c.style.width=W+'px';c.style.height=h+'px';
+  const ctx=c.getContext('2d');ctx.scale(2,2);
+  return{ctx,W,H:h};
+}
+function drawAttritionChart(){
+  const s=setupCanvas('attritionChart',220);if(!s)return;
+  const{ctx,W,H}=s;
+  const pad={t:20,r:20,b:36,l:44};
+  const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const before=[2.2,2.4,2.1,2.0,2.3,2.1,2.2,2.0,1.9,2.2,2.1,2.3];
+  const after=[null,null,null,null,null,null,2.2,1.9,1.6,1.3,1.0,0.8];
+  const max=3;
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<=4;i++){
+    const y=pad.t+ch-(i/4)*ch;
+    ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
+    ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='10px Outfit';ctx.textAlign='right';
+    ctx.fillText((i/4*max).toFixed(1)+'%',pad.l-6,y+4);
+  }
+  function drawLine(data,color,dash){
+    ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
+    if(dash)ctx.setLineDash([5,4]);else ctx.setLineDash([]);
+    ctx.beginPath();let started=false;
+    data.forEach((v,i)=>{if(v===null)return;const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;!started?(ctx.moveTo(x,y),started=true):ctx.lineTo(x,y);});
+    ctx.stroke();ctx.setLineDash([]);
+  }
+  const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+  grad.addColorStop(0,'rgba(204,34,41,.12)');grad.addColorStop(1,'rgba(204,34,41,0)');
+  ctx.fillStyle=grad;ctx.beginPath();
+  before.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.lineTo(pad.l+cw,pad.t+ch);ctx.lineTo(pad.l,pad.t+ch);ctx.closePath();ctx.fill();
+  drawLine(before,'#CC2229',false);
+  drawLine(after,'#0d6b5e',false);
+  before.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='#CC2229';ctx.fill();});
+  after.forEach((v,i)=>{if(v===null)return;const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle='#0d6b5e';ctx.fill();});
+  months.forEach((m,i)=>{const x=pad.l+(i/(months.length-1))*cw;ctx.fillStyle='rgba(255,255,255,.28)';ctx.font='9px Outfit';ctx.textAlign='center';ctx.fillText(m,x,pad.t+ch+18);});
+}
+const chartObs=new IntersectionObserver(es=>{if(es[0].isIntersecting){drawAttritionChart();chartObs.disconnect();}},{threshold:.2});
+const analyticsSection=document.querySelector('.analytics-section');
+if(analyticsSection)chartObs.observe(analyticsSection);
+window.addEventListener('resize',()=>{if(document.getElementById('panel-workforce').classList.contains('active'))drawAttritionChart();});
+
+/* ── BROCHURE DATA ── */
+const brochureData={
+  workforce:{
+    tag:'Workforce Execution · Brochure',
+    h:'Workforce Execution System',
+    sub:'Structured hiring, onboarding, attrition management, and people analytics — delivered as a managed service.',
+    stats:[{n:'67',s:'%',l:'Failures originate in workforce layer first'},{n:'24',s:'→9%',l:'Attrition reduction in BFSI case study'},{n:'28',s:'days',l:'Avg. time-to-fill post-engagement'}],
+    sections:[
+      {title:'What ORIGENNT Delivers',items:['Structured hiring criteria design — no more reactive, inconsistent hiring','End-to-end talent acquisition (up to 5 roles/month)','HR analytics — 60-day attrition early warning system','30/60/90 day onboarding programme design and delivery','Manager effectiveness scoring (quarterly)','Campus and early-careers pipeline management','Executive and leadership search (C-suite and VP)']},
+      {title:'What Changes After 6 Months',items:['Attrition rate drops from industry avg. 24% to under 10%','Time-to-fill reduces by an average of 39 days','Offer acceptance rate improves from 44% to 78%','90-day hire retention improves from 61% to 89%','Hiring cost per role reduces by 57% on average','Management time on hiring drops by 74%']},
+      {title:'Who This Is For',items:['MSMEs and SMEs with 10–500 employees','Businesses experiencing high attrition (above 15% annually)','Founders spending more than 30% of time on people issues','Companies hiring reactively without a structured system','Businesses with no HR function or an under-resourced one']}
+    ]
+  },
+  operations:{
+    tag:'Operational Systems · Brochure',
+    h:'Operational Systems Design',
+    sub:'Payroll, compliance, SOP design, and operational infrastructure — built to run without manual management.',
+    stats:[{n:'99',s:'%',l:'Payroll filing accuracy rate'},{n:'₹0',s:'',l:'Penalty risk on ORIGENNT-managed payroll'},{n:'82',s:'%',l:'Avg. SOP adoption rate post-engagement'}],
+    sections:[
+      {title:'What ORIGENNT Delivers',items:['Full payroll processing — EPF, ESI, TDS (Form 24Q), PT, LWF, Form 16','Statutory compliance management across all applicable Acts','Labour Code 2025 compliance audit and remediation','SOP design for core business functions (hiring, onboarding, payroll, exit)','HR policy architecture — written, reviewed, legally current','Organisation structure design aligned to growth stage','Full & Final settlement processing and compliance']},
+      {title:'What Changes After 6 Months',items:['Zero payroll filing errors (from avg. 4–6/month before engagement)','94% of core processes documented (from avg. 12% before)','Zero compliance penalties — all filings on time and correct','HR admin time drops from 28 hrs/week to 6 hrs/week','88% SOP adoption rate achieved within 90 days','Delegation effectiveness improves from ad hoc to structured']},
+      {title:'Who This Is For',items:['Businesses processing payroll manually or with inconsistent tools','Companies with statutory compliance exposure (EPF/ESI/TDS gaps)','Organisations that have grown without documenting their processes','Founders personally managing HR operations and compliance','Multi-state employers needing unified payroll management']}
+    ]
+  },
+  growth:{
+    tag:'Growth Execution · Brochure',
+    h:'Growth Execution Framework',
+    sub:'Strategy, L&D, performance management, and compensation benchmarking — structured as execution systems, not aspirations.',
+    stats:[{n:'2.8',s:'×',l:'Avg. revenue lift over 12-month engagement'},{n:'74',s:'%',l:'Reduction in execution vs. plan variance'},{n:'4.1',s:'×',l:'L&D ROI measured at Kirkpatrick Level 3'}],
+    sections:[
+      {title:'What ORIGENNT Delivers',items:['HR and business strategy advisory (monthly structured sessions)','L&D programme design and delivery (ILT and blended)','Leadership development and high-potential coaching','Performance management system design — metrics, cadence, accountability','Compensation benchmarking against Indian market data (quarterly)','Workforce planning and people analytics for growth decisions','Organisation transformation roadmap — culture, structure, capability']},
+      {title:'What Changes After 6 Months',items:['Revenue growth becomes measurable and consistent (not intuition-driven)','Execution vs. plan variance drops from >40% to <12%','Leadership pipeline identified and development structured','Compensation gaps closed — retention of top performers improves','Training ROI measured at behaviour-change level (not just attendance)','Strategy reviews shift from annual to quarterly with execution tracking']},
+      {title:'Who This Is For',items:['Businesses stalling at the same revenue band for 2+ years','Founders whose strategy is clear but execution is inconsistent','Companies where leadership development has never been structured','Organisations investing in training without measuring impact','Businesses preparing for scale, acquisition, or investment readiness']}
+    ]
+  }
+};
+
+function openBrochure(type){
+  const d=brochureData[type];
+  document.getElementById('brochureTag').textContent=d.tag;
+  document.getElementById('brochureH').textContent=d.h;
+  document.getElementById('brochureSub').textContent=d.sub;
+  let html=`<div class="brochure-stat-row">${d.stats.map(s=>`<div class="bsr"><div class="bsr-n">${s.n}<sub>${s.s}</sub></div><div class="bsr-l">${s.l}</div></div>`).join('')}</div>`;
+  d.sections.forEach(sec=>{
+    html+=`<div class="brochure-section-title">${sec.title}</div><div class="brochure-items">${sec.items.map(item=>`<div class="brochure-item"><div class="brochure-item-text">${item}</div></div>`).join('')}</div>`;
+  });
+  const prices={workforce:'₹42,000/month',operations:'₹38,000/month',growth:'₹45,000/month'};
+  const amounts={workforce:42000,operations:38000,growth:45000};
+  const names={workforce:'Workforce Execution System',operations:'Operational Systems Design',growth:'Growth Execution Framework'};
+  html+=`<button class="brochure-cta" onclick="closeBrochure();openRzp('${names[type]}',${amounts[type]},'${d.sub}')">Book This Model — ${prices[type]} →</button>`;
+  document.getElementById('brochureBody').innerHTML=html;
+  document.getElementById('brochureOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBrochure(){document.getElementById('brochureOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('brochureClose').addEventListener('click',closeBrochure);
+document.getElementById('brochureOverlay').addEventListener('click',function(e){if(e.target===this)closeBrochure();});
+
+/* ── ADD-ON CALCULATOR ── */
+let addonTotal=0;
+function toggleAddon(el){
+  el.classList.toggle('selected');
+  addonTotal=0;
+  document.querySelectorAll('.addon-item.selected').forEach(item=>{addonTotal+=+item.dataset.price;});
+  document.getElementById('addonTotalDisplay').textContent=addonTotal.toLocaleString('en-IN');
+}
+function payAddons(){
+  if(addonTotal===0){alert('Please select at least one add-on service.');return;}
+  const selected=[];
+  document.querySelectorAll('.addon-item.selected').forEach(item=>selected.push(item.querySelector('.addon-name').textContent));
+  openRzp('ORIGENNT Add-Ons: '+selected.join(', '),addonTotal,'Selected add-on services: '+selected.join(', '));
+}
+
+/* ── RAZORPAY ── */
+let rzpCurrent={};
+function openRzp(name,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent='ORIGENNT — Services for Businesses';
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent=amtInt>0?'Engagement begins within 48 hours of payment.':'Our team will scope and respond within 24 hours.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?'<sup>₹</sup>'+amtInt.toLocaleString('en-IN'):'<span style="font-size:24px;">Custom</span>';
+  document.getElementById('rzpPDesc').textContent=desc;
+  document.getElementById('rzpBtn').textContent=amtInt>0?'Proceed to Payment →':'Submit Enquiry →';
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){document.getElementById('rzpOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,
+      currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      image:'https://origennt.com/favicon.ico',
+      handler:function(response){
+        closeRzp();
+        alert('✓ Payment successful!\nPayment ID: '+response.razorpay_payment_id+'\n\nYour ORIGENNT engagement begins within 48 hours. We will contact you at '+email+' with your engagement brief.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,employees:document.getElementById('rzpEmp').value,states:document.getElementById('rzpStates').value,challenge:document.getElementById('rzpChallenge').value,service:rzpCurrent.name},
+      theme:{color:'#CC2229'},
+      modal:{ondismiss:function(){}}
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT,\n\nBusiness Services Enquiry:\nService: '+rzpCurrent.name+'\nCompany: '+company+'\nContact: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nEmployees: '+document.getElementById('rzpEmp').value+'\nStates: '+document.getElementById('rzpStates').value+'\nChallenge: '+document.getElementById('rzpChallenge').value);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+</script>
+</body>
+</html>
+
+
+
+
