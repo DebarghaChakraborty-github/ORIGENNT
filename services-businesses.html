@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services for Businesses — ORIGENNT Execution Systems</title>
+<meta name="description" content="ORIGENNT offers structured execution services across Workforce, Operations, and Growth. Book individual services or choose a combined package. Direct checkout — no enquiries.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Crect x='8' y='14' width='16' height='1' fill='%23CC2229'/%3E%3Crect x='8' y='10' width='10' height='1' fill='%231a1a1a'/%3E%3C/svg%3E">
+<style>
+:root {
+  --red: #CC2229;
+  --red-light: #f8e8e8;
+  --black: #0d0d0d;
+  --ink: #1a1a1a;
+  --ink2: #2f2f2f;
+  --text: #333333;
+  --text2: #555555;
+  --text3: #888888;
+  --rule: #e4e2de;
+  --rule2: #f0eeeb;
+  --warm: #faf9f7;
+  --white: #ffffff;
+  --gold: #b8941e;
+  --ease: cubic-bezier(.25,.1,.25,1);
+  --ease2: cubic-bezier(.77,0,.18,1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ═══ TOPBAR ═══ */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 58px;
+  background: rgba(255,255,255,.97); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; z-index: 900;
+}
+.tb-left { display: flex; align-items: center; gap: 24px; }
+.tb-wordmark {
+  font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500;
+  letter-spacing: .04em; color: var(--black);
+}
+.tb-wordmark span { color: var(--red); }
+.tb-sep { width: 1px; height: 20px; background: var(--rule); }
+.tb-section { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--text3); }
+.tb-right { display: flex; align-items: center; gap: 28px; }
+.tb-nav-link { font-size: 12.5px; font-weight: 400; color: var(--text2); transition: color .2s; }
+.tb-nav-link:hover { color: var(--black); }
+.tb-diagnostic-btn {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 8px 20px; transition: background .2s;
+  white-space: nowrap;
+}
+.tb-diagnostic-btn:hover { background: #a31a20; }
+
+/* ═══ SECTION PRIMITIVES ═══ */
+.section { padding: 96px 60px; }
+.section.warm { background: var(--warm); }
+.section.black { background: var(--black); }
+.section.red-pale { background: var(--red-light); }
+
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.sec-eyebrow.red { color: var(--red); }
+.sec-eyebrow::before { content: attr(data-n); }
+
+h2.sec-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.2vw, 48px); font-weight: 400;
+  line-height: 1.1; letter-spacing: -.02em; color: var(--black);
+}
+h2.sec-h em { font-style: italic; color: var(--red); }
+h2.sec-h.w { color: var(--white); }
+h2.sec-h.w em { color: rgba(255,255,255,.35); }
+
+.sec-lead { font-size: 15px; font-weight: 300; line-height: 1.88; color: var(--text2); max-width: 540px; margin-top: 14px; }
+.sec-lead.w { color: rgba(255,255,255,.5); }
+
+.sec-header-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 64px; padding-bottom: 36px; border-bottom: 1px solid var(--rule); }
+.sec-header-grid.dark-rule { border-bottom-color: rgba(255,255,255,.08); }
+
+.btn-p {
+  font-size: 11.5px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 13px 28px; transition: background .2s;
+  display: inline-block;
+}
+.btn-p:hover { background: #a31a20; }
+.btn-s {
+  font-size: 11.5px; font-weight: 500; letter-spacing: .04em;
+  color: var(--text2); border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px; transition: color .2s, border-color .2s;
+  display: inline-block;
+}
+.btn-s:hover { color: var(--black); border-color: var(--black); }
+
+/* ═══ REVEAL ANIMATIONS ═══ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.vis { opacity: 1; transform: none; }
+.reveal-l { opacity: 0; transform: translateX(-16px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal-l.vis { opacity: 1; transform: none; }
+
+/* ═══ PAGE HERO ═══ */
+.page-hero {
+  padding-top: 58px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 72vh;
+}
+.ph-left {
+  padding: 88px 72px 88px 60px;
+  border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.ph-right {
+  padding: 88px 60px 88px 72px;
+  background: var(--warm);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.h-overline {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 300; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+}
+.h-overline::before { content: ''; width: 28px; height: 1px; background: var(--red); }
+h1.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(46px, 5.2vw, 72px);
+  font-weight: 400; line-height: 1.04; letter-spacing: -.02em;
+  color: var(--black);
+}
+h1.hero-h1 em { font-style: italic; }
+.hero-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px; font-weight: 300;
+  color: var(--text3); margin-top: 32px; line-height: 1.6;
+  border-left: 2px solid var(--rule); padding-left: 18px;
+  letter-spacing: .02em;
+}
+.hero-tagline strong { color: var(--red); font-weight: 400; }
+.hero-acts { display: flex; gap: 12px; margin-top: 48px; align-items: center; flex-wrap: wrap; }
+
+/* Breadcrumb trail */
+.breadcrumb {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 10px;
+}
+.breadcrumb a { color: var(--text3); transition: color .2s; }
+.breadcrumb a:hover { color: var(--red); }
+.breadcrumb span { color: var(--rule); }
+
+/* How to use strip */
+.how-strip {
+  display: flex; gap: 0;
+  border: 1px solid var(--rule); background: var(--warm);
+  margin-top: 40px;
+}
+.hs-step {
+  flex: 1; padding: 22px 24px; border-right: 1px solid var(--rule);
+  display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start;
+}
+.hs-step:last-child { border-right: none; }
+.hs-n { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--red); margin-top: 2px; }
+.hs-title { font-size: 12px; font-weight: 600; color: var(--black); margin-bottom: 3px; }
+.hs-sub { font-size: 11px; font-weight: 300; color: var(--text2); line-height: 1.55; }
+
+/* Ph-right content */
+.ph-stat-block { margin-bottom: 40px; }
+.psb-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px; font-weight: 400; color: var(--black); line-height: 1;
+}
+.psb-n sup { font-size: 20px; color: var(--red); font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.psb-l { font-size: 12px; font-weight: 400; color: var(--text3); margin-top: 6px; letter-spacing: .04em; }
+.ph-right-doctrine {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 1.8vw, 24px); font-weight: 400; line-height: 1.4;
+  color: var(--black); border-left: 3px solid var(--red); padding-left: 20px;
+  margin-bottom: 24px;
+}
+.ph-right-doctrine em { font-style: italic; color: var(--red); }
+.ph-right-sub { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.78; }
+
+/* ═══ MODELS SECTION ═══ */
+/* Three model cards */
+.models-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.model-card {
+  border: 1px solid var(--rule); border-right: none;
+  padding: 0;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: box-shadow .3s;
+}
+.model-card:last-child { border-right: 1px solid var(--rule); }
+.model-card.featured {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px var(--red);
+}
+.mc-badge {
+  position: absolute; top: 0; right: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px; letter-spacing: .18em; text-transform: uppercase;
+  background: var(--red); color: var(--white);
+  padding: 5px 12px;
+}
+.mc-header { padding: 36px 32px 28px; border-bottom: 1px solid var(--rule); }
+.mc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 16px; display: block;
+}
+.mc-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+.mc-title { font-size: 18px; font-weight: 600; color: var(--black); margin-bottom: 8px; }
+.mc-tagline { font-size: 12.5px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+.mc-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; }
+.mc-services { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.mc-service-item {
+  font-size: 12.5px; font-weight: 400; color: var(--text2);
+  display: flex; gap: 10px; align-items: flex-start;
+  padding-bottom: 10px; border-bottom: 1px solid var(--rule2);
+}
+.mc-service-item:last-child { border-bottom: none; padding-bottom: 0; }
+.mc-service-item::before { content: '→'; color: var(--red); font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+.mc-service-title { font-weight: 600; color: var(--black); display: block; margin-bottom: 1px; }
+.mc-service-sub { font-size: 11px; font-weight: 300; color: var(--text3); }
+.mc-price-block { margin-top: auto; padding-top: 20px; border-top: 1px solid var(--rule); }
+.mc-price-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 8px;
+}
+.mc-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 400; color: var(--black); line-height: 1;
+}
+.mc-price sub { font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 300; color: var(--text3); }
+.mc-price-savings { font-size: 11px; font-weight: 500; color: var(--red); margin-top: 5px; }
+.mc-actions { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+.mc-btn-p {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 12px 20px; transition: background .2s;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.mc-btn-p:hover { background: #a31a20; }
+.mc-btn-s {
+  font-size: 11px; font-weight: 500; letter-spacing: .04em;
+  color: var(--text2); border: 1px solid var(--rule);
+  padding: 10px 20px; transition: border-color .2s, color .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.mc-btn-s:hover { border-color: var(--ink2); color: var(--black); }
+
+/* ═══ SERVICE LAYER DEEP DIVES ═══ */
+.service-layer {
+  display: grid; grid-template-columns: 1fr 2fr; gap: 0;
+  border: 1px solid var(--rule);
+  margin-bottom: -1px;
+}
+.sl-left {
+  padding: 56px 48px; border-right: 1px solid var(--rule);
+  background: var(--warm);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.sl-right { padding: 56px 52px; }
+.sl-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.sl-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px; font-weight: 400; line-height: .9;
+  color: rgba(0,0,0,.06); margin-bottom: 12px; letter-spacing: -.04em;
+}
+h3.sl-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 2.4vw, 34px); font-weight: 400;
+  line-height: 1.2; color: var(--black); margin-bottom: 16px;
+}
+h3.sl-title em { font-style: italic; color: var(--red); }
+.sl-desc { font-size: 13.5px; font-weight: 300; color: var(--text2); line-height: 1.78; margin-bottom: 28px; }
+.sl-analytics-strip { display: flex; gap: 0; border-top: 1px solid var(--rule); padding-top: 24px; }
+.sa { flex: 1; border-right: 1px solid var(--rule); padding-right: 16px; margin-right: 16px; }
+.sa:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.sa-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 400; color: var(--black); line-height: 1;
+}
+.sa-n sup { font-size: 12px; color: var(--red); font-family: 'DM Sans', sans-serif; font-weight: 600; }
+.sa-l { font-size: 9.5px; font-weight: 500; color: var(--text3); margin-top: 4px; letter-spacing: .04em; }
+/* Right side of service layer */
+.sl-right-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 24px;
+}
+.sl-services-list { display: flex; flex-direction: column; gap: 0; }
+.sl-service {
+  padding: 20px 0; border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: 28px 1fr auto; gap: 16px;
+  align-items: start;
+}
+.sl-service:last-child { border-bottom: none; }
+.sls-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--red); margin-top: 3px; }
+.sls-title { font-size: 13.5px; font-weight: 600; color: var(--black); margin-bottom: 4px; }
+.sls-desc { font-size: 12px; font-weight: 300; color: var(--text2); line-height: 1.65; }
+.sls-add-btn {
+  font-size: 10px; font-weight: 600; letter-spacing: .06em;
+  color: var(--red); border: 1px solid rgba(204,34,41,.3);
+  padding: 6px 12px; white-space: nowrap; flex-shrink: 0;
+  cursor: pointer; transition: background .2s, color .2s;
+  background: transparent;
+}
+.sls-add-btn:hover, .sls-add-btn.active {
+  background: var(--red); color: var(--white); border-color: var(--red);
+}
+.sls-add-btn.active::before { content: '✓ '; }
+/* Before/After analytics panel */
+.sl-analytics-panel {
+  background: var(--black); padding: 28px 24px; margin-top: 24px;
+}
+.sap-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.3); margin-bottom: 16px;
+}
+.sap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.sap-col { padding: 0 16px; border-right: 1px solid rgba(255,255,255,.07); }
+.sap-col:first-child { padding-left: 0; }
+.sap-col:last-child { border-right: none; }
+.sap-state {
+  font-family: 'DM Mono', monospace;
+  font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sap-state.before { color: rgba(255,255,255,.25); }
+.sap-state.after { color: var(--red); }
+.sap-metric { display: flex; flex-direction: column; gap: 8px; }
+.sap-row { font-size: 11.5px; font-weight: 300; color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 8px; }
+.sap-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.2); flex-shrink: 0; }
+.sap-dot.red { background: var(--red); }
+/* Brochure strip */
+.sl-brochure-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  border: 1px solid var(--rule); padding: 16px 20px; margin-top: 20px;
+  background: var(--warm);
+}
+.slbs-text { font-size: 12.5px; font-weight: 500; color: var(--black); }
+.slbs-sub { font-size: 11px; font-weight: 300; color: var(--text3); margin-top: 2px; }
+.slbs-btn {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .06em;
+  color: var(--black); border: 1px solid var(--rule);
+  padding: 8px 16px; transition: border-color .2s, color .2s;
+  white-space: nowrap; display: flex; align-items: center; gap: 6px;
+}
+.slbs-btn:hover { border-color: var(--ink2); color: var(--black); }
+
+/* ═══ INTERACTIVE CART / BUILDER ═══ */
+.builder-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.bw-left {
+  padding: 80px 72px 80px 60px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.bw-right {
+  padding: 80px 60px 80px 72px;
+  position: sticky; top: 58px; height: fit-content;
+}
+.bw-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.bw-tag::before { content: ''; width: 16px; height: 1px; background: var(--red); }
+h2.bw-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.2vw, 44px); font-weight: 400;
+  line-height: 1.1; color: var(--white); margin-bottom: 16px;
+}
+h2.bw-h em { font-style: italic; color: rgba(255,255,255,.35); }
+.bw-lead { font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(255,255,255,.5); margin-bottom: 36px; }
+
+/* Service selector */
+.service-selector { display: flex; flex-direction: column; gap: 0; }
+.ss-item {
+  border: 1px solid rgba(255,255,255,.07); border-top: none;
+  padding: 20px 22px;
+  display: grid; grid-template-columns: 28px 1fr auto; gap: 16px; align-items: center;
+  cursor: pointer; transition: background .2s;
+}
+.ss-item:first-child { border-top: 1px solid rgba(255,255,255,.07); }
+.ss-item:hover { background: rgba(255,255,255,.03); }
+.ss-item.selected { background: rgba(204,34,41,.08); border-color: rgba(204,34,41,.25); }
+.ss-num { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,.3); }
+.ss-item.selected .ss-num { color: var(--red); }
+.ss-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.7); }
+.ss-sub { font-size: 11px; font-weight: 300; color: rgba(255,255,255,.3); margin-top: 2px; }
+.ss-item.selected .ss-label { color: var(--white); }
+.ss-price { font-family: 'DM Mono', monospace; font-size: 12px; color: rgba(255,255,255,.35); }
+.ss-item.selected .ss-price { color: var(--red); }
+.ss-check {
+  width: 18px; height: 18px; border: 1px solid rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: transparent; transition: all .2s;
+  flex-shrink: 0;
+}
+.ss-item.selected .ss-check {
+  background: var(--red); border-color: var(--red); color: var(--white);
+}
+
+/* Bundle notice */
+.bundle-notice {
+  background: rgba(204,34,41,.12); border: 1px solid rgba(204,34,41,.25);
+  padding: 16px 20px; margin-top: 20px;
+  display: none;
+}
+.bundle-notice.visible { display: block; }
+.bn-title { font-size: 12.5px; font-weight: 600; color: var(--red); margin-bottom: 4px; }
+.bn-body { font-size: 12px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+/* Why bundle matters */
+.bundle-reasons { margin-top: 28px; display: flex; flex-direction: column; gap: 0; }
+.br-row {
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  display: grid; grid-template-columns: 24px 1fr; gap: 12px;
+}
+.br-row:first-child { border-top: 1px solid rgba(255,255,255,.06); }
+.br-icon { font-size: 14px; margin-top: 1px; }
+.br-t { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.75); margin-bottom: 2px; }
+.br-d { font-size: 11.5px; font-weight: 300; color: rgba(255,255,255,.35); line-height: 1.55; }
+
+/* Cart panel */
+.cart-panel {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+  padding: 28px 28px;
+}
+.cp-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.25); margin-bottom: 20px;
+}
+.cp-items { display: flex; flex-direction: column; gap: 0; min-height: 60px; }
+.cp-empty { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.2); font-style: italic; padding: 12px 0; }
+.cp-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.cpi-name { font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,.7); }
+.cpi-price { font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--red); }
+.cpi-remove { font-size: 11px; color: rgba(255,255,255,.2); cursor: pointer; padding: 2px 6px; transition: color .2s; margin-left: 12px; }
+.cpi-remove:hover { color: rgba(255,255,255,.5); }
+.cp-total-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 18px 0 0; margin-top: 4px;
+}
+.cp-total-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,.6); }
+.cp-total-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 400; color: var(--white);
+}
+.cp-savings { font-size: 11px; font-weight: 600; color: #4caf50; margin-bottom: 16px; text-align: right; }
+/* Add-on services */
+.addon-section { margin-top: 20px; border-top: 1px solid rgba(255,255,255,.07); padding-top: 16px; }
+.addon-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.2); margin-bottom: 12px;
+}
+.addon-items { display: flex; flex-direction: column; gap: 6px; }
+.addon-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 10px; border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer; transition: background .2s;
+}
+.addon-item:hover { background: rgba(255,255,255,.03); }
+.addon-item.selected { background: rgba(204,34,41,.06); border-color: rgba(204,34,41,.2); }
+.ai-label { font-size: 11.5px; font-weight: 400; color: rgba(255,255,255,.55); }
+.ai-price { font-family: 'DM Mono', monospace; font-size: 10.5px; color: rgba(255,255,255,.3); }
+.addon-item.selected .ai-label { color: rgba(255,255,255,.8); }
+.addon-item.selected .ai-price { color: var(--red); }
+.ai-check {
+  width: 14px; height: 14px; border: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; color: transparent; transition: all .2s; flex-shrink: 0; margin-left: 10px;
+}
+.addon-item.selected .ai-check { background: var(--red); border-color: var(--red); color: var(--white); }
+/* Checkout */
+.checkout-btn {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 20px; transition: background .2s;
+  cursor: pointer; border: none; width: 100%;
+}
+.checkout-btn:hover:not(:disabled) { background: #a31a20; }
+.checkout-btn:disabled { background: rgba(255,255,255,.06); color: rgba(255,255,255,.2); cursor: not-allowed; }
+.checkout-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .1em; color: rgba(255,255,255,.15);
+  margin-top: 10px; line-height: 1.65; text-align: center;
+}
+
+/* ═══ WHY PACKAGE ═══ */
+.why-pkg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--rule); }
+.wp-col { padding: 40px 32px; border-right: 1px solid var(--rule); }
+.wp-col:last-child { border-right: none; }
+.wpc-icon { font-size: 26px; margin-bottom: 16px; display: block; }
+.wpc-h { font-size: 15px; font-weight: 600; color: var(--black); margin-bottom: 10px; }
+.wpc-body { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.78; }
+.wpc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 14px; display: block;
+}
+
+/* ═══ PAYMENT MODAL ═══ */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.8);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000; opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-box {
+  background: var(--white); max-width: 560px; width: 90%;
+  padding: 48px 48px; position: relative;
+  transform: translateY(24px); transition: transform .3s var(--ease);
+  max-height: 85vh; overflow-y: auto;
+}
+.modal-overlay.open .modal-box { transform: none; }
+.modal-close {
+  position: absolute; top: 18px; right: 22px;
+  font-size: 20px; color: var(--text3); cursor: pointer; transition: color .2s;
+  background: none; border: none;
+}
+.modal-close:hover { color: var(--black); }
+.modal-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 16px;
+}
+h3.modal-h {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 400; line-height: 1.2; color: var(--black); margin-bottom: 8px;
+}
+.modal-sub { font-size: 13px; font-weight: 300; color: var(--text2); line-height: 1.65; margin-bottom: 28px; }
+.modal-order-summary { border: 1px solid var(--rule); margin-bottom: 24px; }
+.mos-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--text3); padding: 10px 16px; border-bottom: 1px solid var(--rule); background: var(--warm);
+}
+.mos-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 16px; border-bottom: 1px solid var(--rule2);
+  font-size: 13px;
+}
+.mos-item:last-child { border-bottom: none; }
+.mos-name { font-weight: 500; color: var(--black); }
+.mos-price { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--red); }
+.mos-total {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 16px; background: var(--black); margin-top: -1px;
+}
+.mos-total-label { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.6); }
+.mos-total-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; font-weight: 400; color: var(--white);
+}
+/* Form fields */
+.modal-form { display: flex; flex-direction: column; gap: 14px; }
+.mf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mf-field { display: flex; flex-direction: column; gap: 6px; }
+.mf-label { font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--text2); }
+.mf-input, .mf-select {
+  padding: 11px 14px; border: 1px solid var(--rule);
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--black);
+  background: var(--white); transition: border-color .2s; outline: none;
+}
+.mf-input:focus, .mf-select:focus { border-color: var(--red); }
+.mf-select { cursor: pointer; }
+.modal-pay-btn {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--white); background: var(--red);
+  padding: 16px 24px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .2s; margin-top: 8px; width: 100%;
+}
+.modal-pay-btn:hover { background: #a31a20; }
+.modal-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: .1em; color: var(--text3);
+  margin-top: 12px; line-height: 1.65; text-align: center;
+}
+
+/* ═══ FINAL CTA ═══ */
+.final-cta {
+  padding: 100px 60px; text-align: center;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.final-cta::before {
+  content: 'EXECUTE'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Playfair Display', serif; font-size: 200px; font-weight: 700; color: rgba(0,0,0,.02);
+  pointer-events: none; letter-spacing: -.04em; white-space: nowrap;
+}
+.final-overline {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 20px;
+}
+h2.final-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 4.5vw, 64px); font-weight: 400;
+  line-height: 1.1; letter-spacing: -.02em; color: var(--black);
+  max-width: 700px; margin: 0 auto 28px;
+}
+h2.final-h em { font-style: italic; color: var(--red); }
+.final-sub { font-size: 15px; font-weight: 300; color: var(--text2); max-width: 480px; margin: 0 auto 44px; line-height: 1.8; }
+.final-acts { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.final-mono {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--text3); margin-top: 24px;
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: var(--black); padding: 40px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+}
+.ft-brand { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+.ft-brand span { color: var(--red); }
+.ft-usp { font-size: 12px; font-weight: 300; color: rgba(255,255,255,.35); max-width: 380px; line-height: 1.6; }
+.ft-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.ft-l { font-size: 12px; color: rgba(255,255,255,.3); transition: color .2s; }
+.ft-l:hover { color: rgba(255,255,255,.7); }
+.ft-copy { font-size: 11px; color: rgba(255,255,255,.18); }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1100px) {
+  .page-hero, .service-layer, .builder-wrap { grid-template-columns: 1fr; }
+  .ph-left { border-right: none; border-bottom: 1px solid var(--rule); }
+  .sl-left { border-right: none; border-bottom: 1px solid var(--rule); }
+  .bw-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .models-grid, .why-pkg-grid { grid-template-columns: 1fr 1fr; }
+  .model-card:nth-child(2) { border-right: 1px solid var(--rule) !important; }
+}
+@media (max-width: 768px) {
+  .topbar { padding: 0 24px; }
+  .tb-right .tb-nav-link { display: none; }
+  .section { padding: 64px 28px; }
+  .ph-left, .ph-right { padding: 48px 28px; }
+  .sl-left, .sl-right { padding: 40px 28px; }
+  .bw-left, .bw-right { padding: 56px 28px; }
+  .models-grid, .why-pkg-grid { grid-template-columns: 1fr; }
+  .model-card { border-right: 1px solid var(--rule) !important; }
+  .sec-header-grid { grid-template-columns: 1fr; gap: 20px; }
+  footer { padding: 36px 28px; flex-direction: column; align-items: flex-start; }
+  .final-cta { padding: 72px 28px; }
+  .modal-box { padding: 36px 28px; }
+  .mf-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════ TOPBAR ════ -->
+<header class="topbar">
+  <div class="tb-left">
+    <div class="tb-wordmark">ORIGENNT<span>.</span></div>
+    <div class="tb-sep"></div>
+    <div class="tb-section">Services for Businesses</div>
+  </div>
+  <nav class="tb-right">
+    <a href="#workforce-layer" class="tb-nav-link">Workforce</a>
+    <a href="#operations-layer" class="tb-nav-link">Operations</a>
+    <a href="#growth-layer" class="tb-nav-link">Growth</a>
+    <a href="#build" class="tb-nav-link">Build Your Plan</a>
+    <a href="#build" class="tb-diagnostic-btn">Book Services →</a>
+  </nav>
+</header>
+
+<!-- ════ PAGE HERO ════ -->
+<div class="page-hero">
+  <div class="ph-left">
+    <div>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>→</span>
+        <span style="color:var(--text2);">Services for Businesses</span>
+      </div>
+      <div class="h-overline">Execution Services · ORIGENNT</div>
+      <h1 class="hero-h1">
+        Services that<br>
+        <em>build systems,</em><br>
+        not reports.
+      </h1>
+      <p class="hero-tagline">
+        Three structured execution services. Choose one, two, or three —<br>
+        or take the full Execution System package at a significant advantage.<br><br>
+        <strong>No enquiries. No waiting. Book and begin.</strong>
+      </p>
+      <div class="hero-acts">
+        <a href="#build" class="btn-p">Build Your Service Plan</a>
+        <a href="services.html" class="btn-s">View All Services →</a>
+      </div>
+    </div>
+    <div class="how-strip">
+      <div class="hs-step">
+        <div class="hs-n">01</div>
+        <div>
+          <div class="hs-title">Choose Services</div>
+          <div class="hs-sub">Select the execution layers you need addressed</div>
+        </div>
+      </div>
+      <div class="hs-step">
+        <div class="hs-n">02</div>
+        <div>
+          <div class="hs-title">Add Ons (Optional)</div>
+          <div class="hs-sub">Customise with additional services per your context</div>
+        </div>
+      </div>
+      <div class="hs-step">
+        <div class="hs-n">03</div>
+        <div>
+          <div class="hs-title">Pay & Begin</div>
+          <div class="hs-sub">Direct checkout — your engagement starts within 48 hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ph-right">
+    <div class="ph-stat-block">
+      <div class="psb-n">3<sup>×</sup></div>
+      <div class="psb-l">Execution layers addressed per engagement</div>
+    </div>
+    <div class="ph-right-doctrine">
+      Most MSMEs treat their problems as<br>
+      <em>events.</em> We treat them as <em>systems.</em>
+    </div>
+    <p class="ph-right-sub">
+      Every ORIGENNT service is designed around one principle: a business problem that keeps recurring is not an event failure — it is a systems failure. Our services don't solve your problem once. They build the system that prevents it from recurring.
+    </p>
+    <div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--rule);">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;">Service Structure</div>
+      <div style="display:flex;gap:0;border:1px solid var(--rule);">
+        <div style="flex:1;padding:14px 16px;border-right:1px solid var(--rule);text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--black);">3</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px;">Core Services</div>
+        </div>
+        <div style="flex:1;padding:14px 16px;border-right:1px solid var(--rule);text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--black);">5+</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px;">Add-On Options</div>
+        </div>
+        <div style="flex:1;padding:14px 16px;text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:var(--red);">1</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px;">Full Package</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ THREE MODELS (Packages) ════ -->
+<section class="section">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="01 —">Service Models</div>
+      <h2 class="sec-h">Three models.<br>One for every<br><em>execution stage.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">We show three structured service models aligned to where your business actually is — not where you hope it is. Choose the model that fits your current execution reality, or build your own below.</p>
+      <p style="font-size:13px;font-weight:300;color:var(--text3);margin-top:14px;line-height:1.7;">Need something more specific? <a href="services.html" style="color:var(--red);border-bottom:1px solid rgba(204,34,41,.3);">View all 173 services →</a></p>
+    </div>
+  </div>
+  <div class="models-grid reveal">
+
+    <!-- Model 1 -->
+    <div class="model-card">
+      <div class="mc-header">
+        <span class="mc-tag">Model · 01 — Foundation</span>
+        <span class="mc-icon">🏗️</span>
+        <div class="mc-title">Workforce Foundation</div>
+        <div class="mc-tagline">For MSMEs where the people system is the primary execution bottleneck. Build the hiring and team structure that allows everything else to work.</div>
+      </div>
+      <div class="mc-body">
+        <div class="mc-services">
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Workforce Execution Audit</span>
+              <span class="mc-service-sub">Hiring criteria, onboarding structure, accountability frameworks</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Manpower Planning System</span>
+              <span class="mc-service-sub">Role mapping, headcount planning, deployment structure</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Attrition Diagnostic</span>
+              <span class="mc-service-sub">Root cause analysis of team exits, retention system design</span>
+            </div>
+          </div>
+        </div>
+        <div class="mc-price-block">
+          <div class="mc-price-label">Starting From</div>
+          <div class="mc-price">₹24,999 <sub>/ engagement</sub></div>
+        </div>
+        <div class="mc-actions">
+          <a href="#build" class="mc-btn-p">Select This Model <span>→</span></a>
+          <button class="mc-btn-s" onclick="openBrochure('workforce')">📄 View Brochure</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model 2 — Featured -->
+    <div class="model-card featured">
+      <div class="mc-badge">Most Chosen</div>
+      <div class="mc-header">
+        <span class="mc-tag">Model · 02 — Full System</span>
+        <span class="mc-icon">⚙️</span>
+        <div class="mc-title">Full Execution System</div>
+        <div class="mc-tagline">All three execution layers addressed together. The only model that treats your business as an interdependent system — because it is.</div>
+      </div>
+      <div class="mc-body">
+        <div class="mc-services">
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Workforce Execution</span>
+              <span class="mc-service-sub">Complete people system audit and redesign</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Operational Systems</span>
+              <span class="mc-service-sub">Process documentation, delegation, SOP implementation</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Growth Execution</span>
+              <span class="mc-service-sub">Revenue systems, measurement frameworks, scaling structure</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Bottleneck Report + Sequencing</span>
+              <span class="mc-service-sub">Interdependency map, prioritised intervention plan</span>
+            </div>
+          </div>
+        </div>
+        <div class="mc-price-block">
+          <div class="mc-price-label">Package Price</div>
+          <div class="mc-price">₹59,999 <sub>/ engagement</sub></div>
+          <div class="mc-price-savings">Save ₹14,998 vs. booking individually</div>
+        </div>
+        <div class="mc-actions">
+          <a href="#build" class="mc-btn-p" style="background:var(--red);">Select Full Package <span>→</span></a>
+          <button class="mc-btn-s" onclick="openBrochure('full')">📄 View Brochure</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model 3 -->
+    <div class="model-card">
+      <div class="mc-header">
+        <span class="mc-tag">Model · 03 — Scale</span>
+        <span class="mc-icon">📈</span>
+        <div class="mc-title">Operations + Growth</div>
+        <div class="mc-tagline">For businesses where the workforce is stable but operational structure and growth measurement are limiting the next level of performance.</div>
+      </div>
+      <div class="mc-body">
+        <div class="mc-services">
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Operational Structure Analysis</span>
+              <span class="mc-service-sub">Process mapping, workflow redesign, SOP creation</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Delegation Infrastructure</span>
+              <span class="mc-service-sub">Authority matrix, accountability systems, handoff protocols</span>
+            </div>
+          </div>
+          <div class="mc-service-item">
+            <div>
+              <span class="mc-service-title">Growth Execution Mapping</span>
+              <span class="mc-service-sub">Revenue system audit, performance measurement, scaling plan</span>
+            </div>
+          </div>
+        </div>
+        <div class="mc-price-block">
+          <div class="mc-price-label">Starting From</div>
+          <div class="mc-price">₹39,999 <sub>/ engagement</sub></div>
+          <div class="mc-price-savings">Save ₹4,999 vs. individual booking</div>
+        </div>
+        <div class="mc-actions">
+          <a href="#build" class="mc-btn-p">Select This Model <span>→</span></a>
+          <button class="mc-btn-s" onclick="openBrochure('ops-growth')">📄 View Brochure</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ SERVICE LAYER: WORKFORCE ════ -->
+<section class="section warm" id="workforce-layer">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="02 —">Service Layer · 01</div>
+      <h2 class="sec-h">Workforce<br><em>Execution.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">When workforce execution fails, every other system suffers. Hiring is not an event — it is a system. This service layer rebuilds the people infrastructure from criteria to accountability.</p>
+    </div>
+  </div>
+
+  <div class="service-layer reveal">
+    <div class="sl-left">
+      <div>
+        <div class="sl-label">Category · 01</div>
+        <div class="sl-number">01</div>
+        <h3 class="sl-title">People are your<br>first <em>execution layer.</em></h3>
+        <p class="sl-desc">MSMEs hire reactively. They replace, not recruit. They manage, not lead. The result is a workforce held together by individual effort rather than systemic structure — fragile, expensive, and unscalable.</p>
+      </div>
+      <div class="sl-analytics-strip">
+        <div class="sa">
+          <div class="sa-n">67<sup>%</sup></div>
+          <div class="sa-l">Failures begin in workforce layer</div>
+        </div>
+        <div class="sa">
+          <div class="sa-n">3.2<sup>×</sup></div>
+          <div class="sa-l">Cost of reactive vs. structured hiring</div>
+        </div>
+      </div>
+    </div>
+    <div class="sl-right">
+      <div class="sl-right-label">Services Included — Add to Your Plan</div>
+      <div class="sl-services-list">
+        <div class="sl-service">
+          <div class="sls-num">W1</div>
+          <div>
+            <div class="sls-title">Hiring System Design</div>
+            <div class="sls-desc">Standardised hiring criteria, structured interview frameworks, role benchmarking, and decision-making protocols that remove subjectivity from every hire.</div>
+          </div>
+          <button class="sls-add-btn" data-service="W1" data-name="Hiring System Design" data-price="12999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">W2</div>
+          <div>
+            <div class="sls-title">Onboarding Architecture</div>
+            <div class="sls-desc">30-60-90 day onboarding frameworks, role clarity documentation, team integration protocols, and early performance measurement systems.</div>
+          </div>
+          <button class="sls-add-btn" data-service="W2" data-name="Onboarding Architecture" data-price="8999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">W3</div>
+          <div>
+            <div class="sls-title">Manpower Planning System</div>
+            <div class="sls-desc">Workforce requirement forecasting, role hierarchy mapping, headcount optimisation, and deployment structure aligned to business growth stages.</div>
+          </div>
+          <button class="sls-add-btn" data-service="W3" data-name="Manpower Planning System" data-price="11999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">W4</div>
+          <div>
+            <div class="sls-title">Attrition & Retention Diagnostic</div>
+            <div class="sls-desc">Root cause analysis of exit patterns, team satisfaction audit, retention lever identification, and structural changes to reduce controllable attrition.</div>
+          </div>
+          <button class="sls-add-btn" data-service="W4" data-name="Attrition & Retention Diagnostic" data-price="9999" onclick="toggleService(this)">+ Add</button>
+        </div>
+      </div>
+      <!-- Before/After -->
+      <div class="sl-analytics-panel">
+        <div class="sap-label">Execution State · Before & After ORIGENNT Workforce Services</div>
+        <div class="sap-grid">
+          <div class="sap-col">
+            <div class="sap-state before">Before</div>
+            <div class="sap-metric">
+              <div class="sap-row"><span class="sap-dot"></span>Hiring decisions based on gut instinct</div>
+              <div class="sap-row"><span class="sap-dot"></span>No consistent onboarding structure</div>
+              <div class="sap-row"><span class="sap-dot"></span>Attrition managed reactively</div>
+              <div class="sap-row"><span class="sap-dot"></span>Manpower linked to crises, not planning</div>
+            </div>
+          </div>
+          <div class="sap-col">
+            <div class="sap-state after">After</div>
+            <div class="sap-metric">
+              <div class="sap-row"><span class="sap-dot red"></span>Standardised, criteria-driven hiring</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Structured 90-day onboarding protocol</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Retention systems reduce controllable exits</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Workforce planned against growth milestones</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Brochure -->
+      <div class="sl-brochure-strip">
+        <div>
+          <div class="slbs-text">Workforce Execution — Service Brochure</div>
+          <div class="slbs-sub">Full methodology, deliverables, and engagement structure</div>
+        </div>
+        <button class="slbs-btn" onclick="openBrochure('workforce')">📄 Download Brochure →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SERVICE LAYER: OPERATIONS ════ -->
+<section class="section" id="operations-layer">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="03 —">Service Layer · 02</div>
+      <h2 class="sec-h">Operational<br><em>Systems.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">Operations without structure don't scale — they fracture. Every undocumented process, informal delegation, and inconsistent workflow compounds into a ceiling that prevents the business from growing past its current state.</p>
+    </div>
+  </div>
+
+  <div class="service-layer reveal">
+    <div class="sl-left">
+      <div>
+        <div class="sl-label">Category · 02</div>
+        <div class="sl-number">02</div>
+        <h3 class="sl-title">Process is the<br><em>second layer</em><br>of execution.</h3>
+        <p class="sl-desc">The compounding cost of unstructured operations is invisible on your P&L — until it isn't. Repeated mistakes, unclear ownership, and informal processes drain resources in ways that never appear as a line item but compound into existential risk.</p>
+      </div>
+      <div class="sl-analytics-strip">
+        <div class="sa">
+          <div class="sa-n">41<sup>%</sup></div>
+          <div class="sa-l">Avg. time lost to undocumented processes</div>
+        </div>
+        <div class="sa">
+          <div class="sa-n">2.8<sup>×</sup></div>
+          <div class="sa-l">Error rate without SOP infrastructure</div>
+        </div>
+      </div>
+    </div>
+    <div class="sl-right">
+      <div class="sl-right-label">Services Included — Add to Your Plan</div>
+      <div class="sl-services-list">
+        <div class="sl-service">
+          <div class="sls-num">O1</div>
+          <div>
+            <div class="sls-title">Process Documentation System</div>
+            <div class="sls-desc">Comprehensive mapping of all core business processes, creation of Standard Operating Procedures (SOPs), and implementation of documentation maintenance protocols.</div>
+          </div>
+          <button class="sls-add-btn" data-service="O1" data-name="Process Documentation System" data-price="14999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">O2</div>
+          <div>
+            <div class="sls-title">Delegation Infrastructure Design</div>
+            <div class="sls-desc">Authority matrix creation, task ownership clarification, escalation protocols, and accountability structures that allow delegation without abdication.</div>
+          </div>
+          <button class="sls-add-btn" data-service="O2" data-name="Delegation Infrastructure Design" data-price="11999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">O3</div>
+          <div>
+            <div class="sls-title">Operational Debt Audit</div>
+            <div class="sls-desc">Identification and quantification of accumulated operational inefficiencies, informal workarounds, and systemic drag that is preventing the business from operating at full capacity.</div>
+          </div>
+          <button class="sls-add-btn" data-service="O3" data-name="Operational Debt Audit" data-price="9999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">O4</div>
+          <div>
+            <div class="sls-title">Workflow Efficiency Redesign</div>
+            <div class="sls-desc">End-to-end review of key operational workflows, elimination of unnecessary steps, reduction of handoff failures, and redesign for throughput rather than compliance.</div>
+          </div>
+          <button class="sls-add-btn" data-service="O4" data-name="Workflow Efficiency Redesign" data-price="12999" onclick="toggleService(this)">+ Add</button>
+        </div>
+      </div>
+      <div class="sl-analytics-panel">
+        <div class="sap-label">Execution State · Before & After ORIGENNT Operations Services</div>
+        <div class="sap-grid">
+          <div class="sap-col">
+            <div class="sap-state before">Before</div>
+            <div class="sap-metric">
+              <div class="sap-row"><span class="sap-dot"></span>Processes exist in people's heads</div>
+              <div class="sap-row"><span class="sap-dot"></span>Delegation fails at first handoff</div>
+              <div class="sap-row"><span class="sap-dot"></span>Same mistakes repeat across quarters</div>
+              <div class="sap-row"><span class="sap-dot"></span>Owner is the system</div>
+            </div>
+          </div>
+          <div class="sap-col">
+            <div class="sap-state after">After</div>
+            <div class="sap-metric">
+              <div class="sap-row"><span class="sap-dot red"></span>SOPs documented, maintained, and followed</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Clear authority and ownership at every level</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Error rates tracked and structurally reduced</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Business operates when the owner isn't present</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sl-brochure-strip">
+        <div>
+          <div class="slbs-text">Operational Systems — Service Brochure</div>
+          <div class="slbs-sub">Full methodology, deliverables, and engagement structure</div>
+        </div>
+        <button class="slbs-btn" onclick="openBrochure('operations')">📄 Download Brochure →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SERVICE LAYER: GROWTH ════ -->
+<section class="section warm" id="growth-layer">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="04 —">Service Layer · 03</div>
+      <h2 class="sec-h">Growth<br><em>Execution.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">Growth that feels random is random. Revenue peaks and valleys in SMEs are not market-driven — they are system-driven. This service layer builds the measurement and scaling infrastructure that makes growth consistent and traceable.</p>
+    </div>
+  </div>
+
+  <div class="service-layer reveal">
+    <div class="sl-left">
+      <div>
+        <div class="sl-label">Category · 03</div>
+        <div class="sl-number">03</div>
+        <h3 class="sl-title">Growth without<br>systems is <em>controlled<br>chaos.</em></h3>
+        <p class="sl-desc">Most MSMEs stall at the same revenue figure, year after year. This is not a market limitation. It is the point at which the current execution system hits its structural ceiling — and refuses to move without redesign.</p>
+      </div>
+      <div class="sl-analytics-strip">
+        <div class="sa">
+          <div class="sa-n">3.4<sup>×</sup></div>
+          <div class="sa-l">Faster growth with structured execution</div>
+        </div>
+        <div class="sa">
+          <div class="sa-n">89<sup>%</sup></div>
+          <div class="sa-l">Revenue stalls are system-caused</div>
+        </div>
+      </div>
+    </div>
+    <div class="sl-right">
+      <div class="sl-right-label">Services Included — Add to Your Plan</div>
+      <div class="sl-services-list">
+        <div class="sl-service">
+          <div class="sls-num">G1</div>
+          <div>
+            <div class="sls-title">Revenue System Audit</div>
+            <div class="sls-desc">Comprehensive analysis of your revenue generation mechanics — from pipeline structure to conversion systems to repeat business infrastructure — to identify where growth is leaking.</div>
+          </div>
+          <button class="sls-add-btn" data-service="G1" data-name="Revenue System Audit" data-price="13999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">G2</div>
+          <div>
+            <div class="sls-title">Performance Measurement Framework</div>
+            <div class="sls-desc">Design of execution KPIs, leading and lagging indicator systems, performance review cadences, and measurement infrastructure that connects daily activity to revenue outcomes.</div>
+          </div>
+          <button class="sls-add-btn" data-service="G2" data-name="Performance Measurement Framework" data-price="11999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">G3</div>
+          <div>
+            <div class="sls-title">Scaling Structure Design</div>
+            <div class="sls-desc">Identification of the structural changes required to move the business past its current revenue ceiling — including team structure, capacity planning, and systems prerequisites for the next growth stage.</div>
+          </div>
+          <button class="sls-add-btn" data-service="G3" data-name="Scaling Structure Design" data-price="14999" onclick="toggleService(this)">+ Add</button>
+        </div>
+        <div class="sl-service">
+          <div class="sls-num">G4</div>
+          <div>
+            <div class="sls-title">Growth Execution Mapping</div>
+            <div class="sls-desc">A sequenced, 90-day execution roadmap linking specific business activities to measurable growth outcomes — designed to eliminate the experience of growth feeling random.</div>
+          </div>
+          <button class="sls-add-btn" data-service="G4" data-name="Growth Execution Mapping" data-price="12999" onclick="toggleService(this)">+ Add</button>
+        </div>
+      </div>
+      <div class="sl-analytics-panel">
+        <div class="sap-label">Execution State · Before & After ORIGENNT Growth Services</div>
+        <div class="sap-grid">
+          <div class="sap-col">
+            <div class="sap-state before">Before</div>
+            <div class="sap-metric">
+              <div class="sap-row"><span class="sap-dot"></span>Revenue feels unpredictable and seasonal</div>
+              <div class="sap-row"><span class="sap-dot"></span>No link between activity and revenue</div>
+              <div class="sap-row"><span class="sap-dot"></span>Growth stalled at same band for 2+ years</div>
+              <div class="sap-row"><span class="sap-dot"></span>Performance reviews are post-mortems</div>
+            </div>
+          </div>
+          <div class="sap-col">
+            <div class="sap-state after">After</div>
+            <div class="sap-metric">
+              <div class="sap-row"><span class="sap-dot red"></span>Revenue traced to specific execution inputs</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Leading indicators reviewed weekly</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Structural ceiling identified and addressed</div>
+              <div class="sap-row"><span class="sap-dot red"></span>Performance managed in real time, not hindsight</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sl-brochure-strip">
+        <div>
+          <div class="slbs-text">Growth Execution — Service Brochure</div>
+          <div class="slbs-sub">Full methodology, deliverables, and engagement structure</div>
+        </div>
+        <button class="slbs-btn" onclick="openBrochure('growth')">📄 Download Brochure →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ WHY PACKAGE OVER INDIVIDUAL ════ -->
+<section class="section">
+  <div class="sec-header-grid">
+    <div>
+      <div class="sec-eyebrow red" data-n="05 —">Package vs. Individual</div>
+      <h2 class="sec-h">Why the package<br>outperforms any<br><em>individual service.</em></h2>
+    </div>
+    <div>
+      <p class="sec-lead">Every individual service solves a real problem. The package solves the system that produces those problems. This is not a pricing argument — it is a structural one.</p>
+    </div>
+  </div>
+  <div class="why-pkg-grid reveal">
+    <div class="wp-col">
+      <span class="wpc-tag">Reason · 01</span>
+      <span class="wpc-icon">🔗</span>
+      <div class="wpc-h">Execution layers are interdependent</div>
+      <div class="wpc-body">Fixing your hiring system without fixing your onboarding process creates a bottleneck one stage later. Improving operations without addressing growth measurement means efficiency gains that never convert to revenue. Addressing all three layers together eliminates the cascade failure that makes single-layer interventions temporary.</div>
+    </div>
+    <div class="wp-col">
+      <span class="wpc-tag">Reason · 02</span>
+      <span class="wpc-icon">📊</span>
+      <div class="wpc-h">Sequencing determines outcome</div>
+      <div class="wpc-body">Which execution layer you fix first matters as much as what you fix. A business that improves its growth system before stabilising its operational structure will scale chaos, not results. The Full Execution System package includes interdependency mapping and sequenced implementation — a plan for the order of intervention, not just the intervention itself.</div>
+    </div>
+    <div class="wp-col">
+      <span class="wpc-tag">Reason · 03</span>
+      <span class="wpc-icon">💰</span>
+      <div class="wpc-h">Structural savings are compounding</div>
+      <div class="wpc-body">Individual services address individual problems. The package saves ₹14,998 in fee, but that is the smaller saving. The larger saving is the elimination of repeat interventions — businesses that address only one layer typically return for additional services within 12 months, spending more in total than the package price and losing execution momentum between engagements.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ INTERACTIVE BUILDER ════ -->
+<section class="section black" id="build">
+  <div class="builder-wrap">
+    <div class="bw-left">
+      <div class="bw-tag">Interactive Service Builder</div>
+      <h2 class="bw-h">Build your<br><em>execution plan.</em></h2>
+      <p class="bw-lead">Select the specific services your business needs. Add the ones relevant to your situation. Your total builds in real time. When you're ready — pay directly and your engagement begins within 48 hours.</p>
+
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px;">Core Services — Select Any or All</div>
+      <div class="service-selector">
+        <div class="ss-item" onclick="togglePackage('workforce')" id="pkg-workforce">
+          <div class="ss-num">W</div>
+          <div>
+            <div class="ss-label">👥 Workforce Execution Package</div>
+            <div class="ss-sub">Hiring system · Onboarding · Manpower planning · Attrition diagnostic</div>
+          </div>
+          <div class="ss-price">₹24,999</div>
+          <div class="ss-check">✓</div>
+        </div>
+        <div class="ss-item" onclick="togglePackage('operations')" id="pkg-operations">
+          <div class="ss-num">O</div>
+          <div>
+            <div class="ss-label">⚙️ Operational Systems Package</div>
+            <div class="ss-sub">Process docs · Delegation · Operational debt · Workflow redesign</div>
+          </div>
+          <div class="ss-price">₹29,999</div>
+          <div class="ss-check">✓</div>
+        </div>
+        <div class="ss-item" onclick="togglePackage('growth')" id="pkg-growth">
+          <div class="ss-num">G</div>
+          <div>
+            <div class="ss-label">📈 Growth Execution Package</div>
+            <div class="ss-sub">Revenue audit · Performance KPIs · Scaling structure · Execution mapping</div>
+          </div>
+          <div class="ss-price">₹19,999</div>
+          <div class="ss-check">✓</div>
+        </div>
+      </div>
+
+      <div class="bundle-notice" id="bundle-notice">
+        <div class="bn-title">Full Execution System — Bundle Applied</div>
+        <div class="bn-body">You've selected all three execution layers. The Full Execution System package applies automatically, saving you ₹14,998 compared to booking individually. A sequenced implementation plan and interdependency map are included at no extra charge.</div>
+      </div>
+
+      <div class="bundle-reasons" style="margin-top:32px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:4px;">Why this works as a system</div>
+        <div class="br-row">
+          <div class="br-icon">🔗</div>
+          <div>
+            <div class="br-t">Layers are interdependent</div>
+            <div class="br-d">One broken layer creates pressure on the next. Addressing them together eliminates cascade failure.</div>
+          </div>
+        </div>
+        <div class="br-row">
+          <div class="br-icon">🗺️</div>
+          <div>
+            <div class="br-t">Sequencing is included</div>
+            <div class="br-d">The full package includes a prioritised intervention map — so you know what to fix first and why.</div>
+          </div>
+        </div>
+        <div class="br-row">
+          <div class="br-icon">📉</div>
+          <div>
+            <div class="br-t">Prevents repeat engagements</div>
+            <div class="br-d">Single-layer fixes often require follow-up. System-level intervention reduces the total cost of execution repair.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bw-right">
+      <div class="cart-panel">
+        <div class="cp-label">Your Service Plan</div>
+        <div class="cp-items" id="cart-items">
+          <div class="cp-empty" id="cart-empty">No services selected yet. Choose from the left.</div>
+        </div>
+        <div id="cart-total-section" style="display:none;">
+          <div id="cart-savings" class="cp-savings"></div>
+          <div class="cp-total-row">
+            <div class="cp-total-label">Total</div>
+            <div class="cp-total-price" id="cart-total">₹0</div>
+          </div>
+        </div>
+
+        <!-- Add-ons -->
+        <div class="addon-section">
+          <div class="addon-label">Add-On Services (Optional)</div>
+          <div class="addon-items">
+            <div class="addon-item" onclick="toggleAddon(this, 'Executive Diagnostic Session', 4999)">
+              <div class="ai-label">Executive Diagnostic Session (2hr)</div>
+              <div class="ai-price">₹4,999</div>
+              <div class="ai-check">✓</div>
+            </div>
+            <div class="addon-item" onclick="toggleAddon(this, 'Implementation Support (30 days)', 9999)">
+              <div class="ai-label">Implementation Support — 30 Days</div>
+              <div class="ai-price">₹9,999</div>
+              <div class="ai-check">✓</div>
+            </div>
+            <div class="addon-item" onclick="toggleAddon(this, 'Team Workshop (Half Day)', 7999)">
+              <div class="ai-label">Team Workshop — Half Day On-Site</div>
+              <div class="ai-price">₹7,999</div>
+              <div class="ai-check">✓</div>
+            </div>
+            <div class="addon-item" onclick="toggleAddon(this, 'Monthly Execution Review (3 Months)', 14999)">
+              <div class="ai-label">Monthly Execution Review — 3 Months</div>
+              <div class="ai-price">₹14,999</div>
+              <div class="ai-check">✓</div>
+            </div>
+            <div class="addon-item" onclick="toggleAddon(this, 'Priority Report Delivery (48hr)', 2999)">
+              <div class="ai-label">Priority Report Delivery — 48hr</div>
+              <div class="ai-price">₹2,999</div>
+              <div class="ai-check">✓</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="checkout-btn" id="checkout-btn" disabled onclick="openCheckout()">
+          <span>Proceed to Checkout</span>
+          <span>→</span>
+        </button>
+        <div class="checkout-note">
+          Engagement begins within 48 hours of payment confirmation.<br>
+          Initial scoping call scheduled within 24 hours. Minimum team size: 5 employees.
+        </div>
+      </div>
+
+      <!-- Dashboard preview strip -->
+      <div style="margin-top:20px;border:1px solid rgba(255,255,255,.07);padding:20px 22px;background:rgba(255,255,255,.02);">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px;">Interactive Execution Dashboard — Included</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+          <div style="padding:12px;border:1px solid rgba(255,255,255,.06);text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--white);">W</div>
+            <div style="font-size:9.5px;color:rgba(255,255,255,.2);margin-top:4px;">Workforce</div>
+            <div style="width:100%;height:3px;background:rgba(255,255,255,.07);margin-top:10px;position:relative;"><div style="position:absolute;left:0;top:0;height:3px;background:var(--red);width:70%;"></div></div>
+          </div>
+          <div style="padding:12px;border:1px solid rgba(255,255,255,.06);text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--white);">O</div>
+            <div style="font-size:9.5px;color:rgba(255,255,255,.2);margin-top:4px;">Operations</div>
+            <div style="width:100%;height:3px;background:rgba(255,255,255,.07);margin-top:10px;position:relative;"><div style="position:absolute;left:0;top:0;height:3px;background:var(--red);width:45%;"></div></div>
+          </div>
+          <div style="padding:12px;border:1px solid rgba(255,255,255,.06);text-align:center;">
+            <div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--white);">G</div>
+            <div style="font-size:9.5px;color:rgba(255,255,255,.2);margin-top:4px;">Growth</div>
+            <div style="width:100%;height:3px;background:rgba(255,255,255,.07);margin-top:10px;position:relative;"><div style="position:absolute;left:0;top:0;height:3px;background:var(--red);width:30%;"></div></div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.25);margin-top:12px;line-height:1.55;">Your execution health across all three layers, tracked and updated through each engagement milestone.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FINAL CTA ════ -->
+<section class="final-cta">
+  <div class="final-overline">One Decision. One System.</div>
+  <h2 class="final-h">Stop managing symptoms.<br>Build the <em>system.</em></h2>
+  <p class="final-sub">Choose your services, build your plan, and begin. No enquiry queues. No waiting weeks for a proposal. ORIGENNT engagements start within 48 hours of payment.</p>
+  <div class="final-acts">
+    <a href="#build" class="btn-p">Build Your Service Plan</a>
+    <a href="services.html" class="btn-s">View All 173 Services →</a>
+  </div>
+  <div class="final-mono">ORIGENNT · Execution Systems · Bhubaneswar, Odisha · +91 98611 68291</div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div>
+    <div class="ft-brand">ORIGENNT<span>.</span></div>
+    <div class="ft-usp">ORIGENNT builds execution systems for MSMEs and SMEs that transform business operations into structured, measurable, and scalable systems across workforce, operations, and growth.</div>
+  </div>
+  <div class="ft-links">
+    <a href="index.html" class="ft-l">Home</a>
+    <a href="insights.html" class="ft-l">Insights</a>
+    <a href="services.html" class="ft-l">All Services</a>
+    <a href="affiliate.html" class="ft-l">Affiliate Program</a>
+    <a href="campus-ambassador.html" class="ft-l">Campus Ambassador</a>
+    <a href="internship.html" class="ft-l">Internship Programs</a>
+  </div>
+  <div class="ft-copy">© 2025 ORIGENNT Private Limited · Companies Act 2013 · Odisha</div>
+</footer>
+
+<!-- ════ CHECKOUT MODAL ════ -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-eyebrow">Secure Checkout · ORIGENNT</div>
+    <h3 class="modal-h">Complete Your Booking</h3>
+    <p class="modal-sub">Your engagement begins within 48 hours. A scoping call will be scheduled within 24 hours of payment confirmation.</p>
+    <div class="modal-order-summary">
+      <div class="mos-label">Order Summary</div>
+      <div id="modal-items"></div>
+      <div class="mos-total">
+        <div class="mos-total-label">Total Payable</div>
+        <div class="mos-total-price" id="modal-total">₹0</div>
+      </div>
+    </div>
+    <div class="modal-form">
+      <div class="mf-row">
+        <div class="mf-field">
+          <label class="mf-label">Your Name *</label>
+          <input class="mf-input" type="text" placeholder="Full name" id="f-name">
+        </div>
+        <div class="mf-field">
+          <label class="mf-label">Business Name *</label>
+          <input class="mf-input" type="text" placeholder="Company / firm name" id="f-biz">
+        </div>
+      </div>
+      <div class="mf-row">
+        <div class="mf-field">
+          <label class="mf-label">Phone Number *</label>
+          <input class="mf-input" type="tel" placeholder="+91 XXXXX XXXXX" id="f-phone">
+        </div>
+        <div class="mf-field">
+          <label class="mf-label">Email Address *</label>
+          <input class="mf-input" type="email" placeholder="you@company.com" id="f-email">
+        </div>
+      </div>
+      <div class="mf-field">
+        <label class="mf-label">Industry</label>
+        <select class="mf-select" id="f-industry">
+          <option value="">Select your industry</option>
+          <option>Manufacturing</option>
+          <option>Services</option>
+          <option>Consulting</option>
+          <option>Retail / Distribution</option>
+          <option>Logistics</option>
+          <option>Healthcare</option>
+          <option>Education</option>
+          <option>Technology</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="mf-field">
+        <label class="mf-label">Team Size</label>
+        <select class="mf-select" id="f-size">
+          <option value="">Select team size</option>
+          <option>5–15 employees</option>
+          <option>16–50 employees</option>
+          <option>51–150 employees</option>
+          <option>150+ employees</option>
+        </select>
+      </div>
+      <div class="mf-field">
+        <label class="mf-label">Primary Execution Challenge (optional)</label>
+        <input class="mf-input" type="text" placeholder="Briefly describe your main challenge" id="f-challenge">
+      </div>
+      <button class="modal-pay-btn" onclick="submitBooking()">
+        <span>Confirm & Pay via Razorpay</span>
+        <span>→</span>
+      </button>
+    </div>
+    <div class="modal-note">
+      Payment is processed securely. By proceeding you agree to ORIGENNT's engagement terms.<br>
+      GST applicable as per prevailing rates. Invoice issued within 24 hours of payment.
+    </div>
+  </div>
+</div>
+
+<!-- ════ BROCHURE MODAL ════ -->
+<div class="modal-overlay" id="brochure-modal" onclick="closeBrochureOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeBrochure()">×</button>
+    <div class="modal-eyebrow" id="bm-eyebrow">Service Brochure · ORIGENNT</div>
+    <h3 class="modal-h" id="bm-title">Service Brochure</h3>
+    <p class="modal-sub" id="bm-desc">Full methodology, deliverables, and engagement structure.</p>
+    <div id="bm-content"></div>
+    <div class="mf-field" style="margin-top:20px;">
+      <label class="mf-label">Email to receive brochure PDF</label>
+      <input class="mf-input" type="email" placeholder="you@company.com" id="bm-email">
+    </div>
+    <button class="modal-pay-btn" style="margin-top:14px;" onclick="sendBrochure()">
+      <span>Send Brochure to My Email</span>
+      <span>→</span>
+    </button>
+    <div class="modal-note">Brochure sent within minutes. No spam. Unsubscribe anytime.</div>
+  </div>
+</div>
+
+<script>
+// ══ STATE ══
+const PACKAGES = {
+  workforce: { name: 'Workforce Execution Package', price: 24999 },
+  operations: { name: 'Operational Systems Package', price: 29999 },
+  growth: { name: 'Growth Execution Package', price: 19999 }
+};
+const BUNDLE_PRICE = 59999;
+const BUNDLE_INDIVIDUAL_TOTAL = 74997;
+
+let selected = new Set();
+let addons = new Map();
+
+// ══ PACKAGE TOGGLE ══
+function togglePackage(key) {
+  const el = document.getElementById('pkg-' + key);
+  if (selected.has(key)) {
+    selected.delete(key);
+    el.classList.remove('selected');
+  } else {
+    selected.add(key);
+    el.classList.add('selected');
+  }
+  updateCart();
+}
+
+// ══ ADDON TOGGLE ══
+function toggleAddon(el, name, price) {
+  if (addons.has(name)) {
+    addons.delete(name);
+    el.classList.remove('selected');
+  } else {
+    addons.set(name, price);
+    el.classList.add('selected');
+  }
+  updateCart();
+}
+
+// ══ SERVICE INDIVIDUAL TOGGLE (service layer buttons) ══
+function toggleService(btn) {
+  btn.classList.toggle('active');
+  const name = btn.dataset.name;
+  const price = parseInt(btn.dataset.price);
+  if (btn.classList.contains('active')) {
+    addons.set('svc-' + btn.dataset.service, { name, price });
+  } else {
+    addons.delete('svc-' + btn.dataset.service);
+  }
+  updateCart();
+}
+
+// ══ UPDATE CART ══
+function updateCart() {
+  const isBundle = selected.size === 3;
+  const bundleNotice = document.getElementById('bundle-notice');
+  bundleNotice.classList.toggle('visible', isBundle);
+
+  // Base cost
+  let baseTotal = isBundle ? BUNDLE_PRICE : Array.from(selected).reduce((s, k) => s + PACKAGES[k].price, 0);
+
+  // Addon cost
+  let addonTotal = 0;
+  addons.forEach(val => {
+    const p = typeof val === 'object' ? val.price : val;
+    addonTotal += p;
+  });
+
+  const grandTotal = baseTotal + addonTotal;
+
+  // Cart items
+  const itemsEl = document.getElementById('cart-items');
+  const emptyEl = document.getElementById('cart-empty');
+  const totalSection = document.getElementById('cart-total-section');
+  const totalEl = document.getElementById('cart-total');
+  const savingsEl = document.getElementById('cart-savings');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  // Clear
+  Array.from(itemsEl.querySelectorAll('.cp-item')).forEach(el => el.remove());
+
+  const hasItems = selected.size > 0 || addons.size > 0;
+  emptyEl.style.display = hasItems ? 'none' : 'block';
+  totalSection.style.display = hasItems ? 'block' : 'none';
+  checkoutBtn.disabled = !hasItems;
+
+  if (isBundle) {
+    const savings = BUNDLE_INDIVIDUAL_TOTAL - BUNDLE_PRICE + addonTotal; // show package saving
+    savingsEl.textContent = `You save ₹${(BUNDLE_INDIVIDUAL_TOTAL - BUNDLE_PRICE).toLocaleString('en-IN')} with the Full Package`;
+    addItem(itemsEl, 'Full Execution System Package', BUNDLE_PRICE);
+  } else {
+    savingsEl.textContent = '';
+    selected.forEach(k => addItem(itemsEl, PACKAGES[k].name, PACKAGES[k].price));
+  }
+
+  // Add-ons
+  addons.forEach((val, key) => {
+    const n = typeof val === 'object' ? val.name : key;
+    const p = typeof val === 'object' ? val.price : val;
+    addItem(itemsEl, n, p);
+  });
+
+  totalEl.textContent = '₹' + grandTotal.toLocaleString('en-IN');
+}
+
+function addItem(container, name, price) {
+  const div = document.createElement('div');
+  div.className = 'cp-item';
+  div.innerHTML = `<div class="cpi-name">${name}</div><div style="display:flex;align-items:center;"><div class="cpi-price">₹${price.toLocaleString('en-IN')}</div></div>`;
+  container.appendChild(div);
+}
+
+// ══ CHECKOUT ══
+function openCheckout() {
+  // Populate modal summary
+  const items = [];
+  const isBundle = selected.size === 3;
+  if (isBundle) {
+    items.push({ name: 'Full Execution System Package', price: BUNDLE_PRICE });
+  } else {
+    selected.forEach(k => items.push({ name: PACKAGES[k].name, price: PACKAGES[k].price }));
+  }
+  addons.forEach((val, key) => {
+    const n = typeof val === 'object' ? val.name : key;
+    const p = typeof val === 'object' ? val.price : val;
+    items.push({ name: n, price: p });
+  });
+
+  const total = items.reduce((s, i) => s + i.price, 0);
+
+  document.getElementById('modal-items').innerHTML = items.map(i =>
+    `<div class="mos-item"><div class="mos-name">${i.name}</div><div class="mos-price">₹${i.price.toLocaleString('en-IN')}</div></div>`
+  ).join('');
+  document.getElementById('modal-total').textContent = '₹' + total.toLocaleString('en-IN');
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+function submitBooking() {
+  const name = document.getElementById('f-name').value.trim();
+  const biz = document.getElementById('f-biz').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if (!name || !biz || !phone || !email) {
+    alert('Please fill in all required fields to proceed.');
+    return;
+  }
+  // In production: integrate Razorpay here
+  // For now, redirect to WhatsApp with order summary
+  const isBundle = selected.size === 3;
+  const pkgs = isBundle ? ['Full Execution System Package'] : Array.from(selected).map(k => PACKAGES[k].name);
+  const addonList = [];
+  addons.forEach((val, key) => { const n = typeof val === 'object' ? val.name : key; addonList.push(n); });
+  const total = isBundle ? BUNDLE_PRICE : Array.from(selected).reduce((s,k) => s + PACKAGES[k].price, 0);
+  const addonTotal = Array.from(addons.values()).reduce((s, v) => s + (typeof v === 'object' ? v.price : v), 0);
+  const grand = total + addonTotal;
+
+  const msg = encodeURIComponent(
+    `Hi ORIGENNT,\n\nI'd like to confirm my service booking.\n\nName: ${name}\nBusiness: ${biz}\nPhone: ${phone}\nEmail: ${email}\n\nServices:\n${pkgs.join('\n')}${addonList.length ? '\n\nAdd-ons:\n' + addonList.join('\n') : ''}\n\nTotal: ₹${grand.toLocaleString('en-IN')}\n\nPlease confirm and send the payment link.`
+  );
+  window.open('https://wa.me/919861168291?text=' + msg, '_blank');
+  closeModal();
+}
+
+// ══ BROCHURE ══
+const BROCHURE_DATA = {
+  workforce: {
+    title: 'Workforce Execution — Service Brochure',
+    desc: 'Complete methodology, deliverables, timelines, and case illustrations for ORIGENNT\'s Workforce Execution services.',
+    content: [
+      { label: 'W1', title: 'Hiring System Design', detail: 'Criteria standardisation · Structured interview frameworks · Role benchmarking' },
+      { label: 'W2', title: 'Onboarding Architecture', detail: '30-60-90 day frameworks · Role clarity documentation · Early performance measurement' },
+      { label: 'W3', title: 'Manpower Planning System', detail: 'Headcount forecasting · Role hierarchy mapping · Deployment structure' },
+      { label: 'W4', title: 'Attrition & Retention Diagnostic', detail: 'Exit pattern analysis · Retention lever identification · Structural retention design' },
+    ]
+  },
+  operations: {
+    title: 'Operational Systems — Service Brochure',
+    desc: 'Complete methodology, deliverables, timelines, and case illustrations for ORIGENNT\'s Operational Systems services.',
+    content: [
+      { label: 'O1', title: 'Process Documentation System', detail: 'Core process mapping · SOP creation · Documentation maintenance protocols' },
+      { label: 'O2', title: 'Delegation Infrastructure Design', detail: 'Authority matrix · Task ownership clarification · Escalation protocols' },
+      { label: 'O3', title: 'Operational Debt Audit', detail: 'Inefficiency identification · Quantification of systemic drag · Remediation sequencing' },
+      { label: 'O4', title: 'Workflow Efficiency Redesign', detail: 'End-to-end workflow review · Handoff failure reduction · Throughput optimisation' },
+    ]
+  },
+  growth: {
+    title: 'Growth Execution — Service Brochure',
+    desc: 'Complete methodology, deliverables, timelines, and case illustrations for ORIGENNT\'s Growth Execution services.',
+    content: [
+      { label: 'G1', title: 'Revenue System Audit', detail: 'Pipeline analysis · Conversion system review · Repeat business infrastructure' },
+      { label: 'G2', title: 'Performance Measurement Framework', detail: 'Execution KPIs · Leading & lagging indicators · Performance review cadence design' },
+      { label: 'G3', title: 'Scaling Structure Design', detail: 'Revenue ceiling identification · Capacity planning · Growth stage prerequisites' },
+      { label: 'G4', title: 'Growth Execution Mapping', detail: '90-day execution roadmap · Activity-to-revenue linkage · Milestone tracking' },
+    ]
+  },
+  full: {
+    title: 'Full Execution System — Package Brochure',
+    desc: 'Complete overview of all three execution layers, the interdependency model, sequenced implementation plan, and package savings breakdown.',
+    content: [
+      { label: 'W', title: 'Workforce Execution', detail: 'All four workforce services included' },
+      { label: 'O', title: 'Operational Systems', detail: 'All four operations services included' },
+      { label: 'G', title: 'Growth Execution', detail: 'All four growth services included' },
+      { label: '+', title: 'Interdependency Map + Sequencing Plan', detail: 'Exclusive to the Full Execution System package' },
+    ]
+  },
+  'ops-growth': {
+    title: 'Operations + Growth — Package Brochure',
+    desc: 'Combined service overview for the Operations & Growth Execution package, designed for businesses with a stable workforce base.',
+    content: [
+      { label: 'O', title: 'Operational Systems Package', detail: 'Process documentation · Delegation · Debt audit · Workflow redesign' },
+      { label: 'G', title: 'Growth Execution Package', detail: 'Revenue audit · Performance KPIs · Scaling structure · Execution mapping' },
+    ]
+  }
+};
+
+function openBrochure(type) {
+  const data = BROCHURE_DATA[type] || BROCHURE_DATA.full;
+  document.getElementById('bm-eyebrow').textContent = 'Service Brochure · ORIGENNT';
+  document.getElementById('bm-title').textContent = data.title;
+  document.getElementById('bm-desc').textContent = data.desc;
+  document.getElementById('bm-content').innerHTML = data.content.map(c => `
+    <div style="display:grid;grid-template-columns:32px 1fr;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);">
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--red);margin-top:2px;">${c.label}</div>
+      <div>
+        <div style="font-size:13.5px;font-weight:600;color:var(--black);margin-bottom:3px;">${c.title}</div>
+        <div style="font-size:12px;font-weight:300;color:var(--text2);line-height:1.6;">${c.detail}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('brochure-modal').classList.add('open');
+}
+function closeBrochure() { document.getElementById('brochure-modal').classList.remove('open'); }
+function closeBrochureOutside(e) { if (e.target === document.getElementById('brochure-modal')) closeBrochure(); }
+function sendBrochure() {
+  const email = document.getElementById('bm-email').value.trim();
+  if (!email) { alert('Please enter your email address.'); return; }
+  // In production: API call to send brochure email
+  const title = document.getElementById('bm-title').textContent;
+  const msg = encodeURIComponent(`Hi ORIGENNT,\n\nPlease send me the brochure for: ${title}\n\nEmail: ${email}\n\nThank you.`);
+  window.open('https://wa.me/919861168291?text=' + msg, '_blank');
+  closeBrochure();
+}
+
+// ══ SCROLL REVEAL ══
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('vis');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-l').forEach(el => ro.observe(el));
+
+// ══ TOPBAR SHADOW ══
+const tb = document.querySelector('.topbar');
+window.addEventListener('scroll', () => {
+  tb.style.boxShadow = window.scrollY > 40 ? '0 1px 20px rgba(0,0,0,.06)' : 'none';
+}, { passive: true });
+
+// ══ SMOOTH ANCHORS ══
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
