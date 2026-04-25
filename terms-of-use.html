@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Terms of Use — ORIGENNT Private Limited. Legal terms governing use of the ORIGENNT website, services, and digital platforms.">
+  <title>Terms of Use — ORIGENNT</title>
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Terms of Use — ORIGENNT Private Limited">
+  <meta property="og:description" content="Legal terms governing use of the ORIGENNT website, services, and digital platforms.">
+  <meta property="og:url" content="https://origennt.com/terms-of-use.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;--black:#0d0d0d;--white:#fff;--off:#f7f6f4;--gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;--gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;--sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-badge{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:var(--red-pale);padding:8px 18px;border:1px solid rgba(204,34,41,.18);}
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+.hero{padding-top:64px;background:var(--black);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;padding:72px 80px 64px;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(38px,4.8vw,68px);font-weight:400;color:var(--white);line-height:1.06;letter-spacing:-.025em;opacity:0;transform:translateY(28px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-meta{display:flex;gap:40px;flex-wrap:wrap;margin-top:36px;padding-top:32px;border-top:1px solid rgba(255,255,255,.07);opacity:0;animation:fu .9s .3s var(--ease) forwards;}
+.hero-meta-item{display:flex;flex-direction:column;gap:4px;}
+.hero-meta-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:500;}
+.hero-meta-val{font-size:13px;font-weight:300;color:rgba(255,255,255,.65);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.toc-strip{background:var(--red);}
+.toc-inner{padding:0 80px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;}
+.toc-inner::-webkit-scrollbar{display:none;}
+.toc-link{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;padding:18px 24px;white-space:nowrap;border-right:1px solid rgba(255,255,255,.12);transition:color .2s,background .2s;flex-shrink:0;}
+.toc-link:hover{color:var(--white);background:rgba(255,255,255,.08);}
+.content-wrap{display:grid;grid-template-columns:1fr 280px;align-items:start;}
+.terms-body{padding:0 80px 100px;}
+.terms-sidebar{position:sticky;top:64px;padding:48px 40px 48px 0;max-height:calc(100vh - 64px);overflow-y:auto;scrollbar-width:none;}
+.terms-sidebar::-webkit-scrollbar{display:none;}
+.terms-section{padding-top:72px;border-top:1px solid var(--gl);margin-top:64px;}
+.terms-section:first-child{margin-top:0;border-top:none;padding-top:72px;}
+.section-number{font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.section-number::before{content:'';display:block;width:22px;height:1px;background:var(--red);}
+.section-title{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.2vw,30px);font-weight:400;color:var(--black);line-height:1.2;margin-bottom:24px;letter-spacing:-.02em;}
+.section-title em{font-style:italic;color:var(--red);}
+.terms-text{font-size:14.5px;font-weight:300;color:var(--gt);line-height:1.9;margin-bottom:18px;}
+.terms-text strong{font-weight:600;color:var(--black);}
+.clause{background:var(--off);border-left:4px solid var(--gl);padding:20px 24px;margin:16px 0;transition:border-color .2s;}
+.clause:hover{border-left-color:var(--red);}
+.clause-head{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.clause-body{font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.85;}
+.clause-body strong{font-weight:600;color:var(--black);}
+.terms-ol{list-style:none;counter-reset:tol;margin:16px 0 24px;}
+.terms-ol li{counter-increment:tol;display:flex;gap:16px;margin-bottom:14px;font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.8;}
+.terms-ol li::before{content:counter(tol)".";font-family:'Libre Baskerville',serif;font-size:14px;color:var(--red);flex-shrink:0;min-width:22px;}
+.terms-ol li strong{font-weight:600;color:var(--black);}
+.terms-ul{list-style:none;margin:12px 0 20px;}
+.terms-ul li{display:flex;gap:14px;margin-bottom:10px;font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.75;}
+.terms-ul li::before{content:'—';color:var(--red);flex-shrink:0;}
+.terms-ul li strong{font-weight:600;color:var(--black);}
+.highlight-box{background:var(--black);padding:28px 32px;margin:24px 0;position:relative;overflow:hidden;}
+.highlight-box::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);}
+.highlight-box-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:10px;}
+.highlight-box-text{font-size:13.5px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.85;}
+.highlight-box-text strong{color:rgba(255,255,255,.9);font-weight:500;}
+.warn-box{background:var(--red-pale);border:1px solid rgba(204,34,41,.2);padding:22px 24px;margin:20px 0;}
+.warn-box-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:8px;}
+.warn-box-text{font-size:13px;font-weight:300;color:#5a1010;line-height:1.8;}
+.terms-table-wrap{overflow-x:auto;margin:20px 0;}
+table.terms-table{width:100%;border-collapse:collapse;}
+table.terms-table th{padding:12px 16px;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-align:left;background:var(--black);color:rgba(255,255,255,.7);border-bottom:2px solid var(--red);}
+table.terms-table td{padding:12px 16px;font-size:13px;font-weight:300;color:var(--gt);border-bottom:1px solid var(--gl);vertical-align:top;line-height:1.7;}
+table.terms-table td:first-child{font-weight:600;color:var(--black);min-width:160px;}
+table.terms-table tr:hover td{background:var(--off);}
+.def-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:20px 0;}
+.def-card{background:var(--off);padding:18px 20px;border-left:3px solid var(--gl);transition:border-color .2s;}
+.def-card:hover{border-left-color:var(--red);}
+.def-term{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+.def-meaning{font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.75;}
+.def-meaning strong{font-weight:500;color:var(--black);}
+.snav-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:16px;}
+.snav-link{display:block;font-size:12px;font-weight:300;color:var(--gm);text-decoration:none;padding:7px 0;border-bottom:1px solid var(--gl);transition:color .2s;line-height:1.4;}
+.snav-link:hover{color:var(--black);}
+.snav-link.active{color:var(--red);font-weight:500;}
+.snav-num{font-size:10px;color:var(--gm);margin-right:6px;}
+.snav-contact{margin-top:28px;background:var(--off);padding:20px;}
+.snav-contact-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+.snav-contact-text{font-size:12px;font-weight:300;color:var(--gt);line-height:1.8;}
+.snav-contact-text a{color:var(--red);text-decoration:none;}
+.sig-strip{background:var(--black);padding:48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+.sig-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px;font-weight:500;}
+.sig-val{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--white);margin-bottom:4px;}
+.sig-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.7;}
+.sig-div{width:100%;height:1px;background:rgba(255,255,255,.07);margin:20px 0;}
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{padding:60px 32px 48px;}
+  .toc-inner{padding:0 32px;}
+  .content-wrap{grid-template-columns:1fr;}
+  .terms-body{padding:0 32px 80px;}
+  .terms-sidebar{display:none;}
+  .sig-strip{grid-template-columns:1fr;gap:32px;padding:40px 32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .def-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){.footer-top{grid-template-columns:1fr;}}
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PBCDJ7Y3JQ"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PBCDJ7Y3JQ');</script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy &amp; Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisation Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll &amp; Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning &amp; Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus-ambassador.html" class="nav-link">Campus Ambassador <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="privacy-policy.html" class="nav-link">Privacy Policy <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="terms-of-use.html" class="nav-link active">Terms of Use <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U70200OD2025PTC051453 &middot; Est. 25/11/2025</small></div>
+  </div>
+</aside>
+
+<div class="main">
+<header class="topbar">
+  <a href="index.html" class="back-link">Home</a>
+  <div class="topbar-badge">Legal Document &middot; Effective 25 November 2025</div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Legal &middot; Terms of Use &middot; ORIGENNT Private Limited</div></div>
+    <h1 class="hero-h1">Terms of Use.<br>Read before you <em>proceed.</em></h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><span class="hero-meta-label">Document</span><span class="hero-meta-val">Terms of Use &amp; Service Agreement</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Effective Date</span><span class="hero-meta-val">25 November 2025</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Governing Law</span><span class="hero-meta-val">Republic of India &middot; Odisha Jurisdiction</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Entity</span><span class="hero-meta-val">ORIGENNT Private Limited &middot; Companies Act 2013</span></div>
+      <div class="hero-meta-item"><span class="hero-meta-label">Last Reviewed</span><span class="hero-meta-val">April 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<nav class="toc-strip">
+  <div class="toc-inner">
+    <a href="#s1" class="toc-link">1. About ORIGENNT</a>
+    <a href="#s2" class="toc-link">2. Definitions</a>
+    <a href="#s3" class="toc-link">3. Acceptance</a>
+    <a href="#s4" class="toc-link">4. Services</a>
+    <a href="#s5" class="toc-link">5. User Obligations</a>
+    <a href="#s6" class="toc-link">6. Intellectual Property</a>
+    <a href="#s7" class="toc-link">7. Confidentiality</a>
+    <a href="#s8" class="toc-link">8. Payments &amp; Fees</a>
+    <a href="#s9" class="toc-link">9. Liability</a>
+    <a href="#s10" class="toc-link">10. Data &amp; Privacy</a>
+    <a href="#s11" class="toc-link">11. Affiliates</a>
+    <a href="#s12" class="toc-link">12. Disputes</a>
+    <a href="#s13" class="toc-link">13. Governing Law</a>
+    <a href="#s14" class="toc-link">14. Amendments</a>
+    <a href="#s15" class="toc-link">15. Contact</a>
+  </div>
+</nav>
+
+<div class="content-wrap">
+<div class="terms-body">
+
+<section class="terms-section reveal" id="s1">
+  <div class="section-number">Section 01</div>
+  <h2 class="section-title">About ORIGENNT &amp; <em>Scope of This Document</em></h2>
+  <p class="terms-text">This Terms of Use agreement ("Agreement" or "Terms") is a legally binding document between <strong>ORIGENNT Private Limited</strong>, a company incorporated under the Companies Act, 2013, bearing CIN U70200OD2025PTC051453, having its registered office at Bhubaneswar, Odisha, India ("ORIGENNT," "we," "us," or "Company"), and any individual, entity, organisation, or legal person ("User," "you," or "Client") who accesses, browses, registers on, or otherwise uses the website located at <strong>www.origennt.com</strong> and any associated sub-domains, mobile applications, digital platforms, or services offered by ORIGENNT ("Platform").</p>
+  <p class="terms-text">ORIGENNT is a management consulting and human resource advisory firm incorporated on 25 November 2025 under the Companies Act, 2013, with its Memorandum of Association (MOA) explicitly authorising the provision of management consultancy, talent acquisition and placement, payroll processing and compliance management, human resource operations, and learning and development services. All services offered by ORIGENNT fall within the scope of its MOA authorisation.</p>
+  <div class="highlight-box">
+    <div class="highlight-box-label">Important Legal Notice</div>
+    <div class="highlight-box-text">By accessing or using the ORIGENNT Platform in any manner whatsoever, you acknowledge that you have read, understood, and agree to be bound by these Terms in their entirety. If you do not agree to any part of these Terms, you must immediately cease use of the Platform and all associated services. <strong>Use of the Platform constitutes unconditional acceptance of these Terms.</strong></div>
+  </div>
+  <p class="terms-text">These Terms, together with the Privacy Policy at <a href="privacy-policy.html" style="color:var(--red);text-decoration:none;font-weight:500;">www.origennt.com/privacy-policy.html</a>, the Affiliate Program Agreement (if applicable), and any executed service agreement or engagement letter between you and ORIGENNT, collectively constitute the entire agreement between the parties.</p>
+</section>
+
+<section class="terms-section reveal" id="s2">
+  <div class="section-number">Section 02</div>
+  <h2 class="section-title">Definitions &amp; <em>Interpretation</em></h2>
+  <p class="terms-text">In these Terms, the following words and expressions shall have the meanings assigned to them unless the context otherwise requires:</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Platform</div><div class="def-meaning">The ORIGENNT website (www.origennt.com), all sub-pages, mobile interfaces, digital portals, and any digital property operated by ORIGENNT Private Limited.</div></div>
+    <div class="def-card"><div class="def-term">Services</div><div class="def-meaning">All services offered by ORIGENNT including management consulting, talent acquisition, executive search, payroll &amp; compliance, HR analytics, learning &amp; development, internship programs, campus recruitment, and affiliate services.</div></div>
+    <div class="def-card"><div class="def-term">User / You</div><div class="def-meaning">Any individual, company, partnership, trust, or other legal entity accessing or using the Platform, whether as a prospective client, registered client, affiliate partner, internship applicant, or general visitor.</div></div>
+    <div class="def-card"><div class="def-term">Client</div><div class="def-meaning">A User who has executed a service agreement, engagement letter, or paid a retainer or fee to ORIGENNT for the provision of any Service.</div></div>
+    <div class="def-card"><div class="def-term">Candidate</div><div class="def-meaning">An individual whose professional profile, resume, or application has been submitted to or identified by ORIGENNT in connection with a talent acquisition or executive search mandate.</div></div>
+    <div class="def-card"><div class="def-term">Confidential Information</div><div class="def-meaning">Any information shared by either party in connection with the Services that is designated confidential or would reasonably be understood to be confidential given its nature or the circumstances of disclosure.</div></div>
+    <div class="def-card"><div class="def-term">Content</div><div class="def-meaning">All text, data, reports, graphics, logos, trademarks, methodologies, frameworks, templates, and other materials published, displayed, or made available on the Platform by ORIGENNT.</div></div>
+    <div class="def-card"><div class="def-term">Intellectual Property</div><div class="def-meaning">All patents, trademarks, service marks, trade names, copyrights, database rights, domain names, know-how, methodologies, trade secrets, and all other intellectual and industrial property rights, whether registered or unregistered.</div></div>
+    <div class="def-card"><div class="def-term">Mandate</div><div class="def-meaning">A formal, accepted instruction from a Client to ORIGENNT to provide executive search or talent acquisition services in respect of a specific role or roles.</div></div>
+    <div class="def-card"><div class="def-term">Placement</div><div class="def-meaning">The successful employment of a Candidate recommended by ORIGENNT with a Client or any associated entity of the Client within 12 months of the relevant introduction.</div></div>
+    <div class="def-card"><div class="def-term">Retainer</div><div class="def-meaning">The non-refundable advance fee paid by a Client to ORIGENNT at mandate commencement, which confirms the engagement and initiates the search process.</div></div>
+    <div class="def-card"><div class="def-term">Affiliate Partner</div><div class="def-meaning">A person or entity registered under the ORIGENNT Affiliate Program who promotes ORIGENNT's services and receives commission on successful referrals pursuant to a separate Affiliate Agreement.</div></div>
+  </div>
+  <p class="terms-text" style="margin-top:20px;">References to any statute shall be construed as including any modification or re-enactment thereof. The singular shall include the plural and vice versa. Headings are for convenience only and shall not affect interpretation.</p>
+</section>
+
+<section class="terms-section reveal" id="s3">
+  <div class="section-number">Section 03</div>
+  <h2 class="section-title">Acceptance, Eligibility &amp; <em>Capacity to Contract</em></h2>
+  <p class="terms-text">Access to and use of the Platform is conditional upon your acceptance of and compliance with these Terms. Your acceptance is signified in any of the following ways:</p>
+  <ol class="terms-ol">
+    <li>By accessing, viewing, or otherwise using any part of the Platform;</li>
+    <li>By clicking "I agree," "Submit," "Proceed," or any similar confirmation on the Platform;</li>
+    <li>By submitting an enquiry, mandate form, internship application, campus registration, or affiliate registration via the Platform;</li>
+    <li>By making any payment to ORIGENNT through the Platform or by reference to the Platform;</li>
+    <li>By executing any engagement letter, service agreement, or retainer agreement with ORIGENNT.</li>
+  </ol>
+  <div class="clause">
+    <div class="clause-head">Eligibility — Individuals</div>
+    <div class="clause-body">You represent and warrant that you are at least <strong>18 years of age</strong> and possess the legal capacity to enter into a binding contract under applicable Indian law. If you are below 18 years of age, you may only use the Platform under the supervision of a parent or legal guardian who accepts these Terms on your behalf.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Eligibility — Organisations</div>
+    <div class="clause-body">If you access or use the Platform on behalf of a company, partnership, trust, or other legal entity, you represent and warrant that you have full authority to bind such entity to these Terms. In such case, "you" and "User" shall refer to both the individual accessing the Platform and the entity on whose behalf access is obtained.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Capacity to Contract</div>
+    <div class="clause-body">By using the Platform, you confirm that you are not: (a) a person disqualified from contracting under the Indian Contract Act, 1872; (b) subject to any court order prohibiting you from entering into contracts; (c) acting in violation of any applicable law, regulation, or fiduciary duty; or (d) a person or entity designated on any sanctions list applicable in India.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s4">
+  <div class="section-number">Section 04</div>
+  <h2 class="section-title">Services — <em>Scope, Limitations &amp; MOA Compliance</em></h2>
+  <p class="terms-text">ORIGENNT provides the following Services, all of which are explicitly authorised under its Memorandum of Association filed with the Registrar of Companies, Odisha, under the Companies Act, 2013:</p>
+  <div class="terms-table-wrap">
+    <table class="terms-table">
+      <thead><tr><th>Service</th><th>Description</th><th>MOA Authority</th></tr></thead>
+      <tbody>
+        <tr><td>Management Consulting</td><td>Strategic, operational, financial, and organisational advisory services for businesses of all sizes.</td><td>Clause 3(A)(i) of MOA</td></tr>
+        <tr><td>Talent Acquisition</td><td>End-to-end recruitment including job scoping, sourcing, screening, and offer management for permanent and contractual roles.</td><td>Clause 3(A)(ii) of MOA</td></tr>
+        <tr><td>Executive Search</td><td>Retained, confidential search for senior leadership roles (Director, VP, C-Suite, MD, CEO, Board) using research-led methodology and proprietary networks.</td><td>Clause 3(A)(ii) of MOA</td></tr>
+        <tr><td>Payroll &amp; Compliance</td><td>Payroll processing, statutory compliance management (EPF, ESI, TDS, PT, LWF), and labour law advisory under applicable Indian labour legislation.</td><td>Clause 3(A)(iii) of MOA</td></tr>
+        <tr><td>HR Analytics</td><td>Workforce intelligence, attrition analysis, salary benchmarking, productivity analytics, and people data strategy.</td><td>Clause 3(A)(i) of MOA</td></tr>
+        <tr><td>Learning &amp; Development</td><td>Corporate training, leadership development, compliance training, and capability building programs in physical, online, or blended format.</td><td>Clause 3(A)(iv) of MOA</td></tr>
+        <tr><td>Internship Programs</td><td>Structured internship opportunities for students and fresh graduates across domains relevant to ORIGENNT's practice areas.</td><td>Clause 3(A)(ii) of MOA</td></tr>
+        <tr><td>Campus Recruitment</td><td>Campus hiring services for organisations seeking fresh talent from colleges and universities across India.</td><td>Clause 3(A)(ii) of MOA</td></tr>
+        <tr><td>Affiliate Program</td><td>Revenue-sharing partnership program for individuals and entities who refer clients to ORIGENNT.</td><td>Clause 3(B) of MOA</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Service Limitations</div>
+    <div class="clause-body">ORIGENNT does not provide legal advice, tax advice, investment advice, or medical advice. Any information provided in the course of consulting engagements is of a general advisory nature and does not constitute a legal opinion. Clients are advised to seek independent legal, tax, and financial counsel as appropriate. ORIGENNT's compliance advice relates to HR and labour law only.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">No Employment Guarantee</div>
+    <div class="clause-body">ORIGENNT's talent acquisition and internship services do not guarantee employment or placement for any Candidate. ORIGENNT acts as an intermediary and facilitator. The final hiring decision rests solely with the Client. ORIGENNT's executive search 90-day placement guarantee is a re-search guarantee and is not a guarantee of employment for any individual.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Service Availability</div>
+    <div class="clause-body">ORIGENNT endeavours to maintain Platform availability on a best-efforts basis but does not guarantee uninterrupted access. Services may be temporarily unavailable due to maintenance, technical failure, force majeure, or circumstances beyond ORIGENNT's reasonable control.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s5">
+  <div class="section-number">Section 05</div>
+  <h2 class="section-title">User Obligations &amp; <em>Prohibited Conduct</em></h2>
+  <p class="terms-text">As a condition of your use of the Platform and Services, you agree to comply with all applicable laws, regulations, and these Terms.</p>
+  <h3 style="font-size:15px;font-weight:600;color:var(--black);margin:20px 0 12px;">5.1 General Obligations</h3>
+  <ul class="terms-ul">
+    <li>Provide accurate, complete, and current information in all forms, registrations, and communications with ORIGENNT;</li>
+    <li>Promptly update any information that subsequently becomes inaccurate, incomplete, or misleading;</li>
+    <li>Use the Platform and Services solely for lawful purposes and in accordance with these Terms;</li>
+    <li>Maintain the confidentiality of any login credentials or access codes provided by ORIGENNT;</li>
+    <li>Notify ORIGENNT immediately of any unauthorised use of your account or any breach of security;</li>
+    <li>Comply with all applicable labour laws and data protection regulations when using ORIGENNT's talent services.</li>
+  </ul>
+  <h3 style="font-size:15px;font-weight:600;color:var(--black);margin:20px 0 12px;">5.2 Client-Specific Obligations</h3>
+  <ul class="terms-ul">
+    <li>Provide accurate and complete job specifications and organisational information to ORIGENNT for the purpose of delivering Services;</li>
+    <li>Not engage, directly or indirectly, any Candidate introduced by ORIGENNT within 12 months of the introduction without paying the applicable placement fee, whether or not a formal mandate is in place;</li>
+    <li>Not share candidate information received from ORIGENNT with third parties without ORIGENNT's prior written consent;</li>
+    <li>Provide timely feedback on candidates presented, within the agreed timelines specified in the engagement letter;</li>
+    <li>Ensure that any hiring process conducted with ORIGENNT-introduced candidates complies with applicable Indian employment laws, including the Equal Remuneration Act, Maternity Benefit Act, POSH Act, and Persons with Disabilities Act.</li>
+  </ul>
+  <h3 style="font-size:15px;font-weight:600;color:var(--black);margin:20px 0 12px;">5.3 Prohibited Conduct</h3>
+  <div class="warn-box">
+    <div class="warn-box-label">Strictly Prohibited — Violation May Result in Legal Action</div>
+    <div class="warn-box-text">The following conduct is strictly prohibited and may result in immediate termination of access, recovery of damages, and legal proceedings under applicable Indian law.</div>
+  </div>
+  <ul class="terms-ul">
+    <li>Using any information obtained from the Platform to <strong>contact ORIGENNT candidates directly</strong>, bypassing ORIGENNT's process and fee structure;</li>
+    <li><strong>Misrepresenting</strong> your identity, organisation, authority, or business purpose in any communication with ORIGENNT;</li>
+    <li>Transmitting any material that is <strong>defamatory, obscene, threatening, discriminatory, or unlawful</strong> through the Platform;</li>
+    <li>Attempting to <strong>reverse-engineer, copy, scrape, or reproduce</strong> ORIGENNT's methodologies, databases, candidate information, or proprietary content;</li>
+    <li>Using automated tools, bots, crawlers, or scrapers to access or extract any content from the Platform without ORIGENNT's prior written consent;</li>
+    <li>Introducing, transmitting, or installing any <strong>malware, virus, or harmful code</strong> on or through the Platform;</li>
+    <li>Engaging in any conduct that constitutes <strong>unfair competition</strong> against ORIGENNT, including soliciting ORIGENNT's employees or affiliate partners;</li>
+    <li>Using the Platform in connection with any <strong>illegal, fraudulent, or deceptive activity</strong>, including money laundering, fraud, or identity theft;</li>
+    <li>Posting or submitting <strong>false or fabricated</strong> candidate profiles, company information, or testimonials on the Platform.</li>
+  </ul>
+</section>
+
+<section class="terms-section reveal" id="s6">
+  <div class="section-number">Section 06</div>
+  <h2 class="section-title">Intellectual Property &amp; <em>Ownership Rights</em></h2>
+  <p class="terms-text">All Content on the Platform, including text, graphics, logos, icons, images, data compilations, methodologies, frameworks, research reports, training materials, assessment tools, and software, is the exclusive property of ORIGENNT Private Limited or its licensors and is protected by the Copyright Act, 1957, the Trade Marks Act, 1999, and the Information Technology Act, 2000.</p>
+  <div class="clause">
+    <div class="clause-head">ORIGENNT Trademarks</div>
+    <div class="clause-body">The name "ORIGENNT," the ORIGENNT logo, taglines, and all associated marks are trademarks of ORIGENNT Private Limited. You may not use, reproduce, imitate, or display any ORIGENNT trademark without prior written consent. Unauthorised use constitutes infringement under the Trade Marks Act, 1999.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Methodologies &amp; Proprietary Content</div>
+    <div class="clause-body">ORIGENNT's consulting methodologies, search frameworks, competency assessment tools, candidate evaluation models, payroll compliance templates, and all related intellectual property ("Proprietary Content") remain the exclusive property of ORIGENNT. No engagement with ORIGENNT, including the payment of fees, shall constitute a transfer of ownership of Proprietary Content to the Client. Deliverables created specifically for a Client shall be licensed to that Client for internal use only and may not be shared, published, or reproduced without ORIGENNT's consent.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Limited Licence to Users</div>
+    <div class="clause-body">ORIGENNT grants you a limited, non-exclusive, non-transferable, revocable licence to access and use the Platform solely for the purpose of obtaining information about ORIGENNT's services and engaging with ORIGENNT as a prospective or active client or affiliate partner. This licence does not include the right to copy, reproduce, distribute, or create derivative works based on any Content.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Client Content</div>
+    <div class="clause-body">You retain ownership of all information, documents, and materials you provide to ORIGENNT ("Client Content"). By providing Client Content, you grant ORIGENNT a non-exclusive, royalty-free licence to use, process, and store such Client Content solely for the purpose of delivering the agreed Services.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s7">
+  <div class="section-number">Section 07</div>
+  <h2 class="section-title">Confidentiality &amp; <em>Non-Disclosure Obligations</em></h2>
+  <p class="terms-text">The nature of ORIGENNT's services requires the exchange of highly sensitive information. Both ORIGENNT and you agree to observe strict confidentiality obligations as set out in this section.</p>
+  <h3 style="font-size:15px;font-weight:600;color:var(--black);margin:20px 0 12px;">7.1 ORIGENNT's Confidentiality Obligations</h3>
+  <p class="terms-text">ORIGENNT shall keep all Client Confidential Information strictly confidential and shall not disclose it to any third party except: (a) with the Client's prior written consent; (b) to ORIGENNT's employees, directors, or consultants on a need-to-know basis; (c) as required by law, court order, or regulatory authority; or (d) to the extent the information becomes publicly available through no fault of ORIGENNT.</p>
+  <h3 style="font-size:15px;font-weight:600;color:var(--black);margin:20px 0 12px;">7.2 Your Confidentiality Obligations</h3>
+  <ul class="terms-ul">
+    <li>Candidate profiles, CVs, assessment reports, psychometric results, and reference check outcomes;</li>
+    <li>ORIGENNT's proprietary methodologies, frameworks, pricing structures, and internal processes;</li>
+    <li>Information about other ORIGENNT clients, mandates, or candidates;</li>
+    <li>Any information marked "Confidential" or which would reasonably be understood to be confidential.</li>
+  </ul>
+  <div class="clause">
+    <div class="clause-head">Candidate Information — Special Provisions</div>
+    <div class="clause-body">Candidate information is shared solely for the purpose of evaluating the candidate for the specific role for which the mandate was placed. You may not use candidate information to approach the candidate for any other role, share candidate profiles with third parties, or retain candidate personal data beyond the period permitted under the Digital Personal Data Protection Act, 2023.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Duration of Confidentiality</div>
+    <div class="clause-body">Confidentiality obligations shall survive the termination or expiry of any service engagement and shall remain in force for a period of <strong>three (3) years</strong> from the date of disclosure, except in respect of trade secrets and candidate personal data where obligations shall continue indefinitely or until the relevant data is lawfully destroyed.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s8">
+  <div class="section-number">Section 08</div>
+  <h2 class="section-title">Payments, Fees &amp; <em>Billing Terms</em></h2>
+  <p class="terms-text">All fees charged by ORIGENNT are governed by the specific engagement letter or service agreement. The following general terms apply to all financial transactions with ORIGENNT:</p>
+  <div class="clause">
+    <div class="clause-head">GST &amp; Tax</div>
+    <div class="clause-body">All fees quoted by ORIGENNT are exclusive of Goods and Services Tax (GST) at the applicable rate (currently 18%). GST will be charged in addition to all quoted fees. ORIGENNT shall issue a valid GST invoice for every payment received. Clients are responsible for any withholding tax (TDS) obligations under the Income Tax Act, 1961, and shall provide Form 16A certificates to ORIGENNT upon deduction.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Retainer Fees — Non-Refundability</div>
+    <div class="clause-body">Retainer fees paid at mandate commencement for executive search or talent acquisition services are <strong>strictly non-refundable</strong>. The retainer confirms ORIGENNT's commitment to the search and initiates the deployment of research resources. Cancellation of a mandate after retainer payment shall not entitle the Client to a refund of the retainer. If the Client cancels a mandate after the shortlist stage, the shortlist payment milestone shall also be payable in full.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Milestone Payment Structure</div>
+    <div class="clause-body">Executive search fees are payable in milestones: Milestone 1 — retainer at mandate signing; Milestone 2 — percentage of total fee at shortlist delivery; Milestone 3 — balance upon candidate joining. Exact milestone amounts are specified in the engagement letter. Non-payment of any milestone within the agreed timeline entitles ORIGENNT to suspend the search without liability.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Introduction Fee — 12-Month Clause</div>
+    <div class="clause-body">If a Client engages, employs, contracts with, or otherwise retains any person introduced by ORIGENNT within <strong>12 months of the first introduction</strong>, the full placement fee applicable to the role shall be payable to ORIGENNT, regardless of whether a formal mandate was in place. This clause applies equally to employment by any associated entity, subsidiary, or group company of the Client.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Payment Methods</div>
+    <div class="clause-body">ORIGENNT accepts payments via: Razorpay (UPI, credit/debit cards, net banking, EMI, wallets); NEFT/RTGS bank transfer; Demand Draft in favour of "ORIGENNT Private Limited." All online payments are processed through Razorpay's PCI-DSS compliant payment gateway. ORIGENNT does not store card details. For bank transfer details, contact <a href="mailto:origennt@gmail.com" style="color:var(--red);text-decoration:none;">origennt@gmail.com</a>.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Late Payment</div>
+    <div class="clause-body">Invoices unpaid beyond 30 days from the due date shall attract interest at the rate of <strong>18% per annum</strong> on the outstanding amount, calculated from the due date to the date of actual payment. ORIGENNT reserves the right to suspend or terminate Services upon non-payment and to initiate legal proceedings for recovery of outstanding amounts, including reasonable legal costs.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Payroll Services — Specific Terms</div>
+    <div class="clause-body">For payroll processing and compliance services, fees are payable monthly in advance. ORIGENNT shall process payroll based on data provided by the Client. ORIGENNT shall not be liable for penalties arising from inaccurate or incomplete data provided by the Client. The Client remains the principal employer for all statutory compliance purposes; ORIGENNT acts as the processing agent only.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s9">
+  <div class="section-number">Section 09</div>
+  <h2 class="section-title">Limitation of Liability &amp; <em>Disclaimers</em></h2>
+  <div class="highlight-box">
+    <div class="highlight-box-label">Liability Cap — Please Read Carefully</div>
+    <div class="highlight-box-text">ORIGENNT's total aggregate liability to any User or Client, whether arising in contract, tort (including negligence), breach of statutory duty, or otherwise, shall in no circumstances exceed the <strong>total fees paid by that Client to ORIGENNT in the 12 months preceding the event giving rise to the claim</strong>. Where no fees have been paid, ORIGENNT's liability shall be limited to &8377;10,000 (Rupees Ten Thousand only).</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Exclusion of Consequential Loss</div>
+    <div class="clause-body">To the maximum extent permitted by applicable Indian law, ORIGENNT shall not be liable for any: (a) loss of profit, revenue, business, or anticipated savings; (b) loss of goodwill or reputation; (c) loss of data or corruption of data; (d) indirect, special, incidental, or consequential loss or damage; arising from or in connection with the use of the Platform or the provision or failure to provide any Service.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Platform Disclaimer</div>
+    <div class="clause-body">The Platform and all Content thereon are provided "as is" and "as available" without warranty of any kind, express or implied. ORIGENNT makes no warranty that: (a) the Platform will meet your requirements; (b) the Platform will be available, uninterrupted, timely, secure, or error-free; (c) any information on the Platform is accurate, complete, or current.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Candidate Performance Disclaimer</div>
+    <div class="clause-body">While ORIGENNT applies rigorous assessment and due diligence, ORIGENNT cannot guarantee the future performance, conduct, or suitability of any Candidate placed with a Client. The Client assumes all risks associated with the employment of a Candidate from the date of joining. ORIGENNT's 90-day guarantee is a commitment to re-search only.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Force Majeure</div>
+    <div class="clause-body">ORIGENNT shall not be liable for any delay or failure to perform its obligations if such delay or failure results from circumstances beyond ORIGENNT's reasonable control, including acts of God, natural disasters, pandemic, government orders, strikes, civil unrest, failure of the internet or telecommunications infrastructure, or failure of third-party service providers.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Third-Party Links</div>
+    <div class="clause-body">The Platform may contain links to third-party websites and services (including payment gateways, Google Forms, WhatsApp, and professional networks). ORIGENNT does not endorse, control, or accept responsibility for any content, privacy practices, or terms of such third-party platforms. Your use of third-party platforms is governed by their respective terms and policies.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s10">
+  <div class="section-number">Section 10</div>
+  <h2 class="section-title">Data Protection &amp; <em>Privacy Rights</em></h2>
+  <p class="terms-text">ORIGENNT is committed to the lawful, fair, and transparent processing of personal data in accordance with the <strong>Digital Personal Data Protection Act, 2023 (DPDPA)</strong> and other applicable Indian data protection laws. The full Privacy Policy at <a href="privacy-policy.html" style="color:var(--red);text-decoration:none;font-weight:500;">www.origennt.com/privacy-policy.html</a> provides complete details.</p>
+  <div class="clause">
+    <div class="clause-head">Data Collected</div>
+    <div class="clause-body">ORIGENNT collects personal data including: name, contact details, professional history, and communication records of Clients and enquirers; Candidate personal data including name, CV, professional background, assessment results, and reference check information; payment information (processed via Razorpay; ORIGENNT does not store card or bank details); website usage data via cookies and Google Analytics.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Purpose of Processing</div>
+    <div class="clause-body">Personal data is processed by ORIGENNT solely for: delivery of agreed Services; communication related to enquiries, mandates, and engagements; statutory compliance and record-keeping; improvement of the Platform and Services; and, with consent, marketing communications. ORIGENNT does not sell or rent personal data to third parties.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Candidate Data — Special Provisions</div>
+    <div class="clause-body">Candidate personal data is processed by ORIGENNT as a data fiduciary under the DPDPA. Candidate data is shared with Clients only for evaluating the Candidate for the specific role. Candidates have the right to: access their personal data; correct inaccurate data; withdraw consent; and request erasure subject to ORIGENNT's legal retention obligations. Exercise these rights by contacting <a href="mailto:origennt@gmail.com" style="color:var(--red);text-decoration:none;">origennt@gmail.com</a>.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Data Retention</div>
+    <div class="clause-body">Client and Candidate data is retained for a period of <strong>7 years</strong> from the date of last engagement for statutory compliance purposes under the Companies Act, 2013, Income Tax Act, 1961, and EPF/ESI legislation. Data no longer required shall be securely deleted or anonymised.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Cookies</div>
+    <div class="clause-body">The Platform uses cookies and similar tracking technologies to enhance user experience and analyse traffic. By continuing to use the Platform, you consent to ORIGENNT's use of cookies. You may disable cookies in your browser settings, but this may affect the functionality of certain Platform features.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s11">
+  <div class="section-number">Section 11</div>
+  <h2 class="section-title">Affiliate Program &amp; <em>Partner Terms</em></h2>
+  <p class="terms-text">ORIGENNT operates an Affiliate Program through which registered partners may earn commission by referring clients to ORIGENNT. Participation is governed by the separate Affiliate Program Agreement at <a href="affiliate.html" style="color:var(--red);text-decoration:none;font-weight:500;">www.origennt.com/affiliate.html</a> and the following provisions:</p>
+  <div class="clause">
+    <div class="clause-head">Affiliate Eligibility</div>
+    <div class="clause-body">Affiliate Partners must be at least 18 years of age, legally capable of entering into contracts, and must not be a direct competitor of ORIGENNT. Employees, directors, and family members of ORIGENNT directors are not eligible. Registration as an Affiliate Partner does not create an employment, agency, partnership, or joint venture relationship between the Affiliate and ORIGENNT.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Commission &amp; Payments</div>
+    <div class="clause-body">Commission rates and payment timelines are specified in the Affiliate Program Agreement. Commission is payable only on referrals that result in a paid, executed engagement. Commission shall be paid after ORIGENNT has received full payment from the referred client for the relevant milestone. ORIGENNT reserves the right to withhold commission where the referral is found to be fraudulent or in breach of these Terms.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Affiliate Conduct</div>
+    <div class="clause-body">Affiliate Partners must not: misrepresent ORIGENNT's services, fees, or capabilities; make guarantees or commitments on ORIGENNT's behalf; use ORIGENNT's brand marks without prior written approval; engage in spam or misleading advertising; or engage in any conduct that could bring ORIGENNT into disrepute. ORIGENNT reserves the right to terminate an Affiliate's participation and withhold unpaid commissions if these obligations are breached.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Tax on Affiliate Earnings</div>
+    <div class="clause-body">Commission earned by Affiliate Partners constitutes taxable income under the Income Tax Act, 1961. Affiliates are solely responsible for their own tax compliance. ORIGENNT shall deduct TDS where required and shall issue Form 16A or equivalent certificates. GST may apply to affiliate services; Affiliates are responsible for their own GST compliance.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s12">
+  <div class="section-number">Section 12</div>
+  <h2 class="section-title">Dispute Resolution &amp; <em>Escalation Procedure</em></h2>
+  <p class="terms-text">ORIGENNT prefers to resolve disputes amicably. The following escalation procedure applies to all disputes arising from or in connection with these Terms or any service engagement:</p>
+  <ol class="terms-ol">
+    <li><strong>Step 1 — Direct Resolution (30 days):</strong> The aggrieved party shall notify the other party in writing, setting out the nature of the dispute and the remedy sought. Both parties shall make good faith efforts to resolve the dispute within 30 days of the notice.</li>
+    <li><strong>Step 2 — Senior Management Escalation (15 days):</strong> If the dispute is not resolved at Step 1, either party may escalate the matter to a Director-level representative of ORIGENNT within 15 days of the expiry of the Step 1 period. Senior management shall meet within 15 days of escalation.</li>
+    <li><strong>Step 3 — Mediation (30 days):</strong> If the dispute remains unresolved after Step 2, either party may refer the dispute to mediation under the Mediation Act, 2023, with a mediator appointed by the Mediation Centre, High Court of Orissa. Costs of mediation shall be shared equally.</li>
+    <li><strong>Step 4 — Arbitration:</strong> If mediation fails or is declined, the dispute shall be finally resolved by arbitration under the Arbitration and Conciliation Act, 1996 (as amended). The arbitration shall be conducted by a sole arbitrator. The seat and venue of arbitration shall be Bhubaneswar, Odisha. The arbitration shall be conducted in English. The award shall be final and binding.</li>
+  </ol>
+  <div class="clause">
+    <div class="clause-head">Urgent Relief</div>
+    <div class="clause-body">Nothing in this dispute resolution procedure shall prevent either party from seeking urgent interlocutory relief from the courts of competent jurisdiction, including injunctions to restrain breach of confidentiality, intellectual property infringement, or other irreparable harm.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Consumer Disputes</div>
+    <div class="clause-body">Where a dispute involves a consumer (as defined under the Consumer Protection Act, 2019), such consumer retains the right to approach the appropriate Consumer Disputes Redressal Commission. These Terms do not restrict any rights available to consumers under applicable Indian consumer protection law.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s13">
+  <div class="section-number">Section 13</div>
+  <h2 class="section-title">Governing Law &amp; <em>Jurisdiction</em></h2>
+  <p class="terms-text">These Terms and any dispute or claim arising out of or in connection with them or their subject matter or formation (including non-contractual disputes or claims) shall be governed by and construed in accordance with the laws of the <strong>Republic of India</strong>.</p>
+  <p class="terms-text">Subject to the dispute resolution procedure in Section 12, the parties irrevocably submit to the exclusive jurisdiction of the <strong>courts of Bhubaneswar, Odisha</strong> in respect of any dispute or claim that is not resolved through arbitration or other alternative dispute resolution mechanism provided herein.</p>
+  <div class="clause">
+    <div class="clause-head">Applicable Indian Laws</div>
+    <div class="clause-body">These Terms are subject to, inter alia: Companies Act, 2013; Indian Contract Act, 1872; Information Technology Act, 2000 and IT (Amendment) Act, 2008; Digital Personal Data Protection Act, 2023; Consumer Protection Act, 2019; Arbitration and Conciliation Act, 1996; Mediation Act, 2023; Income Tax Act, 1961; Goods and Services Tax laws; Copyright Act, 1957; Trade Marks Act, 1999; Shops and Establishments Act, Odisha; and all applicable labour laws including the Labour Codes 2019&ndash;2020.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s14">
+  <div class="section-number">Section 14</div>
+  <h2 class="section-title">Amendments, Termination &amp; <em>General Provisions</em></h2>
+  <div class="clause">
+    <div class="clause-head">Amendments to These Terms</div>
+    <div class="clause-body">ORIGENNT reserves the right to modify, update, or replace these Terms at any time at its sole discretion. Amended Terms will be published on the Platform with an updated "Last Reviewed" date. Your continued use of the Platform after any amendment constitutes your acceptance of the revised Terms.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Termination by ORIGENNT</div>
+    <div class="clause-body">ORIGENNT may suspend or terminate your access to the Platform and Services at any time, with or without notice, if: (a) you breach any provision of these Terms; (b) ORIGENNT reasonably suspects fraudulent or illegal activity; (c) ORIGENNT is required to do so by law or regulatory authority; or (d) ORIGENNT decides to discontinue the Platform or any Service.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Termination by You</div>
+    <div class="clause-body">You may stop using the Platform at any time. Termination of your use of the Platform does not affect any obligations owed to ORIGENNT under an active service engagement, including outstanding fee obligations and confidentiality undertakings.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Severability</div>
+    <div class="clause-body">If any provision of these Terms is found to be invalid, illegal, or unenforceable, such provision shall be severed to the minimum extent necessary and the remaining provisions shall continue in full force and effect.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Waiver</div>
+    <div class="clause-body">No failure or delay by ORIGENNT in exercising any right or remedy under these Terms shall operate as a waiver of that right or remedy, nor shall any single or partial exercise preclude any other or further exercise thereof.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Entire Agreement</div>
+    <div class="clause-body">These Terms, together with the Privacy Policy, Affiliate Agreement (if applicable), and any executed engagement letter or service agreement, constitute the entire agreement between ORIGENNT and you and supersede all prior and contemporaneous agreements, representations, and understandings.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Assignment</div>
+    <div class="clause-body">You may not assign or transfer any of your rights or obligations under these Terms without the prior written consent of ORIGENNT. ORIGENNT may assign its rights and obligations to any successor entity, including in connection with a merger, acquisition, or sale of assets.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Notices</div>
+    <div class="clause-body">All legal notices to ORIGENNT must be sent in writing to the registered office address or by email to <a href="mailto:origennt@gmail.com" style="color:var(--red);text-decoration:none;">origennt@gmail.com</a> with the subject line "Legal Notice — Terms of Use." Notices sent by email shall be deemed received on the business day following transmission.</div>
+  </div>
+  <div class="clause">
+    <div class="clause-head">Language</div>
+    <div class="clause-body">These Terms are written in English. In the event of any translation into any other language, the English version shall prevail in the event of any inconsistency or conflict.</div>
+  </div>
+</section>
+
+<section class="terms-section reveal" id="s15">
+  <div class="section-number">Section 15</div>
+  <h2 class="section-title">Contact, Grievance &amp; <em>Legal Correspondence</em></h2>
+  <p class="terms-text">For all queries, concerns, or correspondence relating to these Terms of Use, the Services, or the Platform, please use the following contact details:</p>
+  <div class="terms-table-wrap">
+    <table class="terms-table">
+      <thead><tr><th>Contact Type</th><th>Details</th></tr></thead>
+      <tbody>
+        <tr><td>Registered Entity</td><td>ORIGENNT Private Limited<br>CIN:U70200OD2025PTC051453<br>Incorporated under Companies Act, 2013 &middot; Odisha</td></tr>
+        <tr><td>Registered Office</td><td>Bhubaneswar, Odisha, India</td></tr>
+        <tr><td>General Enquiries</td><td><a href="mailto:origennt@gmail.com" style="color:var(--red);text-decoration:none;">origennt@gmail.com</a></td></tr>
+        <tr><td>Legal Notices</td><td><a href="mailto:origennt@gmail.com" style="color:var(--red);text-decoration:none;">origennt@gmail.com</a><br>Subject: "Legal Notice — Terms of Use"</td></tr>
+        <tr><td>Data Protection / DPDPA Requests</td><td><a href="mailto:origennt@gmail.com" style="color:var(--red);text-decoration:none;">origennt@gmail.com</a><br>Subject: "Data Protection Request"</td></tr>
+        <tr><td>Grievance Officer</td><td>Directors, ORIGENNT Private Limited<br><a href="mailto:admin@origennt.com" style="color:var(--red);text-decoration:none;">admin@origennt.com</a><br>Response time: within 15 working days of receipt.</td></tr>
+        <tr><td>WhatsApp (Non-legal)</td><td><a href="https://wa.me/919861168291" style="color:var(--red);text-decoration:none;" target="_blank">+91 98611 68291</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="warn-box" style="margin-top:24px;">
+    <div class="warn-box-label">Grievance Resolution — IT Act Compliance</div>
+    <div class="warn-box-text">In accordance with the Information Technology Act, 2000, and the IT (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021, ORIGENNT has designated a Grievance Officer to address complaints regarding content published on the Platform. All complaints must be submitted in writing and will be acknowledged within 24 hours and resolved within 15 working days where possible.</div>
+  </div>
+</section>
+
+</div>
+
+<aside class="terms-sidebar">
+  <div class="snav-label">Contents</div>
+  <a href="#s1" class="snav-link"><span class="snav-num">01</span>About ORIGENNT</a>
+  <a href="#s2" class="snav-link"><span class="snav-num">02</span>Definitions</a>
+  <a href="#s3" class="snav-link"><span class="snav-num">03</span>Acceptance &amp; Eligibility</a>
+  <a href="#s4" class="snav-link"><span class="snav-num">04</span>Services &amp; MOA Scope</a>
+  <a href="#s5" class="snav-link"><span class="snav-num">05</span>User Obligations</a>
+  <a href="#s6" class="snav-link"><span class="snav-num">06</span>Intellectual Property</a>
+  <a href="#s7" class="snav-link"><span class="snav-num">07</span>Confidentiality</a>
+  <a href="#s8" class="snav-link"><span class="snav-num">08</span>Payments &amp; Fees</a>
+  <a href="#s9" class="snav-link"><span class="snav-num">09</span>Limitation of Liability</a>
+  <a href="#s10" class="snav-link"><span class="snav-num">10</span>Data &amp; Privacy</a>
+  <a href="#s11" class="snav-link"><span class="snav-num">11</span>Affiliate Program</a>
+  <a href="#s12" class="snav-link"><span class="snav-num">12</span>Dispute Resolution</a>
+  <a href="#s13" class="snav-link"><span class="snav-num">13</span>Governing Law</a>
+  <a href="#s14" class="snav-link"><span class="snav-num">14</span>Amendments &amp; General</a>
+  <a href="#s15" class="snav-link"><span class="snav-num">15</span>Contact &amp; Grievance</a>
+  <div class="snav-contact">
+    <div class="snav-contact-label">Legal Contact</div>
+    <div class="snav-contact-text">ORIGENNT Private Limited<br>Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><br>For formal legal notices:<br><em>"Legal Notice — Terms of Use"</em></div>
+  </div>
+</aside>
+</div>
+
+<div class="sig-strip">
+  <div>
+    <div class="sig-label">Issued By</div>
+    <div class="sig-val">ORIGENNT Private Limited</div>
+    <div class="sig-sub">CIN:U70200OD2025PTC051453<br>Incorporated 25 November 2025 under Companies Act, 2013<br>Registered in Odisha, India<br>MOA-authorised for all services described herein</div>
+    <div class="sig-div"></div>
+    <div class="sig-label">Governing Framework</div>
+    <div class="sig-sub">Companies Act 2013 &middot; Indian Contract Act 1872 &middot; IT Act 2000 &middot; DPDPA 2023 &middot; Consumer Protection Act 2019 &middot; Arbitration &amp; Conciliation Act 1996 &middot; Mediation Act 2023 &middot; Income Tax Act 1961 &middot; GST Laws &middot; Labour Codes 2019&ndash;2020 &middot; Copyright Act 1957 &middot; Trade Marks Act 1999</div>
+  </div>
+  <div>
+    <div class="sig-label">Document Details</div>
+    <div class="sig-val" style="font-size:14px;margin-bottom:8px;">Terms of Use &amp; Service Agreement</div>
+    <div class="sig-sub">Effective Date: 25 November 2025<br>Last Reviewed: April 2026<br>Jurisdiction: Bhubaneswar, Odisha, India<br>Language: English (prevails over any translation)<br>Dispute Resolution: Arbitration &mdash; Seat Bhubaneswar</div>
+    <div class="sig-div"></div>
+    <div class="sig-label">Related Documents</div>
+    <div class="sig-sub"><a href="privacy-policy.html" style="color:var(--red);text-decoration:none;">Privacy Policy &rarr;</a><br><a href="affiliate.html" style="color:rgba(255,255,255,.4);text-decoration:none;">Affiliate Program Agreement &rarr;</a><br><a href="contact.html" style="color:rgba(255,255,255,.4);text-decoration:none;">Contact ORIGENNT &rarr;</a></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll &amp; compliance, and learning &amp; development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U70200OD2025PTC051453<br>Incorporated: 25 November 2025 &middot; Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Consulting</div>
+      <a href="management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="strategy.html" class="footer-link">Strategy &amp; Transformation</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
+    </div>
+    <div>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll &amp; Compliance</a>
+      <a href="learning-development.html" class="footer-link">Learning &amp; Development</a>
+      <a href="internship.html" class="footer-link">Internship Program</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <a href="terms-of-use.html" class="footer-link" style="color:var(--red);">Terms of Use</a>
+      <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+      <a href="affiliate.html" class="footer-link">Affiliate Agreement</a>
+      <div class="footer-col-title" style="margin-top:24px;">Company</div>
+      <a href="about.html" class="footer-link">About ORIGENNT</a>
+      <a href="contact.html" class="footer-link">Contact Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">&copy; 2025 Origennt Private Limited &middot; All rights reserved &middot; Registered under Companies Act 2013 &middot; Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">&#128172;</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">&#9993;</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const snavLinks=document.querySelectorAll('.snav-link');
+const sections=document.querySelectorAll('.terms-section');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){snavLinks.forEach(l=>l.classList.remove('active'));const active=document.querySelector('.snav-link[href="#'+e.target.id+'"]');if(active)active.classList.add('active');}});},{threshold:.3,rootMargin:'-60px 0px -60% 0px'});
+sections.forEach(s=>io.observe(s));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const target=document.querySelector(this.getAttribute('href'));if(target){e.preventDefault();const top=target.getBoundingClientRect().top+window.pageYOffset-80;window.scrollTo({top,behavior:'smooth'});}});});
+</script>
+</body>
+</html>
