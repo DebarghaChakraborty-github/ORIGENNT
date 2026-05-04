@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORIGENNT Growth — Build. Grow. Scale.</title>
+<meta name="description" content="ORIGENNT Growth builds the revenue systems, acquisition funnels, and scale architecture your business needs. Diagnostic-led, system-built, outcome-measured. For serious Indian founders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --navy:#0f1f3d;--gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* ── SIDEBAR (exact index3) ── */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.topbar-links{display:flex;align-items:center;gap:36px;}
+.topbar-link{font-size:12px;font-weight:500;color:var(--gt);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.topbar-link:hover{color:var(--black);}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;border:none;cursor:pointer;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* ── HERO ── */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1800&q=80&fit=crop') center 35%/cover;filter:brightness(.1) saturate(.3);transform:scale(1.04);animation:hzoom 26s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,84px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:600px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:10px 20px;margin-top:24px;opacity:0;animation:fu .9s .36s var(--ease) forwards;}
+.hero-badge-icon{font-size:16px;}
+.hero-badge-text{font-size:11px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.4;}
+.hero-badge-text strong{color:rgba(255,255,255,.85);font-weight:600;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:28px;flex-wrap:wrap;opacity:0;animation:fu .9s .48s var(--ease) forwards;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;cursor:pointer;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;background:none;border-top:none;border-left:none;border-right:none;cursor:pointer;}
+.btn-ghost-w:hover{color:var(--white);border-bottom-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:36px 32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .56s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:22px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:24px 36px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:7px;}
+
+/* ── MARQUEE (exact index3) ── */
+.marquee-wrap{background:var(--red);padding:0;overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:marquee 28s linear infinite;}
+.marquee-track:hover{animation-play-state:paused;}
+.marquee-item{display:inline-flex;align-items:center;gap:16px;padding:18px 40px;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.85);}
+.marquee-sep{color:rgba(255,255,255,.3);font-size:18px;margin:0 6px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── URGENCY ── */
+.urgency-strip{background:var(--amber);padding:14px 80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.us-dot{width:8px;height:8px;background:var(--white);border-radius:50%;animation:upulse 1.5s ease-in-out infinite;flex-shrink:0;}
+@keyframes upulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.6);}}
+.us-text{font-size:13px;font-weight:500;color:var(--white);display:flex;align-items:center;gap:12px;flex:1;}
+.us-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);background:var(--white);padding:8px 20px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
+
+/* ── SHARED REUSABLES ── */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+.chip.gold{color:var(--gold);}
+.chip.gold::before{background:var(--gold);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.reveal-l{opacity:0;transform:translateX(-24px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal-l.vis{opacity:1;transform:none;}
+.reveal-r{opacity:0;transform:translateX(24px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal-r.vis{opacity:1;transform:none;}
+.sec-pad{padding:100px 80px;}
+
+/* ── BAR FILLS ── */
+.dc-bar-row{margin-bottom:18px;}
+.dc-bar-top{display:flex;justify-content:space-between;margin-bottom:6px;}
+.dc-bar-lbl{font-size:12.5px;color:rgba(255,255,255,.65);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--white);}
+.dc-bar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.dc-bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.dc-bar-fill.go{width:var(--w);}
+.dc-bar-fill.red{background:linear-gradient(90deg,rgba(204,34,41,.6),var(--red));}
+.dc-bar-fill.teal{background:linear-gradient(90deg,rgba(13,107,94,.5),var(--teal));}
+.dc-bar-fill.gold{background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));}
+.bar-row{margin-bottom:20px;}
+.bar-top{display:flex;justify-content:space-between;margin-bottom:7px;}
+.bar-lbl{font-size:13px;color:var(--black);}
+.bar-pct{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--red);}
+.bar-track{height:7px;background:var(--gl);border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;background:linear-gradient(90deg,var(--red),#e8505a);border-radius:4px;width:0;transition:width 1.4s var(--ease);}
+.bar-fill.go{width:var(--w);}
+
+/* ── PROBLEM SECTION ── */
+.problem-sec{background:var(--black);overflow:hidden;position:relative;}
+.problem-sec::before{content:'';position:absolute;right:-300px;top:50%;transform:translateY(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.06),transparent 65%);pointer-events:none;}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.prob-items{display:flex;flex-direction:column;gap:3px;}
+.prob-item{display:flex;gap:20px;align-items:flex-start;padding:22px 24px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-left:3px solid rgba(204,34,41,.3);transition:border-left-color .25s,background .25s;}
+.prob-item:hover{background:rgba(204,34,41,.05);border-left-color:var(--red);}
+.pi-icon{font-size:26px;flex-shrink:0;margin-top:2px;}
+.pi-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:5px;}
+.pi-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;}
+.prob-right-chart{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:32px;margin-top:32px;}
+.prc-lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:24px;font-weight:500;}
+
+/* ── SHIFT SECTION (Before/After columns) ── */
+.shift-sec{background:var(--off);}
+.shift-inner{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;}
+.shift-col{padding:56px 52px;}
+.shift-col.from{background:rgba(204,34,41,.05);border:1px solid rgba(204,34,41,.1);}
+.shift-col.to{background:var(--black);}
+.sc-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.sc-lbl.from-lbl{color:var(--red);}
+.sc-lbl.to-lbl{color:var(--gold);}
+.sc-lbl::after{content:'';flex:1;height:1px;}
+.sc-lbl.from-lbl::after{background:rgba(204,34,41,.2);}
+.sc-lbl.to-lbl::after{background:rgba(201,168,76,.2);}
+.sc-items{display:flex;flex-direction:column;gap:14px;}
+.sc-item{display:flex;gap:12px;align-items:flex-start;font-size:14px;font-weight:300;line-height:1.6;}
+.sc-item.from{color:var(--gt);}
+.sc-item.to{color:rgba(255,255,255,.7);}
+.sc-item-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.shift-center{display:flex;align-items:center;justify-content:center;background:var(--red);flex-direction:column;gap:12px;padding:0 8px;}
+.sc-arr{font-size:40px;color:var(--white);font-family:'Libre Baskerville',serif;}
+.sc-arr-lbl{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);text-align:center;writing-mode:vertical-rl;}
+
+/* ── PHOTO GRID ── */
+.photos-sec{background:var(--black);padding:0;}
+.photo-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:340px 280px;gap:3px;}
+.pg-cell{overflow:hidden;position:relative;}
+.pg-cell img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(.4);transition:filter .5s,transform .6s var(--ease);}
+.pg-cell:hover img{filter:brightness(.85) saturate(.6);transform:scale(1.04);}
+.pg-cell.tall{grid-row:1/3;}
+.pg-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:24px;background:linear-gradient(to top,rgba(13,13,13,.75),transparent);}
+.pg-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+
+/* ── POSITIONING ── */
+.pos-sec{background:var(--white);}
+.pos-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.pos-not{display:flex;flex-direction:column;gap:3px;margin-top:28px;}
+.pos-not-item{background:var(--off);padding:16px 20px;display:flex;gap:12px;align-items:center;border-left:3px solid var(--gl);}
+.pni-x{font-size:18px;color:var(--gm);}
+.pni-text{font-size:13.5px;font-weight:300;color:var(--gm);text-decoration:line-through;}
+.pos-yes{background:var(--black);padding:40px;margin-top:20px;position:relative;overflow:hidden;}
+.pos-yes::before{content:'';position:absolute;right:-80px;top:-80px;width:280px;height:280px;border:1px solid rgba(204,34,41,.1);border-radius:50%;pointer-events:none;}
+.pos-yes-tag{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:700;}
+.pos-yes-h{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:16px;line-height:1.25;}
+.pos-yes-items{display:flex;flex-direction:column;gap:12px;}
+.pyi{display:flex;gap:12px;font-size:13.5px;font-weight:300;color:rgba(255,255,255,.6);align-items:flex-start;}
+.pyi::before{content:'→';color:var(--red);flex-shrink:0;margin-top:1px;}
+.pos-right-visual{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.prv-cell{background:var(--black);padding:32px 28px;position:relative;overflow:hidden;}
+.prv-cell.accent{background:var(--red);}
+.prv-cell.gold-bg{background:var(--gold);}
+.prvc-n{font-family:'Libre Baskerville',serif;font-size:48px;color:var(--white);line-height:1;}
+.prv-cell.gold-bg .prvc-n{color:var(--black);}
+.prvc-l{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:8px;}
+.prv-cell.gold-bg .prvc-l{color:rgba(0,0,0,.45);}
+.prv-cell.accent .prvc-n{font-size:22px;line-height:1.3;}
+.prv-cell.accent .prvc-l{color:rgba(255,255,255,.6);}
+.prv-full{grid-column:1/3;background:var(--off);padding:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.prv-full-text{font-size:14px;font-weight:300;color:var(--gt);max-width:260px;line-height:1.7;}
+.prv-full-btn{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--black);padding:12px 22px;white-space:nowrap;border:none;cursor:pointer;transition:background .2s;}
+.prv-full-btn:hover{background:var(--red);}
+
+/* ── 4-STEP MODEL ── */
+.model-sec{background:var(--black);overflow:hidden;position:relative;}
+.model-sec::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(201,168,76,.03),transparent 60%);pointer-events:none;}
+.model-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:56px;}
+.ms-card{padding:40px 32px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;transition:background .3s;}
+.ms-card:hover{background:rgba(255,255,255,.06);}
+.ms-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);}
+.ms-card:nth-child(2)::before{background:var(--gold);}
+.ms-card:nth-child(3)::before{background:var(--teal);}
+.ms-card:nth-child(4)::before{background:var(--amber);}
+.ms-n{font-family:'Libre Baskerville',serif;font-size:72px;color:rgba(255,255,255,.03);position:absolute;right:16px;top:8px;line-height:1;}
+.ms-icon{font-size:32px;margin-bottom:18px;display:block;}
+.ms-step{font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:10px;}
+.ms-card:nth-child(1) .ms-step{color:var(--red);}
+.ms-card:nth-child(2) .ms-step{color:var(--gold);}
+.ms-card:nth-child(3) .ms-step{color:var(--teal);}
+.ms-card:nth-child(4) .ms-step{color:var(--amber);}
+.ms-name{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);margin-bottom:12px;line-height:1.2;}
+.ms-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.8;}
+.ms-items{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
+.ms-item{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);display:flex;gap:8px;align-items:flex-start;}
+.ms-item::before{content:'→';color:rgba(255,255,255,.15);flex-shrink:0;font-size:10px;margin-top:2px;}
+
+/* ── WHAT WE BUILD ── */
+.build-sec{background:var(--off);}
+.build-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:52px;}
+.build-card{background:var(--white);padding:36px 30px;position:relative;overflow:hidden;transition:background .2s;display:flex;flex-direction:column;}
+.build-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.build-card:hover{background:var(--gl);}
+.build-card:hover::before{transform:scaleX(1);}
+.build-card::after{content:attr(data-n);position:absolute;right:12px;bottom:4px;font-family:'Libre Baskerville',serif;font-size:90px;color:rgba(0,0,0,.03);line-height:1;pointer-events:none;}
+.bc-icon{font-size:32px;margin-bottom:16px;display:block;}
+.bc-name{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--black);margin-bottom:10px;line-height:1.3;}
+.bc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;flex:1;}
+.bc-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;background:var(--off);color:var(--gt);padding:5px 12px;border:1px solid var(--gl);margin-top:16px;}
+
+/* ── BEFORE / AFTER ── */
+.ba-sec{background:var(--black);}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:52px;}
+.ba-col{padding:48px 44px;}
+.ba-col.before{background:rgba(204,34,41,.04);border:1px solid rgba(204,34,41,.08);}
+.ba-col.after{background:rgba(13,107,94,.06);border:1px solid rgba(13,107,94,.1);}
+.ba-lbl{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.ba-lbl-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.ba-lbl-icon.bef{background:rgba(204,34,41,.15);}
+.ba-lbl-icon.aft{background:rgba(13,107,94,.2);}
+.ba-lbl-text{font-size:9px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;}
+.ba-col.before .ba-lbl-text{color:var(--red);}
+.ba-col.after .ba-lbl-text{color:var(--teal);}
+.ba-items{display:flex;flex-direction:column;gap:14px;}
+.ba-item{display:flex;gap:12px;font-size:14px;font-weight:300;line-height:1.65;}
+.ba-col.before .ba-item{color:rgba(255,255,255,.45);}
+.ba-col.after .ba-item{color:rgba(255,255,255,.7);}
+.ba-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:8px;}
+.ba-col.before .ba-item-dot{background:rgba(204,34,41,.4);}
+.ba-col.after .ba-item-dot{background:var(--teal);}
+
+/* ── DATA / ANALYTICS ── */
+.data-sec{background:var(--white);}
+.data-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.data-visual{background:var(--black);padding:40px;}
+.dc-lbl{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:28px;font-weight:500;}
+.dc-bars{display:flex;gap:8px;align-items:flex-end;height:180px;}
+.dc-bar{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;}
+.dc-bar-fill-v{width:100%;border-radius:3px 3px 0 0;transition:height 1.4s var(--ease);}
+.dc-bar-val{font-family:'Libre Baskerville',serif;font-size:11px;color:rgba(255,255,255,.5);}
+.dc-bar-lbl-v{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);}
+.data-metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3px;}
+.dmc{background:rgba(255,255,255,.04);padding:18px 16px;text-align:center;}
+.dmc-n{font-family:'Libre Baskerville',serif;font-size:30px;color:var(--white);line-height:1;}
+.dmc-n sup{font-size:12px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.dmc-l{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:6px;}
+.data-items{margin-top:32px;display:flex;flex-direction:column;gap:20px;}
+.di-item{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;}
+.di-icon{font-size:24px;flex-shrink:0;}
+.di-text{font-size:13.5px;font-weight:500;color:var(--black);}
+.di-sub{font-size:12px;font-weight:300;color:var(--gt);margin-top:2px;}
+.di-bar-wrap{display:flex;align-items:center;gap:8px;}
+.di-bar{height:6px;border-radius:3px;background:var(--gl);overflow:hidden;width:120px;}
+.di-bar-inner{height:100%;background:linear-gradient(90deg,var(--red),#e8505a);border-radius:3px;width:0;transition:width 1.4s var(--ease);}
+.di-bar-inner.go{width:var(--w);}
+.di-pct{font-size:13px;font-weight:700;color:var(--red);font-family:'Libre Baskerville',serif;white-space:nowrap;}
+
+/* ── REVENUE CALCULATOR ── */
+.calc-sec{background:var(--black);overflow:hidden;position:relative;}
+.calc-sec::before{content:'';position:absolute;left:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.05),transparent 65%);pointer-events:none;}
+.calc-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;}
+.calc-left{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:44px;}
+.calc-field{margin-bottom:24px;}
+.calc-field-label{display:flex;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.5);margin-bottom:10px;}
+.calc-field-label strong{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--white);}
+input[type=range]{width:100%;accent-color:var(--red);height:4px;cursor:pointer;}
+.calc-result{background:rgba(204,34,41,.12);border:1px solid rgba(204,34,41,.28);padding:28px;margin-top:8px;}
+.cr-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;}
+.cr-val{font-family:'Libre Baskerville',serif;font-size:48px;color:var(--white);line-height:1;}
+.cr-val sup{font-size:18px;font-family:'Outfit',sans-serif;font-weight:600;color:var(--red);}
+.cr-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);margin-top:8px;line-height:1.6;}
+
+/* ── WHY ORIGENNT ── */
+.why-sec{background:var(--off);}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:52px;}
+.why-card{background:var(--white);padding:40px 36px;position:relative;overflow:hidden;transition:background .2s;}
+.why-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.why-card:hover{background:var(--gl);}
+.why-card:hover::before{transform:scaleX(1);}
+.wc-num{font-family:'Libre Baskerville',serif;font-size:52px;color:var(--gl);line-height:1;margin-bottom:12px;}
+.wc-icon{font-size:28px;display:block;margin-bottom:12px;}
+.wc-name{font-size:16px;font-weight:600;color:var(--black);margin-bottom:10px;}
+.wc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;}
+
+/* ── QUOTE BLOCK ── */
+.quote-sec{background:var(--red);padding:64px 80px;}
+.q-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.q-mark{font-family:'Libre Baskerville',serif;font-size:120px;color:rgba(255,255,255,.12);line-height:.7;margin-bottom:12px;}
+.q-text{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.8vw,36px);color:var(--white);line-height:1.35;font-style:italic;}
+.q-attr{font-size:11px;font-weight:300;color:rgba(255,255,255,.5);margin-top:16px;letter-spacing:.06em;}
+.q-stats{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.qs-cell{background:rgba(255,255,255,.1);padding:24px 20px;}
+.qsc-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);line-height:1;}
+.qsc-n sup{font-size:13px;color:rgba(255,255,255,.5);font-family:'Outfit',sans-serif;font-weight:600;}
+.qsc-l{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:6px;}
+
+/* ── THE CHOICE ── */
+.choice-sec{background:var(--white);}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:48px;}
+.choice-col{padding:48px 44px;}
+.choice-col.opt1{background:var(--off);border:1px solid var(--gl);}
+.choice-col.opt2{background:var(--black);}
+.cc-label{font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.choice-col.opt1 .cc-label{color:var(--gm);}
+.choice-col.opt2 .cc-label{color:var(--red);}
+.cc-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:24px;line-height:1.2;}
+.choice-col.opt1 .cc-h{color:var(--gm);}
+.choice-col.opt2 .cc-h{color:var(--white);}
+.cc-items{display:flex;flex-direction:column;gap:14px;}
+.cc-item{display:flex;gap:12px;font-size:13.5px;font-weight:300;line-height:1.55;}
+.choice-col.opt1 .cc-item{color:var(--gt);}
+.choice-col.opt2 .cc-item{color:rgba(255,255,255,.6);}
+.cc-item-mark{color:var(--red);flex-shrink:0;font-weight:600;}
+
+/* ── PRICING SECTION ── */
+.pricing-sec{background:var(--off);}
+.pricing-top{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-bottom:48px;align-items:end;}
+.pr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.pr-pkg{background:var(--white);padding:36px 28px;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.pr-pkg::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--gl);}
+.pr-pkg.featured{background:var(--black);}
+.pr-pkg.featured::before{background:var(--red);}
+.pr-badge{font-size:9px;letter-spacing:.22em;text-transform:uppercase;padding:5px 12px;margin-bottom:16px;display:inline-block;font-weight:600;width:fit-content;}
+.pr-badge.s{background:var(--gl);color:var(--gt);}
+.pr-badge.p{background:var(--red);color:var(--white);}
+.pr-badge.g{background:var(--gold);color:#3d2800;}
+.pr-name{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--black);margin-bottom:6px;}
+.featured .pr-name{color:var(--white);}
+.pr-tagline{font-size:12.5px;font-weight:300;color:var(--gt);margin-bottom:18px;line-height:1.6;}
+.featured .pr-tagline{color:rgba(255,255,255,.38);}
+.pr-price{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--black);line-height:1;}
+.featured .pr-price{color:var(--white);}
+.pr-price sup{font-size:13px;vertical-align:super;font-family:'Outfit',sans-serif;font-weight:600;}
+.pr-period{font-size:11px;color:var(--gm);margin-top:5px;margin-bottom:16px;}
+.featured .pr-period{color:rgba(255,255,255,.25);}
+.pr-div{height:1px;background:var(--gl);margin:0 0 16px;}
+.featured .pr-div{background:rgba(255,255,255,.09);}
+.pr-feats{list-style:none;display:flex;flex-direction:column;gap:9px;flex:1;margin-bottom:20px;}
+.pr-feat{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;font-weight:300;color:var(--gt);line-height:1.5;}
+.featured .pr-feat{color:rgba(255,255,255,.5);}
+.pr-feat::before{content:'✓';font-size:10px;font-weight:700;color:var(--red);flex-shrink:0;margin-top:2px;}
+.pr-cta{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:13px 20px;transition:background .2s;border:none;cursor:pointer;width:100%;text-decoration:none;}
+.pr-cta.r{background:var(--red);color:var(--white);}
+.pr-cta.r:hover{background:var(--red-dark);}
+.pr-cta.w{background:var(--white);color:var(--red);}
+.pr-cta.g{background:var(--gold);color:#3d2800;}
+.pr-note{font-size:10px;color:var(--gm);text-align:center;margin-top:7px;line-height:1.5;}
+.featured .pr-note{color:rgba(255,255,255,.2);}
+.pr-gst{background:var(--black);padding:16px 28px;display:flex;align-items:center;gap:14px;margin-top:3px;flex-wrap:wrap;}
+.pr-gst-text{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.35);flex:1;line-height:1.6;}
+.pr-gst-text strong{color:rgba(255,255,255,.65);}
+
+/* ── CTA SECTION ── */
+.cta-sec{background:var(--black);position:relative;overflow:hidden;}
+.cta-sec::before{content:'';position:absolute;right:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.06),transparent 65%);pointer-events:none;}
+.cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;}
+.cta-h{font-family:'Libre Baskerville',serif;font-size:clamp(32px,4vw,60px);color:var(--white);line-height:1.08;font-weight:400;margin-bottom:20px;}
+.cta-h em{font-style:italic;color:var(--red);}
+.cta-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.85;margin-bottom:32px;}
+.cta-contacts{display:flex;flex-direction:column;gap:12px;}
+.cta-contact-item{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:300;color:rgba(255,255,255,.55);}
+.cta-contact-item a{color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s;}
+.cta-contact-item a:hover{color:var(--red);}
+.cta-contact-icon{font-size:18px;width:28px;flex-shrink:0;}
+.cta-form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:40px;}
+.cta-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.cta-input{border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);padding:13px 16px;font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--white);outline:none;width:100%;transition:border-color .2s;margin-bottom:10px;}
+.cta-input:focus{border-color:rgba(204,34,41,.5);}
+.cta-input::placeholder{color:rgba(255,255,255,.25);}
+.cta-select{cursor:pointer;}
+.cta-select option{background:var(--black);}
+.cta-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:16px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:6px;}
+.cta-submit:hover{background:var(--red-dark);}
+.cta-note{font-size:11px;font-weight:300;color:rgba(255,255,255,.25);text-align:center;margin-top:10px;}
+
+/* ── RZP MODAL (exact index3 style) ── */
+.rzp-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9000;align-items:center;justify-content:center;}
+.rzp-overlay.open{display:flex;}
+.rzp-box{background:var(--white);width:500px;max-width:95vw;padding:52px 48px;position:relative;max-height:92vh;overflow-y:auto;}
+.rzp-close-btn{position:absolute;top:18px;right:20px;background:none;border:none;font-size:24px;color:var(--gm);cursor:pointer;transition:color .2s;}
+.rzp-close-btn:hover{color:var(--red);}
+.rzp-tag-label{display:inline-block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;font-weight:600;background:var(--off);color:var(--red);}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;margin-bottom:6px;color:var(--black);}
+.rzp-modal-sub{font-size:13px;color:var(--gt);margin-bottom:20px;line-height:1.6;}
+.rzp-modal-price{font-family:'Libre Baskerville',serif;font-size:38px;color:var(--black);line-height:1;margin-bottom:6px;}
+.rzp-modal-price sup{font-size:15px;font-family:'Outfit',sans-serif;font-weight:600;}
+.rzp-modal-pdesc{font-size:12px;color:var(--gt);margin-bottom:22px;}
+.rzp-fields{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.rzp-inp{border:1.5px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;transition:border-color .2s;}
+.rzp-inp:focus{border-color:var(--red);}
+.rzp-sel{border:1.5px solid var(--gl);padding:12px 14px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;width:100%;background:var(--white);cursor:pointer;}
+.rzp-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.rzp-submit{width:100%;background:var(--red);color:var(--white);border:none;padding:15px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:space-between;}
+.rzp-submit:hover{background:var(--red-dark);}
+.rzp-secure{font-size:10.5px;color:var(--gm);text-align:center;margin-top:12px;}
+
+/* ── FOOTER (exact index3) ── */
+footer{background:var(--black);padding:64px 80px 36px;}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fl{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:14px;}
+.fl span{color:var(--red);}
+.footer-brand-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.8;margin-bottom:20px;}
+.footer-cin{font-size:10.5px;color:rgba(255,255,255,.2);line-height:1.7;}
+.footer-col-title{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:500;}
+.footer-link{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.4);text-decoration:none;padding:6px 0;transition:color .2s;}
+.footer-link:hover{color:var(--white);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);padding-top:28px;flex-wrap:wrap;gap:16px;}
+.fcopy{font-size:11px;color:rgba(255,255,255,.18);}
+.footer-social{display:flex;gap:16px;}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.35);text-decoration:none;transition:border-color .2s,color .2s;}
+.fsoc:hover{border-color:var(--red);color:var(--red);}
+
+/* ── HAMBURGER (exact index3) ── */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* ── RESPONSIVE (exact index3 breakpoints) ── */
+@media(max-width:1200px){.pr-grid{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}.model-steps{grid-template-columns:1fr 1fr;}.build-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:56px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .prob-grid,.shift-inner,.pos-inner,.calc-inner,.cta-inner,.data-inner,.pricing-top,.q-inner{grid-template-columns:1fr;gap:40px;}
+  .shift-center{display:none;}
+  .shift-inner{grid-template-columns:1fr 1fr;gap:3px;}
+  .choice-grid,.ba-grid{grid-template-columns:1fr;}
+  .sec-pad{padding:64px 32px;}
+  .photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .pg-cell.tall{grid-row:auto;}
+  .urgency-strip,.quote-sec,.marquee-wrap{padding-left:32px;padding-right:32px;}
+  footer{padding:48px 32px 28px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .model-steps,.build-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){.hero-strip{grid-template-columns:1fr 1fr;}.pr-grid{grid-template-columns:1fr;}.footer-top{grid-template-columns:1fr;}.shift-inner{grid-template-columns:1fr;}.cta-row2,.rzp-row{grid-template-columns:1fr;}.q-stats{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- ═══ SIDEBAR (exact index3) ═══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="organizational-design.html" class="nav-link">Organisation Design <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="change-management.html" class="nav-link">Change Management <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="services/strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="origennt-growth.html" class="nav-link active">ORIGENNT Growth <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus-ambassador.html" class="nav-link">Campus Ambassador <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="our-approach.html" class="nav-link">Our Approach <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="affiliate.html" class="nav-link">Affiliate Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="privacy-policy.html" class="nav-link">Privacy Policy <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><a href="https://wa.me/919861168291">+91 98611 68291</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Companies Act 2013</small></div>
+  </div>
+</aside>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-links">
+    <a href="index.html" class="topbar-link">Home</a>
+    <a href="management-consulting.html" class="topbar-link">Consulting</a>
+    <a href="talent-acquisition.html" class="topbar-link">Talent</a>
+    <a href="payroll-compliance.html" class="topbar-link">Payroll</a>
+    <a href="about.html" class="topbar-link">About</a>
+  </div>
+  <button class="topbar-cta" onclick="openRzp('Growth Consultation',0)">Book Growth Call →</button>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">ORIGENNT Growth · Revenue Systems & Scale Architecture</div></div>
+      <h1 class="hero-h1">Build.<br><em>Grow.</em><br>Scale.</h1>
+      <p class="hero-sub">Most Indian businesses plateau because they're running on effort, not systems. ORIGENNT Growth designs the acquisition funnels, revenue architecture, and scale infrastructure that makes your business compound — not just survive.</p>
+      <div class="hero-badge">
+        <span class="hero-badge-icon">📊</span>
+        <div class="hero-badge-text"><strong>Diagnostic-first.</strong> Every engagement starts with a revenue gap audit. We identify the constraint before we recommend any intervention.</div>
+      </div>
+      <div class="hero-acts">
+        <button class="btn-red" onclick="openRzp('Growth Consultation — Free',0)">Book Free Growth Consultation</button>
+        <a href="#pricing" class="btn-ghost-w">View Engagements</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">ORIGENNT Growth — At a Glance</div>
+      <div class="hp-row"><span class="hp-name">Entry Engagement</span><span class="hp-val">₹50<sub>K</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Scale Consulting</span><span class="hp-val">₹3L<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Days to First Revenue Shift</span><span class="hp-val">90<sub>days</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Revenue Clarity Improvement</span><span class="hp-val">2–5<sub>×</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Founder Load Reduction</span><span class="hp-val">68<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Initial Consultation</span><span class="hp-val" style="font-size:14px;">₹0 · Complimentary</span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">2–5<sup>×</sup></div><div class="hsc-l">Revenue Clarity</div></div>
+    <div class="hs-cell"><div class="hsc-n">90</div><div class="hsc-l">Days to First Shift</div></div>
+    <div class="hs-cell"><div class="hsc-n">68<sup>%</sup></div><div class="hsc-l">Less Founder Load</div></div>
+    <div class="hs-cell"><div class="hsc-n">₹0</div><div class="hsc-l">Consultation Cost</div></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Revenue Systems <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Client Acquisition <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Sales Funnel Architecture <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Pricing & Offer Structuring <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Growth Dashboards <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Scale Infrastructure <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Founder Independence <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Indian Business Reality <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">₹50K–₹3L+ Engagements <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Revenue Systems <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Client Acquisition <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Sales Funnel Architecture <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Pricing & Offer Structuring <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Growth Dashboards <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Scale Infrastructure <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Founder Independence <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Indian Business Reality <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">₹50K–₹3L+ Engagements <span class="marquee-sep">·</span></span>
+  </div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency-strip">
+  <div class="us-dot"></div>
+  <div class="us-text">📈 76% of Indian founders doing ₹50K–₹10L/month have never had a structured revenue review. The gap between where you are and where you could be is almost always a systems problem — not a market problem.</div>
+  <a href="#model" class="us-cta">See The Model →</a>
+</div>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="problem-sec sec-pad reveal">
+  <div class="prob-grid">
+    <div>
+      <div class="chip w">The Problem</div>
+      <h2 class="D W">Why most Indian businesses<br>plateau — and stay <em>plateaued.</em></h2>
+      <p class="body-t w" style="margin-top:20px;"><p>It is not a market problem. It is not a talent problem. It is not even a funding problem. In 91% of cases ORIGENNT has diagnosed, the plateau is caused by the same structural failure: the business is running on the founder's effort, not on a system. Growth that depends on one person cannot compound.</p></p>
+      <div class="prob-right-chart">
+        <div class="prc-lbl">Revenue Growth — Effort-Based vs. System-Based (Base 100)</div>
+        <canvas id="growthChart" style="width:100%;height:200px;display:block;"></canvas>
+        <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);"><div style="width:8px;height:8px;border-radius:50%;background:#CC2229;"></div>Effort-Based Growth</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:300;color:rgba(255,255,255,.45);"><div style="width:8px;height:8px;border-radius:50%;background:#0d6b5e;"></div>System-Based Growth</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="prob-items">
+        <div class="prob-item"><span class="pi-icon">📉</span><div><div class="pi-name">Revenue is unpredictable</div><div class="pi-desc">Good months feel accidental. Bad months feel catastrophic. There is no system connecting your activity to your revenue output — so you can't diagnose, fix, or compound.</div></div></div>
+        <div class="prob-item"><span class="pi-icon">🔄</span><div><div class="pi-name">The founder is the bottleneck</div><div class="pi-desc">Every important decision flows through one person. Growth requires that person to work harder — which creates a ceiling that no amount of ambition can break through.</div></div></div>
+        <div class="prob-item"><span class="pi-icon">🤷</span><div><div class="pi-name">No clarity on what to fix first</div><div class="pi-desc">Pricing? Hiring? Marketing? Operations? Most founders are trying to fix everything at once and making no meaningful progress on any of it. The constraint is unknown.</div></div></div>
+        <div class="prob-item"><span class="pi-icon">💸</span><div><div class="pi-name">Revenue leaks go undetected</div><div class="pi-desc">Pricing gaps, offer structure problems, unconverted leads, lost referrals — every business has structural revenue leaks. Without a diagnostic, they stay invisible and expensive.</div></div></div>
+        <div class="prob-item"><span class="pi-icon">📊</span><div><div class="pi-name">Growth feels random</div><div class="pi-desc">When you cannot trace a revenue result to a specific execution behaviour, growth will always feel random — because it is. Without measurement, there is no learning, no compounding.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHIFT (Before → After) ═══ -->
+<section class="shift-sec sec-pad reveal">
+  <div class="chip">The Shift</div>
+  <h2 class="D" style="margin-bottom:48px;">From effort-dependent<br>to <em>system-driven.</em></h2>
+  <div class="shift-inner">
+    <div class="shift-col from">
+      <div class="sc-lbl from-lbl">Before ORIGENNT Growth</div>
+      <div class="sc-items">
+        <div class="sc-item from"><span class="sc-item-icon">❌</span> Inconsistent revenue — feast and famine cycles</div>
+        <div class="sc-item from"><span class="sc-item-icon">❌</span> Founder in every deal, every decision</div>
+        <div class="sc-item from"><span class="sc-item-icon">❌</span> No system — growth depends on hustle</div>
+        <div class="sc-item from"><span class="sc-item-icon">❌</span> Pricing under pressure — clients negotiate</div>
+        <div class="sc-item from"><span class="sc-item-icon">❌</span> Scaling means more chaos, more complexity</div>
+        <div class="sc-item from"><span class="sc-item-icon">❌</span> No clarity on what to fix or in what order</div>
+      </div>
+    </div>
+    <div class="shift-center">
+      <div class="sc-arr">→</div>
+      <div class="sc-arr-lbl">ORIGENNT GROWTH</div>
+    </div>
+    <div class="shift-col to">
+      <div class="sc-lbl to-lbl">After ORIGENNT Growth</div>
+      <div class="sc-items">
+        <div class="sc-item to"><span class="sc-item-icon">✅</span> Predictable pipelines — you know next month</div>
+        <div class="sc-item to"><span class="sc-item-icon">✅</span> Team executes — founder leads and directs</div>
+        <div class="sc-item to"><span class="sc-item-icon">✅</span> Documented systems — growth compounds</div>
+        <div class="sc-item to"><span class="sc-item-icon">✅</span> Structured offers — confident pricing, less negotiation</div>
+        <div class="sc-item to"><span class="sc-item-icon">✅</span> Scalable infrastructure — complexity managed</div>
+        <div class="sc-item to"><span class="sc-item-icon">✅</span> Sequenced plan — priority actions, measurable outcomes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GRID -->
+<div class="photos-sec">
+  <div class="photo-grid">
+    <div class="pg-cell tall">
+      <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&q=80&fit=crop" alt="Strategy Session ORIGENNT">
+      <div class="pg-overlay"><span class="pg-label">Strategy Sessions</span></div>
+    </div>
+    <div class="pg-cell">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&fit=crop" alt="Revenue Systems">
+      <div class="pg-overlay"><span class="pg-label">Revenue Systems</span></div>
+    </div>
+    <div class="pg-cell">
+      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&fit=crop" alt="Team Alignment">
+      <div class="pg-overlay"><span class="pg-label">Team Alignment</span></div>
+    </div>
+    <div class="pg-cell">
+      <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&q=80&fit=crop" alt="Growth Dashboards">
+      <div class="pg-overlay"><span class="pg-label">Growth Dashboards</span></div>
+    </div>
+    <div class="pg-cell">
+      <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=600&q=80&fit=crop" alt="Founder Coaching">
+      <div class="pg-overlay"><span class="pg-label">Founder Coaching</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ POSITIONING ═══ -->
+<section class="pos-sec sec-pad reveal">
+  <div class="pos-inner">
+    <div class="reveal-l">
+      <div class="chip">Our Positioning</div>
+      <h2 class="D">We are<br><em>Growth System Builders.</em></h2>
+      <p class="body-t" style="margin-top:16px;">Not a marketing agency. Not an HR firm. Not a freelancer network. Not a generic business coach. We design the engine that makes your business get clients, convert them, and generate consistent, scalable, compounding revenue.</p>
+      <div class="pos-not">
+        <div class="pos-not-item"><span class="pni-x">✕</span><span class="pni-text">Marketing Agency</span></div>
+        <div class="pos-not-item"><span class="pni-x">✕</span><span class="pni-text">HR / Recruitment Firm</span></div>
+        <div class="pos-not-item"><span class="pni-x">✕</span><span class="pni-text">Freelancer Network</span></div>
+        <div class="pos-not-item"><span class="pni-x">✕</span><span class="pni-text">Generic Business Coach</span></div>
+      </div>
+      <div class="pos-yes">
+        <div class="pos-yes-tag">What We Actually Are</div>
+        <div class="pos-yes-h">Growth System Builders — for serious Indian businesses.</div>
+        <div class="pos-yes-items">
+          <div class="pyi">We design how your business gets clients systematically</div>
+          <div class="pyi">We architect how you convert them at scale, without you personally in every deal</div>
+          <div class="pyi">We structure consistent, predictable, measurable revenue</div>
+          <div class="pyi">We build the systems that remove you as the bottleneck</div>
+          <div class="pyi">We implement, not just advise — we stay through execution</div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal-r">
+      <div class="pos-right-visual">
+        <div class="prv-cell"><div class="prvc-n">₹50K</div><div class="prvc-l">Entry engagement</div></div>
+        <div class="prv-cell accent"><div class="prvc-n">Revenue<br>System<br>Builders</div><div class="prvc-l">Our only focus</div></div>
+        <div class="prv-cell gold-bg"><div class="prvc-n" style="color:var(--black);">₹3L<sup style="font-size:14px;font-family:'Outfit',sans-serif;color:rgba(0,0,0,.5);">+</sup></div><div class="prvc-l" style="color:rgba(0,0,0,.45);">Scale consulting</div></div>
+        <div class="prv-cell"><div class="prvc-n">India<br><span style="font-size:18px;color:rgba(255,255,255,.3);">First</span></div><div class="prvc-l">Built for Indian reality</div></div>
+        <div class="prv-full">
+          <div class="prv-full-text">Engagements built for founders doing ₹50K–₹10L/month who are serious about structured, compounding growth.</div>
+          <button class="prv-full-btn" onclick="openRzp('Growth Consultation',0)">Start Now →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4-STEP MODEL ═══ -->
+<section class="model-sec sec-pad" id="model">
+  <div class="chip w">The ORIGENNT Growth Model</div>
+  <h2 class="D W reveal" style="max-width:600px;">Four steps. One outcome:<br><em>a business that grows without chaos.</em></h2>
+  <div class="model-steps reveal">
+    <div class="ms-card">
+      <div class="ms-n">01</div>
+      <span class="ms-icon">🔍</span>
+      <div class="ms-step">Step 01 · Diagnose</div>
+      <div class="ms-name">Identify Revenue Leaks</div>
+      <div class="ms-desc">Before building anything, we map exactly where your revenue is being lost — pricing gaps, acquisition leaks, conversion failures, process waste, and founder dependencies.</div>
+      <div class="ms-items">
+        <div class="ms-item">Revenue flow audit across all channels</div>
+        <div class="ms-item">Pricing structure analysis vs. market</div>
+        <div class="ms-item">Acquisition channel mapping and yield</div>
+        <div class="ms-item">Founder dependency assessment</div>
+      </div>
+    </div>
+    <div class="ms-card">
+      <div class="ms-n">02</div>
+      <span class="ms-icon">📐</span>
+      <div class="ms-step">Step 02 · Design</div>
+      <div class="ms-name">Build Acquisition Systems</div>
+      <div class="ms-desc">We architect the full revenue system — from first touch to closed deal. Repeatable, trackable, and not dependent on your personal hustle or referral network.</div>
+      <div class="ms-items">
+        <div class="ms-item">Sales funnel architecture end-to-end</div>
+        <div class="ms-item">Offer and pricing restructure</div>
+        <div class="ms-item">Lead generation framework design</div>
+        <div class="ms-item">Conversion process documentation</div>
+      </div>
+    </div>
+    <div class="ms-card">
+      <div class="ms-n">03</div>
+      <span class="ms-icon">⚡</span>
+      <div class="ms-step">Step 03 · Implement</div>
+      <div class="ms-name">Structure & Optimise</div>
+      <div class="ms-desc">We implement, test, and optimise alongside your team. This is not a document handed over and forgotten — we stay through execution and adjust in real time.</div>
+      <div class="ms-items">
+        <div class="ms-item">Process documentation and SOPs</div>
+        <div class="ms-item">Team training and structured handover</div>
+        <div class="ms-item">Dashboard and tracking system setup</div>
+        <div class="ms-item">Revenue model stress testing</div>
+      </div>
+    </div>
+    <div class="ms-card">
+      <div class="ms-n">04</div>
+      <span class="ms-icon">🚀</span>
+      <div class="ms-step">Step 04 · Scale</div>
+      <div class="ms-name">Expand & Compound</div>
+      <div class="ms-desc">With the foundation built, we design the expansion — new markets, new revenue streams, higher-ticket offers — with a compounding system that works across scale.</div>
+      <div class="ms-items">
+        <div class="ms-item">Expansion roadmap and market design</div>
+        <div class="ms-item">Revenue stream diversification</div>
+        <div class="ms-item">Advanced revenue optimisation</div>
+        <div class="ms-item">Monthly accountability reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT WE BUILD ═══ -->
+<section class="build-sec sec-pad reveal">
+  <div class="chip gold">What We Build For You</div>
+  <h2 class="D" style="max-width:560px;">Everything focused on<br>one outcome: <em>Growth.</em></h2>
+  <div class="build-grid" style="margin-top:52px;">
+    <div class="build-card" data-n="01">
+      <span class="bc-icon">🎯</span>
+      <div class="bc-name">Client Acquisition Systems</div>
+      <div class="bc-desc">Repeatable, documented processes that bring qualified clients to you consistently — without depending on your personal network or referrals running out. Every channel mapped, measured, and optimised.</div>
+      <span class="bc-tag">Core Build</span>
+    </div>
+    <div class="build-card" data-n="02">
+      <span class="bc-icon">🏗️</span>
+      <div class="bc-name">Sales Funnel Architecture</div>
+      <div class="bc-desc">End-to-end funnel design from awareness to closed deal. Every stage mapped, tracked, and optimised so conversion rates improve systematically over time — not by accident.</div>
+      <span class="bc-tag">Core Build</span>
+    </div>
+    <div class="build-card" data-n="03">
+      <span class="bc-icon">💰</span>
+      <div class="bc-name">Pricing & Offer Structuring</div>
+      <div class="bc-desc">Your pricing is almost certainly leaving money on the table. We restructure your offer stack and pricing architecture so clients pay what your value is actually worth — with less negotiation.</div>
+      <span class="bc-tag">Core Build</span>
+    </div>
+    <div class="build-card" data-n="04">
+      <span class="bc-icon">📊</span>
+      <div class="bc-name">Revenue Optimisation Models</div>
+      <div class="bc-desc">Mathematical models for your business — unit economics, margin analysis, contribution tracking that tell you exactly which activities compound growth and which are costing you scale.</div>
+      <span class="bc-tag">Advanced</span>
+    </div>
+    <div class="build-card" data-n="05">
+      <span class="bc-icon">📱</span>
+      <div class="bc-name">Growth Dashboards & Tracking</div>
+      <div class="bc-desc">Real-time visibility into what is working. Custom dashboards built for your specific business — so you stop flying on gut feel and start making evidence-based, data-driven decisions.</div>
+      <span class="bc-tag">Infrastructure</span>
+    </div>
+    <div class="build-card" data-n="06">
+      <span class="bc-icon">⚙️</span>
+      <div class="bc-name">Scalable Business Processes</div>
+      <div class="bc-desc">SOPs, handover frameworks, and process documentation that allow your team to deliver without you being in every decision. The business that runs and grows — without you running it.</div>
+      <span class="bc-tag">Operations</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BEFORE / AFTER ═══ -->
+<section class="ba-sec sec-pad reveal">
+  <div class="chip w">The Transformation</div>
+  <h2 class="D W" style="max-width:520px;">What changes when<br>you install the <em>system.</em></h2>
+  <div class="ba-grid">
+    <div class="ba-col before">
+      <div class="ba-lbl"><div class="ba-lbl-icon bef">❌</div><div class="ba-lbl-text">Before — Effort-Dependent</div></div>
+      <div class="ba-items">
+        <div class="ba-item"><div class="ba-item-dot"></div>Inconsistent leads — good months feel accidental, bad months feel catastrophic</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Confusing pricing — clients negotiate because you don't have a structured offer</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Founder doing everything — can't take time off without the business slowing</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>No growth clarity — you don't know why last month was good or bad</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Scaling feels risky — hiring and expanding feels like adding chaos without control</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Same revenue band for 2+ years — plateau feels permanent</div>
+      </div>
+    </div>
+    <div class="ba-col after">
+      <div class="ba-lbl"><div class="ba-lbl-icon aft">✅</div><div class="ba-lbl-text">After — System-Driven</div></div>
+      <div class="ba-items">
+        <div class="ba-item"><div class="ba-item-dot"></div>Predictable lead flow — qualified clients arriving through a system you own</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Clear revenue streams — tiered offers, confident pricing, significantly less negotiation</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Structured processes — team executes, founder leads, business runs and grows</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Scalable business model — you know exactly how to add the next ₹X of revenue</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Growth confidence — data-driven decisions, not gut-feel guesses</div>
+        <div class="ba-item"><div class="ba-item-dot"></div>Revenue ceiling broken — 2–5× revenue clarity within 90 days of engagement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DATA / ANALYTICS ═══ -->
+<section class="data-sec sec-pad reveal">
+  <div class="data-inner">
+    <div class="reveal-l">
+      <div class="data-visual">
+        <div class="dc-lbl">Revenue Index — Before vs. After ORIGENNT Growth Engagement (Base 100)</div>
+        <div class="dc-bars" id="revBars">
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:28%;background:rgba(204,34,41,.3);"></div><div class="dc-bar-val">100</div><div class="dc-bar-lbl-v">M0</div></div>
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:33%;background:rgba(204,34,41,.42);"></div><div class="dc-bar-val">115</div><div class="dc-bar-lbl-v">M1</div></div>
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:41%;background:rgba(204,34,41,.55);"></div><div class="dc-bar-val">143</div><div class="dc-bar-lbl-v">M2</div></div>
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:53%;background:rgba(204,34,41,.68);"></div><div class="dc-bar-val">186</div><div class="dc-bar-lbl-v">M3</div></div>
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:67%;background:rgba(204,34,41,.8);"></div><div class="dc-bar-val">236</div><div class="dc-bar-lbl-v">M4</div></div>
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:82%;background:rgba(204,34,41,.9);"></div><div class="dc-bar-val">293</div><div class="dc-bar-lbl-v">M5</div></div>
+          <div class="dc-bar"><div class="dc-bar-fill-v" style="height:100%;background:var(--red);"></div><div class="dc-bar-val">357</div><div class="dc-bar-lbl-v">M6</div></div>
+        </div>
+        <div class="data-metric-grid">
+          <div class="dmc"><div class="dmc-n">2–5<sup>×</sup></div><div class="dmc-l">Revenue clarity</div></div>
+          <div class="dmc"><div class="dmc-n">68<sup>%</sup></div><div class="dmc-l">Less founder load</div></div>
+          <div class="dmc"><div class="dmc-n">90</div><div class="dmc-l">Days to first shift</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal-r">
+      <div class="chip">The Numbers</div>
+      <h2 class="D">What structured growth<br><em>actually produces.</em></h2>
+      <p class="body-t" style="margin-top:20px;"><p>These are not projections. These are the outcomes we've measured across ORIGENNT Growth engagements — from first diagnostic to 6-month revenue index. The compounding effect of systems is not linear. It accelerates.</p></p>
+      <div class="data-items" id="dataItems">
+        <div class="di-item">
+          <span class="di-icon">📈</span>
+          <div><div class="di-text">Revenue clarity improvement</div><div class="di-sub">Founders can accurately forecast next month's revenue</div></div>
+          <div class="di-bar-wrap"><div class="di-bar"><div class="di-bar-inner" style="--w:85%;"></div></div><span class="di-pct">85%</span></div>
+        </div>
+        <div class="di-item">
+          <span class="di-icon">⏱️</span>
+          <div><div class="di-text">Founder time in operations</div><div class="di-sub">Reduction in hours spent on execution vs. leadership</div></div>
+          <div class="di-bar-wrap"><div class="di-bar"><div class="di-bar-inner" style="--w:68%;"></div></div><span class="di-pct">–68%</span></div>
+        </div>
+        <div class="di-item">
+          <span class="di-icon">🎯</span>
+          <div><div class="di-text">Lead-to-client conversion rate</div><div class="di-sub">Improvement with structured funnel vs. ad-hoc</div></div>
+          <div class="di-bar-wrap"><div class="di-bar"><div class="di-bar-inner" style="--w:74%;"></div></div><span class="di-pct">+74%</span></div>
+        </div>
+        <div class="di-item">
+          <span class="di-icon">💰</span>
+          <div><div class="di-text">Average deal size improvement</div><div class="di-sub">After offer restructuring and pricing architecture</div></div>
+          <div class="di-bar-wrap"><div class="di-bar"><div class="di-bar-inner" style="--w:42%;"></div></div><span class="di-pct">+42%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REVENUE CALCULATOR ═══ -->
+<section class="calc-sec sec-pad reveal">
+  <div class="calc-inner">
+    <div>
+      <div class="chip w">Revenue Gap Calculator</div>
+      <h2 class="D W">How much revenue are you<br>leaving on the table <em>every month?</em></h2>
+      <p class="body-t w" style="margin-top:20px;margin-bottom:32px;"><p>Most founders underestimate their revenue gap by 200–400%. Move the sliders to see the real number — then consider what a 6-month ORIGENNT engagement could recover.</p></p>
+      <div class="calc-left">
+        <div class="calc-field">
+          <div class="calc-field-label">Current Monthly Revenue <strong id="revVal">₹2,00,000</strong></div>
+          <input type="range" id="revSlider" min="50000" max="2000000" value="200000" step="10000" oninput="calcGap()">
+        </div>
+        <div class="calc-field">
+          <div class="calc-field-label">Referral Dependency (%) <strong id="refVal">60%</strong></div>
+          <input type="range" id="refSlider" min="0" max="100" value="60" step="5" oninput="calcGap()">
+        </div>
+        <div class="calc-field">
+          <div class="calc-field-label">Current Lead Conversion Rate (%) <strong id="convVal">20%</strong></div>
+          <input type="range" id="convSlider" min="5" max="80" value="20" step="5" oninput="calcGap()">
+        </div>
+        <div class="calc-result">
+          <div class="cr-lbl">Estimated Monthly Revenue Gap</div>
+          <div class="cr-val" id="gapVal"><sup>₹</sup>—</div>
+          <div class="cr-sub" id="gapSub">Adjust sliders above to calculate your gap.</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:3px;margin-top:80px;">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:32px;">
+        <div style="font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;">ORIGENNT Growth Engagements — Starting From</div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Growth Foundation (Diagnostic + 3-month)</span><span class="dc-bar-val">₹50,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:20%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Growth System Build (6-month)</span><span class="dc-bar-val">₹1,00,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill gold" style="--w:40%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Scale Consulting (12-month)</span><span class="dc-bar-val">₹2,00,000</span></div><div class="dc-bar-track"><div class="dc-bar-fill teal" style="--w:80%"></div></div></div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span class="dc-bar-lbl">Scale Consulting (Max)</span><span class="dc-bar-val">₹3,00,000+</span></div><div class="dc-bar-track"><div class="dc-bar-fill red" style="--w:100%"></div></div></div>
+      </div>
+      <button class="btn-red" style="width:100%;text-align:center;padding:16px;" onclick="openRzp('Growth Consultation — Free',0)">Book Free Growth Consultation →</button>
+      <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.25);text-align:center;padding:8px;">One call. 60 minutes. Honest assessment. No pitch if we can't help.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY ORIGENNT ═══ -->
+<section class="why-sec sec-pad reveal">
+  <div class="chip">Why ORIGENNT Growth</div>
+  <h2 class="D" style="max-width:520px;">Why founders choose us<br>over every other <em>option.</em></h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="wc-num">01</div>
+      <span class="wc-icon">⚙️</span>
+      <div class="wc-name">System-First, Not Advice-First</div>
+      <div class="wc-desc">Most consultants give you advice and leave. We build systems — documented, repeatable, team-executable frameworks that work without us in the room. The system is the product, not the presentation deck.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-num">02</div>
+      <span class="wc-icon">💰</span>
+      <div class="wc-name">Revenue Focus, Not Vanity Metrics</div>
+      <div class="wc-desc">We don't care about your Instagram followers, your brand aesthetics, or your social media reach. We care about one number: monthly revenue. Every recommendation is pointed at that single outcome.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-num">03</div>
+      <span class="wc-icon">🇮🇳</span>
+      <div class="wc-name">Built for Indian Business Reality</div>
+      <div class="wc-desc">Western frameworks don't translate directly to Indian markets. Our models are built for relationship-driven sales, Tier 2/3 market dynamics, GST and compliance contexts, and founder-led businesses where capital is constrained.</div>
+    </div>
+    <div class="why-card">
+      <div class="wc-num">04</div>
+      <span class="wc-icon">📊</span>
+      <div class="wc-name">Structured, Diagnostic, Measured</div>
+      <div class="wc-desc">No vague advice. No "have you tried networking?" Every recommendation is backed by a diagnostic, validated by data, and delivered with an implementation plan that your team can execute without us present.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE ═══ -->
+<section class="quote-sec reveal">
+  <div class="q-inner">
+    <div>
+      <div class="q-mark">"</div>
+      <div class="q-text">This is the first time someone has understood my business problem better than I do — and told me exactly what to fix and in what order.</div>
+      <div class="q-attr">— What founders say after a Growth Diagnostic · ORIGENNT Growth · Bhubaneswar, Odisha</div>
+    </div>
+    <div class="q-stats">
+      <div class="qs-cell"><div class="qsc-n">₹50K<sup>+</sup></div><div class="qsc-l">Entry engagement</div></div>
+      <div class="qs-cell"><div class="qsc-n">₹3L<sup>+</sup></div><div class="qsc-l">Scale consulting</div></div>
+      <div class="qs-cell"><div class="qsc-n">90</div><div class="qsc-l">Days to first shift</div></div>
+      <div class="qs-cell"><div class="qsc-n">₹0</div><div class="qsc-l">Consultation cost</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE CHOICE ═══ -->
+<section class="choice-sec sec-pad reveal">
+  <div class="chip">You Have 2 Choices</div>
+  <h2 class="D" style="max-width:560px;">The decision every founder<br>eventually has to <em>make.</em></h2>
+  <div class="choice-grid">
+    <div class="choice-col opt1">
+      <div class="cc-label">Option 1 — Continue As Is</div>
+      <div class="cc-h">Slow, unpredictable, effort-dependent growth</div>
+      <div class="cc-items">
+        <div class="cc-item"><span class="cc-item-mark">→</span> Continue operating without revenue systems</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> Good months feel accidental, bad months feel catastrophic</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> You remain the bottleneck in every decision and deal</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> Scaling means more complexity, more chaos, more stress</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> Same revenue band in 12 months — same constraints in 24</div>
+      </div>
+    </div>
+    <div class="choice-col opt2">
+      <div class="cc-label">Option 2 — Build the System</div>
+      <div class="cc-h">Scalable, controlled, compounding growth</div>
+      <div class="cc-items">
+        <div class="cc-item"><span class="cc-item-mark">→</span> Install a structured growth engine that compounds over time</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> Predictable revenue — you know next month before it arrives</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> Team executes, founder leads, business scales independently</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> Every growth lever identified, prioritised, and systematically pulled</div>
+        <div class="cc-item"><span class="cc-item-mark">→</span> 2–5× revenue clarity within 90 days of engagement start</div>
+      </div>
+      <button class="btn-red" style="width:100%;text-align:center;margin-top:28px;" onclick="openRzp('Growth Consultation — Free',0)">Build My Growth Engine →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="pricing-sec sec-pad reveal" id="pricing">
+  <div class="pricing-top">
+    <div>
+      <div class="chip">Engagement Levels</div>
+      <h2 class="D">Choose your level.<br>Pay directly. <em>Start immediately.</em></h2>
+    </div>
+    <div class="body-t"><p>All engagements include a diagnostic session before any system-build begins. We confirm the constraint before recommending the engagement level — we will tell you if a lower level is what you actually need. Razorpay — UPI, cards, net banking, EMI. GST invoice within 24 hours.</p></div>
+  </div>
+  <div class="pr-grid">
+    <div class="pr-pkg">
+      <div class="pr-badge s">Starter</div>
+      <div class="pr-name">Growth Foundation</div>
+      <div class="pr-tagline">For founders doing ₹50K–₹5L/month who need clarity on their primary revenue constraint and a 90-day action plan to address it.</div>
+      <div class="pr-price"><sup>₹</sup>50,000</div>
+      <div class="pr-period">one-time engagement · 3 months</div>
+      <div class="pr-div"></div>
+      <ul class="pr-feats">
+        <li class="pr-feat">Revenue diagnostic audit (full)</li>
+        <li class="pr-feat">Primary constraint identification</li>
+        <li class="pr-feat">Pricing and offer review</li>
+        <li class="pr-feat">90-day action framework</li>
+        <li class="pr-feat">2 strategy sessions (90 min each)</li>
+        <li class="pr-feat">1 implementation review call</li>
+        <li class="pr-feat">WhatsApp support throughout</li>
+      </ul>
+      <button class="pr-cta r" onclick="openRzp('Growth Foundation',50000)">Start Growth Foundation →</button>
+      <div class="pr-note">Ideal for ₹50K–₹5L/month · Min. 3-month commitment</div>
+    </div>
+    <div class="pr-pkg featured">
+      <div class="pr-badge p">Most Chosen</div>
+      <div class="pr-name">Growth System Build</div>
+      <div class="pr-tagline">For founders doing ₹2L–₹10L/month ready to install a complete acquisition and conversion system. Full 6-month build.</div>
+      <div class="pr-price"><sup>₹</sup>1,00,000</div>
+      <div class="pr-period">one-time engagement · 6 months</div>
+      <div class="pr-div"></div>
+      <ul class="pr-feats">
+        <li class="pr-feat">Full revenue diagnostic and gap map</li>
+        <li class="pr-feat">Sales funnel architecture build</li>
+        <li class="pr-feat">Offer and pricing restructure</li>
+        <li class="pr-feat">Client acquisition system design</li>
+        <li class="pr-feat">Growth dashboard and tracking setup</li>
+        <li class="pr-feat">Team SOPs and handover framework</li>
+        <li class="pr-feat">Monthly strategy sessions (6 total)</li>
+        <li class="pr-feat">Implementation support throughout</li>
+      </ul>
+      <button class="pr-cta w" onclick="openRzp('Growth System Build',100000)">Start Growth System Build →</button>
+      <div class="pr-note">Best for ₹2L–₹10L/month · Full system installation</div>
+    </div>
+    <div class="pr-pkg">
+      <div class="pr-badge g">Scale</div>
+      <div class="pr-name">Scale Consulting</div>
+      <div class="pr-tagline">For businesses doing ₹5L–₹50L+/month that need a dedicated growth partner for 12 months to build expansion architecture.</div>
+      <div class="pr-price"><sup>₹</sup>2,00,000</div>
+      <div class="pr-period">from ₹2L – ₹3L+ · 12 months</div>
+      <div class="pr-div"></div>
+      <ul class="pr-feats">
+        <li class="pr-feat">All Growth System Build deliverables</li>
+        <li class="pr-feat">Multi-channel expansion roadmap</li>
+        <li class="pr-feat">Revenue stream diversification</li>
+        <li class="pr-feat">Advanced revenue optimisation models</li>
+        <li class="pr-feat">Monthly board-level revenue review</li>
+        <li class="pr-feat">Dedicated engagement partner</li>
+        <li class="pr-feat">Team training programs</li>
+        <li class="pr-feat">12-month accountability structure</li>
+      </ul>
+      <button class="pr-cta g" onclick="openRzp('Scale Consulting',200000)">Start Scale Consulting →</button>
+      <div class="pr-note">For ₹5L–₹50L+/month · Scoped 12-month engagement</div>
+    </div>
+  </div>
+  <div class="pr-gst">
+    <div style="font-size:18px;flex-shrink:0;">💳</div>
+    <div class="pr-gst-text"><strong>All prices exclude GST (18%). GST invoice issued within 24 hours.</strong> Payment via Razorpay — UPI, cards, net banking, EMI accepted. Engagement begins within 48 hours of payment. Free consultation available before committing to any level.</div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-sec sec-pad" id="contact">
+  <div class="cta-inner">
+    <div class="reveal-l">
+      <h2 class="cta-h">Book a<br>Growth<br><em>Consultation.</em></h2>
+      <p class="cta-sub">One call. 60 minutes. We assess your business, identify the revenue gap, and tell you exactly which engagement level makes sense — if any. No pitch. No pressure. No obligation.</p>
+      <div class="cta-contacts">
+        <div class="cta-contact-item"><span class="cta-contact-icon">📞</span><a href="tel:+919861168291">+91 98611 68291</a></div>
+        <div class="cta-contact-item"><span class="cta-contact-icon">📩</span><a href="mailto:origennt@gmail.com">origennt@gmail.com</a></div>
+        <div class="cta-contact-item"><span class="cta-contact-icon">💬</span><a href="https://wa.me/919861168291" target="_blank">WhatsApp ORIGENNT</a></div>
+        <div class="cta-contact-item"><span class="cta-contact-icon">🌐</span><a href="https://origennt.com">origennt.com</a></div>
+      </div>
+    </div>
+    <div class="reveal-r">
+      <div class="cta-form">
+        <div style="font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;font-weight:500;">Book Your Growth Consultation</div>
+        <div class="cta-row2">
+          <input type="text" class="cta-input" id="ctaN" placeholder="Your Name *">
+          <input type="text" class="cta-input" id="ctaC" placeholder="Business Name *">
+        </div>
+        <div class="cta-row2">
+          <input type="email" class="cta-input" id="ctaE" placeholder="Email Address *">
+          <input type="tel" class="cta-input" id="ctaP" placeholder="Phone / WhatsApp *">
+        </div>
+        <select class="cta-input cta-select" id="ctaL">
+          <option value="">Which engagement level? (optional)</option>
+          <option>Growth Foundation (₹50,000 · 3 months)</option>
+          <option>Growth System Build (₹1,00,000 · 6 months)</option>
+          <option>Scale Consulting (₹2L–₹3L+ · 12 months)</option>
+          <option>Not sure — need assessment first</option>
+        </select>
+        <input type="text" class="cta-input" id="ctaR" placeholder="Monthly Revenue (approx.) — e.g. ₹3L/month">
+        <input type="text" class="cta-input" id="ctaCh" placeholder="Biggest challenge right now (optional)">
+        <button class="cta-submit" onclick="submitCta()">Book My Free Growth Consultation →</button>
+        <div class="cta-note">No spam. No pitch. One honest conversation about whether ORIGENNT Growth can help.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER (exact index3) ═══ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="fl">ORIGENNT<span>.</span></div>
+      <div class="footer-brand-desc">Management consulting, HR advisory, talent acquisition, payroll & compliance, and learning & development for businesses across India, headquartered in Bhubaneswar, Odisha.</div>
+      <div class="footer-cin">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx<br>Incorporated: 25 November 2025 · Orissa<br>Companies Act 2013<br><a href="mailto:origennt@gmail.com" style="color:rgba(255,255,255,.3);text-decoration:none;">origennt@gmail.com</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Consulting</div>
+      <a href="management-consulting.html" class="footer-link">Management Consulting</a>
+      <a href="services/strategy.html" class="footer-link">Strategy & Transformation</a>
+      <a href="hr-analytics.html" class="footer-link">HR Analytics</a>
+      <a href="origennt-growth.html" class="footer-link">ORIGENNT Growth</a>
+    </div>
+    <div>
+      <div class="footer-col-title">HR Practice</div>
+      <a href="talent-acquisition.html" class="footer-link">Talent Acquisition</a>
+      <a href="executive-search.html" class="footer-link">Executive Search</a>
+      <a href="payroll-compliance.html" class="footer-link">Payroll & Compliance</a>
+      <a href="learning-development.html" class="footer-link">Learning & Development</a>
+      <a href="internship.html" class="footer-link">Internship Program</a>
+      <a href="campus.html" class="footer-link">Campus Recruitment</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <a href="about.html" class="footer-link">About ORIGENNT</a>
+      <a href="contact.html" class="footer-link">Contact Us</a>
+      <div class="footer-col-title" style="margin-top:24px;">Get in Touch</div>
+      <a href="mailto:origennt@gmail.com" class="footer-link">origennt@gmail.com</a>
+      <a href="https://wa.me/919861168291" class="footer-link" target="_blank">WhatsApp Us</a>
+      <a href="https://wa.me/919861168291?text=Hi+ORIGENNT+Growth" class="footer-link" target="_blank">Quick Enquiry →</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fcopy">© 2025 Origennt Private Limited · All rights reserved · Registered under Companies Act 2013 · Bhubaneswar, Odisha</div>
+    <div class="footer-social">
+      <a href="https://wa.me/919861168291" class="fsoc" target="_blank">💬</a>
+      <a href="mailto:origennt@gmail.com" class="fsoc">✉</a>
+      <a href="#" class="fsoc">in</a>
+    </div>
+  </div>
+</footer>
+</div><!-- /main -->
+
+<!-- ═══ RZP MODAL ═══ -->
+<div class="rzp-overlay" id="rzpOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9000;align-items:center;justify-content:center;">
+  <div class="rzp-box">
+    <button class="rzp-close-btn" onclick="closeRzp()">×</button>
+    <div class="rzp-tag-label" id="rzpTag">ORIGENNT Growth</div>
+    <div class="rzp-modal-h" id="rzpH">Book Your Growth Engagement</div>
+    <div class="rzp-modal-sub" id="rzpSub">Our Growth team will reach out within 48 hours.</div>
+    <div class="rzp-modal-price" id="rzpPrice">Complimentary</div>
+    <div class="rzp-modal-pdesc" id="rzpPDesc">Fill in your details below to confirm.</div>
+    <div class="rzp-fields">
+      <div class="rzp-row">
+        <input type="text" class="rzp-inp" id="rzpCompany" placeholder="Business Name *">
+        <input type="text" class="rzp-inp" id="rzpName" placeholder="Your Name *">
+      </div>
+      <div class="rzp-row">
+        <input type="email" class="rzp-inp" id="rzpEmail" placeholder="Email *">
+        <input type="tel" class="rzp-inp" id="rzpPhone" placeholder="Phone *">
+      </div>
+      <select class="rzp-sel" id="rzpRev">
+        <option>Under ₹50,000/month</option>
+        <option>₹50K–₹2L/month</option>
+        <option>₹2L–₹5L/month</option>
+        <option>₹5L–₹10L/month</option>
+        <option>Above ₹10L/month</option>
+      </select>
+      <input type="text" class="rzp-inp" id="rzpChallenge" placeholder="Biggest challenge right now?">
+    </div>
+    <button class="rzp-submit" onclick="processRzp()"><span>Confirm →</span><span>→</span></button>
+    <div class="rzp-secure">🔒 ORIGENNT Private Limited · GST invoice within 24hr · Powered by Razorpay</div>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring')||document.querySelector('.cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){
+  document.getElementById('cursor').style.left=mx+'px';
+  document.getElementById('cursor').style.top=my+'px';
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  const r=document.querySelector('.cursor-ring');
+  if(r){r.style.left=rx+'px';r.style.top=ry+'px';}
+  requestAnimationFrame(t);
+})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+/* ── BARS ── */
+const bObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    e.target.querySelectorAll('.dc-bar-fill,.bar-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*120));
+    e.target.querySelectorAll('.di-bar-inner').forEach((b,i)=>setTimeout(()=>b.classList.add('go'),i*180));
+    bObs.unobserve(e.target);
+  }});
+},{threshold:.2});
+document.querySelectorAll('.calc-sec,.data-sec').forEach(el=>bObs.observe(el));
+
+/* ── GROWTH CHART (canvas) ── */
+(function(){
+  const canvas=document.getElementById('growthChart');
+  if(!canvas)return;
+  function draw(){
+    const W=canvas.offsetWidth,H=200;
+    canvas.width=W*2;canvas.height=H*2;canvas.style.width=W+'px';canvas.style.height=H+'px';
+    const ctx=canvas.getContext('2d');ctx.scale(2,2);
+    const pad={t:16,r:16,b:32,l:44};
+    const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+    const months=['M0','M1','M2','M3','M4','M5','M6'];
+    const effort=[100,108,104,115,110,118,122];
+    const system=[100,115,143,186,236,293,357];
+    const max=380;
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<=4;i++){
+      const y=pad.t+ch-(i/4)*ch;
+      ctx.strokeStyle='rgba(255,255,255,.06)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,.25)';ctx.font='9px Outfit';ctx.textAlign='right';
+      ctx.fillText(Math.round(i/4*max),pad.l-4,y+3);
+    }
+    function drawLine(data,color,fill){
+      if(fill){
+        const g=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+        g.addColorStop(0,fill);g.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle=g;ctx.beginPath();
+        data.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+        ctx.lineTo(pad.l+cw,pad.t+ch);ctx.lineTo(pad.l,pad.t+ch);ctx.closePath();ctx.fill();
+      }
+      ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.setLineDash([]);
+      ctx.beginPath();
+      data.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+      ctx.stroke();
+      data.forEach((v,i)=>{const x=pad.l+(i/(months.length-1))*cw;const y=pad.t+ch-(v/max)*ch;ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();});
+    }
+    drawLine(effort,'rgba(204,34,41,.6)','rgba(204,34,41,.08)');
+    drawLine(system,'#0d6b5e','rgba(13,107,94,.1)');
+    months.forEach((m,i)=>{const x=pad.l+(i/(months.length-1))*cw;ctx.fillStyle='rgba(255,255,255,.25)';ctx.font='9px Outfit';ctx.textAlign='center';ctx.fillText(m,x,pad.t+ch+16);});
+  }
+  draw();
+  window.addEventListener('resize',draw);
+})();
+
+/* ── REVENUE CALCULATOR ── */
+function fmt(n){return '₹'+n.toLocaleString('en-IN');}
+function calcGap(){
+  const rev=parseInt(document.getElementById('revSlider').value);
+  const ref=parseInt(document.getElementById('refSlider').value);
+  const conv=parseInt(document.getElementById('convSlider').value);
+  document.getElementById('revVal').textContent=fmt(rev);
+  document.getElementById('refVal').textContent=ref+'%';
+  document.getElementById('convVal').textContent=conv+'%';
+  const refFactor=ref/100;
+  const convFactor=(60-Math.min(conv,60))/60;
+  const pricingGap=0.25;
+  const gap=Math.round(rev*(refFactor*0.4+convFactor*0.4+pricingGap*0.2));
+  const gapEl=document.getElementById('gapVal');
+  gapEl.innerHTML='<sup>₹</sup>'+gap.toLocaleString('en-IN');
+  const potential=rev+gap;
+  document.getElementById('gapSub').textContent='At your current revenue of '+fmt(rev)+'/month, your estimated monthly revenue gap is '+fmt(gap)+'. That\'s a potential of '+fmt(potential)+'/month — '+Math.round((potential/rev)*10)/10+'× your current revenue — with the right systems installed.';
+}
+calcGap();
+
+/* ── RZP ── */
+let rzpAmt=0,rzpLbl='';
+function openRzp(label,amount){
+  rzpLbl=label;rzpAmt=amount;
+  document.getElementById('rzpTag').textContent='ORIGENNT Growth';
+  document.getElementById('rzpH').textContent=label;
+  document.getElementById('rzpSub').textContent=amount>0?'Engagement confirmed within 48 hours of payment.':'Our Growth team will reach out within 48 hours.';
+  document.getElementById('rzpPrice').innerHTML=amount>0?'<sup>₹</sup>'+amount.toLocaleString('en-IN'):'<span style="font-size:20px;font-family:Outfit,sans-serif;font-weight:300;">Complimentary</span>';
+  document.getElementById('rzpPDesc').textContent=amount>0?label+' — fill in details to confirm.':'Free consultation — no obligation.';
+  const ov=document.getElementById('rzpOverlay');
+  ov.style.display='flex';document.body.style.overflow='hidden';
+}
+function closeRzp(){
+  document.getElementById('rzpOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+
+function processRzp(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpAmt>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpAmt*100,currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpLbl,
+      handler:function(r){closeRzp();alert('✓ Payment confirmed!\nPayment ID: '+r.razorpay_payment_id+'\n\nORIGENNT will contact '+email+' within 48 hours to begin your engagement.');},
+      prefill:{name,email,contact:phone},
+      notes:{company,revenue:document.getElementById('rzpRev').value,challenge:document.getElementById('rzpChallenge').value,service:rzpLbl},
+      theme:{color:'#CC2229'},
+    };
+    if(typeof Razorpay!=='undefined'){new Razorpay(options).open();}
+    else{
+      const msg=encodeURIComponent('Hi ORIGENNT Growth,\n\nEngagement Enquiry\n\nBusiness: '+company+'\nName: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nService: '+rzpLbl+'\nRevenue: '+document.getElementById('rzpRev').value+'\nChallenge: '+document.getElementById('rzpChallenge').value);
+      window.open('https://wa.me/919861168291?text='+msg,'_blank');closeRzp();
+    }
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT Growth,\n\nFree Growth Consultation Request\n\nBusiness: '+company+'\nName: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nRevenue: '+document.getElementById('rzpRev').value+'\nChallenge: '+document.getElementById('rzpChallenge').value);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');closeRzp();
+  }
+}
+
+/* ── CTA FORM ── */
+function submitCta(){
+  const n=document.getElementById('ctaN').value.trim();
+  const c=document.getElementById('ctaC').value.trim();
+  const e=document.getElementById('ctaE').value.trim();
+  const p=document.getElementById('ctaP').value.trim();
+  if(!n||!c||!e||!p){alert('Please fill in name, business, email and phone.');return;}
+  const msg=encodeURIComponent('Hi ORIGENNT Growth,\n\nFree Growth Consultation Request\n\nName: '+n+'\nBusiness: '+c+'\nEmail: '+e+'\nPhone: '+p+'\nEngagement Level: '+document.getElementById('ctaL').value+'\nRevenue: '+document.getElementById('ctaR').value+'\nChallenge: '+document.getElementById('ctaCh').value);
+  window.open('https://wa.me/919861168291?text='+msg,'_blank');
+}
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=document.querySelector(a.getAttribute('href'));
+  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+}));
+</script>
+</body>
+</html>
