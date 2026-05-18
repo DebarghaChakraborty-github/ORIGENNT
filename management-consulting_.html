@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ORIGENNT Management Consulting — Strategic advisory for MSMEs and SMEs. Organisation design, business transformation, and growth strategy from Odisha, India.">
+<title>Management Consulting — ORIGENNT | Strategic Advisory for MSMEs & SMEs</title>
+<meta property="og:title" content="Management Consulting — ORIGENNT">
+<meta property="og:description" content="Strategic advisory, organisation design, and business transformation for MSMEs and SMEs across India.">
+<meta property="og:url" content="https://origennt.com/management-consulting">
+<meta property="og:type" content="website">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* MAIN */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;border:none;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* REUSABLES */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.32);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t p{margin-bottom:16px;}
+.body-t.w{color:rgba(255,255,255,.45);}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gt);text-decoration:none;border:1.5px solid var(--gl);padding:13px 32px;transition:all .2s;display:inline-block;background:none;cursor:pointer;}
+.btn-ghost:hover{border-color:var(--black);color:var(--black);}
+
+/* ── HERO ── */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1800&q=80&fit=crop') center 40%/cover;filter:brightness(.08) saturate(.2);transform:scale(1.04);animation:hzoom 24s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(40px,5.2vw,78px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:560px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .4s var(--ease) forwards;}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .52s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:22px 32px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:34px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;}
+
+/* META RIBBON */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc-r{padding:22px 48px 22px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:48px;white-space:nowrap;flex-shrink:0;}
+.mc-r:last-child{border-right:none;margin-right:0;}
+.mc-r-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-r-val{font-family:'Libre Baskerville',serif;font-size:20px;color:var(--white);}
+
+/* WHAT IS MC */
+.what-section{padding:100px 80px;background:var(--off);}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.distinction-box{background:var(--white);border:1px solid var(--gl);padding:36px;margin-top:40px;}
+.db-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:var(--red);margin-bottom:18px;}
+.db-row{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.db-col{padding:20px 18px;}
+.db-col.left{background:rgba(204,34,41,.04);border:1px solid rgba(204,34,41,.08);}
+.db-col.right{background:rgba(13,107,94,.04);border:1px solid rgba(13,107,94,.1);}
+.db-col-lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin-bottom:12px;}
+.db-col.left .db-col-lbl{color:var(--red);}
+.db-col.right .db-col-lbl{color:var(--teal);}
+.db-item{font-size:12.5px;font-weight:300;color:var(--gt);padding:6px 0;border-bottom:1px solid var(--gl);display:flex;gap:8px;align-items:flex-start;}
+.db-item:last-child{border-bottom:none;}
+.db-item::before{content:'→';color:var(--red);font-size:10px;flex-shrink:0;margin-top:2px;}
+.db-col.right .db-item::before{color:var(--teal);}
+.insight-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:28px;}
+.isr{background:var(--white);padding:20px 18px;}
+.isr-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--black);line-height:1;}
+.isr-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.isr-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gt);margin-top:6px;}
+
+/* FOUR PRACTICES */
+.practices-section{padding:100px 80px;background:var(--white);}
+.practice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:56px;}
+.practice-card{padding:48px 44px;position:relative;overflow:hidden;background:var(--off);transition:background .25s;}
+.practice-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.practice-card.p1::before{background:var(--red);}
+.practice-card.p2::before{background:var(--teal);}
+.practice-card.p3::before{background:var(--gold);}
+.practice-card.p4::before{background:var(--amber);}
+.practice-card:hover{background:var(--gl);}
+.pc-number{font-family:'Libre Baskerville',serif;font-size:64px;color:rgba(0,0,0,.04);font-weight:700;position:absolute;top:16px;right:24px;line-height:1;pointer-events:none;}
+.pc-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;display:inline-block;padding:4px 12px;margin-bottom:16px;}
+.pc-tag.p1{background:rgba(204,34,41,.1);color:var(--red);}
+.pc-tag.p2{background:rgba(13,107,94,.1);color:var(--teal);}
+.pc-tag.p3{background:rgba(201,168,76,.1);color:var(--gold);}
+.pc-tag.p4{background:rgba(224,123,32,.1);color:var(--amber);}
+.pc-icon{font-size:36px;margin-bottom:18px;display:block;}
+.pc-name{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--black);margin-bottom:12px;line-height:1.2;}
+.pc-desc{font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.8;margin-bottom:28px;}
+.pc-deliverables{display:flex;flex-direction:column;gap:7px;margin-bottom:28px;}
+.pcd{font-size:12.5px;font-weight:300;color:var(--gt);display:flex;gap:8px;align-items:flex-start;}
+.pcd::before{content:'✓';color:var(--red);font-size:10px;flex-shrink:0;margin-top:2px;font-weight:700;}
+.practice-card.p2 .pcd::before{color:var(--teal);}
+.practice-card.p3 .pcd::before{color:var(--gold);}
+.practice-card.p4 .pcd::before{color:var(--amber);}
+.pc-price{padding-top:20px;border-top:1px solid var(--gl);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.pc-price-val{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--black);}
+.pc-price-sub{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gm);}
+.pc-book{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--white);background:var(--black);padding:10px 20px;border:none;cursor:pointer;transition:background .2s;}
+.pc-book:hover{background:var(--red);}
+
+/* HOW WE WORK */
+.how-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.how-section::before{content:'';position:absolute;right:-200px;top:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.05),transparent 60%);pointer-events:none;}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+.phase-list{display:flex;flex-direction:column;gap:0;}
+.phase{display:flex;gap:24px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,.06);position:relative;}
+.phase:last-child{border-bottom:none;}
+.phase-num{font-family:'Libre Baskerville',serif;font-size:36px;color:rgba(255,255,255,.07);flex-shrink:0;width:48px;line-height:1;margin-top:4px;}
+.phase-body{}
+.phase-name{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);margin-bottom:8px;}
+.phase-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.85;}
+.phase-tag{display:inline-block;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-top:10px;}
+.engagement-panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:40px;}
+.ep-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:24px;}
+.ep-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.ep-row:last-child{border-bottom:none;}
+.ep-key{font-size:12px;font-weight:300;color:rgba(255,255,255,.45);}
+.ep-val{font-size:12px;font-weight:500;color:var(--white);}
+.ep-note{margin-top:24px;padding:16px;background:rgba(204,34,41,.08);border-left:3px solid var(--red);}
+.ep-note-text{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.7;}
+.ep-note-text strong{color:rgba(255,255,255,.8);font-weight:500;}
+
+/* FOR WHOM */
+.whom-section{padding:100px 80px;background:var(--off);}
+.whom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.whom-card{background:var(--white);padding:36px 32px;}
+.wc-icon{font-size:28px;margin-bottom:16px;display:block;}
+.wc-title{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--black);margin-bottom:10px;}
+.wc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;}
+.wc-trigger{margin-top:20px;padding-top:16px;border-top:1px solid var(--gl);}
+.wc-trigger-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.wc-trigger-item{font-size:12px;color:var(--gt);padding:4px 0;display:flex;gap:6px;align-items:flex-start;}
+.wc-trigger-item::before{content:'—';color:var(--gm);flex-shrink:0;}
+
+/* NOT FOR WHOM */
+.not-whom{background:var(--gl);padding:24px 80px;display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
+.nw-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gt);font-weight:600;flex-shrink:0;}
+.nw-items{display:flex;gap:24px;flex-wrap:wrap;}
+.nw-item{font-size:12.5px;font-weight:300;color:var(--gt);display:flex;align-items:center;gap:8px;}
+.nw-item::before{content:'✕';font-size:9px;color:var(--gm);font-weight:700;}
+
+/* MC vs EXEC */
+.compare-section{padding:100px 80px;background:var(--white);}
+.compare-table{margin-top:48px;border:1px solid var(--gl);overflow:hidden;}
+.ct-header{display:grid;grid-template-columns:1.2fr 1fr 1fr;background:var(--black);}
+.ct-head{padding:18px 24px;font-size:9px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.4);}
+.ct-head:first-child{color:rgba(255,255,255,.25);}
+.ct-head.active{color:var(--red);}
+.ct-row{display:grid;grid-template-columns:1.2fr 1fr 1fr;border-top:1px solid var(--gl);}
+.ct-row:hover{background:var(--off);}
+.ct-cell{padding:16px 24px;font-size:13px;font-weight:300;color:var(--gt);display:flex;align-items:center;gap:8px;border-right:1px solid var(--gl);}
+.ct-cell:last-child{border-right:none;}
+.ct-cell.label{font-weight:500;color:var(--black);font-size:13px;}
+.ct-cell .yes{color:var(--teal);font-weight:600;}
+.ct-cell .no{color:var(--gm);}
+.ct-cell .hi{color:var(--red);font-weight:500;}
+
+/* TESTIMONIALS / OUTCOMES */
+.outcomes-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.outcomes-section::before{content:'';position:absolute;left:-300px;bottom:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,.04),transparent 60%);pointer-events:none;}
+.outcome-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:56px;}
+.outcome-card{padding:36px 32px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);}
+.oc-quote{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--red);margin-bottom:12px;opacity:.5;}
+.oc-stat{font-family:'Libre Baskerville',serif;font-size:42px;color:var(--white);line-height:1;}
+.oc-stat sup{font-size:16px;color:var(--red);}
+.oc-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:8px;}
+.oc-context{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.35);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);line-height:1.7;}
+
+/* CTA */
+.cta-section{padding:100px 80px;background:var(--red);position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;right:-100px;top:-100px;width:500px;height:500px;border:1px solid rgba(255,255,255,.08);border-radius:50%;pointer-events:none;}
+.cta-section::after{content:'';position:absolute;right:50px;top:50px;width:300px;height:300px;border:1px solid rgba(255,255,255,.05);border-radius:50%;pointer-events:none;}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.cta-h{font-family:'Libre Baskerville',serif;font-size:clamp(28px,3vw,44px);font-weight:400;color:var(--white);line-height:1.1;letter-spacing:-.02em;}
+.cta-h em{font-style:italic;color:rgba(255,255,255,.5);}
+.cta-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.65);margin-top:16px;line-height:1.8;}
+.cta-right{display:flex;flex-direction:column;gap:16px;}
+.cta-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cta-input{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:var(--white);font-family:'Outfit',sans-serif;font-size:13px;padding:14px 18px;width:100%;outline:none;transition:border-color .2s;}
+.cta-input::placeholder{color:rgba(255,255,255,.35);}
+.cta-input:focus{border-color:rgba(255,255,255,.5);}
+.cta-select{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-family:'Outfit',sans-serif;font-size:13px;padding:14px 18px;width:100%;outline:none;appearance:none;cursor:pointer;}
+.cta-select option{background:var(--black);color:var(--white);}
+.cta-submit{background:var(--white);color:var(--red);font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:16px 32px;border:none;cursor:pointer;transition:background .2s,transform .2s;width:100%;}
+.cta-submit:hover{background:var(--off);transform:translateY(-2px);}
+.cta-note{font-size:11px;color:rgba(255,255,255,.35);text-align:center;}
+
+/* ── BENCHMARK CHART ── */
+.chart-section{padding:100px 80px;background:var(--off);}
+.chart-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-top:40px;margin-bottom:32px;}
+.ctab{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:11px 24px;border:1.5px solid var(--gl);background:var(--white);color:var(--gt);cursor:pointer;transition:all .2s;}
+.ctab:hover{border-color:var(--black);color:var(--black);}
+.ctab.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.chart-canvas-wrap{background:var(--white);border:1px solid var(--gl);padding:32px;position:relative;}
+.chart-legend{display:flex;align-items:center;gap:28px;margin-top:16px;flex-wrap:wrap;}
+.cl-item{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:300;color:var(--gt);}
+.cl-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0;}
+.cl-note{font-size:11px;color:var(--gm);margin-left:auto;}
+
+/* ── CALCULATOR ── */
+.calc-section{padding:100px 80px;background:var(--black);position:relative;}
+.calc-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:start;}
+.calc-fields{margin-top:40px;display:flex;flex-direction:column;gap:32px;}
+.calc-field-group{display:flex;flex-direction:column;gap:12px;}
+.cfg-label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:600;}
+.cfg-note{font-size:12px;font-weight:300;color:rgba(255,255,255,.25);}
+.calc-toggle-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.calc-toggle{display:block;cursor:pointer;}
+.calc-toggle input{display:none;}
+.ct-box{display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.08);transition:all .2s;}
+.ct-check{width:16px;height:16px;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;transition:all .2s;}
+.ct-name{font-size:12px;font-weight:400;color:rgba(255,255,255,.55);flex:1;line-height:1.3;}
+.ct-price{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);white-space:nowrap;}
+.calc-toggle input:checked + .ct-box{background:rgba(204,34,41,.12);border-color:var(--red);}
+.calc-toggle input:checked + .ct-box .ct-check{background:var(--red);border-color:var(--red);color:var(--white);}
+.calc-toggle input:checked + .ct-box .ct-name{color:var(--white);}
+.calc-toggle input:checked + .ct-box .ct-price{color:var(--red);}
+.calc-slider{width:100%;-webkit-appearance:none;height:3px;background:rgba(255,255,255,.12);outline:none;}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;background:var(--red);border-radius:50%;cursor:pointer;}
+.calc-slider::-moz-range-thumb{width:20px;height:20px;background:var(--red);border-radius:50%;cursor:pointer;border:none;}
+.calc-slider-labels{display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:rgba(255,255,255,.3);}
+.calc-slider-labels span:nth-child(2){color:var(--white);font-weight:600;}
+/* summary panel */
+.calc-summary{background:var(--white);padding:36px;position:sticky;top:80px;}
+.cs-head{font-size:9px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:var(--red);margin-bottom:24px;}
+.cs-section{margin-bottom:20px;}
+.cs-s-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gm);margin-bottom:8px;}
+.cs-practices-empty{font-size:12px;font-weight:300;color:var(--gm);font-style:italic;}
+.cs-practice-item,.cs-addon-item{font-size:13px;font-weight:300;color:var(--gt);padding:6px 0;border-bottom:1px solid var(--gl);display:flex;justify-content:space-between;}
+.cs-practice-item:last-child,.cs-addon-item:last-child{border-bottom:none;}
+.cs-duration-val{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--black);}
+.cs-divider{height:1px;background:var(--gl);margin:16px 0;}
+.cs-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;}
+.cs-row.total{padding-top:12px;}
+.cs-r-lbl{font-size:12px;font-weight:300;color:var(--gt);}
+.cs-r-val{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--black);}
+.cs-row.total .cs-r-val{font-size:28px;color:var(--red);}
+.cs-gst{font-size:10px;color:var(--gm);text-align:right;margin-top:2px;}
+.cs-roi-box{background:rgba(13,107,94,.06);border:1px solid rgba(13,107,94,.15);padding:18px;margin-top:20px;}
+.croi-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+.croi-val{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--teal);}
+.croi-note{font-size:11px;font-weight:300;color:var(--gt);margin-top:6px;line-height:1.6;}
+.cs-book-btn{width:100%;margin-top:20px;background:var(--red);color:var(--white);font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:16px;border:none;cursor:pointer;transition:background .2s;}
+.cs-book-btn:disabled{background:var(--gl);color:var(--gm);cursor:not-allowed;}
+.cs-book-btn:not(:disabled):hover{background:var(--red-dark);}
+.btn-ghost-dark{font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--gt);background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:color .2s;}
+.btn-ghost-dark:hover{color:var(--black);}
+
+/* ── AI FREEMIUM ── */
+.ai-section{background:var(--off);padding:80px;}
+.ai-header{display:grid;grid-template-columns:1fr auto;gap:64px;align-items:start;margin-bottom:48px;}
+.ai-meta-pill{font-size:11px;font-weight:500;color:var(--gt);background:var(--white);border:1px solid var(--gl);padding:6px 16px;display:inline-block;}
+.ai-freemium-badge{background:var(--black);padding:32px;min-width:220px;text-align:center;}
+.afb-tag{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.afb-n{font-family:'Libre Baskerville',serif;font-size:48px;color:var(--white);line-height:1;}
+.afb-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);margin-top:4px;}
+.afb-divider{height:1px;background:rgba(255,255,255,.08);margin:20px 0;}
+.afb-pro-lbl{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:10px;}
+.afb-pro-btn{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:none;border:1px solid var(--red);padding:10px 20px;cursor:pointer;width:100%;transition:all .2s;}
+.afb-pro-btn:hover{background:var(--red);color:var(--white);}
+.ai-chat-wrap{background:var(--white);border:1px solid var(--gl);}
+.ai-starter-qs{padding:24px 28px;border-bottom:1px solid var(--gl);}
+.sq-lbl{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gm);margin-bottom:14px;font-weight:600;}
+.sq-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.sq-btn{font-family:'Outfit',sans-serif;font-size:12px;font-weight:300;color:var(--gt);background:var(--off);border:1px solid var(--gl);padding:11px 14px;text-align:left;cursor:pointer;line-height:1.5;transition:all .2s;}
+.sq-btn:hover{background:var(--gl);color:var(--black);border-color:var(--gm);}
+.ai-messages{min-height:200px;max-height:500px;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:20px;scroll-behavior:smooth;}
+.ai-msg{display:flex;gap:14px;animation:msgIn .35s var(--ease);}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.ai-msg.user{flex-direction:row-reverse;}
+.ai-avatar{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.ai-avatar.bot{background:var(--black);color:var(--white);}
+.ai-avatar.user{background:var(--red);color:var(--white);font-size:11px;font-weight:700;}
+.ai-bubble{max-width:78%;padding:16px 20px;font-size:13.5px;font-weight:300;line-height:1.85;color:var(--black);}
+.ai-bubble.bot{background:var(--off);border:1px solid var(--gl);}
+.ai-bubble.user{background:var(--black);color:var(--white);}
+.ai-bubble strong{font-weight:600;}
+.ai-bubble ul{margin:10px 0 10px 18px;}
+.ai-bubble li{margin-bottom:6px;}
+.ai-typing{display:flex;align-items:center;gap:5px;padding:12px 16px;}
+.typing-dot{width:7px;height:7px;background:var(--gm);border-radius:50%;animation:tdot 1.2s infinite;}
+.typing-dot:nth-child(2){animation-delay:.2s;}.typing-dot:nth-child(3){animation-delay:.4s;}
+@keyframes tdot{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-6px);}}
+.ai-input-bar{border-top:1px solid var(--gl);padding:16px 20px;background:var(--white);}
+.ai-qs-remaining{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gm);margin-bottom:10px;}
+.ai-input-row{display:flex;gap:12px;align-items:flex-end;}
+.ai-textarea{flex:1;border:1.5px solid var(--gl);padding:13px 18px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:300;color:var(--black);resize:none;outline:none;max-height:140px;line-height:1.6;transition:border-color .2s;}
+.ai-textarea:focus{border-color:var(--black);}
+.ai-send-btn{width:46px;height:46px;background:var(--red);border:none;color:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s;}
+.ai-send-btn:hover{background:var(--red-dark);}
+.ai-send-btn:disabled{background:var(--gl);cursor:not-allowed;}
+.ai-upgrade-bar{padding:24px 28px;background:var(--black);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.aub-text{font-size:13px;font-weight:300;color:rgba(255,255,255,.55);max-width:520px;line-height:1.7;}
+.aub-btn{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);border:none;padding:13px 28px;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0;}
+.aub-btn:hover{background:var(--red-dark);}
+
+/* RZP OVERLAY */
+.rzp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.rzp-overlay.open{opacity:1;pointer-events:all;}
+.rzp-modal{background:var(--white);width:520px;max-width:94vw;max-height:90vh;overflow-y:auto;position:relative;}
+.rzp-modal-head{background:var(--black);padding:32px 36px;}
+.rzp-modal-tag{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.rzp-modal-h{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);margin-bottom:6px;}
+.rzp-modal-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);}
+.rzp-modal-body{padding:32px 36px;}
+.rzp-field{margin-bottom:16px;}
+.rzp-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--gt);margin-bottom:6px;display:block;}
+.rzp-input{border:1px solid var(--gl);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:13px;width:100%;outline:none;color:var(--black);transition:border-color .2s;}
+.rzp-input:focus{border-color:var(--black);}
+.rzp-select{border:1px solid var(--gl);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:13px;width:100%;outline:none;color:var(--black);background:var(--white);appearance:none;}
+.rzp-price-row{display:flex;justify-content:space-between;align-items:center;background:var(--off);padding:16px;margin-bottom:24px;}
+.rzp-price-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gt);}
+.rzp-price-val{font-family:'Libre Baskerville',serif;font-size:28px;color:var(--black);}
+.rzp-btn{width:100%;background:var(--red);color:var(--white);font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:16px;border:none;cursor:pointer;margin-top:8px;transition:background .2s;}
+.rzp-btn:hover{background:var(--red-dark);}
+.rzp-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:20px;color:rgba(255,255,255,.4);cursor:pointer;line-height:1;transition:color .2s;}
+.rzp-close:hover{color:var(--white);}
+</style>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Services</div>
+      <a href="services-for-businesses.html" class="nav-link">Services for Businesses <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="management-consulting.html" class="nav-link active">Management Consulting <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="career-services.html" class="nav-link">Career Services <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link">About ORIGENNT <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="insights.html" class="nav-link">Insights <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting Practices</div>
+      <a href="#strategy" class="nav-link">Business Strategy <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="#org" class="nav-link">Organisation Design <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="#transformation" class="nav-link">Business Transformation <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+      <a href="#leadership" class="nav-link">Leadership Advisory <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Bhubaneswar, Odisha</div>
+    <div class="sb-info">
+      <a href="mailto:consult@origennt.com">consult@origennt.com</a><br>
+      <a href="tel:+919861168291">+91 98611 68291</a><br>
+      Serving MSMEs & SMEs across India
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a href="index.html" class="back-link">Back to Home</a>
+    <button class="topbar-cta" onclick="openRzp('Management Consulting — Discovery Call',0,'Introductory strategy session to assess fit and scope of engagement.')">Book a Discovery Call</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line"></div>
+          <div class="hero-eyebrow-text">Management Consulting · ORIGENNT</div>
+        </div>
+        <h1 class="hero-h1">Strategy that gets<br>executed. Not just<br><em>advised.</em></h1>
+        <p class="hero-sub">Most consultants hand you a report and leave. ORIGENNT embeds strategy into your organisation — and measures whether it actually changed anything. We work with MSMEs and SMEs across India who are serious about structured growth.</p>
+        <div class="hero-acts">
+          <button class="btn-red" onclick="openRzp('Management Consulting — Discovery Call',0,'Introductory strategy session to assess fit and scope of engagement.')">Start with a Discovery Call →</button>
+          <a href="#practices" class="btn-ghost-w">See Our Practices</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hp-lbl">Engagement At a Glance</div>
+        <div class="hp-row"><span class="hp-name">Engagement Type</span><span class="hp-val">Retainer</span></div>
+        <div class="hp-row"><span class="hp-name">Starting Engagement</span><span class="hp-val">₹<sub>from</sub>55K<sub>/mo</sub></span></div>
+        <div class="hp-row"><span class="hp-name">Minimum Duration</span><span class="hp-val">3 Months</span></div>
+        <div class="hp-row"><span class="hp-name">Discovery Call</span><span class="hp-val">Complimentary</span></div>
+        <div class="hp-row"><span class="hp-name">Industries Served</span><span class="hp-val">All Sectors</span></div>
+        <div class="hp-row"><span class="hp-name">Mode</span><span class="hp-val">On-site + Remote</span></div>
+      </div>
+    </div>
+    <div class="hero-strip">
+      <div class="hs-cell"><div class="hsc-n">4</div><div class="hsc-l">Consulting Practices</div></div>
+      <div class="hs-cell"><div class="hsc-n">3<sup>mo</sup></div><div class="hsc-l">Minimum Engagement</div></div>
+      <div class="hs-cell"><div class="hsc-n">48<sup>hr</sup></div><div class="hsc-l">Strategy Brief Turnaround</div></div>
+      <div class="hs-cell"><div class="hsc-n">100<sup>%</sup></div><div class="hsc-l">Outcome-Tracked</div></div>
+    </div>
+  </section>
+
+  <!-- META RIBBON -->
+  <div class="meta-ribbon">
+    <div class="mc-r"><div class="mc-r-lbl">Our Approach</div><div class="mc-r-val">Embedded, Not Reported</div></div>
+    <div class="mc-r"><div class="mc-r-lbl">Client Size</div><div class="mc-r-val">₹1 Cr – ₹100 Cr Revenue</div></div>
+    <div class="mc-r"><div class="mc-r-lbl">Geography</div><div class="mc-r-val">Pan-India, Odisha-Rooted</div></div>
+    <div class="mc-r"><div class="mc-r-lbl">Billing</div><div class="mc-r-val">Monthly Retainer + Project</div></div>
+    <div class="mc-r"><div class="mc-r-lbl">Sector Focus</div><div class="mc-r-val">Manufacturing, Services, Retail, EdTech</div></div>
+  </div>
+
+  <!-- WHAT IS MC -->
+  <section class="what-section reveal">
+    <div class="what-grid">
+      <div>
+        <div class="chip">What Is This</div>
+        <h2 class="D">Management Consulting<br>is not a <em>report.</em></h2>
+        <div class="body-t" style="margin-top:20px;">
+          <p>Management Consulting at ORIGENNT means an experienced advisor sits inside your business decisions — not outside them. We study your structure, your people, your numbers, and your market. Then we co-build the changes and stay accountable for what happens next.</p>
+          <p>The difference between us and a traditional consultant: we don't disappear after the presentation. Every recommendation comes with an implementation plan, a measurement framework, and a consultant who shows up to track whether it worked.</p>
+        </div>
+        <div class="distinction-box">
+          <div class="db-lbl">The ORIGENNT Difference</div>
+          <div class="db-row">
+            <div class="db-col left">
+              <div class="db-col-lbl">Typical Consulting</div>
+              <div class="db-item">Delivers a deck. Leaves.</div>
+              <div class="db-item">Strategy without execution</div>
+              <div class="db-item">Billed on hours, not outcomes</div>
+              <div class="db-item">Generic frameworks applied</div>
+              <div class="db-item">No baseline. No measurement.</div>
+            </div>
+            <div class="db-col right">
+              <div class="db-col-lbl">ORIGENNT Consulting</div>
+              <div class="db-item">Stays through implementation</div>
+              <div class="db-item">Strategy tied to execution KPIs</div>
+              <div class="db-item">Monthly retainer. Clear scope.</div>
+              <div class="db-item">Built for your business size</div>
+              <div class="db-item">Baseline set on Day 1. Tracked monthly.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="insight-stat-row">
+          <div class="isr"><div class="isr-n">67<sup>%</sup></div><div class="isr-l">Of MSMEs never act on consultant recommendations</div></div>
+          <div class="isr"><div class="isr-n">3<sup>×</sup></div><div class="isr-l">Higher success rate with embedded advisory vs. project consulting</div></div>
+          <div class="isr"><div class="isr-n">₹0</div><div class="isr-l">Cost of a Discovery Call — we earn the engagement or we don't.</div></div>
+        </div>
+        <div style="background:var(--white);border:1px solid var(--gl);padding:32px;margin-top:3px;">
+          <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gt);margin-bottom:18px;font-weight:500;">Who Typically Calls Us</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;font-weight:300;color:var(--gt);"><span style="color:var(--red);font-weight:700;flex-shrink:0;">→</span>Founders who've grown to ₹5–50Cr but feel the business is now managing them, not the other way around.</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;font-weight:300;color:var(--gt);"><span style="color:var(--red);font-weight:700;flex-shrink:0;">→</span>Promoters preparing for institutional investment, acquisition, or a planned exit in 2–4 years.</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;font-weight:300;color:var(--gt);"><span style="color:var(--red);font-weight:700;flex-shrink:0;">→</span>Business owners whose second line of leadership hasn't developed and the founder remains the bottleneck.</div>
+            <div style="display:flex;gap:12px;align-items:flex-start;font-size:13px;font-weight:300;color:var(--gt);"><span style="color:var(--red);font-weight:700;flex-shrink:0;">→</span>Companies stalled at the same revenue band for 2+ years with no structural explanation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUR PRACTICES -->
+  <section class="practices-section reveal" id="practices">
+    <div class="chip">The Four Practices</div>
+    <h2 class="D">Every engagement maps to<br>one — or more — of <em>these.</em></h2>
+    <p class="body-t" style="max-width:620px;margin-top:14px;">Our consulting practices are not product categories. They are lenses. Most engagements combine two or more practices depending on what the business actually needs.</p>
+    <div class="practice-grid" id="strategy">
+
+      <!-- P1 -->
+      <div class="practice-card p1">
+        <div class="pc-number">01</div>
+        <span class="pc-tag p1">Practice 01 · Strategy</span>
+        <span class="pc-icon">🧭</span>
+        <div class="pc-name">Business Strategy<br>Advisory</div>
+        <div class="pc-desc">For founders who have a direction but lack a structured plan to get there — or who are making too many decisions from instinct and not enough from data. We build the strategy framework, the decision architecture, and the review cadence that keeps the business on trajectory.</div>
+        <div class="pc-deliverables">
+          <div class="pcd">Business Model Analysis & Competitive Landscape Mapping</div>
+          <div class="pcd">3-Year Growth Roadmap with quarterly milestones</div>
+          <div class="pcd">Revenue stream diversification and prioritisation</div>
+          <div class="pcd">Market entry / expansion strategy for new geographies</div>
+          <div class="pcd">Investor readiness assessment and narrative structuring</div>
+          <div class="pcd">Monthly strategy review and course-correction sessions</div>
+        </div>
+        <div class="pc-price">
+          <div>
+            <div class="pc-price-val">₹55,000<span style="font-size:14px;color:var(--gm);font-family:'Outfit',sans-serif;font-weight:300;">/month</span></div>
+            <div class="pc-price-sub">3-month minimum · excludes GST</div>
+          </div>
+          <button class="pc-book" onclick="openRzp('Business Strategy Advisory',55000,'Business model analysis, growth roadmap, market entry strategy, and monthly advisory sessions.')">Book This →</button>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="practice-card p2" id="org">
+        <div class="pc-number">02</div>
+        <span class="pc-tag p2">Practice 02 · Organisation</span>
+        <span class="pc-icon">🏛️</span>
+        <div class="pc-name">Organisation<br>Design & Restructuring</div>
+        <div class="pc-desc">When a company's structure is the problem — roles are unclear, accountability loops don't close, decisions pile up at the founder — no amount of hiring fixes it. We redesign the organisational structure for where you're going, not where you've been.</div>
+        <div class="pc-deliverables">
+          <div class="pcd">Current-State Organisation Diagnostic (roles, spans, layers)</div>
+          <div class="pcd">Future-State Organisation Design aligned to growth targets</div>
+          <div class="pcd">Role architecture: Job families, levels, and accountability maps</div>
+          <div class="pcd">Delegation framework and decision-rights design</div>
+          <div class="pcd">Succession planning and second-line leadership identification</div>
+          <div class="pcd">Change management and communication plan for restructuring</div>
+        </div>
+        <div class="pc-price">
+          <div>
+            <div class="pc-price-val">₹60,000<span style="font-size:14px;color:var(--gm);font-family:'Outfit',sans-serif;font-weight:300;">/month</span></div>
+            <div class="pc-price-sub">3-month minimum · excludes GST</div>
+          </div>
+          <button class="pc-book" style="background:var(--teal);" onclick="openRzp('Organisation Design & Restructuring',60000,'Org diagnostic, future-state design, role architecture, delegation framework, and succession planning.')">Book This →</button>
+        </div>
+      </div>
+
+      <!-- P3 -->
+      <div class="practice-card p3" id="transformation">
+        <div class="pc-number">03</div>
+        <span class="pc-tag p3">Practice 03 · Transformation</span>
+        <span class="pc-icon">⚡</span>
+        <div class="pc-name">Business Transformation<br>& Change Management</div>
+        <div class="pc-desc">Transformation fails when it's announced but not managed. Whether you're entering a new market, overhauling your business model, or recovering from a stall — we build the execution system that takes you from the current state to the intended one, without losing the business in between.</div>
+        <div class="pc-deliverables">
+          <div class="pcd">Transformation Roadmap with 30/60/90 day milestones</div>
+          <div class="pcd">Stakeholder alignment and change readiness assessment</div>
+          <div class="pcd">Process re-engineering for post-transformation operating model</div>
+          <div class="pcd">Culture assessment and culture-change architecture</div>
+          <div class="pcd">Performance tracking during transition — weekly dashboards</div>
+          <div class="pcd">Risk identification and mitigation planning</div>
+        </div>
+        <div class="pc-price">
+          <div>
+            <div class="pc-price-val">₹65,000<span style="font-size:14px;color:var(--gm);font-family:'Outfit',sans-serif;font-weight:300;">/month</span></div>
+            <div class="pc-price-sub">Minimum 4 months · excludes GST</div>
+          </div>
+          <button class="pc-book" style="background:var(--gold);color:#3d2800;" onclick="openRzp('Business Transformation & Change Management',65000,'Transformation roadmap, stakeholder alignment, process re-engineering, and change management.')">Book This →</button>
+        </div>
+      </div>
+
+      <!-- P4 -->
+      <div class="practice-card p4" id="leadership">
+        <div class="pc-number">04</div>
+        <span class="pc-tag p4">Practice 04 · Leadership</span>
+        <span class="pc-icon">🎯</span>
+        <div class="pc-name">Leadership Advisory<br>& Founder Coaching</div>
+        <div class="pc-desc">At a certain scale, the company's ceiling becomes the founder's ceiling. This practice is for founders and senior leaders who need a structured thinking partner — someone who pushes back, holds them accountable, and helps them make better decisions faster. Not therapy. Not cheerleading. Advisory.</div>
+        <div class="pc-deliverables">
+          <div class="pcd">Monthly 1:1 advisory sessions (structured agenda, not open-ended)</div>
+          <div class="pcd">Decision quality review — analysing recurring patterns and blind spots</div>
+          <div class="pcd">Leadership effectiveness assessment (360° stakeholder input)</div>
+          <div class="pcd">Executive communication and board-readiness coaching</div>
+          <div class="pcd">Priority alignment: where you spend time vs. where you should</div>
+          <div class="pcd">Confidential sounding board for high-stakes decisions</div>
+        </div>
+        <div class="pc-price">
+          <div>
+            <div class="pc-price-val">₹45,000<span style="font-size:14px;color:var(--gm);font-family:'Outfit',sans-serif;font-weight:300;">/month</span></div>
+            <div class="pc-price-sub">3-month minimum · excludes GST</div>
+          </div>
+          <button class="pc-book" style="background:var(--amber);" onclick="openRzp('Leadership Advisory & Founder Coaching',45000,'Monthly advisory sessions, decision review, leadership assessment, and executive coaching.')">Book This →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="how-section reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:0;">
+      <div>
+        <div class="chip w">The Engagement Model</div>
+        <h2 class="D W">How a consulting<br>engagement <em>actually works.</em></h2>
+      </div>
+      <div class="body-t w" style="padding-top:36px;">
+        <p>Every ORIGENNT Management Consulting engagement follows a structured 4-phase model. We don't start advising before we understand. We don't leave before change is embedded. The process below applies to every practice and every client.</p>
+      </div>
+    </div>
+    <div class="how-grid">
+      <div class="phase-list">
+        <div class="phase">
+          <div class="phase-num">01</div>
+          <div class="phase-body">
+            <div class="phase-name">Discovery & Diagnostic</div>
+            <div class="phase-desc">Before any advice, we document the current state — financials, structure, people, processes, and competitive context. This becomes the baseline against which every future outcome is measured. Duration: 2–3 weeks. Deliverable: Current-State Diagnostic Report.</div>
+            <span class="phase-tag">Weeks 1–3</span>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">02</div>
+          <div class="phase-body">
+            <div class="phase-name">Strategy Design & Alignment</div>
+            <div class="phase-desc">We co-build the future-state strategy with your leadership team — not for them. This ensures ownership and dramatically improves implementation. Deliverable: Strategy Document + Execution Roadmap with KPIs.</div>
+            <span class="phase-tag">Weeks 4–6</span>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">03</div>
+          <div class="phase-body">
+            <div class="phase-name">Embedded Implementation</div>
+            <div class="phase-desc">We work alongside your team to implement the changes — attending key meetings, reviewing decisions, unblocking execution bottlenecks, and adjusting the plan as reality dictates. This is where most consultants disappear. We don't.</div>
+            <span class="phase-tag">Month 2 → ongoing</span>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">04</div>
+          <div class="phase-body">
+            <div class="phase-name">Measurement & Course-Correction</div>
+            <div class="phase-desc">Monthly reviews against the baseline. What moved. What didn't. What the data says. Adjustments made in real time, not in a quarterly report that nobody reads. Deliverable: Monthly Execution Scorecard.</div>
+            <span class="phase-tag">Every 30 Days</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="engagement-panel">
+          <div class="ep-lbl">Engagement Parameters</div>
+          <div class="ep-row"><span class="ep-key">Minimum Duration</span><span class="ep-val">3 Months</span></div>
+          <div class="ep-row"><span class="ep-key">Recommended Duration</span><span class="ep-val">6–12 Months</span></div>
+          <div class="ep-row"><span class="ep-key">Consulting Hours / Month</span><span class="ep-val">16–24 hrs (structured)</span></div>
+          <div class="ep-row"><span class="ep-key">Mode of Delivery</span><span class="ep-val">On-site + Remote</span></div>
+          <div class="ep-row"><span class="ep-key">Reporting Frequency</span><span class="ep-val">Weekly + Monthly Scorecard</span></div>
+          <div class="ep-row"><span class="ep-key">Team Access</span><span class="ep-val">Consultant + Analyst</span></div>
+          <div class="ep-row"><span class="ep-key">Discovery Call</span><span class="ep-val">Complimentary · No obligation</span></div>
+          <div class="ep-row"><span class="ep-key">Payment Terms</span><span class="ep-val">Monthly advance · Razorpay</span></div>
+          <div class="ep-row"><span class="ep-key">Contract Type</span><span class="ep-val">Rolling monthly after month 3</span></div>
+          <div class="ep-note">
+            <div class="ep-note-text"><strong>Important:</strong> We take on a limited number of consulting clients per quarter to protect quality. If we are at capacity, we will tell you — and put you on a priority waitlist with a defined start date.</div>
+          </div>
+        </div>
+        <button class="btn-red" style="width:100%;text-align:center;margin-top:3px;" onclick="openRzp('Management Consulting — Discovery Call',0,'Complimentary discovery call to assess fit and scope for a management consulting engagement.')">Book Your Discovery Call — No Charge →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR WHOM -->
+  <section class="whom-section reveal">
+    <div class="chip">Who This Is For</div>
+    <h2 class="D">The right fit matters<br>as much as the <em>right advice.</em></h2>
+    <p class="body-t" style="max-width:620px;margin-top:14px;">Management Consulting at ORIGENNT is not for everyone. Before you engage, check whether this is the right moment for your business.</p>
+    <div class="whom-grid">
+      <div class="whom-card">
+        <span class="wc-icon">🏭</span>
+        <div class="wc-title">The Scaling Founder</div>
+        <div class="wc-desc">You've built something real — ₹3Cr to ₹50Cr revenue — but growth has plateaued, the team is not aligned, and every major decision still runs through you.</div>
+        <div class="wc-trigger">
+          <div class="wc-trigger-lbl">You're ready if:</div>
+          <div class="wc-trigger-item">Revenue stalled for 12+ months with no structural reason</div>
+          <div class="wc-trigger-item">You're working harder but the business isn't growing faster</div>
+          <div class="wc-trigger-item">Key hires exist but accountability is still informal</div>
+        </div>
+      </div>
+      <div class="whom-card">
+        <span class="wc-icon">📐</span>
+        <div class="wc-title">The Restructuring Business</div>
+        <div class="wc-desc">You've been through a reset — a market shift, a leadership change, a failed expansion — and you need to restructure the organisation and strategy before the next attempt.</div>
+        <div class="wc-trigger">
+          <div class="wc-trigger-lbl">You're ready if:</div>
+          <div class="wc-trigger-item">Previous expansion attempts failed without clear learning</div>
+          <div class="wc-trigger-item">Organisation structure is misaligned with the new reality</div>
+          <div class="wc-trigger-item">Leadership team needs redesigning or reprioritising</div>
+        </div>
+      </div>
+      <div class="whom-card">
+        <span class="wc-icon">📊</span>
+        <div class="wc-title">The Investment-Ready Business</div>
+        <div class="wc-desc">You're preparing for PE/VC funding, a bank loan at scale, or a strategic acquisition — and you need the business to look and operate as professionally as you know it can.</div>
+        <div class="wc-trigger">
+          <div class="wc-trigger-lbl">You're ready if:</div>
+          <div class="wc-trigger-item">Investor conversations have flagged governance gaps</div>
+          <div class="wc-trigger-item">Financials, HR, and operations are not diligence-ready</div>
+          <div class="wc-trigger-item">You need a 12-month runway to clean the house before a raise</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOT FOR WHOM -->
+  <div class="not-whom">
+    <div class="nw-label">This Is Not For</div>
+    <div class="nw-items">
+      <div class="nw-item">Businesses under ₹1Cr revenue</div>
+      <div class="nw-item">Those wanting a one-time report only</div>
+      <div class="nw-item">Founders not willing to implement change</div>
+      <div class="nw-item">Companies already working with large consulting firms</div>
+      <div class="nw-item">Pre-revenue startups</div>
+    </div>
+  </div>
+
+  <!-- MC vs EXEC -->
+  <section class="compare-section reveal">
+    <div class="chip">Know What You Need</div>
+    <h2 class="D">Management Consulting vs.<br><em>Execution Systems</em> — the difference.</h2>
+    <p class="body-t" style="max-width:660px;margin-top:14px;">ORIGENNT offers two distinct service lines. Understanding which one fits your business right now prevents a mis-scoped engagement.</p>
+    <div class="compare-table">
+      <div class="ct-header">
+        <div class="ct-head">Dimension</div>
+        <div class="ct-head active">Management Consulting</div>
+        <div class="ct-head">Execution Systems (Services for Business)</div>
+      </div>
+      <div class="ct-row"><div class="ct-cell label">What it is</div><div class="ct-cell"><span class="hi">Strategic advisory + embedded implementation</span></div><div class="ct-cell">Monthly operating systems for HR, ops & growth</div></div>
+      <div class="ct-row"><div class="ct-cell label">Best for</div><div class="ct-cell"><span class="hi">Transformation, restructuring, strategy</span></div><div class="ct-cell">Running HR, payroll, compliance, recruitment</div></div>
+      <div class="ct-row"><div class="ct-cell label">Output</div><div class="ct-cell"><span class="hi">Decisions, roadmaps, structure redesign</span></div><div class="ct-cell">Processes, hiring, payroll, SOPs</div></div>
+      <div class="ct-row"><div class="ct-cell label">Engagement style</div><div class="ct-cell"><span class="hi">Consultant embeds in leadership layer</span></div><div class="ct-cell">ORIGENNT operates a function for you</div></div>
+      <div class="ct-row"><div class="ct-cell label">Pricing</div><div class="ct-cell"><span class="hi">₹45,000 – ₹65,000/month</span></div><div class="ct-cell">₹38,000 – ₹45,000/month</div></div>
+      <div class="ct-row"><div class="ct-cell label">Can be combined?</div><div class="ct-cell"><span class="yes">Yes — often the most powerful combination</span></div><div class="ct-cell"><span class="yes">Yes — often run in parallel</span></div></div>
+    </div>
+    <div style="margin-top:24px;display:flex;gap:16px;flex-wrap:wrap;">
+      <button class="btn-red" onclick="openRzp('Management Consulting — Discovery Call',0,'Introductory session to determine which ORIGENNT service line fits best.')">Not Sure Which Fits? Book a Call →</button>
+      <a href="services-for-businesses.html" class="btn-ghost">View Execution Systems →</a>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="outcomes-section reveal">
+    <div class="chip w">What Changes</div>
+    <h2 class="D W">Consulting that doesn't move<br>a number is <em>not consulting.</em></h2>
+    <p class="body-t w" style="max-width:620px;margin-top:14px;">These are representative outcomes from management consulting engagements. Every engagement starts with a baseline — so these numbers are measured, not estimated.</p>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="oc-quote">"</div>
+        <div class="oc-stat">2.4<sup>×</sup></div>
+        <div class="oc-label">Revenue Growth Over 18 Months</div>
+        <div class="oc-context">Manufacturing MSME in Odisha. Engaged for Business Strategy + Org Design. Previously stalled at same revenue band for 3 years.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="oc-quote">"</div>
+        <div class="oc-stat">68<sup>%</sup></div>
+        <div class="oc-label">Reduction in Founder Decision Load</div>
+        <div class="oc-context">Services firm in Bhubaneswar. Org restructuring engagement. Delegation frameworks and leadership pipeline built over 6 months.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="oc-quote">"</div>
+        <div class="oc-stat">₹0</div>
+        <div class="oc-label">Cost of Discovery Call — Always</div>
+        <div class="oc-context">We earn the engagement or we don't. The Discovery Call is a structured session — not a sales call. You leave with at least one useful insight regardless of outcome.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="oc-quote">"</div>
+        <div class="oc-stat">91<sup>%</sup></div>
+        <div class="oc-label">Clients Renew Past Month 3</div>
+        <div class="oc-context">The minimum is 3 months. Most clients continue for 6–12. This number tells us whether the value is real. So far, it is.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="oc-quote">"</div>
+        <div class="oc-stat">14</div>
+        <div class="oc-label">Days to First Tangible Deliverable</div>
+        <div class="oc-context">The Current-State Diagnostic is delivered within 2 weeks. From Day 1, the engagement produces something you can act on — not just billable hours.</div>
+      </div>
+      <div class="outcome-card">
+        <div class="oc-quote">"</div>
+        <div class="oc-stat">3<sup>×</sup></div>
+        <div class="oc-label">More Likely to Achieve Target Than Alone</div>
+        <div class="oc-context">Based on comparison of client performance vs. stated 12-month targets at engagement start. Embedded accountability changes the execution probability.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       INTERACTIVE BENCHMARK CHART
+  ═══════════════════════════════════════════ -->
+  <section class="chart-section reveal" id="benchmark">
+    <div class="chip">Industry Benchmarks</div>
+    <h2 class="D">Where does your business<br>stand against <em>peers?</em></h2>
+    <p class="body-t" style="max-width:620px;margin-top:14px;">Select a metric below. The chart compares median performance of ORIGENNT-engaged businesses vs. unadvised MSMEs at the same revenue band. Data drawn from our engagement history and published MSME surveys.</p>
+
+    <div class="chart-tabs">
+      <button class="ctab active" onclick="switchChart('revenue')">Revenue Growth</button>
+      <button class="ctab" onclick="switchChart('attrition')">Attrition</button>
+      <button class="ctab" onclick="switchChart('decision')">Decision Speed</button>
+      <button class="ctab" onclick="switchChart('execution')">Execution Rate</button>
+      <button class="ctab" onclick="switchChart('founder')">Founder Load</button>
+    </div>
+
+    <div class="chart-canvas-wrap">
+      <canvas id="benchmarkChart" height="340"></canvas>
+    </div>
+
+    <div class="chart-legend">
+      <div class="cl-item"><span class="cl-dot" style="background:var(--red);"></span>ORIGENNT-Engaged Businesses</div>
+      <div class="cl-item"><span class="cl-dot" style="background:var(--gl);border:2px solid var(--gm);"></span>Unadvised Peer MSMEs</div>
+      <div class="cl-note">Tracked across 6-month engagement periods. Baseline measured on Day 1.</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ENGAGEMENT PRICE CALCULATOR
+  ═══════════════════════════════════════════ -->
+  <section class="calc-section reveal" id="calculator">
+    <div class="calc-inner">
+      <div class="calc-left">
+        <div class="chip w">Engagement Calculator</div>
+        <h2 class="D W">Build your consulting<br>engagement — <em>live.</em></h2>
+        <p class="body-t w" style="margin-top:14px;">Select your practices, duration, and add-ons. The price updates in real time. All prices exclude 18% GST. Discovery Call is always free.</p>
+        <div class="calc-fields">
+
+          <div class="calc-field-group">
+            <div class="cfg-label">Select Consulting Practices</div>
+            <div class="calc-toggle-grid">
+              <label class="calc-toggle">
+                <input type="checkbox" value="55000" data-name="Business Strategy Advisory" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Business Strategy</span><span class="ct-price">₹55K/mo</span></span>
+              </label>
+              <label class="calc-toggle">
+                <input type="checkbox" value="60000" data-name="Organisation Design" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Organisation Design</span><span class="ct-price">₹60K/mo</span></span>
+              </label>
+              <label class="calc-toggle">
+                <input type="checkbox" value="65000" data-name="Business Transformation" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Transformation</span><span class="ct-price">₹65K/mo</span></span>
+              </label>
+              <label class="calc-toggle">
+                <input type="checkbox" value="45000" data-name="Leadership Advisory" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Leadership Advisory</span><span class="ct-price">₹45K/mo</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="calc-field-group">
+            <div class="cfg-label">Engagement Duration</div>
+            <div class="calc-slider-wrap">
+              <input type="range" min="3" max="18" value="6" step="1" id="durationSlider" oninput="recalc()" class="calc-slider">
+              <div class="calc-slider-labels">
+                <span>3 months</span><span id="durationVal">6 months</span><span>18 months</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-field-group">
+            <div class="cfg-label">Add-On Services (one-time)</div>
+            <div class="calc-toggle-grid">
+              <label class="calc-toggle">
+                <input type="checkbox" value="12000" data-name="Attrition Deep Dive" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Attrition Deep Dive</span><span class="ct-price">₹12K</span></span>
+              </label>
+              <label class="calc-toggle">
+                <input type="checkbox" value="25000" data-name="Compliance Audit" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Compliance Audit</span><span class="ct-price">₹25K</span></span>
+              </label>
+              <label class="calc-toggle">
+                <input type="checkbox" value="20000" data-name="BI Dashboard Setup" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">BI Dashboard Setup</span><span class="ct-price">₹20K</span></span>
+              </label>
+              <label class="calc-toggle">
+                <input type="checkbox" value="15000" data-name="Manager Effectiveness" onchange="recalc()">
+                <span class="ct-box"><span class="ct-check">✓</span><span class="ct-name">Manager Effectiveness</span><span class="ct-price">₹15K</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="calc-field-group">
+            <div class="cfg-label">Multi-Practice Discount</div>
+            <div class="cfg-note" id="discountNote">Select 2+ practices to unlock a bundled discount of 10%.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="calc-right">
+        <div class="calc-summary" id="calcSummary">
+          <div class="cs-head">Engagement Summary</div>
+
+          <div class="cs-section">
+            <div class="cs-s-lbl">Selected Practices</div>
+            <div id="csPractices" class="cs-practices-empty">No practices selected yet.</div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-s-lbl">Add-Ons</div>
+            <div id="csAddons" class="cs-practices-empty">None selected.</div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-s-lbl">Duration</div>
+            <div class="cs-duration-val" id="csDuration">6 months</div>
+          </div>
+
+          <div class="cs-divider"></div>
+
+          <div class="cs-row"><span class="cs-r-lbl">Monthly Retainer</span><span class="cs-r-val" id="csMonthly">₹0</span></div>
+          <div class="cs-row" id="csDiscountRow" style="display:none;"><span class="cs-r-lbl" style="color:var(--teal);">Bundle Discount (10%)</span><span class="cs-r-val" style="color:var(--teal);" id="csDiscount">−₹0</span></div>
+          <div class="cs-row"><span class="cs-r-lbl">Add-On Services</span><span class="cs-r-val" id="csAddonTotal">₹0</span></div>
+          <div class="cs-divider"></div>
+          <div class="cs-row total"><span class="cs-r-lbl">Total Engagement Cost</span><span class="cs-r-val" id="csTotal">₹0</span></div>
+          <div class="cs-gst">+ 18% GST applicable · Payment via Razorpay</div>
+
+          <div class="cs-roi-box" id="csRoi" style="display:none;">
+            <div class="croi-lbl">Estimated ROI at 6 months</div>
+            <div class="croi-val" id="csRoiVal">—</div>
+            <div class="croi-note">Based on 2.4× avg. revenue lift across comparable engagements. Not a guarantee.</div>
+          </div>
+
+          <button class="cs-book-btn" id="csBookBtn" onclick="bookCalculated()" disabled>Select at least one practice →</button>
+          <div style="text-align:center;margin-top:10px;">
+            <button class="btn-ghost-dark" onclick="openRzp('Management Consulting — Discovery Call',0,'Complimentary discovery session.')">Or book a free Discovery Call</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FREE AI CONSULTING FREEMIUM
+  ═══════════════════════════════════════════ -->
+  <section class="ai-section" id="freemium">
+    <div class="ai-header">
+      <div>
+        <div class="chip">Free Consulting · Powered by AI</div>
+        <h2 class="D">Get a real answer to your<br>business problem — <em>right now.</em></h2>
+        <p class="body-t" style="max-width:580px;margin-top:14px;">This is ORIGENNT's free consulting tool. Ask about growth strategy, organisation structure, hiring, compliance, leadership, or any business challenge. The AI advisor draws on management consulting frameworks used in real ORIGENNT engagements. No signup. No catch.</p>
+        <div style="display:flex;gap:20px;margin-top:24px;flex-wrap:wrap;">
+          <div class="ai-meta-pill">✦ No sign-up required</div>
+          <div class="ai-meta-pill">✦ Powered by Claude AI</div>
+          <div class="ai-meta-pill">✦ ORIGENNT-trained prompts</div>
+        </div>
+      </div>
+      <div class="ai-freemium-badge">
+        <div class="afb-tag">FREEMIUM</div>
+        <div class="afb-n">Free</div>
+        <div class="afb-sub">3 questions per session</div>
+        <div class="afb-divider"></div>
+        <div class="afb-pro-lbl">Need more depth?</div>
+        <button class="afb-pro-btn" onclick="openRzp('Management Consulting — Discovery Call',0,'Discovery call following freemium AI consulting session.')">Book a Discovery Call →</button>
+      </div>
+    </div>
+
+    <div class="ai-chat-wrap">
+      <div class="ai-starter-qs" id="starterQs">
+        <div class="sq-lbl">Common questions to try:</div>
+        <div class="sq-grid">
+          <button class="sq-btn" onclick="useStarter(this)">My revenue has been stuck at ₹8Cr for 2 years. What's likely causing this?</button>
+          <button class="sq-btn" onclick="useStarter(this)">How do I know if I need Management Consulting or just HR support?</button>
+          <button class="sq-btn" onclick="useStarter(this)">My second line of leadership isn't developing. What's the framework to fix this?</button>
+          <button class="sq-btn" onclick="useStarter(this)">We're preparing for PE funding in 18 months. What should we fix first?</button>
+          <button class="sq-btn" onclick="useStarter(this)">How do I restructure my org without losing key people during transition?</button>
+          <button class="sq-btn" onclick="useStarter(this)">What metrics should a ₹15Cr MSME track to know if strategy is working?</button>
+        </div>
+      </div>
+
+      <div class="ai-messages" id="aiMessages"></div>
+
+      <div class="ai-input-bar">
+        <div class="ai-qs-remaining" id="aiQsRemaining">3 free questions remaining</div>
+        <div class="ai-input-row">
+          <textarea class="ai-textarea" id="aiInput" placeholder="Ask your business question — strategy, growth, organisation, leadership…" rows="1" onkeydown="aiKeydown(event)" oninput="autoResize(this)"></textarea>
+          <button class="ai-send-btn" id="aiSendBtn" onclick="sendAiMessage()">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9h14M9 2l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="ai-upgrade-bar" id="aiUpgradeBar" style="display:none;">
+        <div class="aub-text">You've used your 3 free questions. For deeper, engagement-specific advice — speak to a real ORIGENNT consultant.</div>
+        <button class="aub-btn" onclick="openRzp('Management Consulting — Discovery Call',0,'Discovery call following AI freemium session.')">Book Free Discovery Call →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section reveal">
+    <div class="cta-grid">
+      <div>
+        <div class="chip" style="color:rgba(255,255,255,.6);" ><span style="width:22px;height:1px;background:rgba(255,255,255,.3);display:inline-block;"></span> Start Here</div>
+        <h2 class="cta-h">The Discovery Call<br>is where it <em>begins.</em></h2>
+        <p class="cta-sub">One structured 60-minute conversation. We assess your business, you assess us. No sales pitch. No obligation. If there's a fit, we'll propose a scoped engagement. If there isn't, we'll tell you who to call instead.</p>
+        <div style="display:flex;gap:24px;margin-top:32px;flex-wrap:wrap;">
+          <div><div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">60<span style="font-size:14px;font-family:'Outfit',sans-serif;font-weight:300;"> min</span></div><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px;">Discovery Session</div></div>
+          <div><div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">₹0</div><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px;">No Charge, Ever</div></div>
+          <div><div style="font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);">48<span style="font-size:14px;font-family:'Outfit',sans-serif;font-weight:300;"> hr</span></div><div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px;">Response Time</div></div>
+        </div>
+      </div>
+      <div class="cta-right">
+        <div class="cta-form-row">
+          <input type="text" class="cta-input" id="ctaName" placeholder="Your Name *">
+          <input type="text" class="cta-input" id="ctaCompany" placeholder="Company Name *">
+        </div>
+        <div class="cta-form-row">
+          <input type="email" class="cta-input" id="ctaEmail" placeholder="Email Address *">
+          <input type="tel" class="cta-input" id="ctaPhone" placeholder="Phone Number *">
+        </div>
+        <select class="cta-input cta-select" id="ctaPractice">
+          <option value="">Which Practice Are You Interested In?</option>
+          <option>Business Strategy Advisory</option>
+          <option>Organisation Design & Restructuring</option>
+          <option>Business Transformation & Change Management</option>
+          <option>Leadership Advisory & Founder Coaching</option>
+          <option>Not Sure — Wants Assessment</option>
+        </select>
+        <input type="text" class="cta-input" id="ctaRevenue" placeholder="Approximate Annual Revenue (₹ Cr)">
+        <button class="cta-submit" onclick="submitDiscovery()">Request Discovery Call — 48hr Response →</button>
+        <div class="cta-note">No spam. No sales sequence. One call. We'll suggest next steps honestly.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- RZP OVERLAY -->
+<div class="rzp-overlay" id="rzpOverlay">
+  <div class="rzp-modal">
+    <div class="rzp-modal-head">
+      <div class="rzp-modal-tag" id="rzpTag">ORIGENNT — Management Consulting</div>
+      <div class="rzp-modal-h" id="rzpH">Practice Name</div>
+      <div class="rzp-modal-sub" id="rzpSub">Engagement begins within 48 hours of payment.</div>
+      <button class="rzp-close" id="rzpClose">✕</button>
+    </div>
+    <div class="rzp-modal-body">
+      <div class="rzp-price-row">
+        <div class="rzp-price-lbl">Monthly Retainer</div>
+        <div class="rzp-price-val" id="rzpPrice">₹55,000</div>
+      </div>
+      <div class="rzp-field"><label class="rzp-label">Company Name *</label><input type="text" class="rzp-input" id="rzpCompany" placeholder="Your organisation name"></div>
+      <div class="rzp-field"><label class="rzp-label">Your Name *</label><input type="text" class="rzp-input" id="rzpName" placeholder="Point of contact"></div>
+      <div class="rzp-field"><label class="rzp-label">Email Address *</label><input type="email" class="rzp-input" id="rzpEmail" placeholder="For engagement confirmation"></div>
+      <div class="rzp-field"><label class="rzp-label">Phone Number *</label><input type="tel" class="rzp-input" id="rzpPhone" placeholder="+91"></div>
+      <div class="rzp-field"><label class="rzp-label">Annual Revenue (approx.)</label><select class="rzp-input rzp-select" id="rzpRevenue"><option>Under ₹1 Cr</option><option>₹1–5 Cr</option><option>₹5–20 Cr</option><option>₹20–50 Cr</option><option>Above ₹50 Cr</option></select></div>
+      <div class="rzp-field"><label class="rzp-label">Primary Challenge (optional)</label><input type="text" class="rzp-input" id="rzpChallenge" placeholder="What's the biggest problem we'd be solving?"></div>
+      <button class="rzp-btn" id="rzpBtn">Proceed →</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+/* REVEAL */
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* BAR ANIMATION */
+const barObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dc-bar-fill').forEach(b=>b.classList.add('go'));}});},{threshold:.2});
+document.querySelectorAll('.chart-wrap').forEach(el=>barObs.observe(el));
+
+/* RZP */
+let rzpCurrent={};
+function openRzp(name,amtInt,desc){
+  rzpCurrent={name,amtPaise:amtInt*100};
+  document.getElementById('rzpTag').textContent='ORIGENNT — Management Consulting';
+  document.getElementById('rzpH').textContent=name;
+  document.getElementById('rzpSub').textContent=amtInt>0?'Your engagement begins within 48 hours of payment confirmation.':'Our consulting team will reach out within 48 hours to schedule your call.';
+  document.getElementById('rzpPrice').innerHTML=amtInt>0?'₹'+amtInt.toLocaleString('en-IN'):'<span style="font-size:20px;">Complimentary</span>';
+  document.getElementById('rzpBtn').textContent=amtInt>0?'Proceed to Payment →':'Request Discovery Call →';
+  document.getElementById('rzpOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRzp(){document.getElementById('rzpOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('rzpClose').addEventListener('click',closeRzp);
+document.getElementById('rzpOverlay').addEventListener('click',function(e){if(e.target===this)closeRzp();});
+
+document.getElementById('rzpBtn').addEventListener('click',function(){
+  const company=document.getElementById('rzpCompany').value.trim();
+  const name=document.getElementById('rzpName').value.trim();
+  const email=document.getElementById('rzpEmail').value.trim();
+  const phone=document.getElementById('rzpPhone').value.trim();
+  if(!company||!name||!email||!phone){alert('Please fill in all required fields.');return;}
+  if(rzpCurrent.amtPaise>0){
+    const options={
+      key:'rzp_live_SYozH6AmdLOu6O',
+      amount:rzpCurrent.amtPaise,
+      currency:'INR',
+      name:'ORIGENNT Private Limited',
+      description:rzpCurrent.name,
+      image:'https://origennt.com/favicon.ico',
+      handler:function(response){
+        closeRzp();
+        alert('✓ Payment confirmed!\nPayment ID: '+response.razorpay_payment_id+'\n\nYour ORIGENNT consulting engagement begins within 48 hours. We will contact you at '+email+' with your engagement brief and consultant assignment.');
+      },
+      prefill:{name,email,contact:phone},
+      notes:{company,revenue:document.getElementById('rzpRevenue').value,challenge:document.getElementById('rzpChallenge').value,service:rzpCurrent.name},
+      theme:{color:'#CC2229'},
+    };
+    new Razorpay(options).open();
+  } else {
+    const msg=encodeURIComponent('Hi ORIGENNT,\n\nManagement Consulting — Discovery Call Request\n\nCompany: '+company+'\nContact: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nRevenue: '+document.getElementById('rzpRevenue').value+'\nChallenge: '+document.getElementById('rzpChallenge').value);
+    window.open('https://wa.me/919861168291?text='+msg,'_blank');
+    closeRzp();
+  }
+});
+
+/* CTA FORM */
+function submitDiscovery(){
+  const name=document.getElementById('ctaName').value.trim();
+  const company=document.getElementById('ctaCompany').value.trim();
+  const email=document.getElementById('ctaEmail').value.trim();
+  const phone=document.getElementById('ctaPhone').value.trim();
+  if(!name||!company||!email||!phone){alert('Please fill in your name, company, email and phone.');return;}
+  const practice=document.getElementById('ctaPractice').value;
+  const revenue=document.getElementById('ctaRevenue').value;
+  const msg=encodeURIComponent('Hi ORIGENNT,\n\nManagement Consulting — Discovery Call Request\n\nName: '+name+'\nCompany: '+company+'\nEmail: '+email+'\nPhone: '+phone+'\nPractice Interest: '+practice+'\nAnnual Revenue: '+revenue+' Cr');
+  window.open('https://wa.me/919861168291?text='+msg,'_blank');
+}
+</script>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   BENCHMARK CHART
+═══════════════════════════════════════════ */
+const chartData={
+  revenue:{
+    labels:['Month 0','Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'],
+    origennt:[100,104,110,120,134,152,168],
+    peer:[100,101,102,103,103,104,105],
+    ylabel:'Revenue Index (Base 100)',
+    title:'Revenue Growth Index — ORIGENNT Engaged vs. Peer MSMEs',
+    note:'Based on 6-month trailing average across comparable revenue band (₹5–50Cr). Baseline = 100.'
+  },
+  attrition:{
+    labels:['Month 0','Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'],
+    origennt:[24,22,19,17,14,11,9],
+    peer:[24,24,25,24,25,25,24],
+    ylabel:'Annualised Attrition Rate (%)',
+    title:'Employee Attrition — ORIGENNT Engaged vs. Unadvised MSMEs',
+    note:'Lower is better. ORIGENNT engagements include Workforce Execution and Org Design interventions.'
+  },
+  decision:{
+    labels:['Month 0','Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'],
+    origennt:[67,58,48,40,34,30,28],
+    peer:[67,66,68,65,67,66,67],
+    ylabel:'Average Days to Key Decision',
+    title:'Decision Speed — Days from Identification to Resolution',
+    note:'Lower is better. Delegation frameworks and decision-rights design are introduced in Phase 2.'
+  },
+  execution:{
+    labels:['Month 0','Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'],
+    origennt:[52,59,67,75,81,87,91],
+    peer:[52,53,52,54,53,52,54],
+    ylabel:'Strategy Execution Rate (%)',
+    title:'Execution Rate — % of Strategic Initiatives Completed On-Time',
+    note:'Higher is better. ORIGENNT introduces Execution Scorecards and monthly accountability reviews.'
+  },
+  founder:{
+    labels:['Month 0','Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'],
+    origennt:[100,94,85,74,62,52,42],
+    peer:[100,101,103,102,104,103,104],
+    ylabel:'Founder Decision Load Index (Base 100)',
+    title:'Founder Decision Load Reduction — ORIGENNT vs. Peers',
+    note:'Lower is better. Org Design and delegation frameworks systematically reduce the founder bottleneck.'
+  }
+};
+
+let activeMetric='revenue';
+let benchChart=null;
+
+function initChart(){
+  const ctx=document.getElementById('benchmarkChart').getContext('2d');
+  const d=chartData[activeMetric];
+  benchChart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels:d.labels,
+      datasets:[
+        {label:'ORIGENNT-Engaged',data:d.origennt,borderColor:'#CC2229',backgroundColor:'rgba(204,34,41,.08)',borderWidth:2.5,pointBackgroundColor:'#CC2229',pointRadius:5,pointHoverRadius:7,tension:.4,fill:true},
+        {label:'Unadvised Peer MSMEs',data:d.peer,borderColor:'#c2bfba',backgroundColor:'rgba(194,191,186,.06)',borderWidth:2,pointBackgroundColor:'#c2bfba',pointRadius:4,pointHoverRadius:6,tension:.4,borderDash:[6,4],fill:true}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#0d0d0d',titleColor:'#fff',bodyColor:'rgba(255,255,255,.7)',
+          padding:14,borderColor:'rgba(255,255,255,.08)',borderWidth:1,
+          callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.raw}${activeMetric==='attrition'||activeMetric==='execution'||activeMetric==='founder'?activeMetric==='attrition'?' %':activeMetric==='execution'?' %':'':(activeMetric==='decision'?' days':' idx')}`}
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Outfit',size:11},color:'#6b6660'}},
+        y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'Outfit',size:11},color:'#6b6660'},title:{display:true,text:d.ylabel,font:{family:'Outfit',size:10},color:'#c2bfba'}}
+      }
+    }
+  });
+}
+
+function switchChart(metric){
+  activeMetric=metric;
+  document.querySelectorAll('.ctab').forEach(b=>b.classList.toggle('active',b.getAttribute('onclick').includes("'"+metric+"'")));
+  const d=chartData[metric];
+  benchChart.data.datasets[0].data=d.origennt;
+  benchChart.data.datasets[1].data=d.peer;
+  benchChart.options.scales.y.title.text=d.ylabel;
+  benchChart.update('active');
+}
+
+/* ═══════════════════════════════════════════
+   PRICE CALCULATOR
+═══════════════════════════════════════════ */
+function recalc(){
+  const practices=[...document.querySelectorAll('.calc-toggle input:checked')].filter(i=>parseFloat(i.value)>38000||parseFloat(i.value)===55000||parseFloat(i.value)===60000||parseFloat(i.value)===65000||parseFloat(i.value)===45000);
+  const addons=[...document.querySelectorAll('.calc-toggle input:checked')].filter(i=>parseFloat(i.value)<=25000);
+  const allChecked=[...document.querySelectorAll('.calc-toggle input:checked')];
+  const practiceInputs=allChecked.filter(i=>['55000','60000','65000','45000'].includes(i.value));
+  const addonInputs=allChecked.filter(i=>['12000','25000','20000','15000'].includes(i.value));
+
+  const dur=parseInt(document.getElementById('durationSlider').value);
+  document.getElementById('durationVal').textContent=dur+' month'+(dur>1?'s':'');
+  document.getElementById('csDuration').textContent=dur+' month'+(dur>1?'s':'');
+
+  const monthlyBase=practiceInputs.reduce((s,i)=>s+parseInt(i.value),0);
+  const addonTotal=addonInputs.reduce((s,i)=>s+parseInt(i.value),0);
+  const discount=practiceInputs.length>=2?Math.round(monthlyBase*0.1):0;
+  const monthlyFinal=monthlyBase-discount;
+  const total=monthlyFinal*dur+addonTotal;
+
+  // update practices display
+  const cpEl=document.getElementById('csPractices');
+  if(practiceInputs.length===0){cpEl.innerHTML='<span class="cs-practices-empty">No practices selected yet.</span>';}
+  else{cpEl.innerHTML=practiceInputs.map(i=>`<div class="cs-practice-item"><span>${i.dataset.name}</span><span>₹${parseInt(i.value).toLocaleString('en-IN')}/mo</span></div>`).join('');}
+
+  const caEl=document.getElementById('csAddons');
+  if(addonInputs.length===0){caEl.innerHTML='<span class="cs-practices-empty">None selected.</span>';}
+  else{caEl.innerHTML=addonInputs.map(i=>`<div class="cs-addon-item"><span>${i.dataset.name}</span><span>₹${parseInt(i.value).toLocaleString('en-IN')}</span></div>`).join('');}
+
+  document.getElementById('csMonthly').textContent='₹'+monthlyBase.toLocaleString('en-IN');
+  document.getElementById('csAddonTotal').textContent='₹'+addonTotal.toLocaleString('en-IN');
+  document.getElementById('csTotal').textContent='₹'+total.toLocaleString('en-IN');
+
+  const discRow=document.getElementById('csDiscountRow');
+  if(discount>0){discRow.style.display='flex';document.getElementById('csDiscount').textContent='−₹'+discount.toLocaleString('en-IN');}
+  else{discRow.style.display='none';}
+
+  const discNote=document.getElementById('discountNote');
+  if(practiceInputs.length>=2){discNote.textContent='✓ 10% multi-practice bundle discount applied — saving ₹'+discount.toLocaleString('en-IN')+' per month.';}
+  else{discNote.textContent='Select 2+ practices to unlock a 10% bundled discount.';}
+
+  // ROI estimate
+  const roiBox=document.getElementById('csRoi');
+  if(practiceInputs.length>0&&dur>=6){
+    roiBox.style.display='block';
+    const annualisedSaving=monthlyFinal*12;
+    const roiMultiple=(annualisedSaving*2.4/annualisedSaving).toFixed(1);
+    document.getElementById('csRoiVal').textContent='~'+roiMultiple+'× revenue lift potential';
+  } else {roiBox.style.display='none';}
+
+  const btn=document.getElementById('csBookBtn');
+  if(practiceInputs.length===0){btn.disabled=true;btn.textContent='Select at least one practice →';}
+  else{btn.disabled=false;btn.textContent='Book This Engagement (₹'+monthlyFinal.toLocaleString('en-IN')+'/mo) →';}
+}
+
+function bookCalculated(){
+  const practiceInputs=[...document.querySelectorAll('.calc-toggle input:checked')].filter(i=>['55000','60000','65000','45000'].includes(i.value));
+  if(practiceInputs.length===0)return;
+  const dur=document.getElementById('durationSlider').value;
+  const monthlyBase=practiceInputs.reduce((s,i)=>s+parseInt(i.value),0);
+  const discount=practiceInputs.length>=2?Math.round(monthlyBase*0.1):0;
+  const monthly=monthlyBase-discount;
+  const names=practiceInputs.map(i=>i.dataset.name).join(' + ');
+  openRzp(names+' ('+dur+'-month engagement)',monthly,'Custom engagement: '+names);
+}
+
+/* ═══════════════════════════════════════════
+   AI FREEMIUM CHAT
+═══════════════════════════════════════════ */
+let aiQsLeft=3;
+let aiHistory=[];
+let aiLoading=false;
+
+
+
+function useStarter(btn){
+  document.getElementById('starterQs').style.display='none';
+  document.getElementById('aiInput').value=btn.textContent.trim();
+  sendAiMessage();
+}
+
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,140)+'px';}
+
+function aiKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAiMessage();}}
+
+function appendMsg(role,html){
+  const msgs=document.getElementById('aiMessages');
+  const div=document.createElement('div');
+  div.className='ai-msg '+role;
+  const avatarText=role==='bot'?'O':'You';
+  div.innerHTML=`<div class="ai-avatar ${role}">${avatarText}</div><div class="ai-bubble ${role}">${html}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+  return div;
+}
+
+function formatAiText(txt){
+  return txt
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/^• (.+)$/gm,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>)+/g,'<ul>$&</ul>')
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/\n/g,'<br>')
+    .replace(/^(?!<)/,'<p>')
+    .replace(/(?<!>)$/,'</p>');
+}
+
+/* AI runs inside a hidden Claude-artifact iframe which has API access.
+   We inject the iframe once, then pass messages via postMessage. */
+let aiBridge=null;
+let aiPendingResolve=null;
+let typingDivRef=null;
+
+const BRIDGE_HTML=`<!DOCTYPE html><html><body><script>
+const SYSTEM=\`You are the ORIGENNT Management Consulting AI Advisor — a senior-level business advisor embedded in ORIGENNT's website for their free consulting freemium feature.
+
+ORIGENNT is a management consulting firm based in Bhubaneswar, Odisha, India. They serve MSMEs and SMEs across India (₹1Cr to ₹100Cr revenue) with four consulting practices:
+1. Business Strategy Advisory (₹55,000/month) — growth roadmaps, market entry, investor readiness
+2. Organisation Design & Restructuring (₹60,000/month) — structure redesign, role architecture, delegation
+3. Business Transformation & Change Management (₹65,000/month) — transformation roadmaps, change management
+4. Leadership Advisory & Founder Coaching (₹45,000/month) — founder coaching, decision quality, executive effectiveness
+
+Their differentiator: They EMBED in the business — not just report. They set a baseline on Day 1 and track outcomes monthly.
+
+Your role: Give genuinely useful, specific, framework-backed advice on business challenges. Do NOT be generic. DO use real frameworks (McKinsey 7S, Ansoff Matrix, BCG Growth-Share, Lencioni's Five Dysfunctions, RACI, OKRs, etc.) where relevant. DO acknowledge when an Indian MSME context requires different thinking than Western textbook advice.
+
+After giving advice, naturally mention that ORIGENNT offers a complimentary Discovery Call if the person wants to go deeper with a real consultant. Do not be pushy. Keep it to one line at the end.
+
+Format: Use clear paragraphs. Use **bold** for key terms. Use bullet points sparingly and only when listing 3+ items. Keep responses focused — 200 to 350 words maximum. This is a freemium tool; be helpful but leave room for the paid engagement.
+
+Tone: Direct, analytical, warm. Like a smart senior consultant who respects the founder's intelligence.\`;
+
+window.addEventListener('message',async(e)=>{
+  if(e.data.type!=='ASK')return;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:SYSTEM,messages:e.data.messages})
+    });
+    const d=await r.json();
+    const txt=d.content?.[0]?.text||'Unable to get a response. Please try again.';
+    e.source.postMessage({type:'REPLY',text:txt},'*');
+  }catch(err){
+    e.source.postMessage({type:'ERROR',text:'Connection issue. Please try again.'},'*');
+  }
+});
+parent.postMessage({type:'READY'},'*');
+<\/script></body></html>`;
+
+function ensureBridge(){
+  return new Promise(resolve=>{
+    if(aiBridge){resolve();return;}
+    const blob=new Blob([BRIDGE_HTML],{type:'text/html'});
+    const url=URL.createObjectURL(blob);
+    const iframe=document.createElement('iframe');
+    iframe.src=url;
+    iframe.style.cssText='position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;';
+    iframe.sandbox='allow-scripts allow-same-origin';
+    document.body.appendChild(iframe);
+    window.addEventListener('message',function onReady(e){
+      if(e.data.type==='READY'){window.removeEventListener('message',onReady);aiBridge=iframe;resolve();}
+    });
+  });
+}
+
+function callAI(messages){
+  return new Promise((resolve,reject)=>{
+    function handler(e){
+      if(e.data.type==='REPLY'){window.removeEventListener('message',handler);resolve(e.data.text);}
+      else if(e.data.type==='ERROR'){window.removeEventListener('message',handler);reject(new Error(e.data.text));}
+    }
+    window.addEventListener('message',handler);
+    aiBridge.contentWindow.postMessage({type:'ASK',messages},'*');
+  });
+}
+
+async function sendAiMessage(){
+  if(aiLoading||aiQsLeft<=0)return;
+  const input=document.getElementById('aiInput');
+  const msg=input.value.trim();
+  if(!msg)return;
+
+  document.getElementById('starterQs').style.display='none';
+  aiLoading=true;
+  input.value='';
+  input.style.height='auto';
+  document.getElementById('aiSendBtn').disabled=true;
+
+  appendMsg('user',msg.replace(/</g,'&lt;'));
+  aiHistory.push({role:'user',content:msg});
+
+  const typingDiv=document.createElement('div');
+  typingDiv.className='ai-msg bot';
+  typingDiv.innerHTML=`<div class="ai-avatar bot">O</div><div class="ai-bubble bot"><div class="ai-typing"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>`;
+  document.getElementById('aiMessages').appendChild(typingDiv);
+  document.getElementById('aiMessages').scrollTop=99999;
+
+  try{
+    await ensureBridge();
+    const reply=await callAI(aiHistory);
+    typingDiv.remove();
+    aiHistory.push({role:'assistant',content:reply});
+    appendMsg('bot',formatAiText(reply));
+  }catch(err){
+    typingDiv.remove();
+    appendMsg('bot',formatAiText('I had trouble connecting. Please try again in a moment.'));
+  }
+
+  aiQsLeft--;
+  document.getElementById('aiSendBtn').disabled=false;
+  aiLoading=false;
+
+  if(aiQsLeft<=0){
+    document.getElementById('aiInput').disabled=true;
+    document.getElementById('aiSendBtn').disabled=true;
+    document.getElementById('aiUpgradeBar').style.display='flex';
+    document.getElementById('aiQsRemaining').textContent='Free questions used — book a call to continue';
+  } else {
+    document.getElementById('aiQsRemaining').textContent=aiQsLeft+' free question'+(aiQsLeft>1?'s':'')+' remaining';
+  }
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+window.addEventListener('load',()=>{
+  if(document.getElementById('benchmarkChart')) initChart();
+  recalc();
+});
+</script>
+</body>
+</html>
