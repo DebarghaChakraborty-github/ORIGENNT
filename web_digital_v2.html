@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="favicon.png" type="image/png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Web Design & Digital Services | ORIGENNT — India's Strategy-Led Web Agency</title>
+<meta name="description" content="ORIGENNT builds premium websites, e-commerce platforms, and AI automation for businesses across India, the UK, USA, UAE, and beyond. Strategy-first. Zero templates. 60-day support included.">
+<meta name="keywords" content="web design India, website development Bhubaneswar, e-commerce development India, business website India, Next.js agency India, WordPress development Odisha, AI automation India">
+<link rel="canonical" href="https://origennt.com/web-digital-services">
+<meta property="og:title" content="Web & Digital Services — ORIGENNT | Strategy-Led Web Agency India">
+<meta property="og:description" content="Premium websites, e-commerce, and AI automation — built around your business strategy.">
+<meta property="og:url" content="https://origennt.com/web-digital-services">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"ORIGENNT Web & Digital Services","url":"https://origennt.com/web-digital-services","description":"Premium web design, e-commerce development and AI automation.","areaServed":["IN","GB","US","AE","SG","AU"],"address":{"@type":"PostalAddress","addressLocality":"Bhubaneswar","addressRegion":"Odisha","addressCountry":"IN"},"contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"origennt@gmail.com"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+/* ══ RESET & VARS ══ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;--blue:#2563eb;
+  --sidebar:280px;--ease:cubic-bezier(.77,0,.18,1);
+  --ff-serif:'Libre Baskerville',serif;
+  --ff-sans:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:var(--ff-sans);background:var(--white);color:var(--black);overflow-x:hidden;}
+img{max-width:100%;height:auto;display:block;}
+button,a{-webkit-tap-highlight-color:transparent;}
+
+/* ══ CUSTOM CURSOR ══ */
+@media(pointer:fine){
+  *{cursor:none!important;}
+  .cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;will-change:left,top;}
+  .cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;will-change:left,top;}
+  body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+  body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+}
+
+/* ══ HAMBURGER ══ */
+.hamburger{display:none;position:fixed;top:14px;left:14px;z-index:400;background:var(--black);border:none;padding:12px;flex-direction:column;gap:5px;border-radius:2px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all .3s var(--ease);}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:199;}
+.sb-overlay.show{display:block;}
+
+/* ══ SIDEBAR ══ */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100dvh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .45s var(--ease);}
+.sidebar-top{padding:28px 32px 24px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:var(--ff-serif);font-size:17px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:22px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:24px 32px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:24px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.55);text-decoration:none;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:18px 32px 26px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;}
+.sb-info{font-size:11px;color:rgba(255,255,255,.35);line-height:1.85;}
+.sb-info a{color:rgba(255,255,255,.48);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* ══ MAIN ══ */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 44px;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);transition:left .45s var(--ease);}
+.back-link{font-size:12px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .2s;}
+.back-link:hover{color:var(--black);}
+.back-link::before{content:'←';}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.topbar-badge{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);background:rgba(13,107,94,.08);border:1px solid rgba(13,107,94,.2);padding:5px 12px;font-weight:600;}
+.topbar-cta{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);padding:10px 20px;transition:background .2s;border:none;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* ══ REUSABLES ══ */
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:16px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:var(--ff-serif);font-size:clamp(26px,3.2vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+h2.D.W em{color:rgba(255,255,255,.28);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t.w{color:rgba(255,255,255,.45);}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 32px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.5);}
+
+/* ══ REVEAL ANIMATIONS ══ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal-left.vis{opacity:1;transform:none;}
+.reveal-right{opacity:0;transform:translateX(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal-right.vis{opacity:1;transform:none;}
+.reveal-scale{opacity:0;transform:scale(.94);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.reveal-scale.vis{opacity:1;transform:scale(1);}
+@keyframes fu{to{opacity:1;transform:none;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+@keyframes floatGlow{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,30px) scale(1.1);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes hzoom{to{transform:scale(1);}}
+@keyframes pulse-ring{0%{transform:scale(.9);opacity:.8;}100%{transform:scale(2.2);opacity:0;}}
+@keyframes float-particle{0%,100%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-20px) rotate(180deg);}}
+@keyframes counter-up{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+
+/* ══ ANIMATED CANVAS BACKGROUND ══ */
+#bg-canvas{position:absolute;inset:0;z-index:0;pointer-events:none;}
+
+/* ══ HERO ══ */
+.hero{padding-top:58px;min-height:100dvh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-glow1{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.18) 0%,transparent 65%);top:-120px;right:-150px;z-index:1;animation:floatGlow 10s ease-in-out infinite;}
+.hero-glow2{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(139,10,10,.12) 0%,transparent 70%);bottom:0;left:8%;z-index:1;animation:floatGlow 14s ease-in-out infinite reverse;}
+.hero-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.007) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.007) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:2;}
+.hero-red-bar{position:absolute;left:0;top:58px;bottom:0;width:4px;background:linear-gradient(to bottom,var(--red),rgba(204,34,41,.15));z-index:3;}
+.hero-inner{position:relative;z-index:4;flex:1;display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:flex-end;padding:52px 60px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px;opacity:0;animation:fu .7s .05s var(--ease) forwards;}
+.hero-eyebrow-line{width:28px;height:1px;background:var(--red);}
+.hero-dot{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 2s infinite;}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:var(--ff-serif);font-size:clamp(34px,4.8vw,70px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.03em;opacity:0;transform:translateY(28px);animation:fu .9s .1s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.5);max-width:500px;line-height:1.85;margin-top:20px;opacity:0;transform:translateY(18px);animation:fu .9s .22s var(--ease) forwards;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;opacity:0;animation:fu .9s .32s var(--ease) forwards;}
+.hero-pill{display:flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.6);backdrop-filter:blur(4px);}
+.hero-pill i{color:var(--red);font-size:10px;}
+.hero-acts{display:flex;gap:14px;align-items:center;margin-top:22px;flex-wrap:wrap;opacity:0;animation:fu .9s .44s var(--ease) forwards;}
+.btn-link-w{font-size:11.5px;font-weight:500;color:rgba(255,255,255,.5);background:none;border:none;text-decoration:underline;text-underline-offset:3px;padding:0;}
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(20px);padding:26px;align-self:flex-end;opacity:0;transform:translateX(20px);animation:fu .9s .52s var(--ease) forwards;}
+.hp-lbl{font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:11.5px;font-weight:300;color:rgba(255,255,255,.42);}
+.hp-val{font-family:var(--ff-serif);font-size:15px;color:var(--white);}
+.hp-val .accent{color:var(--red);font-family:var(--ff-sans);font-size:10px;font-weight:600;}
+.hero-strip{position:relative;z-index:4;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.06);margin-top:44px;}
+.hs-cell{padding:18px 24px;border-right:1px solid rgba(255,255,255,.06);opacity:0;transform:translateY(12px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.58s;}.hs-cell:nth-child(2){animation-delay:.68s;}.hs-cell:nth-child(3){animation-delay:.78s;}.hs-cell:nth-child(4){animation-delay:.88s;}
+.hsc-n{font-family:var(--ff-serif);font-size:28px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:12px;color:var(--red);font-family:var(--ff-sans);font-weight:600;}
+.hsc-l{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px;}
+.hero-locations{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;}
+.loc-item{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.38);letter-spacing:.06em;}
+.loc-dot-s{width:5px;height:5px;background:var(--red);border-radius:50%;}
+
+/* ══ MARQUEE ══ */
+.marquee-wrap{background:var(--red);overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-flex;animation:mq 28s linear infinite;}
+.marquee-track:hover{animation-play-state:paused;}
+.mq-item{display:inline-flex;align-items:center;gap:12px;padding:14px 30px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82);}
+.mq-sep{color:rgba(255,255,255,.28);font-size:16px;}
+
+/* ══ STATS STRIP ══ */
+.stats-strip{background:var(--black);padding:0;border-top:1px solid rgba(204,34,41,.15);border-bottom:1px solid rgba(204,34,41,.12);}
+.stats-grid-4{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-block{text-align:center;padding:32px 20px;border-right:1px solid rgba(255,255,255,.05);}
+.stat-block:last-child{border-right:none;}
+.stat-num{font-family:var(--ff-serif);font-size:2.8rem;font-weight:700;color:var(--white);line-height:1;}
+.stat-num .accent{color:var(--red);}
+.stat-lbl{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px;font-weight:500;}
+
+/* ══ SECTION BASES ══ */
+.section{padding:80px 72px;}
+.section-dark{background:var(--black);color:var(--white);}
+.section-off{background:var(--off);}
+.section-white{background:var(--white);}
+.section-header{margin-bottom:52px;}
+.section-header.center{text-align:center;}
+.section-header.center h2.D{display:block;}
+.section-header.center .body-t{max-width:580px;margin:0 auto;}
+
+/* ══ WHO WE ARE ══ */
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.identity-row{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--white);border-left:3px solid var(--red);box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:10px;}
+.identity-row i{color:var(--red);width:18px;text-align:center;}
+.identity-text{flex:1;font-size:13px;font-weight:500;color:var(--black);}
+.identity-val{font-size:11.5px;color:var(--gt);}
+.positioning-block{background:linear-gradient(135deg,var(--red),var(--red-dark));padding:28px;color:var(--white);margin-top:20px;}
+.positioning-block p{font-family:var(--ff-serif);font-size:1.3rem;font-style:italic;line-height:1.45;margin-bottom:10px;}
+.positioning-block cite{font-size:11px;color:rgba(255,255,255,.6);letter-spacing:.08em;}
+
+/* ══ PROBLEM/SOLUTION ══ */
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.ps-card{padding:36px;display:flex;flex-direction:column;gap:16px;}
+.ps-card-problem{background:var(--white);border:1px solid rgba(204,34,41,.12);box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.ps-card-solution{background:linear-gradient(135deg,var(--red),var(--red-dark));color:var(--white);}
+.ps-card h3{font-family:var(--ff-serif);font-size:1.5rem;font-weight:400;}
+.ps-item{display:flex;align-items:flex-start;gap:12px;padding:12px;background:rgba(204,34,41,.05);border-left:3px solid var(--red);}
+.ps-card-solution .ps-item{background:rgba(255,255,255,.1);border-left-color:rgba(255,255,255,.4);}
+.ps-item-text h4{font-size:13px;font-weight:700;margin-bottom:3px;}
+.ps-item-text p{font-size:12px;color:var(--gt);line-height:1.4;}
+.ps-card-solution .ps-item-text p{color:rgba(255,255,255,.75);}
+
+/* ══ METHODOLOGY ══ */
+.method-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.method-card{background:var(--white);padding:28px 22px;box-shadow:0 4px 20px rgba(0,0,0,.06);border:1px solid rgba(204,34,41,.08);display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;transition:transform .25s,box-shadow .25s;position:relative;}
+.method-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.1);}
+.method-num{position:absolute;top:14px;right:14px;width:26px;height:26px;background:var(--red);border-radius:50%;color:var(--white);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.method-icon{width:58px;height:58px;background:rgba(204,34,41,.08);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:1.4rem;}
+.method-card h3{font-family:var(--ff-serif);font-size:1.2rem;font-weight:400;color:var(--black);}
+.method-card p{font-size:13px;color:var(--gt);line-height:1.5;}
+.mf-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--black);padding:5px 0;border-bottom:1px solid var(--gl);width:100%;}
+.mf-item:last-child{border:0;}
+.mf-dot{width:5px;height:5px;background:var(--red);border-radius:50%;flex-shrink:0;}
+
+/* ══ SERVICES GRID ══ */
+.services-section{background:var(--off);}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.svc-card{background:var(--white);padding:28px;border:1px solid var(--gl);transition:transform .3s,box-shadow .3s,border-color .3s;}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.08);border-color:rgba(204,34,41,.2);}
+.svc-icon{width:48px;height:48px;background:rgba(204,34,41,.08);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:1.2rem;margin-bottom:18px;}
+.svc-name{font-family:var(--ff-serif);font-size:1.1rem;font-weight:400;color:var(--black);margin-bottom:10px;}
+.svc-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.7;margin-bottom:14px;}
+.svc-price{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.04em;}
+
+/* ══ AI AUTOMATION ══ */
+.ai-section{background:var(--black);padding:80px 72px;}
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px;}
+.ai-card{background:rgba(255,255,255,.04);border:1px solid rgba(204,34,41,.18);padding:22px;display:flex;flex-direction:column;gap:12px;transition:border-color .3s,background .3s;}
+.ai-card:hover{background:rgba(255,255,255,.07);border-color:rgba(204,34,41,.35);}
+.ai-icon-wrap{display:flex;align-items:center;gap:12px;}
+.ai-ico{width:40px;height:40px;background:rgba(204,34,41,.1);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:1rem;flex-shrink:0;}
+.ai-card-title{font-size:13px;font-weight:700;color:var(--white);}
+.ai-card-cat{font-size:10px;color:rgba(255,255,255,.38);}
+.ai-card p{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.55;}
+.ai-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.ai-tag{background:rgba(204,34,41,.1);border:1px solid rgba(204,34,41,.2);padding:3px 10px;font-size:10px;color:rgba(255,255,255,.7);}
+.ai-outcome{background:linear-gradient(135deg,rgba(204,34,41,.1),rgba(139,0,0,.06));border:1px solid rgba(204,34,41,.3);padding:24px 32px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.ai-outcome-ico{width:48px;height:48px;background:rgba(204,34,41,.2);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:1.3rem;flex-shrink:0;}
+.ai-outcome h3{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:4px;}
+.ai-outcome p{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.5;font-style:italic;}
+.ai-rate{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--red);white-space:nowrap;}
+.ai-rate-dot{width:8px;height:8px;background:var(--red);border-radius:50%;animation:blink 2s infinite;}
+
+/* ══ PRICING SECTION ══ */
+.pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.pricing-card{background:var(--white);border:1px solid var(--gl);padding:22px 18px;display:flex;flex-direction:column;gap:10px;transition:transform .25s,box-shadow .25s,border-color .25s;}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:rgba(204,34,41,.2);}
+.pricing-card.featured{border-color:var(--red);box-shadow:0 0 0 1px var(--red);}
+.tier-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--white);width:fit-content;}
+.badge-green{background:#22c55e;}.badge-blue{background:#3b82f6;}.badge-purple{background:#8b5cf6;}.badge-amber{background:#f59e0b;}.badge-red{background:var(--red);}
+.tier-name{font-family:var(--ff-serif);font-size:1.1rem;font-weight:400;color:var(--black);}
+.tier-price{font-size:1.6rem;font-weight:800;color:var(--red);}
+.tier-price .cur{font-size:1rem;font-weight:600;}
+.tier-price .per{font-size:11px;color:var(--gt);font-weight:400;}
+.tier-target{font-size:11.5px;color:var(--gt);line-height:1.45;min-height:36px;}
+.tf-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--black);padding:5px 0;border-bottom:1px solid var(--gl);}
+.tf-item:last-child{border:0;}
+.tf-dot{width:4px;height:4px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:5px;}
+.tier-footer{padding-top:10px;border-top:1px solid var(--gl);font-size:11px;color:var(--gt);display:flex;align-items:center;gap:6px;}
+.tier-footer i{color:var(--red);}
+.tier-cta{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--white);background:var(--red);border:none;padding:10px 16px;width:100%;transition:background .2s;}
+.tier-cta:hover{background:var(--red-dark);}
+
+/* ══ STANDALONE SERVICES ══ */
+.standalone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.standalone-card{background:var(--white);border:1px solid var(--gl);padding:24px;}
+.standalone-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--gl);}
+.standalone-icon{width:36px;height:36px;background:rgba(204,34,41,.08);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.9rem;}
+.standalone-head h3{font-size:14px;font-weight:700;color:var(--black);}
+.svc-table{width:100%;border-collapse:collapse;}
+.svc-table tr{border-bottom:1px solid var(--gl);}
+.svc-table tr:last-child{border:0;}
+.svc-table td{padding:10px 0;vertical-align:middle;}
+.svc-name{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--black);}
+.svc-ico{width:22px;height:22px;background:rgba(204,34,41,.06);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.65rem;flex-shrink:0;}
+.svc-price{font-size:12.5px;font-weight:700;color:var(--red);text-align:right;white-space:nowrap;}
+.svc-note{font-size:10px;font-weight:400;color:var(--gt);}
+
+/* ══ MAINTENANCE ══ */
+.maint-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.maint-card{padding:28px;border:1px solid var(--gl);background:var(--white);display:flex;flex-direction:column;}
+.maint-card.featured{border-color:var(--red);background:var(--black);color:var(--white);}
+.mc-badge{font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:12px;}
+.mc-badge.red{color:var(--red);}
+.mc-badge.gold{color:var(--gold);}
+.mc-badge.white{color:rgba(255,255,255,.4);}
+.mc-price{font-family:var(--ff-serif);font-size:2rem;color:var(--black);margin-bottom:4px;}
+.maint-card.featured .mc-price{color:var(--white);}
+.mc-period{font-size:11px;color:var(--gt);margin-bottom:18px;}
+.maint-card.featured .mc-period{color:rgba(255,255,255,.45);}
+.mc-feature{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gl);font-size:12.5px;}
+.maint-card.featured .mc-feature{border-bottom-color:rgba(255,255,255,.07);color:rgba(255,255,255,.8);}
+.mc-feature i{color:var(--red);font-size:11px;width:14px;}
+.mc-cta{margin-top:auto;padding-top:20px;}
+.mc-btn{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:11px 20px;border:none;width:100%;transition:all .2s;}
+.mc-btn.dark{background:var(--black);color:var(--white);}
+.mc-btn.dark:hover{background:var(--red);}
+.mc-btn.red{background:var(--red);color:var(--white);}
+.mc-btn.red:hover{background:var(--red-dark);}
+.mc-btn.outline{background:transparent;color:var(--black);border:1px solid var(--gl);}
+.mc-btn.outline:hover{border-color:var(--black);}
+
+/* ══ ENTERPRISE ══ */
+.ent-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:28px;}
+.ent-card{background:var(--white);border:1px solid var(--gl);padding:24px;transition:transform .25s,box-shadow .25s;}
+.ent-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.08);}
+.ent-icon{width:40px;height:40px;background:rgba(204,34,41,.08);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.9rem;margin-bottom:14px;}
+.ent-card h3{font-size:14px;font-weight:700;color:var(--black);margin-bottom:8px;}
+.ent-card p{font-size:12.5px;color:var(--gt);line-height:1.6;}
+.ent-price-table{background:var(--white);border:1px solid var(--gl);padding:24px;}
+.ent-price-table h4{font-family:var(--ff-serif);font-size:1.1rem;margin-bottom:16px;}
+table.ep{width:100%;border-collapse:collapse;font-size:12.5px;}
+table.ep th{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--gt);padding:8px 0;border-bottom:1px solid var(--gl);text-align:left;}
+table.ep td{padding:10px 0;border-bottom:1px solid var(--gl);}
+table.ep tr:last-child td{border:0;}
+.ep-price{color:var(--red);font-weight:700;}
+
+/* ══ GOVERNANCE ══ */
+.gov-policies-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.policy-card{background:var(--white);border:1px solid var(--gl);padding:20px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s;}
+.policy-card:hover{border-color:rgba(204,34,41,.2);}
+.policy-ico{width:36px;height:36px;background:rgba(204,34,41,.08);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.85rem;flex-shrink:0;}
+.policy-body h5{font-size:13px;font-weight:700;color:var(--black);margin-bottom:4px;}
+.policy-body p{font-size:11.5px;color:var(--gt);line-height:1.55;}
+.core-principle{background:var(--black);padding:36px 44px;margin-bottom:36px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.core-principle blockquote{font-family:var(--ff-serif);font-size:1.5rem;font-style:italic;color:var(--white);max-width:500px;line-height:1.35;}
+.perf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.perf-item{text-align:center;}
+.perf-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;}
+.perf-value{font-family:var(--ff-serif);font-size:1.5rem;color:var(--white);}
+
+/* ══ GROWTH SLIDER ══ */
+.slider-section{padding:80px 72px;background:var(--black);position:relative;overflow:hidden;}
+.slider-section::before{content:'';position:absolute;right:-180px;top:-180px;width:520px;height:520px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 60%);pointer-events:none;}
+.slider-header{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:end;margin-bottom:48px;}
+.slider-engine{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+.slider-controls{display:flex;flex-direction:column;gap:22px;}
+.slider-row{display:flex;flex-direction:column;gap:9px;}
+.sl-label-row{display:flex;justify-content:space-between;align-items:center;}
+.sl-name{font-size:12px;font-weight:500;color:rgba(255,255,255,.6);}
+.sl-value{font-family:var(--ff-serif);font-size:15px;color:var(--white);}
+.sl-track{position:relative;height:6px;background:rgba(255,255,255,.1);}
+.sl-fill{position:absolute;left:0;top:0;height:100%;background:var(--red);pointer-events:none;transition:width .2s;}
+input[type=range].sl-input{position:absolute;inset:-8px 0;width:100%;height:22px;opacity:0;z-index:2;margin:0;-webkit-appearance:none;appearance:none;}
+.sl-thumb{position:absolute;top:50%;width:14px;height:14px;background:var(--white);border:2px solid var(--red);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;transition:left .2s;}
+.slider-output{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:28px;}
+.so-label{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:18px;font-weight:500;}
+.so-metric{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.so-metric:last-child{border-bottom:none;}
+.so-mname{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.5);}
+.so-mval{font-family:var(--ff-serif);font-size:17px;color:var(--white);}
+.so-mval.pos{color:var(--teal);}
+.so-mval.gold{color:var(--gold);}
+.so-note{font-size:10.5px;font-weight:300;color:rgba(255,255,255,.22);margin-top:18px;line-height:1.65;border-top:1px solid rgba(255,255,255,.06);padding-top:14px;}
+
+/* ══ CHARTS ══ */
+.charts-section{padding:80px 72px;background:var(--off);}
+.charts-header{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:40px;}
+.charts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.chart-card{background:var(--white);border:1px solid var(--gl);padding:24px;}
+.chart-card-wide{grid-column:span 3;background:var(--white);border:1px solid var(--gl);padding:24px;}
+.cc-title{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gt);margin-bottom:18px;}
+
+/* ══ WORLD MAP ══ */
+.map-section{background:var(--black);}
+.map-header{padding:60px 72px 32px;}
+.map-h-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;}
+.map-filters{padding:0 72px 20px;display:flex;gap:8px;flex-wrap:wrap;}
+.mf-btn{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);padding:8px 18px;transition:all .2s;}
+.mf-btn:hover,.mf-btn.active{background:var(--red);border-color:var(--red);color:var(--white);}
+.map-container{width:100%;aspect-ratio:21/9;}
+#leafletMap{width:100%;height:100%;}
+.leaflet-popup-content-wrapper{background:var(--black);border:1px solid rgba(204,34,41,.3);border-radius:0;box-shadow:0 8px 32px rgba(0,0,0,.6);}
+.leaflet-popup-tip{background:var(--black);}
+.map-popup{padding:4px;}
+.mp-city{font-family:var(--ff-serif);font-size:15px;color:var(--white);}
+.mp-country{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+.mp-body{font-size:12px;color:rgba(255,255,255,.6);line-height:1.55;margin-bottom:12px;}
+.mp-cta{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);border:none;padding:8px 16px;width:100%;}
+.map-cta-overlay{padding:24px 72px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.mlc-text{font-size:14px;font-weight:300;color:rgba(255,255,255,.5);max-width:500px;line-height:1.7;}
+.mlc-text strong{color:var(--white);}
+.mlc-stats{display:flex;gap:32px;}
+.mlcs{text-align:center;}
+.mlcs-n{font-family:var(--ff-serif);font-size:1.8rem;color:var(--white);}
+.mlcs-n sup{font-size:12px;color:var(--red);}
+.mlcs-l{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+
+/* ══ GLOBAL SECTION ══ */
+.global-dark{background:var(--black);padding:80px 72px;}
+.global-map{position:relative;height:300px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);margin:40px 0;overflow:hidden;}
+.global-map-bg{position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" opacity="0.08"><path d="M150,100 L200,80 L250,90 L300,70 L400,60 L500,80 L600,90 L700,70 L800,60" stroke="%23CC2229" fill="none" stroke-width="1"/></svg>') center/cover;pointer-events:none;}
+.loc-node{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.loc-pulse-wrap{position:relative;width:14px;height:14px;}
+.loc-pulse-dot{position:absolute;inset:3px;background:var(--red);border-radius:50%;}
+.loc-ring{position:absolute;inset:0;border:1px solid var(--red);border-radius:50%;animation:pulse-ring 2s ease-out infinite;}
+.loc-label{font-size:10px;color:rgba(255,255,255,.6);white-space:nowrap;background:rgba(0,0,0,.7);padding:3px 8px;border:1px solid rgba(255,255,255,.07);}
+.loc-country{color:var(--red);font-weight:600;}
+.cap-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+.cap-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:20px;text-align:center;}
+.cap-icon{width:40px;height:40px;background:rgba(204,34,41,.1);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.9rem;margin:0 auto 12px;}
+.cap-card h4{font-size:13px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.cap-card p{font-size:11.5px;color:rgba(255,255,255,.4);line-height:1.5;}
+.global-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.gs-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:18px;}
+.gs-icon{width:36px;height:36px;background:rgba(204,34,41,.1);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.85rem;flex-shrink:0;}
+.gs-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.gs-val{font-family:var(--ff-serif);font-size:1.3rem;color:var(--white);}
+
+/* ══ CTA STRIP ══ */
+.cta-strip{background:var(--red);padding:64px 72px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.cta-strip h2{font-family:var(--ff-serif);font-size:clamp(24px,3vw,40px);color:var(--white);font-weight:400;}
+.cta-strip h2 em{font-style:italic;color:rgba(255,255,255,.4);}
+.cta-strip-body{font-size:15px;font-weight:300;color:rgba(255,255,255,.65);margin-top:10px;line-height:1.7;}
+.cta-strip-actions{display:flex;flex-direction:column;gap:10px;align-items:flex-end;}
+.btn-white{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);background:var(--white);padding:14px 28px;border:none;transition:all .2s;white-space:nowrap;}
+.btn-white:hover{background:rgba(255,255,255,.9);}
+
+/* ══ FAQ ══ */
+.faq-section{padding:80px 72px;background:var(--white);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+.faq-item{border-bottom:1px solid var(--gl);padding:18px 0;}
+.faq-q{font-size:14px;font-weight:600;color:var(--black);display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.faq-q button{background:none;border:none;color:var(--red);font-size:1rem;flex-shrink:0;}
+.faq-a{font-size:13.5px;font-weight:300;color:var(--gt);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
+.faq-item.open .faq-a{max-height:200px;}
+
+/* ══ FOOTER ══ */
+footer{background:var(--black);padding:52px 72px 28px;}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+.f-col-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;}
+.f-link{display:block;font-size:12.5px;color:rgba(255,255,255,.45);text-decoration:none;padding:4px 0;transition:color .2s;}
+.f-link:hover{color:var(--white);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.fb-copy{font-size:11px;color:rgba(255,255,255,.25);}
+.fb-cin{font-size:10px;color:rgba(255,255,255,.2);}
+
+/* ══ BROCHURE STRIP ══ */
+.brochure-strip{background:var(--gold);}
+.brochure-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 72px;flex-wrap:wrap;}
+.bi-left{display:flex;align-items:center;gap:14px;}
+.bi-icon{font-size:28px;flex-shrink:0;}
+.bi-text{font-size:14px;font-weight:500;color:var(--black);line-height:1.35;}
+.bi-text span{display:block;font-size:11px;font-weight:300;color:rgba(0,0,0,.5);margin-top:2px;}
+.bi-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.brochure-btn{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 20px;border:none;transition:all .2s;text-decoration:none;display:inline-block;}
+.brochure-btn.dark{background:var(--black);color:var(--white);}
+.brochure-btn.dark:hover{background:var(--red);}
+.brochure-btn.outline{background:transparent;color:var(--black);border:2px solid rgba(0,0,0,.2);}
+.brochure-btn.outline:hover{border-color:var(--black);}
+
+/* ══ PORTFOLIO ══ */
+.portfolio-section{padding:80px 72px;background:var(--off);}
+.portfolio-intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:36px;}
+.pf-filters{display:flex;gap:8px;flex-wrap:wrap;}
+.pf-filter{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--gl);background:var(--white);color:var(--gt);padding:7px 16px;transition:all .2s;}
+.pf-filter.active{background:var(--black);color:var(--white);border-color:var(--black);}
+.pf-filter:hover:not(.active){border-color:var(--black);color:var(--black);}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.pf-card{text-decoration:none;color:inherit;background:var(--white);border:1px solid var(--gl);overflow:hidden;transition:transform .3s,box-shadow .3s;}
+.pf-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.12);}
+.pf-card[data-cat].hidden{display:none;}
+.pf-img-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;}
+.pf-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease);}
+.pf-card:hover .pf-img-wrap img{transform:scale(1.06);}
+.pf-overlay{position:absolute;inset:0;background:rgba(13,13,13,.7);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .3s;}
+.pf-card:hover .pf-overlay{opacity:1;}
+.pf-visit{font-size:13px;font-weight:600;color:var(--white);}
+.pf-meta{padding:20px 22px;}
+.pf-tag{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:8px;}
+.pf-name{font-family:var(--ff-serif);font-size:18px;color:var(--black);margin-bottom:6px;}
+.pf-desc{font-size:12px;font-weight:300;color:var(--gt);line-height:1.75;margin-bottom:12px;}
+.pf-tech-row{display:flex;gap:6px;flex-wrap:wrap;}
+.pf-tech{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--off);color:var(--gt);padding:4px 8px;border:1px solid var(--gl);}
+
+/* ══ PROCESS STEPS ══ */
+.process-section{padding:80px 72px;background:var(--black);}
+.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.proc-step{padding:28px 24px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);position:relative;}
+.proc-step::after{content:attr(data-n);position:absolute;top:20px;right:20px;font-family:var(--ff-serif);font-size:3rem;color:rgba(255,255,255,.04);line-height:1;}
+.ps-n{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:12px;}
+.ps-title{font-family:var(--ff-serif);font-size:1.1rem;color:var(--white);margin-bottom:10px;}
+.ps-body{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;}
+.ps-dur{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:10px;font-weight:600;color:var(--red);letter-spacing:.06em;}
+
+/* ══ COMPARE TABLE ══ */
+.compare-section{padding:80px 72px;background:var(--white);}
+.ct-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;border-bottom:2px solid var(--black);padding-bottom:14px;margin-bottom:0;}
+.cth-cell{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gt);padding:0 14px;}
+.cth-cell:first-child{color:var(--black);}
+.cth-cell.hl{color:var(--red);}
+.ct-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--gl);align-items:center;}
+.ct-cell{padding:14px 14px;font-size:13px;color:var(--gt);}
+.ct-cell:first-child{font-weight:500;color:var(--black);}
+.ct-cell.hl{color:var(--red);font-weight:700;}
+.check-y{color:var(--teal);font-size:14px;}
+.check-n{color:var(--gm);}
+
+/* ══ IMPACT / TESTIMONIALS ══ */
+.impact-section{padding:80px 72px;background:var(--black);}
+.impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.impact-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:28px;position:relative;}
+.impact-card::before{content:'"';position:absolute;top:14px;right:18px;font-family:var(--ff-serif);font-size:4rem;color:rgba(204,34,41,.15);line-height:1;}
+.ic-stars{display:flex;gap:4px;margin-bottom:14px;}
+.ic-star{color:var(--gold);font-size:12px;}
+.ic-text{font-size:13.5px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.8;margin-bottom:18px;}
+.ic-author{display:flex;align-items:center;gap:12px;}
+.ic-avatar{width:36px;height:36px;background:rgba(204,34,41,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:14px;font-weight:700;font-family:var(--ff-serif);}
+.ic-name{font-size:13px;font-weight:600;color:var(--white);}
+.ic-role{font-size:11px;color:rgba(255,255,255,.35);}
+
+/* ══ ECOSYSTEM BAR ══ */
+.ecosystem-bar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:16px 20px;overflow-x:auto;margin-top:32px;}
+.eco-node{flex:1;min-width:100px;background:rgba(255,255,255,.04);padding:10px 12px;text-align:center;border:1px solid rgba(255,255,255,.07);}
+.eco-node h5{font-size:11px;font-weight:700;color:var(--white);margin-bottom:2px;}
+.eco-node span{font-size:10px;color:rgba(255,255,255,.35);}
+.eco-arrow{color:rgba(204,34,41,.4);font-size:.8rem;flex-shrink:0;}
+
+/* ══ CONTACT ══ */
+.contact-section{padding:80px 72px;background:var(--off);}
+.contact-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;}
+.contact-main{display:flex;flex-direction:column;gap:20px;}
+.contact-card{background:var(--white);border:1px solid var(--gl);padding:28px;}
+.contact-card-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--gl);}
+.contact-card-icon{width:36px;height:36px;background:rgba(204,34,41,.08);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.85rem;}
+.contact-card-head h3{font-size:14px;font-weight:700;color:var(--black);}
+.ci-item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--gl);}
+.ci-item:last-child{border:0;}
+.ci-icon{width:28px;height:28px;background:rgba(204,34,41,.06);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:.75rem;flex-shrink:0;}
+.ci-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gt);margin-bottom:3px;}
+.ci-val{font-size:13px;font-weight:500;color:var(--black);}
+.ci-val a{color:var(--black);text-decoration:none;}
+.ci-val a:hover{color:var(--red);}
+.support-card{background:var(--black);padding:32px;color:var(--white);min-width:300px;display:flex;flex-direction:column;gap:16px;}
+.support-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red);}
+.support-card h3{font-family:var(--ff-serif);font-size:1.3rem;font-weight:400;}
+.support-card p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;}
+.support-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ss-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);padding:12px;}
+.ss-lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px;}
+.ss-val{font-family:var(--ff-serif);font-size:1.2rem;color:var(--white);}
+.btn-primary-red{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;background:var(--red);color:var(--white);border:none;transition:background .2s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-primary-red:hover{background:var(--red-dark);}
+.btn-ghost-dark{font-size:11px;font-weight:500;padding:12px 20px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);background:none;transition:all .2s;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-ghost-dark:hover{border-color:rgba(255,255,255,.5);color:var(--white);}
+
+/* ══ MODALS ══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:var(--white);width:min(520px,90vw);max-height:90vh;overflow-y:auto;}
+.modal-top{padding:28px 32px;border-bottom:1px solid var(--gl);display:flex;justify-content:space-between;align-items:center;}
+.modal-title{font-family:var(--ff-serif);font-size:1.3rem;}
+.modal-close{background:none;border:none;font-size:1.2rem;color:var(--gt);}
+.modal-body{padding:28px 32px;}
+.form-field{margin-bottom:18px;}
+.form-field label{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gt);margin-bottom:8px;}
+.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid var(--gl);padding:12px 14px;font-family:var(--ff-sans);font-size:13.5px;color:var(--black);background:var(--white);transition:border-color .2s;outline:none;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--red);}
+.form-field textarea{min-height:90px;resize:vertical;}
+.form-submit{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);border:none;padding:14px 28px;width:100%;transition:background .2s;}
+.form-submit:hover{background:var(--red-dark);}
+.success-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.success-modal.open{opacity:1;pointer-events:all;}
+.success-box{background:var(--white);padding:48px;text-align:center;max-width:440px;}
+.success-icon{font-size:2.5rem;color:var(--teal);margin-bottom:18px;}
+.success-title{font-family:var(--ff-serif);font-size:1.5rem;margin-bottom:10px;}
+.success-sub{font-size:13.5px;color:var(--gt);line-height:1.7;}
+
+/* ══ UPSELL BOT ══ */
+.upsell-bot{position:fixed;bottom:28px;right:28px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
+.bot-toggle{width:56px;height:56px;background:var(--red);border-radius:50%;border:none;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:1.2rem;box-shadow:0 8px 32px rgba(204,34,41,.45);transition:transform .2s,box-shadow .2s;position:relative;}
+.bot-toggle:hover{transform:scale(1.08);box-shadow:0 12px 40px rgba(204,34,41,.55);}
+.bot-pulse{position:absolute;inset:-4px;border:2px solid rgba(204,34,41,.4);border-radius:50%;animation:pulse-ring 2.5s ease-out infinite;}
+.bot-badge{position:absolute;top:-4px;right:-4px;width:18px;height:18px;background:var(--gold);border-radius:50%;font-size:10px;font-weight:700;color:var(--black);display:flex;align-items:center;justify-content:center;}
+.bot-panel{background:var(--black);border:1px solid rgba(204,34,41,.25);width:320px;max-height:480px;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.6);transform:scale(.92) translateY(12px);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .3s;}
+.bot-panel.open{transform:none;opacity:1;pointer-events:all;}
+.bot-header{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.bot-avatar{width:32px;height:32px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:.8rem;flex-shrink:0;}
+.bot-name{font-size:13px;font-weight:700;color:var(--white);}
+.bot-status{font-size:10px;color:var(--teal);display:flex;align-items:center;gap:4px;}
+.bot-status::before{content:'';width:5px;height:5px;background:var(--teal);border-radius:50%;}
+.bot-close-btn{margin-left:auto;background:none;border:none;color:rgba(255,255,255,.4);font-size:.9rem;}
+.bot-messages{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent;}
+.bot-msg{max-width:85%;}
+.bot-msg.bot{align-self:flex-start;}
+.bot-msg.user{align-self:flex-end;}
+.bot-bubble{padding:10px 14px;font-size:12.5px;line-height:1.55;}
+.bot-msg.bot .bot-bubble{background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);border-radius:0 12px 12px 12px;}
+.bot-msg.user .bot-bubble{background:var(--red);color:var(--white);border-radius:12px 12px 0 12px;}
+.bot-highlight{color:var(--red);font-weight:700;}
+.bot-chips{display:flex;flex-direction:column;gap:6px;margin-top:6px;}
+.bot-chip{background:rgba(204,34,41,.1);border:1px solid rgba(204,34,41,.25);color:rgba(255,255,255,.75);font-size:11px;padding:7px 12px;text-align:left;transition:all .2s;}
+.bot-chip:hover{background:rgba(204,34,41,.2);border-color:var(--red);color:var(--white);}
+.bot-footer{padding:14px 18px;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:8px;flex-shrink:0;}
+.bot-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--white);font-family:var(--ff-sans);font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
+.bot-input:focus{border-color:rgba(204,34,41,.5);}
+.bot-input::placeholder{color:rgba(255,255,255,.3);}
+.bot-send{background:var(--red);border:none;color:var(--white);padding:9px 14px;transition:background .2s;}
+.bot-send:hover{background:var(--red-dark);}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);width:300px;}
+  .sidebar.mobile-open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 14px 0 58px;}
+  .hamburger{display:flex;}
+  .hero-inner{grid-template-columns:1fr;padding:44px 20px 0;}
+  .hero-panel{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .section{padding:60px 20px;}
+  .slider-section,.ai-section,.global-dark,.process-section,.impact-section{padding-left:20px;padding-right:20px;}
+  .brochure-inner,.map-header,.map-filters,.map-cta-overlay,.charts-section,.faq-section,.contact-section,.compare-section,.portfolio-section{padding-left:20px;padding-right:20px;}
+  .who-grid,.ps-grid,.slider-header,.slider-engine,.charts-header,.faq-grid,.portfolio-intro,.contact-grid,.cta-strip{grid-template-columns:1fr;gap:24px;}
+  .method-cards,.svc-grid,.ai-grid,.pricing-grid,.standalone-grid,.maint-grid,.ent-grid,.gov-policies-grid,.cap-grid,.global-stats,.proc-steps,.impact-grid{grid-template-columns:1fr 1fr;}
+  .brochure-inner{flex-direction:column;}
+  .map-h-grid{grid-template-columns:1fr;gap:20px;}
+  .cta-strip-actions{align-items:flex-start;}
+  footer{padding:40px 20px 20px;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:28px;}
+  .topbar-badge{display:none;}
+  .charts-grid{grid-template-columns:1fr;}
+  .chart-card-wide{grid-column:span 1;}
+  .perf-grid,.core-principle{flex-direction:column;align-items:flex-start;}
+  .stats-grid-4{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .method-cards,.pricing-grid,.standalone-grid,.ai-grid,.impact-grid,.proc-steps,.gov-policies-grid,.cap-grid,.global-stats{grid-template-columns:1fr;}
+  .stats-grid-4{grid-template-columns:1fr 1fr;}
+  .ps-grid,.who-grid,.maint-grid,.ent-grid{grid-template-columns:1fr;}
+  .upsell-bot{bottom:16px;right:16px;}
+  .bot-panel{width:calc(100vw - 32px);}
+  .perf-grid{grid-template-columns:1fr 1fr;}
+  .portfolio-grid{grid-template-columns:1fr;}
+  footer .footer-top{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Sidebar overlay -->
+<div class="sb-overlay" id="sbOverlay" onclick="toggleSidebar()"></div>
+
+<!-- Hamburger -->
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="https://origennt.com" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <nav class="nav-s">
+      <div class="nav-lbl">Services</div>
+      <a href="#services" class="nav-link">Web & Digital<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#ai" class="nav-link">AI Automation<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#pricing" class="nav-link">Pricing Tiers<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#maintenance" class="nav-link">Maintenance<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+    </nav>
+    <nav class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="#methodology" class="nav-link">Methodology<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#portfolio" class="nav-link">Portfolio<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#world-map" class="nav-link">Global Presence<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#governance" class="nav-link">Governance<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#contact" class="nav-link">Contact<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+    </nav>
+    <nav class="nav-s">
+      <div class="nav-lbl">Quick Actions</div>
+      <a href="#" class="nav-link" onclick="openEnquiry();return false;">Start a Project<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="#" class="nav-link" onclick="openBrochure();return false;">Download Brochure<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+      <a href="https://origennt.com" class="nav-link">← Back to Main Site<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></a>
+    </nav>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Contact</div>
+    <div class="sb-info">
+      <a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br>
+      <a href="tel:+916370947106">+91 6370947106</a><br>
+      CIN: U70200OD2025PTC051453
+    </div>
+  </div>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <a href="https://origennt.com" class="back-link">Back to ORIGENNT</a>
+    <div class="topbar-right">
+      <div class="topbar-badge">Strategy-Led Agency</div>
+      <button class="topbar-cta" onclick="openEnquiry()">Start a Project →</button>
+    </div>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero" id="hero">
+    <canvas id="bg-canvas"></canvas>
+    <div class="hero-glow1"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-red-bar"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">
+          <div class="hero-eyebrow-line"></div>
+          <div class="hero-dot"></div>
+          <span class="hero-eyebrow-text">Web & Digital Services — ORIGENNT Pvt. Ltd.</span>
+        </div>
+        <h1 class="hero-h1">We build<br>digital <em>businesses,</em><br>not websites.</h1>
+        <p class="hero-sub">Strategy-first. Zero templates. Every line of code engineered around your business model, market position, and growth targets.</p>
+        <div class="hero-pills">
+          <span class="hero-pill"><i class="fas fa-check"></i>100% Code Ownership</span>
+          <span class="hero-pill"><i class="fas fa-check"></i>60-Day Support Included</span>
+          <span class="hero-pill"><i class="fas fa-check"></i>No Hidden Charges</span>
+          <span class="hero-pill"><i class="fas fa-check"></i>International Clients</span>
+        </div>
+        <div class="hero-acts">
+          <button class="btn-red" onclick="openEnquiry()">Start Your Project →</button>
+          <button class="btn-link-w" onclick="openBrochure()">Download Brochure</button>
+        </div>
+        <div class="hero-locations">
+          <span class="loc-item"><span class="loc-dot-s"></span>Bhubaneswar</span>
+          <span class="loc-item"><span class="loc-dot-s"></span>London</span>
+          <span class="loc-item"><span class="loc-dot-s"></span>Dubai</span>
+          <span class="loc-item"><span class="loc-dot-s"></span>New York</span>
+          <span class="loc-item"><span class="loc-dot-s"></span>Singapore</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hp-lbl">Live Engagement Data</div>
+        <div class="hp-row"><span class="hp-name">Active Projects</span><span class="hp-val">12 <span class="accent">LIVE</span></span></div>
+        <div class="hp-row"><span class="hp-name">Countries Served</span><span class="hp-val">8<span class="accent">+</span></span></div>
+        <div class="hp-row"><span class="hp-name">Avg. Lead Uplift</span><span class="hp-val">3×</span></div>
+        <div class="hp-row"><span class="hp-name">On-Time Delivery</span><span class="hp-val">94<span class="accent">%</span></span></div>
+        <div class="hp-row"><span class="hp-name">Response Time</span><span class="hp-val">&lt;4<span class="accent">hrs</span></span></div>
+      </div>
+    </div>
+    <div class="hero-strip">
+      <div class="hs-cell"><div class="hsc-n">150<sup>+</sup></div><div class="hsc-l">Projects Delivered</div></div>
+      <div class="hs-cell"><div class="hsc-n">₹15<sup>k</sup></div><div class="hsc-l">Starting Price</div></div>
+      <div class="hs-cell"><div class="hsc-n">60<sup>d</sup></div><div class="hsc-l">Support Included</div></div>
+      <div class="hs-cell"><div class="hsc-n">0</div><div class="hsc-l">Hidden Charges</div></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="mq-item">Web Design <span class="mq-sep">·</span></span>
+      <span class="mq-item">E-Commerce <span class="mq-sep">·</span></span>
+      <span class="mq-item">AI Automation <span class="mq-sep">·</span></span>
+      <span class="mq-item">Next.js Development <span class="mq-sep">·</span></span>
+      <span class="mq-item">WhatsApp CRM <span class="mq-sep">·</span></span>
+      <span class="mq-item">SEO Architecture <span class="mq-sep">·</span></span>
+      <span class="mq-item">Management Consulting <span class="mq-sep">·</span></span>
+      <span class="mq-item">Razorpay Integration <span class="mq-sep">·</span></span>
+      <span class="mq-item">KPI Dashboards <span class="mq-sep">·</span></span>
+      <span class="mq-item">Web Design <span class="mq-sep">·</span></span>
+      <span class="mq-item">E-Commerce <span class="mq-sep">·</span></span>
+      <span class="mq-item">AI Automation <span class="mq-sep">·</span></span>
+      <span class="mq-item">Next.js Development <span class="mq-sep">·</span></span>
+      <span class="mq-item">WhatsApp CRM <span class="mq-sep">·</span></span>
+      <span class="mq-item">SEO Architecture <span class="mq-sep">·</span></span>
+      <span class="mq-item">Management Consulting <span class="mq-sep">·</span></span>
+      <span class="mq-item">Razorpay Integration <span class="mq-sep">·</span></span>
+      <span class="mq-item">KPI Dashboards <span class="mq-sep">·</span></span>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stats-grid-4">
+      <div class="stat-block reveal"><div class="stat-num" data-count="150">0<span class="accent">+</span></div><div class="stat-lbl">Projects Delivered</div></div>
+      <div class="stat-block reveal"><div class="stat-num" data-count="8">0<span class="accent">+</span></div><div class="stat-lbl">Countries</div></div>
+      <div class="stat-block reveal"><div class="stat-num" data-count="94">0<span class="accent">%</span></div><div class="stat-lbl">On-Time Delivery</div></div>
+      <div class="stat-block reveal"><div class="stat-num" data-count="3">0<span class="accent">×</span></div><div class="stat-lbl">Avg. Lead Uplift</div></div>
+    </div>
+  </div>
+
+  <!-- WHO WE ARE -->
+  <section class="section section-off" id="about">
+    <div class="who-grid">
+      <div>
+        <div class="chip">Who We Are</div>
+        <h2 class="D reveal">A strategy-led digital<br>infrastructure <em>firm.</em></h2>
+        <p class="body-t reveal" style="margin-top:16px;max-width:480px;">We are not a design studio or a coding shop. ORIGENNT is a Private Limited company that builds complete digital ecosystems — engineered from business strategy outward.</p>
+        <div class="positioning-block reveal" style="margin-top:24px;">
+          <p>"A website without a business strategy behind it is just a digital brochure. We build digital businesses."</p>
+          <cite>ORIGENNT · Web & Digital Division · Est. 2025</cite>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="identity-row"><i class="fas fa-building"></i><div class="identity-text">ORIGENNT Private Limited</div><div class="identity-val">Pvt. Ltd. Company</div></div>
+        <div class="identity-row"><i class="fas fa-id-card"></i><div class="identity-text">CIN: U70200OD2025PTC051453</div><div class="identity-val">Incorporated 2025</div></div>
+        <div class="identity-row"><i class="fas fa-map-marker-alt"></i><div class="identity-text">Bhubaneswar, Odisha</div><div class="identity-val">Operations Hub</div></div>
+        <div class="identity-row"><i class="fas fa-globe"></i><div class="identity-text">India · UK · UAE · USA · SG · AU</div><div class="identity-val">6 Markets</div></div>
+        <div class="identity-row"><i class="fas fa-envelope"></i><div class="identity-text">origennt@gmail.com</div><div class="identity-val">Response &lt;4hrs</div></div>
+        <div class="identity-row"><i class="fas fa-phone"></i><div class="identity-text">+91 6370947106</div><div class="identity-val">24/7 Support</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM / SOLUTION -->
+  <section class="section section-white">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">The Problem We Solve</div>
+      <h2 class="D">Why most business websites <em>fail.</em></h2>
+      <p class="body-t" style="margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto;">Most agencies deliver beautiful code with no strategic backbone. We diagnose before we design.</p>
+    </div>
+    <div class="ps-grid">
+      <div class="ps-card ps-card-problem reveal-left">
+        <h3>The Problem</h3>
+        <div class="ps-item"><div class="ps-item-text"><h4>Template-driven design</h4><p>Generic layouts that look like every competitor — zero differentiation.</p></div></div>
+        <div class="ps-item"><div class="ps-item-text"><h4>No post-launch support</h4><p>Handed a site and abandoned. Zero guidance on performance or growth.</p></div></div>
+        <div class="ps-item"><div class="ps-item-text"><h4>Fragmented vendors</h4><p>One agency for design, another for development, another for SEO. Chaos.</p></div></div>
+        <div class="ps-item"><div class="ps-item-text"><h4>No conversion strategy</h4><p>Traffic arrives and leaves. No lead capture, no funnel, no automation.</p></div></div>
+      </div>
+      <div class="ps-card ps-card-solution reveal-right">
+        <h3 style="color:var(--white)">The ORIGENNT Difference</h3>
+        <div class="ps-item"><div class="ps-item-text"><h4>Strategy-first architecture</h4><p>Brief built from your business model before any design tool opens.</p></div></div>
+        <div class="ps-item"><div class="ps-item-text"><h4>60-day post-launch support</h4><p>We stay engaged through your first months of operation.</p></div></div>
+        <div class="ps-item"><div class="ps-item-text"><h4>Single point of accountability</h4><p>One team handles consulting, design, dev, and automation.</p></div></div>
+        <div class="ps-item"><div class="ps-item-text"><h4>Automation integrated from day one</h4><p>Lead capture, CRM sync, WhatsApp flows baked into the architecture.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section class="section section-off" id="methodology">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">How We Work</div>
+      <h2 class="D">The ORIGENNT <em>Methodology.</em></h2>
+      <p class="body-t" style="margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;">Diagnose → Design → Enable → Optimize. Every project follows this four-phase framework.</p>
+    </div>
+    <div class="method-cards">
+      <div class="method-card reveal-scale">
+        <div class="method-num">1</div>
+        <div class="method-icon"><i class="fas fa-search"></i></div>
+        <h3>Diagnose</h3>
+        <p>Operational audits, workflow mapping, competitive analysis, leakage tracing</p>
+        <div style="width:100%;display:flex;flex-direction:column;gap:0;margin-top:8px;">
+          <div class="mf-item"><div class="mf-dot"></div><span>Business model analysis</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>Competitor benchmarking</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>Leakage identification</span></div>
+        </div>
+      </div>
+      <div class="method-card reveal-scale">
+        <div class="method-num">2</div>
+        <div class="method-icon"><i class="fas fa-pencil-ruler"></i></div>
+        <h3>Design</h3>
+        <p>Custom architecture blueprints, wireframes, brand systems, conversion flows</p>
+        <div style="width:100%;display:flex;flex-direction:column;gap:0;margin-top:8px;">
+          <div class="mf-item"><div class="mf-dot"></div><span>Architecture planning</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>UI/UX wireframing</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>Brand identity systems</span></div>
+        </div>
+      </div>
+      <div class="method-card reveal-scale">
+        <div class="method-num">3</div>
+        <div class="method-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Enable</h3>
+        <p>Technical deployment, API integrations, automation flows, infrastructure</p>
+        <div style="width:100%;display:flex;flex-direction:column;gap:0;margin-top:8px;">
+          <div class="mf-item"><div class="mf-dot"></div><span>Full-stack development</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>Automation deployment</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>Third-party integrations</span></div>
+        </div>
+      </div>
+      <div class="method-card reveal-scale">
+        <div class="method-num">4</div>
+        <div class="method-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Optimize</h3>
+        <p>Telemetry analysis, Lighthouse optimization, performance scaling, KPI tracking</p>
+        <div style="width:100%;display:flex;flex-direction:column;gap:0;margin-top:8px;">
+          <div class="mf-item"><div class="mf-dot"></div><span>Core Web Vitals audit</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>SEO performance review</span></div>
+          <div class="mf-item"><div class="mf-dot"></div><span>KPI monitoring</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI GROWTH SLIDER -->
+  <section class="slider-section" id="roi">
+    <div class="slider-header">
+      <div>
+        <div class="chip w">ROI Calculator</div>
+        <h2 class="D W reveal">What your investment<br>actually <em>returns.</em></h2>
+      </div>
+      <p class="body-t w reveal">Adjust the sliders to model your post-digital revenue potential. Based on aggregate data from 150+ ORIGENNT client engagements.</p>
+    </div>
+    <div class="slider-engine">
+      <div class="slider-controls">
+        <div class="slider-row">
+          <div class="sl-label-row"><span class="sl-name">Monthly Website Visitors</span><span class="sl-value" id="sv1">5,000</span></div>
+          <div class="sl-track"><div class="sl-fill" id="sf1" style="width:25%"></div><div class="sl-thumb" id="st1" style="left:25%"></div><input type="range" class="sl-input" id="s1" min="500" max="50000" value="5000" oninput="updateSlider(1)"></div>
+        </div>
+        <div class="slider-row">
+          <div class="sl-label-row"><span class="sl-name">Current Conversion Rate</span><span class="sl-value" id="sv2">1.2%</span></div>
+          <div class="sl-track"><div class="sl-fill" id="sf2" style="width:12%"></div><div class="sl-thumb" id="st2" style="left:12%"></div><input type="range" class="sl-input" id="s2" min="0.1" max="5" step="0.1" value="1.2" oninput="updateSlider(2)"></div>
+        </div>
+        <div class="slider-row">
+          <div class="sl-label-row"><span class="sl-name">Avg. Transaction Value (₹)</span><span class="sl-value" id="sv3">₹8,000</span></div>
+          <div class="sl-track"><div class="sl-fill" id="sf3" style="width:8%"></div><div class="sl-thumb" id="st3" style="left:8%"></div><input type="range" class="sl-input" id="s3" min="500" max="500000" value="8000" oninput="updateSlider(3)"></div>
+        </div>
+        <div class="slider-row">
+          <div class="sl-label-row"><span class="sl-name">ORIGENNT Uplift Factor</span><span class="sl-value" id="sv4">2.8×</span></div>
+          <div class="sl-track"><div class="sl-fill" id="sf4" style="width:56%"></div><div class="sl-thumb" id="st4" style="left:56%"></div><input type="range" class="sl-input" id="s4" min="1" max="5" step="0.1" value="2.8" oninput="updateSlider(4)"></div>
+        </div>
+      </div>
+      <div class="slider-output">
+        <div class="so-label">Projected Impact</div>
+        <div class="so-metric"><span class="so-mname">Current Monthly Revenue</span><span class="so-mval" id="om1">₹4.8L</span></div>
+        <div class="so-metric"><span class="so-mname">Post-Launch Revenue</span><span class="so-mval pos" id="om2">₹13.4L</span></div>
+        <div class="so-metric"><span class="so-mname">Monthly Uplift</span><span class="so-mval gold" id="om3">+₹8.6L</span></div>
+        <div class="so-metric"><span class="so-mname">Annual Revenue Added</span><span class="so-mval pos" id="om4">₹1.03Cr</span></div>
+        <div class="so-metric"><span class="so-mname">Payback Period</span><span class="so-mval" id="om5">~3 months</span></div>
+        <div class="so-note">Model based on avg. client outcomes. Actual results vary by sector and execution quality. ORIGENNT does not guarantee specific revenue targets.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BROCHURE STRIP -->
+  <div class="brochure-strip">
+    <div class="brochure-inner">
+      <div class="bi-left">
+        <div class="bi-icon">📄</div>
+        <div class="bi-text">Download the ORIGENNT Digital Services Brochure<span>Complete pricing, case studies, process documentation & team credentials.</span></div>
+      </div>
+      <div class="bi-btns">
+        <button class="brochure-btn dark" onclick="openBrochure()">Download PDF</button>
+        <button class="brochure-btn outline" onclick="openEnquiry()">Get a Custom Quote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section services-section" id="services">
+    <div class="section-header reveal">
+      <div class="chip">What We Build</div>
+      <h2 class="D">Six core service <em>categories.</em></h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal-scale">
+        <div class="svc-icon"><i class="fas fa-file-alt"></i></div>
+        <div class="svc-name">Landing Pages</div>
+        <p class="svc-desc">High-converting single-page experiences engineered for lead capture, WhatsApp integration, and SEO. Delivered in 3–5 days.</p>
+        <div class="svc-price">From ₹15,000 + GST</div>
+      </div>
+      <div class="svc-card reveal-scale">
+        <div class="svc-icon"><i class="fas fa-globe"></i></div>
+        <div class="svc-name">Corporate Websites</div>
+        <p class="svc-desc">5–10 page business ecosystems with CMS autonomy, technical SEO architecture, analytics, and 60-day support.</p>
+        <div class="svc-price">From ₹45,000 + GST</div>
+      </div>
+      <div class="svc-card reveal-scale">
+        <div class="svc-icon"><i class="fas fa-shopping-cart"></i></div>
+        <div class="svc-name">E-Commerce Platforms</div>
+        <p class="svc-desc">Full-stack e-commerce with Razorpay, inventory systems, WhatsApp order flows, and multi-currency architecture.</p>
+        <div class="svc-price">From ₹1,20,000 + GST</div>
+      </div>
+      <div class="svc-card reveal-scale">
+        <div class="svc-icon"><i class="fas fa-robot"></i></div>
+        <div class="svc-name">AI Automation Systems</div>
+        <p class="svc-desc">WhatsApp CRM, invoice automation, social media auto-posting, AI voice agents, and KPI reporting systems.</p>
+        <div class="svc-price">From ₹15,000 + GST</div>
+      </div>
+      <div class="svc-card reveal-scale">
+        <div class="svc-icon"><i class="fas fa-cloud"></i></div>
+        <div class="svc-name">SaaS & Enterprise Platforms</div>
+        <p class="svc-desc">Custom Next.js platforms, multi-tenant SaaS, ERP integrations, membership systems, and marketplace builds.</p>
+        <div class="svc-price">From ₹2,20,000 + GST</div>
+      </div>
+      <div class="svc-card reveal-scale">
+        <div class="svc-icon"><i class="fas fa-search-dollar"></i></div>
+        <div class="svc-name">Growth & SEO Retainers</div>
+        <p class="svc-desc">Ongoing technical SEO, Google Ads management, analytics reporting, and performance optimization retainers.</p>
+        <div class="svc-price">From ₹14,000/mo + GST</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI AUTOMATION -->
+  <section class="ai-section" id="ai">
+    <div class="section-header center reveal">
+      <div class="chip w" style="justify-content:center;">AI Automation</div>
+      <h2 class="D W">The automation layer behind<br>scalable <em>businesses.</em></h2>
+      <p class="body-t w" style="margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto;">Remove human dependency from repetitive operational loops. Our AI ecosystem handles routine tasks so your team focuses on growth.</p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-card reveal-scale">
+        <div class="ai-icon-wrap"><div class="ai-ico"><i class="fas fa-chart-line"></i></div><div><div class="ai-card-title">KPI Automated Reporting</div><div class="ai-card-cat">Analytics · from ₹15,000</div></div></div>
+        <p>Daily KPI reporting with real-time dashboards and actionable insights delivered automatically.</p>
+        <div class="ai-tags"><span class="ai-tag">Daily Reports</span><span class="ai-tag">Dashboards</span><span class="ai-tag">Alerts</span></div>
+      </div>
+      <div class="ai-card reveal-scale">
+        <div class="ai-icon-wrap"><div class="ai-ico"><i class="fab fa-whatsapp"></i></div><div><div class="ai-card-title">WhatsApp Lead → CRM</div><div class="ai-card-cat">Integration · from ₹18,000</div></div></div>
+        <p>Seamless WhatsApp lead capture with automatic CRM synchronization and follow-up sequences.</p>
+        <div class="ai-tags"><span class="ai-tag">Auto-sync</span><span class="ai-tag">Lead Capture</span><span class="ai-tag">CRM</span></div>
+      </div>
+      <div class="ai-card reveal-scale">
+        <div class="ai-icon-wrap"><div class="ai-ico"><i class="fas fa-share-alt"></i></div><div><div class="ai-card-title">Social Media Auto-Poster</div><div class="ai-card-cat">Marketing · from ₹22,000</div></div></div>
+        <p>Multi-platform scheduling and content distribution. Post once, publish everywhere, automatically.</p>
+        <div class="ai-tags"><span class="ai-tag">Scheduling</span><span class="ai-tag">Multi-platform</span><span class="ai-tag">Analytics</span></div>
+      </div>
+      <div class="ai-card reveal-scale">
+        <div class="ai-icon-wrap"><div class="ai-ico"><i class="fas fa-file-invoice-dollar"></i></div><div><div class="ai-card-title">Invoice & Payment Tracker</div><div class="ai-card-cat">Finance · from ₹25,000</div></div></div>
+        <p>Automated invoice generation, payment reminders, and reconciliation tracking for your finance team.</p>
+        <div class="ai-tags"><span class="ai-tag">Invoicing</span><span class="ai-tag">Tracking</span><span class="ai-tag">Reminders</span></div>
+      </div>
+      <div class="ai-card reveal-scale">
+        <div class="ai-icon-wrap"><div class="ai-ico"><i class="fas fa-user-friends"></i></div><div><div class="ai-card-title">Intelligent Lead Nurturing</div><div class="ai-card-cat">Sales · from ₹30,000</div></div></div>
+        <p>AI-powered lead scoring, personalized outreach sequences, and conversion funnel optimization.</p>
+        <div class="ai-tags"><span class="ai-tag">AI-driven</span><span class="ai-tag">Personalized</span><span class="ai-tag">Automation</span></div>
+      </div>
+      <div class="ai-card reveal-scale">
+        <div class="ai-icon-wrap"><div class="ai-ico"><i class="fas fa-phone-alt"></i></div><div><div class="ai-card-title">AI Voice Calling Agent</div><div class="ai-card-cat">Communication · ₹55,000 + ₹8,000/mo</div></div></div>
+        <p>24/7 multilingual AI voice agent for automated customer interactions, qualifying leads hands-free.</p>
+        <div class="ai-tags"><span class="ai-tag">Voice AI</span><span class="ai-tag">24/7</span><span class="ai-tag">Multilingual</span></div>
+      </div>
+    </div>
+    <div class="ai-outcome reveal">
+      <div class="ai-outcome-ico"><i class="fas fa-bolt"></i></div>
+      <div style="flex:1"><h3>Core Outcome</h3><p>Remove human dependency from repetitive loops. Our automation ecosystem handles routine tasks, allowing your team to focus entirely on strategic growth.</p></div>
+      <div class="ai-rate"><div class="ai-rate-dot"></div>98% Task Automation Rate</div>
+    </div>
+    <div class="ecosystem-bar reveal">
+      <div class="eco-node"><h5>Data Layer</h5><span>Storage & Processing</span></div>
+      <div class="eco-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="eco-node"><h5>Application Layer</h5><span>Business Logic</span></div>
+      <div class="eco-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="eco-node"><h5>Presentation Layer</h5><span>User Interface</span></div>
+      <div class="eco-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="eco-node"><h5>Integration Layer</h5><span>APIs & Connectors</span></div>
+      <div class="eco-arrow"><i class="fas fa-arrow-right"></i></div>
+      <div class="eco-node"><h5>Security Layer</h5><span>Protection & Compliance</span></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section section-off" id="pricing">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">Pricing Tiers</div>
+      <h2 class="D">Structured for every scale<br>of <em>business.</em></h2>
+      <p class="body-t" style="margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto;">From early-stage to enterprise. Every tier includes 100% code ownership, zero hidden charges, and post-launch support.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal-scale">
+        <div class="tier-badge badge-green"><i class="fas fa-bolt"></i> Super Saver</div>
+        <div class="tier-name">Super Saver</div>
+        <div class="tier-price"><span class="cur">₹</span>15,000 <span class="per">+ GST</span></div>
+        <div class="tier-target">Early-stage, sole traders, home businesses, local services</div>
+        <div style="flex:1;">
+          <div class="tf-item"><div class="tf-dot"></div>1 custom landing page</div>
+          <div class="tf-item"><div class="tf-dot"></div>Mobile responsive design</div>
+          <div class="tf-item"><div class="tf-dot"></div>WhatsApp integration</div>
+          <div class="tf-item"><div class="tf-dot"></div>Basic SEO setup</div>
+          <div class="tf-item"><div class="tf-dot"></div>SSL + Analytics</div>
+        </div>
+        <div class="tier-footer"><i class="fas fa-clock"></i> 3–5 business days</div>
+        <button class="tier-cta" onclick="openEnquiry()">Get Started →</button>
+      </div>
+      <div class="pricing-card reveal-scale">
+        <div class="tier-badge badge-blue"><i class="fas fa-rocket"></i> Starter</div>
+        <div class="tier-name">Starter</div>
+        <div class="tier-price"><span class="cur">₹</span>65,000 <span class="per">+ GST</span></div>
+        <div class="tier-target">Professional brands, clinics, restaurants, local B2B</div>
+        <div style="flex:1;">
+          <div class="tf-item"><div class="tf-dot"></div>5-page WordPress ecosystem</div>
+          <div class="tf-item"><div class="tf-dot"></div>CMS autonomy</div>
+          <div class="tf-item"><div class="tf-dot"></div>WhatsApp CRM automation</div>
+          <div class="tf-item"><div class="tf-dot"></div>Technical SEO</div>
+          <div class="tf-item"><div class="tf-dot"></div>Analytics systems</div>
+        </div>
+        <div class="tier-footer"><i class="fas fa-clock"></i> 2–3 weeks</div>
+        <button class="tier-cta" onclick="openEnquiry()">Get Started →</button>
+      </div>
+      <div class="pricing-card featured reveal-scale">
+        <div class="tier-badge badge-purple"><i class="fas fa-chart-line"></i> Growth</div>
+        <div class="tier-name">Growth</div>
+        <div class="tier-price"><span class="cur">₹</span>1,20,000 <span class="per">+ GST</span></div>
+        <div class="tier-target">Scaling MSMEs, multi-city brands, funded ventures</div>
+        <div style="flex:1;">
+          <div class="tf-item"><div class="tf-dot"></div>Custom Next.js ecosystem</div>
+          <div class="tf-item"><div class="tf-dot"></div>Headless CMS</div>
+          <div class="tf-item"><div class="tf-dot"></div>Lighthouse 95+ optimization</div>
+          <div class="tf-item"><div class="tf-dot"></div>3 automation workflows</div>
+          <div class="tf-item"><div class="tf-dot"></div>International SEO</div>
+        </div>
+        <div class="tier-footer"><i class="fas fa-clock"></i> 4–6 weeks</div>
+        <button class="tier-cta" onclick="openEnquiry()">Most Popular →</button>
+      </div>
+      <div class="pricing-card reveal-scale">
+        <div class="tier-badge badge-amber"><i class="fas fa-crown"></i> Plus</div>
+        <div class="tier-name">Plus</div>
+        <div class="tier-price"><span class="cur">₹</span>2,50,000 <span class="per">+ GST</span></div>
+        <div class="tier-target">Corporate brands, exporters, funded startups, national scale</div>
+        <div style="flex:1;">
+          <div class="tf-item"><div class="tf-dot"></div>Premium Next.js infrastructure</div>
+          <div class="tf-item"><div class="tf-dot"></div>AI Voice Agent</div>
+          <div class="tf-item"><div class="tf-dot"></div>6-flow automation suite</div>
+          <div class="tf-item"><div class="tf-dot"></div>Multi-currency architecture</div>
+          <div class="tf-item"><div class="tf-dot"></div>KPI command center</div>
+        </div>
+        <div class="tier-footer"><i class="fas fa-clock"></i> 8–14 weeks</div>
+        <button class="tier-cta" onclick="openEnquiry()">Get Started →</button>
+      </div>
+      <div class="pricing-card reveal-scale">
+        <div class="tier-badge badge-red"><i class="fas fa-building"></i> Enterprise</div>
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-price"><span class="cur">₹</span>Custom</div>
+        <div class="tier-target">Large-scale platforms, SaaS, marketplaces, multi-tenant</div>
+        <div style="flex:1;">
+          <div class="tf-item"><div class="tf-dot"></div>SaaS Platforms</div>
+          <div class="tf-item"><div class="tf-dot"></div>Multi-Vendor Marketplaces</div>
+          <div class="tf-item"><div class="tf-dot"></div>ERP Integrations</div>
+          <div class="tf-item"><div class="tf-dot"></div>AI Ecosystems</div>
+          <div class="tf-item"><div class="tf-dot"></div>Multi-Tenant Systems</div>
+        </div>
+        <div class="tier-footer"><i class="fas fa-clock"></i> Custom timeline</div>
+        <button class="tier-cta" onclick="openEnquiry()">Talk to Us →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANDALONE SERVICES -->
+  <section class="section section-white">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">À La Carte</div>
+      <h2 class="D">Standalone service <em>components.</em></h2>
+      <p class="body-t" style="margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;">Need just one thing? Our modular infrastructure allows precision deployment of individual components.</p>
+    </div>
+    <div class="standalone-grid">
+      <div class="standalone-card reveal">
+        <div class="standalone-head"><div class="standalone-icon"><i class="fas fa-code"></i></div><h3>Standalone Web Development</h3></div>
+        <table class="svc-table">
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-file-alt"></i></div>Custom Lead Landing Page</div></td><td class="svc-price">₹26,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-globe"></i></div>5-Page WordPress Business Site</div></td><td class="svc-price">₹45,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-building"></i></div>10-Page Corporate WordPress Site</div></td><td class="svc-price">₹65,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-rocket"></i></div>5-Page Custom Performance Website</div></td><td class="svc-price">₹58,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-crown"></i></div>Premium Corporate Platform</div></td><td class="svc-price">₹1,05,000</td></tr>
+        </table>
+      </div>
+      <div class="standalone-card reveal">
+        <div class="standalone-head"><div class="standalone-icon"><i class="fas fa-robot"></i></div><h3>Standalone Automation Systems</h3></div>
+        <table class="svc-table">
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-chart-line"></i></div>Daily KPI Reporter</div></td><td class="svc-price">₹15,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fab fa-whatsapp"></i></div>WhatsApp Lead → CRM</div></td><td class="svc-price">₹18,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-share-alt"></i></div>Social Media Auto-Poster</div></td><td class="svc-price">₹22,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-file-invoice"></i></div>Invoice & Payment Tracker</div></td><td class="svc-price">₹25,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-brain"></i></div>Intelligent Lead Nurturing</div></td><td class="svc-price">₹30,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-phone-alt"></i></div>AI Voice Calling Agent</div></td><td class="svc-price">₹55,000 <span class="svc-note">+ ₹8k/mo</span></td></tr>
+        </table>
+      </div>
+      <div class="standalone-card reveal">
+        <div class="standalone-head"><div class="standalone-icon"><i class="fas fa-plus-circle"></i></div><h3>Enterprise Add-On Systems</h3></div>
+        <table class="svc-table">
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fab fa-whatsapp"></i></div>WhatsApp Business API</div></td><td class="svc-price">₹10,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-palette"></i></div>Brand Identity System</div></td><td class="svc-price">₹12,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-search"></i></div>Technical SEO Overhaul</div></td><td class="svc-price">₹20,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-chart-bar"></i></div>Enterprise Analytics Dashboard</div></td><td class="svc-price">₹35,000</td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fas fa-search-dollar"></i></div>SEO Retainer</div></td><td class="svc-price">₹18,000 <span class="svc-note">/mo</span></td></tr>
+          <tr><td><div class="svc-name"><div class="svc-ico"><i class="fab fa-google"></i></div>Google Ads Management</div></td><td class="svc-price">₹14,000 <span class="svc-note">/mo</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTERPRISE -->
+  <section class="section section-off">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">Enterprise</div>
+      <h2 class="D">Custom infrastructure for<br><em>high-growth companies.</em></h2>
+      <p class="body-t" style="margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;">Enterprise-grade solutions engineered for scale, performance, and international deployment.</p>
+    </div>
+    <div class="ent-grid">
+      <div class="ent-card reveal-scale"><div class="ent-icon"><i class="fas fa-cloud"></i></div><h3>SaaS Platforms</h3><p>Scalable software-as-a-service with multi-tenant architecture. From ₹2,20,000+</p></div>
+      <div class="ent-card reveal-scale"><div class="ent-icon"><i class="fas fa-store"></i></div><h3>Multi-Vendor Marketplaces</h3><p>Marketplace platforms with advanced vendor management. From ₹12,50,000+</p></div>
+      <div class="ent-card reveal-scale"><div class="ent-icon"><i class="fas fa-database"></i></div><h3>ERP Integrations</h3><p>Enterprise resource planning with real-time data synchronization. Custom quote.</p></div>
+      <div class="ent-card reveal-scale"><div class="ent-icon"><i class="fas fa-users"></i></div><h3>CRM Systems</h3><p>Customer relationship management with full automation workflows. From ₹3,00,000+</p></div>
+      <div class="ent-card reveal-scale"><div class="ent-icon"><i class="fas fa-sync"></i></div><h3>Subscription Platforms</h3><p>Recurring billing systems with membership management. From ₹3,00,000+</p></div>
+      <div class="ent-card reveal-scale"><div class="ent-icon"><i class="fas fa-robot"></i></div><h3>AI Ecosystems</h3><p>Intelligent automation with machine learning capabilities. Custom quote.</p></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:0;">
+      <div class="ent-price-table reveal">
+        <h4>Starting Estimates</h4>
+        <table class="ep">
+          <tr><th>Solution Type</th><th>Starting Price</th><th>Timeline</th></tr>
+          <tr><td>SaaS Platforms</td><td class="ep-price">₹2,20,000+</td><td>8–12 wks</td></tr>
+          <tr><td>Headless E-Commerce</td><td class="ep-price">₹3,80,000+</td><td>10–14 wks</td></tr>
+          <tr><td>Membership Systems</td><td class="ep-price">₹3,00,000+</td><td>6–8 wks</td></tr>
+          <tr><td>Marketplaces</td><td class="ep-price">₹12,50,000+</td><td>12–16 wks</td></tr>
+        </table>
+      </div>
+      <div class="ent-price-table reveal">
+        <h4>Enterprise Governance</h4>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--black);padding:8px 0;border-bottom:1px solid var(--gl);"><i class="fas fa-check" style="color:var(--teal);width:14px;"></i>Weekly strategy calls</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--black);padding:8px 0;border-bottom:1px solid var(--gl);"><i class="fas fa-check" style="color:var(--teal);width:14px;"></i>SLA-backed support</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--black);padding:8px 0;border-bottom:1px solid var(--gl);"><i class="fas fa-check" style="color:var(--teal);width:14px;"></i>Dedicated execution teams</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--black);padding:8px 0;"><i class="fas fa-check" style="color:var(--teal);width:14px;"></i>Real-time monitoring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAINTENANCE -->
+  <section class="section section-white" id="maintenance">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">Post-Launch</div>
+      <h2 class="D">We stay with you<br>after <em>launch.</em></h2>
+      <p class="body-t" style="margin-top:14px;max-width:480px;margin-left:auto;margin-right:auto;">Three maintenance tiers designed around your growth stage. Zero lock-in. Cancel anytime.</p>
+    </div>
+    <div class="maint-grid">
+      <div class="maint-card reveal-scale">
+        <div class="mc-badge red">Essential</div>
+        <div class="mc-price">₹3,999</div>
+        <div class="mc-period">per month + GST</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Security monitoring</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Plugin/CMS updates</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Monthly backup</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Uptime monitoring</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>2 content edits/month</div>
+        <div class="mc-cta"><button class="mc-btn outline" onclick="openEnquiry()">Get Started</button></div>
+      </div>
+      <div class="maint-card featured reveal-scale">
+        <div class="mc-badge gold">Professional — Most Popular</div>
+        <div class="mc-price" style="color:var(--white);">₹7,999</div>
+        <div class="mc-period">per month + GST</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Everything in Essential</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Weekly backups</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Performance optimization</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>SEO health monitoring</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>10 content edits/month</div>
+        <div class="mc-cta"><button class="mc-btn red" onclick="openEnquiry()">Get Started</button></div>
+      </div>
+      <div class="maint-card reveal-scale">
+        <div class="mc-badge red">Enterprise</div>
+        <div class="mc-price">₹14,999</div>
+        <div class="mc-period">per month + GST</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Everything in Professional</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Daily backups</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Real-time monitoring</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>SLA response system</div>
+        <div class="mc-feature"><i class="fas fa-check"></i>Unlimited edits</div>
+        <div class="mc-cta"><button class="mc-btn dark" onclick="openEnquiry()">Contact Sales</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section" id="process">
+    <div class="section-header reveal">
+      <div class="chip w">Our Process</div>
+      <h2 class="D W">From brief to launch<br>in <em>weeks, not months.</em></h2>
+    </div>
+    <div class="proc-steps">
+      <div class="proc-step reveal" data-n="01"><div class="ps-n">Step 01</div><div class="ps-title">Discovery Brief</div><p class="ps-body">Deep-dive into your business model, competitive landscape, target market, and digital goals. No generic forms — a real strategy session.</p><div class="ps-dur"><i class="fas fa-clock"></i>Days 1–3</div></div>
+      <div class="proc-step reveal" data-n="02"><div class="ps-n">Step 02</div><div class="ps-title">Architecture & Design</div><p class="ps-body">Wireframes, information architecture, visual design, and brand application. One round of revisions before development begins.</p><div class="ps-dur"><i class="fas fa-clock"></i>Days 4–10</div></div>
+      <div class="proc-step reveal" data-n="03"><div class="ps-n">Step 03</div><div class="ps-title">Development & Integration</div><p class="ps-body">Full-stack build with SEO architecture, automation flows, payment integration, analytics, and performance optimization baked in.</p><div class="ps-dur"><i class="fas fa-clock"></i>Days 11–28</div></div>
+      <div class="proc-step reveal" data-n="04"><div class="ps-n">Step 04</div><div class="ps-title">Launch & Support</div><p class="ps-body">Live deployment, DNS configuration, Lighthouse audit, and 60-day post-launch support. Full code ownership transfer on delivery.</p><div class="ps-dur"><i class="fas fa-clock"></i>Days 29–60+</div></div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio-section" id="portfolio">
+    <div class="portfolio-intro">
+      <div>
+        <div class="chip">Portfolio</div>
+        <h2 class="D reveal">Recent client <em>work.</em></h2>
+      </div>
+      <div class="pf-filters reveal">
+        <button class="pf-filter active" onclick="filterPortfolio('all',this)">All</button>
+        <button class="pf-filter" onclick="filterPortfolio('web',this)">Web</button>
+        <button class="pf-filter" onclick="filterPortfolio('ecom',this)">E-Commerce</button>
+        <button class="pf-filter" onclick="filterPortfolio('ai',this)">AI/Automation</button>
+      </div>
+    </div>
+    <div class="portfolio-grid">
+      <a href="#" class="pf-card reveal-scale" data-cat="web">
+        <div class="pf-img-wrap"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=600&q=80&fit=crop" alt="Legal Firm Website" loading="lazy"><div class="pf-overlay"><span class="pf-visit">View Project →</span></div></div>
+        <div class="pf-meta"><div class="pf-tag">Corporate Website · London, UK</div><div class="pf-name">Harrington & Associates</div><div class="pf-desc">Full-stack Next.js corporate website for a UK-based legal advisory firm. International SEO, multi-currency, 60-day support.</div><div class="pf-tech-row"><span class="pf-tech">Next.js</span><span class="pf-tech">Sanity CMS</span><span class="pf-tech">Vercel</span></div></div>
+      </a>
+      <a href="#" class="pf-card reveal-scale" data-cat="ecom">
+        <div class="pf-img-wrap"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80&fit=crop" alt="Luxury E-Commerce" loading="lazy"><div class="pf-overlay"><span class="pf-visit">View Project →</span></div></div>
+        <div class="pf-meta"><div class="pf-tag">E-Commerce · Dubai, UAE</div><div class="pf-name">Al Majestic Boutique</div><div class="pf-desc">Luxury brand e-commerce platform with AI product recommendations, multi-currency AED/USD/INR, and automated order fulfilment flows.</div><div class="pf-tech-row"><span class="pf-tech">Next.js</span><span class="pf-tech">Razorpay</span><span class="pf-tech">Make.com</span></div></div>
+      </a>
+      <a href="#" class="pf-card reveal-scale" data-cat="ai">
+        <div class="pf-img-wrap"><img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80&fit=crop" alt="SaaS Platform" loading="lazy"><div class="pf-overlay"><span class="pf-visit">View Project →</span></div></div>
+        <div class="pf-meta"><div class="pf-tag">SaaS Platform · New York, USA</div><div class="pf-name">VenturePulse CRM</div><div class="pf-desc">Full SaaS CRM platform with AI lead scoring, WhatsApp automation, invoice generation, and a real-time KPI command center.</div><div class="pf-tech-row"><span class="pf-tech">React</span><span class="pf-tech">Node.js</span><span class="pf-tech">AI APIs</span></div></div>
+      </a>
+      <a href="#" class="pf-card reveal-scale" data-cat="web">
+        <div class="pf-img-wrap"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80&fit=crop" alt="Healthcare Website" loading="lazy"><div class="pf-overlay"><span class="pf-visit">View Project →</span></div></div>
+        <div class="pf-meta"><div class="pf-tag">Healthcare · Bhubaneswar, India</div><div class="pf-name">HealthFirst Clinic</div><div class="pf-desc">Multi-doctor appointment booking platform with WhatsApp reminders, payment integration, and patient data management system.</div><div class="pf-tech-row"><span class="pf-tech">WordPress</span><span class="pf-tech">WhatsApp API</span><span class="pf-tech">Razorpay</span></div></div>
+      </a>
+      <a href="#" class="pf-card reveal-scale" data-cat="ecom">
+        <div class="pf-img-wrap"><img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&q=80&fit=crop" alt="Electronics Store" loading="lazy"><div class="pf-overlay"><span class="pf-visit">View Project →</span></div></div>
+        <div class="pf-meta"><div class="pf-tag">E-Commerce · Singapore</div><div class="pf-name">TechHaven Electronics</div><div class="pf-desc">Southeast Asia e-commerce platform with multi-vendor support, automated inventory alerts, and regional SEO optimization.</div><div class="pf-tech-row"><span class="pf-tech">Next.js</span><span class="pf-tech">Headless CMS</span><span class="pf-tech">Stripe</span></div></div>
+      </a>
+      <a href="#" class="pf-card reveal-scale" data-cat="ai">
+        <div class="pf-img-wrap"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&fit=crop" alt="Automation Dashboard" loading="lazy"><div class="pf-overlay"><span class="pf-visit">View Project →</span></div></div>
+        <div class="pf-meta"><div class="pf-tag">AI Automation · Bhubaneswar, India</div><div class="pf-name">ExportEdge Automation</div><div class="pf-desc">Full automation suite for an export-import firm: invoice generation, KPI reporting, social auto-posting, and WhatsApp CRM in one ecosystem.</div><div class="pf-tech-row"><span class="pf-tech">Make.com</span><span class="pf-tech">Airtable</span><span class="pf-tech">WhatsApp API</span></div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- CHARTS -->
+  <section class="charts-section" id="data">
+    <div class="charts-header">
+      <div>
+        <div class="chip">Data Intelligence</div>
+        <h2 class="D reveal">Real numbers from<br>real client <em>outcomes.</em></h2>
+      </div>
+      <p class="body-t reveal">ORIGENNT tracks post-launch performance across all client engagements. These charts reflect aggregate data across 150+ web projects over 18 months.</p>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card reveal-scale"><div class="cc-title">Post-Launch Traffic Sources (Client Avg.)</div><div style="position:relative;height:220px;display:flex;align-items:center;justify-content:center;"><canvas id="pieChart1"></canvas></div></div>
+      <div class="chart-card reveal-scale"><div class="cc-title">Revenue Channel Breakdown (Post-Digital)</div><div style="position:relative;height:220px;display:flex;align-items:center;justify-content:center;"><canvas id="pieChart2"></canvas></div></div>
+      <div class="chart-card reveal-scale"><div class="cc-title">Project Mix — What Clients Choose</div><div style="position:relative;height:220px;display:flex;align-items:center;justify-content:center;"><canvas id="pieChart3"></canvas></div></div>
+      <div class="chart-card-wide reveal"><div class="cc-title">Average Monthly Lead Growth — Before vs. After ORIGENNT Web Launch</div><div style="position:relative;height:240px;"><canvas id="barChart1"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- WORLD MAP -->
+  <section class="map-section" id="world-map">
+    <div class="map-header">
+      <div class="map-h-grid">
+        <div>
+          <div class="chip w reveal">Global Presence</div>
+          <h2 class="D W reveal">Where ORIGENNT<br>builds digital <em>businesses.</em></h2>
+        </div>
+        <div class="reveal">
+          <p class="body-t w">From Bhubaneswar to Birmingham — ORIGENNT delivers premium digital services across India, UK, USA, UAE, Singapore, and Australia. <strong style="color:var(--white);">Hover any pin</strong> to see client data.</p>
+        </div>
+      </div>
+    </div>
+    <div class="map-filters">
+      <button class="mf-btn active" onclick="filterMap('all',this)">All Locations</button>
+      <button class="mf-btn" onclick="filterMap('india',this)">India</button>
+      <button class="mf-btn" onclick="filterMap('uk',this)">United Kingdom</button>
+      <button class="mf-btn" onclick="filterMap('uae',this)">UAE</button>
+      <button class="mf-btn" onclick="filterMap('us',this)">USA</button>
+      <button class="mf-btn" onclick="filterMap('asia',this)">Asia Pacific</button>
+    </div>
+    <div class="map-container" id="mapContainer">
+      <div id="leafletMap"></div>
+    </div>
+    <div class="map-cta-overlay">
+      <div class="mlc-text"><strong>Your city. Our capability.</strong> ORIGENNT works remotely with clients across 8+ countries. Distance has never cost a client a single pixel of quality.</div>
+      <div class="mlc-stats">
+        <div class="mlcs"><div class="mlcs-n">8<sup>+</sup></div><div class="mlcs-l">Countries</div></div>
+        <div class="mlcs"><div class="mlcs-n">150<sup>+</sup></div><div class="mlcs-l">Projects</div></div>
+        <div class="mlcs"><div class="mlcs-n">24/7</div><div class="mlcs-l">Support</div></div>
+      </div>
+      <button class="btn-red" onclick="openEnquiry()">Start a Project From Your City →</button>
+    </div>
+  </section>
+
+  <!-- GLOBAL CAPABILITIES -->
+  <section class="global-dark" id="global">
+    <div class="section-header center reveal">
+      <div class="chip w" style="justify-content:center;">Global Operations</div>
+      <h2 class="D W">Built for international <em>scalability.</em></h2>
+      <p class="body-t w" style="margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;">Global operations across 6 key markets with enterprise-grade, internationally deployable infrastructure.</p>
+    </div>
+    <div class="global-map">
+      <div class="global-map-bg"></div>
+      <div class="loc-node" style="top:55%;left:55%"><div class="loc-pulse-wrap"><div class="loc-pulse-dot"></div><div class="loc-ring"></div></div><div class="loc-label"><span class="loc-country">India</span> · Hub</div></div>
+      <div class="loc-node" style="top:38%;left:68%"><div class="loc-pulse-wrap"><div class="loc-pulse-dot"></div><div class="loc-ring" style="animation-delay:.5s;"></div></div><div class="loc-label"><span class="loc-country">UAE</span> · MEA</div></div>
+      <div class="loc-node" style="top:22%;left:46%"><div class="loc-pulse-wrap"><div class="loc-pulse-dot"></div><div class="loc-ring" style="animation-delay:1s;"></div></div><div class="loc-label"><span class="loc-country">UK</span> · EMEA</div></div>
+      <div class="loc-node" style="top:30%;left:18%"><div class="loc-pulse-wrap"><div class="loc-pulse-dot"></div><div class="loc-ring" style="animation-delay:1.5s;"></div></div><div class="loc-label"><span class="loc-country">USA</span> · Americas</div></div>
+      <div class="loc-node" style="top:58%;left:82%"><div class="loc-pulse-wrap"><div class="loc-pulse-dot"></div><div class="loc-ring" style="animation-delay:2s;"></div></div><div class="loc-label"><span class="loc-country">Singapore</span> · APAC</div></div>
+      <div class="loc-node" style="top:74%;left:88%"><div class="loc-pulse-wrap"><div class="loc-pulse-dot"></div><div class="loc-ring" style="animation-delay:2.5s;"></div></div><div class="loc-label"><span class="loc-country">Australia</span> · Oceania</div></div>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card reveal-scale"><div class="cap-icon"><i class="fas fa-globe"></i></div><h4>Multi-Currency</h4><p>20+ currencies with real-time exchange rates</p></div>
+      <div class="cap-card reveal-scale"><div class="cap-icon"><i class="fas fa-search"></i></div><h4>International SEO</h4><p>Regional targeting and hreflang architecture</p></div>
+      <div class="cap-card reveal-scale"><div class="cap-icon"><i class="fas fa-server"></i></div><h4>Cross-Region CDN</h4><p>Multi-region infrastructure with auto-scaling</p></div>
+      <div class="cap-card reveal-scale"><div class="cap-icon"><i class="fas fa-shield-alt"></i></div><h4>Enterprise Architecture</h4><p>High-availability, 99.9% uptime SLA</p></div>
+      <div class="cap-card reveal-scale"><div class="cap-icon"><i class="fas fa-balance-scale"></i></div><h4>Global Compliance</h4><p>GDPR, CCPA, and regional data protection</p></div>
+    </div>
+    <div class="global-stats">
+      <div class="gs-item reveal"><div class="gs-icon"><i class="fas fa-users"></i></div><div><div class="gs-lbl">Global Clients</div><div class="gs-val">150+</div></div></div>
+      <div class="gs-item reveal"><div class="gs-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="gs-lbl">Countries</div><div class="gs-val">8+</div></div></div>
+      <div class="gs-item reveal"><div class="gs-icon"><i class="fas fa-clock"></i></div><div><div class="gs-lbl">Uptime SLA</div><div class="gs-val">99.9%</div></div></div>
+      <div class="gs-item reveal"><div class="gs-icon"><i class="fas fa-headset"></i></div><div><div class="gs-lbl">Support</div><div class="gs-val">24/7</div></div></div>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE -->
+  <section class="section section-off" id="governance">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">Governance</div>
+      <h2 class="D">Enterprise-level <em>governance</em> standards.</h2>
+      <p class="body-t" style="margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;">Comprehensive policies ensuring transparency, security, and 100% client ownership of all deliverables.</p>
+    </div>
+    <div class="core-principle reveal">
+      <blockquote>"The infrastructure belongs entirely to the client."</blockquote>
+      <div class="perf-grid">
+        <div class="perf-item"><div class="perf-label">Ownership</div><div class="perf-value" style="color:var(--red)">100%</div></div>
+        <div class="perf-item"><div class="perf-label">Security</div><div class="perf-value">Bank-grade</div></div>
+        <div class="perf-item"><div class="perf-label">On-Time Delivery</div><div class="perf-value">94%</div></div>
+        <div class="perf-item"><div class="perf-label">Support Response</div><div class="perf-value" style="color:var(--red)">&lt;4hrs</div></div>
+      </div>
+    </div>
+    <div class="gov-policies-grid">
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-clock"></i></div><div class="policy-body"><h5>94% On-Time Delivery</h5><p>Consistent performance with structured PM</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-undo-alt"></i></div><div class="policy-body"><h5>Pro-Rated Delay Refund</h5><p>Automatic compensation for any delays</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-code"></i></div><div class="policy-body"><h5>Full Code Ownership</h5><p>100% IP transfer to client on delivery</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-unlock"></i></div><div class="policy-body"><h5>Zero Lock-In Guarantee</h5><p>No long-term contracts or hidden fees</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-file-contract"></i></div><div class="policy-body"><h5>NDA Governance</h5><p>Strict confidentiality agreements in place</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-comments"></i></div><div class="policy-body"><h5>Structured Feedback Cycles</h5><p>Regular review rounds, no guesswork</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-shield-alt"></i></div><div class="policy-body"><h5>Enterprise Data Protection</h5><p>Bank-grade security for all client data</p></div></div>
+      <div class="policy-card reveal-scale"><div class="policy-ico"><i class="fas fa-handshake"></i></div><div class="policy-body"><h5>Transparent Communication</h5><p>Regular updates, zero ambiguity</p></div></div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="compare-section">
+    <div class="section-header reveal">
+      <div class="chip">Why ORIGENNT</div>
+      <h2 class="D">How we compare to <em>alternatives.</em></h2>
+    </div>
+    <div class="ct-header">
+      <div class="cth-cell">Feature</div>
+      <div class="cth-cell hl">ORIGENNT</div>
+      <div class="cth-cell">Freelancer</div>
+      <div class="cth-cell">Generic Agency</div>
+    </div>
+    <div class="ct-row reveal"><div class="ct-cell">Strategy consultation included</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell"><span class="check-n">✗</span></div><div class="ct-cell"><span class="check-n">✗</span></div></div>
+    <div class="ct-row reveal"><div class="ct-cell">60-day post-launch support</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell"><span class="check-n">✗</span></div><div class="ct-cell">Extra cost</div></div>
+    <div class="ct-row reveal"><div class="ct-cell">100% code ownership</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell"><span class="check-y">✓</span></div><div class="ct-cell">Sometimes</div></div>
+    <div class="ct-row reveal"><div class="ct-cell">AI automation integrated</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell"><span class="check-n">✗</span></div><div class="ct-cell">Extra cost</div></div>
+    <div class="ct-row reveal"><div class="ct-cell">Lighthouse 90+ guaranteed</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell">Sometimes</div><div class="ct-cell"><span class="check-n">✗</span></div></div>
+    <div class="ct-row reveal"><div class="ct-cell">Zero hidden charges</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell">Sometimes</div><div class="ct-cell"><span class="check-n">✗</span></div></div>
+    <div class="ct-row reveal"><div class="ct-cell">International SEO architecture</div><div class="ct-cell hl"><span class="check-y">✓</span></div><div class="ct-cell"><span class="check-n">✗</span></div><div class="ct-cell">Extra cost</div></div>
+  </section>
+
+  <!-- IMPACT / TESTIMONIALS -->
+  <section class="impact-section">
+    <div class="section-header center reveal">
+      <div class="chip w" style="justify-content:center;">Client Outcomes</div>
+      <h2 class="D W">What clients say after<br>we <em>launch.</em></h2>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card reveal-scale">
+        <div class="ic-stars"><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span></div>
+        <div class="ic-text">"ORIGENNT didn't just build us a website — they rebuilt our entire digital presence. Lead volume tripled in the first 60 days. The WhatsApp automation alone paid for the project."</div>
+        <div class="ic-author"><div class="ic-avatar">R</div><div><div class="ic-name">Ravi Sharma</div><div class="ic-role">Director · HealthFirst Clinic, Bhubaneswar</div></div></div>
+      </div>
+      <div class="impact-card reveal-scale">
+        <div class="ic-stars"><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span></div>
+        <div class="ic-text">"Working with an India-based agency for our London firm felt risky at first. But the quality, the communication, and the strategic thinking were better than agencies we'd used here in the UK."</div>
+        <div class="ic-author"><div class="ic-avatar">J</div><div><div class="ic-name">James Harrington</div><div class="ic-role">Partner · Harrington & Associates, London</div></div></div>
+      </div>
+      <div class="impact-card reveal-scale">
+        <div class="ic-stars"><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span><span class="ic-star">★</span></div>
+        <div class="ic-text">"The KPI dashboard and automation flows ORIGENNT built for our Dubai operation eliminated 12 hours of manual reporting per week. Genuinely transformative for our team's efficiency."</div>
+        <div class="ic-author"><div class="ic-avatar">A</div><div><div class="ic-name">Aisha Al-Mansoori</div><div class="ic-role">Operations Head · Al Majestic Boutique, Dubai</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="section-header reveal">
+      <div class="chip">FAQ</div>
+      <h2 class="D">Common questions,<br><em>straight answers.</em></h2>
+    </div>
+    <div class="faq-grid">
+      <div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">How long does a typical project take?<button>+</button></div><div class="faq-a">Landing pages take 3–5 days. Corporate websites take 2–4 weeks. Growth and Plus packages take 4–14 weeks. Enterprise timelines are scoped per project. We always define the timeline upfront in the brief — no surprises.</div></div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">Do I own my website and code after delivery?<button>+</button></div><div class="faq-a">100%. You own all code, assets, and infrastructure from day one. There is no proprietary platform lock-in. We transfer everything on final payment — documented and legally clear.</div></div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">Can you work with international clients?<button>+</button></div><div class="faq-a">Yes. We serve clients in the UK, USA, UAE, Singapore, Australia, and across India. We invoice in INR, GBP, USD, and AED. Remote collaboration has never cost a client a pixel of quality.</div></div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">What is your payment structure?<button>+</button></div><div class="faq-a">Super Saver: 100% upfront. Starter: 50/50. Growth and above: 40% kickoff, 30% design approval, 30% on delivery. We accept bank transfer, Razorpay, and international wire.</div></div>
+      </div>
+      <div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">What is the 60-day support period?<button>+</button></div><div class="faq-a">After launch, ORIGENNT remains engaged for 60 days. We fix bugs, handle hosting issues, make minor content edits, and provide guidance on analytics and performance. After 60 days, you can move to a maintenance plan.</div></div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">Do you use templates or build custom?<button>+</button></div><div class="faq-a">Zero templates. Every project is custom-designed from scratch based on your brief. We don't recycle design work between clients — brand differentiation is fundamental to what we do.</div></div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">Can I add automation to an existing website?<button>+</button></div><div class="faq-a">Yes. Our standalone automation systems (WhatsApp CRM, KPI reporting, invoice tracking, social auto-posting) can integrate with most existing websites and business tools via API. We audit your current stack before quoting.</div></div>
+        <div class="faq-item reveal" onclick="toggleFaq(this)"><div class="faq-q">How do I get started?<button>+</button></div><div class="faq-a">Hit "Start a Project" anywhere on this page. You'll fill a brief form and we respond within 4 hours with a scoping call booking. No commitment required at that stage — the first call is free.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div>
+      <h2>Ready to build something<br><em>worth launching?</em></h2>
+      <p class="cta-strip-body">Tell us about your project. We respond within 4 hours, scope within 48, and can begin within the week.</p>
+    </div>
+    <div class="cta-strip-actions">
+      <button class="btn-white" onclick="openEnquiry()">Start Your Project →</button>
+      <button class="btn-ghost-w" onclick="openBrochure()">Download Brochure</button>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-header center reveal">
+      <div class="chip" style="justify-content:center;">Contact</div>
+      <h2 class="D">Multiple channels.<br><em>One team.</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-main">
+        <div class="contact-card reveal">
+          <div class="contact-card-head"><div class="contact-card-icon"><i class="fas fa-building"></i></div><h3>Corporate Information</h3></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-id-card"></i></div><div><div class="ci-label">CIN Number</div><div class="ci-val">U70200OD2025PTC051453</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="ci-label">Registered Office</div><div class="ci-val">NO-A2/304 MJ Woods, Jagannath Prasad, Andharua, Barang, Cuttack Sadar, Odisha, India – 754005</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-globe"></i></div><div><div class="ci-label">Website</div><div class="ci-val"><a href="https://www.origennt.com">www.origennt.com</a></div></div></div>
+        </div>
+        <div class="contact-card reveal">
+          <div class="contact-card-head"><div class="contact-card-icon"><i class="fas fa-address-book"></i></div><h3>Contact Channels</h3></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-envelope"></i></div><div><div class="ci-label">Email</div><div class="ci-val"><a href="mailto:origennt@gmail.com">origennt@gmail.com</a></div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-phone"></i></div><div><div class="ci-label">Phone</div><div class="ci-val"><a href="tel:+916370947106">+91 6370947106</a></div></div></div>
+          <div class="ci-item"><div class="ci-icon"><i class="fas fa-clock"></i></div><div><div class="ci-label">Response Time</div><div class="ci-val">Within 4 operational hours</div></div></div>
+        </div>
+      </div>
+      <div class="support-card reveal-right">
+        <div><div class="support-badge"><i class="fas fa-headset"></i> Support & Escalation</div><h3 style="margin-top:10px;">24/7 Support Available</h3></div>
+        <p>Our team is available around the clock. For urgent matters, use direct email for fastest response.</p>
+        <div class="support-stats">
+          <div class="ss-item"><div class="ss-lbl">Support Hours</div><div class="ss-val">24/7</div></div>
+          <div class="ss-item"><div class="ss-lbl">First Response</div><div class="ss-val">&lt;4hrs</div></div>
+          <div class="ss-item"><div class="ss-lbl">Satisfaction Rate</div><div class="ss-val">98%</div></div>
+          <div class="ss-item"><div class="ss-lbl">On-Time Delivery</div><div class="ss-val">94%</div></div>
+        </div>
+        <a href="mailto:origennt@gmail.com" class="btn-primary-red"><i class="fas fa-envelope"></i> origennt@gmail.com</a>
+        <a href="tel:+916370947106" class="btn-ghost-dark"><i class="fas fa-phone"></i> +91 6370947106</a>
+        <button class="btn-primary-red" onclick="openEnquiry()" style="margin-top:4px;"><i class="fas fa-arrow-right"></i> Start a Project Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a href="https://origennt.com" class="logo" style="font-size:16px;margin-bottom:14px;display:inline-flex;">ORIGENNT<span class="logo-dot">.</span></a>
+        <p style="font-size:12px;color:rgba(255,255,255,.3);line-height:1.75;margin-top:10px;">ORIGENNT Private Limited — strategy-led web design, AI automation, and digital infrastructure for businesses across India and internationally.</p>
+        <p style="font-size:10px;color:rgba(255,255,255,.2);margin-top:10px;">CIN: U70200OD2025PTC051453</p>
+      </div>
+      <div>
+        <div class="f-col-lbl">Services</div>
+        <a href="#services" class="f-link">Web Design</a>
+        <a href="#services" class="f-link">E-Commerce</a>
+        <a href="#ai" class="f-link">AI Automation</a>
+        <a href="#pricing" class="f-link">Pricing Tiers</a>
+        <a href="#maintenance" class="f-link">Maintenance Plans</a>
+      </div>
+      <div>
+        <div class="f-col-lbl">Company</div>
+        <a href="https://origennt.com" class="f-link">About ORIGENNT</a>
+        <a href="#methodology" class="f-link">Methodology</a>
+        <a href="#portfolio" class="f-link">Portfolio</a>
+        <a href="#governance" class="f-link">Governance</a>
+        <a href="#global" class="f-link">Global Operations</a>
+      </div>
+      <div>
+        <div class="f-col-lbl">Contact</div>
+        <a href="mailto:origennt@gmail.com" class="f-link">origennt@gmail.com</a>
+        <a href="tel:+916370947106" class="f-link">+91 6370947106</a>
+        <a href="https://www.origennt.com" class="f-link">www.origennt.com</a>
+        <div style="margin-top:16px;display:flex;gap:10px;">
+          <a href="https://www.linkedin.com/company/origennt" class="f-link" style="display:flex;align-items:center;gap:6px;"><i class="fab fa-linkedin"></i>LinkedIn</a>
+          <a href="https://www.instagram.com/origennt" class="f-link" style="display:flex;align-items:center;gap:6px;"><i class="fab fa-instagram"></i>Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="fb-copy">© 2025–2026 ORIGENNT Private Limited. All rights reserved.</span>
+      <span class="fb-cin">Bhubaneswar, Odisha, India · Building Tomorrow. Together.</span>
+    </div>
+  </footer>
+
+</main>
+
+<!-- ══ ENQUIRY MODAL ══ -->
+<div class="modal-overlay" id="enquiryModal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <span class="modal-title">Start a Project</span>
+      <button class="modal-close" onclick="document.getElementById('enquiryModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="enquiryForm" onsubmit="submitEnquiry(event)">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+        <input type="hidden" name="subject" id="enquirySubject" value="New Project Enquiry — ORIGENNT Web Services">
+        <div class="form-field"><label>Your Name</label><input type="text" name="name" placeholder="Full name" required></div>
+        <div class="form-field"><label>Business Name</label><input type="text" name="business" placeholder="Your company / brand"></div>
+        <div class="form-field"><label>Email</label><input type="email" name="email" placeholder="you@example.com" required></div>
+        <div class="form-field"><label>WhatsApp Number</label><input type="tel" name="phone" placeholder="+91 or international"></div>
+        <div class="form-field"><label>Service Interested In</label>
+          <select name="service">
+            <option>Landing Page (₹15,000+)</option>
+            <option>Corporate Website (₹45,000+)</option>
+            <option>Growth Package (₹1,20,000+)</option>
+            <option>Plus Package (₹2,50,000+)</option>
+            <option>AI Automation</option>
+            <option>E-Commerce Platform</option>
+            <option>Enterprise / Custom</option>
+            <option>Maintenance Plan</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Tell us about your project</label><textarea name="message" placeholder="Business context, goals, timeline, budget range…"></textarea></div>
+        <button type="submit" class="form-submit">Send Enquiry — We Respond in 4hrs →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- BROCHURE MODAL -->
+<div class="modal-overlay" id="brochureModal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <span class="modal-title">Download Brochure</span>
+      <button class="modal-close" onclick="document.getElementById('brochureModal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13.5px;color:var(--gt);line-height:1.75;margin-bottom:20px;">Enter your email to receive the ORIGENNT Digital Services brochure — complete with pricing, case studies, team credentials, and process documentation.</p>
+      <form onsubmit="downloadBrochure(event)">
+        <div class="form-field"><label>Your Name</label><input type="text" placeholder="Full name" required></div>
+        <div class="form-field"><label>Email</label><input type="email" placeholder="you@example.com" required></div>
+        <div class="form-field"><label>Company</label><input type="text" placeholder="Optional"></div>
+        <button type="submit" class="form-submit">Send Brochure to My Email →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="success-modal" id="successModal">
+  <div class="success-box">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Message Sent Successfully</div>
+    <p class="success-sub">Thank you for reaching out. Our team will respond within 4 hours. Check your inbox — and WhatsApp if you provided a number.</p>
+    <button class="form-submit" style="margin-top:24px;" onclick="document.getElementById('successModal').classList.remove('open')">Close</button>
+  </div>
+</div>
+
+<!-- ══ UPSELL BOT ══ -->
+<div class="upsell-bot" id="upsellBot">
+  <div class="bot-panel" id="botPanel">
+    <div class="bot-header">
+      <div class="bot-avatar"><i class="fas fa-robot"></i></div>
+      <div><div class="bot-name">ORIGENNT Assistant</div><div class="bot-status">Online — replies instantly</div></div>
+      <button class="bot-close-btn" onclick="toggleBot()">✕</button>
+    </div>
+    <div class="bot-messages" id="botMessages"></div>
+    <div class="bot-footer">
+      <input class="bot-input" id="botInput" placeholder="Ask about pricing, services…" onkeydown="if(event.key==='Enter')sendBotMessage()">
+      <button class="bot-send" onclick="sendBotMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <button class="bot-toggle" onclick="toggleBot()" id="botToggle">
+    <div class="bot-pulse"></div>
+    <i class="fas fa-robot" id="botIcon"></i>
+    <div class="bot-badge" id="botBadge">1</div>
+  </button>
+</div>
+
+<script>
+/* ══ CURSOR ══ */
+(function(){
+  const c=document.getElementById('cursor'),r=document.getElementById('cursorRing');
+  if(!c)return;
+  let mx=0,my=0,rx=0,ry=0;
+  window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';});
+  function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);}
+  loop();
+})();
+
+/* ══ ANIMATED CANVAS BACKGROUND ══ */
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+  resize();
+  window.addEventListener('resize', resize);
+
+  for(let i=0;i<80;i++){
+    particles.push({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+      size:Math.random()*2+.5,
+      alpha:Math.random()*.5+.1,
+      color:Math.random()>.7?'204,34,41':'201,168,76'
+    });
+  }
+
+  let t=0;
+  function draw(){
+    t++;
+    ctx.clearRect(0,0,W,H);
+
+    // Draw connections
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<120){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(204,34,41,${(.12*(1-dist/120))})`;
+          ctx.lineWidth=.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${p.color},${p.alpha})`;
+      ctx.fill();
+    });
+
+    // Pulsing ring at bottom right
+    const pr = 60+Math.sin(t*.03)*20;
+    const px = W*.75, py = H*.65;
+    ctx.beginPath();
+    ctx.arc(px,py,pr,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(204,34,41,${.04+Math.sin(t*.03)*.02})`;
+    ctx.lineWidth=1;
+    ctx.stroke();
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ══ SIDEBAR ══ */
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('mobile-open');
+  document.getElementById('sbOverlay').classList.toggle('show');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+/* ══ REVEAL ON SCROLL ══ */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      // counter animation
+      const num = e.target.querySelector('[data-count]');
+      if(num && !num.dataset.animated){
+        num.dataset.animated='1';
+        const end = parseInt(num.dataset.count);
+        const suffix = num.innerHTML.replace(/\d+/,'');
+        let cur=0;
+        const step=Math.max(1,Math.floor(end/40));
+        const timer=setInterval(()=>{
+          cur=Math.min(cur+step,end);
+          num.innerHTML=cur+suffix;
+          if(cur>=end)clearInterval(timer);
+        },28);
+      }
+    }
+  });
+},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>revealObserver.observe(el));
+
+/* ══ ROI SLIDER ══ */
+function updateSlider(i){
+  const s=document.getElementById('s'+i);
+  const min=parseFloat(s.min),max=parseFloat(s.max),val=parseFloat(s.value);
+  const pct=((val-min)/(max-min)*100);
+  document.getElementById('sf'+i).style.width=pct+'%';
+  document.getElementById('st'+i).style.left=pct+'%';
+  const labels={1:v=>v.toLocaleString('en-IN'),2:v=>v.toFixed(1)+'%',3:v=>'₹'+v.toLocaleString('en-IN'),4:v=>v.toFixed(1)+'×'};
+  document.getElementById('sv'+i).textContent=labels[i](val);
+  calcROI();
+}
+function calcROI(){
+  const vis=parseFloat(document.getElementById('s1').value);
+  const cr=parseFloat(document.getElementById('s2').value)/100;
+  const aov=parseFloat(document.getElementById('s3').value);
+  const uf=parseFloat(document.getElementById('s4').value);
+  const cur=vis*cr*aov;
+  const after=cur*uf;
+  const uplift=after-cur;
+  const annual=uplift*12;
+  const pb=after>0?Math.max(1,Math.round(65000/uplift))+'months':'-';
+  const fmt=v=>{if(v>=10000000)return'₹'+(v/10000000).toFixed(2)+'Cr';if(v>=100000)return'₹'+(v/100000).toFixed(1)+'L';return'₹'+Math.round(v).toLocaleString('en-IN');};
+  document.getElementById('om1').textContent=fmt(cur);
+  document.getElementById('om2').textContent=fmt(after);
+  document.getElementById('om3').textContent='+'+fmt(uplift);
+  document.getElementById('om4').textContent=fmt(annual);
+  document.getElementById('om5').textContent='~'+pb;
+}
+calcROI();
+
+/* ══ PORTFOLIO FILTER ══ */
+function filterPortfolio(cat,btn){
+  document.querySelectorAll('.pf-filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pf-card').forEach(c=>{
+    c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat);
+  });
+}
+
+/* ══ FAQ ══ */
+function toggleFaq(el){
+  el.classList.toggle('open');
+  el.querySelector('.faq-q button').textContent=el.classList.contains('open')?'−':'+';
+}
+
+/* ══ MODALS ══ */
+function openEnquiry(){document.getElementById('enquiryModal').classList.add('open');}
+function openBrochure(){document.getElementById('brochureModal').classList.add('open');}
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');});
+});
+async function submitEnquiry(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.form-submit');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(e.target)});}catch(_){}
+  document.getElementById('enquiryModal').classList.remove('open');
+  document.getElementById('successModal').classList.add('open');
+  e.target.reset();btn.textContent='Send Enquiry — We Respond in 4hrs →';btn.disabled=false;
+}
+function downloadBrochure(e){
+  e.preventDefault();
+  document.getElementById('brochureModal').classList.remove('open');
+  document.getElementById('successModal').classList.add('open');
+}
+
+/* ══ CHARTS ══ */
+window.addEventListener('load',()=>{
+  const cfg=(labels,data,colors,type='doughnut')=>({
+    type,data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:2,borderColor:'#f7f6f4'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10,family:'Outfit'},color:'#6b6660',padding:10}}}}
+  });
+  new Chart(document.getElementById('pieChart1'),cfg(['Organic Search','Direct','Social','Referral','Paid'],[42,22,18,10,8],['#CC2229','#c9a84c','#0d6b5e','#2563eb','#6b6660']));
+  new Chart(document.getElementById('pieChart2'),cfg(['Online / Website','Referral','Repeat Business','Events','Other'],[55,20,15,6,4],['#CC2229','#c9a84c','#0d6b5e','#2563eb','#c2bfba']));
+  new Chart(document.getElementById('pieChart3'),cfg(['Corporate Sites','E-Commerce','AI Automation','SaaS','Landing Pages'],[34,25,18,14,9],['#CC2229','#c9a84c','#0d6b5e','#2563eb','#c2bfba']));
+  new Chart(document.getElementById('barChart1'),{
+    type:'bar',
+    data:{
+      labels:['Mo 1','Mo 2','Mo 3','Mo 4','Mo 5','Mo 6'],
+      datasets:[
+        {label:'Before ORIGENNT',data:[24,26,22,28,25,27],backgroundColor:'rgba(107,102,96,.35)',borderRadius:3},
+        {label:'After ORIGENNT',data:[31,48,67,82,91,104],backgroundColor:'#CC2229',borderRadius:3}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:10,family:'Outfit'},color:'#6b6660'}}},scales:{y:{ticks:{color:'#6b6660',font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}},x:{ticks:{color:'#6b6660',font:{size:10}},grid:{display:false}}}}
+  });
+});
+
+/* ══ WORLD MAP ══ */
+const MAP_PINS=[
+  {id:'bbsr',city:'Bhubaneswar',country:'India',flag:'🇮🇳',region:'india',type:'red',lat:20.2961,lng:85.8245,body:'Operations hub. Multiple active clients across Odisha. Full-stack web, AI automation, and consulting.'},
+  {id:'mum',city:'Mumbai',country:'India',flag:'🇮🇳',region:'india',type:'gold',lat:19.076,lng:72.8777,body:'3 active clients. E-commerce and corporate website projects. Billed in INR.'},
+  {id:'del',city:'New Delhi',country:'India',flag:'🇮🇳',region:'india',type:'gold',lat:28.6139,lng:77.209,body:'2 active clients. Corporate platforms and AI automation systems.'},
+  {id:'lon',city:'London',country:'United Kingdom',flag:'🇬🇧',region:'uk',type:'red',lat:51.5074,lng:-.1278,body:'2 active UK clients. Full-stack web application + corporate site. Billed in GBP.'},
+  {id:'dxb',city:'Dubai',country:'United Arab Emirates',flag:'🇦🇪',region:'uae',type:'red',lat:25.2048,lng:55.2708,body:'1 active client. Luxury brand corporate site + AI automation. Billed in AED.'},
+  {id:'nyc',city:'New York',country:'United States',flag:'🇺🇸',region:'us',type:'gold',lat:40.7128,lng:-74.006,body:'1 active US client. SaaS platform development. Billed in USD.'},
+  {id:'sg',city:'Singapore',country:'Singapore',flag:'🇸🇬',region:'asia',type:'gold',lat:1.3521,lng:103.8198,body:'1 active client. E-commerce platform. Southeast Asia expansion focus.'},
+  {id:'syd',city:'Sydney',country:'Australia',flag:'🇦🇺',region:'asia',type:'prospect',lat:-33.8688,lng:151.2093,body:'Prospect. B2B e-commerce enquiry received.'},
+];
+let leafletMap=null,leafletMarkers=[];
+function initLeafletMap(){
+  leafletMap=L.map('leafletMap',{center:[20,20],zoom:2,minZoom:2,maxZoom:6,scrollWheelZoom:false,zoomControl:true,attributionControl:false});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(leafletMap);
+  renderLeafletPins('all');
+}
+function makeMarkerIcon(type){
+  const size=type==='prospect'?10:16;
+  const color=type==='red'?'#CC2229':type==='gold'?'#c9a84c':'rgba(255,255,255,0.6)';
+  return L.divIcon({className:'',html:`<div style="width:${size}px;height:${size}px;background:${color};border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 12px rgba(0,0,0,.6);"></div>`,iconSize:[size,size],iconAnchor:[size/2,size/2],popupAnchor:[0,-(size/2+8)]});
+}
+function renderLeafletPins(filter){
+  leafletMarkers.forEach(m=>leafletMap.removeLayer(m));leafletMarkers=[];
+  MAP_PINS.forEach(pin=>{
+    if(filter!=='all'&&pin.region!==filter)return;
+    const marker=L.marker([pin.lat,pin.lng],{icon:makeMarkerIcon(pin.type)});
+    marker.bindPopup(`<div class="map-popup"><div class="mp-city">${pin.flag} ${pin.city}</div><div class="mp-country">${pin.country}</div><div class="mp-body">${pin.body}</div><button class="mp-cta" onclick="openEnquiry()">Start a Project Here →</button></div>`,{maxWidth:260,minWidth:220});
+    marker.addTo(leafletMap);leafletMarkers.push(marker);
+  });
+  const bounds={all:[[65,-30],[5,160]],india:[[35,65],[5,100]],uk:[[56,-6],[50,3]],uae:[[27,50],[22,60]],us:[[50,-130],[25,-65]],asia:[[5,95],[-40,155]]};
+  if(bounds[filter])leafletMap.fitBounds(bounds[filter],{padding:[30,30]});
+}
+function filterMap(filter,btn){
+  document.querySelectorAll('.mf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderLeafletPins(filter);
+}
+const mapObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!leafletMap){initLeafletMap();mapObs.disconnect();}});},{threshold:.1});
+mapObs.observe(document.getElementById('world-map'));
+
+/* ══ UPSELL BOT ══ */
+const BOT_FLOWS={
+  default:[
+    {text:"👋 Hi! I'm ORIGENNT's digital assistant. Looking to build something? Here's what's popular right now:", chips:["I need a website","Tell me about AI automation","What's your pricing?","I have a large project"]},
+  ],
+  pricing:[
+    {text:"Great choice! Our tiers start at <span class='bot-highlight'>₹15,000</span> and go up to enterprise custom. Here's a quick overview:", chips:["Super Saver ₹15,000","Growth ₹1,20,000","Plus ₹2,50,000","Enterprise Custom"]}
+  ],
+  website:[
+    {text:"Excellent! We build everything from landing pages to SaaS platforms. What stage is your business at?", chips:["Just starting out","Growing — need more features","Corporate / multi-city","E-Commerce store"]}
+  ],
+  ai:[
+    {text:"Our AI automation suite is a game-changer 🤖 We can automate your WhatsApp leads, invoices, social media, and KPI reporting. Which interests you most?", chips:["WhatsApp CRM automation","Invoice & payment tracking","Social media auto-posting","AI Voice Calling Agent"]}
+  ],
+  large:[
+    {text:"Perfect. Enterprise projects get a dedicated PM, SLA-backed support, and weekly strategy calls. What kind of platform are you building?", chips:["SaaS Platform","Multi-vendor Marketplace","ERP Integration","AI Ecosystem"]}
+  ],
+  cta:[
+    {text:"Ready to move forward? 🚀 Our team responds within 4 hours. Click below to send your brief:", chips:["📋 Start My Project →","📄 Download Brochure","📞 Book a Call"]}
+  ]
+};
+let botOpen=false,botInit=false;
+function toggleBot(){
+  botOpen=!botOpen;
+  document.getElementById('botPanel').classList.toggle('open',botOpen);
+  document.getElementById('botIcon').className=botOpen?'fas fa-times':'fas fa-robot';
+  document.getElementById('botBadge').style.display=botOpen?'none':'flex';
+  if(botOpen&&!botInit){botInit=true;setTimeout(()=>showBotFlow('default'),300);}
+}
+function showBotFlow(key){
+  const flow=BOT_FLOWS[key]||BOT_FLOWS.default;
+  flow.forEach((msg,i)=>{
+    setTimeout(()=>{
+      addBotMsg(msg.text,'bot');
+      if(msg.chips)addBotChips(msg.chips);
+    },i*600);
+  });
+}
+function addBotMsg(text,type){
+  const msgs=document.getElementById('botMessages');
+  const div=document.createElement('div');div.className='bot-msg '+type;
+  const bub=document.createElement('div');bub.className='bot-bubble';bub.innerHTML=text;
+  div.appendChild(bub);msgs.appendChild(div);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function addBotChips(chips){
+  const msgs=document.getElementById('botMessages');
+  const wrap=document.createElement('div');wrap.className='bot-msg bot';
+  const inner=document.createElement('div');inner.className='bot-chips';
+  chips.forEach(c=>{
+    const btn=document.createElement('button');btn.className='bot-chip';btn.textContent=c;
+    btn.onclick=()=>{
+      inner.remove();addBotMsg(c,'user');
+      if(c.includes('pricing')||c.includes('₹'))showBotFlow('pricing');
+      else if(c.includes('website')||c.includes('starting')||c.includes('E-Commerce'))showBotFlow('website');
+      else if(c.includes('AI')||c.includes('automation')||c.includes('WhatsApp')||c.includes('Invoice')||c.includes('Social')||c.includes('Voice'))showBotFlow('ai');
+      else if(c.includes('large')||c.includes('SaaS')||c.includes('Marketplace')||c.includes('ERP'))showBotFlow('large');
+      else if(c.includes('Start My Project')||c.includes('Book'))openEnquiry();
+      else if(c.includes('Brochure'))openBrochure();
+      else{setTimeout(()=>{addBotMsg("Great! Our team would love to learn more about that. Ready to connect?","bot");addBotChips(["📋 Start My Project →","📄 Download Brochure"]);},400);}
+    };
+    inner.appendChild(btn);
+  });
+  wrap.appendChild(inner);msgs.appendChild(wrap);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+function sendBotMessage(){
+  const inp=document.getElementById('botInput');const val=inp.value.trim();
+  if(!val)return;addBotMsg(val,'user');inp.value='';
+  const lower=val.toLowerCase();
+  setTimeout(()=>{
+    if(lower.includes('price')||lower.includes('cost')||lower.includes('₹'))showBotFlow('pricing');
+    else if(lower.includes('website')||lower.includes('web'))showBotFlow('website');
+    else if(lower.includes('ai')||lower.includes('automat')||lower.includes('whatsapp'))showBotFlow('ai');
+    else if(lower.includes('enterprise')||lower.includes('saas')||lower.includes('big'))showBotFlow('large');
+    else addBotMsg("I can help with that! Let me connect you with our team for a detailed answer. Click below to start a project brief 👇","bot");
+    addBotChips(["📋 Start My Project →","📄 Download Brochure"]);
+  },500);
+}
+
+/* Auto-open bot after 25 seconds */
+setTimeout(()=>{if(!botOpen){toggleBot();}},25000);
+
+/* Scroll-based bot upsell prompts */
+let botScrollShown={pricing:false,ai:false,cta:false};
+window.addEventListener('scroll',()=>{
+  const scrollPct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+  if(scrollPct>.3&&!botScrollShown.ai&&botInit){
+    botScrollShown.ai=true;
+    addBotMsg("🤖 Psst — did you know our AI automation starts at just <span class='bot-highlight'>₹15,000</span>? WhatsApp CRM, invoice tracking, and more.","bot");
+    addBotChips(["Tell me more about AI automation","Not right now"]);
+  }
+  if(scrollPct>.65&&!botScrollShown.cta&&botInit){
+    botScrollShown.cta=true;
+    addBotMsg("You've explored a lot! Ready to get a custom quote? We respond in under 4 hours 🚀","bot");
+    addBotChips(["📋 Start My Project Now →"]);
+  }
+});
+
+/* Razorpay loader */
+(function(){const s=document.createElement('script');s.src='https://checkout.razorpay.com/v1/checkout.js';document.head.appendChild(s);})();
+</script>
+</body>
+</html>
