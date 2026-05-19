@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights — ORIGENNT | Execution Intelligence for MSMEs & SMEs</title>
+<meta name="description" content="ORIGENNT Insights: Structured execution intelligence on workforce, operations, and growth. Read, learn, and contribute your own business thinking.">
+<meta name="keywords" content="MSME insights India, SME execution, HR analytics, business strategy Odisha, workforce systems, ORIGENNT insights">
+<meta property="og:title" content="ORIGENNT Insights — Execution Intelligence">
+<meta property="og:description" content="Structured thinking on where execution breaks — and what the system needs to hold together. Read insights. Write your own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#CC2229;--red-dark:#a31a20;--red-pale:#fdf0f0;
+  --black:#0d0d0d;--white:#fff;--off:#f7f6f4;
+  --gl:#eeecea;--gm:#c2bfba;--gt:#6b6660;
+  --navy:#0f1f3d;--gold:#c9a84c;--teal:#0d6b5e;--amber:#e07b20;
+  --sidebar:300px;--ease:cubic-bezier(.77,0,.18,1);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;}
+*{cursor:none!important;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s;}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid rgba(204,34,41,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;}
+body:has(a:hover) .cursor,body:has(button:hover) .cursor{width:20px;height:20px;}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:58px;height:58px;}
+
+/* ── SIDEBAR ── */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--black);z-index:200;display:flex;flex-direction:column;transition:transform .5s var(--ease);}
+.sidebar-top{padding:36px 40px 32px;border-bottom:1px solid rgba(255,255,255,.06);}
+.logo{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:2px;}
+.logo-dot{color:var(--red);font-size:26px;line-height:0;position:relative;top:3px;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:32px 40px;scrollbar-width:none;}
+.sidebar-scroll::-webkit-scrollbar{display:none;}
+.nav-s{margin-bottom:32px;}
+.nav-lbl{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:500;}
+.nav-link{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);transition:color .2s;}
+.nav-link:hover,.nav-link.active{color:var(--white);}
+.nav-link svg{opacity:0;transition:opacity .2s,transform .2s;}
+.nav-link:hover svg,.nav-link.active svg{opacity:1;transform:translateX(3px);}
+.sb-bot{padding:24px 40px 32px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-lbl{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;}
+.sb-info{font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;}
+.sb-info a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.sb-info a:hover{color:var(--red);}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar);}
+.topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 72px;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--gl);}
+.back-link{font-size:12.5px;color:var(--gt);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s,gap .2s;}
+.back-link:hover{color:var(--black);gap:14px;}
+.back-link::before{content:'←';}
+.topbar-right{display:flex;align-items:center;gap:16px;}
+.topbar-write{font-size:11.5px;font-weight:600;letter-spacing:.07em;color:var(--red);border:1.5px solid var(--red);padding:9px 22px;text-decoration:none;transition:all .2s;}
+.topbar-write:hover{background:var(--red);color:var(--white);}
+.topbar-cta{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:11px 28px;transition:background .2s;}
+.topbar-cta:hover{background:var(--red-dark);}
+
+/* ── HERO ── */
+.hero{padding-top:64px;min-height:100vh;background:var(--black);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1800&q=80&fit=crop') center 40%/cover;filter:brightness(.1) saturate(.3);transform:scale(1.04);animation:hzoom 22s ease-in-out infinite alternate;}
+@keyframes hzoom{to{transform:scale(1);}}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:1;}
+.hero::after{content:'';position:absolute;left:0;top:64px;bottom:0;width:5px;background:var(--red);z-index:2;}
+.hero-inner{position:relative;z-index:2;flex:1;display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:flex-end;padding:80px 80px 0;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow-line{width:32px;height:1px;background:var(--red);}
+.hero-eyebrow-text{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);font-weight:500;}
+.hero-h1{font-family:'Libre Baskerville',serif;font-size:clamp(44px,5.6vw,82px);font-weight:400;color:var(--white);line-height:1.04;letter-spacing:-.025em;opacity:0;transform:translateY(32px);animation:fu .9s .08s var(--ease) forwards;}
+.hero-h1 em{font-style:italic;color:var(--red);}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:600px;line-height:1.85;margin-top:26px;opacity:0;transform:translateY(20px);animation:fu .9s .24s var(--ease) forwards;}
+.hero-acts{display:flex;gap:20px;align-items:center;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fu .9s .5s var(--ease) forwards;}
+.btn-red{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);text-decoration:none;padding:14px 36px;transition:background .2s,transform .2s;display:inline-block;border:none;}
+.btn-red:hover{background:var(--red-dark);transform:translateY(-2px);}
+.btn-ghost-w{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:2px;transition:color .2s,border-color .2s;}
+.btn-ghost-w:hover{color:var(--white);border-color:rgba(255,255,255,.6);}
+@keyframes fu{to{opacity:1;transform:none;}}
+
+/* Live counter panel */
+.hero-panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);padding:36px 32px;align-self:flex-end;opacity:0;transform:translateX(24px);animation:fl .9s .56s var(--ease) forwards;}
+@keyframes fl{to{opacity:1;transform:none;}}
+.hp-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:22px;}
+.hp-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.07);}
+.hp-row:last-child{border-bottom:none;}
+.hp-name{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);}
+.hp-val{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--white);}
+.hp-val sub{font-size:11px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;vertical-align:baseline;}
+
+.hero-strip{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.07);margin-top:64px;}
+.hs-cell{padding:24px 36px;border-right:1px solid rgba(255,255,255,.07);opacity:0;transform:translateY(14px);animation:fu .7s var(--ease) forwards;}
+.hs-cell:last-child{border-right:none;}
+.hs-cell:nth-child(1){animation-delay:.62s;}.hs-cell:nth-child(2){animation-delay:.73s;}.hs-cell:nth-child(3){animation-delay:.84s;}.hs-cell:nth-child(4){animation-delay:.95s;}.hs-cell:nth-child(5){animation-delay:1.06s;}
+.hsc-n{font-family:'Libre Baskerville',serif;font-size:36px;color:var(--white);line-height:1;}
+.hsc-n sup{font-size:14px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.hsc-l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:7px;}
+
+/* ── MARQUEE ── */
+.marquee-wrap{background:var(--red);overflow:hidden;}
+.marquee-track{display:flex;width:max-content;animation:marquee 32s linear infinite;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.marquee-item{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:14px 48px;border-right:1px solid rgba(255,255,255,.2);white-space:nowrap;display:flex;align-items:center;gap:16px;}
+.marquee-dot{width:5px;height:5px;background:rgba(255,255,255,.4);border-radius:50%;flex-shrink:0;}
+
+/* ── META RIBBON ── */
+.meta-ribbon{background:var(--red);padding:0 80px;display:flex;overflow-x:auto;scrollbar-width:none;}
+.meta-ribbon::-webkit-scrollbar{display:none;}
+.mc{padding:24px 52px 24px 0;border-right:1px solid rgba(255,255,255,.18);margin-right:52px;white-space:nowrap;flex-shrink:0;}
+.mc:last-child{border-right:none;margin-right:0;}
+.mc-lbl{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:5px;}
+.mc-val{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--white);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease);}
+.reveal.vis{opacity:1;transform:none;}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--red);margin-bottom:18px;}
+.chip::before{content:'';width:22px;height:1px;background:var(--red);}
+.chip.w{color:rgba(255,255,255,.4);}
+.chip.w::before{background:rgba(255,255,255,.2);}
+h2.D{font-family:'Libre Baskerville',serif;font-size:clamp(30px,3.2vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.02em;}
+h2.D em{font-style:italic;color:var(--red);}
+h2.D.W{color:var(--white);}
+.body-t{font-size:15px;font-weight:300;line-height:1.9;color:var(--gt);}
+.body-t.w{color:rgba(255,255,255,.45);}
+
+/* ── ANALYTICS DASHBOARD ── */
+.analytics-section{padding:80px 80px 60px;background:var(--off);}
+.analytics-header{margin-bottom:48px;}
+.analytics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:3px;}
+.stat-box{background:var(--white);padding:28px 24px;position:relative;overflow:hidden;}
+.stat-box::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.stat-box:hover::after{transform:scaleX(1);}
+.stat-n{font-family:'Libre Baskerville',serif;font-size:42px;color:var(--black);line-height:1;}
+.stat-n sup{font-size:16px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.stat-l{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gt);margin-top:8px;}
+.stat-trend{font-size:11px;color:var(--teal);margin-top:6px;font-weight:500;}
+.analytics-charts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;}
+.chart-box{background:var(--white);padding:32px 28px;}
+.chart-title{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:24px;font-weight:500;}
+/* Sparkline bars */
+.spark{display:flex;align-items:flex-end;gap:4px;height:60px;}
+.sp-bar{flex:1;background:var(--gl);transition:background .2s;position:relative;}
+.sp-bar.active{background:var(--red);}
+.sp-bar:hover{background:var(--red-dark);}
+/* Category donut */
+.cat-donut-wrap{display:flex;align-items:center;gap:20px;}
+.cat-legend{display:flex;flex-direction:column;gap:10px;}
+.cl-item{display:flex;align-items:center;gap:8px;}
+.cl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.cl-name{font-size:11px;font-weight:300;color:var(--gt);}
+.cl-pct{font-size:12px;font-weight:600;color:var(--black);margin-left:auto;font-family:'Libre Baskerville',serif;}
+/* Read-time dist */
+.dist-bars{display:flex;flex-direction:column;gap:8px;}
+.dist-row{display:flex;align-items:center;gap:10px;}
+.dist-lbl{font-size:11px;color:var(--gt);width:50px;flex-shrink:0;}
+.dist-track{flex:1;height:8px;background:var(--gl);overflow:hidden;}
+.dist-fill{height:100%;background:var(--red);width:0;transition:width 1.4s var(--ease);}
+.dist-fill.go{width:var(--w);}
+.dist-val{font-size:11px;font-weight:600;color:var(--black);width:28px;text-align:right;flex-shrink:0;}
+
+/* ── FILTER BAR ── */
+.filter-bar{background:var(--white);border-bottom:2px solid var(--gl);padding:0 80px;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:64px;z-index:90;}
+.filter-bar::-webkit-scrollbar{display:none;}
+.ftab{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:18px 24px;color:var(--gt);border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .2s,border-color .2s;display:flex;align-items:center;gap:8px;}
+.ftab.active,.ftab:hover{color:var(--red);border-bottom-color:var(--red);}
+.ftab-count{font-size:9px;font-weight:700;padding:2px 7px;background:var(--gl);color:var(--gt);border-radius:9px;transition:background .2s,color .2s;}
+.ftab.active .ftab-count{background:var(--red);color:var(--white);}
+.filter-search{margin-left:auto;display:flex;align-items:center;gap:10px;padding:10px 0;}
+.search-input{border:1px solid var(--gl);padding:8px 16px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--black);outline:none;width:220px;transition:border-color .2s;}
+.search-input:focus{border-color:var(--red);}
+.search-input::placeholder{color:var(--gm);}
+
+/* ── FEATURED INSIGHT ── */
+.featured-section{padding:80px 80px 0;background:var(--off);}
+.featured-card{display:grid;grid-template-columns:1fr 480px;gap:0;background:var(--black);overflow:hidden;position:relative;}
+.fc-img-wrap{position:relative;overflow:hidden;}
+.fc-img{width:100%;height:100%;object-fit:cover;min-height:480px;display:block;transition:transform .6s var(--ease);}
+.featured-card:hover .fc-img{transform:scale(1.03);}
+.fc-img-overlay{position:absolute;inset:0;background:linear-gradient(to right,transparent 40%,rgba(13,13,13,.8));}
+.fc-content{padding:52px 48px;display:flex;flex-direction:column;justify-content:space-between;}
+.fc-eyebrow{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+.fc-tag{font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:5px 12px;font-weight:700;}
+.fc-tag.workforce{background:rgba(204,34,41,.2);color:rgba(255,120,120,.9);}
+.fc-tag.ops{background:rgba(201,168,76,.2);color:rgba(201,168,76,.9);}
+.fc-tag.growth{background:rgba(13,107,94,.2);color:rgba(13,107,94,.9);}
+.fc-tag.framework{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
+.fc-tag.featured{background:var(--red);color:var(--white);}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(22px,2.2vw,34px);font-weight:400;color:var(--white);line-height:1.15;margin-bottom:16px;}
+.fc-h em{font-style:italic;color:rgba(255,255,255,.5);}
+.fc-desc{font-size:14px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.85;margin-bottom:28px;}
+.fc-meta{display:flex;align-items:center;gap:20px;margin-bottom:28px;flex-wrap:wrap;}
+.fc-author{display:flex;align-items:center;gap:10px;}
+.fc-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.1);}
+.fc-author-name{font-size:12px;color:rgba(255,255,255,.6);}
+.fc-read-time{font-size:11px;color:rgba(255,255,255,.35);padding:4px 12px;border:1px solid rgba(255,255,255,.1);}
+.fc-read-btn{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);padding:13px 28px;text-decoration:none;transition:background .2s,transform .2s;}
+.fc-read-btn:hover{background:var(--red-dark);transform:translateY(-2px);}
+.fc-stats{display:flex;gap:24px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);}
+.fc-stat{font-size:11px;color:rgba(255,255,255,.35);}
+.fc-stat strong{color:rgba(255,255,255,.7);font-weight:600;}
+
+/* ── INSIGHTS GRID ── */
+.insights-section{padding:60px 80px 80px;background:var(--off);}
+.insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.ins-card{background:var(--white);padding:36px 30px 28px;position:relative;overflow:hidden;display:flex;flex-direction:column;transition:background .2s;}
+.ins-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.ins-card:hover{background:var(--gl);}
+.ins-card:hover::before{transform:scaleX(1);}
+.ins-card-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;margin-bottom:22px;}
+.ins-tags{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.ins-tag{font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;font-weight:700;}
+.ins-tag.workforce{background:rgba(204,34,41,.1);color:var(--red);}
+.ins-tag.ops{background:rgba(201,168,76,.12);color:var(--gold);}
+.ins-tag.growth{background:rgba(13,107,94,.1);color:var(--teal);}
+.ins-tag.framework{background:var(--gl);color:var(--gt);}
+.ins-tag.community{background:rgba(15,31,61,.1);color:var(--navy);}
+.ins-h{font-family:'Libre Baskerville',serif;font-size:17px;font-weight:400;color:var(--black);line-height:1.3;margin-bottom:12px;}
+.ins-h em{font-style:italic;color:var(--red);}
+.ins-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.8;flex:1;margin-bottom:20px;}
+.ins-footer{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--gl);}
+.ins-author{display:flex;align-items:center;gap:8px;}
+.ins-avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gl);}
+.ins-author-name{font-size:11px;color:var(--gt);}
+.ins-read{font-size:10px;color:var(--gm);}
+.ins-btn{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);background:var(--red);padding:7px 16px;border:none;transition:background .2s;}
+.ins-btn:hover{background:var(--red-dark);}
+.ins-engagement{display:flex;align-items:center;gap:12px;}
+.ins-like{font-size:11px;color:var(--gm);display:flex;align-items:center;gap:4px;transition:color .2s;}
+.ins-like.liked{color:var(--red);}
+.ins-like-ico{font-size:13px;}
+
+/* ── FULL ARTICLE READER (MODAL) ── */
+.reader-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:8000;overflow-y:auto;}
+.reader-modal.open{display:block;}
+.reader-box{background:var(--white);max-width:800px;margin:40px auto;position:relative;animation:mdIn .35s var(--ease);}
+@keyframes mdIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
+.reader-close{position:fixed;top:24px;right:24px;background:var(--black);border:none;color:var(--white);width:44px;height:44px;font-size:22px;display:flex;align-items:center;justify-content:center;z-index:8001;transition:background .2s;}
+.reader-close:hover{background:var(--red);}
+.reader-hero-img{width:100%;aspect-ratio:16/7;object-fit:cover;display:block;}
+.reader-content{padding:56px 60px;}
+.reader-eyebrow{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.reader-h{font-family:'Libre Baskerville',serif;font-size:clamp(28px,3vw,42px);font-weight:400;color:var(--black);line-height:1.15;margin-bottom:18px;}
+.reader-h em{font-style:italic;color:var(--red);}
+.reader-meta{display:flex;align-items:center;gap:20px;padding:16px 0;border-top:1px solid var(--gl);border-bottom:1px solid var(--gl);margin-bottom:36px;}
+.reader-body{font-size:15px;font-weight:300;line-height:1.95;color:#2a2a2a;}
+.reader-body p{margin-bottom:22px;}
+.reader-body h3{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:400;color:var(--black);margin:36px 0 14px;}
+.reader-body h3 em{font-style:italic;color:var(--red);}
+.reader-body blockquote{border-left:4px solid var(--red);padding:16px 24px;background:var(--off);margin:28px 0;font-style:italic;color:var(--gt);}
+.reader-body .highlight-box{background:var(--black);padding:28px 32px;margin:28px 0;}
+.reader-body .highlight-box p{color:rgba(255,255,255,.65);margin-bottom:0;}
+.reader-body .highlight-box strong{color:var(--white);}
+.reader-engage{padding:32px 60px;background:var(--off);border-top:1px solid var(--gl);display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.re-like-btn{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;color:var(--gt);border:1px solid var(--gl);background:var(--white);padding:10px 20px;transition:all .2s;}
+.re-like-btn:hover,.re-like-btn.liked{border-color:var(--red);color:var(--red);}
+.re-share{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--red);padding:11px 24px;border:none;transition:background .2s;}
+.re-share:hover{background:var(--red-dark);}
+.reader-progress{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:8002;transition:width .1s;}
+
+/* ── EXECUTION EQUATION ── */
+.equation-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.equation-section::after{content:'';position:absolute;right:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 65%);pointer-events:none;}
+.equation-inner{position:relative;z-index:1;}
+.eq-formula{display:flex;align-items:center;justify-content:center;gap:0;margin:60px 0;flex-wrap:wrap;}
+.eq-node{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:36px 32px;text-align:center;min-width:160px;flex:1;max-width:200px;transition:background .3s,border-color .3s;position:relative;}
+.eq-node:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);}
+.eq-node.result{background:rgba(204,34,41,.15);border-color:rgba(204,34,41,.4);}
+.eq-node-icon{font-size:32px;margin-bottom:12px;}
+.eq-node-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px;font-weight:500;}
+.eq-node-name{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--white);}
+.eq-operator{font-family:'Libre Baskerville',serif;font-size:48px;color:var(--red);padding:0 16px;align-self:center;opacity:.6;}
+.eq-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3px;}
+.eq-layer{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:32px 28px;}
+.eq-layer-num{font-family:'Libre Baskerville',serif;font-size:44px;color:rgba(204,34,41,.3);line-height:1;margin-bottom:16px;}
+.eq-layer-title{font-size:14px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:10px;}
+.eq-layer-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:16px;}
+.eq-layer-items{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.eq-layer-item{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);display:flex;align-items:flex-start;gap:8px;}
+.eq-layer-item::before{content:'→';color:var(--red);font-size:10px;flex-shrink:0;margin-top:1px;font-weight:700;}
+/* Cascade viz */
+.cascade{margin-top:48px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:36px;}
+.cascade-title{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:28px;font-weight:500;}
+.cascade-row{display:flex;align-items:center;gap:0;margin-bottom:3px;}
+.cascade-cell{flex:1;padding:14px 20px;font-size:12.5px;font-weight:400;display:flex;align-items:center;gap:10px;}
+.cascade-cell.fail{background:rgba(204,34,41,.12);color:rgba(255,120,120,.85);}
+.cascade-cell.strain{background:rgba(224,123,32,.1);color:rgba(224,123,32,.85);}
+.cascade-cell.stop{background:rgba(204,34,41,.08);color:rgba(255,100,100,.7);}
+.cascade-cell.works{background:rgba(13,107,94,.1);color:rgba(13,107,94,.85);}
+.cascade-cell.cap{background:rgba(224,123,32,.08);color:rgba(224,123,32,.7);}
+.cascade-arrow{color:rgba(255,255,255,.2);font-size:18px;padding:0 4px;flex-shrink:0;}
+
+/* ── COMMUNITY WRITE SECTION ── */
+.write-section{padding:100px 80px;background:var(--off);}
+.write-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.write-form-wrap{background:var(--white);padding:48px;}
+.wf-title{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gt);margin-bottom:28px;font-weight:500;}
+.wf-field{margin-bottom:20px;}
+.wf-label{font-size:12px;font-weight:500;color:var(--black);margin-bottom:7px;display:block;}
+.wf-input{width:100%;border:1px solid var(--gl);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;transition:border-color .2s;background:var(--white);}
+.wf-input:focus{border-color:var(--red);}
+.wf-input::placeholder{color:var(--gm);}
+.wf-select{width:100%;border:1px solid var(--gl);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;background:var(--white);appearance:none;transition:border-color .2s;}
+.wf-select:focus{border-color:var(--red);}
+.wf-textarea{width:100%;border:1px solid var(--gl);padding:12px 16px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--black);outline:none;resize:vertical;min-height:180px;transition:border-color .2s;background:var(--white);}
+.wf-textarea:focus{border-color:var(--red);}
+.wf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.wf-char-count{font-size:11px;color:var(--gm);margin-top:5px;text-align:right;}
+.wf-btn{width:100%;background:var(--red);color:var(--white);border:none;padding:16px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;margin-top:8px;}
+.wf-btn:hover{background:var(--red-dark);}
+.wf-note{font-size:11px;color:var(--gm);text-align:center;margin-top:12px;line-height:1.7;}
+/* Guidelines */
+.write-guidelines{display:flex;flex-direction:column;gap:3px;}
+.wg{background:var(--white);padding:22px 26px;display:flex;gap:18px;border-left:4px solid transparent;transition:border-color .25s;}
+.wg:hover{border-left-color:var(--red);}
+.wg-icon{font-size:22px;flex-shrink:0;}
+.wg-title{font-size:14px;font-weight:600;color:var(--black);margin-bottom:5px;}
+.wg-desc{font-size:13px;font-weight:300;color:var(--gt);line-height:1.7;}
+/* Success state */
+.wf-success{display:none;text-align:center;padding:40px 20px;}
+.wf-success-icon{font-size:48px;margin-bottom:16px;}
+.wf-success-h{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--black);margin-bottom:10px;}
+.wf-success-sub{font-size:14px;color:var(--gt);}
+
+/* ── DIAGNOSTIC SECTION ── */
+.diag-section{padding:100px 80px;background:var(--black);position:relative;overflow:hidden;}
+.diag-section::before{content:'';position:absolute;left:-200px;bottom:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(204,34,41,.07),transparent 65%);pointer-events:none;}
+.diag-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1;}
+.diag-steps{display:flex;flex-direction:column;gap:3px;margin-top:36px;}
+.ds{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:22px 26px;display:flex;gap:20px;transition:background .2s;}
+.ds:hover{background:rgba(255,255,255,.08);}
+.ds-num{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--red);flex-shrink:0;line-height:1;opacity:.6;}
+.ds-body{}
+.ds-title{font-size:14px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:5px;}
+.ds-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.7;}
+.diag-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:48px;}
+.diag-stats{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:32px 0;}
+.diag-stat{background:rgba(255,255,255,.04);padding:22px 20px;text-align:center;}
+.diag-stat-n{font-family:'Libre Baskerville',serif;font-size:32px;color:var(--white);line-height:1;}
+.diag-stat-n sup{font-size:13px;color:var(--red);font-family:'Outfit',sans-serif;font-weight:600;}
+.diag-stat-l{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:6px;}
+.diag-ctas{display:flex;flex-direction:column;gap:10px;}
+.dcta{display:block;text-align:center;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+.dcta.red{background:var(--red);color:var(--white);}
+.dcta.red:hover{background:var(--red-dark);}
+.dcta.wa{background:#25D366;color:var(--white);}
+.dcta.wa:hover{opacity:.9;}
+.dcta.ol{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);}
+.dcta.ol:hover{border-color:rgba(255,255,255,.5);color:var(--white);}
+
+/* ── FINAL CTA ── */
+.final-cta{background:var(--red);padding:100px 80px;display:flex;justify-content:space-between;align-items:center;gap:60px;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;right:-200px;top:-200px;width:500px;height:500px;background:rgba(255,255,255,.05);border-radius:50%;}
+.final-cta::after{content:'';position:absolute;left:-100px;bottom:-150px;width:350px;height:350px;background:rgba(0,0,0,.07);border-radius:50%;}
+.fc-left{max-width:560px;position:relative;z-index:1;}
+.fc-h{font-family:'Libre Baskerville',serif;font-size:clamp(26px,2.8vw,42px);font-weight:400;color:var(--white);line-height:1.2;margin-bottom:14px;}
+.fc-h em{font-style:italic;opacity:.7;}
+.fc-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.75;}
+.fc-btns{display:flex;flex-direction:column;gap:12px;min-width:280px;position:relative;z-index:1;}
+.fca{display:block;text-align:center;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:15px 40px;transition:background .2s,transform .2s;text-decoration:none;}
+.fca.w{background:var(--white);color:var(--red);}
+.fca.w:hover{background:var(--off);}
+.fca.ol{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);}
+.fca.ol:hover{border-color:rgba(255,255,255,.7);color:var(--white);}
+
+/* ── FOOTER ── */
+footer{background:var(--black);padding:36px 80px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.fl{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--white);}
+.fl span{color:var(--red);}
+.fcopy{font-size:11px;color:rgba(255,255,255,.2);}
+
+/* ── HAMBURGER ── */
+.hamburger{display:none;position:fixed;top:20px;left:20px;z-index:300;background:var(--black);border:none;padding:13px;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);}
+.overlay-m{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:190;}
+
+/* ── LOAD MORE ── */
+.load-more-wrap{text-align:center;padding:40px 0 0;}
+.load-more-btn{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);border:1.5px solid var(--red);background:transparent;padding:13px 40px;transition:all .2s;}
+.load-more-btn:hover{background:var(--red);color:var(--white);}
+
+/* ── BAR FILL ── */
+.bar-fill{height:100%;width:0;transition:width 1.4s var(--ease);}
+.bar-fill.go{width:var(--w);}
+
+@media(max-width:1200px){.insights-grid{grid-template-columns:1fr 1fr;}.eq-breakdown{grid-template-columns:1fr;}.analytics-grid{grid-template-columns:1fr 1fr;}.analytics-charts{grid-template-columns:1fr 1fr;}}
+@media(max-width:1024px){
+  :root{--sidebar:0px;}
+  .sidebar{transform:translateX(-300px);}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .topbar{left:0;padding:0 20px 0 70px;}
+  .hamburger{display:flex;}
+  .overlay-m.show{display:block;}
+  *{cursor:auto!important;}
+  .cursor,.cursor-ring{display:none;}
+  .hero-inner{grid-template-columns:1fr;padding:60px 32px 0;}
+  .hero-panel{display:none;}
+  .hero::after{display:none;}
+  .hero-strip{grid-template-columns:1fr 1fr;}
+  .analytics-section,.featured-section,.insights-section,.equation-section,.write-section,.diag-section,.final-cta{padding-left:32px;padding-right:32px;}
+  .filter-bar{padding-left:32px;padding-right:32px;}
+  .featured-card{grid-template-columns:1fr;}
+  .fc-img-wrap{display:none;}
+  .write-inner,.diag-inner{grid-template-columns:1fr;gap:40px;}
+  .analytics-charts{grid-template-columns:1fr;}
+  .insights-grid{grid-template-columns:1fr;}
+  .eq-formula{gap:0;flex-direction:column;}
+  .eq-operator{padding:4px 0;transform:rotate(90deg);}
+  .final-cta{flex-direction:column;align-items:flex-start;}
+  footer{flex-direction:column;gap:14px;align-items:flex-start;padding:32px;}
+  .meta-ribbon{padding-left:32px;padding-right:32px;}
+  .wf-row{grid-template-columns:1fr;}
+  .reader-content{padding:32px 24px;}
+  .reader-engage{padding:20px 24px;}
+}
+@media(max-width:640px){.analytics-grid{grid-template-columns:1fr;}.hero-strip{grid-template-columns:1fr 1fr;}.diag-stats{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay-m" id="overlayM"></div>
+
+<!-- ARTICLE READER MODAL -->
+<div class="reader-modal" id="readerModal">
+  <div class="reader-progress" id="readProgress"></div>
+  <button class="reader-close" id="readerClose">×</button>
+  <div class="reader-box">
+    <img class="reader-hero-img" id="readerImg" src="" alt="">
+    <div class="reader-content">
+      <div class="reader-eyebrow" id="readerEyebrow"></div>
+      <h1 class="reader-h" id="readerH"></h1>
+      <div class="reader-meta" id="readerMeta"></div>
+      <div class="reader-body" id="readerBody"></div>
+    </div>
+    <div class="reader-engage">
+      <button class="re-like-btn" id="readerLike" onclick="toggleReaderLike()">♡ &nbsp;Like this insight &nbsp;<span id="readerLikeCount">0</span></button>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <span style="font-size:11px;color:var(--gt);">Share:</span>
+        <button class="re-share" onclick="shareArticle('wa')">WhatsApp</button>
+        <button class="re-share" style="background:var(--navy);" onclick="shareArticle('li')">LinkedIn</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top"><a href="index.html" class="logo">ORIGENNT<span class="logo-dot">.</span></a></div>
+  <div class="sidebar-scroll">
+    <div class="nav-s">
+      <div class="nav-lbl">Consulting</div>
+      <a href="management-consulting.html" class="nav-link">Management Consulting <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="strategy.html" class="nav-link">Strategy & Transformation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="our-approach.html" class="nav-link">Our Approach <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">HR Practice</div>
+      <a href="talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="executive-search.html" class="nav-link">Executive Search <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="hr-analytics.html" class="nav-link">HR Analytics <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="learning-development.html" class="nav-link">Learning & Development <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Programs</div>
+      <a href="internship.html" class="nav-link">Internship Program <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="campus.html" class="nav-link">Campus Recruitment <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Intelligence</div>
+      <a href="insights.html" class="nav-link active">Insights <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-s">
+      <div class="nav-lbl">Company</div>
+      <a href="about.html" class="nav-link">About Us <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="contact.html" class="nav-link">Contact <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sb-bot">
+    <div class="sb-lbl">Headquarters</div>
+    <div class="sb-info">Bhubaneswar, Odisha<br><a href="mailto:origennt@gmail.com">origennt@gmail.com</a><br><small style="opacity:.5;font-size:10px;">ORIGENNT PRIVATE LIMITED<br>CIN: U74999OR2025PTC045xxx · Est. 11/11/2025</small></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+<header class="topbar">
+  <a href="index.html" class="back-link">Home</a>
+  <div class="topbar-right">
+    <a href="#write" class="topbar-write">Write an Insight</a>
+    <a href="#diagnostic" class="topbar-cta">Get Diagnostic</a>
+  </div>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><div class="hero-eyebrow-text">Execution Intelligence — MSMEs & SMEs</div></div>
+      <h1 class="hero-h1">Structured thinking<br>on where businesses<br><em>actually break.</em></h1>
+      <p class="hero-sub">ORIGENNT Insights is not a blog. It is a structured intelligence platform built on one framework: Workforce × Operations × Performance = Execution System. Every insight published here identifies a specific failure, names the system responsible, and shows what the structural fix looks like.</p>
+      <div class="hero-acts">
+        <a href="#insights" class="btn-red">Read Insights</a>
+        <a href="#write" class="btn-ghost-w">Write Your Own</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="hp-lbl">Platform at a Glance</div>
+      <div class="hp-row"><span class="hp-name">Insights Published</span><span class="hp-val">28<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">MSMEs with Execution Gaps</span><span class="hp-val">82<sub>%</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Avg. Read Time</span><span class="hp-val">7<sub>min</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Execution Layers Analysed</span><span class="hp-val">3</span></div>
+      <div class="hp-row"><span class="hp-name">Community Contributors</span><span class="hp-val">12<sub>+</sub></span></div>
+      <div class="hp-row"><span class="hp-name">Faster Growth (Structured)</span><span class="hp-val">3.4<sub>×</sub></span></div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-cell"><div class="hsc-n">28<sup>+</sup></div><div class="hsc-l">Insights Published</div></div>
+    <div class="hs-cell"><div class="hsc-n">82<sup>%</sup></div><div class="hsc-l">MSMEs with Gaps</div></div>
+    <div class="hs-cell"><div class="hsc-n">3.4<sup>×</sup></div><div class="hsc-l">Faster w/ Structure</div></div>
+    <div class="hs-cell"><div class="hsc-n">67<sup>%</sup></div><div class="hsc-l">Failures Start in Workforce</div></div>
+    <div class="hs-cell"><div class="hsc-n">3</div><div class="hsc-l">Execution Layers</div></div>
+  </div>
+</section>
+
+<!-- META RIBBON -->
+<div class="meta-ribbon">
+  <div class="mc"><div class="mc-lbl">Insights Published</div><div class="mc-val">28+</div></div>
+  <div class="mc"><div class="mc-lbl">Workforce Insights</div><div class="mc-val">12</div></div>
+  <div class="mc"><div class="mc-lbl">Operational Insights</div><div class="mc-val">9</div></div>
+  <div class="mc"><div class="mc-lbl">Growth Insights</div><div class="mc-val">7</div></div>
+  <div class="mc"><div class="mc-lbl">Community Posts</div><div class="mc-val">4</div></div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span>Workforce Execution</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Operational Systems</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Growth Execution</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>82% of MSMEs have a broken execution layer</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Diagnostics Not Opinion</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>3.4× Faster Growth with Structure</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>67% of Failures Start in Workforce</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>This is not a blog</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Workforce Execution</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Operational Systems</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Growth Execution</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>82% of MSMEs have a broken execution layer</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Diagnostics Not Opinion</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>3.4× Faster Growth with Structure</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>67% of Failures Start in Workforce</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>This is not a blog</div>
+  </div>
+</div>
+
+<!-- ══════ ANALYTICS DASHBOARD ══════ -->
+<section class="analytics-section reveal">
+  <div class="analytics-header">
+    <div class="chip">Platform Analytics</div>
+    <h2 class="D">The data behind <em>execution failure.</em></h2>
+    <p class="body-t" style="max-width:580px;margin-top:12px;">Real patterns observed across MSME and SME engagements. Every number here is derived from diagnostic data — not survey opinions.</p>
+  </div>
+  <div class="analytics-grid">
+    <div class="stat-box">
+      <div class="stat-n">82<sup>%</sup></div>
+      <div class="stat-l">MSMEs with ≥1 Broken Execution Layer</div>
+      <div class="stat-trend">↑ 6% from 2024 — getting worse</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n">67<sup>%</sup></div>
+      <div class="stat-l">Failures Originating in Workforce Layer</div>
+      <div class="stat-trend">Consistent across sectors</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n">3.4<sup>×</sup></div>
+      <div class="stat-l">Faster Growth with Structured Execution</div>
+      <div class="stat-trend">↑ vs. unstructured peers</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n">₹8.2<sup>L</sup></div>
+      <div class="stat-l">Avg. Annual Cost of Unstructured Operations (50-emp SME)</div>
+      <div class="stat-trend">Mostly invisible on P&L</div>
+    </div>
+  </div>
+  <div class="analytics-charts">
+    <div class="chart-box">
+      <div class="chart-title">Insights Read — Monthly (Last 8 Months)</div>
+      <div class="spark" id="sparkChart"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;">
+        <span style="font-size:10px;color:var(--gm);">Sep '25</span>
+        <span style="font-size:10px;color:var(--gm);">Apr '26</span>
+      </div>
+      <div style="margin-top:16px;font-size:13px;font-weight:300;color:var(--gt);">Readership growing <strong style="color:var(--black);">+34%</strong> month-on-month since launch.</div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Insights by Execution Layer</div>
+      <div class="cat-donut-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#eeecea" stroke-width="16"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#CC2229" stroke-width="16" stroke-dasharray="0 238.8" class="dseg" style="--da:114" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#c9a84c" stroke-width="16" stroke-dasharray="0 238.8" class="dseg" style="--da:71" stroke-dashoffset="-114" transform="rotate(-90 50 50)"/>
+          <circle cx="50" cy="50" r="38" fill="none" stroke="#0d6b5e" stroke-width="16" stroke-dasharray="0 238.8" class="dseg" style="--da:54" stroke-dashoffset="-185" transform="rotate(-90 50 50)"/>
+          <text x="50" y="54" text-anchor="middle" font-family="'Libre Baskerville',serif" font-size="13" fill="#0d0d0d">28</text>
+        </svg>
+        <div class="cat-legend">
+          <div class="cl-item"><div class="cl-dot" style="background:#CC2229"></div><span class="cl-name">Workforce</span><span class="cl-pct" style="margin-left:8px;">43%</span></div>
+          <div class="cl-item"><div class="cl-dot" style="background:#c9a84c"></div><span class="cl-name">Operational</span><span class="cl-pct" style="margin-left:8px;">32%</span></div>
+          <div class="cl-item"><div class="cl-dot" style="background:#0d6b5e"></div><span class="cl-name">Growth</span><span class="cl-pct" style="margin-left:8px;">25%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Where Execution Breaks First — % of Diagnostics</div>
+      <div class="dist-bars">
+        <div class="dist-row"><span class="dist-lbl">Workforce</span><div class="dist-track"><div class="dist-fill" style="--w:67%"></div></div><span class="dist-val">67%</span></div>
+        <div class="dist-row"><span class="dist-lbl">Operations</span><div class="dist-track"><div class="dist-fill" style="--w:22%"></div></div><span class="dist-val">22%</span></div>
+        <div class="dist-row"><span class="dist-lbl">Growth</span><div class="dist-track"><div class="dist-fill" style="--w:11%"></div></div><span class="dist-val">11%</span></div>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gl);">
+        <div class="chart-title" style="margin-bottom:12px;">Avg. Read Time Distribution</div>
+        <div class="dist-bars">
+          <div class="dist-row"><span class="dist-lbl" style="width:40px;">5 min</span><div class="dist-track"><div class="dist-fill" style="--w:30%;background:var(--teal);"></div></div><span class="dist-val">30%</span></div>
+          <div class="dist-row"><span class="dist-lbl" style="width:40px;">7 min</span><div class="dist-track"><div class="dist-fill" style="--w:48%;background:var(--red);"></div></div><span class="dist-val">48%</span></div>
+          <div class="dist-row"><span class="dist-lbl" style="width:40px;">9+ min</span><div class="dist-track"><div class="dist-fill" style="--w:22%;background:var(--gold);"></div></div><span class="dist-val">22%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILTER BAR ── -->
+<div class="filter-bar" id="filterBar">
+  <div class="ftab active" data-filter="all" onclick="filterInsights('all',this)">All Insights <span class="ftab-count">28</span></div>
+  <div class="ftab" data-filter="workforce" onclick="filterInsights('workforce',this)">Workforce <span class="ftab-count">12</span></div>
+  <div class="ftab" data-filter="ops" onclick="filterInsights('ops',this)">Operational <span class="ftab-count">9</span></div>
+  <div class="ftab" data-filter="growth" onclick="filterInsights('growth',this)">Growth <span class="ftab-count">7</span></div>
+  <div class="ftab" data-filter="framework" onclick="filterInsights('framework',this)">Framework <span class="ftab-count">4</span></div>
+  <div class="ftab" data-filter="community" onclick="filterInsights('community',this)">Community <span class="ftab-count">4</span></div>
+  <div class="filter-search">
+    <input class="search-input" type="text" placeholder="Search insights…" id="searchInput" oninput="searchInsights()">
+  </div>
+</div>
+
+<!-- ══════ FEATURED INSIGHT ══════ -->
+<section class="featured-section reveal" id="insights">
+  <div class="featured-card" onclick="openReader(0)">
+    <div class="fc-img-wrap">
+      <img class="fc-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80&fit=crop" alt="Execution is a system">
+      <div class="fc-img-overlay"></div>
+    </div>
+    <div class="fc-content">
+      <div class="fc-eyebrow">
+        <span class="fc-tag featured">Featured</span>
+        <span class="fc-tag framework">Execution Framework</span>
+        <span class="fc-tag framework">Foundational</span>
+      </div>
+      <h2 class="fc-h">Execution is not effort.<br><em>It is a system.</em></h2>
+      <p class="fc-desc">Every failed MSME has stories of effort. Long hours. Hard decisions. Motivated teams. The effort was real — and the business still failed. Not because people stopped trying, but because the system they were trying within was never built. This is the founding idea behind every insight we publish.</p>
+      <div class="fc-meta">
+        <div class="fc-author">
+          <img class="fc-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face" alt="ORIGENNT">
+          <span class="fc-author-name">ORIGENNT Intelligence Team</span>
+        </div>
+        <span class="fc-read-time">12 min read</span>
+      </div>
+      <a class="fc-read-btn" onclick="event.stopPropagation();openReader(0)">Read Full Insight →</a>
+      <div class="fc-stats">
+        <span class="fc-stat"><strong>2,841</strong> reads</span>
+        <span class="fc-stat"><strong>184</strong> likes</span>
+        <span class="fc-stat"><strong>Nov 2025</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ INSIGHTS GRID ══════ -->
+<section class="insights-section">
+  <div class="insights-grid" id="insightsGrid"></div>
+  <div class="load-more-wrap">
+    <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()">Load More Insights</button>
+  </div>
+</section>
+
+<!-- ══════ EXECUTION EQUATION ══════ -->
+<section class="equation-section reveal">
+  <div class="equation-inner">
+    <div style="text-align:center;margin-bottom:0;">
+      <div class="chip w">The Analytical Framework</div>
+      <h2 class="D W">Every insight built on<br><em>one equation.</em></h2>
+      <p class="body-t w" style="max-width:560px;margin:14px auto 0;">All ORIGENNT insights are structured around a single model. This is not opinion — it is a diagnostic framework built from observed execution patterns across real businesses.</p>
+    </div>
+    <div class="eq-formula">
+      <div class="eq-node">
+        <div class="eq-node-icon">👥</div>
+        <div class="eq-node-label">Layer 01</div>
+        <div class="eq-node-name">Workforce</div>
+      </div>
+      <div class="eq-operator">+</div>
+      <div class="eq-node">
+        <div class="eq-node-icon">⚙️</div>
+        <div class="eq-node-label">Layer 02</div>
+        <div class="eq-node-name">Operations</div>
+      </div>
+      <div class="eq-operator">+</div>
+      <div class="eq-node">
+        <div class="eq-node-icon">📈</div>
+        <div class="eq-node-label">Layer 03</div>
+        <div class="eq-node-name">Performance</div>
+      </div>
+      <div class="eq-operator">=</div>
+      <div class="eq-node result">
+        <div class="eq-node-icon">🔄</div>
+        <div class="eq-node-label">Output</div>
+        <div class="eq-node-name">Execution System</div>
+      </div>
+    </div>
+    <div class="eq-breakdown">
+      <div class="eq-layer">
+        <div class="eq-layer-num">P1</div>
+        <div class="eq-layer-title">People — Workforce Layer</div>
+        <div class="eq-layer-desc">Hiring is not recruitment. It is a system. When the system is absent, every hire is a gamble and every departure is a surprise.</div>
+        <ul class="eq-layer-items">
+          <li class="eq-layer-item">Hiring consistency and criteria design</li>
+          <li class="eq-layer-item">Onboarding structure and time-to-productivity</li>
+          <li class="eq-layer-item">Team accountability infrastructure</li>
+          <li class="eq-layer-item">Attrition as a system failure indicator</li>
+          <li class="eq-layer-item">Manpower planning vs. reactive filling</li>
+        </ul>
+      </div>
+      <div class="eq-layer">
+        <div class="eq-layer-num">P2</div>
+        <div class="eq-layer-title">Process — Operational Layer</div>
+        <div class="eq-layer-desc">Operations without structure don't scale — they drain. Every undocumented process is operational debt compounding at growth rate.</div>
+        <ul class="eq-layer-items">
+          <li class="eq-layer-item">Process documentation and SOP culture</li>
+          <li class="eq-layer-item">Delegation infrastructure and failure points</li>
+          <li class="eq-layer-item">Operational debt identification</li>
+          <li class="eq-layer-item">Quality systems and consistency mechanisms</li>
+          <li class="eq-layer-item">Workflow efficiency and handover design</li>
+        </ul>
+      </div>
+      <div class="eq-layer">
+        <div class="eq-layer-num">P3</div>
+        <div class="eq-layer-title">Performance — Growth Layer</div>
+        <div class="eq-layer-desc">Growth that feels random is random. Revenue peaks and valleys in SMEs are system failures, not market-driven outcomes.</div>
+        <ul class="eq-layer-items">
+          <li class="eq-layer-item">Revenue system architecture</li>
+          <li class="eq-layer-item">The revenue band ceiling problem</li>
+          <li class="eq-layer-item">Measuring execution vs. measuring output</li>
+          <li class="eq-layer-item">Scaling mechanisms vs. growth tactics</li>
+          <li class="eq-layer-item">Performance management system design</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Cascade failure viz -->
+    <div class="cascade">
+      <div class="cascade-title">Cascade Failure Patterns — How One Broken Layer Destroys the Others</div>
+      <div class="cascade-row">
+        <div class="cascade-cell fail">👥 People Fails</div>
+        <div class="cascade-arrow">→</div>
+        <div class="cascade-cell strain">⚙️ Process Strains</div>
+        <div class="cascade-arrow">→</div>
+        <div class="cascade-cell stop">📈 Growth Stops</div>
+      </div>
+      <div class="cascade-row">
+        <div class="cascade-cell works">👥 Hiring Works</div>
+        <div class="cascade-arrow">→</div>
+        <div class="cascade-cell fail">⚙️ Ops Fails</div>
+        <div class="cascade-arrow">→</div>
+        <div class="cascade-cell cap">📈 Growth Capped</div>
+      </div>
+      <div class="cascade-row">
+        <div class="cascade-cell works">👥 People Strong</div>
+        <div class="cascade-arrow">→</div>
+        <div class="cascade-cell works">⚙️ Ops Solid</div>
+        <div class="cascade-arrow">→</div>
+        <div class="cascade-cell works" style="background:rgba(13,107,94,.2);color:rgba(13,200,150,.9);">📈 Growth Unlocked</div>
+      </div>
+      <div style="margin-top:20px;font-size:12.5px;font-weight:300;color:rgba(255,255,255,.4);font-style:italic;text-align:center;">"If one layer fails, execution fails. The failure may appear in a different layer — but it originates in the one that broke first." — ORIGENNT Framework, 2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ WRITE AN INSIGHT ══════ -->
+<section class="write-section reveal" id="write">
+  <div>
+    <div class="chip">Community Intelligence</div>
+    <h2 class="D">You've seen it. <em>Write it.</em></h2>
+    <p class="body-t" style="max-width:580px;margin-top:12px;margin-bottom:48px;">ORIGENNT Insights is a platform for structured thinking — not just ours. If you've seen an execution failure close up, built a system that worked, or diagnosed a problem others miss, write it here. We review, structure, and publish community insights under your name.</p>
+  </div>
+  <div class="write-inner">
+    <div class="write-form-wrap">
+      <div class="wf-title">Submit Your Insight — Community Contribution</div>
+      <div id="writeForm">
+        <div class="wf-row">
+          <div class="wf-field">
+            <label class="wf-label">Your Name *</label>
+            <input class="wf-input" type="text" id="wfName" placeholder="Full name">
+          </div>
+          <div class="wf-field">
+            <label class="wf-label">Your Role / Organisation *</label>
+            <input class="wf-input" type="text" id="wfRole" placeholder="e.g. Founder, ABC Pvt. Ltd.">
+          </div>
+        </div>
+        <div class="wf-field">
+          <label class="wf-label">Email Address *</label>
+          <input class="wf-input" type="email" id="wfEmail" placeholder="we'll contact you before publishing">
+        </div>
+        <div class="wf-field">
+          <label class="wf-label">Insight Title *</label>
+          <input class="wf-input" type="text" id="wfTitle" placeholder="What execution problem does this address?">
+        </div>
+        <div class="wf-field">
+          <label class="wf-label">Execution Layer *</label>
+          <select class="wf-select" id="wfCategory">
+            <option value="">Select the layer this insight addresses</option>
+            <option value="workforce">Workforce Execution — Hiring, onboarding, retention, team systems</option>
+            <option value="ops">Operational Systems — Process, delegation, SOPs, workflows</option>
+            <option value="growth">Growth Execution — Revenue, scaling, performance measurement</option>
+            <option value="framework">Framework / Cross-Layer — Spans all three layers</option>
+          </select>
+        </div>
+        <div class="wf-field">
+          <label class="wf-label">Your Insight *</label>
+          <textarea class="wf-textarea" id="wfContent" placeholder="Describe the execution failure you've observed, the system responsible, and what a structural fix looks like. Minimum 200 words. Avoid generic advice — be specific about the structural cause." oninput="countChars()"></textarea>
+          <div class="wf-char-count"><span id="charCount">0</span> / 2000 characters</div>
+        </div>
+        <div class="wf-field">
+          <label class="wf-label">What makes this different from typical business advice?</label>
+          <input class="wf-input" type="text" id="wfDiff" placeholder="One sentence — what's the structural insight here?">
+        </div>
+        <button class="wf-btn" onclick="submitInsight()">Submit for Review →</button>
+        <div class="wf-note">ORIGENNT reviews all submissions within 5 business days. We may edit for structure and format. You'll be credited by name. No payment — this is a community platform.</div>
+      </div>
+      <div class="wf-success" id="writeSuccess">
+        <div class="wf-success-icon">✅</div>
+        <div class="wf-success-h">Insight submitted.</div>
+        <p class="wf-success-sub">Thank you. The ORIGENNT team reviews submissions within 5 business days. We'll email you before publishing. If your insight meets our structural standard, it will appear on this page — credited to you.</p>
+        <div style="margin-top:24px;">
+          <a href="https://wa.me/919861168291" style="display:inline-block;background:#25D366;color:white;padding:12px 28px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;">Follow up on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="margin-bottom:28px;"><div class="chip">Submission Guidelines</div><h2 class="D" style="font-size:26px;">What makes a good <em>community insight?</em></h2></div>
+      <div class="write-guidelines">
+        <div class="wg"><div class="wg-icon">🎯</div><div><div class="wg-title">Name the failure specifically</div><div class="wg-desc">Don't say "companies hire badly." Say "when hiring criteria change with each role, you cannot build a team — you can only collect individuals." Specificity is the standard.</div></div></div>
+        <div class="wg"><div class="wg-icon">🔍</div><div><div class="wg-title">Identify the system responsible</div><div class="wg-desc">Every insight must trace the failure to a specific execution layer: workforce, operational, or growth. If you can't name the system, the diagnosis isn't complete.</div></div></div>
+        <div class="wg"><div class="wg-icon">🏗️</div><div><div class="wg-title">Show the structural fix</div><div class="wg-desc">Don't stop at the problem. What does the structural intervention look like? What changes in the system — not just the behaviour?</div></div></div>
+        <div class="wg"><div class="wg-icon">🚫</div><div><div class="wg-title">No motivational content</div><div class="wg-desc">"Work harder," "stay consistent," "believe in your team" — these don't belong here. ORIGENNT Insights is for structural analysis, not inspiration.</div></div></div>
+        <div class="wg"><div class="wg-icon">📊</div><div><div class="wg-title">Grounded in observed reality</div><div class="wg-desc">Your insight should be rooted in something you've seen — a business you've run, managed, worked in, or consulted for. Abstracted theory without observed evidence doesn't meet our standard.</div></div></div>
+      </div>
+      <div style="margin-top:24px;background:var(--off);padding:24px 28px;border-left:4px solid var(--red);">
+        <div style="font-size:12px;font-weight:600;color:var(--black);margin-bottom:6px;">Questions about contributing?</div>
+        <div style="font-size:13px;font-weight:300;color:var(--gt);margin-bottom:12px;">WhatsApp or email us before submitting — we're happy to help you structure your thinking before you write.</div>
+        <a href="https://wa.me/919861168291?text=Hi ORIGENNT, I want to contribute an insight to your platform." style="font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--red);text-decoration:none;border-bottom:1px solid var(--red);">WhatsApp Us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ EXECUTION DIAGNOSTIC ══════ -->
+<section class="diag-section reveal" id="diagnostic">
+  <div class="diag-inner">
+    <div>
+      <div class="chip w">Execution Diagnostic</div>
+      <h2 class="D W">One report. Three layers.<br><em>Exact answers.</em></h2>
+      <div class="body-t w" style="margin-top:22px;">
+        <p>The Execution Diagnostic is ORIGENNT's single structured service offering for MSME and SME owners who want to understand exactly where their business is breaking — and why.</p>
+        <p>This is not a general business review. It is a targeted structural analysis designed to answer one question: where, exactly, is your execution system failing?</p>
+      </div>
+      <div class="diag-steps">
+        <div class="ds"><div class="ds-num">01</div><div class="ds-body"><div class="ds-title">Workforce Efficiency Review</div><div class="ds-desc">Analysis of your hiring process, criteria consistency, onboarding structure, and team accountability systems. Identifies where your workforce system creates drag.</div></div></div>
+        <div class="ds"><div class="ds-num">02</div><div class="ds-body"><div class="ds-title">Operational Structure Analysis</div><div class="ds-desc">Examination of process documentation, delegation infrastructure, workflows, and system dependencies. Shows where operations create systemic inefficiency.</div></div></div>
+        <div class="ds"><div class="ds-num">03</div><div class="ds-body"><div class="ds-title">Growth Execution Mapping</div><div class="ds-desc">Review of revenue systems, growth measurement practices, and scaling mechanisms. Identifies why growth feels inconsistent or has stalled.</div></div></div>
+        <div class="ds"><div class="ds-num">04</div><div class="ds-body"><div class="ds-title">Bottleneck Identification Report</div><div class="ds-desc">A structured report naming specific execution gaps across all three layers, their interdependencies, and a sequenced fix roadmap.</div></div></div>
+      </div>
+    </div>
+    <div class="diag-card">
+      <div class="chip w">What You Receive</div>
+      <h2 class="D W" style="font-size:28px;">One structured report.<br>One clear <em>next step.</em></h2>
+      <div class="diag-stats">
+        <div class="diag-stat"><div class="diag-stat-n">3<sup>L</sup></div><div class="diag-stat-l">Execution Layers Audited</div></div>
+        <div class="diag-stat"><div class="diag-stat-n">1</div><div class="diag-stat-l">Structured Report</div></div>
+        <div class="diag-stat"><div class="diag-stat-n">7<sup>d</sup></div><div class="diag-stat-l">Typical Turnaround</div></div>
+        <div class="diag-stat"><div class="diag-stat-n">5<sup>+</sup></div><div class="diag-stat-l">Min. Team Size</div></div>
+      </div>
+      <div class="body-t w" style="margin-bottom:28px;font-size:13px;">
+        <p>A prioritised action framework — not generic recommendations, but specific structural changes mapped to your business's current execution state. You will know which layer to fix first, why it matters, and what the fix looks like in practice.</p>
+      </div>
+      <div class="diag-ctas">
+        <a href="https://wa.me/919861168291?text=Hi ORIGENNT, I want to request the Execution Diagnostic for my business." class="dcta wa">Request via WhatsApp →</a>
+        <a href="mailto:origennt@gmail.com?subject=Execution Diagnostic Request&body=Hi ORIGENNT,%0A%0ABusiness Name:%0AIndustry:%0ATeam Size:%0ACore Challenge:" class="dcta red">Email Your Request →</a>
+        <a href="contact.html" class="dcta ol">Contact Page →</a>
+      </div>
+      <div style="margin-top:20px;font-size:11px;color:rgba(255,255,255,.3);text-align:center;line-height:1.7;">Paid professional service. Initial scoping call at no charge.<br>Works with MSMEs & SMEs across manufacturing, services, consulting, retail, and logistics.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FINAL CTA ══════ -->
+<div class="final-cta reveal">
+  <div class="fc-left">
+    <h2 class="fc-h">Structured thinking<br>is the <em>product.</em></h2>
+    <p class="fc-sub">ORIGENNT Insights exists to help MSME and SME owners understand that their problems have structural causes — and structural solutions. Read. Learn. Write. Engage. And when you're ready, get your Execution Diagnostic.</p>
+  </div>
+  <div class="fc-btns">
+    <a href="#write" class="fca w">Write an Insight</a>
+    <a href="#diagnostic" class="fca ol">Get Execution Diagnostic</a>
+    <a href="contact.html" class="fca ol">Speak with ORIGENNT →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="fl">ORIGENNT<span>.</span></div>
+  <div class="fcopy">© 2026 Origennt Private Limited · Companies Act 2013 · Est. 11/11/2025 · Bhubaneswar, Odisha</div>
+</footer>
+</div><!-- /main -->
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+
+/* ── SIDEBAR ── */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlayM').classList.toggle('show');});
+document.getElementById('overlayM').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('open');document.getElementById('overlayM').classList.remove('show');});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── DONUT + DIST BARS ── */
+const dObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dseg').forEach((s,i)=>setTimeout(()=>s.classList.add('go'),i*160));dObs.unobserve(e.target);}});},{threshold:.3});
+document.querySelectorAll('.cat-donut-wrap').forEach(el=>dObs.observe(el));
+const bObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dist-fill,.bar-fill,.am-fill').forEach((f,i)=>setTimeout(()=>f.classList.add('go'),i*80));bObs.unobserve(e.target);}});},{threshold:.2});
+document.querySelectorAll('.analytics-section,.write-section').forEach(el=>bObs.observe(el));
+/* dseg animate */
+document.documentElement.style.cssText+='';
+document.querySelectorAll('.dseg').forEach(s=>{s.style.strokeDasharray='0 238.8';});
+const dsObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.dseg').forEach((s,i)=>{const da=s.style.getPropertyValue('--da')||s.getAttribute('style').match(/--da:([^;]+)/)?.[1]||'0';setTimeout(()=>{s.style.strokeDasharray=da+' 238.8';},i*160);});dsObs.unobserve(e.target);}});},{threshold:.3});
+document.querySelectorAll('.chart-box').forEach(el=>dsObs.observe(el));
+
+/* ── SPARKLINE CHART ── */
+const sparkData=[18,24,31,38,42,55,67,84];
+const sparkEl=document.getElementById('sparkChart');
+const maxS=Math.max(...sparkData);
+sparkData.forEach((v,i)=>{
+  const bar=document.createElement('div');
+  bar.className='sp-bar'+(i===sparkData.length-1?' active':'');
+  bar.style.height=(v/maxS*100)+'%';
+  bar.title=v+' reads';
+  sparkEl.appendChild(bar);
+});
+
+/* ── ARTICLES DATA ── */
+const ARTICLES=[
+  {id:0,cat:'framework',title:'Execution is not effort. <em>It is a system.</em>',desc:'Every failed MSME has stories of effort. Long hours. Hard decisions. The effort was real — and the business still failed. Not because people stopped trying, but because the system was never built.',img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'12 min',likes:184,views:2841,date:'Nov 2025',featured:true,
+  body:`<p>Every failed MSME has stories of effort. Long hours. Hard decisions. Motivated teams who showed up early and stayed late. The effort was real. And yet, the business still failed. Not because the people stopped trying — but because the system they were trying within was never built.</p>
+<p>Execution is not a synonym for hard work. It is the architecture within which hard work produces predictable results.</p>
+<h3>The three arguments that matter</h3>
+<p>First: <strong>effort without system is activity, not execution.</strong> When there is no measurable system beneath the effort, you cannot identify what is working, what is failing, or why. You can only observe outcomes — and hope they improve.</p>
+<p>Second: <strong>every execution failure has a structural cause.</strong> Missed revenue targets, hiring failures, operational chaos — none of these are random. Each traces back to a specific structural gap in workforce, operations, or growth execution.</p>
+<blockquote>"When one layer of the execution system fails, the entire business feels broken — even if everything else is working."</blockquote>
+<p>Third: <strong>systems convert effort into consistent results.</strong> A business with good systems and average talent outperforms a business with great talent and no systems — consistently, predictably, and at scale.</p>
+<h3>What this means in practice</h3>
+<p>The question every business owner should be asking is not "are we working hard enough?" The question is: "do we have a system beneath the work that makes the outcome predictable?"</p>
+<div class="highlight-box"><p><strong>One diagnostic answers the question with data, not intuition.</strong> ORIGENNT's Execution Diagnostic analyses all three layers of your business and tells you, specifically, where the system is broken — and what to fix first.</p></div>
+<p>This insight is the foundational idea behind everything ORIGENNT publishes. Every other insight on this platform is an elaboration of this single observation, examined from a different angle, through a different execution layer.</p>`},
+
+  {id:1,cat:'workforce',title:'Why MSMEs fail at <em>hiring consistency</em>',desc:'Inconsistent hiring is not a skill problem. It is a system problem. When criteria change with each hire, you cannot build a team — you can only collect individuals.',img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'8 min',likes:92,views:1240,date:'Dec 2025',
+  body:`<p>Inconsistent hiring is not a skill problem. It is a system problem. When your criteria change with each hire — when the definition of "a good candidate" shifts depending on who is interviewing, what week it is, or how urgently you need to fill the role — you cannot build a team. You can only collect individuals.</p>
+<p>The result is a workforce with no common performance baseline, unpredictable output, and constant management overhead that prevents the business from scaling.</p>
+<h3>The structural cause</h3>
+<p>Most MSMEs hire reactively. A role becomes open — through resignation, growth, or an emergency — and the response is immediate: post the job, take calls, interview whoever applies, hire the least-bad option within the deadline. This is not a hiring process. It is a hiring event.</p>
+<blockquote>"Reactive hiring optimises for speed. Systematic hiring optimises for fit. You cannot have both without the architecture."</blockquote>
+<h3>What the system fix looks like</h3>
+<p>A hiring system has four components: a defined role architecture (what does success look like in this role, specifically?), a consistent evaluation rubric (the same criteria applied by every interviewer), a structured assessment process (not just conversations — structured questions with scored responses), and a post-hire measurement mechanism (is this person performing against the standard we hired them to?).</p>
+<div class="highlight-box"><p><strong>Without all four, hiring is a gamble dressed as a process.</strong> The businesses that scale are not the ones with the best interviewers — they are the ones with the most consistent hiring system.</p></div>`},
+
+  {id:2,cat:'ops',title:'Operations don\'t scale without <em>structure</em>',desc:'Every SME has operational chaos at some scale. The businesses that survive it are not the ones that hired better people — they built documented systems before the chaos became permanent.',img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'6 min',likes:74,views:986,date:'Jan 2026',
+  body:`<p>Every SME has operational chaos at some scale. The businesses that survive it are not the ones that hired better people — they are the ones that built documented systems before the chaos became permanent. Operational structure is not bureaucracy. It is the infrastructure that makes scale possible.</p>
+<h3>The compounding cost of undocumented processes</h3>
+<p>When a process is not documented, it lives in someone's head. When that person leaves — and they will — the process leaves with them. The business then spends weeks rediscovering what already existed, teaching it informally to a replacement, and watching quality decline while the gap is bridged.</p>
+<blockquote>"The most expensive cost in your business is probably invisible on your P&L. Unstructured execution drains resources in ways that never appear as a line item."</blockquote>
+<h3>Where delegation always breaks</h3>
+<p>MSME delegation fails at the same point across sectors: the moment the delegator assumes the delegatee knows what "good" looks like. Without a documented standard for what the output should be, delegation is not delegation — it is abdication with optimism attached.</p>
+<div class="highlight-box"><p><strong>Operational structure is not built overnight.</strong> It is built one documented process at a time, starting with the highest-frequency, highest-variance tasks in your business. Start with three. Build the habit. The system follows.</p></div>`},
+
+  {id:3,cat:'growth',title:'Why growth feels <em>random in SMEs</em>',desc:'Revenue peaks and valleys in SMEs are not market-driven. They are system-driven. When you cannot trace a revenue result to a specific execution behaviour, growth will always feel unpredictable — because it is.',img:'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'7 min',likes:63,views:854,date:'Jan 2026',
+  body:`<p>Revenue peaks and valleys in SMEs are not market-driven. They are system-driven. When you cannot trace a revenue result to a specific execution behaviour — when you don't know why last month was strong and this month is not — growth will always feel unpredictable. Because it is.</p>
+<h3>The structural cause of random growth</h3>
+<p>Random growth is almost always the result of missing measurement. Not missing data — most SMEs have plenty of data. Missing <em>measurement</em>: the connection between a specific execution behaviour and a specific revenue outcome.</p>
+<blockquote>"Growth that feels random is a systems failure. If you cannot explain why revenue changed, you cannot repeat the success or prevent the failure."</blockquote>
+<h3>The revenue band ceiling</h3>
+<p>Most MSMEs stall at the same revenue figure, year after year. This stall is not a market limitation. It is the point at which the current execution system hits its structural ceiling and refuses to move without redesign. The founder who ran the business from ₹0–1Cr cannot run the same business from ₹1–5Cr with the same systems. The architecture has to change.</p>
+<div class="highlight-box"><p><strong>The first step to predictable growth is tracing your last three revenue movements</strong> — good and bad — to specific execution behaviours. If you cannot trace them, you don't yet have a growth system. You have a growth hope.</p></div>`},
+
+  {id:4,cat:'ops',title:'The hidden cost of <em>unstructured execution</em>',desc:'The most expensive cost in your business is probably invisible on your P&L. Unstructured execution — repeated mistakes, unclear delegation, informal processes — compounds into existential risk.',img:'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'5 min',likes:51,views:710,date:'Feb 2026',
+  body:`<p>The most expensive cost in your business is probably invisible on your P&L. Unstructured execution — repeated mistakes, unclear delegation, informal processes — drains resources in ways that never appear as a line item but compound into existential risk over time.</p>
+<h3>What invisible costs look like</h3>
+<p>Consider a simple example: a process that should take one hour takes three, because it is not documented and must be re-figured each time. For a 20-person business with 10 such processes running weekly, that is 400 hours of wasted time per month. At even a modest effective hourly cost, the annual drain exceeds ₹12 lakh — invisible, unmeasured, and growing.</p>
+<div class="highlight-box"><p><strong>Operational debt is real debt.</strong> It accrues interest in the form of management time, quality variance, and employee frustration. Unlike financial debt, it doesn't appear on a balance sheet — until the business breaks.</p></div>`},
+
+  {id:5,cat:'workforce',title:'When attrition is a <em>system problem</em>',desc:'High attrition is almost never about compensation. It is about the experience of working in a system that doesn\'t function. People leave when the system around them prevents them from doing good work.',img:'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'6 min',likes:88,views:1102,date:'Feb 2026',
+  body:`<p>High attrition is almost never about compensation. Exit interviews say it is — but exit interviews are designed to be polite. The real reason people leave is this: the system around them prevents them from doing good work. And people who want to do good work will not tolerate that environment indefinitely.</p>
+<h3>The system signals attrition sends</h3>
+<p>Attrition is not a people problem. It is a diagnostic. When attrition clusters in a specific team, tenure band, or role type, it is telling you something about the system in that part of the business. The question is not "how do we retain people?" The question is "what is the system failure that is making retention impossible?"</p>
+<blockquote>"Every attrition pattern has a structural cause. Finding it requires looking at the system, not the person who left."</blockquote>
+<div class="highlight-box"><p><strong>The structural fix for attrition is not a salary review.</strong> It is a workflow audit, a management system review, and an honest assessment of whether the role itself is designed to allow someone to succeed. Fix the system — the retention follows.</p></div>`},
+
+  {id:6,cat:'growth',title:'The revenue band problem in <em>MSMEs</em>',desc:'Most MSMEs stall at the same revenue figure, year after year. This stall is not a market limitation — it is the point at which the execution system hits its structural ceiling.',img:'https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80&fit=crop',author:'ORIGENNT Intelligence',avatar:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&q=80&fit=crop&crop=face',read:'9 min',likes:107,views:1388,date:'Mar 2026',
+  body:`<p>Most MSMEs stall at the same revenue figure, year after year. ₹80 lakh. ₹2 crore. ₹8 crore. The number is different for every business, but the pattern is identical: growth feels impossible above a certain threshold, no matter what tactics are tried. This stall is not a market limitation. It is the point at which the current execution system hits its structural ceiling — and refuses to move without redesign.</p>
+<h3>Why the ceiling exists</h3>
+<p>The founder who built a business from zero to ₹1Cr did so by being present everywhere. Every decision. Every client. Every problem. At ₹1Cr, that model starts to crack. The founder becomes the bottleneck. The team cannot operate without constant direction. Delegation fails because the systems to support it don't exist.</p>
+<blockquote>"The ceiling is not the market. The ceiling is the current execution architecture, applied to a business it was never designed to run at scale."</blockquote>
+<div class="highlight-box"><p><strong>Breaking through a revenue band ceiling requires rebuilding the execution architecture</strong> — not adding more people, not increasing marketing spend, not working harder. The structure has to change. That is the work.</p></div>`},
+
+  {id:7,cat:'community',title:'What I learned running a 12-person <em>logistics operation</em>',desc:'A community contribution from a first-time founder in Odisha — on what broke first, why it broke, and what a structural fix actually looked like in practice.',img:'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80&fit=crop',author:'Community Contributor',avatar:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&q=80&fit=crop&crop=face',read:'5 min',likes:38,views:442,date:'Mar 2026',
+  body:`<p>I started a last-mile logistics operation in Bhubaneswar in 2023. By month six, we had 12 people on the team and were processing around 300 deliveries a day. By month nine, I was personally resolving customer complaints at 10pm. Something had broken — I just couldn't see what.</p>
+<h3>What broke first</h3>
+<p>After an ORIGENNT diagnostic, the answer was clear: the workforce layer. We had hired 12 people using 12 different criteria. Some roles had clear performance standards. Most didn't. When something went wrong — a missed delivery, a damaged parcel — we had no consistent accountability mechanism. The operational layer was straining under the pressure of an incoherent team.</p>
+<blockquote>"The operational chaos was visible. The workforce system failure was invisible. We kept fixing symptoms — route inefficiencies, tracking errors — without ever touching the cause."</blockquote>
+<h3>What the fix looked like</h3>
+<p>We spent three weeks building a consistent role standard for every position. We defined what "good" looked like for a delivery associate, a dispatch coordinator, and a customer service person. We tied those standards to a simple daily accountability check. Within 60 days, escalations to me had dropped by 70%. The operations didn't change. The workforce system did.</p>
+<div class="highlight-box"><p><strong>This is a community contribution.</strong> I'm not a consultant — I'm a founder who learned the hard way. If it helps one other operator see their own system more clearly, it was worth writing.</p></div>`},
+];
+
+/* ── INSIGHTS RENDER ── */
+let visibleCount=6;
+let activeFilter='all';
+let searchQuery='';
+let likedArticles=new Set();
+
+function getFilteredArticles(){
+  return ARTICLES.filter(a=>{
+    const matchCat=activeFilter==='all'||a.cat===activeFilter;
+    const matchSearch=!searchQuery||a.title.toLowerCase().replace(/<[^>]+>/g,'').includes(searchQuery)||a.desc.toLowerCase().includes(searchQuery)||a.author.toLowerCase().includes(searchQuery);
+    return matchCat&&matchSearch;
+  });
+}
+
+function renderGrid(){
+  const filtered=getFilteredArticles();
+  const grid=document.getElementById('insightsGrid');
+  const slice=filtered.slice(0,visibleCount);
+  grid.innerHTML=slice.map(a=>`
+    <div class="ins-card" data-id="${a.id}" onclick="openReader(${a.id})">
+      <img class="ins-card-img" src="${a.img}" alt="${a.title.replace(/<[^>]+>/g,'')}">
+      <div class="ins-tags">
+        <span class="ins-tag ${a.cat}">${{workforce:'Workforce',ops:'Operational',growth:'Growth',framework:'Framework',community:'Community'}[a.cat]}</span>
+      </div>
+      <div class="ins-h">${a.title}</div>
+      <div class="ins-desc">${a.desc}</div>
+      <div class="ins-footer">
+        <div class="ins-author">
+          <img class="ins-avatar" src="${a.avatar}" alt="${a.author}">
+          <div>
+            <div class="ins-author-name">${a.author}</div>
+            <div class="ins-read">${a.read} · ${a.date}</div>
+          </div>
+        </div>
+        <div class="ins-engagement">
+          <span class="ins-like${likedArticles.has(a.id)?' liked':''}" onclick="event.stopPropagation();toggleLike(${a.id},this)">
+            <span class="ins-like-ico">${likedArticles.has(a.id)?'♥':'♡'}</span>
+            <span>${a.likes+(likedArticles.has(a.id)?1:0)}</span>
+          </span>
+          <button class="ins-btn">Read →</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('loadMoreBtn').style.display=filtered.length>visibleCount?'inline-block':'none';
+}
+
+function filterInsights(f,el){
+  activeFilter=f;
+  visibleCount=6;
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderGrid();
+}
+
+function searchInsights(){
+  searchQuery=document.getElementById('searchInput').value.toLowerCase();
+  visibleCount=6;
+  renderGrid();
+}
+
+function loadMore(){visibleCount+=3;renderGrid();}
+
+function toggleLike(id,el){
+  if(likedArticles.has(id)){likedArticles.delete(id);}else{likedArticles.add(id);}
+  renderGrid();
+}
+
+renderGrid();
+
+/* ── READER MODAL ── */
+let currentArticleLiked=false;
+function openReader(id){
+  const a=ARTICLES.find(x=>x.id===id);
+  if(!a)return;
+  currentArticleLiked=likedArticles.has(id);
+  document.getElementById('readerImg').src=a.img;
+  document.getElementById('readerEyebrow').innerHTML=`<span class="fc-tag ${a.cat}">${{workforce:'Workforce Execution',ops:'Operational Systems',growth:'Growth Execution',framework:'Execution Framework',community:'Community Contribution'}[a.cat]}</span><span class="fc-tag framework">${a.read}</span>`;
+  document.getElementById('readerH').innerHTML=a.title;
+  document.getElementById('readerMeta').innerHTML=`<img style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:10px;" src="${a.avatar}" alt="${a.author}"><span style="font-size:13px;color:var(--gt);">${a.author}</span><span style="margin-left:16px;font-size:12px;color:var(--gm);">${a.date}</span><span style="margin-left:auto;font-size:12px;color:var(--gm);">${a.views.toLocaleString()} reads</span>`;
+  document.getElementById('readerBody').innerHTML=a.body;
+  document.getElementById('readerLikeCount').textContent=a.likes+(currentArticleLiked?1:0);
+  document.getElementById('readerLike').className='re-like-btn'+(currentArticleLiked?' liked':'');
+  document.getElementById('readerLike').innerHTML=(currentArticleLiked?'♥':'♡')+' &nbsp;Like this insight &nbsp;<span id="readerLikeCount">'+(a.likes+(currentArticleLiked?1:0))+'</span>';
+  document.getElementById('readerModal').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('readerModal').scrollTop=0;
+  window._currentArticle=a;
+}
+
+document.getElementById('readerClose').addEventListener('click',()=>{document.getElementById('readerModal').classList.remove('open');document.body.style.overflow='';});
+document.getElementById('readerModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('open');document.body.style.overflow='';}});
+
+function toggleReaderLike(){
+  const a=window._currentArticle;if(!a)return;
+  if(likedArticles.has(a.id)){likedArticles.delete(a.id);currentArticleLiked=false;}else{likedArticles.add(a.id);currentArticleLiked=true;}
+  document.getElementById('readerLike').className='re-like-btn'+(currentArticleLiked?' liked':'');
+  document.getElementById('readerLike').innerHTML=(currentArticleLiked?'♥':'♡')+' &nbsp;Like this insight &nbsp;<span id="readerLikeCount">'+(a.likes+(currentArticleLiked?1:0))+'</span>';
+  renderGrid();
+}
+
+/* Read progress bar */
+document.getElementById('readerModal').addEventListener('scroll',function(){
+  const el=this;const box=el.querySelector('.reader-box');
+  if(!box)return;
+  const total=box.scrollHeight-el.clientHeight;
+  const pct=Math.min(100,(el.scrollTop/total)*100);
+  document.getElementById('readProgress').style.width=pct+'%';
+});
+
+function shareArticle(platform){
+  const a=window._currentArticle;if(!a)return;
+  const text=encodeURIComponent('Read "'+a.title.replace(/<[^>]+>/g,'')+'" on ORIGENNT Insights: https://origennt.com/insights.html');
+  if(platform==='wa')window.open('https://wa.me/?text='+text,'_blank');
+  else window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent('https://origennt.com/insights.html'),'_blank');
+}
+
+/* ── WRITE FORM ── */
+function countChars(){
+  const v=document.getElementById('wfContent').value;
+  document.getElementById('charCount').textContent=v.length;
+}
+
+function submitInsight(){
+  const name=document.getElementById('wfName').value.trim();
+  const role=document.getElementById('wfRole').value.trim();
+  const email=document.getElementById('wfEmail').value.trim();
+  const title=document.getElementById('wfTitle').value.trim();
+  const cat=document.getElementById('wfCategory').value;
+  const content=document.getElementById('wfContent').value.trim();
+  if(!name||!email||!title||!cat||content.length<100){
+    alert('Please fill in all required fields. Your insight should be at least 100 characters.');return;
+  }
+  const msg=encodeURIComponent(`ORIGENNT Insights — Community Submission\n\nName: ${name}\nRole: ${role}\nEmail: ${email}\nTitle: ${title}\nCategory: ${cat}\n\nInsight:\n${content}`);
+  window.open('https://wa.me/919861168291?text='+msg,'_blank');
+  document.getElementById('writeForm').style.display='none';
+  document.getElementById('writeSuccess').style.display='block';
+}
+</script>
+</body>
+</html>
