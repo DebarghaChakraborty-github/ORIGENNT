@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — ORIGENNT | Global Management Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   CORE RESET & TYPOGRAPHIC BASE ARCHITECTURE
+   ═══════════════════════════════════════════ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --red: #CC2229;
+  --red-dark: #a31a20;
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --off: #f7f6f4;
+  --grey-light: #eeecea;
+  --grey-mid: #c2bfba;
+  --grey-text: #6b6660;
+  --sidebar: 320px;
+}
+html {
+  scroll-behavior: smooth;
+  background-color: var(--black);
+}
+body {
+  font-family: 'Libre Baskerville', serif;
+  background: var(--black);
+  color: var(--black);
+  overflow-x: hidden;
+  cursor: none;
+}
+a, button, input, select, textarea, .hamburger, .am5-html-container {
+  cursor: none !important;
+}
+
+/* Luxury Interactive Custom Telemetry Cursor System */
+.cursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(204, 34, 41, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out;
+}
+
+#earth-container{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100vh;
+  z-index:1;
+  background:#000814;
+  overflow:hidden;
+}
+
+.canvas{
+  display:block;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR NAV SYSTEM INTERFACE 
+   ═══════════════════════════════════════════ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar);
+  height: 100vh;
+  background: var(--black);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.sidebar-top {
+  padding: 44px 40px 36px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 21px;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.logo-dot {
+  color: var(--red);
+  font-size: 28px;
+  line-height: 0;
+  position: relative;
+  top: 4px;
+}
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px;
+  scrollbar-width: none;
+}
+.sidebar-scroll::-webkit-scrollbar {
+  display: none;
+}
+.nav-section {
+  margin-bottom: 38px;
+}
+.nav-section-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--white);
+  padding-left: 4px;
+}
+.nav-link svg {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s, transform 0.2s;
+  color: var(--red);
+}
+.nav-link:hover svg, .nav-link.active svg {
+  opacity: 1;
+  transform: none;
+}
+.sidebar-bottom {
+  padding: 32px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255,255,255,0.01);
+}
+.sidebar-contact-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 12px;
+}
+.sidebar-contact-info {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.85;
+}
+.sidebar-contact-info a {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+}
+.sidebar-contact-info a:hover {
+  color: var(--red);
+}
+
+/* ═══════════════════════════════════════════
+   MAIN PANELS LAYER WRAPPER ARCHITECTURE
+   ═══════════════════════════════════════════ */
+.main {
+  margin-left: var(--sidebar);
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+.main > * {
+  pointer-events: auto;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar);
+  right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 64px;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.back-link {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s;
+}
+.back-link:hover {
+  color: var(--white);
+}
+.topbar-badge {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(204, 34, 41, 0.3);
+  padding: 8px 20px;
+  background: rgba(204, 34, 41, 0.04);
+}
+
+/* ═══════════════════════════════════════════
+   HERO SCENIC LAYOUT PANEL 
+   ═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 720px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, 
+    rgba(10,10,10,1) 15%, 
+    rgba(10,10,10,0.92) 35%, 
+    rgba(10,10,10,0.1) 65%, 
+    rgba(10,10,10,0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  padding: 0 80px;
+  max-width: 780px;
+}
+.hero-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s 0.05s forwards cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--red);
+}
+.hero-h1 {
+  font-size: clamp(44px, 5.5vw, 84px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s 0.15s forwards cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-h1 em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 400;
+}
+.hero-sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 520px;
+  line-height: 1.85;
+  margin-top: 36px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s 0.3s forwards cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-stats {
+  display: flex;
+  gap: 0;
+  margin-top: 64px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s 0.45s forwards cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hero-stat {
+  padding: 0 40px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+.hero-stat:first-child {
+  padding-left: 0;
+}
+.hero-stat:last-child {
+  border-right: none;
+}
+.hero-stat-num {
+  font-size: 34px;
+  color: var(--white);
+  line-height: 1;
+}
+.hero-stat-num span.plus {
+  color: var(--red);
+  font-size: 24px;
+  margin-left: 2px;
+}
+.hero-stat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.06em;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 48px;
+  left: 80px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  animation: fadeUp 1.2s 0.8s forwards;
+}
+.scroll-cue::after {
+  content: '';
+  width: 48px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Real-Time Matrix Mode Visual Tracker HUD */
+.diurnal-tracker-hud {
+  position: absolute;
+  bottom: 48px;
+  right: 80px;
+  z-index: 99;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 14px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+}
+.hud-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.hud-value-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hud-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  transition: background 0.5s, box-shadow 0.5s;
+}
+.hud-status-text {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13px;
+  color: var(--white);
+  font-style: italic;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   MODULE CONTROLS & TWIN GRID MODULE
+   ═══════════════════════════════════════════ */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 100vh;
+  position: relative;
+  z-index: 15;
+}
+.contact-info {
+  background: rgba(247, 246, 244, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 96px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  border-right: 1px solid var(--grey-light);
+}
+.info-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.info-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--red);
+}
+.office-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.office-card {
+  background: var(--white);
+  padding: 32px;
+  border-left: 2px solid transparent;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.015);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.office-card:hover {
+  border-left-color: var(--red);
+  transform: translateX(4px);
+}
+.office-type {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.office-city {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.office-addr {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--grey-text);
+  line-height: 1.8;
+}
+.info-item-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--black);
+  line-height: 2;
+}
+.info-item-text a {
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(0,0,0,0.2);
+  transition: color 0.2s, border-color 0.2s;
+}
+.info-item-text a:hover {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+.response-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  padding: 16px 26px;
+}
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+/* Modern Dynamic Grid Corridor Rows */
+.social-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+}
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  padding: 18px 24px;
+  background: var(--white);
+  border-left: 2px solid transparent;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.01);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  color: var(--black);
+}
+.social-link:hover {
+  border-left-color: var(--red);
+  background: #fdfaf9;
+  transform: translateX(4px);
+}
+.social-link-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.social-link-icon.web { background: var(--black); }
+.social-link-icon.ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+.social-link-icon.li { background: #0077b5; }
+.social-link-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--black);
+}
+.social-link-handle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--grey-text);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════
+   SUBMISSION ENQUIRY FORM PANEL
+   ═══════════════════════════════════════════ */
+.contact-form-wrap {
+  background: var(--white);
+  padding: 96px 80px;
+}
+.form-title {
+  font-size: 38px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.form-title em {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 400;
+}
+.form-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--grey-text);
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.form-group {
+  margin-bottom: 24px;
+}
+.form-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+  display: block;
+  margin-bottom: 10px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--off);
+  border: 1px solid var(--grey-light);
+  font-family: 'Libre Baskerville', serif;
+  font-size: 14px;
+  color: var(--black);
+  padding: 16px 20px;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
+  border-radius: 0;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--red);
+  background: var(--white);
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 160px;
+  line-height: 1.6;
+}
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b6660' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 48px;
+}
+.btn-submit {
+  width: 100%;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: none;
+  padding: 22px;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 12px;
+}
+.btn-submit:hover {
+  background: var(--red-dark);
+}
+.btn-submit:active {
+  transform: scale(0.995);
+}
+.btn-submit:disabled {
+  opacity: 0.6;
+}
+.form-privacy {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--grey-mid);
+  margin-top: 18px;
+  line-height: 1.7;
+}
+.form-privacy a {
+  color: var(--grey-text);
+  text-decoration: underline;
+}
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 96px 0;
+}
+.form-success .tick {
+  font-size: 56px;
+  color: var(--red);
+  line-height: 1;
+}
+.form-success h3 {
+  font-size: 28px;
+  margin: 24px 0 12px;
+  font-weight: 400;
+}
+.form-success p {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14.5px;
+  font-weight: 300;
+  color: var(--grey-text);
+  line-height: 1.6;
+}
+.form-success a {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: var(--red);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  display: inline-block;
+  margin-top: 24px;
+}
+
+/* ═══════════════════════════════════════════
+   DEEP CARTOGRAPHIC INTERACTIVE PANEL SITES
+   ═══════════════════════════════════════════ */
+.map-section {
+  background: rgba(10, 10, 10, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 96px 80px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.map-section-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 64px;
+}
+.map-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.map-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--red);
+}
+.map-title {
+  font-size: 42px;
+  color: var(--white);
+  line-height: 1.2;
+  font-weight: 400;
+}
+.map-title em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 400;
+}
+.map-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  max-width: 340px;
+  line-height: 1.8;
+}
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.map-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.map-card:hover {
+  border-color: rgba(204, 34, 41, 0.5);
+  transform: translateY(-4px);
+}
+.map-card-header {
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.map-card-type {
+  font-family: 'Outfit', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.map-card-city {
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+.map-card-addr {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.8;
+}
+.map-pin-icon {
+  font-size: 24px;
+  opacity: 0.7;
+}
+.map-iframe-wrap iframe {
+  width: 100%;
+  height: 260px;
+  border: none;
+  display: block;
+  filter: grayscale(100%) invert(92%) contrast(90%);
+  opacity: 0.65;
+  transition: opacity 0.3s, filter 0.3s;
+}
+.map-card:hover .map-iframe-wrap iframe {
+  filter: grayscale(40%) invert(85%) contrast(95%);
+  opacity: 0.95;
+}
+.map-open-link {
+  display: block;
+  text-align: center;
+  padding: 18px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  text-decoration: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255,255,255,0.005);
+  transition: background 0.2s, color 0.2s;
+}
+.map-open-link:hover {
+  background: rgba(204, 34, 41, 0.06);
+  color: var(--white);
+}
+
+/* ═══════════════════════════════════════════
+   LIVE TELEMETRY INTERFACES & TRACKER PANELS
+   ═══════════════════════════════════════════ */
+.tracker-section {
+  background: rgba(10, 10, 10, 0.91);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 96px 80px;
+}
+.tracker-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tracker-label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--red);
+}
+.tracker-title {
+  font-size: 38px;
+  color: var(--white);
+  margin-bottom: 64px;
+  line-height: 1.2;
+  font-weight: 400;
+}
+.tracker-title em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 400;
+}
+.tracker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.tracker-card {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 44px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+.tracker-card:hover {
+  border-color: rgba(204, 34, 41, 0.4);
+  background: rgba(255, 255, 255, 0.03);
+}
+.tracker-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: var(--red);
+  transition: height 0.4s ease-out;
+}
+.tracker-card:hover::before {
+  height: 100%;
+}
+.tracker-icon {
+  font-size: 22px;
+  margin-bottom: 24px;
+  opacity: 0.5;
+}
+.tracker-num {
+  font-size: 44px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+.tracker-num span.suffix {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-left: 2px;
+}
+.tracker-card-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.5;
+}
+.tracker-card-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.25);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+.tracker-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+  margin-top: 48px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tracker-live-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse 1.8s infinite;
+}
+
+/* ═══════════════════════════════════════════
+   STRIP COULOIR & LUXURY SIGNATURE FOOTER
+   ═══════════════════════════════════════════ */
+.presence-strip {
+  background: rgba(10, 10, 10, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 44px 80px;
+}
+.presence-inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.presence-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+}
+.presence-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+.presence-cities {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.presence-city {
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.05em;
+}
+.presence-city::before {
+  content: '↗ ';
+  color: var(--red);
+  font-size: 11px;
+}
+
+footer {
+  background: var(--black);
+  padding: 56px 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.footer-logo {
+  font-size: 19px;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+.footer-logo span {
+  color: var(--red);
+}
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+.footer-social {
+  display: flex;
+  gap: 16px;
+}
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.2s, background 0.2s;
+  text-decoration: none;
+  font-size: 14px;
+}
+.footer-social-link:hover {
+  border-color: var(--red);
+  background: rgba(204, 34, 41, 0.08);
+}
+.footer-copy {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Scroll Fade Revelations Framework */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE OVERRIDES & UI HAMBURGER SYSTEM
+   ═══════════════════════════════════════════ */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 300;
+  background: var(--black);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px;
+  flex-direction: column;
+  gap: 6px;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--white);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 190;
+  backdrop-filter: blur(4px);
+}
+
+@media (max-width: 1200px) {
+  :root { --sidebar: 0px; }
+  .sidebar { transform: translateX(-320px); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  #chartdiv { left: 0; width: 100%; }
+  .topbar { left: 0; padding: 0 24px 0 80px; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .hero-content { padding: 0 40px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-info, .contact-form-wrap { padding: 64px 40px; }
+  .map-section, .tracker-section { padding: 64px 40px; }
+  .map-grid { grid-template-columns: 1fr; }
+  .map-section-top { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .tracker-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 24px; align-items: flex-start; padding: 44px 40px; }
+  .footer-right { align-items: flex-start; }
+  .presence-strip { padding: 44px 40px; }
+  body, a, button, input, select, textarea, .hamburger, .am5-html-container { cursor: auto !important; }
+  .cursor, .cursor-ring { display: none; }
+}
+@media (max-width: 640px) {
+  .tracker-grid { grid-template-columns: 1fr; }
+  .presence-cities { gap: 18px; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+  .hero-stat { padding: 0 0 16px 0; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+}
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+<div class="overlay" id="overlay"></div>
+
+<div id="earth-container"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-top">
+    <a href="https://origennt.com/" class="logo">ORIGENNT<span class="logo-dot">.</span></a>
+  </div>
+  <div class="sidebar-scroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Consulting</div>
+      <a href="https://origennt.com/management-consulting_.html" class="nav-link">Management Consulting <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/strategy.html" class="nav-link">Strategy & Transformation <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/organizational-design.html" class="nav-link">Organisational Design <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/change-management.html" class="nav-link">Change Management <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/web_digital_v2.html" class="nav-link">Web & Digital (ORISSON) <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">HR Practice</div>
+      <a href="https://origennt.com/talent-acquisition.html" class="nav-link">Talent Acquisition <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/executive-search.html" class="nav-link">Executive Search <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/payroll-compliance.html" class="nav-link">Payroll & Compliance <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/hr-analytics.html" class="nav-link">HR Analytics <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/learning-development.html" class="nav-link">Learning & Development <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Programs</div>
+      <a href="https://origennt.com/internship.html" class="nav-link">Internship Program <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/campus.html" class="nav-link">Campus Recruitment <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Company</div>
+      <a href="https://origennt.com/about.html" class="nav-link">About Us <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/insight.html" class="nav-link">Insights <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+      <a href="https://origennt.com/contact.html" class="nav-link active">Contact <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M9 1l4 4-4 4M13 5H1" stroke="currentColor" stroke-width="1.2"/></svg></a>
+    </div>
+  </div>
+  <div class="sidebar-bottom">
+    <div class="sidebar-contact-label">Headquarters</div>
+    <div class="sidebar-contact-info">
+      Bhubaneswar, Odisha · India<br>
+      <a href="mailto:solutions@origennt.com">solutions@origennt.com</a>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <a href="https://origennt.com/" class="back-link">Home</a>
+    <div class="topbar-badge">Open to Global Engagements</div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">ORIGENNT · Global Management Consulting</div>
+      <h1 class="hero-h1">Let's build<br>something <em>consequential.</em></h1>
+      <p class="hero-sub">Whether you're scaling an enterprise, transforming a workforce, or charting your next career move — we are where strategy meets execution, across every timezone.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">150<span class="plus">+</span></div>
+          <div class="hero-stat-label">Companies Served</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">12<span class="plus">+</span></div>
+          <div class="hero-stat-label">Countries Reached</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue">Scroll to rotate & track</div>
+    
+    <div class="diurnal-tracker-hud">
+      <div class="hud-title">Diurnal Matrix Mapping</div>
+      <div class="hud-value-row">
+        <div class="hud-pulse-dot" id="hudDot"></div>
+        <div class="hud-status-text" id="hudStatus">Deep Night Mode</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <div>
+        <div class="info-label">Our Offices</div>
+        <div class="office-cards">
+          <div class="office-card">
+            <div class="office-type">Registered Office</div>
+            <div class="office-city">Cuttack, Odisha</div>
+            <div class="office-addr">NO-A2/304 MJ WOODS, Jagannath Prasad<br>Andharua, Barang, Cuttack – 754005<br>Odisha, India</div>
+          </div>
+          <div class="office-card">
+            <div class="office-type">Operations HQ · ORISSON Division</div>
+            <div class="office-city">Bhubaneswar, Odisha</div>
+            <div class="office-addr">C-2, Room 703, DLF Cyber City<br>IDCO Info Park, Chandaka Industrial Estate<br>Patia, Bhubaneswar – 751024, India</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label">Direct Contact</div>
+        <div class="info-item-text">
+          Solutions: <a href="mailto:solutions@origennt.com">solutions@origennt.com</a><br>
+          Corporate: <a href="mailto:admin@origennt.com">admin@origennt.com</a><br>
+          Careers: Call us directly or visit our office.
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label">Response Commitment</div>
+        <div class="response-badge">
+          <div class="badge-dot"></div>
+          We respond within 24–48 business hours
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label">Working Hours</div>
+        <div class="info-item-text">Monday – Saturday · 9:00 AM – 6:30 PM IST<br><br>Priority support lines active for current corporate accounts.</div>
+      </div>
+
+      <div>
+        <div class="info-label">Connect With Us</div>
+        <div class="social-row">
+          <a class="social-link" href="https://origennt.com/" target="_blank" rel="noopener">
+            <div class="social-link-icon web">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="social-link-meta">
+              <div class="social-link-name">Official Portal</div>
+              <div class="social-link-handle">origennt.com</div>
+            </div>
+          </a>
+          <a class="social-link" href="https://www.instagram.com/origennt/" target="_blank" rel="noopener">
+            <div class="social-link-icon ig">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div class="social-link-meta">
+              <div class="social-link-name">Instagram Ecosystem</div>
+              <div class="social-link-handle">@origennt</div>
+            </div>
+          </a>
+          <a class="social-link" href="https://www.linkedin.com/company/origennt/" target="_blank" rel="noopener">
+            <div class="social-link-icon li">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+            </div>
+            <div class="social-link-meta">
+              <div class="social-link-name">LinkedIn Corporate Hub</div>
+              <div class="social-link-handle">Origennt Private Limited</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <h2 class="form-title">Send us a <em>message.</em></h2>
+      <p class="form-sub">Fill in your details and our team will respond within 24–48 hours.</p>
+      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="efb5c1b3-a84b-4683-94bc-7b48d3b94343">
+        <input type="hidden" name="subject" value="New Enterprise Inquiry — ORIGENNT">
+        <input type="checkbox" name="botcheck" style="display:none">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">First Name *</label>
+            <input class="form-input" id="fname" name="first_name" type="text" placeholder="Rahul" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lname">Last Name</label>
+            <input class="form-input" id="lname" name="last_name" type="text" placeholder="Sharma">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-input" id="email" name="email" type="email" placeholder="rahul@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone Number</label>
+            <input class="form-input" id="phone" name="phone" type="tel" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="scale">Engagement Scale</label>
+          <select class="form-select" id="scale" name="engagement_scale">
+            <option value="" disabled selected>Select execution scale…</option>
+            <option>Individual Partnership</option>
+            <option>Startup Infrastructure (up to 50 employees)</option>
+            <option>Mid-Market SME (50–500 employees)</option>
+            <option>Large Enterprise Framework (500+ employees)</option>
+            <option>Institutional Mandate</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Your Message *</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Describe your corporate requirement or consultation goals..." required></textarea>
+        </div>
+        <button class="btn-submit" type="submit" id="submitBtn">Submit Briefing</button>
+        <p class="form-privacy">By submitting, you authorize processing under our standard <a href="https://origennt.com/privacy-policy.html">Privacy Policy</a>.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="tick">✦</div>
+        <h3>Briefing Strategy Registered</h3>
+        <p>Thank you for reaching out. A corporate representative is reviewing your telemetry parameters and will match you shortly.</p>
+        <br>
+        <a href="https://origennt.com/">Return to Dashboard Portal →</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="map-section reveal">
+    <div class="map-section-top">
+      <div>
+        <div class="map-label">Geographic Centers</div>
+        <h2 class="map-title">Two offices.<br><em>Unified deployment.</em></h2>
+      </div>
+      <div class="map-subtitle">Both addresses are fully operational. Schedule a private strategy session or interface with us natively.</div>
+    </div>
+    <div class="map-grid">
+      <div class="map-card">
+        <div class="map-card-header">
+          <div>
+            <div class="map-card-type">Registered Hub</div>
+            <div class="map-card-city">Cuttack, Odisha</div>
+            <div class="map-card-addr">NO-A2/304 MJ WOODS, Jagannath Prasad<br>Andharua, Barang, Cuttack – 754005</div>
+          </div>
+          <div class="map-pin-icon">📍</div>
+        </div>
+        <div class="map-iframe-wrap">
+          <iframe src="https://maps.google.com/maps?q=MJ+WOODS+Andharua+Cuttack&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" title="Origennt Registered Hub Cuttack"></iframe>
+        </div>
+        <a class="map-open-link" href="https://maps.google.com" target="_blank" rel="noopener">Launch Global Navigation System</a>
+      </div>
+      <div class="map-card">
+        <div class="map-card-header">
+          <div>
+            <div class="map-card-type">Operations HQ</div>
+            <div class="map-card-city">Bhubaneswar, Odisha</div>
+            <div class="map-card-addr">DLF Cyber City, Patia<br>Patia, Bhubaneswar – 751024</div>
+          </div>
+          <div class="map-pin-icon">📍</div>
+        </div>
+        <div class="map-iframe-wrap">
+          <iframe src="https://maps.google.com/maps?q=DLF+Cyber+City+Patia+Bhubaneswar&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" title="Origennt Core Executive HQ"></iframe>
+        </div>
+        <a class="map-open-link" href="https://maps.google.com" target="_blank" rel="noopener">Launch Global Navigation System</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="tracker-section reveal">
+    <div class="tracker-label">Live Platform Telemetry</div>
+    <h2 class="tracker-title">Data-driven architecture.<br><em>Validated metrics.</em></h2>
+    <div class="tracker-grid">
+      <div class="tracker-card">
+        <div class="tracker-icon">🌐</div>
+        <div class="tracker-num" id="visitCount">48,600+</div>
+        <div class="tracker-card-label">Monthly Engagements</div>
+        <div class="tracker-card-sub">Aggregated user traffic interactions across direct and partner nodes.</div>
+      </div>
+      <div class="tracker-card">
+        <div class="tracker-icon">🏢</div>
+        <div class="tracker-num">150<span class="suffix">+</span></div>
+        <div class="tracker-card-label">Enterprise Partners</div>
+        <div class="tracker-card-sub">Active global corporate accounts leveraging advisory pipelines.</div>
+      </div>
+      <div class="tracker-card">
+        <div class="tracker-icon">💼</div>
+        <div class="tracker-num">2.5K<span class="suffix">+</span></div>
+        <div class="tracker-card-label">Mandates Closed</div>
+        <div class="tracker-card-sub">Leadership and technological placements finalized successfully.</div>
+      </div>
+      <div class="tracker-card">
+        <div class="tracker-icon">📈</div>
+        <div class="tracker-num">94.2<span class="suffix">%</span></div>
+        <div class="tracker-card-label">Retention Index</div>
+        <div class="tracker-card-sub">Year-over-year enterprise project retention index metrics.</div>
+      </div>
+    </div>
+    <div class="tracker-live-badge">
+      <div class="tracker-live-dot"></div> connection channel live telemetry verified
+    </div>
+  </section>
+
+  <div class="presence-strip">
+    <div class="presence-inner">
+      <div class="presence-label">Global Node Reach</div>
+      <div class="presence-divider"></div>
+      <div class="presence-cities">
+        <span class="presence-city">Bhubaneswar</span>
+        <span class="presence-city">Cuttack</span>
+        <span class="presence-city">Mumbai</span>
+        <span class="presence-city">Bengaluru</span>
+        <span class="presence-city">Delhi NCR</span>
+        <span class="presence-city">Hyderabad</span>
+        <span class="presence-city">Dubai</span>
+        <span class="presence-city">Singapore</span>
+        <span class="presence-city">London</span>
+        <span class="presence-city">New York</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <div class="footer-logo">ORIGENNT<span>.</span></div>
+    </div>
+    <div class="footer-right">
+      <div class="footer-social">
+        <a class="footer-social-link" href="https://origennt.com/" target="_blank" rel="noopener">🌐</a>
+        <a class="footer-social-link" href="https://www.instagram.com/origennt/" target="_blank" rel="noopener">📸</a>
+        <a class="footer-social-link" href="https://www.linkedin.com/company/origennt/" target="_blank" rel="noopener">🔗</a>
+      </div>
+      <div class="footer-copy">© 2026 Origennt Private Limited. Strategic Advisory & Execution Matrix.</div>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   PREMIUM UI MOUSE INTERACTION MECHANICS
+   ═══════════════════════════════════════════ */
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('ring');
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  ring.style.left = e.clientX + 'px';
+  ring.style.top = e.clientY + 'px';
+});
+
+/* Mobile Layout Hamburger Sidebar Handlers */
+const burger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+if(burger && sidebar && overlay) {
+  burger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  });
+}
+
+/* Intersection Scroll Animations Logic */
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('vis');
+  });
+}, { root: null, threshold: 0.1 });
+revealElements.forEach(el => revealObserver.observe(el));
+
+/* Web3Forms Endpoint Pipeline Interfacing */
+const form = document.getElementById('contactForm');
+const successDiv = document.getElementById('formSuccess');
+if(form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Transmitting Strategy Brief...';
+    btn.disabled = true;
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+      if(response.ok) {
+        form.style.display = 'none';
+        successDiv.style.display = 'block';
+      } else {
+        alert('Network pipeline transmission exception. Utilize direct email channel.');
+        btn.textContent = 'Submit Briefing';
+        btn.disabled = false;
+      }
+    } catch {
+      alert('Connection protocol error.');
+      btn.textContent = 'Submit Briefing';
+      btn.disabled = false;
+    }
+  });
+}
+
+/* Telemetry Counter Linear Metric Animation */
+const visitEl = document.getElementById('visitCount');
+if (visitEl) {
+  let started = false;
+  const countObserver = new IntersectionObserver((entries) => {
+    if(entries[0].isIntersecting && !started) {
+      started = true;
+      let count = 25000;
+      const target = 48600;
+      const step = () => {
+        count += Math.floor((target - count) * 0.08) + 95;
+        if(count >= target) {
+          visitEl.innerHTML = target.toLocaleString('en-IN') + '<span class="suffix">+</span>';
+        } else {
+          visitEl.innerHTML = count.toLocaleString('en-IN') + '<span class="suffix">+</span>';
+          requestAnimationFrame(step);
+        }
+      };
+      requestAnimationFrame(step);
+    }
+  }, { threshold: 0.15 });
+  countObserver.observe(visitEl);
+}
+
+/* ═══════════════════════════════════════════
+   amCHARTS 5 DYNAMIC ASTRONOMICAL DIURNAL SYSTEM
+   ═══════════════════════════════════════════ */
+const container = document.getElementById("earth-container");
+
+const scene = new THREE.Scene();
+
+const camera = new THREE.PerspectiveCamera(
+  45,
+  window.innerWidth/window.innerHeight,
+  0.1,
+  1000
+);
+
+camera.position.z = 4;
+
+const renderer = new THREE.WebGLRenderer({
+  antialias:true,
+  alpha:true
+});
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio);
+
+container.appendChild(renderer.domElement);
+
+/* EARTH */
+const geometry = new THREE.SphereGeometry(1, 128, 128);
+
+const textureLoader = new THREE.TextureLoader();
+
+const earthTexture = textureLoader.load(
+  "https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg"
+);
+
+const bumpTexture = textureLoader.load(
+  "https://threejs.org/examples/textures/planets/earth_normal_2048.jpg"
+);
+
+const material = new THREE.MeshStandardMaterial({
+  map: earthTexture,
+  bumpMap: bumpTexture,
+  bumpScale:0.04,
+  roughness:1,
+  metalness:0
+});
+
+const earth = new THREE.Mesh(geometry, material);
+scene.add(earth);
+
+/* ATMOSPHERE */
+const atmosphereGeometry = new THREE.SphereGeometry(1.05,128,128);
+
+const atmosphereMaterial = new THREE.MeshBasicMaterial({
+  color:0x4da6ff,
+  transparent:true,
+  opacity:0.12,
+  side:THREE.BackSide
+});
+
+const atmosphere = new THREE.Mesh(
+  atmosphereGeometry,
+  atmosphereMaterial
+);
+
+scene.add(atmosphere);
+
+/* SUN LIGHT */
+const sunLight = new THREE.DirectionalLight(0xffffff, 2.5);
+scene.add(sunLight);
+
+/* REAL TIME SUN POSITION */
+function updateSunPosition(){
+
+  const hour = new Date().getHours();
+
+  const angle = (hour / 24) * Math.PI * 2;
+
+  sunLight.position.set(
+    Math.cos(angle) * 5,
+    0,
+    Math.sin(angle) * 5
+  );
+}
+
+updateSunPosition();
+
+/* AMBIENT */
+const ambient = new THREE.AmbientLight(0x223344,0.4);
+scene.add(ambient);
+
+/* STARS */
+const starGeometry = new THREE.BufferGeometry();
+const starCount = 5000;
+
+const positions = [];
+
+for(let i=0;i<starCount;i++){
+
+  positions.push(
+    (Math.random()-0.5)*2000,
+    (Math.random()-0.5)*2000,
+    (Math.random()-0.5)*2000
+  );
+
+}
+
+starGeometry.setAttribute(
+  'position',
+  new THREE.Float32BufferAttribute(positions,3)
+);
+
+const starMaterial = new THREE.PointsMaterial({
+  size:0.7
+});
+
+const stars = new THREE.Points(starGeometry, starMaterial);
+scene.add(stars);
+
+/* =========================
+   OFFICE POINTER
+========================= */
+
+const lat = 20.2961;
+const lon = 85.8245;
+
+function latLonToVector3(lat, lon, radius) {
+
+  const phi = (90 - lat) * (Math.PI / 180);
+  const theta = (lon + 180) * (Math.PI / 180);
+
+  const x = -(radius * Math.sin(phi) * Math.cos(theta));
+  const z = (radius * Math.sin(phi) * Math.sin(theta));
+  const y = (radius * Math.cos(phi));
+
+  return new THREE.Vector3(x, y, z);
+
+}
+
+const officePosition = latLonToVector3(lat, lon, 1.02);
+
+
+/* RED LOCATION DOT */
+
+const markerGeometry = new THREE.SphereGeometry(0.015, 16, 16);
+
+const markerMaterial = new THREE.MeshBasicMaterial({
+  color: 0xff3b3b
+});
+
+const marker = new THREE.Mesh(
+  markerGeometry,
+  markerMaterial
+);
+
+marker.position.copy(officePosition);
+
+earth.add(marker);
+
+
+/* FLOATING LABEL */
+
+const label = document.createElement("div");
+
+label.innerHTML = `<div style="
+  color:white;
+  font-family:sans-serif;
+  font-size:14px;
+  background:rgba(0,0,0,0.5);
+  padding:10px 14px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,0.12);
+  white-space:nowrap;
+">
+WE ARE HERE
+</div>
+`;
+
+label.style.position = "absolute";
+label.style.zIndex = "999";
+
+document.body.appendChild(label);
+
+/* AUTO ROTATION */
+let autoRotate = true;
+let targetRotation = 1;
+let idleTimer;
+
+/* MOUSE MOVE = STOP ROTATION TEMPORARILY */
+window.addEventListener("mousemove", () => {
+
+  autoRotate = false;
+
+  clearTimeout(idleTimer);
+
+  idleTimer = setTimeout(() => {
+
+    autoRotate = true;
+
+  }, 2000);
+
+});
+
+/* SCROLL ROTATION */
+window.addEventListener("scroll", () => {
+
+  targetRotation += window.scrollY * 0.0001;
+
+});
+
+/* ANIMATION */
+function animate(){
+
+  requestAnimationFrame(animate);
+
+  /* IDLE AUTO ROTATE */
+  if(autoRotate){
+
+    earth.rotation.y += 0.0015;
+
+  }
+
+  /* SMOOTH SCROLL ROTATION */
+  earth.rotation.y += (targetRotation - earth.rotation.y) * 0.03;
+
+  atmosphere.rotation.y = earth.rotation.y;
+
+/* LABEL FOLLOWING EARTH */
+
+const vector = officePosition.clone();
+
+vector.applyMatrix4(earth.matrixWorld);
+
+vector.project(camera);
+
+const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+const y = (-vector.y * 0.5 + 0.5) * window.innerHeight;
+
+label.style.left = `${x + 30}px`;
+label.style.top = `${y}px`;
+
+
+  renderer.render(scene, camera);
+
+}
+
+animate();
+
+
+/* RESPONSIVE */
+window.addEventListener("resize",()=>{
+
+  camera.aspect = window.innerWidth/window.innerHeight;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+});
+</script>
+
+</body>
+</html>
