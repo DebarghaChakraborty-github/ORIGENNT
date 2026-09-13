@@ -5,13 +5,26 @@ export default async function handler(req, res) {
   try {
     const params = new URLSearchParams(req.query);
 
+    params.set('key', process.env.HR_API_SECRET);
+
     const response = await fetch(
       `${APPS_SCRIPT_URL}?${params.toString()}`
     );
 
-    const data = await response.json();
+    const text = await response.text();
 
-    return res.status(200).json(data);
+    let data;
+
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(
+        `Apps Script returned non-JSON response: ${text.slice(0, 120)}`
+      );
+    }
+
+    return res.status(response.ok ? 200 : response.status).json(data);
+
   } catch (error) {
     return res.status(500).json({
       success: false,
