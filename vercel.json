@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/hr",
+      "destination": "/ORIGENNT%20HR/hr.html"
+    },
+    {
+      "source": "/hr/",
+      "destination": "/ORIGENNT%20HR/hr.html"
+    }
+  ]
+}
