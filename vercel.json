@@ -1,5 +1,16 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "hr.origennt.com"
+        }
+      ],
+      "destination": "/ORIGENNT%20HR/hr.html"
+    },
     {
       "source": "/hr",
       "destination": "/ORIGENNT%20HR/hr.html"
