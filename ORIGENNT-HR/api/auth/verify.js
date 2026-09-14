@@ -5,11 +5,9 @@ const {
   getRole
 } = require('../_lib/session');
 
-const client = new OAuth2Client(
-  process.env.GOOGLE_CLIENT_ID
-);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
@@ -75,16 +73,14 @@ export default async function handler(req, res) {
 
     const role = getRole(email);
 
-    const user = {
-      sub: payload.sub,
-      email,
-      name: payload.name || email,
-      role
-    };
-
     const session = issueSession(
       res,
-      user,
+      {
+        sub: payload.sub,
+        email,
+        name: payload.name || email,
+        role
+      },
       process.env.HR_SESSION_SECRET
     );
 
@@ -105,3 +101,5 @@ export default async function handler(req, res) {
     });
   }
 }
+
+module.exports = handler;
