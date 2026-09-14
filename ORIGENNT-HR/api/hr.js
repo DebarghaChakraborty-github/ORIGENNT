@@ -1,15 +1,102 @@
+const crypto = require('crypto');
+const { getSession } = require('./_lib/session');
+
+function signIdentity(email, timestamp, secret) {
+  return crypto
+    .createHmac('sha256', secret)
+    .update(`${email}|${timestamp}`)
+    .digest('hex');
+}
+
 export default async function handler(req, res) {
-  const APPS_SCRIPT_URL =
-    'https://script.google.com/macros/s/AKfycbxYs-3m5_wcJYT4MG3m1O3_8_nW0Yn-rvRpkc0n1CccRoZSRWxKIVClXR0uGx1giPcs/exec';
+  if (req.method !== 'GET') {
+    return res.status(405).json({
+      success: false,
+      error: 'Method not allowed.'
+    });
+  }
 
   try {
-    const params = new URLSearchParams(req.query);
-
-    params.set('key', process.env.HR_API_SECRET);
-
-    const response = await fetch(
-      `${APPS_SCRIPT_URL}?${params.toString()}`
+    const session = getSession(
+      req,
+      process.env.HR_SESSION_SECRET
     );
+
+    if (!session) {
+      return res.status(401).json({
+        success: false,
+        error: 'Authentication required.'
+      });
+    }
+
+    const {
+      HR_APPS_SCRIPT_URL,
+      HR_API_SECRET,
+      HR_IDENTITY_SIGNING_SECRET
+    } = process.env;
+
+    if (!HR_APPS_SCRIPT_URL) {
+      return res.status(500).json({
+        success: false,
+        error: 'HR Apps Script URL is not configured.'
+      });
+    }
+
+    if (!HR_API_SECRET) {
+      return res.status(500).json({
+        success: false,
+        error: 'HR API secret is not configured.'
+      });
+    }
+
+    if (!HR_IDENTITY_SIGNING_SECRET) {
+      return res.status(500).json({
+        success: false,
+        error: 'HR identity signing secret is not configured.'
+      });
+    }
+
+    const params = new URLSearchParams();
+
+    for (const [key, value] of Object.entries(req.query || {})) {
+      if (key === 'key' || key === 'userEmail' || key === 'userName' || key === 'authTs' || key === 'authSig') {
+        continue;
+      }
+
+      if (Array.isArray(value)) {
+        value.forEach(item => params.append(key, String(item)));
+      } else if (value !== undefined) {
+        params.set(key, String(value));
+      }
+    }
+
+    const email = String(session.email || '').trim().toLowerCase();
+    const name = String(session.name || email);
+    const timestamp = String(Date.now());
+
+    params.set('key', HR_API_SECRET);
+    params.set('userEmail', email);
+    params.set('userName', name);
+    params.set('authTs', timestamp);
+    params.set(
+      'authSig',
+      signIdentity(
+        email,
+        timestamp,
+        HR_IDENTITY_SIGNING_SECRET
+      )
+    );
+
+    const targetUrl =
+      `${HR_APPS_SCRIPT_URL}?${params.toString()}`;
+
+    const response = await fetch(targetUrl, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json'
+      },
+      cache: 'no-store'
+    });
 
     const text = await response.text();
 
@@ -18,9 +105,11 @@ export default async function handler(req, res) {
     try {
       data = JSON.parse(text);
     } catch {
-      throw new Error(
-        `Apps Script returned non-JSON response: ${text.slice(0, 120)}`
-      );
+      return res.status(502).json({
+        success: false,
+        error: 'HR backend returned a non-JSON response.',
+        detail: text.slice(0, 500)
+      });
     }
 
     return res
@@ -28,9 +117,11 @@ export default async function handler(req, res) {
       .json(data);
 
   } catch (error) {
+    console.error('HR proxy error:', error);
+
     return res.status(500).json({
       success: false,
-      error: error.message
+      error: 'HR backend request failed.'
     });
   }
 }
