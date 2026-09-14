@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="application-name" content="ORIGENNT HR">
+<meta name="author" content="ORIGENNT Private Limited">
+<meta name="description" content="ORIGENNT HR — the single operating system for people, tasks, training, MPRs, appointments and documents.">
+<meta name="robots" content="noindex,nofollow">
+<title>ORIGENNT HR | People Operations</title>
+<link rel="icon" href="https://origennt.com/assets/origennt-logo-transparent.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js" defer></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  --paper:#F6F6F3;
+  --surface:#FFFFFF;
+  --ink:#15161A;
+  --ink-soft:#3A3C3F;
+  --muted:#63666B;
+  --line:rgba(21,22,26,.13);
+  --line-strong:rgba(21,22,26,.22);
+  --accent:#CC2229;
+  --accent-deep:#8A0F1C;
+  --accent-soft:rgba(204,34,41,.09);
+  --accent-soft-strong:rgba(204,34,41,.16);
+  --gold:#B8912E;
+  --gold-soft:rgba(184,145,46,.13);
+  --good:#1E7A46;
+  --good-soft:rgba(30,122,70,.10);
+  --warn:#9A6400;
+  --warn-soft:rgba(154,100,0,.11);
+  --info:#215FA6;
+  --info-soft:rgba(33,95,166,.10);
+  --radius-lg:20px;
+  --radius-md:14px;
+  --radius-sm:10px;
+  --shadow-card:0 1px 2px rgba(20,20,20,.04), 0 8px 24px rgba(20,20,20,.05);
+  --shadow-pop:0 20px 60px rgba(15,15,15,.20);
+  --max:1360px;
+  --sans:'Public Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --serif:'Libre Baskerville',Georgia,'Times New Roman',serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--sans);color:var(--ink);letter-spacing:-.01em}
+.hr-hero h1,.hr-title,.hr-panel-head h3,.hr-card h3,.auth-card h2,.hr-hero-panel .quote{font-family:var(--serif);letter-spacing:0}
+button,input,select,textarea{font-family:var(--sans)}
+a{color:var(--accent)}
+::selection{background:var(--accent-soft-strong)}
+:focus-visible{outline:2.5px solid var(--accent-deep);outline-offset:2px;border-radius:4px}
+
+/* ---------- Top bar / brand ---------- */
+.hr-topband{background:var(--ink);color:rgba(255,255,255,.72);font-size:11px}
+.hr-topband-inner{max-width:var(--max);margin:0 auto;padding:7px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.hr-topband strong{color:#fff;font-weight:600}
+.hr-header{position:sticky;top:0;z-index:200;background:rgba(246,246,243,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hr-header-inner{max-width:var(--max);margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:16px}
+.brand-lockup{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.brand-logo{height:30px;width:auto;display:block}
+.brand-wordmark{display:none;font-weight:800;letter-spacing:.02em;font-size:17px;color:var(--ink)}
+.hr-header-title{margin-left:2px}
+.hr-header-title .eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.hr-header-title .name{font-size:13.5px;font-weight:700;color:var(--ink)}
+.hr-header-actions{margin-left:auto;display:flex;gap:9px;align-items:center}
+
+/* ---------- Shell / layout ---------- */
+.hr-shell{padding:24px 0 64px}
+.hr-container{width:min(calc(100% - 40px),var(--max));margin:0 auto}
+.hr-layout{display:grid;grid-template-columns:236px minmax(0,1fr);gap:20px;align-items:start}
+.hr-sidebar{position:sticky;top:78px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md)}
+.hr-side-label{padding:10px 10px 6px;font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--muted)}
+.hr-nav{display:grid;gap:2px}
+.hr-nav button{width:100%;border:0;background:transparent;padding:10px 11px;border-radius:10px;display:flex;align-items:center;gap:10px;text-align:left;color:var(--ink-soft);font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s,color .15s}
+.hr-nav button .ic{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.hr-nav button:hover{background:var(--paper)}
+.hr-nav button.active{background:var(--ink);color:#fff}
+.hr-side-group{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.hr-side-title{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:0 10px 8px}
+.hr-side-note{padding:8px 10px 2px;font-size:11.5px;color:var(--ink-soft);line-height:1.55}
+.hr-side-note b{color:var(--ink)}
+.hr-footnote{margin-top:6px;color:var(--muted);font-size:11px;line-height:1.5}
+
+.hr-main{min-width:0}
+.hr-topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+.hr-kicker{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.hr-title{margin:0;font-size:clamp(24px,2.6vw,34px);line-height:1.08;font-weight:800;letter-spacing:-.02em}
+.hr-subtitle{margin:8px 0 0;color:var(--muted);font-size:13.5px;line-height:1.6;max-width:640px}
+.hr-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.hr-btn{border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);padding:10px 15px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;transition:.15s;white-space:nowrap}
+.hr-btn:hover{border-color:var(--ink);background:var(--paper)}
+.hr-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.hr-btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.hr-btn.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.hr-btn.dark:hover{background:#000}
+.hr-btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+.hr-btn.ghost:hover{background:var(--paper);color:var(--ink)}
+.hr-btn.small{padding:7px 11px;font-size:11.5px}
+.hr-btn.wa{background:#1F7A46;border-color:#1F7A46;color:#fff}
+.hr-btn.wa:hover{background:#175c34;border-color:#175c34}
+.hr-btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* ---------- Today strip (replaces stock-photo hero) ---------- */
+.hr-today{display:grid;grid-template-columns:1.3fr repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.hr-today>div{background:var(--surface);padding:18px 20px;min-height:96px}
+.hr-today-greet{display:flex;flex-direction:column;justify-content:center;background:var(--ink)!important;color:#fff}
+.hr-today-greet .day{font-size:11px;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.03em;text-transform:uppercase}
+.hr-today-greet h2{margin:6px 0 0;font-size:20px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.hr-today-stat{display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer;transition:background .15s}
+.hr-today-stat:hover{background:var(--paper)!important}
+.hr-today-stat .num{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.hr-today-stat .lbl{font-size:11.5px;color:var(--muted);font-weight:600}
+.hr-today-stat.alert .num{color:var(--accent)}
+.hr-today-stat.ok .num{color:var(--good)}
+
+/* ---------- Cards / panels ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-card)}
+.hr-grid-metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px}
+.hr-metric{padding:16px 18px}
+.hr-metric .label{font-size:11px;font-weight:600;color:var(--muted)}
+.hr-metric .value{margin-top:10px;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.hr-panel{padding:22px;margin-bottom:16px}
+.hr-panel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:16px;flex-wrap:wrap}
+.hr-panel-head h3{margin:0;font-size:19px;font-weight:800}
+.hr-panel-head p{margin:5px 0 0;font-size:12.5px;color:var(--muted);max-width:520px}
+.hr-panel-head-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.hr-searchbar{display:flex;gap:9px;align-items:center}
+.hr-searchbar input{flex:1;min-width:0}
+input,select,textarea{border:1px solid var(--line-strong);background:var(--surface);padding:10px 12px;border-radius:10px;outline:none;color:var(--ink);font-size:13px}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.hr-toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}
+.hr-toolbar .field{min-width:160px;flex:1}
+.hr-toolbar .field input,.hr-toolbar .field select{width:100%}
+
+.hr-results{display:grid;gap:8px}
+.hr-result{display:grid;grid-template-columns:44px minmax(0,1.7fr) 1fr 1fr auto;gap:13px;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);transition:.15s}
+.hr-result:hover{border-color:var(--line-strong);box-shadow:var(--shadow-card)}
+.hr-result strong{font-size:13px;font-weight:700}
+.hr-result span{font-size:11.5px;color:var(--muted)}
+.hr-avatar-sm{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:var(--ink);color:#fff;font-size:14px;font-weight:700;overflow:hidden;flex-shrink:0}
+.hr-avatar-sm img{width:100%;height:100%;object-fit:cover}
+.hr-link-btn{border:0;background:transparent;color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;padding:6px}
+.hr-link-btn:hover{text-decoration:underline}
+.hr-empty{padding:26px 20px;border:1px dashed var(--line-strong);border-radius:var(--radius-sm);color:var(--muted);font-size:12.5px;text-align:center;line-height:1.6}
+.hr-status{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:var(--good-soft);color:var(--good);font-size:11px;font-weight:700}
+.hr-status::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.hr-status.pending{background:var(--warn-soft);color:var(--warn)}
+.hr-status.exit{background:var(--accent-soft);color:var(--accent)}
+.hr-status.info{background:var(--info-soft);color:var(--info)}
+.hr-hidden{display:none!important}
+
+.hr-dashboard-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}
+.hr-card{padding:20px}
+.hr-card h3{margin:0;font-size:17px;font-weight:800}
+.hr-card p{color:var(--muted);font-size:12px;line-height:1.6}
+.hr-mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.hr-mini{padding:13px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper)}
+.hr-mini span{display:block;color:var(--muted);font-size:11px;font-weight:600}
+.hr-mini strong{display:block;margin-top:6px;font-size:19px;font-weight:800}
+.hr-activity-list{display:grid;gap:2px}
+.hr-activity-item{display:grid;grid-template-columns:38px 1fr auto;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.hr-activity-item:last-child{border-bottom:0}
+.hr-dot{width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:14px;flex-shrink:0}
+.hr-activity-item strong{font-size:12.5px;font-weight:700}
+.hr-activity-item span{display:block;color:var(--muted);font-size:11.5px;margin-top:2px}
+.hr-date{font-size:11px;color:var(--muted);white-space:nowrap}
+.hr-callout{padding:13px 15px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 var(--radius-sm) var(--radius-sm) 0;color:#5a1420;font-size:12px;line-height:1.6}
+.hr-callout.neutral{border-color:var(--line-strong);background:var(--paper);color:var(--ink-soft)}
+
+/* ---------- Profile ---------- */
+.hr-profile{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:15px}
+.hr-profile-main,.hr-profile-side{padding:22px}
+.hr-profile-id{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.hr-avatar-lg{width:68px;height:68px;border-radius:18px;display:grid;place-items:center;background:var(--ink);color:#fff;font-size:22px;font-weight:700;overflow:hidden;flex-shrink:0}
+.hr-avatar-lg img{width:100%;height:100%;object-fit:cover}
+.hr-name{margin:0;font-size:24px;font-weight:800;letter-spacing:-.01em}
+.hr-muted{color:var(--muted);font-size:12px}
+.hr-data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}
+.hr-data{padding:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-sm)}
+.hr-data .k{font-size:10.5px;font-weight:600;color:var(--muted)}
+.hr-data .v{margin-top:5px;font-size:12.5px;color:var(--ink);font-weight:600;word-break:break-word}
+.hr-profile-side h4{margin:0 0 12px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--accent)}
+.hr-action-list{display:grid;gap:7px}
+.hr-action-list button{border:1px solid var(--line-strong);background:var(--surface);padding:10px 12px;border-radius:var(--radius-sm);text-align:left;font-size:12.5px;font-weight:600;cursor:pointer}
+.hr-action-list button:hover{border-color:var(--ink)}
+.hr-tabbar{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0 0}
+.hr-tab{border:1px solid var(--line-strong);background:var(--surface);padding:8px 13px;border-radius:999px;font-size:11.5px;font-weight:700;cursor:pointer}
+.hr-tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hr-doc-table{width:100%;border-collapse:collapse}
+.hr-doc-table th,.hr-doc-table td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:12.5px}
+.hr-doc-table th{color:var(--muted);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.hr-doc-table a{color:var(--accent);font-weight:700}
+
+/* ---------- Forms ---------- */
+.hr-form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hr-form-field label{display:block;margin:0 0 6px 1px;font-size:11.5px;font-weight:600;color:var(--ink-soft)}
+.hr-form-field input,.hr-form-field select,.hr-form-field textarea{width:100%}
+.hr-form-field textarea{min-height:90px;resize:vertical}
+.hr-form-field.full{grid-column:1/-1}
+.hr-form-title{font-size:15px;font-weight:800;margin:0 0 12px}
+.hr-upload{display:grid;grid-template-columns:130px 1fr;gap:16px;align-items:center}
+.hr-photo-box{height:150px;border:1px dashed var(--line-strong);border-radius:var(--radius-md);background:var(--paper);display:grid;place-items:center;position:relative;overflow:hidden}
+.hr-photo-box img{width:100%;height:100%;object-fit:cover}
+.hr-photo-placeholder{text-align:center;color:var(--muted);font-size:11px;padding:12px;line-height:1.5}
+.hr-dropzone{border:1px dashed var(--line-strong);border-radius:var(--radius-md);padding:16px;background:var(--paper)}
+.hr-dropzone input{position:absolute;width:1px;height:1px;opacity:0}
+.hr-dropzone label{display:inline-flex;padding:9px 13px;border-radius:999px;background:var(--ink);color:#fff;font-size:11.5px;font-weight:700;cursor:pointer}
+.hr-file-list{display:grid;gap:6px;margin-top:9px}
+.hr-file{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);font-size:11.5px}
+.hr-file small{color:var(--muted)}
+
+/* ---------- Lifecycle stages ---------- */
+.hr-lifecycle{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:14px}
+.hr-stage{padding:12px 9px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--paper);text-align:center}
+.hr-stage strong{display:block;font-size:12px;font-weight:700}
+.hr-stage span{display:block;margin-top:5px;color:var(--muted);font-size:10.5px}
+.hr-stage.current{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hr-stage.current span{color:rgba(255,255,255,.65)}
+
+/* ---------- Filters / chips ---------- */
+.hr-filter-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.hr-filter-line .count{font-size:12px;color:var(--muted);font-weight:600}
+.hr-chip-row{display:flex;gap:7px;flex-wrap:wrap}
+.hr-chip{padding:6px 10px;border-radius:999px;border:1px solid var(--line-strong);font-size:10.5px;font-weight:600;background:var(--surface)}
+.hr-chip.red{color:var(--accent);border-color:rgba(196,16,42,.28);background:var(--accent-soft)}
+
+/* ---------- Doc generator ---------- */
+.hr-doc-generator{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+.hr-template-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-height:490px;overflow:auto;padding-right:4px}
+.hr-template{padding:12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);text-align:left;cursor:pointer}
+.hr-template:hover,.hr-template.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.hr-template strong{display:block;font-size:12px;font-weight:700}
+.hr-template span{display:block;color:var(--muted);font-size:10.5px;margin-top:4px}
+.hr-search-template{margin-bottom:9px}
+.hr-generator-preview{min-height:350px;padding:24px;border-radius:var(--radius-lg);background:var(--ink);color:#fff}
+.hr-generator-preview .doc-kicker{font-size:10.5px;color:#f0838f;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.hr-generator-preview h4{font-size:24px;font-weight:800;margin:12px 0}
+.hr-generator-preview p{font-size:12px;color:rgba(255,255,255,.62);line-height:1.7}
+.hr-generator-meta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:18px}
+.hr-generator-meta div{padding:10px;background:rgba(255,255,255,.08);border-radius:var(--radius-sm)}
+.hr-generator-meta span{display:block;font-size:10px;color:rgba(255,255,255,.55)}
+.hr-generator-meta strong{display:block;margin-top:4px;font-size:12px}
+
+/* ---------- Tasks board ---------- */
+.hr-task-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hr-task-col{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius-md);padding:12px;min-height:120px}
+.hr-task-col h4{margin:0 0 10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);display:flex;justify-content:space-between}
+.hr-task-col h4 span{color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:1px 8px;font-size:10.5px}
+.hr-task-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px;margin-bottom:9px}
+.hr-task-card strong{font-size:12.5px;font-weight:700;display:block}
+.hr-task-card p{margin:6px 0 8px;font-size:11.5px;color:var(--muted);line-height:1.5}
+.hr-task-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.hr-task-meta .who{font-size:11px;font-weight:600}
+.hr-task-meta .due{font-size:10.5px;color:var(--muted)}
+.hr-task-meta.overdue .due{color:var(--accent);font-weight:700}
+.hr-priority{font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:6px}
+.hr-priority.High{background:var(--accent-soft);color:var(--accent)}
+.hr-priority.Medium{background:var(--warn-soft);color:var(--warn)}
+.hr-priority.Low{background:var(--info-soft);color:var(--info)}
+.hr-task-actions{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
+.hr-task-actions select{font-size:11px;padding:6px 8px;border-radius:8px}
+
+/* ---------- Generic register table (Training / MPR / Appointments) ---------- */
+.hr-reg-table{width:100%;border-collapse:collapse}
+.hr-reg-table th,.hr-reg-table td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:12.5px;vertical-align:top}
+.hr-reg-table th{color:var(--muted);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.hr-reg-table tr:hover td{background:var(--paper)}
+
+/* ---------- Modal ---------- */
+.hr-modal{position:fixed;inset:0;background:rgba(10,10,10,.55);backdrop-filter:blur(6px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.hr-modal.open{display:flex}
+.hr-modal-card{width:min(1080px,100%);max-height:90vh;overflow:auto;padding:26px;background:var(--surface);border-radius:22px;box-shadow:var(--shadow-pop)}
+.hr-modal-card.narrow{width:min(680px,100%)}
+.hr-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:18px}
+.hr-modal-head h2{margin:0;font-size:22px;font-weight:800}
+.hr-modal-head p{margin:6px 0 0;color:var(--muted);font-size:12.5px}
+.hr-close{border:1px solid var(--line-strong);background:var(--surface);width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;flex-shrink:0}
+.hr-close:hover{border-color:var(--ink)}
+
+.hr-toast{position:fixed;right:22px;bottom:22px;z-index:600;max-width:380px;padding:13px 16px;border-radius:12px;color:#fff;background:var(--ink);box-shadow:var(--shadow-pop);opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s;font-size:12.5px;font-weight:600}
+.hr-toast.show{opacity:1;transform:none}
+.hr-loading{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+.hr-loading::before{content:'';width:12px;height:12px;border:2px solid var(--line-strong);border-top-color:var(--accent);border-radius:50%;animation:hrSpin .7s linear infinite}
+@keyframes hrSpin{to{transform:rotate(360deg)}}
+.hr-alert{padding:10px 13px;border-radius:var(--radius-sm);font-size:11.5px;background:#fff3f3;color:#7a1822;border:1px solid rgba(196,16,42,.18)}
+.hr-quiet{padding:12px 14px;border-radius:var(--radius-sm);background:var(--info-soft);color:#163f6e;font-size:11.5px;line-height:1.55}
+
+@media(max-width:1150px){
+  .hr-grid-metrics{grid-template-columns:repeat(3,1fr)}
+  .hr-dashboard-grid,.hr-doc-generator{grid-template-columns:1fr}
+  .hr-data-grid{grid-template-columns:repeat(3,1fr)}
+  .hr-today{grid-template-columns:1fr 1fr}
+  .hr-task-cols{grid-template-columns:1fr}
+}
+@media(max-width:980px){
+  .hr-layout{grid-template-columns:1fr}
+  .hr-sidebar{position:static}
+  .hr-nav{display:flex;overflow:auto}
+  .hr-nav button{min-width:132px}
+  .hr-result{grid-template-columns:40px minmax(0,1.6fr) 1fr auto}
+  .hr-profile{grid-template-columns:1fr}
+  .hr-form-grid{grid-template-columns:repeat(2,1fr)}
+  .hr-upload{grid-template-columns:120px 1fr}
+  .hr-lifecycle{grid-template-columns:repeat(3,1fr)}
+  .hr-today{grid-template-columns:1fr 1fr}
+}
+/* ---------- Auth gate ---------- */
+.auth-gate{position:fixed;inset:0;z-index:900;display:grid;place-items:center;padding:24px;
+  background:
+    linear-gradient(155deg,rgba(15,10,11,.88),rgba(20,8,10,.80) 45%,rgba(10,10,11,.92)),
+    url('https://images.unsplash.com/photo-1745015446589-7ee6f702d8c1?fm=jpg&q=70&w=1800&auto=format&fit=crop') center/cover no-repeat;
+  background-blend-mode:multiply,normal;
+}
+.auth-card{background:var(--surface);border-radius:var(--radius-lg);padding:38px 34px;max-width:388px;width:100%;text-align:center;box-shadow:var(--shadow-pop);border-top:3px solid var(--accent)}
+.auth-card img{height:32px;margin-bottom:16px}
+.auth-card h2{margin:0 0 8px;font-size:21px;font-weight:700}
+.auth-card p{margin:0 0 22px;color:var(--muted);font-size:12.5px;line-height:1.65}
+.auth-domain-note{margin-top:18px;font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:13px}
+#gsiBtnHolder{display:flex;justify-content:center}
+
+/* ---------- Hero ---------- */
+.hr-hero{position:relative;color:#fff;padding:56px 0 46px;overflow:hidden;isolation:isolate}
+.hr-hero::before{content:'';position:absolute;inset:0;z-index:-2;
+  background:url('https://images.unsplash.com/photo-1745015446589-7ee6f702d8c1?fm=jpg&q=75&w=2400&auto=format&fit=crop') center 38%/cover no-repeat;
+  filter:saturate(.85);
+}
+.hr-hero::after{content:'';position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(100deg,rgba(9,7,8,.94) 0%,rgba(20,9,11,.86) 32%,rgba(45,10,15,.55) 58%,rgba(60,12,17,.30) 100%),
+    linear-gradient(0deg,rgba(9,8,9,.5),rgba(9,8,9,.5));
+}
+.hr-hero-inner{width:min(calc(100% - 40px),var(--max));margin:0 auto;display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:end}
+.hr-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.hr-hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--gold)}
+.hr-hero h1{margin:0;font-size:clamp(28px,3.4vw,42px);line-height:1.16;font-weight:700;letter-spacing:-.01em}
+.hr-hero p{margin:16px 0 0;color:rgba(255,255,255,.72);font-size:14.5px;line-height:1.75;max-width:520px;font-family:var(--sans)}
+.hr-hero-chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.hr-hero-chip{padding:8px 14px;border-radius:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);font-size:11.5px;font-weight:600;font-family:var(--sans)}
+.hr-hero-chip b{color:var(--gold);font-weight:700}
+.hr-hero-panel{background:rgba(15,14,15,.55);backdrop-filter:blur(18px) saturate(1.1);border:1px solid rgba(255,255,255,.14);border-radius:2px;padding:24px 24px 20px;border-left:3px solid var(--gold)}
+.hr-hero-panel .quote{font-size:15px;line-height:1.6;font-style:italic;color:#fff;margin:0 0 10px;position:relative}
+.hr-hero-panel .attrib{font-size:11px;color:rgba(255,255,255,.55);font-family:var(--sans);letter-spacing:.02em}
+.hr-hero-panel hr{border:0;border-top:1px solid rgba(255,255,255,.14);margin:18px 0}
+.hr-hero-panel .row{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.72);padding:5px 0;font-family:var(--sans)}
+.hr-hero-panel .row strong{color:#fff}
+@media(max-width:900px){.hr-hero-inner{grid-template-columns:1fr}.hr-hero::before{background-position:center 30%}}
+
+/* ---------- Compliance ---------- */
+.compliance-table{width:100%;border-collapse:collapse}
+.compliance-table th,.compliance-table td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:12.5px;vertical-align:top}
+.compliance-table th{color:var(--muted);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.due-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:700}
+.due-badge.overdue{background:var(--accent-soft);color:var(--accent)}
+.due-badge.soon{background:var(--warn-soft);color:var(--warn)}
+.due-badge.ok{background:var(--good-soft);color:var(--good)}
+.comp-cat{font-size:10.5px;color:var(--muted);font-weight:600}
+
+/* ---------- Analytics ---------- */
+.analytics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.analytics-card{padding:18px}
+.analytics-card h4{margin:0 0 4px;font-size:13px;font-weight:800}
+.analytics-card p{margin:0 0 14px;font-size:11.5px;color:var(--muted)}
+.analytics-card canvas{max-height:240px}
+@media(max-width:1000px){.analytics-grid{grid-template-columns:1fr}}
+
+/* ---------- Activity detail modal reuse + WA digest ---------- */
+.hr-activity-item{cursor:pointer}
+.hr-activity-item:hover{background:var(--paper)}
+.audit-kv{display:grid;grid-template-columns:140px 1fr;gap:4px 12px;font-size:12.5px;margin-bottom:6px}
+.audit-kv b{color:var(--muted);font-weight:600}
+
+@media(max-width:650px){
+  .hr-container{width:min(calc(100% - 24px),var(--max))}
+  .hr-topbar{align-items:flex-start;flex-direction:column}
+  .hr-actions{justify-content:flex-start}
+  .hr-grid-metrics{grid-template-columns:1fr 1fr}
+  .hr-result{grid-template-columns:40px 1fr}
+  .hr-result>div:nth-child(3),.hr-result>div:nth-child(4){display:none}
+  .hr-form-grid{grid-template-columns:1fr}
+  .hr-form-field.full{grid-column:auto}
+  .hr-upload{grid-template-columns:1fr}
+  .hr-template-list{grid-template-columns:1fr}
+  .hr-lifecycle{grid-template-columns:1fr 1fr}
+  .hr-data-grid{grid-template-columns:1fr 1fr}
+  .hr-modal{padding:10px}
+  .hr-modal-card{padding:18px}
+  .hr-mini-grid{grid-template-columns:1fr 1fr}
+  .hr-today{grid-template-columns:1fr}
+  .hr-header-inner{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<div class="auth-gate" id="authGate">
+  <div class="auth-card">
+    <img src="https://origennt.com/assets/origennt-logo-transparent.png" alt="ORIGENNT" onerror="this.style.display='none'">
+    <h2>ORIGENNT HR — Restricted Access</h2>
+    <p>Sign in with your @origennt.com Google Workspace account to open People Operations. Every session is logged.</p>
+    <div id="gsiBtnHolder"></div>
+    <button class="hr-btn" style="margin-top:10px" type="button" onclick="devBypassAuth()">Continue without Google Sign-In (local preview only)</button>
+    <div class="auth-domain-note">Access is restricted to ORIGENNT Private Limited Google accounts. Sign-in attempts and session activity are recorded in the audit log.</div>
+  </div>
+</div>
+
+<div class="hr-topband"><div class="hr-topband-inner">
+  <span><strong>ORIGENNT</strong> Private Limited &middot; Bhubaneswar, India</span>
+  <span>Internal People Operations &middot; Restricted Access</span>
+</div></div>
+<header class="hr-header"><div class="hr-header-inner">
+  <a class="brand-lockup" href="/" aria-label="ORIGENNT">
+    <img class="brand-logo" src="https://origennt.com/assets/origennt-logo-transparent.png" alt="ORIGENNT" onerror="this.style.display='none';this.nextElementSibling.classList.add('show')">
+    <span class="brand-wordmark" aria-hidden="true">ORIGENNT</span>
+  </a>
+  <div class="hr-header-title">
+    <div class="eyebrow">People Operations</div>
+    <div class="name">ORIGENNT HR</div>
+  </div>
+  <div class="hr-header-actions">
+    <button class="hr-btn wa" id="sendWaDigestBtn" type="button">Send Today's Digest</button>
+    <button class="hr-btn" id="addTaskBtnHeader" type="button">+ Task</button>
+    <button class="hr-btn primary" id="addEmployeeBtn" type="button">+ Add Person</button>
+    <button class="hr-btn ghost small" id="signOutBtn" type="button" title="Sign out">Sign out</button>
+  </div>
+</div></header>
+
+<section class="hr-hero">
+  <div class="hr-hero-inner">
+    <div>
+      <div class="hr-hero-eyebrow">Go-Paperless Programme &middot; ORIGENNT Private Limited</div>
+      <h1>One record of truth for every person, task and filing.</h1>
+      <p>People Operations replaces registers, folders and WhatsApp threads with a single controlled workspace — records, compliance, documentation and performance in one place, fully audited.</p>
+      <div class="hr-hero-chips" id="heroChips">
+        <span class="hr-hero-chip"><b id="heroHeadcount">—</b> people on record</span>
+        <span class="hr-hero-chip"><b id="heroCompliance">—</b> compliance items tracked</span>
+        <span class="hr-hero-chip"><b id="heroDocs">—</b> document templates ready</span>
+      </div>
+    </div>
+    <div class="hr-hero-panel">
+      <div class="row" style="padding-top:0"><span id="heroDay">&nbsp;</span></div>
+      <h2 id="todayGreet" style="margin:2px 0 10px;font-size:22px">Good morning</h2>
+      <p class="quote" id="dailyQuote">&nbsp;</p>
+      <div class="attrib" id="dailyQuoteAuthor"></div>
+      <hr>
+      <div class="row"><span>Tasks due today</span><strong id="todayTasksDue">—</strong></div>
+      <div class="row"><span>Appointments today</span><strong id="todayAppointments">—</strong></div>
+      <div class="row"><span>Pending KYC</span><strong id="todayPendingKyc">—</strong></div>
+      <div class="row"><span>Compliance due (7 days)</span><strong id="todayComplianceDue">—</strong></div>
+    </div>
+  </div>
+</section>
+
+<main class="hr-shell"><div class="hr-container"><div class="hr-layout">
+
+<aside class="hr-sidebar">
+  <div class="hr-side-label">People Operations</div>
+  <nav class="hr-nav" aria-label="HR Navigation">
+    <button class="active" data-view="dashboard" type="button">Overview</button>
+    <button data-view="people" type="button">People &amp; Interns</button>
+    <button data-view="candidates" type="button">Candidates</button>
+    <button data-view="documents" type="button">Document Centre</button>
+    <button data-view="exit" type="button">Employee Exit</button>
+  </nav>
+  <div class="hr-side-group">
+  <div class="hr-side-title">Work &amp; Growth</div>
+  <nav class="hr-nav">
+    <button data-view="tasks" type="button">Tasks</button>
+    <button data-view="training" type="button">Training</button>
+    <button data-view="mpr" type="button">MPRs</button>
+    <button data-view="appointments" type="button">Appointments</button>
+    <button data-view="generate" type="button">Generate</button>
+  </nav>
+  </div>
+  <div class="hr-side-group">
+  <div class="hr-side-title">Governance</div>
+  <nav class="hr-nav">
+    <button data-view="compliance" type="button">Compliance Calendar</button>
+    <button data-view="analytics" type="button">Analytics</button>
+    <button data-view="activity" type="button">Activity &amp; Audit</button>
+  </nav>
+  <div class="hr-side-note"><b>Backend:</b> Google Apps Script<br><b>Records:</b> Google Sheets &middot; <b>Files:</b> Google Drive</div>
+  <div class="hr-footnote">Time &amp; attendance stay in Jibble — this system does not track hours.</div>
+  <div class="hr-footnote" style="opacity:.6">Hero photography via Unsplash, used under the Unsplash License.</div>
+  </div>
+</aside>
+
+<section class="hr-main">
+  <div class="hr-topbar">
+    <div><div class="hr-kicker">ORIGENNT HR</div><h1 class="hr-title">People &amp; Operations Control Centre</h1><p class="hr-subtitle">One workspace for records, tasks, training, MPRs, appointments and documentation — so the HR team runs people operations from here instead of paper and spreadsheets.</p></div>
+    <div class="hr-actions"><button class="hr-btn" id="addEmployeeBtn2b" type="button">+ Add Person</button><button class="hr-btn primary" id="generateBtn" type="button">Generate Document</button></div>
+  </div>
+
+  <div class="hr-grid-metrics" style="grid-template-columns:repeat(4,1fr);margin-bottom:10px">
+    <div class="card hr-metric"><div class="label">MPRs pending this month</div><div class="value" id="todayMprDue">&mdash;</div></div>
+    <div class="card hr-metric"><div class="label">Overdue tasks</div><div class="value" id="metricOverdueTasks">&mdash;</div></div>
+    <div class="card hr-metric"><div class="label">Compliance overdue</div><div class="value" id="metricComplianceOverdue">&mdash;</div></div>
+    <div class="card hr-metric"><div class="label">Interns active</div><div class="value" id="metricInternsQuick">&mdash;</div></div>
+  </div>
+
+  <section id="view-dashboard">
+    <div class="hr-grid-metrics">
+      <div class="card hr-metric"><div class="label">People</div><div class="value" id="metricPeople">&mdash;</div></div>
+      <div class="card hr-metric"><div class="label">Active</div><div class="value" id="metricActive">&mdash;</div></div>
+      <div class="card hr-metric"><div class="label">Interns</div><div class="value" id="metricInterns">&mdash;</div></div>
+      <div class="card hr-metric"><div class="label">Pending KYC</div><div class="value" id="metricKyc">&mdash;</div></div>
+      <div class="card hr-metric"><div class="label">Exited</div><div class="value" id="metricExited">&mdash;</div></div>
+    </div>
+    <div class="hr-dashboard-grid">
+      <div class="card hr-card">
+        <div class="hr-panel-head"><div><h3>People register</h3><p>Current workforce records connected to the central employee register.</p></div><button class="hr-link-btn" data-view-link="people">Open People</button></div>
+        <div class="hr-mini-grid">
+          <div class="hr-mini"><span>Active employees</span><strong id="dashActive">&mdash;</strong></div>
+          <div class="hr-mini"><span>Pending KYC</span><strong id="dashKyc">&mdash;</strong></div>
+          <div class="hr-mini"><span>People on notice</span><strong id="dashNotice">&mdash;</strong></div>
+          <div class="hr-mini"><span>Exited records</span><strong id="dashExited">&mdash;</strong></div>
+        </div>
+        <div class="hr-callout neutral" style="margin-top:14px">Attendance and time tracking stay in Jibble. ORIGENNT HR covers records, tasks, training, MPRs, appointments, lifecycle and documentation.</div>
+      </div>
+      <div class="card hr-card">
+        <div class="hr-panel-head"><div><h3>Recent activity</h3><p>Every action taken across this system, logged automatically.</p></div><button class="hr-link-btn" data-view-link="activity">View all</button></div>
+        <div id="dashboardActivity"><div class="hr-empty">Loading activity.</div></div>
+      </div>
+    </div>
+  </section>
+  <section id="view-people" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>People</h3><p>Everyone in the register. Search and filter before opening a record.</p></div><button class="hr-btn primary" id="addEmployeeBtn2" type="button">+ Add Person</button></div>
+      <div class="hr-toolbar">
+        <div class="field"><input id="peopleSearch" type="search" placeholder="Search name, Employee ID, department or designation"></div>
+        <div class="field"><select id="peopleStatus"><option value="">All statuses</option><option>Active</option><option>On Notice</option><option>Resigned</option><option>Exited</option></select></div>
+        <div class="field"><select id="peopleDepartment"><option value="">All departments</option><option>Management</option><option>Human Resources</option><option>Operations</option><option>Sales</option><option>Consulting</option><option>Technology</option><option>Finance</option><option>Marketing</option></select></div>
+        <div class="field"><select id="peopleEmpType"><option value="">Employees &amp; interns</option><option value="intern">Interns only</option><option value="full time">Full-time only</option><option value="contract">Contract only</option></select></div>
+        <button class="hr-btn" id="refreshPeople" type="button">Refresh</button>
+      </div>
+      <div class="hr-filter-line"><div class="count" id="peopleCount">Loading people</div><div class="hr-chip-row"><span class="hr-chip red">KYC controlled</span><span class="hr-chip">Photo ready</span><span class="hr-chip">Employee lifecycle</span></div></div>
+      <div id="peopleResults" class="hr-results"><div class="hr-empty"><span class="hr-loading">Loading people register</span></div></div>
+    </div>
+  </section>
+
+  <section id="view-candidates" class="hr-hidden">
+    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Candidates</h3><p>Recruitment evidence, interview records and candidate evaluation, on the same People Operations layer.</p></div><button class="hr-btn primary" type="button" id="addCandidateBtn">+ Add Candidate</button></div>
+      <div class="hr-mini-grid" style="grid-template-columns:repeat(2,1fr)"><div class="hr-mini"><span>Recruitment register</span><strong id="candidateCount">&mdash;</strong></div><div class="hr-mini"><span>Status</span><strong style="font-size:14px">Evidence-first</strong></div></div>
+      <div class="hr-searchbar" style="margin-top:13px"><input id="candidateSearch" type="search" placeholder="Search candidate name or email"><button class="hr-btn primary" id="candidateSearchBtn" type="button">Search</button></div>
+      <div id="candidateResults" class="hr-results" style="margin-top:13px"><div class="hr-empty">Candidate retrieval uses the Candidates register once connected to the backend.</div></div>
+    </div>
+  </section>
+
+  <section id="view-documents" class="hr-hidden">
+    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Document Centre</h3><p>Central access to employee, intern, candidate and generated files stored in Google Drive.</p></div></div>
+      <div class="hr-toolbar"><div class="field"><input id="documentPerson" type="search" placeholder="Enter Employee ID or person name"></div><div class="field"><select id="documentCategory"><option value="">All categories</option><option>KYC</option><option>Employment</option><option>Internship</option><option>Training</option><option>Academic</option><option>Previous Employment</option><option>Exit</option><option>Other</option></select></div><button class="hr-btn primary" id="loadPersonDocuments" type="button">Load</button></div>
+      <div id="documentsTable"><div class="hr-empty">Select a person to view associated documents.</div></div>
+    </div>
+  </section>
+
+  <section id="view-exit" class="hr-hidden">
+    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Employee Exit</h3><p>Controlled offboarding from resignation through clearance and final documentation.</p></div><button class="hr-btn primary" id="startExitBtn" type="button">Start Exit</button></div>
+      <div class="hr-lifecycle"><div class="hr-stage current"><strong>Resignation</strong><span>Notice received</span></div><div class="hr-stage"><strong>Notice</strong><span>Last working day</span></div><div class="hr-stage"><strong>Handover</strong><span>Knowledge transfer</span></div><div class="hr-stage"><strong>Clearance</strong><span>Assets &amp; access</span></div><div class="hr-stage"><strong>Settlement</strong><span>Full &amp; final</span></div><div class="hr-stage"><strong>Closed</strong><span>Exit documents</span></div></div>
+      <div class="hr-form-grid" style="margin-top:18px"><div class="hr-form-field"><label>Employee ID</label><input id="exitEmployeeId" placeholder="ORI-EMP-0001"></div><div class="hr-form-field"><label>Resignation Date</label><input id="exitResignationDate" type="date"></div><div class="hr-form-field"><label>Last Working Day</label><input id="exitLastDay" type="date"></div><div class="hr-form-field"><label>Exit Type</label><select id="exitType"><option>Voluntary Resignation</option><option>Role Completion</option><option>Contract End</option><option>Termination</option><option>Other</option></select></div><div class="hr-form-field"><label>Notice Status</label><select id="exitNotice"><option>Not Started</option><option>In Progress</option><option>Completed</option><option>Waived</option></select></div><div class="hr-form-field"><label>Clearance Status</label><select id="exitClearance"><option>Pending</option><option>In Progress</option><option>Completed</option></select></div><div class="hr-form-field"><label>Asset Return</label><select id="exitAssets"><option>Pending</option><option>In Progress</option><option>Complete</option><option>Not Applicable</option></select></div><div class="hr-form-field"><label>Access Revocation</label><select id="exitAccess"><option>Pending</option><option>Complete</option></select></div><div class="hr-form-field"><label>Final Settlement</label><select id="exitSettlement"><option>Pending</option><option>In Process</option><option>Completed</option></select></div><div class="hr-form-field full"><label>Exit Remarks</label><textarea id="exitRemarks" placeholder="Handover, final settlement, clearance notes and relevant remarks"></textarea></div></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="hr-btn primary" id="saveExitBtn" type="button">Save Exit Record</button></div>
+      <div class="hr-footnote">Saves to the EMPLOYEE EXIT sheet tab and updates the person's Employment Status.</div>
+    </div>
+  </section>
+
+  <section id="view-tasks" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>Tasks</h3><p>Assign daily work, track it to done, and nudge people on WhatsApp when something's due.</p></div><button class="hr-btn primary" id="addTaskBtn" type="button">+ Assign Task</button></div>
+      <div class="hr-toolbar">
+        <div class="field"><input id="taskSearch" type="search" placeholder="Search tasks or assignee"></div>
+        <div class="field"><select id="taskPriorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+        <button class="hr-btn" id="refreshTasks" type="button">Refresh</button>
+      </div>
+      <div id="taskBoard" class="hr-task-cols">
+        <div class="hr-empty">Loading tasks.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-training" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>Training</h3><p>One place to track every course, workshop and certification — who's enrolled, and who's finished.</p></div><button class="hr-btn primary" id="addTrainingBtn" type="button">+ Log Training</button></div>
+      <div class="hr-toolbar">
+        <div class="field"><input id="trainingSearch" type="search" placeholder="Search programme or person"></div>
+        <div class="field"><select id="trainingStatusFilter"><option value="">All statuses</option><option>Scheduled</option><option>Ongoing</option><option>Completed</option><option>Lapsed</option></select></div>
+        <button class="hr-btn" id="refreshTraining" type="button">Refresh</button>
+      </div>
+      <div id="trainingTable"><div class="hr-empty">Loading training records.</div></div>
+    </div>
+  </section>
+
+  <section id="view-mpr" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>Monthly Progress Reports</h3><p>Compile every employee's MPR in one register instead of chasing emailed documents.</p></div><button class="hr-btn primary" id="addMprBtn" type="button">+ Log MPR</button></div>
+      <div class="hr-toolbar">
+        <div class="field"><input id="mprMonthFilter" type="month"></div>
+        <div class="field"><select id="mprStatusFilter"><option value="">All statuses</option><option>Draft</option><option>Submitted</option><option>Reviewed</option><option>Approved</option></select></div>
+        <button class="hr-btn" id="refreshMpr" type="button">Refresh</button>
+      </div>
+      <div id="mprTable"><div class="hr-empty">Loading MPRs.</div></div>
+    </div>
+  </section>
+
+  <section id="view-appointments" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>Appointments</h3><p>Book interviews, reviews and onboarding sessions — synced to Google Calendar.</p></div><button class="hr-btn primary" id="addAppointmentBtn" type="button">+ Book Appointment</button></div>
+      <div class="hr-quiet" style="margin-bottom:13px">Appointments save to the register below and, once the Calendar-enabled backend is deployed, create a matching Google Calendar event automatically. Until then, use "Add to Google Calendar" on any appointment.</div>
+      <div class="hr-toolbar"><button class="hr-btn" id="refreshAppointments" type="button">Refresh</button></div>
+      <div id="appointmentsTable"><div class="hr-empty">Loading appointments.</div></div>
+    </div>
+  </section>
+
+  <section id="view-compliance" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>Statutory Compliance Calendar</h3><p>Every recurring HR-linked government filing for ORIGENNT Private Limited, with the next due date calculated automatically and reminders raised as tasks.</p></div>
+        <div class="hr-panel-head-actions"><button class="hr-btn wa" id="waComplianceBtn" type="button">Send due items on WhatsApp</button><button class="hr-btn" id="refreshCompliance" type="button">Refresh</button></div>
+      </div>
+      <div class="hr-quiet" style="margin-bottom:13px">Dates below follow standard central statutory schedules (ESIC, EPF, TDS, ROC, PT, POSH, Bonus, Gratuity). Confirm against current CBDT/EPFO/ESIC/ROC notifications and your company secretary/CA before relying on them for filing — government departments occasionally extend deadlines.</div>
+      <div id="complianceTable"><div class="hr-empty">Loading compliance calendar.</div></div>
+    </div>
+  </section>
+
+  <section id="view-analytics" class="hr-hidden">
+    <div class="card hr-panel">
+      <div class="hr-panel-head"><div><h3>Workforce Analytics</h3><p>Live cuts of the same records held in People, Tasks, MPRs and Compliance — nothing here is estimated or fabricated.</p></div></div>
+      <div class="analytics-grid">
+        <div class="card analytics-card"><h4>Headcount by department</h4><p>Active people register, grouped by department.</p><canvas id="chartDept"></canvas></div>
+        <div class="card analytics-card"><h4>Employment mix</h4><p>Full-time, intern and contract split.</p><canvas id="chartEmpType"></canvas></div>
+        <div class="card analytics-card"><h4>Task status</h4><p>Everything assigned through the Tasks module.</p><canvas id="chartTasks"></canvas></div>
+        <div class="card analytics-card"><h4>MPR ratings distribution</h4><p>Manager ratings logged across all submitted MPRs.</p><canvas id="chartMpr"></canvas></div>
+        <div class="card analytics-card" style="grid-column:1/-1"><h4>Compliance adherence</h4><p>Statutory items by status — overdue, due within 7 days, or on track.</p><canvas id="chartCompliance"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-generate" class="hr-hidden">
+    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Generate a formal document</h3><p>Search a person, select a controlled document template and generate from existing records.</p></div></div>
+      <div class="hr-doc-generator">
+        <div>
+          <div class="hr-searchbar hr-search-template"><input id="generateEmployee" type="search" placeholder="Enter Employee ID or name"><button class="hr-btn" id="loadGenerateEmployee" type="button">Load</button></div>
+          <div id="generatePerson"><div class="hr-empty">Select a person before choosing a document.</div></div>
+          <div style="margin-top:12px"><input id="templateSearch" type="search" placeholder="Search 150+ document templates" style="width:100%"></div>
+          <div id="templateList" class="hr-template-list" style="margin-top:10px"></div>
+        </div>
+        <div class="hr-generator-preview" id="generatorPreview"><div class="doc-kicker">Controlled document</div><h4>Select a template</h4><p>Document generation uses approved ORIGENNT templates, existing employee/intern data and reference numbering.</p><div class="hr-generator-meta"><div><span>Person</span><strong id="genPersonMeta">Not selected</strong></div><div><span>Document</span><strong id="genDocMeta">Not selected</strong></div><div><span>Category</span><strong id="genCategoryMeta">&mdash;</strong></div><div><span>Status</span><strong>Ready for template route</strong></div></div><button class="hr-btn primary" id="generateDocumentAction" style="width:100%;margin-top:14px">Generate</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-activity" class="hr-hidden">
+    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Activity</h3><p>A chronological record of every HR action, task, MPR, appointment and lifecycle change &mdash; logged automatically by the backend.</p></div><button class="hr-btn" id="refreshActivity" type="button">Refresh</button></div><div id="activityTable"><div class="hr-empty">Loading activity.</div></div></div>
+  </section>
+
+  <section id="employee-record" class="hr-hidden"><div class="card hr-panel"><div class="hr-panel-head"><div><h3>Employee Record</h3><p>Controlled personnel information and related records.</p></div><button class="hr-link-btn" id="closeProfile" type="button">Close</button></div><div id="employeeProfile"></div></div></section>
+</section></div></div></main>
+<div class="hr-modal" id="addEmployeeModal" role="dialog" aria-modal="true" aria-labelledby="addEmployeeTitle"><div class="hr-modal-card"><div class="hr-modal-head"><div><h2 id="addEmployeeTitle">Add person</h2><p>Create the master person record and stage profile/KYC evidence.</p></div><button class="hr-close" type="button" data-close-modal="addEmployeeModal">&times;</button></div>
+  <form id="addEmployeeForm">
+    <div class="hr-form-title">Identity</div>
+    <div class="hr-upload"><div class="hr-photo-box" id="photoPreview"><div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div></div><div class="hr-dropzone"><input id="employeePhoto" type="file" accept="image/*"><label for="employeePhoto">Choose photograph</label><div id="photoName" class="hr-footnote">No photo selected.</div><div class="hr-callout neutral" style="margin-top:11px">The selected profile image is part of the person record. Drive storage binds to the Employee Folder when the file-upload route is enabled.</div></div></div>
+    <div class="hr-form-grid" style="margin-top:16px"><div class="hr-form-field"><label>Full Name *</label><input id="empFullName" required></div><div class="hr-form-field"><label>Official Email</label><input id="empOfficialEmail" type="email"></div><div class="hr-form-field"><label>Personal Email</label><input id="empPersonalEmail" type="email"></div><div class="hr-form-field"><label>Mobile</label><input id="empMobile" inputmode="tel" placeholder="+91 90000 00000"></div><div class="hr-form-field"><label>Date of Birth</label><input id="empDob" type="date"></div><div class="hr-form-field"><label>Gender</label><select id="empGender"><option value="">Select</option><option>Female</option><option>Male</option><option>Other</option><option>Prefer not to say</option></select></div><div class="hr-form-field"><label>Department</label><input id="empDepartment"></div><div class="hr-form-field"><label>Designation</label><input id="empDesignation"></div><div class="hr-form-field"><label>Reporting Manager</label><input id="empManager"></div><div class="hr-form-field"><label>Joining Date</label><input id="empJoiningDate" type="date"></div><div class="hr-form-field"><label>Employment Type</label><select id="empEmploymentType"><option>Full Time</option><option>Part Time</option><option>Contract</option><option>Intern</option><option>Consultant</option><option>Trainee</option></select></div><div class="hr-form-field"><label>Work Mode</label><select id="empWorkMode"><option>Office</option><option>Hybrid</option><option>Remote</option><option>Field</option></select></div><div class="hr-form-field"><label>Work Location</label><input id="empWorkLocation" value="Bhubaneswar"></div><div class="hr-form-field"><label>Employment Status</label><select id="empEmploymentStatus"><option>Active</option><option>On Notice</option><option>Resigned</option><option>Exited</option></select></div><div class="hr-form-field"><label>KYC Status</label><select id="empKycStatus"><option>Pending</option><option>In Progress</option><option>Completed</option><option>Verified</option></select></div></div>
+    <div class="hr-form-title" style="margin-top:22px">Emergency contact</div>
+    <div class="hr-form-grid"><div class="hr-form-field"><label>Name</label><input id="empEmergencyName"></div><div class="hr-form-field"><label>Relationship</label><input id="empEmergencyRelation"></div><div class="hr-form-field"><label>Mobile</label><input id="empEmergencyMobile"></div></div>
+    <div class="hr-form-title" style="margin-top:22px">KYC &amp; supporting documents</div>
+    <div class="hr-dropzone"><input id="kycFiles" type="file" multiple><label for="kycFiles">Choose KYC / supporting files</label><div class="hr-footnote">Aadhaar &middot; PAN &middot; Address Proof &middot; Educational Certificates &middot; Previous Employment &middot; Bank Proof &middot; Signed HR Documents &middot; Other</div><div id="kycFileList" class="hr-file-list"></div></div>
+    <div class="hr-callout neutral" style="margin-top:14px">The existing ORIGENNT KYC process remains the authoritative KYC questionnaire. This screen is for person creation, photo and evidence capture; it does not duplicate the KYC form.</div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addEmployeeModal">Cancel</button><button type="submit" class="hr-btn primary">Create Person Record</button></div>
+  </form>
+</div></div>
+
+<div class="hr-modal" id="addTaskModal" role="dialog" aria-modal="true" aria-labelledby="addTaskTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addTaskTitle">Assign a task</h2><p>Give it an owner and a WhatsApp number so you can send a reminder later.</p></div><button class="hr-close" type="button" data-close-modal="addTaskModal">&times;</button></div>
+  <form id="addTaskForm">
+    <div class="hr-form-grid" style="grid-template-columns:1fr">
+      <div class="hr-form-field"><label>Task title *</label><input id="taskTitle" required placeholder="e.g. Collect Aadhaar copy from new joiner"></div>
+      <div class="hr-form-field"><label>Details</label><textarea id="taskDetails" placeholder="Anything the assignee needs to know"></textarea></div>
+    </div>
+    <div class="hr-form-grid" style="margin-top:12px">
+      <div class="hr-form-field"><label>Assign to *</label><input id="taskAssignee" required placeholder="Name"></div>
+      <div class="hr-form-field"><label>WhatsApp number</label><input id="taskAssigneeMobile" inputmode="tel" placeholder="+91 90000 00000"></div>
+      <div class="hr-form-field"><label>Priority</label><select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></div>
+      <div class="hr-form-field"><label>Due date</label><input id="taskDueDate" type="date"></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addTaskModal">Cancel</button><button type="submit" class="hr-btn primary">Assign Task</button></div>
+  </form>
+</div></div>
+
+<div class="hr-modal" id="addTrainingModal" role="dialog" aria-modal="true" aria-labelledby="addTrainingTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addTrainingTitle">Log a training record</h2><p>Track enrollment through to completion and certificate.</p></div><button class="hr-close" type="button" data-close-modal="addTrainingModal">&times;</button></div>
+  <form id="addTrainingForm">
+    <div class="hr-form-grid">
+      <div class="hr-form-field full"><label>Programme name *</label><input id="trainingName" required placeholder="e.g. Fire Safety Workshop"></div>
+      <div class="hr-form-field"><label>Type</label><select id="trainingType"><option>Internal</option><option>External</option><option>Certification</option><option>Compliance</option></select></div>
+      <div class="hr-form-field"><label>Provider</label><input id="trainingProvider" placeholder="Trainer / vendor"></div>
+      <div class="hr-form-field"><label>Employee(s) *</label><input id="trainingEmployees" required placeholder="Names, comma-separated"></div>
+      <div class="hr-form-field"><label>Status</label><select id="trainingStatus"><option>Scheduled</option><option>Ongoing</option><option>Completed</option><option>Lapsed</option></select></div>
+      <div class="hr-form-field"><label>Start date</label><input id="trainingStart" type="date"></div>
+      <div class="hr-form-field"><label>Completion date</label><input id="trainingEnd" type="date"></div>
+      <div class="hr-form-field full"><label>Certificate link (optional)</label><input id="trainingCertLink" placeholder="Google Drive link"></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addTrainingModal">Cancel</button><button type="submit" class="hr-btn primary">Save Training Record</button></div>
+  </form>
+</div></div>
+
+<div class="hr-modal" id="addMprModal" role="dialog" aria-modal="true" aria-labelledby="addMprTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addMprTitle">Log a Monthly Progress Report</h2><p>One record per person, per month.</p></div><button class="hr-close" type="button" data-close-modal="addMprModal">&times;</button></div>
+  <form id="addMprForm">
+    <div class="hr-form-grid">
+      <div class="hr-form-field"><label>Employee *</label><input id="mprEmployee" required placeholder="Name or Employee ID"></div>
+      <div class="hr-form-field"><label>Month *</label><input id="mprMonth" type="month" required></div>
+      <div class="hr-form-field"><label>Status</label><select id="mprStatus"><option>Draft</option><option>Submitted</option><option>Reviewed</option><option>Approved</option></select></div>
+      <div class="hr-form-field"><label>Manager rating (1&ndash;5)</label><input id="mprRating" type="number" min="1" max="5"></div>
+      <div class="hr-form-field full"><label>Key achievements *</label><textarea id="mprAchievements" required placeholder="What got done this month"></textarea></div>
+      <div class="hr-form-field full"><label>Targets for next month</label><textarea id="mprTargets" placeholder="What's planned next"></textarea></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addMprModal">Cancel</button><button type="submit" class="hr-btn primary">Save MPR</button></div>
+  </form>
+</div></div>
+
+<div class="hr-modal" id="addAppointmentModal" role="dialog" aria-modal="true" aria-labelledby="addAppointmentTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addAppointmentTitle">Book an appointment</h2><p>Saves here and, once connected, creates a Google Calendar event.</p></div><button class="hr-close" type="button" data-close-modal="addAppointmentModal">&times;</button></div>
+  <form id="addAppointmentForm">
+    <div class="hr-form-grid">
+      <div class="hr-form-field full"><label>Title *</label><input id="apptTitle" required placeholder="e.g. Interview &mdash; Backend Developer"></div>
+      <div class="hr-form-field"><label>With</label><input id="apptWith" placeholder="Person or team"></div>
+      <div class="hr-form-field"><label>Type</label><select id="apptType"><option>Interview</option><option>Review</option><option>Onboarding</option><option>Other</option></select></div>
+      <div class="hr-form-field"><label>Date *</label><input id="apptDate" type="date" required></div>
+      <div class="hr-form-field"><label>Start time *</label><input id="apptStart" type="time" required></div>
+      <div class="hr-form-field"><label>End time</label><input id="apptEnd" type="time"></div>
+      <div class="hr-form-field full"><label>Location / link</label><input id="apptLocation" placeholder="Meeting room or video call link"></div>
+      <div class="hr-form-field full"><label>Notes</label><textarea id="apptNotes"></textarea></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addAppointmentModal">Cancel</button><button type="submit" class="hr-btn primary">Book Appointment</button></div>
+  </form>
+</div></div>
+
+<div class="hr-modal" id="activityDetailModal" role="dialog" aria-modal="true"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2>Activity record</h2><p>Full audit entry, as logged by the system.</p></div><button class="hr-close" type="button" data-close-modal="activityDetailModal">&times;</button></div>
+  <div id="activityDetailBody"></div>
+</div></div>
+
+<div id="hrToast" class="hr-toast" role="status" aria-live="polite"></div>
+<script>
+/* Point this at your deployed Apps Script Web App exec URL (see the companion
+   Code.gs + SETUP.md). Until then, network calls below fail gracefully and
+   the UI stays usable for layout/testing. */
+const HR_BACKEND_URL='/api/hr';
+
+const state={currentView:'dashboard',employee:null,people:[],tasks:[],training:[],mpr:[],appointments:[],compliance:[],selectedTemplate:null,generatePerson:null};
+
+/* ---------- daily quote (deterministic — same quote all day, changes at midnight) ---------- */
+const QUOTES=[
+ ["Discipline is the bridge between goals and accomplishment.","Jim Rohn"],
+ ["Quality is not an act, it is a habit.","Aristotle"],
+ ["What gets measured gets managed.","Peter Drucker"],
+ ["The way to get started is to quit talking and begin doing.","Walt Disney"],
+ ["Excellence is never an accident; it is the result of high intention and sincere effort.","Aristotle"],
+ ["Culture eats strategy for breakfast.","Peter Drucker"],
+ ["Small disciplines repeated with consistency lead to great achievements.","John C. Maxwell"],
+ ["Trust is built with consistency.","Lincoln Chafee"],
+ ["People rarely succeed unless they have fun in what they are doing.","Dale Carnegie"],
+ ["Efficiency is doing things right; effectiveness is doing the right things.","Peter Drucker"],
+ ["The strength of the team is each individual member.","Phil Jackson"],
+ ["Good process brings good results.","W. Edwards Deming"],
+ ["It is not the strongest that survive, but the most adaptable to change.","Charles Darwin"],
+ ["Do the hard jobs first. The easy jobs will take care of themselves.","Dale Carnegie"],
+ ["A goal without a plan is just a wish.","Antoine de Saint-Exupéry"],
+ ["Compliance is not a cost centre; it is the cost of staying in business.","Anonymous"],
+ ["Details create the big picture.","Sanford I. Weill"],
+ ["Systems run the business and people run the systems.","Michael Gerber"],
+ ["You cannot manage what you do not measure.","W. Edwards Deming"],
+ ["Well done is better than well said.","Benjamin Franklin"]
+];
+function dayOfYear(d){const start=new Date(d.getFullYear(),0,0);return Math.floor((d-start)/864e5)}
+function renderDailyQuote(){
+  const idx=dayOfYear(new Date())%QUOTES.length;
+  document.getElementById('dailyQuote').textContent=`"${QUOTES[idx][0]}"`;
+  document.getElementById('dailyQuoteAuthor').textContent=`— ${QUOTES[idx][1]}`;
+}
+
+/* ---------- compliance calendar (central-government statutory obligations) ---------- */
+const COMPLIANCE_RULES=[
+ {name:'EPF — ECR filing & payment',cat:'EPFO',freq:'Monthly',rule:'day',day:15,note:'Electronic Challan-cum-Return for the previous wage month, filed on the EPFO Unified Portal.'},
+ {name:'ESIC — Contribution payment',cat:'ESIC',freq:'Monthly',rule:'day',day:15,note:'Employee State Insurance contribution challan for the previous wage month.'},
+ {name:'TDS on salary — deposit',cat:'Income Tax',freq:'Monthly',rule:'day',day:7,note:'Tax deducted at source on salary (Sec 192) deposited by the 7th of the following month.'},
+ {name:'TDS return — Form 138 (formerly 24Q), Q1',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:7,day:31,note:'Salary TDS quarterly statement for Apr–Jun.'},
+ {name:'TDS return — Form 138, Q2',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:10,day:31,note:'Salary TDS quarterly statement for Jul–Sep.'},
+ {name:'TDS return — Form 138, Q3',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:1,day:31,note:'Salary TDS quarterly statement for Oct–Dec.'},
+ {name:'TDS return — Form 138, Q4 + Form 16 issuance',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:5,day:31,note:'Salary TDS quarterly statement for Jan–Mar; annual salary certificate (Form 16/Form 130) to employees by 15 June.'},
+ {name:'EPF Annual Return — Form 3A / Form 6A',cat:'EPFO',freq:'Annual',rule:'fixed',month:4,day:30,note:'Consolidated annual PF statement for the financial year just ended.'},
+ {name:'ESIC Half-Yearly Return',cat:'ESIC',freq:'Half-yearly',rule:'halfyear',day1:{month:5,day:11},day2:{month:11,day:11},note:'Half-yearly contribution return — periods Apr–Sep and Oct–Mar.'},
+ {name:'Professional Tax — Odisha monthly payment',cat:'State PT',freq:'Monthly',rule:'lastday',note:'Odisha PT deducted from employees remitted by the last day of the month.'},
+ {name:'Professional Tax — Annual enrolment renewal',cat:'State PT',freq:'Annual',rule:'fixed',month:4,day:30,note:'Employer PT enrolment renewal / annual return.'},
+ {name:'POSH — Annual Report (Internal Committee)',cat:'POSH',freq:'Annual',rule:'fixed',month:1,day:31,note:'Annual report on sexual harassment complaints to the employer/District Officer under the POSH Act.'},
+ {name:'Payment of Bonus — Bonus Act',cat:'Labour',freq:'Annual',rule:'fixed',month:11,day:30,note:'Statutory bonus to be paid within 8 months of the close of the accounting year.'},
+ {name:'Shops & Establishment — Registration renewal',cat:'State Labour',freq:'Annual',rule:'fixed',month:3,day:31,note:'Renew Odisha Shops & Commercial Establishments registration ahead of expiry — confirm exact renewal date against the certificate issued.'},
+ {name:'ROC — AOC-4 (Financial Statements)',cat:'MCA/ROC',freq:'Annual',rule:'fixed',month:10,day:30,note:'File financial statements within 30 days of AGM (assumes AGM by 30 Sep for FY ending 31 Mar).'},
+ {name:'ROC — MGT-7A (Annual Return, small company)',cat:'MCA/ROC',freq:'Annual',rule:'fixed',month:11,day:29,note:'File annual return within 60 days of AGM.'},
+ {name:'Gratuity — Payment on eligibility',cat:'Labour',freq:'As triggered',rule:'ongoing',note:'Payable within 30 days of it becoming due (resignation/retirement/termination after 5 years\' service).'},
+];
+function nextOccurrence(rule){
+  const now=new Date();const y=now.getFullYear();
+  const cands=[];
+  if(rule.rule==='day'){
+    for(const dy of[y,y+1])for(let m=0;m<12;m++)cands.push(new Date(dy,m,rule.day));
+  }else if(rule.rule==='fixed'){
+    cands.push(new Date(y,rule.month-1,rule.day),new Date(y+1,rule.month-1,rule.day));
+  }else if(rule.rule==='halfyear'){
+    for(const dy of[y,y+1]){cands.push(new Date(dy,rule.day1.month-1,rule.day1.day));cands.push(new Date(dy,rule.day2.month-1,rule.day2.day))}
+  }else if(rule.rule==='lastday'){
+    for(const dy of[y,y+1])for(let m=0;m<12;m++)cands.push(new Date(dy,m+1,0));
+  }else{return null}
+  const future=cands.filter(d=>d>=new Date(now.toDateString())).sort((a,b)=>a-b);
+  return future[0]||null;
+}
+function complianceStatus(dueDate){
+  if(!dueDate)return'ongoing';
+  const days=Math.ceil((dueDate-new Date(new Date().toDateString()))/864e5);
+  if(days<0)return'overdue';if(days<=7)return'soon';return'ok';
+}
+function renderCompliance(){
+  const target=document.getElementById('complianceTable');
+  const rows=COMPLIANCE_RULES.map(r=>{
+    const due=nextOccurrence(r);
+    return{...r,due,status:complianceStatus(due)};
+  });
+  state.compliance=rows;
+  rows.sort((a,b)=>(a.due?a.due:new Date(8640000000000000))-(b.due?b.due:new Date(8640000000000000)));
+  target.innerHTML=`<table class="compliance-table"><thead><tr><th>Filing</th><th>Category</th><th>Frequency</th><th>Next Due</th><th>Status</th></tr></thead><tbody>${rows.map(r=>`<tr><td><strong>${esc(r.name)}</strong><br><span class="hr-muted">${esc(r.note)}</span></td><td class="comp-cat">${esc(r.cat)}</td><td>${esc(r.freq)}</td><td>${r.due?fmt(r.due):'Ongoing'}</td><td><span class="due-badge ${r.status==='overdue'?'overdue':r.status==='soon'?'soon':'ok'}">${r.status==='overdue'?'Overdue':r.status==='soon'?'Due soon':r.status==='ongoing'?'Ongoing':'On track'}</span></td></tr>`).join('')}</tbody></table>`;
+  refreshTodayStrip();
+}
+function waComplianceDigest(){
+  const due=state.compliance.filter(r=>r.status==='overdue'||r.status==='soon');
+  const lines=due.map(r=>`• ${r.name} — due ${r.due?fmt(r.due):'—'}`).join('\n');
+  const text=`ORIGENNT HR — Compliance items needing attention:\n${lines||'Nothing due in the next 7 days.'}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(text)}`,'_blank');
+}
+function buildDailyDigestText(){
+  const today=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  const tasksToday=state.tasks.filter(t=>t.status!=='Done'&&isToday(t.dueDate));
+  const overdueTasks=state.tasks.filter(t=>t.status!=='Done'&&t.dueDate&&new Date(t.dueDate)<new Date(new Date().toDateString()));
+  const apptsToday=state.appointments.filter(a=>isToday(a.date));
+  const kycPending=state.people.filter(p=>String(p['KYC Status']||'').toLowerCase()==='pending').length;
+  const compDue=state.compliance.filter(r=>r.status==='overdue'||r.status==='soon');
+  let t=`*ORIGENNT HR — Daily Digest*\n${today}\n\n`;
+  t+=`*Tasks due today:* ${tasksToday.length}\n${tasksToday.map(x=>`• ${x.title} (${x.assignee||'Unassigned'})`).join('\n')}\n\n`;
+  t+=`*Overdue tasks:* ${overdueTasks.length}\n${overdueTasks.map(x=>`• ${x.title} (${x.assignee||'Unassigned'})`).join('\n')}\n\n`;
+  t+=`*Appointments today:* ${apptsToday.length}\n${apptsToday.map(x=>`• ${x.title} — ${x.startTime||''}`).join('\n')}\n\n`;
+  t+=`*Pending KYC:* ${kycPending}\n\n`;
+  t+=`*Compliance due (≤7 days):*\n${compDue.map(x=>`• ${x.name} — ${x.due?fmt(x.due):''}`).join('\n')||'None'}\n`;
+  return t;
+}
+
+const TEMPLATES=[
+['Training Certificate','Training'],['Course Completion Certificate','Training'],['Training Completion Certificate','Training'],['Internship Certificate','Internship'],['Internship Completion Certificate','Internship'],['Internship Participation Certificate','Internship'],['Internship Experience Certificate','Internship'],['Employment Certificate','Employment'],['Experience Certificate','Employment'],['Work Experience Certificate','Employment'],['Service Certificate','Employment'],['Joining Certificate','Employment'],['Employment Confirmation Certificate','Employment'],['Probation Completion Certificate','Employment'],['Employee Confirmation Letter','Letters'],['Appointment Letter','Letters'],['Offer Letter','Letters'],['Employment Offer Letter','Letters'],['Internship Offer Letter','Internship'],['Internship Appointment Letter','Internship'],['Joining Letter','Letters'],['Engagement Letter','Letters'],['Contract Letter','Letters'],['Assignment Letter','Project'],['Project Assignment Letter','Project'],['Project Completion Certificate','Project'],['Project Participation Certificate','Project'],['Project Experience Certificate','Project'],['Achievement Certificate','Recognition'],['Appreciation Certificate','Recognition'],['Recognition Certificate','Recognition'],['Excellence Certificate','Recognition'],['Merit Certificate','Recognition'],['Performance Certificate','Performance'],['Participation Certificate','Certificates'],['Attendance Certificate','Training'],['Training Attendance Certificate','Training'],['Workshop Certificate','Training'],['Workshop Participation Certificate','Training'],['Seminar Certificate','Training'],['Seminar Participation Certificate','Training'],['Webinar Certificate','Training'],['Webinar Participation Certificate','Training'],['Event Participation Certificate','Events'],['Event Completion Certificate','Events'],['Bootcamp Certificate','Training'],['Bootcamp Completion Certificate','Training'],['Masterclass Certificate','Training'],['Masterclass Completion Certificate','Training'],['Course Certificate','Training'],['Course Participation Certificate','Training'],['Skill Certificate','Assessment'],['Skill Assessment Certificate','Assessment'],['Skill Verification Certificate','Verification'],['Competency Certificate','Assessment'],['Competency Assessment Certificate','Assessment'],['Credential Certificate','Credential'],['Professional Credential','Credential'],['Digital Credential','Credential'],['Credential Verification Letter','Verification'],['Certificate of Completion','Certificates'],['Certificate of Achievement','Certificates'],['Certificate of Recognition','Certificates'],['Certificate of Participation','Certificates'],['Certificate of Appreciation','Certificates'],['Certificate of Merit','Certificates'],['Certificate of Excellence','Certificates'],['Certificate of Attendance','Certificates'],['Letter of Completion','Letters'],['Letter of Participation','Letters'],['Letter of Appreciation','Letters'],['Letter of Recommendation','Letters'],['Recommendation Letter','Letters'],['Reference Letter','Letters'],['Professional Reference Letter','Letters'],['Experience Letter','Employment'],['Employment Letter','Employment'],['Relieving Letter','Exit'],['Release Letter','Exit'],['Termination Letter','Exit'],['Resignation Acceptance Letter','Exit'],['No Objection Certificate','Exit'],['NOC','Exit'],['Salary Certificate','Verification'],['Salary Verification Letter','Verification'],['Compensation Certificate','Verification'],['Income Certificate','Verification'],['Employment Verification Letter','Verification'],['Employment Verification Certificate','Verification'],['Internship Verification Letter','Verification'],['Internship Verification Certificate','Verification'],['Training Verification Letter','Verification'],['Training Verification Certificate','Verification'],['Document Verification Letter','Verification'],['Background Verification Letter','Verification'],['Character Certificate','Verification'],['Conduct Certificate','Verification'],['Good Standing Certificate','Verification'],['Identity Verification Letter','Verification'],['KYC Confirmation Letter','KYC'],['KYC Verification Certificate','KYC'],['Onboarding Completion Certificate','Onboarding'],['Onboarding Confirmation Letter','Onboarding'],['Offboarding Confirmation Letter','Exit'],['Exit Clearance Certificate','Exit'],['Full and Final Settlement Letter','Exit'],['Policy Acknowledgement','Compliance'],['NDA / Confidentiality Agreement','Compliance'],['Declaration Form','Compliance'],['Undertaking','Compliance'],['Consent Form','Compliance'],['Authorization Letter','Letters'],['Acknowledgement Letter','Letters'],['Confirmation Letter','Letters'],['Approval Letter','Letters'],['Acceptance Letter','Letters'],['Appointment Confirmation','Employment'],['Registration Confirmation','Confirmation'],['Enrollment Confirmation','Confirmation'],['Training Enrollment Confirmation','Training'],['Course Enrollment Confirmation','Training'],['Service Order Confirmation','Client'],['Service Completion Certificate','Client'],['Service Delivery Certificate','Client'],['Service Engagement Letter','Client'],['Consulting Engagement Letter','Client'],['Consulting Completion Certificate','Client'],['Advisory Engagement Letter','Client'],['Advisory Completion Certificate','Client'],['Project Engagement Letter','Client'],['Project Closure Certificate','Client'],['Client Completion Certificate','Client'],['Client Appreciation Certificate','Client'],['Client Recommendation Letter','Client'],['Client Reference Letter','Client'],['Client Verification Letter','Client'],['B2B Service Certificate','Client'],['B2B Completion Certificate','Client'],['B2C Service Certificate','Client'],['B2C Completion Certificate','Client'],['Career Service Certificate','Career Services'],['Career Counselling Completion Certificate','Career Services'],['Resume Service Completion Certificate','Career Services'],['LinkedIn Optimization Completion Certificate','Career Services'],['Interview Preparation Completion Certificate','Career Services'],['Career Assessment Certificate','Career Services'],['Placement Assistance Certificate','Career Services'],['Recruitment Service Completion Certificate','Recruitment'],['Recruitment Engagement Letter','Recruitment'],['Candidate Assessment Report','Reports'],['Candidate Evaluation Report','Reports'],['Training Assessment Report','Reports'],['Training Completion Report','Reports'],['Performance Evaluation Report','Reports'],['Skill Assessment Report','Reports'],['Service Completion Report','Reports'],['Project Completion Report','Reports'],['Consulting Report','Reports'],['Advisory Report','Reports'],['Assessment Report','Reports'],['Verification Report','Reports'],['Audit Report','Compliance'],['Compliance Certificate','Compliance'],['Compliance Confirmation Letter','Compliance'],['Compliance Verification Certificate','Compliance'],['Quality Certificate','Compliance'],['Quality Assurance Certificate','Compliance'],['Custom Certificate','Custom'],['Custom Letter','Custom'],['Custom Formal Document','Custom'],['Other','Custom']
+];
+
+/* ---------- helpers ---------- */
+function toast(message){const el=document.getElementById('hrToast');el.textContent=message;el.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.classList.remove('show'),2800)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function initials(name){return (name||'Employee').split(' ').slice(0,2).map(x=>x[0]||'').join('').toUpperCase()}
+function fmt(v){if(!v)return'—';const d=new Date(v);return Number.isNaN(d.getTime())?String(v):d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}
+function fmtDateTime(v){if(!v)return'—';const d=new Date(v);return Number.isNaN(d.getTime())?String(v):d.toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+function isToday(v){if(!v)return false;const d=new Date(v);const t=new Date();return d.getFullYear()===t.getFullYear()&&d.getMonth()===t.getMonth()&&d.getDate()===t.getDate()}
+function waLink(mobile,message){const digits=String(mobile||'').replace(/[^\d]/g,'');if(!digits)return null;return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`}
+function gcalLink(appt){const pad=n=>String(n).padStart(2,'0');const start=new Date(`${appt.date}T${appt.startTime||'09:00'}`);const end=appt.endTime?new Date(`${appt.date}T${appt.endTime}`):new Date(start.getTime()+60*60*1000);const fmt2=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;const params=new URLSearchParams({action:'TEMPLATE',text:appt.title||'Appointment',dates:`${fmt2(start)}/${fmt2(end)}`,details:appt.notes||'',location:appt.location||''});return `https://calendar.google.com/calendar/render?${params.toString()}`}
+async function apiGet(action,params={}){const q=new URLSearchParams({action,...params});const res=await fetch(`${HR_BACKEND_URL}?${q.toString()}`,{credentials:'omit'});if(!res.ok)throw new Error(`Backend returned ${res.status}`);return res.json()}
+
+/* ---------- view switching ---------- */
+function showView(view){
+  document.querySelectorAll('[id^="view-"]').forEach(el=>el.classList.add('hr-hidden'));
+  const t=document.getElementById('view-'+view);if(t)t.classList.remove('hr-hidden');
+  document.querySelectorAll('.hr-nav button[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+  state.currentView=view;
+  if(view==='dashboard'||view==='activity')loadRecentActivity();
+  if(view==='people')loadPeople();
+  if(view==='tasks')loadTasks();
+  if(view==='training')loadTraining();
+  if(view==='mpr')loadMpr();
+  if(view==='appointments')loadAppointments();
+  if(view==='compliance')renderCompliance();
+  if(view==='analytics')renderAnalytics();
+}
+document.querySelectorAll('[data-view-link]').forEach(el=>el.addEventListener('click',()=>showView(el.dataset.viewLink)));
+
+function setGreeting(){
+  const now=new Date();
+  document.getElementById('heroDay').textContent=now.toLocaleDateString('en-IN',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  const h=now.getHours();
+  const name=(state.userName||'').split(' ')[0];
+  const base=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('todayGreet').textContent=name?`${base}, ${name}`:base;
+  renderDailyQuote();
+}
+function refreshTodayStrip(){
+  document.getElementById('todayTasksDue').textContent=state.tasks.filter(t=>t.status!=='Done'&&isToday(t.dueDate)).length;
+  document.getElementById('todayAppointments').textContent=state.appointments.filter(a=>isToday(a.date)).length;
+  document.getElementById('todayPendingKyc').textContent=state.people.filter(p=>String(p['KYC Status']||'').toLowerCase()==='pending').length;
+  const month=new Date().toISOString().slice(0,7);
+  document.getElementById('todayMprDue').textContent=state.mpr.filter(m=>m.month===month&&m.status!=='Approved').length;
+  const overdueTasks=state.tasks.filter(t=>t.status!=='Done'&&t.dueDate&&new Date(t.dueDate)<new Date(new Date().toDateString()));
+  document.getElementById('metricOverdueTasks').textContent=overdueTasks.length;
+  const compDue=(state.compliance||[]).filter(r=>r.status==='overdue'||r.status==='soon');
+  const compOverdue=(state.compliance||[]).filter(r=>r.status==='overdue');
+  const elTCD=document.getElementById('todayComplianceDue');if(elTCD)elTCD.textContent=compDue.length;
+  const elMCO=document.getElementById('metricComplianceOverdue');if(elMCO)elMCO.textContent=compOverdue.length;
+  const interns=state.people.filter(p=>String(p['Employment Type']||'').toLowerCase()==='intern'&&String(p['Employment Status']||'').toLowerCase()==='active');
+  const elIQ=document.getElementById('metricInternsQuick');if(elIQ)elIQ.textContent=interns.length;
+  const elHH=document.getElementById('heroHeadcount');if(elHH)elHH.textContent=state.people.length;
+  const elHC=document.getElementById('heroCompliance');if(elHC)elHC.textContent=COMPLIANCE_RULES.length;
+  const elHD=document.getElementById('heroDocs');if(elHD)elHD.textContent=TEMPLATES.length+'+';
+}
+
+/* ---------- dashboard metrics ---------- */
+function updateMetrics(people){
+  const active=people.filter(p=>String(p['Employment Status']||'').toLowerCase()==='active').length;
+  const interns=people.filter(p=>String(p['Employment Type']||'').toLowerCase()==='intern').length;
+  const kyc=people.filter(p=>String(p['KYC Status']||'').toLowerCase()==='pending').length;
+  const notice=people.filter(p=>String(p['Employment Status']||'').toLowerCase()==='on notice').length;
+  const exited=people.filter(p=>String(p['Employment Status']||'').toLowerCase()==='exited').length;
+  document.getElementById('metricPeople').textContent=people.length;
+  document.getElementById('metricActive').textContent=active;
+  document.getElementById('metricInterns').textContent=interns;
+  document.getElementById('metricKyc').textContent=kyc;
+  document.getElementById('metricExited').textContent=exited;
+  document.getElementById('dashActive').textContent=active;
+  document.getElementById('dashKyc').textContent=kyc;
+  document.getElementById('dashNotice').textContent=notice;
+  document.getElementById('dashExited').textContent=exited;
+  refreshTodayStrip();
+}
+
+/* ---------- activity ---------- */
+let ACTIVITY_STORE=[];
+function renderActivities(items,targetId){
+  const target=document.getElementById(targetId);
+  if(!items.length){target.innerHTML='<div class="hr-empty">No activity recorded yet.</div>';return}
+  const offset=ACTIVITY_STORE.length;
+  ACTIVITY_STORE=ACTIVITY_STORE.concat(items);
+  target.innerHTML=`<div class="hr-activity-list">${items.map((a,i)=>`<div class="hr-activity-item" data-activity-idx="${offset+i}"><div class="hr-dot">&bull;</div><div><strong>${esc(a['Action Type']||a.title||a.type||'Activity')}</strong><span>${esc(a['Description']||a.summary||a.detail||'')}</span></div><div class="hr-date">${fmtDateTime(a['Timestamp']||a.timestamp||a.date)}</div></div>`).join('')}</div>`;
+  target.querySelectorAll('[data-activity-idx]').forEach(el=>el.addEventListener('click',()=>openActivityDetail(Number(el.dataset.activityIdx))));
+}
+function openActivityDetail(idx){
+  const a=ACTIVITY_STORE[idx];if(!a)return;
+  const rows=Object.entries(a).filter(([k,v])=>v!==''&&v!==undefined).map(([k,v])=>`<div class="audit-kv"><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join('');
+  document.getElementById('activityDetailBody').innerHTML=rows||'<div class="hr-empty">No further detail on this record.</div>';
+  openModal('activityDetailModal');
+}
+async function loadRecentActivity(){
+  try{
+    const data=await apiGet('getRecentActivity',{limit:25});
+    ACTIVITY_STORE=[];
+    renderActivities(data.activities||[],'dashboardActivity');
+    renderActivities(data.activities||[],'activityTable');
+  }catch(e){
+    document.getElementById('dashboardActivity').innerHTML='<div class="hr-empty">Activity could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+    document.getElementById('activityTable').innerHTML='<div class="hr-empty">Activity could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+  }
+}
+
+/* ---------- people ---------- */
+async function loadPeople(){
+  const target=document.getElementById('peopleResults');
+  target.innerHTML='<div class="hr-empty"><span class="hr-loading">Loading people register</span></div>';
+  try{
+    const data=await apiGet('searchEmployees',{q:'ORI-EMP-'});
+    state.people=data.results||[];
+    renderPeople(state.people);
+    updateMetrics(state.people);
+  }catch(e){
+    target.innerHTML='<div class="hr-empty">People register could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+  }
+}
+function renderPeople(people){
+  const target=document.getElementById('peopleResults');
+  const status=document.getElementById('peopleStatus').value.toLowerCase();
+  const dept=document.getElementById('peopleDepartment').value.toLowerCase();
+  const etype=document.getElementById('peopleEmpType').value.toLowerCase();
+  const q=document.getElementById('peopleSearch').value.trim().toLowerCase();
+  const filtered=people.filter(e=>{
+    const hit=!q||Object.values(e).some(v=>String(v??'').toLowerCase().includes(q));
+    const hs=!status||String(e['Employment Status']||'').toLowerCase()===status;
+    const hd=!dept||String(e['Department']||'').toLowerCase()===dept;
+    const het=!etype||String(e['Employment Type']||'').toLowerCase()===etype;
+    return hit&&hs&&hd&&het;
+  });
+  document.getElementById('peopleCount').textContent=`${filtered.length} person${filtered.length===1?'':'s'} shown`;
+  if(!filtered.length){target.innerHTML='<div class="hr-empty">No matching person record found.</div>';return}
+  target.innerHTML=filtered.map(emp=>`<div class="hr-result"><div class="hr-avatar-sm">${emp['Photo URL']?`<img src="${esc(emp['Photo URL'])}" alt="${esc(emp['Full Name']||'Person')} photo" loading="lazy" onerror="this.parentElement.innerHTML='<span>${esc(initials(emp['Full Name']))}</span>'">`:`<span>${esc(initials(emp['Full Name']))}</span>`}</div><div><strong>${esc(emp['Full Name']||'—')}</strong><br><span>${esc(emp['Employee ID']||'—')}</span></div><div><strong>${esc(emp['Designation']||'—')}</strong><br><span>${esc(emp['Department']||'—')}</span></div><div><span>${esc(emp['Reporting Manager']||'—')}</span><br><span>${esc(emp['KYC Status']||'Pending')} KYC</span></div><div><span class="hr-status ${String(emp['Employment Status']||'').toLowerCase().includes('exit')?'exit':''}">${esc(emp['Employment Status']||'Active')}</span><br><button class="hr-link-btn" type="button" data-employee-id="${esc(emp['Employee ID']||'')}">Open Record</button></div></div>`).join('');
+  target.querySelectorAll('[data-employee-id]').forEach(b=>b.addEventListener('click',()=>loadProfile(b.dataset.employeeId)));
+}
+
+/* ---------- profile ---------- */
+async function loadProfile(employeeId){
+  const section=document.getElementById('employee-record');
+  section.classList.remove('hr-hidden');
+  document.getElementById('employeeProfile').innerHTML='<div class="hr-empty"><span class="hr-loading">Loading employee record</span></div>';
+  try{
+    const data=await apiGet('getEmployeeProfile',{employeeId});
+    state.employee=data.employee||data;
+    renderProfile(data);
+    section.scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){
+    document.getElementById('employeeProfile').innerHTML='<div class="hr-empty">Employee record could not be loaded.</div>';
+    toast('Unable to load employee record.');
+  }
+}
+function renderProfile(data){
+  const e=data.employee||data;
+  const photo=e['Photo URL']?`<img src="${esc(e['Photo URL'])}" alt="${esc(e['Full Name'])}">`:esc(initials(e['Full Name']));
+  document.getElementById('employeeProfile').innerHTML=`
+  <div class="hr-profile">
+    <div class="card hr-profile-main">
+      <div class="hr-profile-id"><div style="display:flex;gap:14px;align-items:center"><div class="hr-avatar-lg">${photo}</div><div><h2 class="hr-name">${esc(e['Full Name']||'—')}</h2><p class="hr-muted">${esc(e['Employee ID']||'—')} &middot; ${esc(e['Designation']||'—')}</p></div></div><span class="hr-status ${String(e['Employment Status']||'').toLowerCase().includes('exit')?'exit':''}">${esc(e['Employment Status']||'Active')}</span></div>
+      <div class="hr-data-grid">
+        <div class="hr-data"><div class="k">Department</div><div class="v">${esc(e['Department']||'—')}</div></div>
+        <div class="hr-data"><div class="k">Reporting Manager</div><div class="v">${esc(e['Reporting Manager']||'—')}</div></div>
+        <div class="hr-data"><div class="k">Joining Date</div><div class="v">${fmt(e['Joining Date'])}</div></div>
+        <div class="hr-data"><div class="k">Employment Type</div><div class="v">${esc(e['Employment Type']||'—')}</div></div>
+        <div class="hr-data"><div class="k">Work Mode</div><div class="v">${esc(e['Work Mode']||'—')}</div></div>
+        <div class="hr-data"><div class="k">Work Location</div><div class="v">${esc(e['Work Location']||'—')}</div></div>
+        <div class="hr-data"><div class="k">Official Email</div><div class="v">${esc(e['Official Email']||'—')}</div></div>
+        <div class="hr-data"><div class="k">Mobile</div><div class="v">${esc(e['Mobile']||'—')}</div></div>
+        <div class="hr-data"><div class="k">KYC Status</div><div class="v">${esc(e['KYC Status']||'Pending')}</div></div>
+      </div>
+    </div>
+    <div class="card hr-profile-side">
+      <h4>Actions</h4>
+      <div class="hr-action-list">
+        <button type="button" onclick="openAddEmployeeWithData()">Edit person record</button>
+        <button type="button" onclick="document.getElementById('generateEmployee').value='${esc(e['Employee ID']||'')}';showView('generate');loadGeneratePerson()">Generate document</button>
+        <button type="button" onclick="document.getElementById('documentPerson').value='${esc(e['Employee ID']||'')}';showView('documents');loadPersonDocuments()">View documents</button>
+        ${e['Mobile']?`<a class="hr-btn wa" style="text-align:center;text-decoration:none" href="${waLink(e['Mobile'],`Hi ${e['Full Name']||''}, following up from ORIGENNT HR.`)}" target="_blank" rel="noopener">Message on WhatsApp</a>`:''}
+      </div>
+      ${String(e['Employment Type']||'').toLowerCase()==='intern'?`
+      <h4 style="margin-top:18px">Intern Track</h4>
+      <div class="hr-lifecycle" style="grid-template-columns:repeat(3,1fr)">
+        <div class="hr-stage current"><strong>Assigned</strong><span>Mentor &amp; project</span></div>
+        <div class="hr-stage"><strong>Progress</strong><span>Milestones</span></div>
+        <div class="hr-stage"><strong>Certified</strong><span>Completion</span></div>
+      </div>
+      <div class="hr-form-grid" style="grid-template-columns:1fr;margin-top:12px">
+        <div class="hr-form-field"><label>Mentor / Project</label><input id="internMentorInline" placeholder="Mentor name — project"></div>
+        <div class="hr-form-field"><label>Progress Status</label><select id="internStatusInline"><option>In Progress</option><option>Evaluation</option><option>Completed</option><option>Certified</option></select></div>
+        <div class="hr-form-field"><label>Remarks</label><textarea id="internRemarksInline" placeholder="Milestone notes"></textarea></div>
+        <button class="hr-btn primary small" type="button" onclick="saveInternInline('${esc(e['Employee ID']||'')}')">Save Intern Update</button>
+      </div>`:''}
+    </div>
+  </div>`;
+}
+async function saveInternInline(employeeId){
+  const data={employeeId,mentorProject:document.getElementById('internMentorInline').value.trim(),status:document.getElementById('internStatusInline').value,remarks:document.getElementById('internRemarksInline').value.trim()};
+  try{
+    const out=await apiGet('addInternProgress',{data:JSON.stringify(data)});
+    if(!out.success)throw new Error(out.error||'Unable to save');
+    toast('Intern progress saved.');loadRecentActivity();
+  }catch(err){toast(err.message||'Intern progress route connects to the INTERN PROGRESS sheet once deployed.')}
+}
+
+/* ---------- add / edit person ---------- */
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function previewPhoto(){const f=document.getElementById('employeePhoto').files[0];const box=document.getElementById('photoPreview');document.getElementById('photoName').textContent=f?f.name:'No photo selected.';if(f){const r=new FileReader();r.onload=e=>box.innerHTML=`<img src="${e.target.result}" alt="Profile photo preview">`;r.readAsDataURL(f)}else box.innerHTML='<div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div>'}
+function showKycFiles(){const files=[...document.getElementById('kycFiles').files];document.getElementById('kycFileList').innerHTML=files.map(f=>`<div class="hr-file"><span>${esc(f.name)}</span><small>${Math.round(f.size/1024)} KB</small></div>`).join('')||''}
+async function submitEmployee(e){
+  e.preventDefault();
+  const fullName=document.getElementById('empFullName').value.trim();
+  if(!fullName){toast('Full name is required.');return}
+  const data={fullName,officialEmail:document.getElementById('empOfficialEmail').value.trim(),personalEmail:document.getElementById('empPersonalEmail').value.trim(),mobile:document.getElementById('empMobile').value.trim(),department:document.getElementById('empDepartment').value.trim(),designation:document.getElementById('empDesignation').value.trim(),reportingManager:document.getElementById('empManager').value.trim(),joiningDate:document.getElementById('empJoiningDate').value,employmentType:document.getElementById('empEmploymentType').value,workMode:document.getElementById('empWorkMode').value,workLocation:document.getElementById('empWorkLocation').value.trim(),employmentStatus:document.getElementById('empEmploymentStatus').value,kycStatus:document.getElementById('empKycStatus').value};
+  try{
+    const out=await apiGet('addEmployee',{data:JSON.stringify(data)});
+    if(!out.success)throw new Error(out.error||'Unable to create employee');
+    closeModal('addEmployeeModal');
+    document.getElementById('addEmployeeForm').reset();
+    document.getElementById('photoPreview').innerHTML='<div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div>';
+    document.getElementById('kycFileList').innerHTML='';
+    document.getElementById('photoName').textContent='No photo selected.';
+    toast(`Person record ${out.employeeId} created.`);
+    await loadPeople();showView('people');
+  }catch(err){toast(err.message||'Unable to create person record.')}
+}
+function renderTemplates(){
+  const q=document.getElementById('templateSearch').value.trim().toLowerCase();
+  const list=TEMPLATES.filter(([n,c])=>!q||n.toLowerCase().includes(q)||c.toLowerCase().includes(q));
+  document.getElementById('templateList').innerHTML=list.map(([n,c])=>`<button type="button" class="hr-template ${state.selectedTemplate&&state.selectedTemplate.name===n?'active':''}" data-template="${esc(n)}" data-category="${esc(c)}"><strong>${esc(n)}</strong><span>${esc(c)}</span></button>`).join('');
+  document.querySelectorAll('[data-template]').forEach(b=>b.addEventListener('click',()=>{state.selectedTemplate={name:b.dataset.template,category:b.dataset.category};renderTemplates();document.getElementById('genDocMeta').textContent=state.selectedTemplate.name;document.getElementById('genCategoryMeta').textContent=state.selectedTemplate.category}));
+}
+function renderGeneratePerson(){
+  const p=state.generatePerson;
+  if(!p){document.getElementById('generatePerson').innerHTML='<div class="hr-empty">Select a person before choosing a document.</div>';document.getElementById('genPersonMeta').textContent='Not selected';return}
+  document.getElementById('generatePerson').innerHTML=`<div class="card" style="padding:15px"><strong>${esc(p.name)}</strong><div class="hr-muted" style="margin-top:5px">${esc(p.id)} &middot; ${esc(p.designation||'')}</div></div>`;
+  document.getElementById('genPersonMeta').textContent=`${p.name} (${p.id})`;
+}
+async function loadGeneratePerson(){
+  const q=document.getElementById('generateEmployee').value.trim();
+  if(!q){toast('Enter an Employee ID or name.');return}
+  try{
+    const data=await apiGet('searchEmployees',{q});
+    const first=(data.results||[])[0];
+    if(!first){document.getElementById('generatePerson').innerHTML='<div class="hr-empty">Person not found.</div>';return}
+    state.generatePerson={id:first['Employee ID'],name:first['Full Name'],designation:first['Designation']||''};
+    renderGeneratePerson();
+  }catch(e){toast('Unable to search employee register.')}
+}
+function resetAddForm(){document.getElementById('addEmployeeForm').reset();document.getElementById('empWorkLocation').value='Bhubaneswar';document.getElementById('photoPreview').innerHTML='<div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div>';document.getElementById('photoName').textContent='No photo selected.';document.getElementById('kycFileList').innerHTML=''}
+function openAddEmployee(){resetAddForm();openModal('addEmployeeModal')}
+function openAddEmployeeWithData(){
+  openAddEmployee();
+  if(state.employee){
+    const e=state.employee;
+    document.getElementById('empFullName').value=e['Full Name']||'';
+    document.getElementById('empOfficialEmail').value=e['Official Email']||'';
+    document.getElementById('empPersonalEmail').value=e['Personal Email']||'';
+    document.getElementById('empMobile').value=e['Mobile']||'';
+    document.getElementById('empDepartment').value=e['Department']||'';
+    document.getElementById('empDesignation').value=e['Designation']||'';
+    document.getElementById('empManager').value=e['Reporting Manager']||'';
+    document.getElementById('empJoiningDate').value=e['Joining Date']?new Date(e['Joining Date']).toISOString().slice(0,10):'';
+    document.getElementById('empEmploymentType').value=e['Employment Type']||'Full Time';
+    document.getElementById('empWorkMode').value=e['Work Mode']||'Office';
+    document.getElementById('empWorkLocation').value=e['Work Location']||'Bhubaneswar';
+    document.getElementById('empEmploymentStatus').value=e['Employment Status']||'Active';
+    document.getElementById('empKycStatus').value=e['KYC Status']||'Pending';
+  }
+}
+function renderDocumentsEmpty(){document.getElementById('documentsTable').innerHTML='<div class="hr-empty">Select an employee or intern to load the associated documents.</div>'}
+async function loadPersonDocuments(){
+  const q=document.getElementById('documentPerson').value.trim();
+  if(!q){toast('Enter an Employee ID or person name.');return}
+  try{
+    const data=await apiGet('searchEmployees',{q});
+    const first=(data.results||[])[0];
+    if(!first){document.getElementById('documentsTable').innerHTML='<div class="hr-empty">Person not found.</div>';return}
+    const profile=await apiGet('getEmployeeProfile',{employeeId:first['Employee ID']});
+    const docs=profile.documents||[];
+    document.getElementById('documentsTable').innerHTML=docs.length?`<div class="hr-filter-line"><div class="count">${docs.length} document(s) for ${esc(first['Full Name'])}</div></div><table class="hr-doc-table"><thead><tr><th>Type</th><th>Category</th><th>File</th><th>Status</th><th>Verification</th><th>Action</th></tr></thead><tbody>${docs.map(d=>`<tr><td>${esc(d['Document Type']||'—')}</td><td>${esc(d['Document Category']||'—')}</td><td>${esc(d['File Name']||'—')}</td><td>${esc(d['Document Status']||'—')}</td><td>${esc(d['Verification Status']||'—')}</td><td>${d['Google Drive URL']?`<a href="${esc(d['Google Drive URL'])}" target="_blank" rel="noopener">Open</a>`:'—'}</td></tr>`).join('')}</tbody></table>`:'<div class="hr-empty">No documents are recorded for this person.</div>';
+  }catch(e){toast('Unable to load documents.')}
+}
+
+/* ---------- tasks ---------- */
+async function loadTasks(){
+  const target=document.getElementById('taskBoard');
+  target.innerHTML='<div class="hr-empty"><span class="hr-loading">Loading tasks</span></div>';
+  try{
+    const data=await apiGet('listTasks',{});
+    state.tasks=data.tasks||[];
+    renderTasks(state.tasks);
+    refreshTodayStrip();
+  }catch(e){
+    target.innerHTML='<div class="hr-empty">Tasks could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+  }
+}
+function renderTasks(tasks){
+  const target=document.getElementById('taskBoard');
+  const q=document.getElementById('taskSearch').value.trim().toLowerCase();
+  const pr=document.getElementById('taskPriorityFilter').value;
+  const filtered=tasks.filter(t=>(!q||`${t.title} ${t.assignee}`.toLowerCase().includes(q))&&(!pr||t.priority===pr));
+  if(!filtered.length){target.innerHTML='<div class="hr-empty">No tasks yet. Use "+ Assign Task" to create the first one.</div>';return}
+  const cols=[['To Do','To Do'],['In Progress','In Progress'],['Done','Done']];
+  target.innerHTML=cols.map(([label,key])=>{
+    const items=filtered.filter(t=>(t.status||'To Do')===key);
+    return `<div class="hr-task-col"><h4>${esc(label)}<span>${items.length}</span></h4>${items.map(t=>{
+      const overdue=key!=='Done'&&t.dueDate&&new Date(t.dueDate)<new Date(new Date().toDateString());
+      const wa=waLink(t.mobile,`Hi ${t.assignee||''}, reminder from ORIGENNT HR: "${t.title}"${t.dueDate?` is due ${fmt(t.dueDate)}`:''}.`);
+      return `<div class="hr-task-card">
+        <div style="display:flex;justify-content:space-between;gap:8px"><strong>${esc(t.title)}</strong><span class="hr-priority ${esc(t.priority||'Medium')}">${esc(t.priority||'Medium')}</span></div>
+        ${t.details?`<p>${esc(t.details)}</p>`:''}
+        <div class="hr-task-meta ${overdue?'overdue':''}"><span class="who">${esc(t.assignee||'Unassigned')}</span><span class="due">${t.dueDate?`Due ${fmt(t.dueDate)}`:'No due date'}</span></div>
+        <div class="hr-task-actions">
+          <select data-task-id="${esc(t.id)}" class="task-status-select">
+            <option value="To Do" ${key==='To Do'?'selected':''}>To Do</option>
+            <option value="In Progress" ${key==='In Progress'?'selected':''}>In Progress</option>
+            <option value="Done" ${key==='Done'?'selected':''}>Done</option>
+          </select>
+          ${wa?`<a class="hr-btn small wa" href="${wa}" target="_blank" rel="noopener">Remind on WhatsApp</a>`:''}
+        </div>
+      </div>`;
+    }).join('')||'<div class="hr-empty" style="padding:14px">Nothing here.</div>'}</div>`;
+  }).join('');
+  target.querySelectorAll('.task-status-select').forEach(sel=>sel.addEventListener('change',()=>updateTaskStatus(sel.dataset.taskId,sel.value)));
+}
+async function updateTaskStatus(id,status){
+  try{
+    const out=await apiGet('updateTaskStatus',{id,status});
+    if(!out.success)throw new Error(out.error||'Unable to update task');
+    toast('Task updated.');
+    await loadTasks();
+  }catch(e){toast(e.message||'Unable to update task.')}
+}
+async function submitTask(e){
+  e.preventDefault();
+  const title=document.getElementById('taskTitle').value.trim();
+  if(!title){toast('Task title is required.');return}
+  const data={title,details:document.getElementById('taskDetails').value.trim(),assignee:document.getElementById('taskAssignee').value.trim(),mobile:document.getElementById('taskAssigneeMobile').value.trim(),priority:document.getElementById('taskPriority').value,dueDate:document.getElementById('taskDueDate').value,status:'To Do'};
+  try{
+    const out=await apiGet('addTask',{data:JSON.stringify(data)});
+    if(!out.success)throw new Error(out.error||'Unable to create task');
+    closeModal('addTaskModal');document.getElementById('addTaskForm').reset();
+    toast('Task assigned.');
+    await loadTasks();showView('tasks');
+    loadRecentActivity();
+  }catch(err){toast(err.message||'Unable to assign task.')}
+}
+
+/* ---------- training ---------- */
+async function loadTraining(){
+  const target=document.getElementById('trainingTable');
+  target.innerHTML='<div class="hr-empty"><span class="hr-loading">Loading training records</span></div>';
+  try{
+    const data=await apiGet('listTraining',{});
+    state.training=data.training||[];
+    renderTraining(state.training);
+  }catch(e){
+    target.innerHTML='<div class="hr-empty">Training records could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+  }
+}
+function renderTraining(list){
+  const target=document.getElementById('trainingTable');
+  const q=document.getElementById('trainingSearch').value.trim().toLowerCase();
+  const status=document.getElementById('trainingStatusFilter').value;
+  const filtered=list.filter(t=>(!q||`${t.name} ${t.employees}`.toLowerCase().includes(q))&&(!status||t.status===status));
+  if(!filtered.length){target.innerHTML='<div class="hr-empty">No training records yet. Use "+ Log Training" to add one.</div>';return}
+  target.innerHTML=`<table class="hr-reg-table"><thead><tr><th>Programme</th><th>Type</th><th>Employee(s)</th><th>Dates</th><th>Status</th><th>Certificate</th></tr></thead><tbody>${filtered.map(t=>`<tr><td><strong>${esc(t.name)}</strong><br><span class="hr-muted">${esc(t.provider||'—')}</span></td><td>${esc(t.type||'—')}</td><td>${esc(t.employees||'—')}</td><td>${fmt(t.startDate)} &rarr; ${fmt(t.endDate)}</td><td><span class="hr-status ${t.status==='Completed'?'':t.status==='Lapsed'?'exit':'pending'}">${esc(t.status||'Scheduled')}</span></td><td>${t.certLink?`<a href="${esc(t.certLink)}" target="_blank" rel="noopener">Open</a>`:'—'}</td></tr>`).join('')}</tbody></table>`;
+}
+async function submitTraining(e){
+  e.preventDefault();
+  const name=document.getElementById('trainingName').value.trim();
+  const employees=document.getElementById('trainingEmployees').value.trim();
+  if(!name||!employees){toast('Programme name and employees are required.');return}
+  const data={name,type:document.getElementById('trainingType').value,provider:document.getElementById('trainingProvider').value.trim(),employees,status:document.getElementById('trainingStatus').value,startDate:document.getElementById('trainingStart').value,endDate:document.getElementById('trainingEnd').value,certLink:document.getElementById('trainingCertLink').value.trim()};
+  try{
+    const out=await apiGet('addTraining',{data:JSON.stringify(data)});
+    if(!out.success)throw new Error(out.error||'Unable to save training record');
+    closeModal('addTrainingModal');document.getElementById('addTrainingForm').reset();
+    toast('Training record saved.');
+    await loadTraining();showView('training');
+    loadRecentActivity();
+  }catch(err){toast(err.message||'Unable to save training record.')}
+}
+
+/* ---------- MPR ---------- */
+async function loadMpr(){
+  const target=document.getElementById('mprTable');
+  target.innerHTML='<div class="hr-empty"><span class="hr-loading">Loading MPRs</span></div>';
+  try{
+    const data=await apiGet('listMpr',{});
+    state.mpr=data.mpr||[];
+    renderMpr(state.mpr);
+    refreshTodayStrip();
+  }catch(e){
+    target.innerHTML='<div class="hr-empty">MPRs could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+  }
+}
+function renderMpr(list){
+  const target=document.getElementById('mprTable');
+  const month=document.getElementById('mprMonthFilter').value;
+  const status=document.getElementById('mprStatusFilter').value;
+  const filtered=list.filter(m=>(!month||m.month===month)&&(!status||m.status===status));
+  if(!filtered.length){target.innerHTML='<div class="hr-empty">No MPRs logged yet. Use "+ Log MPR" to compile the first one.</div>';return}
+  target.innerHTML=`<table class="hr-reg-table"><thead><tr><th>Employee</th><th>Month</th><th>Achievements</th><th>Rating</th><th>Status</th></tr></thead><tbody>${filtered.map(m=>`<tr><td><strong>${esc(m.employee)}</strong></td><td>${esc(m.month)}</td><td>${esc((m.achievements||'').slice(0,120))}${(m.achievements||'').length>120?'…':''}</td><td>${m.rating?`${esc(m.rating)}/5`:'—'}</td><td><span class="hr-status ${m.status==='Approved'?'':m.status==='Draft'?'pending':'info'}">${esc(m.status||'Draft')}</span></td></tr>`).join('')}</tbody></table>`;
+}
+async function submitMpr(e){
+  e.preventDefault();
+  const employee=document.getElementById('mprEmployee').value.trim();
+  const month=document.getElementById('mprMonth').value;
+  const achievements=document.getElementById('mprAchievements').value.trim();
+  if(!employee||!month||!achievements){toast('Employee, month and achievements are required.');return}
+  const data={employee,month,achievements,targets:document.getElementById('mprTargets').value.trim(),rating:document.getElementById('mprRating').value,status:document.getElementById('mprStatus').value};
+  try{
+    const out=await apiGet('addMpr',{data:JSON.stringify(data)});
+    if(!out.success)throw new Error(out.error||'Unable to save MPR');
+    closeModal('addMprModal');document.getElementById('addMprForm').reset();
+    toast('MPR saved.');
+    await loadMpr();showView('mpr');
+    loadRecentActivity();
+  }catch(err){toast(err.message||'Unable to save MPR.')}
+}
+
+/* ---------- appointments ---------- */
+async function loadAppointments(){
+  const target=document.getElementById('appointmentsTable');
+  target.innerHTML='<div class="hr-empty"><span class="hr-loading">Loading appointments</span></div>';
+  try{
+    const data=await apiGet('listAppointments',{});
+    state.appointments=data.appointments||[];
+    renderAppointments(state.appointments);
+    refreshTodayStrip();
+  }catch(e){
+    target.innerHTML='<div class="hr-empty">Appointments could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
+  }
+}
+function renderAppointments(list){
+  const target=document.getElementById('appointmentsTable');
+  if(!list.length){target.innerHTML='<div class="hr-empty">No appointments booked yet. Use "+ Book Appointment" to add one.</div>';return}
+  const sorted=[...list].sort((a,b)=>new Date(`${a.date}T${a.startTime||'00:00'}`)-new Date(`${b.date}T${b.startTime||'00:00'}`));
+  target.innerHTML=`<table class="hr-reg-table"><thead><tr><th>Title</th><th>With</th><th>Type</th><th>When</th><th>Calendar</th></tr></thead><tbody>${sorted.map(a=>`<tr><td><strong>${esc(a.title)}</strong>${a.location?`<br><span class="hr-muted">${esc(a.location)}</span>`:''}</td><td>${esc(a.with||'—')}</td><td>${esc(a.type||'—')}</td><td>${fmt(a.date)} &middot; ${esc(a.startTime||'')}${a.endTime?`&ndash;${esc(a.endTime)}`:''}</td><td><a href="${gcalLink(a)}" target="_blank" rel="noopener">Add to Google Calendar</a></td></tr>`).join('')}</tbody></table>`;
+}
+async function submitAppointment(e){
+  e.preventDefault();
+  const title=document.getElementById('apptTitle').value.trim();
+  const date=document.getElementById('apptDate').value;
+  const startTime=document.getElementById('apptStart').value;
+  if(!title||!date||!startTime){toast('Title, date and start time are required.');return}
+  const data={title,with:document.getElementById('apptWith').value.trim(),type:document.getElementById('apptType').value,date,startTime,endTime:document.getElementById('apptEnd').value,location:document.getElementById('apptLocation').value.trim(),notes:document.getElementById('apptNotes').value.trim()};
+  try{
+    const out=await apiGet('bookAppointment',{data:JSON.stringify(data)});
+    if(!out.success)throw new Error(out.error||'Unable to book appointment');
+    closeModal('addAppointmentModal');document.getElementById('addAppointmentForm').reset();
+    toast(out.calendarEventUrl?'Appointment booked and added to Google Calendar.':'Appointment saved.');
+    await loadAppointments();showView('appointments');
+    loadRecentActivity();
+  }catch(err){
+    toast('Backend not connected — saving locally isn\'t possible yet. Use "Add to Google Calendar" on the appointment once listed, or connect HR_BACKEND_URL.');
+  }
+}
+
+/* ---------- analytics ---------- */
+const CHART_INSTANCES={};
+function drawChart(id,config){
+  if(typeof Chart==='undefined'){setTimeout(()=>drawChart(id,config),250);return}
+  const el=document.getElementById(id);if(!el)return;
+  if(CHART_INSTANCES[id])CHART_INSTANCES[id].destroy();
+  CHART_INSTANCES[id]=new Chart(el,config);
+}
+function countBy(list,fn){const m={};list.forEach(x=>{const k=fn(x)||'—';m[k]=(m[k]||0)+1});return m}
+function renderAnalytics(){
+  const byDept=countBy(state.people,p=>p['Department']);
+  drawChart('chartDept',{type:'bar',data:{labels:Object.keys(byDept),datasets:[{label:'People',data:Object.values(byDept),backgroundColor:'#C4102A'}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
+
+  const byType=countBy(state.people,p=>p['Employment Type']||'Unspecified');
+  drawChart('chartEmpType',{type:'doughnut',data:{labels:Object.keys(byType),datasets:[{data:Object.values(byType),backgroundColor:['#1B1C1E','#C4102A','#215FA6','#1E7A46','#9A6400']}]}});
+
+  const byTaskStatus=countBy(state.tasks,t=>t.status||'To Do');
+  drawChart('chartTasks',{type:'bar',data:{labels:Object.keys(byTaskStatus),datasets:[{label:'Tasks',data:Object.values(byTaskStatus),backgroundColor:'#215FA6'}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}}}}});
+
+  const byRating=countBy(state.mpr.filter(m=>m.rating),m=>`${m.rating}/5`);
+  drawChart('chartMpr',{type:'bar',data:{labels:Object.keys(byRating),datasets:[{label:'MPRs',data:Object.values(byRating),backgroundColor:'#1E7A46'}]},options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
+
+  const compRows=state.compliance.length?state.compliance:COMPLIANCE_RULES.map(r=>({...r,status:complianceStatus(nextOccurrence(r))}));
+  const byComp=countBy(compRows,r=>r.status==='overdue'?'Overdue':r.status==='soon'?'Due soon':r.status==='ongoing'?'Ongoing':'On track');
+  drawChart('chartCompliance',{type:'bar',data:{labels:Object.keys(byComp),datasets:[{label:'Filings',data:Object.values(byComp),backgroundColor:['#C4102A','#9A6400','#63666B','#1E7A46']}]},options:{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,ticks:{precision:0}}}}});
+}
+
+/* ---------- auth gate (Google Sign-In, ORIGENNT Workspace) ---------- */
+const AUTH_ALLOWED_DOMAIN='origennt.com';
+const GOOGLE_CLIENT_ID='REPLACE_WITH_YOUR_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com';
+function parseJwt(token){try{return JSON.parse(atob(token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')))}catch(e){return null}}
+function onGoogleSignIn(resp){
+  const payload=parseJwt(resp.credential);
+  if(!payload||!payload.email||!String(payload.email).toLowerCase().endsWith('@'+AUTH_ALLOWED_DOMAIN)){
+    toast('Access is restricted to @'+AUTH_ALLOWED_DOMAIN+' accounts.');
+    return;
+  }
+  state.userName=payload.name||payload.email;
+  sessionStorage.setItem('origennt_hr_session',JSON.stringify({email:payload.email,name:payload.name,signedInAt:Date.now()}));
+  /* Send the raw ID token to your server (e.g. a Vercel /api/auth/verify route) so it can
+     verify the signature with Google's certs and set a secure httpOnly session cookie.
+     Client-side domain checks alone are NOT sufficient security — see SECURITY.md. */
+  fetch('/api/auth/verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({credential:resp.credential})}).catch(()=>{});
+  document.getElementById('authGate').style.display='none';
+  setGreeting();
+}
+function devBypassAuth(){
+  sessionStorage.setItem('origennt_hr_session',JSON.stringify({email:'preview@origennt.com',name:'Preview User',signedInAt:Date.now(),dev:true}));
+  document.getElementById('authGate').style.display='none';
+  setGreeting();
+}
+function signOut(){sessionStorage.removeItem('origennt_hr_session');location.reload()}
+function checkSession(){
+  const raw=sessionStorage.getItem('origennt_hr_session');
+  if(!raw)return false;
+  try{
+    const s=JSON.parse(raw);
+    if(Date.now()-s.signedInAt>1000*60*60*8)return false; /* 8-hour session */
+    state.userName=s.name;
+    return true;
+  }catch(e){return false}
+}
+let inactivityTimer;
+function resetInactivityTimer(){clearTimeout(inactivityTimer);inactivityTimer=setTimeout(()=>{toast('Session expired due to inactivity.');signOut()},1000*60*20)}
+['click','keydown','mousemove'].forEach(ev=>document.addEventListener(ev,resetInactivityTimer));
+if(checkSession()){document.getElementById('authGate').style.display='none'}
+else if(typeof google!=='undefined'&&google.accounts){}
+window.addEventListener('load',()=>{
+  if(checkSession())return;
+  try{
+    google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:onGoogleSignIn,hd:AUTH_ALLOWED_DOMAIN});
+    google.accounts.id.renderButton(document.getElementById('gsiBtnHolder'),{theme:'filled_black',size:'large',text:'signin_with'});
+  }catch(e){/* GSI script blocked/offline — the manual preview button still works */}
+});
+
+/* ---------- wiring ---------- */
+document.getElementById('peopleSearch').addEventListener('input',()=>renderPeople(state.people));
+document.getElementById('peopleStatus').addEventListener('change',()=>renderPeople(state.people));
+document.getElementById('peopleDepartment').addEventListener('change',()=>renderPeople(state.people));
+document.getElementById('peopleEmpType').addEventListener('change',()=>renderPeople(state.people));
+document.getElementById('refreshPeople').addEventListener('click',loadPeople);
+
+document.getElementById('addEmployeeBtn').addEventListener('click',openAddEmployee);
+document.getElementById('addEmployeeBtn2').addEventListener('click',openAddEmployee);
+document.getElementById('addEmployeeBtn2b').addEventListener('click',openAddEmployee);
+document.getElementById('addEmployeeForm').addEventListener('submit',submitEmployee);
+document.getElementById('employeePhoto').addEventListener('change',previewPhoto);
+document.getElementById('kycFiles').addEventListener('change',showKycFiles);
+document.querySelectorAll('[data-close-modal]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.closeModal)));
+document.getElementById('closeProfile').addEventListener('click',()=>document.getElementById('employee-record').classList.add('hr-hidden'));
+
+document.getElementById('generateBtn').addEventListener('click',()=>showView('generate'));
+document.getElementById('loadGenerateEmployee').addEventListener('click',loadGeneratePerson);
+document.getElementById('templateSearch').addEventListener('input',renderTemplates);
+document.getElementById('generateDocumentAction').addEventListener('click',()=>{if(!state.generatePerson){toast('Select a person first.');return}if(!state.selectedTemplate){toast('Select a document template first.');return}toast('Template route is ready to connect to the document-generation backend.')});
+
+document.getElementById('loadPersonDocuments').addEventListener('click',loadPersonDocuments);
+document.getElementById('refreshActivity').addEventListener('click',loadRecentActivity);
+document.getElementById('startExitBtn').addEventListener('click',()=>document.getElementById('exitEmployeeId').focus());
+document.getElementById('saveExitBtn').addEventListener('click',()=>toast('Exit workflow UI is ready; the EMPLOYEE EXIT backend route connects next.'));
+document.getElementById('addCandidateBtn').addEventListener('click',()=>toast('Candidate creation connects to the CANDIDATES backend module.'));
+document.getElementById('candidateSearchBtn').addEventListener('click',()=>toast('Candidate search connects to the CANDIDATES backend module.'));
+
+document.getElementById('addTaskBtn').addEventListener('click',()=>openModal('addTaskModal'));
+document.getElementById('addTaskBtnHeader').addEventListener('click',()=>{showView('tasks');openModal('addTaskModal')});
+document.getElementById('addTaskForm').addEventListener('submit',submitTask);
+document.getElementById('taskSearch').addEventListener('input',()=>renderTasks(state.tasks));
+document.getElementById('taskPriorityFilter').addEventListener('change',()=>renderTasks(state.tasks));
+document.getElementById('refreshTasks').addEventListener('click',loadTasks);
+
+document.getElementById('addTrainingBtn').addEventListener('click',()=>openModal('addTrainingModal'));
+document.getElementById('addTrainingForm').addEventListener('submit',submitTraining);
+document.getElementById('trainingSearch').addEventListener('input',()=>renderTraining(state.training));
+document.getElementById('trainingStatusFilter').addEventListener('change',()=>renderTraining(state.training));
+document.getElementById('refreshTraining').addEventListener('click',loadTraining);
+
+document.getElementById('addMprBtn').addEventListener('click',()=>openModal('addMprModal'));
+document.getElementById('addMprForm').addEventListener('submit',submitMpr);
+document.getElementById('mprMonthFilter').addEventListener('change',()=>renderMpr(state.mpr));
+document.getElementById('mprStatusFilter').addEventListener('change',()=>renderMpr(state.mpr));
+document.getElementById('refreshMpr').addEventListener('click',loadMpr);
+
+document.getElementById('addAppointmentBtn').addEventListener('click',()=>openModal('addAppointmentModal'));
+document.getElementById('addAppointmentForm').addEventListener('submit',submitAppointment);
+document.getElementById('refreshAppointments').addEventListener('click',loadAppointments);
+
+document.querySelectorAll('.hr-nav button[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+document.getElementById('signOutBtn').addEventListener('click',signOut);
+document.getElementById('sendWaDigestBtn').addEventListener('click',()=>window.open(`https://wa.me/?text=${encodeURIComponent(buildDailyDigestText())}`,'_blank'));
+document.getElementById('refreshCompliance').addEventListener('click',renderCompliance);
+document.getElementById('waComplianceBtn').addEventListener('click',waComplianceDigest);
+
+setGreeting();
+renderTemplates();
+renderCompliance();
+loadPeople();
+loadRecentActivity();
+loadTasks();
+loadMpr();
+loadAppointments();
+</script>
+</body></html>
