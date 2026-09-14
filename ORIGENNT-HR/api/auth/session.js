@@ -1,6 +1,6 @@
 const { getSession } = require('../_lib/session');
 
-export default function handler(req, res) {
+function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({
       success: false,
@@ -48,3 +48,5 @@ export default function handler(req, res) {
     });
   }
 }
+
+module.exports = handler;
