@@ -1,7 +1,6 @@
-
 const { buildClearCookie } = require('../_lib/session');
 
-export default function handler(req, res) {
+function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
@@ -19,3 +18,5 @@ export default function handler(req, res) {
     message: 'Signed out.'
   });
 }
+
+module.exports = handler;
