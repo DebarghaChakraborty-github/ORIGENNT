@@ -66,7 +66,9 @@ function parseCookies(req) {
     const key = part.slice(0, index).trim();
     const value = part.slice(index + 1).trim();
 
-    if (key) cookies[key] = decodeURIComponent(value);
+    if (key) {
+      cookies[key] = decodeURIComponent(value);
+    }
   });
 
   return cookies;
@@ -122,21 +124,29 @@ function issueSession(res, user, secret) {
 }
 
 function isAuthorisedEmail(email) {
-  const allowed = String(process.env.HR_ALLOWED_EMAILS || '')
+  const allowed = String(
+    process.env.HR_ALLOWED_EMAILS || ''
+  )
     .split(',')
     .map(value => value.trim().toLowerCase())
     .filter(Boolean);
 
-  return allowed.includes(String(email || '').trim().toLowerCase());
+  return allowed.includes(
+    String(email || '').trim().toLowerCase()
+  );
 }
 
 function getRole(email) {
-  const admins = String(process.env.HR_ADMIN_EMAILS || '')
+  const admins = String(
+    process.env.HR_ADMIN_EMAILS || ''
+  )
     .split(',')
     .map(value => value.trim().toLowerCase())
     .filter(Boolean);
 
-  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const normalizedEmail = String(email || '')
+    .trim()
+    .toLowerCase();
 
   return admins.includes(normalizedEmail)
     ? 'admin'
