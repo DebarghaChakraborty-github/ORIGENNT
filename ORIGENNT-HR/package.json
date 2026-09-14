@@ -1,0 +1,8 @@
+{
+  "name": "origennt-hr",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "google-auth-library": "^9.15.0"
+  }
+}
