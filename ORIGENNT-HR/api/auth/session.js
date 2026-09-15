@@ -1,8 +1,11 @@
-import { getSession } from "../_lib/session.js";
+const { getSession } = require("../_lib/session");
 
-export default function handler(req, res) {
+function handler(req, res) {
   if (req.method !== "GET") {
-    return res.status(405).json({ success: false, error: "Method not allowed." });
+    return res.status(405).json({
+      success: false,
+      error: "Method not allowed."
+    });
   }
 
   try {
@@ -34,7 +37,7 @@ export default function handler(req, res) {
         email: session.email || "",
         role: session.role || "hr"
       },
-      redirect: "/"
+      redirect: "/index.html"
     });
   } catch (error) {
     console.error("ORIGENNT HR session error:", error);
@@ -45,3 +48,5 @@ export default function handler(req, res) {
     });
   }
 }
+
+module.exports = handler;
