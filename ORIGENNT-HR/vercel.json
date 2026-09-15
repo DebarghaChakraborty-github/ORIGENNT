@@ -21,7 +21,7 @@
       ]
     },
     {
-      "source": "/index.html",
+      "source": "/admin.html",
       "headers": [
         {
           "key": "Cache-Control",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "source": "/admin.html",
+      "source": "/index.html",
       "headers": [
         {
           "key": "Cache-Control",
