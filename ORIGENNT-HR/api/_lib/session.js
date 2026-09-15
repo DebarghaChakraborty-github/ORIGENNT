@@ -9,7 +9,10 @@ function base64urlEncode(value) {
 
 function signPayload(payload, secret) {
   const body = base64urlEncode(JSON.stringify(payload));
-  const signature = crypto.createHmac("sha256", secret).update(body).digest("base64url");
+  const signature = crypto
+    .createHmac("sha256", secret)
+    .update(body)
+    .digest("base64url");
   return `${body}.${signature}`;
 }
 
@@ -20,7 +23,10 @@ function verifyToken(token, secret) {
   if (parts.length !== 2) return null;
 
   const [body, signature] = parts;
-  const expected = crypto.createHmac("sha256", secret).update(body).digest("base64url");
+  const expected = crypto
+    .createHmac("sha256", secret)
+    .update(body)
+    .digest("base64url");
 
   if (
     signature.length !== expected.length ||
@@ -30,7 +36,10 @@ function verifyToken(token, secret) {
   }
 
   try {
-    const payload = JSON.parse(Buffer.from(body, "base64url").toString("utf8"));
+    const payload = JSON.parse(
+      Buffer.from(body, "base64url").toString("utf8")
+    );
+
     if (!payload.exp || payload.exp <= Date.now()) return null;
     return payload;
   } catch {
@@ -89,7 +98,10 @@ function buildClearCookie() {
 
 function issueSession(res, user) {
   const secret = String(process.env.HR_SESSION_SECRET || "").trim();
-  if (!secret) throw new Error("HR session security is not configured.");
+
+  if (!secret) {
+    throw new Error("HR session security is not configured.");
+  }
 
   const now = Date.now();
 
@@ -103,7 +115,9 @@ function issueSession(res, user) {
     exp: now + SESSION_TTL_SECONDS * 1000
   };
 
-  res.setHeader("Set-Cookie", buildSessionCookie(signPayload(payload, secret)));
+  const token = signPayload(payload, secret);
+  res.setHeader("Set-Cookie", buildSessionCookie(token));
+
   return payload;
 }
 
