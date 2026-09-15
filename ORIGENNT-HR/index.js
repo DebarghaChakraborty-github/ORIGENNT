@@ -1,65 +1,213 @@
-/* Point this at your deployed Apps Script Web App exec URL (see the companion
-   Code.gs + SETUP.md). Until then, network calls below fail gracefully and
-   the UI stays usable for layout/testing. */
+/* ORIGENNT HR — People Operations Frontend */
+
 const HR_BACKEND_URL='/api/hr';
 const GOOGLE_CLIENT_ID='576893667298-kj24mmsvo88id0pp5r1teu256rc1mla4.apps.googleusercontent.com';
 
-const state={currentView:'dashboard',employee:null,people:[],tasks:[],training:[],mpr:[],appointments:[],compliance:[],selectedTemplate:null,generatePerson:null};
+const state={
+  currentView:'dashboard',
+  employee:null,
+  people:[],
+  tasks:[],
+  training:[],
+  mpr:[],
+  appointments:[],
+  compliance:[],
+  selectedTemplate:null,
+  generatePerson:null,
+  userName:'',
+  userEmail:'',
+  userRole:'hr'
+};
 
-/* ---------- daily quote (deterministic — same quote all day, changes at midnight) ---------- */
+/* ---------- daily quote ---------- */
+
 const QUOTES=[
- ["Discipline is the bridge between goals and accomplishment.","Jim Rohn"],
- ["Quality is not an act, it is a habit.","Aristotle"],
- ["What gets measured gets managed.","Peter Drucker"],
- ["The way to get started is to quit talking and begin doing.","Walt Disney"],
- ["Excellence is never an accident; it is the result of high intention and sincere effort.","Aristotle"],
- ["Culture eats strategy for breakfast.","Peter Drucker"],
- ["Small disciplines repeated with consistency lead to great achievements.","John C. Maxwell"],
- ["Trust is built with consistency.","Lincoln Chafee"],
- ["People rarely succeed unless they have fun in what they are doing.","Dale Carnegie"],
- ["Efficiency is doing things right; effectiveness is doing the right things.","Peter Drucker"],
- ["The strength of the team is each individual member.","Phil Jackson"],
- ["Good process brings good results.","W. Edwards Deming"],
- ["It is not the strongest that survive, but the most adaptable to change.","Charles Darwin"],
- ["Do the hard jobs first. The easy jobs will take care of themselves.","Dale Carnegie"],
- ["A goal without a plan is just a wish.","Antoine de Saint-Exupéry"],
- ["Compliance is not a cost centre; it is the cost of staying in business.","Anonymous"],
- ["Details create the big picture.","Sanford I. Weill"],
- ["Systems run the business and people run the systems.","Michael Gerber"],
- ["You cannot manage what you do not measure.","W. Edwards Deming"],
- ["Well done is better than well said.","Benjamin Franklin"]
+  ["Discipline is the bridge between goals and accomplishment.","Jim Rohn"],
+  ["Quality is not an act, it is a habit.","Aristotle"],
+  ["What gets measured gets managed.","Peter Drucker"],
+  ["The way to get started is to quit talking and begin doing.","Walt Disney"],
+  ["Excellence is never an accident; it is the result of high intention and sincere effort.","Aristotle"],
+  ["Culture eats strategy for breakfast.","Peter Drucker"],
+  ["Small disciplines repeated with consistency lead to great achievements.","John C. Maxwell"],
+  ["Trust is built with consistency.","Lincoln Chafee"],
+  ["People rarely succeed unless they have fun in what they are doing.","Dale Carnegie"],
+  ["Efficiency is doing things right; effectiveness is doing the right things.","Peter Drucker"],
+  ["The strength of the team is each individual member.","Phil Jackson"],
+  ["Good process brings good results.","W. Edwards Deming"],
+  ["It is not the strongest that survive, but the most adaptable to change.","Charles Darwin"],
+  ["Do the hard jobs first. The easy jobs will take care of themselves.","Dale Carnegie"],
+  ["A goal without a plan is just a wish.","Antoine de Saint-Exupéry"],
+  ["Compliance is not a cost centre; it is the cost of staying in business.","Anonymous"],
+  ["Details create the big picture.","Sanford I. Weill"],
+  ["Systems run the business and people run the systems.","Michael Gerber"],
+  ["You cannot manage what you do not measure.","W. Edwards Deming"],
+  ["Well done is better than well said.","Benjamin Franklin"]
 ];
 
 function dayOfYear(d){
   const start=new Date(d.getFullYear(),0,0);
-  return Math.floor((d-start)/864e5)
+  return Math.floor((d-start)/864e5);
 }
 
 function renderDailyQuote(){
   const idx=dayOfYear(new Date())%QUOTES.length;
-  document.getElementById('dailyQuote').textContent=`"${QUOTES[idx][0]}"`;
-  document.getElementById('dailyQuoteAuthor').textContent=`— ${QUOTES[idx][1]}`;
+
+  const quote=document.getElementById('dailyQuote');
+  const author=document.getElementById('dailyQuoteAuthor');
+
+  if(quote)quote.textContent=`"${QUOTES[idx][0]}"`;
+  if(author)author.textContent=`— ${QUOTES[idx][1]}`;
 }
 
-/* ---------- compliance calendar (central-government statutory obligations) ---------- */
+/* ---------- compliance ---------- */
+
 const COMPLIANCE_RULES=[
- {name:'EPF — ECR filing & payment',cat:'EPFO',freq:'Monthly',rule:'day',day:15,note:'Electronic Challan-cum-Return for the previous wage month, filed on the EPFO Unified Portal.'},
- {name:'ESIC — Contribution payment',cat:'ESIC',freq:'Monthly',rule:'day',day:15,note:'Employee State Insurance contribution challan for the previous wage month.'},
- {name:'TDS on salary — deposit',cat:'Income Tax',freq:'Monthly',rule:'day',day:7,note:'Tax deducted at source on salary (Sec 192) deposited by the 7th of the following month.'},
- {name:'TDS return — Form 138 (formerly 24Q), Q1',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:7,day:31,note:'Salary TDS quarterly statement for Apr–Jun.'},
- {name:'TDS return — Form 138, Q2',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:10,day:31,note:'Salary TDS quarterly statement for Jul–Sep.'},
- {name:'TDS return — Form 138, Q3',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:1,day:31,note:'Salary TDS quarterly statement for Oct–Dec.'},
- {name:'TDS return — Form 138, Q4 + Form 16 issuance',cat:'Income Tax',freq:'Quarterly',rule:'fixed',month:5,day:31,note:'Salary TDS quarterly statement for Jan–Mar; annual salary certificate (Form 16/Form 130) to employees by 15 June.'},
- {name:'EPF Annual Return — Form 3A / Form 6A',cat:'EPFO',freq:'Annual',rule:'fixed',month:4,day:30,note:'Consolidated annual PF statement for the financial year just ended.'},
- {name:'ESIC Half-Yearly Return',cat:'ESIC',freq:'Half-yearly',rule:'halfyear',day1:{month:5,day:11},day2:{month:11,day:11},note:'Half-yearly contribution return — periods Apr–Sep and Oct–Mar.'},
- {name:'Professional Tax — Odisha monthly payment',cat:'State PT',freq:'Monthly',rule:'lastday',note:'Odisha PT deducted from employees remitted by the last day of the month.'},
- {name:'Professional Tax — Annual enrolment renewal',cat:'State PT',freq:'Annual',rule:'fixed',month:4,day:30,note:'Employer PT enrolment renewal / annual return.'},
- {name:'POSH — Annual Report (Internal Committee)',cat:'POSH',freq:'Annual',rule:'fixed',month:1,day:31,note:'Annual report on sexual harassment complaints to the employer/District Officer under the POSH Act.'},
- {name:'Payment of Bonus — Bonus Act',cat:'Labour',freq:'Annual',rule:'fixed',month:11,day:30,note:'Statutory bonus to be paid within 8 months of the close of the accounting year.'},
- {name:'Shops & Establishment — Registration renewal',cat:'State Labour',freq:'Annual',rule:'fixed',month:3,day:31,note:'Renew Odisha Shops & Commercial Establishments registration ahead of expiry — confirm exact renewal date against the certificate issued.'},
- {name:'ROC — AOC-4 (Financial Statements)',cat:'MCA/ROC',freq:'Annual',rule:'fixed',month:10,day:30,note:'File financial statements within 30 days of AGM (assumes AGM by 30 Sep for FY ending 31 Mar).'},
- {name:'ROC — MGT-7A (Annual Return, small company)',cat:'MCA/ROC',freq:'Annual',rule:'fixed',month:11,day:29,note:'File annual return within 60 days of AGM.'},
- {name:'Gratuity — Payment on eligibility',cat:'Labour',freq:'As triggered',rule:'ongoing',note:'Payable within 30 days of it becoming due (resignation/retirement/termination after 5 years\' service).'},
+  {
+    name:'EPF — ECR filing & payment',
+    cat:'EPFO',
+    freq:'Monthly',
+    rule:'day',
+    day:15,
+    note:'Electronic Challan-cum-Return for the previous wage month, filed on the EPFO Unified Portal.'
+  },
+  {
+    name:'ESIC — Contribution payment',
+    cat:'ESIC',
+    freq:'Monthly',
+    rule:'day',
+    day:15,
+    note:'Employee State Insurance contribution challan for the previous wage month.'
+  },
+  {
+    name:'TDS on salary — deposit',
+    cat:'Income Tax',
+    freq:'Monthly',
+    rule:'day',
+    day:7,
+    note:'Tax deducted at source on salary deposited by the 7th of the following month.'
+  },
+  {
+    name:'TDS return — Q1',
+    cat:'Income Tax',
+    freq:'Quarterly',
+    rule:'fixed',
+    month:7,
+    day:31,
+    note:'Salary TDS quarterly statement for Apr–Jun.'
+  },
+  {
+    name:'TDS return — Q2',
+    cat:'Income Tax',
+    freq:'Quarterly',
+    rule:'fixed',
+    month:10,
+    day:31,
+    note:'Salary TDS quarterly statement for Jul–Sep.'
+  },
+  {
+    name:'TDS return — Q3',
+    cat:'Income Tax',
+    freq:'Quarterly',
+    rule:'fixed',
+    month:1,
+    day:31,
+    note:'Salary TDS quarterly statement for Oct–Dec.'
+  },
+  {
+    name:'TDS return — Q4 + Form 16 issuance',
+    cat:'Income Tax',
+    freq:'Quarterly',
+    rule:'fixed',
+    month:5,
+    day:31,
+    note:'Salary TDS quarterly statement for Jan–Mar.'
+  },
+  {
+    name:'EPF Annual Return',
+    cat:'EPFO',
+    freq:'Annual',
+    rule:'fixed',
+    month:4,
+    day:30,
+    note:'Consolidated annual PF statement for the financial year just ended.'
+  },
+  {
+    name:'ESIC Half-Yearly Return',
+    cat:'ESIC',
+    freq:'Half-yearly',
+    rule:'halfyear',
+    day1:{month:5,day:11},
+    day2:{month:11,day:11},
+    note:'Half-yearly contribution return.'
+  },
+  {
+    name:'Professional Tax — Odisha monthly payment',
+    cat:'State PT',
+    freq:'Monthly',
+    rule:'lastday',
+    note:'Odisha PT deducted from employees remitted by the last day of the month.'
+  },
+  {
+    name:'Professional Tax — Annual renewal',
+    cat:'State PT',
+    freq:'Annual',
+    rule:'fixed',
+    month:4,
+    day:30,
+    note:'Employer PT enrolment renewal / annual return.'
+  },
+  {
+    name:'POSH — Annual Report',
+    cat:'POSH',
+    freq:'Annual',
+    rule:'fixed',
+    month:1,
+    day:31,
+    note:'Annual report under the POSH framework.'
+  },
+  {
+    name:'Payment of Bonus',
+    cat:'Labour',
+    freq:'Annual',
+    rule:'fixed',
+    month:11,
+    day:30,
+    note:'Statutory bonus compliance.'
+  },
+  {
+    name:'Shops & Establishment — Registration renewal',
+    cat:'State Labour',
+    freq:'Annual',
+    rule:'fixed',
+    month:3,
+    day:31,
+    note:'Confirm exact renewal date against the certificate issued.'
+  },
+  {
+    name:'ROC — AOC-4',
+    cat:'MCA/ROC',
+    freq:'Annual',
+    rule:'fixed',
+    month:10,
+    day:30,
+    note:'Financial statements filing.'
+  },
+  {
+    name:'ROC — MGT-7A',
+    cat:'MCA/ROC',
+    freq:'Annual',
+    rule:'fixed',
+    month:11,
+    day:29,
+    note:'Annual return filing.'
+  },
+  {
+    name:'Gratuity — Payment on eligibility',
+    cat:'Labour',
+    freq:'As triggered',
+    rule:'ongoing',
+    note:'Triggered statutory payment.'
+  }
 ];
 
 function nextOccurrence(rule){
@@ -68,9 +216,9 @@ function nextOccurrence(rule){
   const cands=[];
 
   if(rule.rule==='day'){
-    for(const dy of[y,y+1]){
-      for(let m=0;m<12;m++){
-        cands.push(new Date(dy,m,rule.day));
+    for(const year of [y,y+1]){
+      for(let month=0;month<12;month++){
+        cands.push(new Date(year,month,rule.day));
       }
     }
   }else if(rule.rule==='fixed'){
@@ -79,31 +227,32 @@ function nextOccurrence(rule){
       new Date(y+1,rule.month-1,rule.day)
     );
   }else if(rule.rule==='halfyear'){
-    for(const dy of[y,y+1]){
+    for(const year of [y,y+1]){
       cands.push(
-        new Date(dy,rule.day1.month-1,rule.day1.day),
-        new Date(dy,rule.day2.month-1,rule.day2.day)
+        new Date(year,rule.day1.month-1,rule.day1.day),
+        new Date(year,rule.day2.month-1,rule.day2.day)
       );
     }
   }else if(rule.rule==='lastday'){
-    for(const dy of[y,y+1]){
-      for(let m=0;m<12;m++){
-        cands.push(new Date(dy,m+1,0));
+    for(const year of [y,y+1]){
+      for(let month=0;month<12;month++){
+        cands.push(new Date(year,month+1,0));
       }
     }
   }else{
-    return null
+    return null;
   }
 
-  const future=cands
-    .filter(d=>d>=new Date(now.toDateString()))
-    .sort((a,b)=>a-b);
+  const startOfToday=new Date(now.toDateString());
 
-  return future[0]||null;
+  return cands
+    .filter(d=>d>=startOfToday)
+    .sort((a,b)=>a-b)[0]||null;
 }
 
 function complianceStatus(dueDate){
   if(!dueDate)return'ongoing';
+
   const days=Math.ceil(
     (dueDate-new Date(new Date().toDateString()))/864e5
   );
@@ -116,17 +265,24 @@ function complianceStatus(dueDate){
 function renderCompliance(){
   const target=document.getElementById('complianceTable');
 
-  const rows=COMPLIANCE_RULES.map(r=>{
-    const due=nextOccurrence(r);
-    return{...r,due,status:complianceStatus(due)};
+  if(!target)return;
+
+  const rows=COMPLIANCE_RULES.map(rule=>{
+    const due=nextOccurrence(rule);
+
+    return{
+      ...rule,
+      due,
+      status:complianceStatus(due)
+    };
   });
 
   state.compliance=rows;
 
   rows.sort(
     (a,b)=>
-      (a.due?a.due:new Date(8640000000000000))-
-      (b.due?b.due:new Date(8640000000000000))
+      (a.due||new Date(8640000000000000))-
+      (b.due||new Date(8640000000000000))
   );
 
   target.innerHTML=`
@@ -172,7 +328,8 @@ function renderCompliance(){
           </tr>
         `).join('')}
       </tbody>
-    </table>`;
+    </table>
+  `;
 
   refreshTodayStrip();
 }
@@ -186,9 +343,10 @@ function waComplianceDigest(){
     .map(r=>`• ${r.name} — due ${r.due?fmt(r.due):'—'}`)
     .join('\n');
 
-  const text=`ORIGENNT HR — Compliance items needing attention:\n${
-    lines||'Nothing due in the next 7 days.'
-  }`;
+  const text=
+    `ORIGENNT HR — Compliance items needing attention:\n${
+      lines||'Nothing due in the next 7 days.'
+    }`;
 
   window.open(
     `https://wa.me/?text=${encodeURIComponent(text)}`,
@@ -230,221 +388,232 @@ function buildDailyDigestText(){
     r=>r.status==='overdue'||r.status==='soon'
   );
 
-  let t=`*ORIGENNT HR — Daily Digest*\n${today}\n\n`;
+  let text=`*ORIGENNT HR — Daily Digest*\n${today}\n\n`;
 
-  t+=`*Tasks due today:* ${tasksToday.length}\n${
+  text+=`*Tasks due today:* ${tasksToday.length}\n${
     tasksToday
       .map(x=>`• ${x.title} (${x.assignee||'Unassigned'})`)
       .join('\n')
   }\n\n`;
 
-  t+=`*Overdue tasks:* ${overdueTasks.length}\n${
+  text+=`*Overdue tasks:* ${overdueTasks.length}\n${
     overdueTasks
       .map(x=>`• ${x.title} (${x.assignee||'Unassigned'})`)
       .join('\n')
   }\n\n`;
 
-  t+=`*Appointments today:* ${apptsToday.length}\n${
+  text+=`*Appointments today:* ${apptsToday.length}\n${
     apptsToday
       .map(x=>`• ${x.title} — ${x.startTime||''}`)
       .join('\n')
   }\n\n`;
 
-  t+=`*Pending KYC:* ${kycPending}\n\n`;
+  text+=`*Pending KYC:* ${kycPending}\n\n`;
 
-  t+=`*Compliance due (≤7 days):*\n${
+  text+=`*Compliance due (≤7 days):*\n${
     compDue
       .map(x=>`• ${x.name} — ${x.due?fmt(x.due):''}`)
       .join('\n')||'None'
   }\n`;
 
-  return t;
+  return text;
 }
 
+/* ---------- templates ---------- */
+
 const TEMPLATES=[
-['Training Certificate','Training'],
-['Course Completion Certificate','Training'],
-['Training Completion Certificate','Training'],
-['Internship Certificate','Internship'],
-['Internship Completion Certificate','Internship'],
-['Internship Participation Certificate','Internship'],
-['Internship Experience Certificate','Internship'],
-['Employment Certificate','Employment'],
-['Experience Certificate','Employment'],
-['Work Experience Certificate','Employment'],
-['Service Certificate','Employment'],
-['Joining Certificate','Employment'],
-['Employment Confirmation Certificate','Employment'],
-['Probation Completion Certificate','Employment'],
-['Employee Confirmation Letter','Letters'],
-['Appointment Letter','Letters'],
-['Offer Letter','Letters'],
-['Employment Offer Letter','Letters'],
-['Internship Offer Letter','Internship'],
-['Internship Appointment Letter','Internship'],
-['Joining Letter','Letters'],
-['Engagement Letter','Letters'],
-['Contract Letter','Letters'],
-['Assignment Letter','Project'],
-['Project Assignment Letter','Project'],
-['Project Completion Certificate','Project'],
-['Project Participation Certificate','Project'],
-['Project Experience Certificate','Project'],
-['Achievement Certificate','Recognition'],
-['Appreciation Certificate','Recognition'],
-['Recognition Certificate','Recognition'],
-['Excellence Certificate','Recognition'],
-['Merit Certificate','Recognition'],
-['Performance Certificate','Performance'],
-['Participation Certificate','Certificates'],
-['Attendance Certificate','Training'],
-['Training Attendance Certificate','Training'],
-['Workshop Certificate','Training'],
-['Workshop Participation Certificate','Training'],
-['Seminar Certificate','Training'],
-['Seminar Participation Certificate','Training'],
-['Webinar Certificate','Training'],
-['Webinar Participation Certificate','Training'],
-['Event Participation Certificate','Events'],
-['Event Completion Certificate','Events'],
-['Bootcamp Certificate','Training'],
-['Bootcamp Completion Certificate','Training'],
-['Masterclass Certificate','Training'],
-['Masterclass Completion Certificate','Training'],
-['Course Certificate','Training'],
-['Course Participation Certificate','Training'],
-['Skill Certificate','Assessment'],
-['Skill Assessment Certificate','Assessment'],
-['Skill Verification Certificate','Verification'],
-['Competency Certificate','Assessment'],
-['Competency Assessment Certificate','Assessment'],
-['Credential Certificate','Credential'],
-['Professional Credential','Credential'],
-['Digital Credential','Credential'],
-['Credential Verification Letter','Verification'],
-['Certificate of Completion','Certificates'],
-['Certificate of Achievement','Certificates'],
-['Certificate of Recognition','Certificates'],
-['Certificate of Participation','Certificates'],
-['Certificate of Appreciation','Certificates'],
-['Certificate of Merit','Certificates'],
-['Certificate of Excellence','Certificates'],
-['Certificate of Attendance','Certificates'],
-['Letter of Completion','Letters'],
-['Letter of Participation','Letters'],
-['Letter of Appreciation','Letters'],
-['Letter of Recommendation','Letters'],
-['Recommendation Letter','Letters'],
-['Reference Letter','Letters'],
-['Professional Reference Letter','Letters'],
-['Experience Letter','Employment'],
-['Employment Letter','Employment'],
-['Relieving Letter','Exit'],
-['Release Letter','Exit'],
-['Termination Letter','Exit'],
-['Resignation Acceptance Letter','Exit'],
-['No Objection Certificate','Exit'],
-['NOC','Exit'],
-['Salary Certificate','Verification'],
-['Salary Verification Letter','Verification'],
-['Compensation Certificate','Verification'],
-['Income Certificate','Verification'],
-['Employment Verification Letter','Verification'],
-['Employment Verification Certificate','Verification'],
-['Internship Verification Letter','Verification'],
-['Internship Verification Certificate','Verification'],
-['Training Verification Letter','Verification'],
-['Training Verification Certificate','Verification'],
-['Document Verification Letter','Verification'],
-['Background Verification Letter','Verification'],
-['Character Certificate','Verification'],
-['Conduct Certificate','Verification'],
-['Good Standing Certificate','Verification'],
-['Identity Verification Letter','Verification'],
-['KYC Confirmation Letter','KYC'],
-['KYC Verification Certificate','KYC'],
-['Onboarding Completion Certificate','Onboarding'],
-['Onboarding Confirmation Letter','Onboarding'],
-['Offboarding Confirmation Letter','Exit'],
-['Exit Clearance Certificate','Exit'],
-['Full and Final Settlement Letter','Exit'],
-['Policy Acknowledgement','Compliance'],
-['NDA / Confidentiality Agreement','Compliance'],
-['Declaration Form','Compliance'],
-['Undertaking','Compliance'],
-['Consent Form','Compliance'],
-['Authorization Letter','Letters'],
-['Acknowledgement Letter','Letters'],
-['Confirmation Letter','Letters'],
-['Approval Letter','Letters'],
-['Acceptance Letter','Letters'],
-['Appointment Confirmation','Employment'],
-['Registration Confirmation','Confirmation'],
-['Enrollment Confirmation','Confirmation'],
-['Training Enrollment Confirmation','Training'],
-['Course Enrollment Confirmation','Training'],
-['Service Order Confirmation','Client'],
-['Service Completion Certificate','Client'],
-['Service Delivery Certificate','Client'],
-['Service Engagement Letter','Client'],
-['Consulting Engagement Letter','Client'],
-['Consulting Completion Certificate','Client'],
-['Advisory Engagement Letter','Client'],
-['Advisory Completion Certificate','Client'],
-['Project Engagement Letter','Client'],
-['Project Closure Certificate','Client'],
-['Client Completion Certificate','Client'],
-['Client Appreciation Certificate','Client'],
-['Client Recommendation Letter','Client'],
-['Client Reference Letter','Client'],
-['Client Verification Letter','Client'],
-['B2B Service Certificate','Client'],
-['B2B Completion Certificate','Client'],
-['B2C Service Certificate','Client'],
-['B2C Completion Certificate','Client'],
-['Career Service Certificate','Career Services'],
-['Career Counselling Completion Certificate','Career Services'],
-['Resume Service Completion Certificate','Career Services'],
-['LinkedIn Optimization Completion Certificate','Career Services'],
-['Interview Preparation Completion Certificate','Career Services'],
-['Career Assessment Certificate','Career Services'],
-['Placement Assistance Certificate','Career Services'],
-['Recruitment Service Completion Certificate','Recruitment'],
-['Recruitment Engagement Letter','Recruitment'],
-['Candidate Assessment Report','Reports'],
-['Candidate Evaluation Report','Reports'],
-['Training Assessment Report','Reports'],
-['Training Completion Report','Reports'],
-['Performance Evaluation Report','Reports'],
-['Skill Assessment Report','Reports'],
-['Service Completion Report','Reports'],
-['Project Completion Report','Reports'],
-['Consulting Report','Reports'],
-['Advisory Report','Reports'],
-['Assessment Report','Reports'],
-['Verification Report','Reports'],
-['Audit Report','Compliance'],
-['Compliance Certificate','Compliance'],
-['Compliance Confirmation Letter','Compliance'],
-['Compliance Verification Certificate','Compliance'],
-['Quality Certificate','Compliance'],
-['Quality Assurance Certificate','Compliance'],
-['Custom Certificate','Custom'],
-['Custom Letter','Custom'],
-['Custom Formal Document','Custom'],
-['Other','Custom']
+  ['Training Certificate','Training'],
+  ['Course Completion Certificate','Training'],
+  ['Training Completion Certificate','Training'],
+  ['Internship Certificate','Internship'],
+  ['Internship Completion Certificate','Internship'],
+  ['Internship Participation Certificate','Internship'],
+  ['Internship Experience Certificate','Internship'],
+  ['Employment Certificate','Employment'],
+  ['Experience Certificate','Employment'],
+  ['Work Experience Certificate','Employment'],
+  ['Service Certificate','Employment'],
+  ['Joining Certificate','Employment'],
+  ['Employment Confirmation Certificate','Employment'],
+  ['Probation Completion Certificate','Employment'],
+  ['Employee Confirmation Letter','Letters'],
+  ['Appointment Letter','Letters'],
+  ['Offer Letter','Letters'],
+  ['Employment Offer Letter','Letters'],
+  ['Internship Offer Letter','Internship'],
+  ['Internship Appointment Letter','Internship'],
+  ['Joining Letter','Letters'],
+  ['Engagement Letter','Letters'],
+  ['Contract Letter','Letters'],
+  ['Assignment Letter','Project'],
+  ['Project Assignment Letter','Project'],
+  ['Project Completion Certificate','Project'],
+  ['Project Participation Certificate','Project'],
+  ['Project Experience Certificate','Project'],
+  ['Achievement Certificate','Recognition'],
+  ['Appreciation Certificate','Recognition'],
+  ['Recognition Certificate','Recognition'],
+  ['Excellence Certificate','Recognition'],
+  ['Merit Certificate','Recognition'],
+  ['Performance Certificate','Performance'],
+  ['Participation Certificate','Certificates'],
+  ['Attendance Certificate','Training'],
+  ['Training Attendance Certificate','Training'],
+  ['Workshop Certificate','Training'],
+  ['Workshop Participation Certificate','Training'],
+  ['Seminar Certificate','Training'],
+  ['Seminar Participation Certificate','Training'],
+  ['Webinar Certificate','Training'],
+  ['Webinar Participation Certificate','Training'],
+  ['Event Participation Certificate','Events'],
+  ['Event Completion Certificate','Events'],
+  ['Bootcamp Certificate','Training'],
+  ['Bootcamp Completion Certificate','Training'],
+  ['Masterclass Certificate','Training'],
+  ['Masterclass Completion Certificate','Training'],
+  ['Course Certificate','Training'],
+  ['Course Participation Certificate','Training'],
+  ['Skill Certificate','Assessment'],
+  ['Skill Assessment Certificate','Assessment'],
+  ['Skill Verification Certificate','Verification'],
+  ['Competency Certificate','Assessment'],
+  ['Competency Assessment Certificate','Assessment'],
+  ['Credential Certificate','Credential'],
+  ['Professional Credential','Credential'],
+  ['Digital Credential','Credential'],
+  ['Credential Verification Letter','Verification'],
+  ['Certificate of Completion','Certificates'],
+  ['Certificate of Achievement','Certificates'],
+  ['Certificate of Recognition','Certificates'],
+  ['Certificate of Participation','Certificates'],
+  ['Certificate of Appreciation','Certificates'],
+  ['Certificate of Merit','Certificates'],
+  ['Certificate of Excellence','Certificates'],
+  ['Certificate of Attendance','Certificates'],
+  ['Letter of Completion','Letters'],
+  ['Letter of Participation','Letters'],
+  ['Letter of Appreciation','Letters'],
+  ['Letter of Recommendation','Letters'],
+  ['Recommendation Letter','Letters'],
+  ['Reference Letter','Letters'],
+  ['Professional Reference Letter','Letters'],
+  ['Experience Letter','Employment'],
+  ['Employment Letter','Employment'],
+  ['Relieving Letter','Exit'],
+  ['Release Letter','Exit'],
+  ['Termination Letter','Exit'],
+  ['Resignation Acceptance Letter','Exit'],
+  ['No Objection Certificate','Exit'],
+  ['NOC','Exit'],
+  ['Salary Certificate','Verification'],
+  ['Salary Verification Letter','Verification'],
+  ['Compensation Certificate','Verification'],
+  ['Income Certificate','Verification'],
+  ['Employment Verification Letter','Verification'],
+  ['Employment Verification Certificate','Verification'],
+  ['Internship Verification Letter','Verification'],
+  ['Internship Verification Certificate','Verification'],
+  ['Training Verification Letter','Verification'],
+  ['Training Verification Certificate','Verification'],
+  ['Document Verification Letter','Verification'],
+  ['Background Verification Letter','Verification'],
+  ['Character Certificate','Verification'],
+  ['Conduct Certificate','Verification'],
+  ['Good Standing Certificate','Verification'],
+  ['Identity Verification Letter','Verification'],
+  ['KYC Confirmation Letter','KYC'],
+  ['KYC Verification Certificate','KYC'],
+  ['Onboarding Completion Certificate','Onboarding'],
+  ['Onboarding Confirmation Letter','Onboarding'],
+  ['Offboarding Confirmation Letter','Exit'],
+  ['Exit Clearance Certificate','Exit'],
+  ['Full and Final Settlement Letter','Exit'],
+  ['Policy Acknowledgement','Compliance'],
+  ['NDA / Confidentiality Agreement','Compliance'],
+  ['Declaration Form','Compliance'],
+  ['Undertaking','Compliance'],
+  ['Consent Form','Compliance'],
+  ['Authorization Letter','Letters'],
+  ['Acknowledgement Letter','Letters'],
+  ['Confirmation Letter','Letters'],
+  ['Approval Letter','Letters'],
+  ['Acceptance Letter','Letters'],
+  ['Appointment Confirmation','Employment'],
+  ['Registration Confirmation','Confirmation'],
+  ['Enrollment Confirmation','Confirmation'],
+  ['Training Enrollment Confirmation','Training'],
+  ['Course Enrollment Confirmation','Training'],
+  ['Service Order Confirmation','Client'],
+  ['Service Completion Certificate','Client'],
+  ['Service Delivery Certificate','Client'],
+  ['Service Engagement Letter','Client'],
+  ['Consulting Engagement Letter','Client'],
+  ['Consulting Completion Certificate','Client'],
+  ['Advisory Engagement Letter','Client'],
+  ['Advisory Completion Certificate','Client'],
+  ['Project Engagement Letter','Client'],
+  ['Project Closure Certificate','Client'],
+  ['Client Completion Certificate','Client'],
+  ['Client Appreciation Certificate','Client'],
+  ['Client Recommendation Letter','Client'],
+  ['Client Reference Letter','Client'],
+  ['Client Verification Letter','Client'],
+  ['B2B Service Certificate','Client'],
+  ['B2B Completion Certificate','Client'],
+  ['B2C Service Certificate','Client'],
+  ['B2C Completion Certificate','Client'],
+  ['Career Service Certificate','Career Services'],
+  ['Career Counselling Completion Certificate','Career Services'],
+  ['Resume Service Completion Certificate','Career Services'],
+  ['LinkedIn Optimization Completion Certificate','Career Services'],
+  ['Interview Preparation Completion Certificate','Career Services'],
+  ['Career Assessment Certificate','Career Services'],
+  ['Placement Assistance Certificate','Career Services'],
+  ['Recruitment Service Completion Certificate','Recruitment'],
+  ['Recruitment Engagement Letter','Recruitment'],
+  ['Candidate Assessment Report','Reports'],
+  ['Candidate Evaluation Report','Reports'],
+  ['Training Assessment Report','Reports'],
+  ['Training Completion Report','Reports'],
+  ['Performance Evaluation Report','Reports'],
+  ['Skill Assessment Report','Reports'],
+  ['Service Completion Report','Reports'],
+  ['Project Completion Report','Reports'],
+  ['Consulting Report','Reports'],
+  ['Advisory Report','Reports'],
+  ['Assessment Report','Reports'],
+  ['Verification Report','Reports'],
+  ['Audit Report','Compliance'],
+  ['Compliance Certificate','Compliance'],
+  ['Compliance Confirmation Letter','Compliance'],
+  ['Compliance Verification Certificate','Compliance'],
+  ['Quality Certificate','Compliance'],
+  ['Quality Assurance Certificate','Compliance'],
+  ['Custom Certificate','Custom'],
+  ['Custom Letter','Custom'],
+  ['Custom Formal Document','Custom'],
+  ['Other','Custom']
 ];
 
 /* ---------- helpers ---------- */
+
 function toast(message){
   const el=document.getElementById('hrToast');
+
+  if(!el){
+    console.log(message);
+    return;
+  }
+
   el.textContent=message;
   el.classList.add('show');
+
   clearTimeout(window.__toast);
+
   window.__toast=setTimeout(
     ()=>el.classList.remove('show'),
     2800
-  )
+  );
 }
 
 function esc(v){
@@ -457,7 +626,7 @@ function esc(v){
       '"':'&quot;',
       "'":'&#39;'
     }[c])
-  )
+  );
 }
 
 function initials(name){
@@ -466,12 +635,14 @@ function initials(name){
     .slice(0,2)
     .map(x=>x[0]||'')
     .join('')
-    .toUpperCase()
+    .toUpperCase();
 }
 
 function fmt(v){
   if(!v)return'—';
+
   const d=new Date(v);
+
   return Number.isNaN(d.getTime())
     ?String(v)
     :d.toLocaleDateString(
@@ -481,12 +652,14 @@ function fmt(v){
         month:'short',
         year:'numeric'
       }
-    )
+    );
 }
 
 function fmtDateTime(v){
   if(!v)return'—';
+
   const d=new Date(v);
+
   return Number.isNaN(d.getTime())
     ?String(v)
     :d.toLocaleString(
@@ -498,24 +671,28 @@ function fmtDateTime(v){
         hour:'2-digit',
         minute:'2-digit'
       }
-    )
+    );
 }
 
 function isToday(v){
   if(!v)return false;
+
   const d=new Date(v);
   const t=new Date();
 
-  return d.getFullYear()===t.getFullYear()&&
+  return(
+    d.getFullYear()===t.getFullYear()&&
     d.getMonth()===t.getMonth()&&
     d.getDate()===t.getDate()
+  );
 }
 
 function waLink(mobile,message){
   const digits=String(mobile||'').replace(/[^\d]/g,'');
+
   if(!digits)return null;
 
-  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 }
 
 function gcalLink(appt){
@@ -540,7 +717,7 @@ function gcalLink(appt){
     location:appt.location||''
   });
 
-  return `https://calendar.google.com/calendar/render?${params.toString()}`
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
 async function apiGet(action,params={}){
@@ -563,7 +740,7 @@ async function apiGet(action,params={}){
   let body=null;
 
   try{
-    body=await res.json()
+    body=await res.json();
   }catch(e){}
 
   if(!res.ok){
@@ -572,56 +749,77 @@ async function apiGet(action,params={}){
         ?body.error
         :`Backend returned ${res.status}`;
 
-    throw new Error(message)
+    throw new Error(message);
   }
 
-  return body||{}
+  return body||{};
 }
 
 /* ---------- view switching ---------- */
+
 function showView(view){
-  document.querySelectorAll('[id^="view-"]')
+  document
+    .querySelectorAll('[id^="view-"]')
     .forEach(el=>el.classList.add('hr-hidden'));
 
-  const t=document.getElementById('view-'+view);
+  const target=document.getElementById(`view-${view}`);
 
-  if(t)t.classList.remove('hr-hidden');
+  if(target){
+    target.classList.remove('hr-hidden');
+  }
 
-  document.querySelectorAll('.hr-nav button[data-view]')
+  document
+    .querySelectorAll('.hr-nav button[data-view]')
     .forEach(
-      b=>b.classList.toggle(
-        'active',
-        b.dataset.view===view
-      )
+      button=>
+        button.classList.toggle(
+          'active',
+          button.dataset.view===view
+        )
     );
 
   state.currentView=view;
 
-  if(view==='dashboard')loadPeople();
-  if(view==='activity')loadRecentActivity();
-  if(view==='people')loadPeople();
-  if(view==='tasks')loadTasks();
-  if(view==='training')loadTraining();
-  if(view==='mpr')loadMpr();
-  if(view==='appointments')loadAppointments();
-  if(view==='compliance')renderCompliance();
-  if(view==='analytics')renderAnalytics();
+  if(view==='dashboard'){
+    loadPeople();
+  }else if(view==='activity'){
+    loadRecentActivity();
+  }else if(view==='people'){
+    loadPeople();
+  }else if(view==='tasks'){
+    loadTasks();
+  }else if(view==='training'){
+    loadTraining();
+  }else if(view==='mpr'){
+    loadMpr();
+  }else if(view==='appointments'){
+    loadAppointments();
+  }else if(view==='compliance'){
+    renderCompliance();
+  }else if(view==='analytics'){
+    renderAnalytics();
+  }
 }
 
-document.querySelectorAll('[data-view-link]')
-  .forEach(
-    el=>
-      el.addEventListener(
-        'click',
-        ()=>showView(el.dataset.viewLink)
-      )
-  );
+function wireViewLinks(){
+  document
+    .querySelectorAll('[data-view-link]')
+    .forEach(
+      el=>
+        el.addEventListener(
+          'click',
+          ()=>showView(el.dataset.viewLink)
+        )
+    );
+}
 
 function setGreeting(){
   const now=new Date();
 
-  document.getElementById('heroDay').textContent=
-    now.toLocaleDateString(
+  const day=document.getElementById('heroDay');
+
+  if(day){
+    day.textContent=now.toLocaleDateString(
       'en-IN',
       {
         weekday:'long',
@@ -630,9 +828,13 @@ function setGreeting(){
         year:'numeric'
       }
     );
+  }
 
   const h=now.getHours();
-  const name=(state.userName||'').split(' ')[0];
+
+  const name=(state.userName||'')
+    .split(' ')[0];
+
   const base=
     h<12
       ?'Good morning'
@@ -640,133 +842,158 @@ function setGreeting(){
         ?'Good afternoon'
         :'Good evening';
 
-  document.getElementById('todayGreet').textContent=
-    name?`${base}, ${name}`:base;
+  const greet=document.getElementById('todayGreet');
+
+  if(greet){
+    greet.textContent=
+      name
+        ?`${base}, ${name}`
+        :base;
+  }
 
   renderDailyQuote();
 }
 
 function refreshTodayStrip(){
-  document.getElementById('todayTasksDue').textContent=
-    state.tasks.filter(
-      t=>t.status!=='Done'&&isToday(t.dueDate)
-    ).length;
+  const dueToday=state.tasks.filter(
+    t=>t.status!=='Done'&&isToday(t.dueDate)
+  ).length;
 
-  document.getElementById('todayAppointments').textContent=
-    state.appointments.filter(
-      a=>isToday(a.date)
-    ).length;
+  const appointmentsToday=state.appointments.filter(
+    a=>isToday(a.date)
+  ).length;
 
-  document.getElementById('todayPendingKyc').textContent=
-    state.people.filter(
-      p=>String(p['KYC Status']||'').toLowerCase()==='pending'
-    ).length;
+  const pendingKyc=state.people.filter(
+    p=>
+      String(p['KYC Status']||'')
+        .toLowerCase()==='pending'
+  ).length;
 
-  const month=new Date().toISOString().slice(0,7);
+  const month=new Date()
+    .toISOString()
+    .slice(0,7);
 
-  document.getElementById('todayMprDue').textContent=
-    state.mpr.filter(
-      m=>m.month===month&&m.status!=='Approved'
-    ).length;
+  const mprDue=state.mpr.filter(
+    m=>
+      m.month===month&&
+      m.status!=='Approved'
+  ).length;
 
   const overdueTasks=state.tasks.filter(
     t=>
       t.status!=='Done'&&
       t.dueDate&&
-      new Date(t.dueDate)<new Date(new Date().toDateString())
-  );
+      new Date(t.dueDate)<
+        new Date(new Date().toDateString())
+  ).length;
 
-  document.getElementById('metricOverdueTasks').textContent=
-    overdueTasks.length;
-
-  const compDue=(state.compliance||[]).filter(
+  const compDue=state.compliance.filter(
     r=>r.status==='overdue'||r.status==='soon'
-  );
+  ).length;
 
-  const compOverdue=(state.compliance||[]).filter(
+  const compOverdue=state.compliance.filter(
     r=>r.status==='overdue'
-  );
-
-  const elTCD=document.getElementById('todayComplianceDue');
-
-  if(elTCD)elTCD.textContent=compDue.length;
-
-  const elMCO=document.getElementById('metricComplianceOverdue');
-
-  if(elMCO)elMCO.textContent=compOverdue.length;
+  ).length;
 
   const interns=state.people.filter(
     p=>
-      String(p['Employment Type']||'').toLowerCase()==='intern'&&
-      String(p['Employment Status']||'').toLowerCase()==='active'
-  );
+      String(p['Employment Type']||'')
+        .toLowerCase()==='intern'&&
+      String(p['Employment Status']||'')
+        .toLowerCase()==='active'
+  ).length;
 
-  const elIQ=document.getElementById('metricInternsQuick');
+  const set=(id,value)=>{
+    const el=document.getElementById(id);
 
-  if(elIQ)elIQ.textContent=interns.length;
+    if(el)el.textContent=value;
+  };
 
-  const elHH=document.getElementById('heroHeadcount');
-
-  if(elHH)elHH.textContent=state.people.length;
-
-  const elHC=document.getElementById('heroCompliance');
-
-  if(elHC)elHC.textContent=COMPLIANCE_RULES.length;
-
-  const elHD=document.getElementById('heroDocs');
-
-  if(elHD)elHD.textContent=TEMPLATES.length+'+';
+  set('todayTasksDue',dueToday);
+  set('todayAppointments',appointmentsToday);
+  set('todayPendingKyc',pendingKyc);
+  set('todayMprDue',mprDue);
+  set('metricOverdueTasks',overdueTasks);
+  set('todayComplianceDue',compDue);
+  set('metricComplianceOverdue',compOverdue);
+  set('metricInternsQuick',interns);
+  set('heroHeadcount',state.people.length);
+  set('heroCompliance',COMPLIANCE_RULES.length);
+  set('heroDocs',`${TEMPLATES.length}+`);
 }
 
-/* ---------- dashboard metrics ---------- */
+/* ---------- metrics ---------- */
+
 function updateMetrics(people){
   const active=people.filter(
-    p=>String(p['Employment Status']||'').toLowerCase()==='active'
+    p=>
+      String(p['Employment Status']||'')
+        .toLowerCase()==='active'
   ).length;
 
   const interns=people.filter(
-    p=>String(p['Employment Type']||'').toLowerCase()==='intern'
+    p=>
+      String(p['Employment Type']||'')
+        .toLowerCase()==='intern'
   ).length;
 
   const kyc=people.filter(
-    p=>String(p['KYC Status']||'').toLowerCase()==='pending'
+    p=>
+      String(p['KYC Status']||'')
+        .toLowerCase()==='pending'
   ).length;
 
   const notice=people.filter(
-    p=>String(p['Employment Status']||'').toLowerCase()==='on notice'
+    p=>
+      String(p['Employment Status']||'')
+        .toLowerCase()==='on notice'
   ).length;
 
   const exited=people.filter(
-    p=>String(p['Employment Status']||'').toLowerCase()==='exited'
+    p=>
+      String(p['Employment Status']||'')
+        .toLowerCase()==='exited'
   ).length;
 
-  document.getElementById('metricPeople').textContent=people.length;
-  document.getElementById('metricActive').textContent=active;
-  document.getElementById('metricInterns').textContent=interns;
-  document.getElementById('metricKyc').textContent=kyc;
-  document.getElementById('metricExited').textContent=exited;
+  const set=(id,value)=>{
+    const el=document.getElementById(id);
 
-  document.getElementById('dashActive').textContent=active;
-  document.getElementById('dashKyc').textContent=kyc;
-  document.getElementById('dashNotice').textContent=notice;
-  document.getElementById('dashExited').textContent=exited;
+    if(el)el.textContent=value;
+  };
+
+  set('metricPeople',people.length);
+  set('metricActive',active);
+  set('metricInterns',interns);
+  set('metricKyc',kyc);
+  set('metricExited',exited);
+
+  set('dashActive',active);
+  set('dashKyc',kyc);
+  set('dashNotice',notice);
+  set('dashExited',exited);
 
   refreshTodayStrip();
 }
 
 /* ---------- activity ---------- */
+
 let ACTIVITY_STORE=[];
 
 function renderActivities(items,targetId){
   const target=document.getElementById(targetId);
 
+  if(!target)return;
+
   if(!items.length){
-    target.innerHTML='<div class="hr-empty">No activity recorded yet.</div>';
-    return
+    target.innerHTML=
+      '<div class="hr-empty">No activity recorded yet.</div>';
+    return;
   }
 
   const offset=ACTIVITY_STORE.length;
-  ACTIVITY_STORE=ACTIVITY_STORE.concat(items);
+
+  ACTIVITY_STORE=
+    ACTIVITY_STORE.concat(items);
 
   target.innerHTML=`
     <div class="hr-activity-list">
@@ -778,14 +1005,35 @@ function renderActivities(items,targetId){
           >
             <div class="hr-dot">&bull;</div>
             <div>
-              <strong>${esc(a['Action Type']||a.title||a.type||'Activity')}</strong>
-              <span>${esc(a['Description']||a.summary||a.detail||'')}</span>
+              <strong>
+                ${esc(
+                  a['Action Type']||
+                  a.title||
+                  a.type||
+                  'Activity'
+                )}
+              </strong>
+              <span>
+                ${esc(
+                  a['Description']||
+                  a.summary||
+                  a.detail||
+                  ''
+                )}
+              </span>
             </div>
-            <div class="hr-date">${fmtDateTime(a['Timestamp']||a.timestamp||a.date)}</div>
+            <div class="hr-date">
+              ${fmtDateTime(
+                a['Timestamp']||
+                a.timestamp||
+                a.date
+              )}
+            </div>
           </div>
         `
       ).join('')}
-    </div>`;
+    </div>
+  `;
 
   target
     .querySelectorAll('[data-activity-idx]')
@@ -801,24 +1049,36 @@ function renderActivities(items,targetId){
 }
 
 function openActivityDetail(idx){
-  const a=ACTIVITY_STORE[idx];
+  const activity=ACTIVITY_STORE[idx];
 
-  if(!a)return;
+  if(!activity)return;
 
   const rows=Object
-    .entries(a)
-    .filter(([k,v])=>v!==''&&v!==undefined)
+    .entries(activity)
+    .filter(
+      ([key,value])=>
+        value!==''&&
+        value!==undefined
+    )
     .map(
-      ([k,v])=>
-        `<div class="audit-kv">
-          <b>${esc(k)}</b>
-          <span>${esc(v)}</span>
-        </div>`
+      ([key,value])=>`
+        <div class="audit-kv">
+          <b>${esc(key)}</b>
+          <span>${esc(value)}</span>
+        </div>
+      `
     )
     .join('');
 
-  document.getElementById('activityDetailBody').innerHTML=
-    rows||'<div class="hr-empty">No further detail on this record.</div>';
+  const body=document.getElementById(
+    'activityDetailBody'
+  );
+
+  if(body){
+    body.innerHTML=
+      rows||
+      '<div class="hr-empty">No further detail on this record.</div>';
+  }
 
   openModal('activityDetailModal');
 }
@@ -841,144 +1101,303 @@ async function loadRecentActivity(){
       data.activities||[],
       'activityTable'
     );
-  }catch(e){
-    document.getElementById('dashboardActivity').innerHTML=
-      '<div class="hr-empty">Activity could not be loaded.</div>';
+  }catch(error){
+    const dashboard=
+      document.getElementById(
+        'dashboardActivity'
+      );
 
-    document.getElementById('activityTable').innerHTML=
-      '<div class="hr-empty">Activity could not be loaded.</div>';
+    const activity=
+      document.getElementById(
+        'activityTable'
+      );
+
+    if(dashboard){
+      dashboard.innerHTML=
+        '<div class="hr-empty">Activity could not be loaded.</div>';
+    }
+
+    if(activity){
+      activity.innerHTML=
+        '<div class="hr-empty">Activity could not be loaded.</div>';
+    }
   }
 }
 
 /* ---------- people ---------- */
+
 async function loadPeople(){
+  const target=
+    document.getElementById(
+      'peopleResults'
+    );
+
+  if(target){
+    target.innerHTML=
+      '<div class="hr-empty"><span class="hr-loading">Loading people register</span></div>';
+  }
+
   try{
-    const data=await apiGet('listPeople');
+    const data=await apiGet(
+      'searchEmployees',
+      {q:'ORI-EMP-'}
+    );
 
-    state.people=data.people||data.employees||[];
-
-    updateMetrics(state.people);
+    state.people=data.results||[];
 
     renderPeople(state.people);
-  }catch(e){
-    document.getElementById('peopleResults').innerHTML=
-      `<div class="hr-empty">${esc(e.message||'People could not be loaded.')}</div>`;
-
-    updateMetrics([]);
+    updateMetrics(state.people);
+  }catch(error){
+    if(target){
+      target.innerHTML=
+        '<div class="hr-empty">People register could not be loaded.</div>';
+    }
   }
 }
 
 function renderPeople(people){
-  const target=document.getElementById('peopleResults');
+  const target=
+    document.getElementById(
+      'peopleResults'
+    );
 
-  const status=document.getElementById('peopleStatus').value.toLowerCase();
-  const dept=document.getElementById('peopleDepartment').value.toLowerCase();
-  const etype=document.getElementById('peopleEmpType').value.toLowerCase();
-  const q=document.getElementById('peopleSearch').value.trim().toLowerCase();
+  if(!target)return;
 
-  const filtered=people.filter(e=>{
-    const hit=
-      !q||
-      Object.values(e).some(
-        v=>String(v??'').toLowerCase().includes(q)
-      );
+  const status=
+    (
+      document.getElementById(
+        'peopleStatus'
+      )?.value||
+      ''
+    ).toLowerCase();
 
-    const hs=
-      !status||
-      String(e['Employment Status']||'').toLowerCase()===status;
+  const dept=
+    (
+      document.getElementById(
+        'peopleDepartment'
+      )?.value||
+      ''
+    ).toLowerCase();
 
-    const hd=
-      !dept||
-      String(e['Department']||'').toLowerCase()===dept;
+  const etype=
+    (
+      document.getElementById(
+        'peopleEmpType'
+      )?.value||
+      ''
+    ).toLowerCase();
 
-    const het=
-      !etype||
-      String(e['Employment Type']||'').toLowerCase()===etype;
+  const q=
+    (
+      document.getElementById(
+        'peopleSearch'
+      )?.value||
+      ''
+    ).trim().toLowerCase();
 
-    return hit&&hs&&hd&&het;
-  });
+  const filtered=people.filter(
+    employee=>{
+      const hit=
+        !q||
+        Object.values(employee)
+          .some(
+            value=>
+              String(value??'')
+                .toLowerCase()
+                .includes(q)
+          );
 
-  document.getElementById('peopleCount').textContent=
-    `${filtered.length} person${filtered.length===1?'':'s'} shown`;
+      const hs=
+        !status||
+        String(
+          employee['Employment Status']||''
+        ).toLowerCase()===status;
+
+      const hd=
+        !dept||
+        String(
+          employee['Department']||''
+        ).toLowerCase()===dept;
+
+      const het=
+        !etype||
+        String(
+          employee['Employment Type']||''
+        ).toLowerCase()===etype;
+
+      return hit&&hs&&hd&&het;
+    }
+  );
+
+  const count=
+    document.getElementById(
+      'peopleCount'
+    );
+
+  if(count){
+    count.textContent=
+      `${filtered.length} person${
+        filtered.length===1?'':'s'
+      } shown`;
+  }
 
   if(!filtered.length){
     target.innerHTML=
       '<div class="hr-empty">No matching person record found.</div>';
-    return
+    return;
   }
 
-  target.innerHTML=filtered.map(
-    emp=>`
-      <div class="hr-result">
-        <div class="hr-avatar-sm">
-          ${
-            emp['Photo URL']
-              ?`<img
-                  src="${esc(emp['Photo URL'])}"
-                  alt="${esc(emp['Full Name']||'Person')} photo"
-                  loading="lazy"
-                  onerror="this.parentElement.innerHTML='<span>${esc(initials(emp['Full Name']))}</span>'"
-                >`
-              :`<span>${esc(initials(emp['Full Name']))}</span>`
-          }
-        </div>
+  target.innerHTML=
+    filtered.map(
+      employee=>`
+        <div class="hr-result">
 
-        <div>
-          <strong>${esc(emp['Full Name']||'—')}</strong><br>
-          <span>${esc(emp['Employee ID']||'—')}</span>
-        </div>
+          <div class="hr-avatar-sm">
+            ${
+              employee['Photo URL']
+                ?`
+                  <img
+                    src="${esc(employee['Photo URL'])}"
+                    alt="${esc(
+                      employee['Full Name']||
+                      'Person'
+                    )} photo"
+                    loading="lazy"
+                    onerror="this.parentElement.innerHTML='<span>${esc(
+                      initials(
+                        employee['Full Name']
+                      )
+                    )}</span>'"
+                  >
+                `
+                :`
+                  <span>
+                    ${esc(
+                      initials(
+                        employee['Full Name']
+                      )
+                    )}
+                  </span>
+                `
+            }
+          </div>
 
-        <div>
-          <strong>${esc(emp['Designation']||'—')}</strong><br>
-          <span>${esc(emp['Department']||'—')}</span>
-        </div>
+          <div>
+            <strong>
+              ${esc(
+                employee['Full Name']||
+                '—'
+              )}
+            </strong><br>
+            <span>
+              ${esc(
+                employee['Employee ID']||
+                '—'
+              )}
+            </span>
+          </div>
 
-        <div>
-          <span>${esc(emp['Reporting Manager']||'—')}</span><br>
-          <span>${esc(emp['KYC Status']||'Pending')} KYC</span>
-        </div>
+          <div>
+            <strong>
+              ${esc(
+                employee['Designation']||
+                '—'
+              )}
+            </strong><br>
+            <span>
+              ${esc(
+                employee['Department']||
+                '—'
+              )}
+            </span>
+          </div>
 
-        <div>
-          <span class="hr-status ${
-            String(emp['Employment Status']||'')
-              .toLowerCase()
-              .includes('exit')
-              ?'exit'
-              :''
-          }">
-            ${esc(emp['Employment Status']||'Active')}
-          </span><br>
-          <button
-            class="hr-link-btn"
-            type="button"
-            data-employee-id="${esc(emp['Employee ID']||'')}"
-          >
-            Open Record
-          </button>
+          <div>
+            <span>
+              ${esc(
+                employee['Reporting Manager']||
+                '—'
+              )}
+            </span><br>
+            <span>
+              ${esc(
+                employee['KYC Status']||
+                'Pending'
+              )} KYC
+            </span>
+          </div>
+
+          <div>
+            <span class="hr-status ${
+              String(
+                employee['Employment Status']||
+                ''
+              )
+                .toLowerCase()
+                .includes('exit')
+                ?'exit'
+                :''
+            }">
+              ${esc(
+                employee['Employment Status']||
+                'Active'
+              )}
+            </span><br>
+
+            <button
+              class="hr-link-btn"
+              type="button"
+              data-employee-id="${esc(
+                employee['Employee ID']||
+                ''
+              )}"
+            >
+              Open Record
+            </button>
+          </div>
+
         </div>
-      </div>
-    `
-  ).join('');
+      `
+    ).join('');
 
   target
-    .querySelectorAll('[data-employee-id]')
+    .querySelectorAll(
+      '[data-employee-id]'
+    )
     .forEach(
-      b=>
-        b.addEventListener(
+      button=>
+        button.addEventListener(
           'click',
-          ()=>loadProfile(b.dataset.employeeId)
+          ()=>loadProfile(
+            button.dataset.employeeId
+          )
         )
     );
 }
 
 /* ---------- profile ---------- */
+
 async function loadProfile(employeeId){
-  const section=document.getElementById('employee-record');
+  const section=
+    document.getElementById(
+      'employee-record'
+    );
 
-  section.classList.remove('hr-hidden');
+  if(section){
+    section.classList.remove(
+      'hr-hidden'
+    );
+  }
 
-  document.getElementById('employeeProfile').innerHTML=
-    '<div class="hr-empty"><span class="hr-loading">Loading employee record</span></div>';
+  const target=
+    document.getElementById(
+      'employeeProfile'
+    );
+
+  if(target){
+    target.innerHTML=
+      '<div class="hr-empty"><span class="hr-loading">Loading employee record</span></div>';
+  }
 
   try{
     const data=await apiGet(
@@ -986,108 +1405,211 @@ async function loadProfile(employeeId){
       {employeeId}
     );
 
-    state.employee=data.employee||data;
+    state.employee=
+      data.employee||
+      data;
 
     renderProfile(data);
 
-    section.scrollIntoView({
+    section?.scrollIntoView({
       behavior:'smooth',
       block:'start'
     });
-  }catch(e){
-    document.getElementById('employeeProfile').innerHTML=
-      '<div class="hr-empty">Employee record could not be loaded.</div>';
+  }catch(error){
+    if(target){
+      target.innerHTML=
+        '<div class="hr-empty">Employee record could not be loaded.</div>';
+    }
 
-    toast('Unable to load employee record.');
+    toast(
+      'Unable to load employee record.'
+    );
   }
 }
 
 function renderProfile(data){
-  const e=data.employee||data;
+  const employee=
+    data.employee||
+    data;
 
-  const photo=e['Photo URL']
-    ?`<img src="${esc(e['Photo URL'])}" alt="${esc(e['Full Name'])}">`
-    :esc(initials(e['Full Name']));
+  const photo=
+    employee['Photo URL']
+      ?`
+        <img
+          src="${esc(
+            employee['Photo URL']
+          )}"
+          alt="${esc(
+            employee['Full Name']
+          )}"
+        >
+      `
+      :esc(
+        initials(
+          employee['Full Name']
+        )
+      );
 
-  document.getElementById('employeeProfile').innerHTML=`
+  const target=
+    document.getElementById(
+      'employeeProfile'
+    );
+
+  if(!target)return;
+
+  target.innerHTML=`
     <div class="hr-profile">
 
       <div class="card hr-profile-main">
+
         <div class="hr-profile-id">
-          <div style="display:flex;gap:14px;align-items:center">
-            <div class="hr-avatar-lg">${photo}</div>
+
+          <div
+            style="display:flex;gap:14px;align-items:center"
+          >
+            <div class="hr-avatar-lg">
+              ${photo}
+            </div>
+
             <div>
-              <h2 class="hr-name">${esc(e['Full Name']||'—')}</h2>
+              <h2 class="hr-name">
+                ${esc(
+                  employee['Full Name']||
+                  '—'
+                )}
+              </h2>
+
               <p class="hr-muted">
-                ${esc(e['Employee ID']||'—')}
+                ${esc(
+                  employee['Employee ID']||
+                  '—'
+                )}
                 &middot;
-                ${esc(e['Designation']||'—')}
+                ${esc(
+                  employee['Designation']||
+                  '—'
+                )}
               </p>
             </div>
           </div>
 
-          <span class="hr-status ${
-            String(e['Employment Status']||'')
-              .toLowerCase()
-              .includes('exit')
-              ?'exit'
-              :''
-          }">
-            ${esc(e['Employment Status']||'Active')}
+          <span
+            class="hr-status ${
+              String(
+                employee['Employment Status']||
+                ''
+              )
+                .toLowerCase()
+                .includes('exit')
+                ?'exit'
+                :''
+            }"
+          >
+            ${esc(
+              employee['Employment Status']||
+              'Active'
+            )}
           </span>
+
         </div>
 
         <div class="hr-data-grid">
 
           <div class="hr-data">
             <div class="k">Department</div>
-            <div class="v">${esc(e['Department']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Department']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Reporting Manager</div>
-            <div class="v">${esc(e['Reporting Manager']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Reporting Manager']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Joining Date</div>
-            <div class="v">${fmt(e['Joining Date'])}</div>
+            <div class="v">
+              ${fmt(
+                employee['Joining Date']
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Employment Type</div>
-            <div class="v">${esc(e['Employment Type']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Employment Type']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Work Mode</div>
-            <div class="v">${esc(e['Work Mode']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Work Mode']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Work Location</div>
-            <div class="v">${esc(e['Work Location']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Work Location']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Official Email</div>
-            <div class="v">${esc(e['Official Email']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Official Email']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">Mobile</div>
-            <div class="v">${esc(e['Mobile']||'—')}</div>
+            <div class="v">
+              ${esc(
+                employee['Mobile']||
+                '—'
+              )}
+            </div>
           </div>
 
           <div class="hr-data">
             <div class="k">KYC Status</div>
-            <div class="v">${esc(e['KYC Status']||'Pending')}</div>
+            <div class="v">
+              ${esc(
+                employee['KYC Status']||
+                'Pending'
+              )}
+            </div>
           </div>
 
         </div>
+
       </div>
 
       <div class="card hr-profile-side">
+
         <h4>Actions</h4>
 
         <div class="hr-action-list">
@@ -1101,41 +1623,57 @@ function renderProfile(data){
 
           <button
             type="button"
-            onclick="document.getElementById('generateEmployee').value='${esc(e['Employee ID']||'')}';showView('generate');loadGeneratePerson()"
+            onclick="document.getElementById('generateEmployee').value='${esc(
+              employee['Employee ID']||
+              ''
+            )}';showView('generate');loadGeneratePerson()"
           >
             Generate document
           </button>
 
           <button
             type="button"
-            onclick="document.getElementById('documentPerson').value='${esc(e['Employee ID']||'')}';showView('documents');loadPersonDocuments()"
+            onclick="document.getElementById('documentPerson').value='${esc(
+              employee['Employee ID']||
+              ''
+            )}';showView('documents');loadPersonDocuments()"
           >
             View documents
           </button>
 
           ${
-            e['Mobile']
-              ?`<a
+            employee['Mobile']
+              ?`
+                <a
                   class="hr-btn wa"
                   style="text-align:center;text-decoration:none"
                   href="${waLink(
-                    e['Mobile'],
-                    `Hi ${e['Full Name']||''}, following up from ORIGENNT HR.`
+                    employee['Mobile'],
+                    `Hi ${
+                      employee['Full Name']||
+                      ''
+                    }, following up from ORIGENNT HR.`
                   )}"
                   target="_blank"
                   rel="noopener"
                 >
                   Message on WhatsApp
-                </a>`
+                </a>
+              `
               :''
           }
 
         </div>
 
         ${
-          String(e['Employment Type']||'').toLowerCase()==='intern'
+          String(
+            employee['Employment Type']||
+            ''
+          ).toLowerCase()==='intern'
             ?`
-              <h4 style="margin-top:18px">Intern Track</h4>
+              <h4 style="margin-top:18px">
+                Intern Track
+              </h4>
 
               <div
                 class="hr-lifecycle"
@@ -1143,17 +1681,23 @@ function renderProfile(data){
               >
                 <div class="hr-stage current">
                   <strong>Assigned</strong>
-                  <span>Mentor &amp; project</span>
+                  <span>
+                    Mentor &amp; project
+                  </span>
                 </div>
 
                 <div class="hr-stage">
                   <strong>Progress</strong>
-                  <span>Milestones</span>
+                  <span>
+                    Milestones
+                  </span>
                 </div>
 
                 <div class="hr-stage">
                   <strong>Certified</strong>
-                  <span>Completion</span>
+                  <span>
+                    Completion
+                  </span>
                 </div>
               </div>
 
@@ -1161,8 +1705,12 @@ function renderProfile(data){
                 class="hr-form-grid"
                 style="grid-template-columns:1fr;margin-top:12px"
               >
+
                 <div class="hr-form-field">
-                  <label>Mentor / Project</label>
+                  <label>
+                    Mentor / Project
+                  </label>
+
                   <input
                     id="internMentorInline"
                     placeholder="Mentor name — project"
@@ -1170,7 +1718,10 @@ function renderProfile(data){
                 </div>
 
                 <div class="hr-form-field">
-                  <label>Progress Status</label>
+                  <label>
+                    Progress Status
+                  </label>
+
                   <select id="internStatusInline">
                     <option>In Progress</option>
                     <option>Evaluation</option>
@@ -1181,6 +1732,7 @@ function renderProfile(data){
 
                 <div class="hr-form-field">
                   <label>Remarks</label>
+
                   <textarea
                     id="internRemarksInline"
                     placeholder="Milestone notes"
@@ -1190,966 +1742,1799 @@ function renderProfile(data){
                 <button
                   class="hr-btn primary small"
                   type="button"
-                  onclick="saveInternInline('${esc(e['Employee ID']||'')}')"
+                  onclick="saveInternInline('${esc(
+                    employee['Employee ID']||
+                    ''
+                  )}')"
                 >
                   Save Intern Update
                 </button>
+
               </div>
             `
             :''
         }
 
       </div>
-    </div>`;
+
+    </div>
+  `;
 }
 
 async function saveInternInline(employeeId){
-  const data={
-    employeeId,
-    mentorProject:document.getElementById('internMentorInline').value.trim(),
-    status:document.getElementById('internStatusInline').value,
-    remarks:document.getElementById('internRemarksInline').value.trim()
-  };
+  const mentor=
+    document.getElementById(
+      'internMentorInline'
+    )?.value.trim()||'';
+
+  const status=
+    document.getElementById(
+      'internStatusInline'
+    )?.value||'In Progress';
+
+  const remarks=
+    document.getElementById(
+      'internRemarksInline'
+    )?.value.trim()||'';
 
   try{
     const out=await apiGet(
       'addInternProgress',
-      {data:JSON.stringify(data)}
-    );
-
-    if(!out.success)throw new Error(
-      out.error||'Unable to save'
-    );
-
-    toast('Intern progress saved.');
-
-    loadRecentActivity();
-  }catch(err){
-    toast(
-      err.message||
-      'Intern progress route connects to the INTERN PROGRESS sheet once deployed.'
-    )
-  }
-}
-
-/* ---------- add / edit person ---------- */
-function openModal(id){
-  document.getElementById(id).classList.add('open')
-}
-
-function closeModal(id){
-  document.getElementById(id).classList.remove('open')
-}
-
-function previewPhoto(){
-  const f=document.getElementById('employeePhoto').files[0];
-
-  const box=document.getElementById('photoPreview');
-
-  document.getElementById('photoName').textContent=
-    f?f.name:'No photo selected.';
-
-  if(f){
-    const r=new FileReader();
-
-    r.onload=e=>
-      box.innerHTML=
-        `<img src="${e.target.result}" alt="Profile photo preview">`;
-
-    r.readAsDataURL(f);
-  }else{
-    box.innerHTML=
-      '<div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div>'
-  }
-}
-
-function showKycFiles(){
-  const files=[
-    ...document.getElementById('kycFiles').files
-  ];
-
-  document.getElementById('kycFileList').innerHTML=
-    files
-      .map(
-        f=>
-          `<div class="hr-file">
-            <span>${esc(f.name)}</span>
-            <small>${Math.round(f.size/1024)} KB</small>
-          </div>`
-      )
-      .join('')
-      ||'';
-}
-
-async function submitEmployee(e){
-  e.preventDefault();
-
-  const fullName=
-    document.getElementById('empFullName').value.trim();
-
-  if(!fullName){
-    toast('Full name is required.');
-    return
-  }
-
-  const data={
-    fullName,
-    officialEmail:
-      document.getElementById('empOfficialEmail').value.trim(),
-    personalEmail:
-      document.getElementById('empPersonalEmail').value.trim(),
-    mobile:
-      document.getElementById('empMobile').value.trim(),
-    department:
-      document.getElementById('empDepartment').value.trim(),
-    designation:
-      document.getElementById('empDesignation').value.trim(),
-    reportingManager:
-      document.getElementById('empManager').value.trim(),
-    joiningDate:
-      document.getElementById('empJoiningDate').value,
-    employmentType:
-      document.getElementById('empEmploymentType').value,
-    workMode:
-      document.getElementById('empWorkMode').value,
-    workLocation:
-      document.getElementById('empWorkLocation').value.trim(),
-    employmentStatus:
-      document.getElementById('empEmploymentStatus').value,
-    kycStatus:
-      document.getElementById('empKycStatus').value
-  };
-
-  try{
-    const out=await apiGet(
-      'addEmployee',
-      {data:JSON.stringify(data)}
-    );
-
-    if(!out.success){
-      throw new Error(
-        out.error||'Unable to create employee'
-      );
-    }
-
-    closeModal('addEmployeeModal');
-
-    document.getElementById('addEmployeeForm').reset();
-
-    toast(
-      `Person created — ${out.employeeId||'record saved'}`
-    );
-
-    await loadPeople();
-    await loadRecentActivity();
-  }catch(err){
-    toast(
-      err.message||'Unable to create person record.'
-    );
-  }
-}
-
-function openAddEmployee(){
-  state.employee=null;
-
-  document.getElementById('addEmployeeForm').reset();
-
-  openModal('addEmployeeModal');
-}
-
-function openAddEmployeeWithData(){
-  const e=state.employee;
-
-  if(!e){
-    openAddEmployee();
-    return
-  }
-
-  document.getElementById('empFullName').value=e['Full Name']||'';
-  document.getElementById('empOfficialEmail').value=e['Official Email']||'';
-  document.getElementById('empPersonalEmail').value=e['Personal Email']||'';
-  document.getElementById('empMobile').value=e['Mobile']||'';
-  document.getElementById('empDepartment').value=e['Department']||'';
-  document.getElementById('empDesignation').value=e['Designation']||'';
-  document.getElementById('empManager').value=e['Reporting Manager']||'';
-  document.getElementById('empJoiningDate').value=e['Joining Date']||'';
-  document.getElementById('empEmploymentType').value=e['Employment Type']||'Full Time';
-  document.getElementById('empWorkMode').value=e['Work Mode']||'Office';
-  document.getElementById('empWorkLocation').value=e['Work Location']||'';
-  document.getElementById('empEmploymentStatus').value=e['Employment Status']||'Active';
-  document.getElementById('empKycStatus').value=e['KYC Status']||'Pending';
-
-  openModal('addEmployeeModal');
-}
-
-/* ---------- tasks ---------- */
-async function loadTasks(){
-  const target=document.getElementById('taskBoard');
-
-  target.innerHTML=
-    '<div class="hr-empty"><span class="hr-loading">Loading tasks</span></div>';
-
-  try{
-    const data=await apiGet('listTasks',{});
-
-    state.tasks=data.tasks||[];
-
-    renderTasks(state.tasks);
-
-    refreshTodayStrip();
-  }catch(e){
-    target.innerHTML=
-      '<div class="hr-empty">Tasks could not be loaded. Connect the backend in HR_BACKEND_URL to enable this.</div>';
-  }
-}
-
-function renderTasks(tasks){
-  const target=document.getElementById('taskBoard');
-
-  const q=
-    document.getElementById('taskSearch').value
-      .trim()
-      .toLowerCase();
-
-  const pr=
-    document.getElementById('taskPriorityFilter').value;
-
-  const filtered=tasks.filter(
-    t=>
-      (
-        !q||
-        `${t.title} ${t.assignee}`
-          .toLowerCase()
-          .includes(q)
-      )&&
-      (!pr||t.priority===pr)
-  );
-
-  if(!filtered.length){
-    target.innerHTML=
-      '<div class="hr-empty">No tasks yet. Use "+ Assign Task" to create the first one.</div>';
-    return
-  }
-
-  const cols=[
-    ['To Do','To Do'],
-    ['In Progress','In Progress'],
-    ['Done','Done']
-  ];
-
-  target.innerHTML=cols.map(
-    ([key,label])=>{
-      const rows=filtered.filter(
-        t=>t.status===key
-      );
-
-      return `
-        <div class="task-col">
-          <div class="task-col-head">
-            <strong>${label}</strong>
-            <span>${rows.length}</span>
-          </div>
-
-          <div class="task-list">
-            ${
-              rows.length
-                ?rows.map(
-                  t=>`
-                    <div class="task-card">
-
-                      <div class="task-card-top">
-                        <strong>${esc(t.title||'Untitled')}</strong>
-                        <span class="task-priority ${
-                          String(t.priority||'Medium')
-                            .toLowerCase()
-                        }">
-                          ${esc(t.priority||'Medium')}
-                        </span>
-                      </div>
-
-                      <div class="task-card-meta">
-                        <span>${esc(t.assignee||'Unassigned')}</span>
-                        <span>${t.dueDate?fmt(t.dueDate):'No due date'}</span>
-                      </div>
-
-                      <div class="task-card-actions">
-                        ${
-                          key!=='To Do'
-                            ?`<button type="button" data-task-id="${esc(t.id)}" data-task-status="To Do">To Do</button>`
-                            :''
-                        }
-                        ${
-                          key!=='In Progress'
-                            ?`<button type="button" data-task-id="${esc(t.id)}" data-task-status="In Progress">In Progress</button>`
-                            :''
-                        }
-                        ${
-                          key!=='Done'
-                            ?`<button type="button" data-task-id="${esc(t.id)}" data-task-status="Done">Done</button>`
-                            :''
-                        }
-                      </div>
-
-                    </div>`
-                ).join('')
-                :'<div class="hr-empty">No tasks</div>'
-            }
-          </div>
-        </div>
-      `
-    }
-  ).join('');
-
-  target
-    .querySelectorAll('[data-task-id]')
-    .forEach(
-      btn=>
-        btn.addEventListener(
-          'click',
-          ()=>updateTaskStatus(
-            btn.dataset.taskId,
-            btn.dataset.taskStatus
-          )
-        )
-    );
-}
-
-async function submitTask(e){
-  e.preventDefault();
-
-  const data={
-    title:document.getElementById('taskTitle').value.trim(),
-    details:document.getElementById('taskDetails').value.trim(),
-    category:document.getElementById('taskCategory').value,
-    type:document.getElementById('taskType').value,
-    assignee:document.getElementById('taskAssignee').value.trim(),
-    relatedPersonId:document.getElementById('taskPersonId').value.trim(),
-    priority:document.getElementById('taskPriority').value,
-    dueDate:document.getElementById('taskDueDate').value,
-    recurrence:document.getElementById('taskRecurrence').value,
-    status:'To Do',
-    source:'Manual'
-  };
-
-  try{
-    const out=await apiGet(
-      'addTask',
-      {data:JSON.stringify(data)}
-    );
-
-    if(!out.success){
-      throw new Error(
-        out.error||'Unable to create task'
-      );
-    }
-
-    closeModal('addTaskModal');
-
-    document.getElementById('addTaskForm').reset();
-
-    toast(
-      out.duplicate
-        ?'Existing task found.'
-        :'Task created.'
-    );
-
-    loadTasks();
-    loadRecentActivity();
-  }catch(err){
-    toast(err.message||'Unable to create task.');
-  }
-}
-
-async function updateTaskStatus(taskId,status){
-  try{
-    const out=await apiGet(
-      'updateTaskStatus',
       {
-        taskId,
-        status
+        data:JSON.stringify({
+          employeeId,
+          mentorProject:mentor,
+          status,
+          remarks
+        })
       }
     );
 
     if(!out.success){
       throw new Error(
-        out.error||'Unable to update task'
+        out.error||
+        'Unable to save'
       );
     }
 
-    toast('Task updated.');
+    toast(
+      'Intern progress saved.'
+    );
 
-    loadTasks();
     loadRecentActivity();
-  }catch(err){
-    toast(err.message||'Unable to update task.');
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to save intern progress.'
+    );
   }
 }
 
-/* ---------- training ---------- */
-async function loadTraining(){
-  try{
-    const data=await apiGet('listTraining');
+/* ---------- modal helpers ---------- */
 
-    state.training=data.training||[];
+function openModal(id){
+  const el=document.getElementById(id);
 
-    renderTraining(state.training);
-  }catch(e){
-    document.getElementById('trainingTable').innerHTML=
-      '<div class="hr-empty">Training data could not be loaded.</div>';
+  if(el){
+    el.classList.add('open');
   }
 }
 
-function renderTraining(items){
-  const target=document.getElementById('trainingTable');
+function closeModal(id){
+  const el=document.getElementById(id);
 
-  const q=
-    document.getElementById('trainingSearch').value
-      .trim()
-      .toLowerCase();
-
-  const status=
-    document.getElementById('trainingStatusFilter').value
-      .toLowerCase();
-
-  const filtered=items.filter(
-    r=>
-      (
-        !q||
-        Object.values(r).some(
-          v=>String(v??'').toLowerCase().includes(q)
-        )
-      )&&
-      (
-        !status||
-        String(r.status||'').toLowerCase()===status
-      )
-  );
-
-  if(!filtered.length){
-    target.innerHTML=
-      '<div class="hr-empty">No training records found.</div>';
-    return
+  if(el){
+    el.classList.remove('open');
   }
-
-  target.innerHTML=`
-    <table class="hr-table">
-      <thead>
-        <tr>
-          <th>Training</th>
-          <th>Person</th>
-          <th>Type</th>
-          <th>Provider</th>
-          <th>Status</th>
-          <th>Start</th>
-          <th>Completion</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${filtered.map(
-          r=>`
-            <tr>
-              <td>${esc(r.name||'—')}</td>
-              <td>${esc(r.employees||'—')}</td>
-              <td>${esc(r.type||'—')}</td>
-              <td>${esc(r.provider||'—')}</td>
-              <td>${esc(r.status||'—')}</td>
-              <td>${fmt(r.startDate)}</td>
-              <td>${fmt(r.endDate)}</td>
-            </tr>
-          `
-        ).join('')}
-      </tbody>
-    </table>`;
 }
 
-async function submitTraining(e){
-  e.preventDefault();
+/* ---------- employee form ---------- */
+
+function resetAddForm(){
+  const form=
+    document.getElementById(
+      'addEmployeeForm'
+    );
+
+  form?.reset();
+
+  const location=
+    document.getElementById(
+      'empWorkLocation'
+    );
+
+  if(location){
+    location.value='Bhubaneswar';
+  }
+
+  const preview=
+    document.getElementById(
+      'photoPreview'
+    );
+
+  if(preview){
+    preview.innerHTML=
+      '<div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div>';
+  }
+
+  const photoName=
+    document.getElementById(
+      'photoName'
+    );
+
+  if(photoName){
+    photoName.textContent=
+      'No photo selected.';
+  }
+
+  const kyc=
+    document.getElementById(
+      'kycFileList'
+    );
+
+  if(kyc){
+    kyc.innerHTML='';
+  }
+}
+
+function previewPhoto(){
+  const input=
+    document.getElementById(
+      'employeePhoto'
+    );
+
+  if(!input)return;
+
+  const file=
+    input.files?.[0];
+
+  const preview=
+    document.getElementById(
+      'photoPreview'
+    );
+
+  const name=
+    document.getElementById(
+      'photoName'
+    );
+
+  if(name){
+    name.textContent=
+      file
+        ?file.name
+        :'No photo selected.';
+  }
+
+  if(!preview)return;
+
+  if(!file){
+    preview.innerHTML=
+      '<div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div>';
+    return;
+  }
+
+  const reader=
+    new FileReader();
+
+  reader.onload=event=>{
+    preview.innerHTML=
+      `<img src="${event.target.result}" alt="Profile photo preview">`;
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function showKycFiles(){
+  const input=
+    document.getElementById(
+      'kycFiles'
+    );
+
+  const target=
+    document.getElementById(
+      'kycFileList'
+    );
+
+  if(!input||!target)return;
+
+  const files=[
+    ...(input.files||[])
+  ];
+
+  target.innerHTML=
+    files.map(
+      file=>`
+        <div class="hr-file">
+          <span>${esc(file.name)}</span>
+          <small>
+            ${Math.round(file.size/1024)} KB
+          </small>
+        </div>
+      `
+    ).join('');
+}
+
+async function submitEmployee(event){
+  event.preventDefault();
+
+  const fullName=
+    document.getElementById(
+      'empFullName'
+    )?.value.trim();
+
+  if(!fullName){
+    toast(
+      'Full name is required.'
+    );
+    return;
+  }
 
   const data={
-    name:document.getElementById('trainingName').value.trim(),
-    employees:document.getElementById('trainingEmployees').value.trim(),
-    type:document.getElementById('trainingType').value,
-    provider:document.getElementById('trainingProvider').value.trim(),
-    startDate:document.getElementById('trainingStartDate').value,
-    endDate:document.getElementById('trainingEndDate').value,
-    duration:document.getElementById('trainingDuration').value.trim(),
-    status:document.getElementById('trainingStatus').value,
-    assessmentScore:document.getElementById('trainingScore').value,
-    certificationStatus:document.getElementById('trainingCertification').value,
-    remarks:document.getElementById('trainingRemarks').value.trim()
+    fullName,
+    officialEmail:
+      document.getElementById(
+        'empOfficialEmail'
+      )?.value.trim()||'',
+
+    personalEmail:
+      document.getElementById(
+        'empPersonalEmail'
+      )?.value.trim()||'',
+
+    mobile:
+      document.getElementById(
+        'empMobile'
+      )?.value.trim()||'',
+
+    department:
+      document.getElementById(
+        'empDepartment'
+      )?.value.trim()||'',
+
+    designation:
+      document.getElementById(
+        'empDesignation'
+      )?.value.trim()||'',
+
+    reportingManager:
+      document.getElementById(
+        'empManager'
+      )?.value.trim()||'',
+
+    joiningDate:
+      document.getElementById(
+        'empJoiningDate'
+      )?.value||'',
+
+    employmentType:
+      document.getElementById(
+        'empEmploymentType'
+      )?.value||'Full Time',
+
+    workMode:
+      document.getElementById(
+        'empWorkMode'
+      )?.value||'Office',
+
+    workLocation:
+      document.getElementById(
+        'empWorkLocation'
+      )?.value.trim()||'Bhubaneswar',
+
+    employmentStatus:
+      document.getElementById(
+        'empEmploymentStatus'
+      )?.value||'Active',
+
+    kycStatus:
+      document.getElementById(
+        'empKycStatus'
+      )?.value||'Pending'
   };
 
   try{
     const out=await apiGet(
-      'addTraining',
-      {data:JSON.stringify(data)}
+      'addEmployee',
+      {
+        data:JSON.stringify(data)
+      }
     );
 
     if(!out.success){
       throw new Error(
-        out.error||'Unable to create training'
+        out.error||
+        'Unable to create employee'
       );
     }
 
-    closeModal('addTrainingModal');
+    closeModal(
+      'addEmployeeModal'
+    );
 
-    document.getElementById('addTrainingForm').reset();
+    resetAddForm();
 
-    toast('Training record created.');
-
-    loadTraining();
-    loadRecentActivity();
-  }catch(err){
     toast(
-      err.message||'Unable to create training record.'
+      `Person record ${
+        out.employeeId||
+        'created'
+      }`
+    );
+
+    await loadPeople();
+    showView('people');
+    loadRecentActivity();
+
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to create person record.'
+    );
+  }
+}
+
+function openAddEmployee(){
+  resetAddForm();
+  openModal('addEmployeeModal');
+}
+
+function openAddEmployeeWithData(){
+  resetAddForm();
+  openModal('addEmployeeModal');
+
+  if(!state.employee)return;
+
+  const employee=
+    state.employee;
+
+  const set=(id,value)=>{
+    const el=document.getElementById(id);
+
+    if(el)el.value=value;
+  };
+
+  set(
+    'empFullName',
+    employee['Full Name']||''
+  );
+
+  set(
+    'empOfficialEmail',
+    employee['Official Email']||''
+  );
+
+  set(
+    'empPersonalEmail',
+    employee['Personal Email']||''
+  );
+
+  set(
+    'empMobile',
+    employee['Mobile']||''
+  );
+
+  set(
+    'empDepartment',
+    employee['Department']||''
+  );
+
+  set(
+    'empDesignation',
+    employee['Designation']||''
+  );
+
+  set(
+    'empManager',
+    employee['Reporting Manager']||''
+  );
+
+  set(
+    'empJoiningDate',
+    employee['Joining Date']
+      ?new Date(
+        employee['Joining Date']
+      ).toISOString().slice(0,10)
+      :''
+  );
+
+  set(
+    'empEmploymentType',
+    employee['Employment Type']||
+    'Full Time'
+  );
+
+  set(
+    'empWorkMode',
+    employee['Work Mode']||
+    'Office'
+  );
+
+  set(
+    'empWorkLocation',
+    employee['Work Location']||
+    'Bhubaneswar'
+  );
+
+  set(
+    'empEmploymentStatus',
+    employee['Employment Status']||
+    'Active'
+  );
+
+  set(
+    'empKycStatus',
+    employee['KYC Status']||
+    'Pending'
+  );
+}
+
+/* ---------- documents ---------- */
+
+async function loadPersonDocuments(){
+  const q=
+    document.getElementById(
+      'documentPerson'
+    )?.value.trim();
+
+  if(!q){
+    toast(
+      'Enter an Employee ID or person name.'
+    );
+    return;
+  }
+
+  const target=
+    document.getElementById(
+      'documentsTable'
+    );
+
+  if(target){
+    target.innerHTML=
+      '<div class="hr-empty"><span class="hr-loading">Loading documents</span></div>';
+  }
+
+  try{
+    const data=await apiGet(
+      'searchEmployees',
+      {q}
+    );
+
+    const first=
+      (data.results||[])[0];
+
+    if(!first){
+      if(target){
+        target.innerHTML=
+          '<div class="hr-empty">Person not found.</div>';
+      }
+      return;
+    }
+
+    const profile=
+      await apiGet(
+        'getEmployeeProfile',
+        {
+          employeeId:
+            first['Employee ID']
+        }
+      );
+
+    const docs=
+      profile.documents||[];
+
+    if(!target)return;
+
+    target.innerHTML=
+      docs.length
+        ?`
+          <div class="hr-filter-line">
+            <div class="count">
+              ${docs.length} document(s)
+              for ${esc(
+                first['Full Name']
+              )}
+            </div>
+          </div>
+
+          <table class="hr-doc-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Category</th>
+                <th>File</th>
+                <th>Status</th>
+                <th>Verification</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              ${docs.map(
+                document=>`
+                  <tr>
+                    <td>
+                      ${esc(
+                        document['Document Type']||
+                        '—'
+                      )}
+                    </td>
+
+                    <td>
+                      ${esc(
+                        document['Document Category']||
+                        '—'
+                      )}
+                    </td>
+
+                    <td>
+                      ${esc(
+                        document['File Name']||
+                        '—'
+                      )}
+                    </td>
+
+                    <td>
+                      ${esc(
+                        document['Document Status']||
+                        '—'
+                      )}
+                    </td>
+
+                    <td>
+                      ${esc(
+                        document['Verification Status']||
+                        '—'
+                      )}
+                    </td>
+
+                    <td>
+                      ${
+                        document['Google Drive URL']
+                          ?`
+                            <a
+                              href="${esc(
+                                document['Google Drive URL']
+                              )}"
+                              target="_blank"
+                              rel="noopener"
+                            >
+                              Open
+                            </a>
+                          `
+                          :'—'
+                      }
+                    </td>
+                  </tr>
+                `
+              ).join('')}
+            </tbody>
+          </table>
+        `
+        :'<div class="hr-empty">No documents are recorded for this person.</div>';
+
+  }catch(error){
+    if(target){
+      target.innerHTML=
+        '<div class="hr-empty">Unable to load documents.</div>';
+    }
+
+    toast(
+      'Unable to load documents.'
+    );
+  }
+}
+
+/* ---------- tasks ---------- */
+
+async function loadTasks(){
+  const target=
+    document.getElementById(
+      'taskBoard'
+    );
+
+  if(!target)return;
+
+  target.innerHTML=
+    '<div class="hr-empty"><span class="hr-loading">Loading tasks</span></div>';
+
+  try{
+    const data=
+      await apiGet(
+        'listTasks',
+        {}
+      );
+
+    state.tasks=
+      data.tasks||[];
+
+    renderTasks(
+      state.tasks
+    );
+
+    refreshTodayStrip();
+
+  }catch(error){
+    target.innerHTML=
+      '<div class="hr-empty">Tasks could not be loaded.</div>';
+  }
+}
+
+function renderTasks(tasks){
+  const target=
+    document.getElementById(
+      'taskBoard'
+    );
+
+  if(!target)return;
+
+  const q=
+    (
+      document.getElementById(
+        'taskSearch'
+      )?.value||
+      ''
+    ).trim().toLowerCase();
+
+  const priority=
+    document.getElementById(
+      'taskPriorityFilter'
+    )?.value||'';
+
+  const filtered=
+    tasks.filter(
+      task=>
+        (
+          !q||
+          `${task.title||''} ${
+            task.assignee||''
+          }`
+            .toLowerCase()
+            .includes(q)
+        )&&
+        (
+          !priority||
+          task.priority===priority
+        )
+    );
+
+  if(!filtered.length){
+    target.innerHTML=
+      '<div class="hr-empty">No tasks yet. Use "+ Assign Task" to create the first one.</div>';
+    return;
+  }
+
+  const columns=[
+    ['To Do','To Do'],
+    ['In Progress','In Progress'],
+    ['Done','Done']
+  ];
+
+  target.innerHTML=
+    columns.map(
+      ([key,label])=>{
+        const items=
+          filtered.filter(
+            task=>
+              (task.status||'To Do')===key
+          );
+
+        return`
+          <div class="hr-task-col">
+
+            <h4>
+              ${esc(label)}
+              <span>${items.length}</span>
+            </h4>
+
+            ${
+              items.length
+                ?items.map(
+                  task=>{
+                    const overdue=
+                      key!=='Done'&&
+                      task.dueDate&&
+                      new Date(task.dueDate)<
+                        new Date(
+                          new Date()
+                            .toDateString()
+                        );
+
+                    const reminder=
+                      waLink(
+                        task.mobile,
+                        `Hi ${
+                          task.assignee||''
+                        }, reminder from ORIGENNT HR: "${
+                          task.title||''
+                        }"${
+                          task.dueDate
+                            ?` is due ${fmt(task.dueDate)}`
+                            :''
+                        }.`
+                      );
+
+                    return`
+                      <div class="hr-task-card">
+
+                        <div
+                          style="display:flex;justify-content:space-between;gap:8px"
+                        >
+                          <strong>
+                            ${esc(
+                              task.title||
+                              'Untitled'
+                            )}
+                          </strong>
+
+                          <span
+                            class="hr-priority ${
+                              esc(
+                                task.priority||
+                                'Medium'
+                              )
+                            }"
+                          >
+                            ${esc(
+                              task.priority||
+                              'Medium'
+                            )}
+                          </span>
+                        </div>
+
+                        ${
+                          task.details
+                            ?`
+                              <p>
+                                ${esc(
+                                  task.details
+                                )}
+                              </p>
+                            `
+                            :''
+                        }
+
+                        <div
+                          class="hr-task-meta ${
+                            overdue
+                              ?'overdue'
+                              :''
+                          }"
+                        >
+                          <span class="who">
+                            ${esc(
+                              task.assignee||
+                              'Unassigned'
+                            )}
+                          </span>
+
+                          <span class="due">
+                            ${
+                              task.dueDate
+                                ?`Due ${fmt(task.dueDate)}`
+                                :'No due date'
+                            }
+                          </span>
+                        </div>
+
+                        <div class="hr-task-actions">
+
+                          <select
+                            data-task-id="${esc(
+                              task.id||
+                              task['Task ID']||
+                              ''
+                            )}"
+                            class="task-status-select"
+                          >
+                            <option
+                              value="To Do"
+                              ${
+                                key==='To Do'
+                                  ?'selected'
+                                  :''
+                              }
+                            >
+                              To Do
+                            </option>
+
+                            <option
+                              value="In Progress"
+                              ${
+                                key==='In Progress'
+                                  ?'selected'
+                                  :''
+                              }
+                            >
+                              In Progress
+                            </option>
+
+                            <option
+                              value="Done"
+                              ${
+                                key==='Done'
+                                  ?'selected'
+                                  :''
+                              }
+                            >
+                              Done
+                            </option>
+                          </select>
+
+                          ${
+                            reminder
+                              ?`
+                                <a
+                                  class="hr-btn small wa"
+                                  href="${reminder}"
+                                  target="_blank"
+                                  rel="noopener"
+                                >
+                                  Remind on WhatsApp
+                                </a>
+                              `
+                              :''
+                          }
+
+                        </div>
+
+                      </div>
+                    `;
+                  }
+                ).join('')
+                :'<div class="hr-empty" style="padding:14px">Nothing here.</div>'
+            }
+
+          </div>
+        `;
+      }
+    ).join('');
+
+  target
+    .querySelectorAll(
+      '.task-status-select'
+    )
+    .forEach(
+      select=>
+        select.addEventListener(
+          'change',
+          ()=>updateTaskStatus(
+            select.dataset.taskId,
+            select.value
+          )
+        )
+    );
+}
+
+async function updateTaskStatus(
+  taskId,
+  status
+){
+  try{
+    const out=
+      await apiGet(
+        'updateTaskStatus',
+        {
+          id:taskId,
+          status
+        }
+      );
+
+    if(!out.success){
+      throw new Error(
+        out.error||
+        'Unable to update task'
+      );
+    }
+
+    toast(
+      'Task updated.'
+    );
+
+    await loadTasks();
+
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to update task.'
+    );
+  }
+}
+
+async function submitTask(event){
+  event.preventDefault();
+
+  const title=
+    document.getElementById(
+      'taskTitle'
+    )?.value.trim();
+
+  if(!title){
+    toast(
+      'Task title is required.'
+    );
+    return;
+  }
+
+  const data={
+    title,
+
+    details:
+      document.getElementById(
+        'taskDetails'
+      )?.value.trim()||'',
+
+    assignee:
+      document.getElementById(
+        'taskAssignee'
+      )?.value.trim()||'',
+
+    mobile:
+      document.getElementById(
+        'taskAssigneeMobile'
+      )?.value.trim()||'',
+
+    priority:
+      document.getElementById(
+        'taskPriority'
+      )?.value||'Medium',
+
+    dueDate:
+      document.getElementById(
+        'taskDueDate'
+      )?.value||'',
+
+    status:'To Do'
+  };
+
+  try{
+    const out=
+      await apiGet(
+        'addTask',
+        {
+          data:JSON.stringify(data)
+        }
+      );
+
+    if(!out.success){
+      throw new Error(
+        out.error||
+        'Unable to create task'
+      );
+    }
+
+    closeModal(
+      'addTaskModal'
+    );
+
+    document
+      .getElementById(
+        'addTaskForm'
+      )
+      ?.reset();
+
+    toast(
+      'Task assigned.'
+    );
+
+    await loadTasks();
+
+    showView('tasks');
+
+    loadRecentActivity();
+
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to assign task.'
+    );
+  }
+}
+
+/* ---------- training ---------- */
+
+async function loadTraining(){
+  const target=
+    document.getElementById(
+      'trainingTable'
+    );
+
+  if(!target)return;
+
+  target.innerHTML=
+    '<div class="hr-empty"><span class="hr-loading">Loading training records</span></div>';
+
+  try{
+    const data=
+      await apiGet(
+        'listTraining',
+        {}
+      );
+
+    state.training=
+      data.training||[];
+
+    renderTraining(
+      state.training
+    );
+
+  }catch(error){
+    target.innerHTML=
+      '<div class="hr-empty">Training records could not be loaded.</div>';
+  }
+}
+
+function renderTraining(list){
+  const target=
+    document.getElementById(
+      'trainingTable'
+    );
+
+  if(!target)return;
+
+  const q=
+    (
+      document.getElementById(
+        'trainingSearch'
+      )?.value||
+      ''
+    ).trim().toLowerCase();
+
+  const status=
+    document.getElementById(
+      'trainingStatusFilter'
+    )?.value||'';
+
+  const filtered=
+    list.filter(
+      training=>
+        (
+          !q||
+          `${training.name||''} ${
+            training.employees||''
+          }`
+            .toLowerCase()
+            .includes(q)
+        )&&
+        (
+          !status||
+          training.status===status
+        )
+    );
+
+  if(!filtered.length){
+    target.innerHTML=
+      '<div class="hr-empty">No training records yet.</div>';
+    return;
+  }
+
+  target.innerHTML=`
+    <table class="hr-reg-table">
+      <thead>
+        <tr>
+          <th>Programme</th>
+          <th>Type</th>
+          <th>Employee(s)</th>
+          <th>Dates</th>
+          <th>Status</th>
+          <th>Certificate</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        ${filtered.map(
+          training=>`
+            <tr>
+              <td>
+                <strong>
+                  ${esc(
+                    training.name||
+                    '—'
+                  )}
+                </strong>
+
+                <br>
+
+                <span class="hr-muted">
+                  ${esc(
+                    training.provider||
+                    '—'
+                  )}
+                </span>
+              </td>
+
+              <td>
+                ${esc(
+                  training.type||
+                  '—'
+                )}
+              </td>
+
+              <td>
+                ${esc(
+                  training.employees||
+                  '—'
+                )}
+              </td>
+
+              <td>
+                ${fmt(
+                  training.startDate
+                )}
+                &rarr;
+                ${fmt(
+                  training.endDate
+                )}
+              </td>
+
+              <td>
+                ${esc(
+                  training.status||
+                  'Scheduled'
+                )}
+              </td>
+
+              <td>
+                ${
+                  training.certLink
+                    ?`
+                      <a
+                        href="${esc(
+                          training.certLink
+                        )}"
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        Open
+                      </a>
+                    `
+                    :'—'
+                }
+              </td>
+            </tr>
+          `
+        ).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+async function submitTraining(event){
+  event.preventDefault();
+
+  const name=
+    document.getElementById(
+      'trainingName'
+    )?.value.trim();
+
+  const employees=
+    document.getElementById(
+      'trainingEmployees'
+    )?.value.trim();
+
+  if(!name||!employees){
+    toast(
+      'Programme name and employees are required.'
+    );
+    return;
+  }
+
+  const data={
+    name,
+
+    type:
+      document.getElementById(
+        'trainingType'
+      )?.value||'',
+
+    provider:
+      document.getElementById(
+        'trainingProvider'
+      )?.value.trim()||'',
+
+    employees,
+
+    status:
+      document.getElementById(
+        'trainingStatus'
+      )?.value||'Scheduled',
+
+    startDate:
+      document.getElementById(
+        'trainingStart'
+      )?.value||'',
+
+    endDate:
+      document.getElementById(
+        'trainingEnd'
+      )?.value||'',
+
+    certLink:
+      document.getElementById(
+        'trainingCertLink'
+      )?.value.trim()||''
+  };
+
+  try{
+    const out=
+      await apiGet(
+        'addTraining',
+        {
+          data:JSON.stringify(data)
+        }
+      );
+
+    if(!out.success){
+      throw new Error(
+        out.error||
+        'Unable to save training record'
+      );
+    }
+
+    closeModal(
+      'addTrainingModal'
+    );
+
+    document
+      .getElementById(
+        'addTrainingForm'
+      )
+      ?.reset();
+
+    toast(
+      'Training record saved.'
+    );
+
+    await loadTraining();
+
+    showView('training');
+
+    loadRecentActivity();
+
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to save training record.'
     );
   }
 }
 
 /* ---------- MPR ---------- */
+
 async function loadMpr(){
+  const target=
+    document.getElementById(
+      'mprTable'
+    );
+
+  if(!target)return;
+
+  target.innerHTML=
+    '<div class="hr-empty"><span class="hr-loading">Loading MPRs</span></div>';
+
   try{
-    const data=await apiGet('listMpr');
+    const data=
+      await apiGet(
+        'listMpr',
+        {}
+      );
 
-    state.mpr=data.mpr||[];
+    state.mpr=
+      data.mpr||[];
 
-    renderMpr(state.mpr);
+    renderMpr(
+      state.mpr
+    );
 
     refreshTodayStrip();
-  }catch(e){
-    document.getElementById('mprTable').innerHTML=
-      '<div class="hr-empty">MPR data could not be loaded.</div>';
+
+  }catch(error){
+    target.innerHTML=
+      '<div class="hr-empty">MPRs could not be loaded.</div>';
   }
 }
 
-function renderMpr(items){
-  const target=document.getElementById('mprTable');
+function renderMpr(list){
+  const target=
+    document.getElementById(
+      'mprTable'
+    );
+
+  if(!target)return;
 
   const month=
-    document.getElementById('mprMonthFilter').value;
+    document.getElementById(
+      'mprMonthFilter'
+    )?.value||'';
 
   const status=
-    document.getElementById('mprStatusFilter').value;
+    document.getElementById(
+      'mprStatusFilter'
+    )?.value||'';
 
-  const filtered=items.filter(
-    r=>
-      (!month||r.month===month)&&
-      (!status||r.status===status)
-  );
+  const filtered=
+    list.filter(
+      m=>
+        (!month||m.month===month)&&
+        (!status||m.status===status)
+    );
 
   if(!filtered.length){
     target.innerHTML=
-      '<div class="hr-empty">No MPR records found.</div>';
-    return
+      '<div class="hr-empty">No MPRs logged yet.</div>';
+    return;
   }
 
   target.innerHTML=`
-    <table class="hr-table">
+    <table class="hr-reg-table">
       <thead>
         <tr>
           <th>Employee</th>
-          <th>Review Period</th>
-          <th>Reviewer</th>
+          <th>Month</th>
+          <th>Achievements</th>
           <th>Rating</th>
-          <th>KPI</th>
-          <th>Overall</th>
           <th>Status</th>
         </tr>
       </thead>
+
       <tbody>
         ${filtered.map(
-          r=>`
+          m=>`
             <tr>
-              <td>${esc(r.employee||'—')}</td>
-              <td>${esc(r.month||'—')}</td>
-              <td>${esc(r.reviewer||'—')}</td>
-              <td>${esc(r.rating??'—')}</td>
-              <td>${esc(r.kpiScore??'—')}</td>
-              <td>${esc(r.overallScore??'—')}</td>
-              <td>${esc(r.status||'—')}</td>
+              <td>
+                <strong>
+                  ${esc(
+                    m.employee||
+                    '—'
+                  )}
+                </strong>
+              </td>
+
+              <td>
+                ${esc(
+                  m.month||
+                  '—'
+                )}
+              </td>
+
+              <td>
+                ${esc(
+                  (
+                    m.achievements||
+                    ''
+                  ).slice(0,120)
+                )}
+                ${
+                  (
+                    m.achievements||
+                    ''
+                  ).length>120
+                    ?'…'
+                    :''
+                }
+              </td>
+
+              <td>
+                ${
+                  m.rating
+                    ?`${esc(m.rating)}/5`
+                    :'—'
+                }
+              </td>
+
+              <td>
+                ${esc(
+                  m.status||
+                  'Draft'
+                )}
+              </td>
             </tr>
           `
         ).join('')}
       </tbody>
-    </table>`;
+    </table>
+  `;
 }
 
-async function submitMpr(e){
-  e.preventDefault();
+async function submitMpr(event){
+  event.preventDefault();
+
+  const employee=
+    document.getElementById(
+      'mprEmployee'
+    )?.value.trim();
+
+  const month=
+    document.getElementById(
+      'mprMonth'
+    )?.value;
+
+  const achievements=
+    document.getElementById(
+      'mprAchievements'
+    )?.value.trim();
+
+  if(!employee||!month||!achievements){
+    toast(
+      'Employee, month and achievements are required.'
+    );
+    return;
+  }
 
   const data={
-    employee:document.getElementById('mprEmployee').value.trim(),
-    month:document.getElementById('mprMonth').value,
-    reviewDate:document.getElementById('mprReviewDate').value,
-    reviewer:document.getElementById('mprReviewer').value.trim(),
-    rating:document.getElementById('mprRating').value,
-    kpiScore:document.getElementById('mprKpiScore').value,
-    qualityScore:document.getElementById('mprQualityScore').value,
-    behaviourScore:document.getElementById('mprBehaviourScore').value,
-    overallScore:document.getElementById('mprOverallScore').value,
-    achievements:document.getElementById('mprAchievements').value.trim(),
-    strengths:document.getElementById('mprStrengths').value.trim(),
-    improvements:document.getElementById('mprImprovements').value.trim(),
-    targets:document.getElementById('mprTargets').value.trim(),
-    reviewerComments:document.getElementById('mprReviewerComments').value.trim(),
-    employeeComments:document.getElementById('mprEmployeeComments').value.trim(),
-    status:document.getElementById('mprStatus').value
+    employee,
+    month,
+    achievements,
+
+    targets:
+      document.getElementById(
+        'mprTargets'
+      )?.value.trim()||'',
+
+    rating:
+      document.getElementById(
+        'mprRating'
+      )?.value||'',
+
+    status:
+      document.getElementById(
+        'mprStatus'
+      )?.value||'Draft'
   };
 
   try{
-    const out=await apiGet(
-      'addMpr',
-      {data:JSON.stringify(data)}
-    );
+    const out=
+      await apiGet(
+        'addMpr',
+        {
+          data:JSON.stringify(data)
+        }
+      );
 
     if(!out.success){
       throw new Error(
-        out.error||'Unable to create MPR'
+        out.error||
+        'Unable to save MPR'
       );
     }
 
-    closeModal('addMprModal');
+    closeModal(
+      'addMprModal'
+    );
 
-    document.getElementById('addMprForm').reset();
+    document
+      .getElementById(
+        'addMprForm'
+      )
+      ?.reset();
 
-    toast('MPR created.');
+    toast(
+      'MPR saved.'
+    );
 
-    loadMpr();
+    await loadMpr();
+
+    showView('mpr');
+
     loadRecentActivity();
-  }catch(err){
-    toast(err.message||'Unable to create MPR.');
+
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to save MPR.'
+    );
   }
 }
 
 /* ---------- appointments ---------- */
-async function loadAppointments(){
-  try{
-    const data=await apiGet('listAppointments');
 
-    state.appointments=data.appointments||[];
+async function loadAppointments(){
+  const target=
+    document.getElementById(
+      'appointmentsTable'
+    );
+
+  if(!target)return;
+
+  target.innerHTML=
+    '<div class="hr-empty"><span class="hr-loading">Loading appointments</span></div>';
+
+  try{
+    const data=
+      await apiGet(
+        'listAppointments',
+        {}
+      );
+
+    state.appointments=
+      data.appointments||[];
 
     renderAppointments(
       state.appointments
     );
 
     refreshTodayStrip();
-  }catch(e){
-    document.getElementById('appointmentsTable').innerHTML=
+
+  }catch(error){
+    target.innerHTML=
       '<div class="hr-empty">Appointments could not be loaded.</div>';
   }
 }
 
-function renderAppointments(items){
-  const target=document.getElementById('appointmentsTable');
+function renderAppointments(list){
+  const target=
+    document.getElementById(
+      'appointmentsTable'
+    );
 
-  if(!items.length){
+  if(!target)return;
+
+  if(!list.length){
     target.innerHTML=
-      '<div class="hr-empty">No appointments scheduled.</div>';
-    return
+      '<div class="hr-empty">No appointments booked yet.</div>';
+    return;
   }
 
-  const sorted=[...items].sort(
-    (a,b)=>
-      new Date(
-        `${a.date||''}T${a.startTime||'00:00'}`
-      )-
-      new Date(
-        `${b.date||''}T${b.startTime||'00:00'}`
-      )
-  );
+  const sorted=
+    [...list].sort(
+      (a,b)=>
+        new Date(
+          `${a.date||''}T${
+            a.startTime||
+            '00:00'
+          }`
+        )-
+        new Date(
+          `${b.date||''}T${
+            b.startTime||
+            '00:00'
+          }`
+        )
+    );
 
   target.innerHTML=`
-    <table class="hr-table">
+    <table class="hr-reg-table">
       <thead>
         <tr>
-          <th>Appointment</th>
-          <th>Person</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>With Whom</th>
-          <th>Status</th>
+          <th>Title</th>
+          <th>With</th>
+          <th>Type</th>
+          <th>When</th>
           <th>Calendar</th>
         </tr>
       </thead>
+
       <tbody>
         ${sorted.map(
-          r=>`
+          appointment=>`
             <tr>
-              <td>${esc(r.title||'—')}</td>
-              <td>${esc(r.personName||'—')}</td>
-              <td>${fmt(r.date)}</td>
-              <td>${esc(r.startTime||'—')} — ${esc(r.endTime||'—')}</td>
-              <td>${esc(r.withWhom||'—')}</td>
-              <td>${esc(r.status||'—')}</td>
+
+              <td>
+                <strong>
+                  ${esc(
+                    appointment.title||
+                    '—'
+                  )}
+                </strong>
+
+                ${
+                  appointment.location
+                    ?`
+                      <br>
+                      <span class="hr-muted">
+                        ${esc(
+                          appointment.location
+                        )}
+                      </span>
+                    `
+                    :''
+                }
+              </td>
+
+              <td>
+                ${esc(
+                  appointment.with||
+                  '—'
+                )}
+              </td>
+
+              <td>
+                ${esc(
+                  appointment.type||
+                  '—'
+                )}
+              </td>
+
+              <td>
+                ${fmt(
+                  appointment.date
+                )}
+                &middot;
+                ${esc(
+                  appointment.startTime||
+                  ''
+                )}
+                ${
+                  appointment.endTime
+                    ?`&ndash;${esc(
+                      appointment.endTime
+                    )}`
+                    :''
+                }
+              </td>
+
               <td>
                 <a
-                  class="hr-link-btn"
-                  href="${gcalLink(r)}"
+                  href="${gcalLink(
+                    appointment
+                  )}"
                   target="_blank"
                   rel="noopener"
                 >
-                  Add
+                  Add to Google Calendar
                 </a>
               </td>
+
             </tr>
           `
         ).join('')}
       </tbody>
-    </table>`;
+    </table>
+  `;
 }
 
-async function submitAppointment(e){
-  e.preventDefault();
+async function submitAppointment(event){
+  event.preventDefault();
+
+  const title=
+    document.getElementById(
+      'apptTitle'
+    )?.value.trim();
+
+  const date=
+    document.getElementById(
+      'apptDate'
+    )?.value;
+
+  const startTime=
+    document.getElementById(
+      'apptStart'
+    )?.value;
+
+  if(!title||!date||!startTime){
+    toast(
+      'Title, date and start time are required.'
+    );
+    return;
+  }
 
   const data={
-    appointmentType:
-      document.getElementById('appointmentType').value,
-    personId:
-      document.getElementById('appointmentPersonId').value.trim(),
-    personName:
-      document.getElementById('appointmentPersonName').value.trim(),
-    personType:
-      document.getElementById('appointmentPersonType').value,
-    department:
-      document.getElementById('appointmentDepartment').value.trim(),
-    withWhom:
-      document.getElementById('appointmentWithWhom').value.trim(),
-    date:
-      document.getElementById('appointmentDate').value,
-    startTime:
-      document.getElementById('appointmentStartTime').value,
+    title,
+
+    with:
+      document.getElementById(
+        'apptWith'
+      )?.value.trim()||'',
+
+    type:
+      document.getElementById(
+        'apptType'
+      )?.value||'',
+
+    date,
+    startTime,
+
     endTime:
-      document.getElementById('appointmentEndTime').value,
+      document.getElementById(
+        'apptEnd'
+      )?.value||'',
+
     location:
-      document.getElementById('appointmentLocation').value.trim(),
-    purpose:
-      document.getElementById('appointmentPurpose').value.trim(),
-    status:
-      document.getElementById('appointmentStatus').value,
-    remarks:
-      document.getElementById('appointmentRemarks').value.trim()
+      document.getElementById(
+        'apptLocation'
+      )?.value.trim()||'',
+
+    notes:
+      document.getElementById(
+        'apptNotes'
+      )?.value.trim()||''
   };
 
   try{
-    const out=await apiGet(
-      'addAppointment',
-      {data:JSON.stringify(data)}
-    );
+    const out=
+      await apiGet(
+        'bookAppointment',
+        {
+          data:JSON.stringify(data)
+        }
+      );
 
     if(!out.success){
       throw new Error(
-        out.error||'Unable to create appointment'
+        out.error||
+        'Unable to book appointment'
       );
     }
 
-    closeModal('addAppointmentModal');
+    closeModal(
+      'addAppointmentModal'
+    );
 
-    document.getElementById('addAppointmentForm').reset();
+    document
+      .getElementById(
+        'addAppointmentForm'
+      )
+      ?.reset();
 
-    toast('Appointment created.');
-
-    loadAppointments();
-    loadRecentActivity();
-  }catch(err){
     toast(
-      err.message||'Unable to create appointment.'
-    );
-  }
-}
-
-/* ---------- templates / documents ---------- */
-function renderTemplates(){
-  const target=document.getElementById('templateGrid');
-
-  if(!target)return;
-
-  const q=
-    (
-      document.getElementById('templateSearch')?.value||
-      ''
-    )
-      .trim()
-      .toLowerCase();
-
-  const filtered=TEMPLATES.filter(
-    t=>
-      !q||
-      t[0].toLowerCase().includes(q)||
-      t[1].toLowerCase().includes(q)
-  );
-
-  target.innerHTML=
-    filtered.map(
-      t=>`
-        <button
-          type="button"
-          class="template-card ${
-            state.selectedTemplate&&
-            state.selectedTemplate.name===t[0]
-              ?'selected'
-              :''
-          }"
-          data-template-name="${esc(t[0])}"
-          data-template-category="${esc(t[1])}"
-        >
-          <span class="template-name">${esc(t[0])}</span>
-          <span class="template-category">${esc(t[1])}</span>
-        </button>
-      `
-    ).join('');
-
-  target
-    .querySelectorAll('[data-template-name]')
-    .forEach(
-      el=>
-        el.addEventListener(
-          'click',
-          ()=>{
-            state.selectedTemplate={
-              name:el.dataset.templateName,
-              category:el.dataset.templateCategory
-            };
-
-            renderTemplates();
-          }
-        )
-    );
-}
-
-function loadGeneratePerson(){
-  const id=
-    document.getElementById('generateEmployee').value.trim();
-
-  if(!id){
-    toast('Enter an Employee ID first.');
-    return
-  }
-
-  const person=
-    state.people.find(
-      p=>String(p['Employee ID'])===String(id)
+      out.calendarEventUrl
+        ?'Appointment booked and added to Google Calendar.'
+        :'Appointment saved.'
     );
 
-  if(!person){
-    toast('Employee not found.');
-    return
-  }
+    await loadAppointments();
 
-  state.generatePerson=person;
+    showView('appointments');
 
-  document.getElementById('generatePersonName').textContent=
-    person['Full Name']||'—';
+    loadRecentActivity();
 
-  document.getElementById('generatePersonMeta').textContent=
-    `${person['Employee ID']||'—'} · ${person['Designation']||'—'}`;
-
-  toast('Person selected.');
-}
-
-async function loadPersonDocuments(){
-  const employeeId=
-    document.getElementById('documentPerson').value.trim();
-
-  if(!employeeId){
-    toast('Enter an Employee ID first.');
-    return
-  }
-
-  const target=document.getElementById('personDocuments');
-
-  target.innerHTML=
-    '<div class="hr-empty"><span class="hr-loading">Loading documents</span></div>';
-
-  try{
-    const data=await apiGet(
-      'listDocuments',
-      {employeeId}
+  }catch(error){
+    toast(
+      error.message||
+      'Unable to book appointment.'
     );
-
-    const docs=data.documents||[];
-
-    if(!docs.length){
-      target.innerHTML=
-        '<div class="hr-empty">No documents found for this person.</div>';
-      return
-    }
-
-    target.innerHTML=`
-      <table class="hr-table">
-        <thead>
-          <tr>
-            <th>Document</th>
-            <th>Category</th>
-            <th>Status</th>
-            <th>Verification</th>
-            <th>Uploaded</th>
-            <th>File</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${docs.map(
-            d=>`
-              <tr>
-                <td>${esc(d['Document Type']||d.documentType||'—')}</td>
-                <td>${esc(d['Document Category']||d.category||'—')}</td>
-                <td>${esc(d['Document Status']||d.status||'—')}</td>
-                <td>${esc(d['Verification Status']||d.verificationStatus||'—')}</td>
-                <td>${fmt(d['Upload Date']||d.uploadDate)}</td>
-                <td>
-                  ${
-                    d['Google Drive URL']||d.url
-                      ?`<a
-                          class="hr-link-btn"
-                          href="${esc(d['Google Drive URL']||d.url)}"
-                          target="_blank"
-                          rel="noopener"
-                        >
-                          Open
-                        </a>`
-                      :'—'
-                  }
-                </td>
-              </tr>
-            `
-          ).join('')}
-        </tbody>
-      </table>`;
-  }catch(e){
-    target.innerHTML=
-      '<div class="hr-empty">Documents could not be loaded.</div>';
   }
 }
 
 /* ---------- analytics ---------- */
-function countBy(items,fn){
-  return items.reduce(
-    (acc,item)=>{
-      const k=fn(item)||'Unspecified';
-      acc[k]=(acc[k]||0)+1;
-      return acc;
-    },
-    {}
-  );
-}
+
+const CHART_INSTANCES={};
 
 function drawChart(id,config){
-  const canvas=document.getElementById(id);
+  if(typeof Chart==='undefined'){
+    setTimeout(
+      ()=>drawChart(id,config),
+      250
+    );
+    return;
+  }
 
-  if(!canvas||typeof Chart==='undefined')return;
+  const canvas=
+    document.getElementById(id);
 
-  if(canvas.__chart)canvas.__chart.destroy();
+  if(!canvas)return;
 
-  canvas.__chart=new Chart(
-    canvas.getContext('2d'),
-    config
+  if(CHART_INSTANCES[id]){
+    CHART_INSTANCES[id].destroy();
+  }
+
+  CHART_INSTANCES[id]=
+    new Chart(
+      canvas,
+      config
+    );
+}
+
+function countBy(list,fn){
+  const map={};
+
+  list.forEach(
+    item=>{
+      const key=
+        fn(item)||
+        '—';
+
+      map[key]=
+        (map[key]||0)+1;
+    }
   );
+
+  return map;
 }
 
 function renderAnalytics(){
   const byDept=
     countBy(
       state.people,
-      p=>p['Department']
+      person=>person['Department']
     );
 
   drawChart(
@@ -2187,7 +3572,9 @@ function renderAnalytics(){
   const byType=
     countBy(
       state.people,
-      p=>p['Employment Type']||'Unspecified'
+      person=>
+        person['Employment Type']||
+        'Unspecified'
     );
 
   drawChart(
@@ -2215,7 +3602,7 @@ function renderAnalytics(){
   const byTaskStatus=
     countBy(
       state.tasks,
-      t=>t.status||'To Do'
+      task=>task.status||'To Do'
     );
 
   drawChart(
@@ -2253,7 +3640,9 @@ function renderAnalytics(){
 
   const byRating=
     countBy(
-      state.mpr.filter(m=>m.rating),
+      state.mpr.filter(
+        m=>m.rating
+      ),
       m=>`${m.rating}/5`
     );
 
@@ -2289,25 +3678,28 @@ function renderAnalytics(){
     }
   );
 
-  const compRows=
+  const complianceRows=
     state.compliance.length
       ?state.compliance
       :COMPLIANCE_RULES.map(
-        r=>({
-          ...r,
-          status:complianceStatus(nextOccurrence(r))
+        rule=>({
+          ...rule,
+          status:
+            complianceStatus(
+              nextOccurrence(rule)
+            )
         })
       );
 
-  const byComp=
+  const byCompliance=
     countBy(
-      compRows,
-      r=>
-        r.status==='overdue'
+      complianceRows,
+      row=>
+        row.status==='overdue'
           ?'Overdue'
-          :r.status==='soon'
+          :row.status==='soon'
             ?'Due soon'
-            :r.status==='ongoing'
+            :row.status==='ongoing'
               ?'Ongoing'
               :'On track'
     );
@@ -2317,11 +3709,15 @@ function renderAnalytics(){
     {
       type:'bar',
       data:{
-        labels:Object.keys(byComp),
+        labels:Object.keys(
+          byCompliance
+        ),
         datasets:[
           {
             label:'Filings',
-            data:Object.values(byComp),
+            data:Object.values(
+              byCompliance
+            ),
             backgroundColor:[
               '#C4102A',
               '#9A6400',
@@ -2351,49 +3747,88 @@ function renderAnalytics(){
   );
 }
 
-/* ---------- authentication + operations boot ---------- */
+/* ---------- authentication ---------- */
+
 let operationsBooted=false;
 
 function parseJwt(token){
   try{
+    const parts=
+      String(token||'')
+        .split('.');
+
+    if(parts.length!==3){
+      return null;
+    }
+
+    const payload=
+      parts[1]
+        .replace(/-/g,'+')
+        .replace(/_/g,'/');
+
+    const padded=
+      payload.padEnd(
+        payload.length+
+          (4-payload.length%4)%4,
+        '='
+      );
+
     return JSON.parse(
-      atob(
-        token
-          .split('.')[1]
-          .replace(/-/g,'+')
-          .replace(/_/g,'/')
-      )
-    )
-  }catch(e){
-    return null
+      atob(padded)
+    );
+
+  }catch(error){
+    console.error(
+      'Google JWT parse failed:',
+      error
+    );
+
+    return null;
   }
 }
 
 function setAuthGate(visible){
-  const gate=document.getElementById('authGate');
+  const gate=
+    document.getElementById(
+      'authGate'
+    );
 
-  if(gate)gate.style.display=
-    visible?'grid':'none';
+  if(gate){
+    gate.style.display=
+      visible
+        ?'grid'
+        :'none';
+  }
 }
 
 async function getServerSession(){
   try{
-    const res=await fetch(
-      '/api/auth/session',
-      {
-        credentials:'include',
-        cache:'no-store',
-        headers:{
-          Accept:'application/json'
+    const response=
+      await fetch(
+        '/api/auth/session',
+        {
+          method:'GET',
+          credentials:'include',
+          cache:'no-store',
+          headers:{
+            Accept:'application/json'
+          }
         }
-      }
-    );
+      );
 
-    if(!res.ok)return null;
+    if(!response.ok){
+      return null;
+    }
 
-    const body=await res.json();
+    const body=
+      await response.json();
 
-    if(!body||!body.authenticated)return null;
+    if(
+      !body||
+      !body.authenticated
+    ){
+      return null;
+    }
 
     state.userName=
       body.user?.name||
@@ -2407,70 +3842,115 @@ async function getServerSession(){
       body.email||
       '';
 
+    state.userRole=
+      body.user?.role||
+      body.role||
+      'hr';
+
     return body;
-  }catch(e){
-    return null
+
+  }catch(error){
+    return null;
   }
 }
 
-async function onGoogleSignIn(resp){
-  const payload=parseJwt(resp.credential);
+async function onGoogleSignIn(response){
+  const credential=
+    response&&
+    response.credential;
 
-  if(!payload||!payload.email){
-    toast('Unable to read the Google account.');
+  if(!credential){
+    toast(
+      'Google did not return a sign-in credential. Please try again.'
+    );
     return;
   }
 
   try{
-    const res=await fetch(
-      '/api/auth/verify',
-      {
-        method:'POST',
-        credentials:'include',
-        headers:{
-          'Content-Type':'application/json',
-          Accept:'application/json'
-        },
-        body:JSON.stringify({
-          credential:resp.credential
-        })
-      }
-    );
+    const res=
+      await fetch(
+        '/api/auth/verify',
+        {
+          method:'POST',
+          credentials:'include',
+          headers:{
+            'Content-Type':
+              'application/json',
+            Accept:
+              'application/json'
+          },
+          body:JSON.stringify({
+            credential
+          })
+        }
+      );
 
-    const body=await res.json().catch(()=>({}));
+    const body=
+      await res
+        .json()
+        .catch(
+          ()=>({})
+        );
 
-    if(!res.ok||body.success===false){
+    if(
+      !res.ok||
+      body.success===false
+    ){
       throw new Error(
-        body.error||'Sign-in verification failed.'
-      )
+        body.error||
+        `Sign-in verification failed (${res.status}).`
+      );
     }
 
     state.userName=
       body.name||
-      payload.name||
-      payload.email;
+      body.email||
+      'HR';
 
     state.userEmail=
       body.email||
-      payload.email;
+      '';
+
+    state.userRole=
+      body.role||
+      'hr';
 
     sessionStorage.setItem(
       'origennt_hr_last_user',
       JSON.stringify({
-        email:state.userEmail,
-        name:state.userName
+        email:
+          state.userEmail,
+        name:
+          state.userName
       })
     );
 
+    setGreeting();
     setAuthGate(false);
 
     await bootOperations();
-  }catch(e){
+
+  }catch(error){
+    console.error(
+      'Google sign-in failed:',
+      error
+    );
+
     toast(
-      e.message||
+      error.message||
       'Unable to complete sign-in.'
     );
   }
+}
+
+/* Expose callback globally for Google Identity Services. */
+window.origenntGoogleSignIn=
+  onGoogleSignIn;
+
+function devBypassAuth(){
+  toast(
+    'Local preview bypass is disabled in Production.'
+  );
 }
 
 async function signOut(){
@@ -2482,8 +3962,8 @@ async function signOut(){
         credentials:'include',
         cache:'no-store'
       }
-    )
-  }catch(e){}
+    );
+  }catch(error){}
 
   sessionStorage.removeItem(
     'origennt_hr_last_user'
@@ -2493,7 +3973,9 @@ async function signOut(){
 }
 
 async function bootOperations(){
-  if(operationsBooted)return;
+  if(operationsBooted){
+    return;
+  }
 
   operationsBooted=true;
 
@@ -2508,37 +3990,52 @@ async function bootOperations(){
   ]);
 }
 
-let inactivityTimer;
+let inactivityTimer=null;
 
 function resetInactivityTimer(){
-  clearTimeout(inactivityTimer);
-
-  inactivityTimer=setTimeout(
-    ()=>{
-      toast('Session expired due to inactivity.');
-      signOut()
-    },
-    1000*60*20
-  )
-}
-
-['click','keydown','mousemove']
-  .forEach(
-    ev=>
-      document.addEventListener(
-        ev,
-        resetInactivityTimer
-      )
+  clearTimeout(
+    inactivityTimer
   );
 
+  inactivityTimer=
+    setTimeout(
+      ()=>{
+        toast(
+          'Session expired due to inactivity.'
+        );
+
+        signOut();
+      },
+      1000*60*20
+    );
+}
+
+function initialiseInactivityTracking(){
+  [
+    'click',
+    'keydown',
+    'mousemove',
+    'touchstart'
+  ].forEach(
+    eventName=>
+      document.addEventListener(
+        eventName,
+        resetInactivityTimer,
+        {
+          passive:true
+        }
+      )
+  );
+}
+
 async function initialiseAccess(){
-  const session=await getServerSession();
+  const session=
+    await getServerSession();
 
   if(session){
     setAuthGate(false);
-
+    setGreeting();
     await bootOperations();
-
     return;
   }
 
@@ -2547,352 +4044,500 @@ async function initialiseAccess(){
   try{
     if(
       typeof google!=='undefined'&&
-      google.accounts
+      google.accounts&&
+      google.accounts.id
     ){
+
+      window.origenntGoogleSignIn=
+        onGoogleSignIn;
+
       google.accounts.id.initialize({
-        client_id:GOOGLE_CLIENT_ID,
-        callback:onGoogleSignIn
+        client_id:
+          GOOGLE_CLIENT_ID,
+
+        callback:
+          window.origenntGoogleSignIn,
+
+        ux_mode:
+          'popup',
+
+        auto_select:
+          false,
+
+        cancel_on_tap_outside:
+          false,
+
+        use_fedcm_for_button:
+          true
       });
 
-      google.accounts.id.renderButton(
-        document.getElementById('gsiBtnHolder'),
-        {
-          theme:'filled_black',
-          size:'large',
-          text:'signin_with'
-        }
+      const holder=
+        document.getElementById(
+          'gsiBtnHolder'
+        );
+
+      if(holder){
+        holder.innerHTML='';
+
+        google.accounts.id.renderButton(
+          holder,
+          {
+            theme:'filled_black',
+            size:'large',
+            text:'signin_with',
+            shape:'rectangular',
+            logo_alignment:'left',
+            width:320
+          }
+        );
+      }
+
+    }else{
+      console.warn(
+        'Google Identity Services not available yet.'
       );
     }
-  }catch(e){
-    /* GSI unavailable; auth gate remains visible */
+
+  }catch(error){
+    console.error(
+      'Google Identity Services initialization failed:',
+      error
+    );
   }
 }
 
 /* ---------- wiring ---------- */
-document.getElementById('peopleSearch')
-  .addEventListener(
+
+function bindIfExists(
+  id,
+  event,
+  handler
+){
+  const el=
+    document.getElementById(id);
+
+  if(el){
+    el.addEventListener(
+      event,
+      handler
+    );
+  }
+}
+
+function bindEvents(){
+
+  bindIfExists(
+    'peopleSearch',
     'input',
-    ()=>renderPeople(state.people)
+    ()=>renderPeople(
+      state.people
+    )
   );
 
-document.getElementById('peopleStatus')
-  .addEventListener(
+  bindIfExists(
+    'peopleStatus',
     'change',
-    ()=>renderPeople(state.people)
+    ()=>renderPeople(
+      state.people
+    )
   );
 
-document.getElementById('peopleDepartment')
-  .addEventListener(
+  bindIfExists(
+    'peopleDepartment',
     'change',
-    ()=>renderPeople(state.people)
+    ()=>renderPeople(
+      state.people
+    )
   );
 
-document.getElementById('peopleEmpType')
-  .addEventListener(
+  bindIfExists(
+    'peopleEmpType',
     'change',
-    ()=>renderPeople(state.people)
+    ()=>renderPeople(
+      state.people
+    )
   );
 
-document.getElementById('refreshPeople')
-  .addEventListener(
+  bindIfExists(
+    'refreshPeople',
     'click',
     loadPeople
   );
 
-document.getElementById('addEmployeeBtn')
-  .addEventListener(
+  bindIfExists(
+    'addEmployeeBtn',
     'click',
     openAddEmployee
   );
 
-document.getElementById('addEmployeeBtn2')
-  .addEventListener(
+  bindIfExists(
+    'addEmployeeBtn2',
     'click',
     openAddEmployee
   );
 
-document.getElementById('addEmployeeBtn2b')
-  .addEventListener(
+  bindIfExists(
+    'addEmployeeBtn2b',
     'click',
     openAddEmployee
   );
 
-document.getElementById('addEmployeeForm')
-  .addEventListener(
+  bindIfExists(
+    'addEmployeeForm',
     'submit',
     submitEmployee
   );
 
-document.getElementById('employeePhoto')
-  .addEventListener(
+  bindIfExists(
+    'employeePhoto',
     'change',
     previewPhoto
   );
 
-document.getElementById('kycFiles')
-  .addEventListener(
+  bindIfExists(
+    'kycFiles',
     'change',
     showKycFiles
   );
 
-document.querySelectorAll('[data-close-modal]')
-  .forEach(
-    b=>
-      b.addEventListener(
-        'click',
-        ()=>closeModal(
-          b.dataset.closeModal
+  document
+    .querySelectorAll(
+      '[data-close-modal]'
+    )
+    .forEach(
+      button=>
+        button.addEventListener(
+          'click',
+          ()=>closeModal(
+            button.dataset.closeModal
+          )
         )
-      )
-  );
+    );
 
-document.getElementById('closeProfile')
-  .addEventListener(
+  bindIfExists(
+    'closeProfile',
     'click',
-    ()=>document
-      .getElementById('employee-record')
-      .classList.add('hr-hidden')
+    ()=>{
+      document
+        .getElementById(
+          'employee-record'
+        )
+        ?.classList.add(
+          'hr-hidden'
+        );
+    }
   );
 
-document.getElementById('generateBtn')
-  .addEventListener(
+  bindIfExists(
+    'generateBtn',
     'click',
-    ()=>showView('generate')
+    ()=>showView(
+      'generate'
+    )
   );
 
-document.getElementById('loadGenerateEmployee')
-  .addEventListener(
+  bindIfExists(
+    'loadGenerateEmployee',
     'click',
     loadGeneratePerson
   );
 
-document.getElementById('templateSearch')
-  .addEventListener(
+  bindIfExists(
+    'templateSearch',
     'input',
     renderTemplates
   );
 
-document.getElementById('generateDocumentAction')
-  .addEventListener(
+  bindIfExists(
+    'generateDocumentAction',
     'click',
     ()=>{
       if(!state.generatePerson){
-        toast('Select a person first.');
-        return
+        toast(
+          'Select a person first.'
+        );
+        return;
       }
 
       if(!state.selectedTemplate){
-        toast('Select a document template first.');
-        return
+        toast(
+          'Select a document template first.'
+        );
+        return;
       }
 
       toast(
-        'Template route is ready to connect to the document-generation backend.'
-      )
+        'Template selected. Document generation is ready for the backend route.'
+      );
     }
   );
 
-document.getElementById('loadPersonDocuments')
-  .addEventListener(
+  bindIfExists(
+    'loadPersonDocuments',
     'click',
     loadPersonDocuments
   );
 
-document.getElementById('refreshActivity')
-  .addEventListener(
+  bindIfExists(
+    'refreshActivity',
     'click',
     loadRecentActivity
   );
 
-document.getElementById('startExitBtn')
-  .addEventListener(
-    'click',
-    ()=>document
-      .getElementById('exitEmployeeId')
-      .focus()
-  );
-
-document.getElementById('saveExitBtn')
-  .addEventListener(
-    'click',
-    ()=>toast(
-      'Exit workflow UI is ready; the EMPLOYEE EXIT backend route connects next.'
-    )
-  );
-
-document.getElementById('addCandidateBtn')
-  .addEventListener(
-    'click',
-    ()=>toast(
-      'Candidate creation connects to the CANDIDATES backend module.'
-    )
-  );
-
-document.getElementById('candidateSearchBtn')
-  .addEventListener(
-    'click',
-    ()=>toast(
-      'Candidate search connects to the CANDIDATES backend module.'
-    )
-  );
-
-document.getElementById('addTaskBtn')
-  .addEventListener(
-    'click',
-    ()=>openModal('addTaskModal')
-  );
-
-document.getElementById('addTaskBtnHeader')
-  .addEventListener(
+  bindIfExists(
+    'startExitBtn',
     'click',
     ()=>{
-      showView('tasks');
-      openModal('addTaskModal')
+      document
+        .getElementById(
+          'exitEmployeeId'
+        )
+        ?.focus();
     }
   );
 
-document.getElementById('addTaskForm')
-  .addEventListener(
+  bindIfExists(
+    'saveExitBtn',
+    'click',
+    ()=>{
+      toast(
+        'Exit workflow UI is ready.'
+      );
+    }
+  );
+
+  bindIfExists(
+    'addCandidateBtn',
+    'click',
+    ()=>{
+      toast(
+        'Candidate creation connects to the CANDIDATES backend module.'
+      );
+    }
+  );
+
+  bindIfExists(
+    'candidateSearchBtn',
+    'click',
+    ()=>{
+      toast(
+        'Candidate search connects to the CANDIDATES backend module.'
+      );
+    }
+  );
+
+  bindIfExists(
+    'addTaskBtn',
+    'click',
+    ()=>openModal(
+      'addTaskModal'
+    )
+  );
+
+  bindIfExists(
+    'addTaskBtnHeader',
+    'click',
+    ()=>{
+      showView('tasks');
+      openModal('addTaskModal');
+    }
+  );
+
+  bindIfExists(
+    'addTaskForm',
     'submit',
     submitTask
   );
 
-document.getElementById('taskSearch')
-  .addEventListener(
+  bindIfExists(
+    'taskSearch',
     'input',
-    ()=>renderTasks(state.tasks)
+    ()=>renderTasks(
+      state.tasks
+    )
   );
 
-document.getElementById('taskPriorityFilter')
-  .addEventListener(
+  bindIfExists(
+    'taskPriorityFilter',
     'change',
-    ()=>renderTasks(state.tasks)
+    ()=>renderTasks(
+      state.tasks
+    )
   );
 
-document.getElementById('refreshTasks')
-  .addEventListener(
+  bindIfExists(
+    'refreshTasks',
     'click',
     loadTasks
   );
 
-document.getElementById('addTrainingBtn')
-  .addEventListener(
+  bindIfExists(
+    'addTrainingBtn',
     'click',
-    ()=>openModal('addTrainingModal')
+    ()=>openModal(
+      'addTrainingModal'
+    )
   );
 
-document.getElementById('addTrainingForm')
-  .addEventListener(
+  bindIfExists(
+    'addTrainingForm',
     'submit',
     submitTraining
   );
 
-document.getElementById('trainingSearch')
-  .addEventListener(
+  bindIfExists(
+    'trainingSearch',
     'input',
-    ()=>renderTraining(state.training)
+    ()=>renderTraining(
+      state.training
+    )
   );
 
-document.getElementById('trainingStatusFilter')
-  .addEventListener(
+  bindIfExists(
+    'trainingStatusFilter',
     'change',
-    ()=>renderTraining(state.training)
+    ()=>renderTraining(
+      state.training
+    )
   );
 
-document.getElementById('refreshTraining')
-  .addEventListener(
+  bindIfExists(
+    'refreshTraining',
     'click',
     loadTraining
   );
 
-document.getElementById('addMprBtn')
-  .addEventListener(
+  bindIfExists(
+    'addMprBtn',
     'click',
-    ()=>openModal('addMprModal')
+    ()=>openModal(
+      'addMprModal'
+    )
   );
 
-document.getElementById('addMprForm')
-  .addEventListener(
+  bindIfExists(
+    'addMprForm',
     'submit',
     submitMpr
   );
 
-document.getElementById('mprMonthFilter')
-  .addEventListener(
+  bindIfExists(
+    'mprMonthFilter',
     'change',
-    ()=>renderMpr(state.mpr)
+    ()=>renderMpr(
+      state.mpr
+    )
   );
 
-document.getElementById('mprStatusFilter')
-  .addEventListener(
+  bindIfExists(
+    'mprStatusFilter',
     'change',
-    ()=>renderMpr(state.mpr)
+    ()=>renderMpr(
+      state.mpr
+    )
   );
 
-document.getElementById('refreshMpr')
-  .addEventListener(
+  bindIfExists(
+    'refreshMpr',
     'click',
     loadMpr
   );
 
-document.getElementById('addAppointmentBtn')
-  .addEventListener(
+  bindIfExists(
+    'addAppointmentBtn',
     'click',
-    ()=>openModal('addAppointmentModal')
+    ()=>openModal(
+      'addAppointmentModal'
+    )
   );
 
-document.getElementById('addAppointmentForm')
-  .addEventListener(
+  bindIfExists(
+    'addAppointmentForm',
     'submit',
     submitAppointment
   );
 
-document.getElementById('refreshAppointments')
-  .addEventListener(
+  bindIfExists(
+    'refreshAppointments',
     'click',
     loadAppointments
   );
 
-document.querySelectorAll('.hr-nav button[data-view]')
-  .forEach(
-    b=>
-      b.addEventListener(
-        'click',
-        ()=>showView(b.dataset.view)
-      )
-  );
+  document
+    .querySelectorAll(
+      '.hr-nav button[data-view]'
+    )
+    .forEach(
+      button=>
+        button.addEventListener(
+          'click',
+          ()=>showView(
+            button.dataset.view
+          )
+        )
+    );
 
-document.getElementById('signOutBtn')
-  .addEventListener(
+  bindIfExists(
+    'signOutBtn',
     'click',
     signOut
   );
 
-document.getElementById('sendWaDigestBtn')
-  .addEventListener(
+  bindIfExists(
+    'sendWaDigestBtn',
     'click',
-    ()=>window.open(
-      `https://wa.me/?text=${encodeURIComponent(
-        buildDailyDigestText()
-      )}`,
-      '_blank'
-    )
+    ()=>{
+      window.open(
+        `https://wa.me/?text=${encodeURIComponent(
+          buildDailyDigestText()
+        )}`,
+        '_blank'
+      );
+    }
   );
 
-document.getElementById('refreshCompliance')
-  .addEventListener(
+  bindIfExists(
+    'refreshCompliance',
     'click',
     renderCompliance
   );
 
-document.getElementById('waComplianceBtn')
-  .addEventListener(
+  bindIfExists(
+    'waComplianceBtn',
     'click',
     waComplianceDigest
   );
+}
 
-setGreeting();
-renderTemplates();
-renderCompliance();
+/* ---------- startup ---------- */
 
-window.addEventListener('load',initialiseAccess);
+function startApplication(){
+  setGreeting();
+  renderTemplates();
+  renderCompliance();
+  wireViewLinks();
+  bindEvents();
+  initialiseInactivityTracking();
+
+  /*
+    IMPORTANT:
+    Do not load People / Tasks / MPR / Appointments here.
+    They are protected API resources and must only be loaded
+    after a valid server session has been established.
+  */
+  initialiseAccess();
+}
+
+if(
+  document.readyState==='loading'
+){
+  document.addEventListener(
+    'DOMContentLoaded',
+    startApplication,
+    {
+      once:true
+    }
+  );
+}else{
+  startApplication();
+}
