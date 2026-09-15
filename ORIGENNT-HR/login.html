@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="application-name" content="ORIGENNT HR">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#7a0e23">
+  <title>ORIGENNT HR | Login</title>
+  <link rel="icon" href="https://origennt.com/assets/origennt-logo-transparent.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="visual-panel" aria-hidden="true">
+      <div class="visual-media">
+        <div class="slide slide-1 is-active"></div>
+        <div class="slide slide-2"></div>
+        <div class="slide slide-3"></div>
+        <div class="slide slide-4"></div>
+      </div>
+      <div class="visual-overlay"></div>
+
+      <div class="visual-top">
+        <a class="brand" href="https://origennt.com">
+          <img src="https://origennt.com/assets/origennt-logo-transparent.png" alt="ORIGENNT">
+        </a>
+        <span class="access-chip"><span></span>Internal Employees Only</span>
+      </div>
+
+      <div class="visual-content">
+        <div class="eyebrow">PEOPLE OPERATIONS</div>
+        <h1>People systems,<br><em>beautifully controlled.</em></h1>
+        <p>One controlled workspace for people records, documentation, lifecycle and operations.</p>
+      </div>
+
+      <div class="visual-bottom">
+        <div class="slide-controls">
+          <button class="slide-dot is-active" data-slide="0" aria-label="Slide 1"></button>
+          <button class="slide-dot" data-slide="1" aria-label="Slide 2"></button>
+          <button class="slide-dot" data-slide="2" aria-label="Slide 3"></button>
+          <button class="slide-dot" data-slide="3" aria-label="Slide 4"></button>
+        </div>
+        <span>ORIGENNT PRIVATE LIMITED · INDIA</span>
+      </div>
+    </section>
+
+    <section class="login-panel">
+      <div class="login-card">
+        <div class="mobile-brand">
+          <img src="https://origennt.com/assets/origennt-logo-transparent.png" alt="ORIGENNT">
+        </div>
+
+        <div class="login-intro">
+          <div class="kicker">ORIGENNT HR</div>
+          <h2>Sign in</h2>
+          <p>Use your company-issued username and password.</p>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="username">Username</label>
+            <div class="input-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 12a4.25 4.25 0 1 0 0-8.5A4.25 4.25 0 0 0 12 12Zm0 2.25c-4.27 0-7.75 2.18-7.75 4.87V21h15.5v-1.88c0-2.69-3.48-4.87-7.75-4.87Z"/>
+              </svg>
+              <input id="username" name="username" type="text" autocomplete="username" placeholder="Username" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-wrap">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.5 10.25h-.75V8.5a4.75 4.75 0 1 0-9.5 0v1.75H6.5A2.5 2.5 0 0 0 4 12.75v5.5a2.5 2.5 0 0 0 2.5 2.5h11a2.5 2.5 0 0 0 2.5-2.5v-5.5a2.5 2.5 0 0 0-2.5-2.5ZM9.5 8.5a2.5 2.5 0 0 1 5 0v1.75h-5V8.5Z"/>
+              </svg>
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Password" required>
+              <button type="button" id="togglePassword" class="icon-button" aria-label="Show password">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M2.25 12s3.5-5.5 9.75-5.5 9.75 5.5 9.75 5.5-3.5 5.5-9.75 5.5S2.25 12 2.25 12Zm9.75 2.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <label class="remember-row">
+            <input id="remember" type="checkbox">
+            <span>Keep me signed in</span>
+          </label>
+
+          <button type="submit" id="submitButton" class="submit-button">
+            <span class="button-label">Sign in</span>
+            <span class="button-loader" aria-hidden="true"></span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+
+          <div id="loginMessage" class="form-message" role="alert" aria-live="polite"></div>
+        </form>
+
+        <div class="internal-note">Internal Employees Only</div>
+
+        <div class="login-foot">
+          <span>ORIGENNT HR</span>
+          <span>People Operations</span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="login.js"></script>
+</body>
+</html>
