@@ -1,363 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="application-name" content="ORIGENNT HR">
-<meta name="author" content="ORIGENNT Private Limited">
-<meta name="description" content="ORIGENNT HR — the single operating system for people, tasks, training, MPRs, appointments and documents.">
-<meta name="robots" content="noindex,nofollow">
-<title>ORIGENNT HR | People Operations</title>
-<link rel="icon" href="https://origennt.com/assets/origennt-logo-transparent.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js" defer></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<link rel="stylesheet" href="index.css?v=qa2">
 
-</head>
-<body>
-
-<div class="auth-gate" id="authGate">
-  <div class="auth-card">
-    <img src="https://origennt.com/assets/origennt-logo-transparent.png" alt="ORIGENNT" onerror="this.style.display='none'">
-    <h2>ORIGENNT HR — Restricted Access</h2>
-    <p>Sign in with an authorised ORIGENNT account to open People Operations. Every session is logged.</p>
-    <div id="gsiBtnHolder"></div>
-    <button class="hr-btn" style="margin-top:10px" type="button" onclick="devBypassAuth()">Continue without Google Sign-In (local preview only)</button>
-    <div class="auth-domain-note">Access is restricted to authorised ORIGENNT accounts. Sign-in attempts and session activity are recorded in the audit log.</div>
-  </div>
-</div>
-
-<div class="hr-topband"><div class="hr-topband-inner">
-  <span><strong>ORIGENNT</strong> Private Limited &middot; Bhubaneswar, India</span>
-  <span>Internal People Operations &middot; Restricted Access</span>
-</div></div>
-<header class="hr-header"><div class="hr-header-inner">
-  <a class="brand-lockup" href="/" aria-label="ORIGENNT">
-    <img class="brand-logo" src="https://origennt.com/assets/origennt-logo-transparent.png" alt="ORIGENNT" onerror="this.style.display='none';this.nextElementSibling.classList.add('show')">
-    <span class="brand-wordmark" aria-hidden="true">ORIGENNT</span>
-  </a>
-  <div class="hr-header-title">
-    <div class="eyebrow">People Operations</div>
-    <div class="name">ORIGENNT HR</div>
-  </div>
-  <div class="hr-header-actions">
-    <button class="hr-btn wa" id="sendWaDigestBtn" type="button">Send Today's Digest</button>
-    <button class="hr-btn" id="addTaskBtnHeader" type="button">+ Task</button>
-    <button class="hr-btn primary" id="addEmployeeBtn" type="button">+ Add Person</button>
-    <button class="hr-btn ghost small" id="signOutBtn" type="button" title="Sign out">Sign out</button>
-  </div>
-</div></header>
-
-<section class="hr-hero">
-  <div class="hr-hero-inner">
-    <div>
-      <div class="hr-hero-eyebrow">Go-Paperless Programme &middot; ORIGENNT Private Limited</div>
-      <h1>One record of truth for every person, task and filing.</h1>
-      <p>People Operations replaces registers, folders and WhatsApp threads with a single controlled workspace — records, compliance, documentation and performance in one place, fully audited.</p>
-      <div class="hr-hero-chips" id="heroChips">
-        <span class="hr-hero-chip"><b id="heroHeadcount">—</b> people on record</span>
-        <span class="hr-hero-chip"><b id="heroCompliance">—</b> compliance items tracked</span>
-        <span class="hr-hero-chip"><b id="heroDocs">—</b> document templates ready</span>
-      </div>
-    </div>
-    <div class="hr-hero-panel">
-      <div class="row" style="padding-top:0"><span id="heroDay">&nbsp;</span></div>
-      <h2 id="todayGreet" style="margin:2px 0 10px;font-size:22px">Good morning</h2>
-      <p class="quote" id="dailyQuote">&nbsp;</p>
-      <div class="attrib" id="dailyQuoteAuthor"></div>
-      <hr>
-      <div class="row"><span>Tasks due today</span><strong id="todayTasksDue">—</strong></div>
-      <div class="row"><span>Appointments today</span><strong id="todayAppointments">—</strong></div>
-      <div class="row"><span>Pending KYC</span><strong id="todayPendingKyc">—</strong></div>
-      <div class="row"><span>Compliance due (7 days)</span><strong id="todayComplianceDue">—</strong></div>
-    </div>
-  </div>
-</section>
-
+<html lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ORIGENNT HR" name="application-name"/><meta content="ORIGENNT Private Limited" name="author"/>
+<meta content="ORIGENNT HR employee and document control centre." name="description"/><meta content="noindex,nofollow" name="robots"/>
+<title>ORIGENNT HR | People Operations Centre</title>
+<link href="https://origennt.com/assets/origennt-logo-transparent.png" rel="icon" type="image/png"/>
+<link href="index.css" rel="stylesheet"/><script defer="True" src="index.js"></script></head>
+<body class="hr-app">
+<div class="utility"><div class="container utility-inner"><div class="utility-group"><span>ORIGENNT PRIVATE LIMITED</span><span>Bhubaneswar, India</span></div><div class="utility-group"><span>Internal HR</span><span>Restricted Access</span></div></div></div>
+<header class="main-nav scrolled"><div class="container nav-inner"><a aria-label="ORIGENNT" class="logo" href="/"><img alt="ORIGENNT" class="brand-logo" src="https://origennt.com/assets/origennt-logo-transparent.png" style="filter:none;width:180px;"/></a><div style="margin-left:auto;display:flex;align-items:center;gap:16px"><div style="text-align:right;line-height:1.2"><div style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Human Resources</div><div style="font-size:12px;font-weight:700">HR Operations Centre</div></div></div></div></header>
 <main class="hr-shell"><div class="hr-container"><div class="hr-layout">
-
-<aside class="hr-sidebar">
-  <div class="hr-side-label">People Operations</div>
-  <nav class="hr-nav" aria-label="HR Navigation">
-    <button class="active" data-view="dashboard" type="button">Overview</button>
-    <button data-view="people" type="button">People &amp; Interns</button>
-    <button data-view="candidates" type="button">Candidates</button>
-    <button data-view="documents" type="button">Document Centre</button>
-    <button data-view="exit" type="button">Employee Exit</button>
-  </nav>
-  <div class="hr-side-group">
-  <div class="hr-side-title">Work &amp; Growth</div>
-  <nav class="hr-nav">
-    <button data-view="tasks" type="button">Tasks</button>
-    <button data-view="training" type="button">Training</button>
-    <button data-view="mpr" type="button">MPRs</button>
-    <button data-view="appointments" type="button">Appointments</button>
-    <button data-view="generate" type="button">Generate</button>
-  </nav>
-  </div>
-  <div class="hr-side-group">
-  <div class="hr-side-title">Governance</div>
-  <nav class="hr-nav">
-    <button data-view="compliance" type="button">Compliance Calendar</button>
-    <button data-view="analytics" type="button">Analytics</button>
-    <button data-view="activity" type="button">Activity &amp; Audit</button>
-  </nav>
-  <div class="hr-side-note"><b>Backend:</b> Google Apps Script<br><b>Records:</b> Google Sheets &middot; <b>Files:</b> Google Drive</div>
-  <div class="hr-footnote">Time &amp; attendance stay in Jibble — this system does not track hours.</div>
-  <div class="hr-footnote" style="opacity:.6">Hero photography via Unsplash, used under the Unsplash License.</div>
-  </div>
-</aside>
-
+<aside class="hr-sidebar neo"><div class="hr-side-label">HR Operations</div><nav aria-label="HR Navigation" class="hr-nav"><button class="active" data-view="dashboard" type="button">Overview</button><button data-view="employees" type="button">People</button><button data-view="candidates" type="button">Candidates</button><button data-view="documents" type="button">Document Centre</button><button data-view="generate" type="button">Generate</button><button data-view="activity" type="button">Activity</button><button data-view="tasks" type="button">Tasks</button><button data-view="training" type="button">Training</button><button data-view="mpr" type="button">MPR</button><button data-view="appointments" type="button">Appointments</button><button data-view="compliance" type="button">Compliance</button><button data-view="analytics" type="button">Analytics</button></nav><div style="margin-top:18px;padding:14px;border-top:1px solid var(--line)"><div style="font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">System</div><div style="margin-top:8px;font-size:11px">Backend: Google Apps Script</div><div class="hr-footnote">Records: Google Sheets · Files: Google Drive</div></div></aside>
 <section class="hr-main">
-  <div class="hr-topbar">
-    <div><div class="hr-kicker">ORIGENNT HR</div><h1 class="hr-title">People &amp; Operations Control Centre</h1><p class="hr-subtitle">One workspace for records, tasks, training, MPRs, appointments and documentation — so the HR team runs people operations from here instead of paper and spreadsheets.</p></div>
-    <div class="hr-actions"><button class="hr-btn" id="addEmployeeBtn2b" type="button">+ Add Person</button><button class="hr-btn primary" id="generateBtn" type="button">Generate Document</button></div>
-  </div>
-
-  <div class="hr-grid-metrics" style="grid-template-columns:repeat(4,1fr);margin-bottom:10px">
-    <div class="card hr-metric"><div class="label">MPRs pending this month</div><div class="value" id="todayMprDue">&mdash;</div></div>
-    <div class="card hr-metric"><div class="label">Overdue tasks</div><div class="value" id="metricOverdueTasks">&mdash;</div></div>
-    <div class="card hr-metric"><div class="label">Compliance overdue</div><div class="value" id="metricComplianceOverdue">&mdash;</div></div>
-    <div class="card hr-metric"><div class="label">Interns active</div><div class="value" id="metricInternsQuick">&mdash;</div></div>
-  </div>
-
-  <section id="view-dashboard">
-    <div class="hr-grid-metrics">
-      <div class="card hr-metric"><div class="label">People</div><div class="value" id="metricPeople">&mdash;</div></div>
-      <div class="card hr-metric"><div class="label">Active</div><div class="value" id="metricActive">&mdash;</div></div>
-      <div class="card hr-metric"><div class="label">Interns</div><div class="value" id="metricInterns">&mdash;</div></div>
-      <div class="card hr-metric"><div class="label">Pending KYC</div><div class="value" id="metricKyc">&mdash;</div></div>
-      <div class="card hr-metric"><div class="label">Exited</div><div class="value" id="metricExited">&mdash;</div></div>
-    </div>
-    <div class="hr-dashboard-grid">
-      <div class="card hr-card">
-        <div class="hr-panel-head"><div><h3>People register</h3><p>Current workforce records connected to the central employee register.</p></div><button class="hr-link-btn" data-view-link="people">Open People</button></div>
-        <div class="hr-mini-grid">
-          <div class="hr-mini"><span>Active employees</span><strong id="dashActive">&mdash;</strong></div>
-          <div class="hr-mini"><span>Pending KYC</span><strong id="dashKyc">&mdash;</strong></div>
-          <div class="hr-mini"><span>People on notice</span><strong id="dashNotice">&mdash;</strong></div>
-          <div class="hr-mini"><span>Exited records</span><strong id="dashExited">&mdash;</strong></div>
-        </div>
-        <div class="hr-callout neutral" style="margin-top:14px">Attendance and time tracking stay in Jibble. ORIGENNT HR covers records, tasks, training, MPRs, appointments, lifecycle and documentation.</div>
-      </div>
-      <div class="card hr-card">
-        <div class="hr-panel-head"><div><h3>Recent activity</h3><p>Every action taken across this system, logged automatically.</p></div><button class="hr-link-btn" data-view-link="activity">View all</button></div>
-        <div id="dashboardActivity"><div class="hr-empty">Loading activity.</div></div>
-      </div>
-    </div>
-  </section>
-  <section id="view-people" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>People</h3><p>Everyone in the register. Search and filter before opening a record.</p></div><button class="hr-btn primary" id="addEmployeeBtn2" type="button">+ Add Person</button></div>
-      <div class="hr-toolbar">
-        <div class="field"><input id="peopleSearch" type="search" placeholder="Search name, Employee ID, department or designation"></div>
-        <div class="field"><select id="peopleStatus"><option value="">All statuses</option><option>Active</option><option>On Notice</option><option>Resigned</option><option>Exited</option></select></div>
-        <div class="field"><select id="peopleDepartment"><option value="">All departments</option><option>Management</option><option>Human Resources</option><option>Operations</option><option>Sales</option><option>Consulting</option><option>Technology</option><option>Finance</option><option>Marketing</option></select></div>
-        <div class="field"><select id="peopleEmpType"><option value="">Employees &amp; interns</option><option value="intern">Interns only</option><option value="full time">Full-time only</option><option value="contract">Contract only</option></select></div>
-        <button class="hr-btn" id="refreshPeople" type="button">Refresh</button>
-      </div>
-      <div class="hr-filter-line"><div class="count" id="peopleCount">Loading people</div><div class="hr-chip-row"><span class="hr-chip red">KYC controlled</span><span class="hr-chip">Photo ready</span><span class="hr-chip">Employee lifecycle</span></div></div>
-      <div id="peopleResults" class="hr-results"><div class="hr-empty"><span class="hr-loading">Loading people register</span></div></div>
-    </div>
-  </section>
-
-  <section id="view-candidates" class="hr-hidden">
-    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Candidates</h3><p>Recruitment evidence, interview records and candidate evaluation, on the same People Operations layer.</p></div><button class="hr-btn primary" type="button" id="addCandidateBtn">+ Add Candidate</button></div>
-      <div class="hr-mini-grid" style="grid-template-columns:repeat(2,1fr)"><div class="hr-mini"><span>Recruitment register</span><strong id="candidateCount">&mdash;</strong></div><div class="hr-mini"><span>Status</span><strong style="font-size:14px">Evidence-first</strong></div></div>
-      <div class="hr-searchbar" style="margin-top:13px"><input id="candidateSearch" type="search" placeholder="Search candidate name or email"><button class="hr-btn primary" id="candidateSearchBtn" type="button">Search</button></div>
-      <div id="candidateResults" class="hr-results" style="margin-top:13px"><div class="hr-empty">Candidate retrieval uses the Candidates register once connected to the backend.</div></div>
-    </div>
-  </section>
-
-  <section id="view-documents" class="hr-hidden">
-    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Document Centre</h3><p>Central access to employee, intern, candidate and generated files stored in Google Drive.</p></div></div>
-      <div class="hr-toolbar"><div class="field"><input id="documentPerson" type="search" placeholder="Enter Employee ID or person name"></div><div class="field"><select id="documentCategory"><option value="">All categories</option><option>KYC</option><option>Employment</option><option>Internship</option><option>Training</option><option>Academic</option><option>Previous Employment</option><option>Exit</option><option>Other</option></select></div><button class="hr-btn primary" id="loadPersonDocuments" type="button">Load</button></div>
-      <div id="documentsTable"><div class="hr-empty">Select a person to view associated documents.</div></div>
-    </div>
-  </section>
-
-  <section id="view-exit" class="hr-hidden">
-    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Employee Exit</h3><p>Controlled offboarding from resignation through clearance and final documentation.</p></div><button class="hr-btn primary" id="startExitBtn" type="button">Start Exit</button></div>
-      <div class="hr-lifecycle"><div class="hr-stage current"><strong>Resignation</strong><span>Notice received</span></div><div class="hr-stage"><strong>Notice</strong><span>Last working day</span></div><div class="hr-stage"><strong>Handover</strong><span>Knowledge transfer</span></div><div class="hr-stage"><strong>Clearance</strong><span>Assets &amp; access</span></div><div class="hr-stage"><strong>Settlement</strong><span>Full &amp; final</span></div><div class="hr-stage"><strong>Closed</strong><span>Exit documents</span></div></div>
-      <div class="hr-form-grid" style="margin-top:18px"><div class="hr-form-field"><label>Employee ID</label><input id="exitEmployeeId" placeholder="ORI-EMP-0001"></div><div class="hr-form-field"><label>Resignation Date</label><input id="exitResignationDate" type="date"></div><div class="hr-form-field"><label>Last Working Day</label><input id="exitLastDay" type="date"></div><div class="hr-form-field"><label>Exit Type</label><select id="exitType"><option>Voluntary Resignation</option><option>Role Completion</option><option>Contract End</option><option>Termination</option><option>Other</option></select></div><div class="hr-form-field"><label>Notice Status</label><select id="exitNotice"><option>Not Started</option><option>In Progress</option><option>Completed</option><option>Waived</option></select></div><div class="hr-form-field"><label>Clearance Status</label><select id="exitClearance"><option>Pending</option><option>In Progress</option><option>Completed</option></select></div><div class="hr-form-field"><label>Asset Return</label><select id="exitAssets"><option>Pending</option><option>In Progress</option><option>Complete</option><option>Not Applicable</option></select></div><div class="hr-form-field"><label>Access Revocation</label><select id="exitAccess"><option>Pending</option><option>Complete</option></select></div><div class="hr-form-field"><label>Final Settlement</label><select id="exitSettlement"><option>Pending</option><option>In Process</option><option>Completed</option></select></div><div class="hr-form-field full"><label>Exit Remarks</label><textarea id="exitRemarks" placeholder="Handover, final settlement, clearance notes and relevant remarks"></textarea></div></div>
-      <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="hr-btn primary" id="saveExitBtn" type="button">Save Exit Record</button></div>
-      <div class="hr-footnote">Saves to the EMPLOYEE EXIT sheet tab and updates the person's Employment Status.</div>
-    </div>
-  </section>
-
-  <section id="view-tasks" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>Tasks</h3><p>Assign daily work, track it to done, and nudge people on WhatsApp when something's due.</p></div><button class="hr-btn primary" id="addTaskBtn" type="button">+ Assign Task</button></div>
-      <div class="hr-toolbar">
-        <div class="field"><input id="taskSearch" type="search" placeholder="Search tasks or assignee"></div>
-        <div class="field"><select id="taskPriorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></div>
-        <button class="hr-btn" id="refreshTasks" type="button">Refresh</button>
-      </div>
-      <div id="taskBoard" class="hr-task-cols">
-        <div class="hr-empty">Loading tasks.</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="view-training" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>Training</h3><p>One place to track every course, workshop and certification — who's enrolled, and who's finished.</p></div><button class="hr-btn primary" id="addTrainingBtn" type="button">+ Log Training</button></div>
-      <div class="hr-toolbar">
-        <div class="field"><input id="trainingSearch" type="search" placeholder="Search programme or person"></div>
-        <div class="field"><select id="trainingStatusFilter"><option value="">All statuses</option><option>Scheduled</option><option>Ongoing</option><option>Completed</option><option>Lapsed</option></select></div>
-        <button class="hr-btn" id="refreshTraining" type="button">Refresh</button>
-      </div>
-      <div id="trainingTable"><div class="hr-empty">Loading training records.</div></div>
-    </div>
-  </section>
-
-  <section id="view-mpr" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>Monthly Progress Reports</h3><p>Compile every employee's MPR in one register instead of chasing emailed documents.</p></div><button class="hr-btn primary" id="addMprBtn" type="button">+ Log MPR</button></div>
-      <div class="hr-toolbar">
-        <div class="field"><input id="mprMonthFilter" type="month"></div>
-        <div class="field"><select id="mprStatusFilter"><option value="">All statuses</option><option>Draft</option><option>Submitted</option><option>Reviewed</option><option>Approved</option></select></div>
-        <button class="hr-btn" id="refreshMpr" type="button">Refresh</button>
-      </div>
-      <div id="mprTable"><div class="hr-empty">Loading MPRs.</div></div>
-    </div>
-  </section>
-
-  <section id="view-appointments" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>Appointments</h3><p>Book interviews, reviews and onboarding sessions — synced to Google Calendar.</p></div><button class="hr-btn primary" id="addAppointmentBtn" type="button">+ Book Appointment</button></div>
-      <div class="hr-quiet" style="margin-bottom:13px">Appointments save to the register below and, once the Calendar-enabled backend is deployed, create a matching Google Calendar event automatically. Until then, use "Add to Google Calendar" on any appointment.</div>
-      <div class="hr-toolbar"><button class="hr-btn" id="refreshAppointments" type="button">Refresh</button></div>
-      <div id="appointmentsTable"><div class="hr-empty">Loading appointments.</div></div>
-    </div>
-  </section>
-
-  <section id="view-compliance" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>Statutory Compliance Calendar</h3><p>Every recurring HR-linked government filing for ORIGENNT Private Limited, with the next due date calculated automatically and reminders raised as tasks.</p></div>
-        <div class="hr-panel-head-actions"><button class="hr-btn wa" id="waComplianceBtn" type="button">Send due items on WhatsApp</button><button class="hr-btn" id="refreshCompliance" type="button">Refresh</button></div>
-      </div>
-      <div class="hr-quiet" style="margin-bottom:13px">Dates below follow standard central statutory schedules (ESIC, EPF, TDS, ROC, PT, POSH, Bonus, Gratuity). Confirm against current CBDT/EPFO/ESIC/ROC notifications and your company secretary/CA before relying on them for filing — government departments occasionally extend deadlines.</div>
-      <div id="complianceTable"><div class="hr-empty">Loading compliance calendar.</div></div>
-    </div>
-  </section>
-
-  <section id="view-analytics" class="hr-hidden">
-    <div class="card hr-panel">
-      <div class="hr-panel-head"><div><h3>Workforce Analytics</h3><p>Live cuts of the same records held in People, Tasks, MPRs and Compliance — nothing here is estimated or fabricated.</p></div></div>
-      <div class="analytics-grid">
-        <div class="card analytics-card"><h4>Headcount by department</h4><p>Active people register, grouped by department.</p><canvas id="chartDept"></canvas></div>
-        <div class="card analytics-card"><h4>Employment mix</h4><p>Full-time, intern and contract split.</p><canvas id="chartEmpType"></canvas></div>
-        <div class="card analytics-card"><h4>Task status</h4><p>Everything assigned through the Tasks module.</p><canvas id="chartTasks"></canvas></div>
-        <div class="card analytics-card"><h4>MPR ratings distribution</h4><p>Manager ratings logged across all submitted MPRs.</p><canvas id="chartMpr"></canvas></div>
-        <div class="card analytics-card" style="grid-column:1/-1"><h4>Compliance adherence</h4><p>Statutory items by status — overdue, due within 7 days, or on track.</p><canvas id="chartCompliance"></canvas></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="view-generate" class="hr-hidden">
-    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Generate a formal document</h3><p>Search a person, select a controlled document template and generate from existing records.</p></div></div>
-      <div class="hr-doc-generator">
-        <div>
-          <div class="hr-searchbar hr-search-template"><input id="generateEmployee" type="search" placeholder="Enter Employee ID or name"><button class="hr-btn" id="loadGenerateEmployee" type="button">Load</button></div>
-          <div id="generatePerson"><div class="hr-empty">Select a person before choosing a document.</div></div>
-          <div style="margin-top:12px"><input id="templateSearch" type="search" placeholder="Search 150+ document templates" style="width:100%"></div>
-          <div id="templateList" class="hr-template-list" style="margin-top:10px"></div>
-        </div>
-        <div class="hr-generator-preview" id="generatorPreview"><div class="doc-kicker">Controlled document</div><h4>Select a template</h4><p>Document generation uses approved ORIGENNT templates, existing employee/intern data and reference numbering.</p><div class="hr-generator-meta"><div><span>Person</span><strong id="genPersonMeta">Not selected</strong></div><div><span>Document</span><strong id="genDocMeta">Not selected</strong></div><div><span>Category</span><strong id="genCategoryMeta">&mdash;</strong></div><div><span>Status</span><strong>Ready for template route</strong></div></div><button class="hr-btn primary" id="generateDocumentAction" style="width:100%;margin-top:14px">Generate</button></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="view-activity" class="hr-hidden">
-    <div class="card hr-panel"><div class="hr-panel-head"><div><h3>Activity</h3><p>A chronological record of every HR action, task, MPR, appointment and lifecycle change &mdash; logged automatically by the backend.</p></div><button class="hr-btn" id="refreshActivity" type="button">Refresh</button></div><div id="activityTable"><div class="hr-empty">Loading activity.</div></div></div>
-  </section>
-
-  <section id="employee-record" class="hr-hidden"><div class="card hr-panel"><div class="hr-panel-head"><div><h3>Employee Record</h3><p>Controlled personnel information and related records.</p></div><button class="hr-link-btn" id="closeProfile" type="button">Close</button></div><div id="employeeProfile"></div></div></section>
-</section></div></div></main>
-<div class="hr-modal" id="addEmployeeModal" role="dialog" aria-modal="true" aria-labelledby="addEmployeeTitle"><div class="hr-modal-card"><div class="hr-modal-head"><div><h2 id="addEmployeeTitle">Add person</h2><p>Create the master person record and stage profile/KYC evidence.</p></div><button class="hr-close" type="button" data-close-modal="addEmployeeModal">&times;</button></div>
-  <form id="addEmployeeForm">
-    <div class="hr-form-title">Identity</div>
-    <div class="hr-upload"><div class="hr-photo-box" id="photoPreview"><div class="hr-photo-placeholder">Profile / KYC Photo<br><small>JPG or PNG</small></div></div><div class="hr-dropzone"><input id="employeePhoto" type="file" accept="image/*"><label for="employeePhoto">Choose photograph</label><div id="photoName" class="hr-footnote">No photo selected.</div><div class="hr-callout neutral" style="margin-top:11px">The selected profile image is part of the person record. Drive storage binds to the Employee Folder when the file-upload route is enabled.</div></div></div>
-    <div class="hr-form-grid" style="margin-top:16px"><div class="hr-form-field"><label>Full Name *</label><input id="empFullName" required></div><div class="hr-form-field"><label>Official Email</label><input id="empOfficialEmail" type="email"></div><div class="hr-form-field"><label>Personal Email</label><input id="empPersonalEmail" type="email"></div><div class="hr-form-field"><label>Mobile</label><input id="empMobile" inputmode="tel" placeholder="+91 90000 00000"></div><div class="hr-form-field"><label>Date of Birth</label><input id="empDob" type="date"></div><div class="hr-form-field"><label>Gender</label><select id="empGender"><option value="">Select</option><option>Female</option><option>Male</option><option>Other</option><option>Prefer not to say</option></select></div><div class="hr-form-field"><label>Department</label><input id="empDepartment"></div><div class="hr-form-field"><label>Designation</label><input id="empDesignation"></div><div class="hr-form-field"><label>Reporting Manager</label><input id="empManager"></div><div class="hr-form-field"><label>Joining Date</label><input id="empJoiningDate" type="date"></div><div class="hr-form-field"><label>Employment Type</label><select id="empEmploymentType"><option>Full Time</option><option>Part Time</option><option>Contract</option><option>Intern</option><option>Consultant</option><option>Trainee</option></select></div><div class="hr-form-field"><label>Work Mode</label><select id="empWorkMode"><option>Office</option><option>Hybrid</option><option>Remote</option><option>Field</option></select></div><div class="hr-form-field"><label>Work Location</label><input id="empWorkLocation" value="Bhubaneswar"></div><div class="hr-form-field"><label>Employment Status</label><select id="empEmploymentStatus"><option>Active</option><option>On Notice</option><option>Resigned</option><option>Exited</option></select></div><div class="hr-form-field"><label>KYC Status</label><select id="empKycStatus"><option>Pending</option><option>In Progress</option><option>Completed</option><option>Verified</option></select></div></div>
-    <div class="hr-form-title" style="margin-top:22px">Emergency contact</div>
-    <div class="hr-form-grid"><div class="hr-form-field"><label>Name</label><input id="empEmergencyName"></div><div class="hr-form-field"><label>Relationship</label><input id="empEmergencyRelation"></div><div class="hr-form-field"><label>Mobile</label><input id="empEmergencyMobile"></div></div>
-    <div class="hr-form-title" style="margin-top:22px">KYC &amp; supporting documents</div>
-    <div class="hr-dropzone"><input id="kycFiles" type="file" multiple><label for="kycFiles">Choose KYC / supporting files</label><div class="hr-footnote">Aadhaar &middot; PAN &middot; Address Proof &middot; Educational Certificates &middot; Previous Employment &middot; Bank Proof &middot; Signed HR Documents &middot; Other</div><div id="kycFileList" class="hr-file-list"></div></div>
-    <div class="hr-callout neutral" style="margin-top:14px">The existing ORIGENNT KYC process remains the authoritative KYC questionnaire. This screen is for person creation, photo and evidence capture; it does not duplicate the KYC form.</div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addEmployeeModal">Cancel</button><button type="submit" class="hr-btn primary">Create Person Record</button></div>
-  </form>
-</div></div>
-
-<div class="hr-modal" id="addTaskModal" role="dialog" aria-modal="true" aria-labelledby="addTaskTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addTaskTitle">Assign a task</h2><p>Give it an owner and a WhatsApp number so you can send a reminder later.</p></div><button class="hr-close" type="button" data-close-modal="addTaskModal">&times;</button></div>
-  <form id="addTaskForm">
-    <div class="hr-form-grid" style="grid-template-columns:1fr">
-      <div class="hr-form-field"><label>Task title *</label><input id="taskTitle" required placeholder="e.g. Collect Aadhaar copy from new joiner"></div>
-      <div class="hr-form-field"><label>Details</label><textarea id="taskDetails" placeholder="Anything the assignee needs to know"></textarea></div>
-    </div>
-    <div class="hr-form-grid" style="margin-top:12px">
-      <div class="hr-form-field"><label>Assign to *</label><input id="taskAssignee" required placeholder="Name"></div>
-      <div class="hr-form-field"><label>WhatsApp number</label><input id="taskAssigneeMobile" inputmode="tel" placeholder="+91 90000 00000"></div>
-      <div class="hr-form-field"><label>Priority</label><select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></div>
-      <div class="hr-form-field"><label>Due date</label><input id="taskDueDate" type="date"></div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addTaskModal">Cancel</button><button type="submit" class="hr-btn primary">Assign Task</button></div>
-  </form>
-</div></div>
-
-<div class="hr-modal" id="addTrainingModal" role="dialog" aria-modal="true" aria-labelledby="addTrainingTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addTrainingTitle">Log a training record</h2><p>Track enrollment through to completion and certificate.</p></div><button class="hr-close" type="button" data-close-modal="addTrainingModal">&times;</button></div>
-  <form id="addTrainingForm">
-    <div class="hr-form-grid">
-      <div class="hr-form-field full"><label>Programme name *</label><input id="trainingName" required placeholder="e.g. Fire Safety Workshop"></div>
-      <div class="hr-form-field"><label>Type</label><select id="trainingType"><option>Internal</option><option>External</option><option>Certification</option><option>Compliance</option></select></div>
-      <div class="hr-form-field"><label>Provider</label><input id="trainingProvider" placeholder="Trainer / vendor"></div>
-      <div class="hr-form-field"><label>Employee(s) *</label><input id="trainingEmployees" required placeholder="Names, comma-separated"></div>
-      <div class="hr-form-field"><label>Status</label><select id="trainingStatus"><option>Scheduled</option><option>Ongoing</option><option>Completed</option><option>Lapsed</option></select></div>
-      <div class="hr-form-field"><label>Start date</label><input id="trainingStart" type="date"></div>
-      <div class="hr-form-field"><label>Completion date</label><input id="trainingEnd" type="date"></div>
-      <div class="hr-form-field full"><label>Certificate link (optional)</label><input id="trainingCertLink" placeholder="Google Drive link"></div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addTrainingModal">Cancel</button><button type="submit" class="hr-btn primary">Save Training Record</button></div>
-  </form>
-</div></div>
-
-<div class="hr-modal" id="addMprModal" role="dialog" aria-modal="true" aria-labelledby="addMprTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addMprTitle">Log a Monthly Progress Report</h2><p>One record per person, per month.</p></div><button class="hr-close" type="button" data-close-modal="addMprModal">&times;</button></div>
-  <form id="addMprForm">
-    <div class="hr-form-grid">
-      <div class="hr-form-field"><label>Employee *</label><input id="mprEmployee" required placeholder="Name or Employee ID"></div>
-      <div class="hr-form-field"><label>Month *</label><input id="mprMonth" type="month" required></div>
-      <div class="hr-form-field"><label>Status</label><select id="mprStatus"><option>Draft</option><option>Submitted</option><option>Reviewed</option><option>Approved</option></select></div>
-      <div class="hr-form-field"><label>Manager rating (1&ndash;5)</label><input id="mprRating" type="number" min="1" max="5"></div>
-      <div class="hr-form-field full"><label>Key achievements *</label><textarea id="mprAchievements" required placeholder="What got done this month"></textarea></div>
-      <div class="hr-form-field full"><label>Targets for next month</label><textarea id="mprTargets" placeholder="What's planned next"></textarea></div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addMprModal">Cancel</button><button type="submit" class="hr-btn primary">Save MPR</button></div>
-  </form>
-</div></div>
-
-<div class="hr-modal" id="addAppointmentModal" role="dialog" aria-modal="true" aria-labelledby="addAppointmentTitle"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2 id="addAppointmentTitle">Book an appointment</h2><p>Saves here and, once connected, creates a Google Calendar event.</p></div><button class="hr-close" type="button" data-close-modal="addAppointmentModal">&times;</button></div>
-  <form id="addAppointmentForm">
-    <div class="hr-form-grid">
-      <div class="hr-form-field full"><label>Title *</label><input id="apptTitle" required placeholder="e.g. Interview &mdash; Backend Developer"></div>
-      <div class="hr-form-field"><label>With</label><input id="apptWith" placeholder="Person or team"></div>
-      <div class="hr-form-field"><label>Type</label><select id="apptType"><option>Interview</option><option>Review</option><option>Onboarding</option><option>Other</option></select></div>
-      <div class="hr-form-field"><label>Date *</label><input id="apptDate" type="date" required></div>
-      <div class="hr-form-field"><label>Start time *</label><input id="apptStart" type="time" required></div>
-      <div class="hr-form-field"><label>End time</label><input id="apptEnd" type="time"></div>
-      <div class="hr-form-field full"><label>Location / link</label><input id="apptLocation" placeholder="Meeting room or video call link"></div>
-      <div class="hr-form-field full"><label>Notes</label><textarea id="apptNotes"></textarea></div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:18px"><button type="button" class="hr-btn" data-close-modal="addAppointmentModal">Cancel</button><button type="submit" class="hr-btn primary">Book Appointment</button></div>
-  </form>
-</div></div>
-
-<div class="hr-modal" id="activityDetailModal" role="dialog" aria-modal="true"><div class="hr-modal-card narrow"><div class="hr-modal-head"><div><h2>Activity record</h2><p>Full audit entry, as logged by the system.</p></div><button class="hr-close" type="button" data-close-modal="activityDetailModal">&times;</button></div>
-  <div id="activityDetailBody"></div>
-</div></div>
-
-<div id="hrToast" class="hr-toast" role="status" aria-live="polite"></div>
-<script src="index.js?v=qa2"></script>
+<div class="hr-topbar"><div><div class="hr-kicker">ORIGENNT HR</div><h1 class="hr-title">Employee &amp; Document Control Centre</h1><p class="hr-subtitle">A controlled workspace for employee records, recruitment evidence and formal HR documentation.</p></div><div class="hr-actions"><button class="hr-btn" id="addEmployeeBtn" type="button">+ Add Employee</button><button class="hr-btn primary" id="generateBtn" type="button">Generate Document</button></div></div>
+<section id="view-dashboard">
+<div class="hr-hero">
+<div class="neo hr-welcome">
+<div class="hr-kicker">People Operations</div>
+<h2 id="welcomeHeadline">Good morning. Let's keep People moving.</h2>
+<p id="welcomeSubline">Your People workspace brings employee identity, evidence, lifecycle and daily HR actions together in one controlled environment.</p>
+<div class="hr-welcome-actions">
+<button class="hr-btn primary" id="quickAddEmployee" type="button">Add a person</button>
+<button class="hr-btn" id="quickReview" type="button">Review attention</button>
+<button class="hr-btn" id="quickGenerate" type="button">Create a document</button>
+</div>
+<div class="hr-welcome-meta">
+<span>Today <strong id="welcomeDate">—</strong></span>
+<span>Workspace <strong>People Operations</strong></span>
+<span id="modeBadgeWrap"></span>
+</div>
+</div>
+<div class="hr-photo-card neo">
+<img alt="ORIGENNT team collaboration" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"/>
+<div class="hr-photo-copy">
+<div class="k">The people behind the work</div>
+<h3>Good systems leave room for good conversations.</h3>
+<p>Use the record when you need control. Use the conversation when you need context.</p>
+</div>
+</div>
+</div>
+<div class="hr-attention">
+<div class="neo attention-card">
+<div class="hr-panel-head"><div><h3>Needs your attention</h3><p id="attentionSummary">We are checking today’s People Operations signals.</p></div></div>
+<div class="attention-list" id="attentionList"></div>
+</div>
+<div class="neo attention-card">
+<div class="hr-panel-head"><div><h3>Workload at a glance</h3><p>Small signals that help you prioritise the day.</p></div></div>
+<div class="hr-mini-grid" id="workloadGrid"></div>
+</div>
+</div>
+<div class="hr-grid-metrics"><div class="neo hr-metric"><div class="label">Employees</div><div class="value" id="metricEmployees">—</div></div><div class="neo hr-metric"><div class="label">Candidates</div><div class="value" id="metricCandidates">—</div></div><div class="neo hr-metric"><div class="label">Generated Documents</div><div class="value" id="metricGenerated">—</div></div><div class="neo hr-metric"><div class="label">Pending KYC</div><div class="value" id="metricKyc">—</div></div></div><div class="neo hr-panel" id="peopleSnapshot"><div class="hr-panel-head"><div><h3>People you may want to check in on</h3><p>Recently active records, onboarding moments and lifecycle changes.</p></div><button class="hr-link-btn" data-view-link="employees" type="button">Open People</button></div><div class="people-strip" id="peopleStrip"></div></div>
+<div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Find a person</h3><p>Search by employee name or Employee ID.</p></div></div><div class="hr-search"><input autocomplete="off" id="employeeSearch" placeholder="Search employee name or ORI-EMP-0001" type="search"/><button class="hr-btn primary" id="searchBtn" type="button">Search</button></div><div class="hr-results" id="searchResults"><div class="hr-empty">Enter a name or Employee ID to begin.</div></div></div>
+<div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Recent activity</h3><p>Latest actions recorded by the HR system.</p></div><button class="hr-link-btn" data-view-link="activity" type="button">View activity</button></div><div id="dashboardActivity"><div class="hr-empty">Activity will appear here once records are created.</div></div></div></section><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>People timeline</h3><p>How the People Operations system is moving today.</p></div></div><div class="hr-timeline" id="peopleTimeline"></div></div>
+<section class="hr-hidden" id="view-employees"><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>People</h3><p>Employee records held in the personnel register.</p></div><button class="hr-btn primary" id="addEmployeeBtn2" type="button">+ Add Employee</button></div><div class="hr-search"><input id="employeeSearch2" placeholder="Search employee name or ID" type="search"/><button class="hr-btn primary" id="searchBtn2" type="button">Search</button></div><div class="hr-results" id="employeeResults2"><div class="hr-empty">Search the employee register.</div></div></div></section>
+<section class="hr-hidden" id="view-candidates"><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Candidates</h3><p>Recruitment records, interview evidence and evaluation history.</p></div><button class="hr-btn primary" id="addCandidateBtn" type="button">+ Add Candidate</button></div><div class="hr-empty">Candidate management will be connected to the recruitment register next.</div></div></section>
+<section class="hr-hidden" id="view-documents"><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Document Centre</h3><p>Central access to employee and candidate files stored in Google Drive.</p></div></div><div id="documentsTable"><div class="hr-empty">Select an employee to view associated documents.</div></div></div></section>
+<section class="hr-hidden" id="view-generate"><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Generate a document</h3><p>Formal HR documents are generated from controlled employee data and approved templates.</p></div></div><div class="hr-profile" style="grid-template-columns:1fr 320px"><div class="hr-profile-main neo" style="box-shadow:none;background:rgba(255,255,255,.66)"><div class="hr-search"><input id="generateEmployee" placeholder="Enter Employee ID or name" type="search"/><button class="hr-btn" id="loadGenerateEmployee" type="button">Load</button></div><div id="generatePerson" style="margin-top:16px"><div class="hr-empty">Select an employee before choosing a document.</div></div></div><div class="hr-profile-side neo" style="box-shadow:none;background:rgba(255,255,255,.66)"><h4>Document</h4><div class="select-wrap"><label for="documentType">Document Type</label><select id="documentType" style="width:100%;border:1px solid var(--line);background:white;border-radius:14px;padding:12px;outline:none"><optgroup label="Employment letters"><option>Offer Letter</option><option>Appointment Letter</option><option>Confirmation Letter</option><option>Experience Certificate</option><option>Relieving Letter</option><option>NOC</option><option>Promotion Letter</option><option>Increment Letter</option></optgroup><optgroup label="Onboarding &amp; policy acknowledgement" id="policyDocOptions"></optgroup></select></div><button class="hr-btn primary" id="generateDocumentAction" style="width:100%;margin-top:12px">Generate</button><div class="hr-footnote">Template generation will be connected after the document route is added.</div></div></div></div></section>
+<section class="hr-hidden" id="view-activity"><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Activity</h3><p>A chronological record of HR actions and document events.</p></div></div><div id="activityTable"><div class="hr-empty">No activity loaded.</div></div></div></section>
+<section class="hr-hidden" id="view-tasks"><div class="neo hr-panel"><div class="hr-panel-head"><div><div class="hr-kicker">Daily Work</div><h3>Tasks</h3><p>Turn People Operations into clear, owned actions.</p></div><button class="hr-btn primary" id="newTaskBtn" type="button">+ New Task</button></div><div class="hr-search"><input id="taskSearch" placeholder="Search tasks" type="search"/><select class="hr-btn" id="taskFilter" style="appearance:auto;border-radius:14px;padding:12px 15px"><option value="">All status</option><option>To Do</option><option>In Progress</option><option>Done</option><option>On Hold</option></select></div><div class="hr-table-wrap" id="taskTable" style="margin-top:14px"></div></div></section><section class="hr-hidden" id="view-training"><div class="module-grid"><div class="neo module-card"><div class="hr-kicker">Learning</div><h3>Training pipeline</h3><div class="module-stat" id="trainingTotal">0</div><p>Training records across the current workforce.</p></div><div class="neo module-card"><div class="hr-kicker">Completion</div><h3>Completed</h3><div class="module-stat" id="trainingCompleted">0%</div><p>Completion progress based on recorded status.</p></div><div class="neo module-card"><div class="hr-kicker">Certification</div><h3>Certificates</h3><div class="module-stat" id="trainingCertificates">0</div><p>Certificates linked to training records.</p></div></div><div class="neo hr-panel" style="margin-top:18px"><div class="hr-panel-head"><div><h3>Training records</h3><p>Training, assessments, certification and development evidence.</p></div></div><div id="trainingTable"></div></div></section><section class="hr-hidden" id="view-mpr"><div class="neo hr-panel"><div class="hr-panel-head"><div><div class="hr-kicker">Performance</div><h3>Monthly Performance Review</h3><p>Review performance with evidence, context and a clear development path.</p></div></div><div class="module-grid"><div class="neo module-card"><div class="hr-kicker">Review cycle</div><h3>Reviews due</h3><div class="module-stat" id="mprDue">0</div><p>Open performance reviews requiring attention.</p></div><div class="neo module-card"><div class="hr-kicker">Average</div><h3>Overall score</h3><div class="module-stat" id="mprAverage">—</div><p>Average recorded overall performance score.</p></div><div class="neo module-card"><div class="hr-kicker">Development</div><h3>Plans active</h3><div class="module-stat" id="mprPlans">0</div><p>Development plans currently being followed.</p></div></div><div class="neo hr-panel" style="margin-top:18px"><div id="mprTable"></div></div></div></section><section class="hr-hidden" id="view-appointments"><div class="neo hr-panel"><div class="hr-panel-head"><div><div class="hr-kicker">Calendar</div><h3>Appointments</h3><p>Interviews, reviews, HR meetings and structured people conversations.</p></div></div><div id="appointmentTable"></div></div></section><section class="hr-hidden" id="view-compliance"><div class="neo hr-panel"><div class="hr-panel-head"><div><div class="hr-kicker">Control</div><h3>Compliance</h3><p>Keep recurring requirements visible, owned and evidence-backed.</p></div></div><div class="module-grid"><div class="neo module-card"><div class="hr-kicker">Status</div><h3>On track</h3><div class="module-stat" id="complianceOnTrack">0</div><p>Items currently within control.</p></div><div class="neo module-card"><div class="hr-kicker">Attention</div><h3>Due soon</h3><div class="module-stat" id="complianceDueSoon">0</div><p>Requirements that need a near-term action.</p></div><div class="neo module-card"><div class="hr-kicker">Risk</div><h3>Overdue</h3><div class="module-stat" id="complianceOverdue">0</div><p>Items outside their required date.</p></div></div><div class="neo hr-panel" style="margin-top:18px"><div id="complianceTable"></div></div></div></section><section class="hr-hidden" id="view-analytics"><div class="neo hr-panel"><div class="hr-panel-head"><div><div class="hr-kicker">Management View</div><h3>People Operations analytics</h3><p>Signals from workforce composition, lifecycle and operational workload.</p></div></div><div class="module-grid" id="analyticsGrid"></div><div class="neo hr-panel" style="margin-top:18px;box-shadow:none;background:rgba(255,255,255,.58)"><div class="hr-panel-head"><div><h3>Workforce composition</h3><p>Current people records by operating function.</p></div></div><div id="analyticsDepartments"></div></div></div></section><section class="hr-hidden" id="employee-record"><div class="neo hr-panel"><div class="hr-panel-head"><div><h3>Employee Record</h3><p>Controlled employee information and related records.</p></div><button class="hr-link-btn" id="closeProfile" type="button">Close</button></div><div id="employeeProfile"></div></div></section>
+</section></div></div></main><div aria-hidden="true" class="modal-layer" id="employeeModal"><div class="modal-card wide"><div class="modal-head"><div><div class="hr-kicker">People Operations</div><h3>Create a person record</h3><p class="hr-subtitle" style="margin:6px 0 0">Start with the controlled information you know. More evidence can be attached later.</p></div><button class="modal-close" data-close-modal="employeeModal" type="button">×</button></div><form id="employeeForm"><details class="kyc-section" open=""><summary>Quick details &amp; employment</summary><div class="modal-grid"><div class="modal-field"><label>Full name</label><input id="fName" required=""/></div><div class="modal-field"><label>Official email</label><input id="fEmail" type="email"/></div><div class="modal-field"><label>Mobile</label><input id="fMobile"/></div><div class="modal-field"><label>Department</label><input id="fDept"/></div><div class="modal-field"><label>Designation</label><input id="fDesignation"/></div><div class="modal-field"><label>Reporting manager</label><input id="fManager"/></div><div class="modal-field"><label>Work location</label><input id="fWorkLocation" placeholder="e.g. Bhubaneswar"/></div><div class="modal-field"><label>Employee category</label><select id="fEmployeeCategory"><option>Confirmed Employee</option><option>Probationer</option><option>Intern</option><option>Contractor</option><option>Consultant</option></select></div><div class="modal-field"><label>Joining date</label><input id="fJoining" type="date"/></div><div class="modal-field"><label>Employment type</label><select id="fType"><option>Full Time</option><option>Part Time</option><option>Internship</option><option>Contract</option></select></div><div class="modal-field"><label>Work mode</label><select id="fMode"><option>Hybrid</option><option>On-site</option><option>Remote</option></select></div><div class="modal-field"><label>Employment status</label><select id="fStatus"><option>Active</option><option>On Hold</option><option>Notice Period</option><option>Exited</option></select></div></div></details><details class="kyc-section"><summary>Photograph &amp; personal identification (KYC)</summary><div class="photo-upload"><img alt="" class="photo-preview" id="fPhotoPreview" src=""/><div class="photo-upload-controls"><label class="hr-btn" for="fPhoto">Attach photograph</label><input accept="image/png,image/jpeg" hidden="" id="fPhoto" type="file"/><span class="hr-footnote" id="fPhotoHint">Passport-sized photo, JPG or PNG, up to 2MB.</span></div></div><div class="modal-grid"><div class="modal-field"><label>Father's name</label><input id="fFather"/></div><div class="modal-field"><label>Mother's name</label><input id="fMother"/></div><div class="modal-field"><label>Date of birth</label><input id="fDob" type="date"/></div><div class="modal-field"><label>Gender</label><select id="fGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></div><div class="modal-field"><label>Place of birth</label><input id="fPOB"/></div><div class="modal-field"><label>Marital status</label><select id="fMarital"><option value="">Select</option><option>Single</option><option>Married</option><option>Divorced</option><option>Widowed</option></select></div><div class="modal-field"><label>Nationality</label><input id="fNationality" value="Indian"/></div><div class="modal-field"><label>Blood group</label><select id="fBlood"><option value="">Select</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div class="modal-field"><label>Identification mark</label><input id="fIdMark"/></div><div class="modal-field"><label>Alternate mobile</label><input id="fAltMobile"/></div><div class="modal-field"><label>Personal email</label><input id="fPersonalEmail" type="email"/></div><div class="modal-field"><label>Spouse name (if applicable)</label><input id="fSpouse"/></div><div class="modal-field"><label>PAN number</label><input id="fPan" style="text-transform:uppercase"/></div><div class="modal-field"><label>Aadhaar number</label><input id="fAadhaar" maxlength="12"/></div></div></details><details class="kyc-section"><summary>Correspondence address</summary><div class="modal-grid"><div class="modal-field full"><label>Address line 1</label><input id="fCorr1"/></div><div class="modal-field full"><label>Address line 2</label><input id="fCorr2"/></div><div class="modal-field"><label>City</label><input id="fCorrCity"/></div><div class="modal-field"><label>State</label><input id="fCorrState"/></div><div class="modal-field"><label>PIN</label><input id="fCorrPin" maxlength="6"/></div><div class="modal-field"><label>Country</label><input id="fCorrCountry" value="India"/></div><div class="modal-field"><label>Type of residence</label><select id="fCorrResidence"><option value="">Select</option><option>Owned</option><option>Rented</option><option>Company Provided</option><option>Family</option><option>PG / Hostel</option></select></div></div></details><details class="kyc-section"><summary>Permanent address &amp; address proof</summary><label class="modal-check"><input id="fSameAddress" type="checkbox"/> Same as correspondence address</label><div class="modal-grid"><div class="modal-field full"><label>Address line 1</label><input id="fPerm1"/></div><div class="modal-field full"><label>Address line 2</label><input id="fPerm2"/></div><div class="modal-field"><label>City</label><input id="fPermCity"/></div><div class="modal-field"><label>State</label><input id="fPermState"/></div><div class="modal-field"><label>PIN</label><input id="fPermPin" maxlength="6"/></div><div class="modal-field"><label>Country</label><input id="fPermCountry" value="India"/></div><div class="modal-field"><label>Type of residence</label><select id="fPermResidence"><option value="">Select</option><option>Owned</option><option>Rented</option><option>Company Provided</option><option>Family</option><option>PG / Hostel</option></select></div><div class="modal-field"><label>Address proof type</label><select id="fAddrProofType"><option value="">Select</option><option>Aadhaar Card</option><option>Passport</option><option>Voter ID</option><option>Driving License</option><option>Utility Bill</option><option>Rent Agreement</option></select></div><div class="modal-field"><label>Address proof ID number</label><input id="fAddrProofId"/></div></div></details><details class="kyc-section"><summary>Bank account particulars</summary><div class="modal-grid"><div class="modal-field"><label>Account holder name</label><input id="fBankHolder"/></div><div class="modal-field"><label>Account number</label><input id="fBankAcc"/></div><div class="modal-field"><label>Bank name</label><input id="fBankName"/></div><div class="modal-field"><label>Branch</label><input id="fBankBranch"/></div><div class="modal-field"><label>IFSC</label><input id="fBankIfsc" style="text-transform:uppercase"/></div><div class="modal-field"><label>Account type</label><select id="fBankType"><option value="">Select</option><option>Savings</option><option>Current</option><option>Salary Account</option><option>Others</option></select></div><div class="modal-field full"><label>Bank address</label><input id="fBankAddr"/></div><div class="modal-field"><label>City</label><input id="fBankCity"/></div><div class="modal-field"><label>State</label><input id="fBankState"/></div></div></details><details class="kyc-section"><summary>Emergency contact — primary</summary><div class="modal-grid"><div class="modal-field"><label>Full name</label><input id="fE1Name"/></div><div class="modal-field"><label>Relationship with employee</label><input id="fE1Rel"/></div><div class="modal-field"><label>Primary mobile</label><input id="fE1Mobile"/></div><div class="modal-field"><label>Alternate mobile</label><input id="fE1Alt"/></div><div class="modal-field"><label>Email address</label><input id="fE1Email" type="email"/></div><div class="modal-field full"><label>Residential address</label><input id="fE1Addr"/></div><div class="modal-field"><label>City / district</label><input id="fE1City"/></div><div class="modal-field"><label>State</label><input id="fE1State"/></div><div class="modal-field"><label>Country</label><input id="fE1Country" value="India"/></div><div class="modal-field"><label>Occupation</label><input id="fE1Occ"/></div><div class="modal-field"><label>Preferred contact method</label><select id="fE1Contact"><option value="">Select</option><option>Call</option><option>WhatsApp</option></select></div><div class="modal-field"><label>Language preference</label><input id="fE1Lang"/></div></div></details><details class="kyc-section"><summary>Emergency contact — secondary</summary><div class="modal-grid"><div class="modal-field"><label>Full name</label><input id="fE2Name"/></div><div class="modal-field"><label>Relationship with employee</label><input id="fE2Rel"/></div><div class="modal-field"><label>Primary mobile</label><input id="fE2Mobile"/></div><div class="modal-field"><label>Alternate mobile</label><input id="fE2Alt"/></div><div class="modal-field"><label>Email address</label><input id="fE2Email" type="email"/></div><div class="modal-field full"><label>Residential address</label><input id="fE2Addr"/></div><div class="modal-field"><label>City / district</label><input id="fE2City"/></div><div class="modal-field"><label>State</label><input id="fE2State"/></div><div class="modal-field"><label>Country</label><input id="fE2Country" value="India"/></div><div class="modal-field"><label>Occupation</label><input id="fE2Occ"/></div><div class="modal-field"><label>Preferred contact method</label><select id="fE2Contact"><option value="">Select</option><option>Call</option><option>WhatsApp</option></select></div><div class="modal-field"><label>Language preference</label><input id="fE2Lang"/></div></div></details><details class="kyc-section"><summary>KYC declarations &amp; notes</summary><label class="modal-check"><input id="fKycDeclared" type="checkbox"/> Signed employee KYC declaration is on file</label><label class="modal-check"><input id="fBankDeclared" type="checkbox"/> Signed bank account details declaration is on file</label><div class="modal-grid" style="margin-top:10px"><div class="modal-field full"><label>Notes / pending documents</label><textarea id="fKycNotes" placeholder="e.g. Awaiting Form 16 from previous employer"></textarea></div></div></details><div class="modal-actions"><button class="hr-btn" data-close-modal="employeeModal" type="button">Cancel</button><button class="hr-btn primary" type="submit">Create record</button></div></form></div></div><div aria-hidden="true" class="modal-layer" id="taskModal"><div class="modal-card"><div class="modal-head"><div><div class="hr-kicker">Work Management</div><h3>Assign a task</h3><p class="hr-subtitle" style="margin:6px 0 0">Give the action an owner, a clear outcome and a date.</p></div><button class="modal-close" data-close-modal="taskModal" type="button">×</button></div><form id="taskForm"><div class="modal-grid"><div class="modal-field full"><label>Task title</label><input id="taskTitle" placeholder="e.g. Verify KYC for ORI-EMP-0018" required=""/></div><div class="modal-field full"><label>Context</label><textarea id="taskDescription" placeholder="What needs to happen?"></textarea></div><div class="modal-field"><label>Assigned to</label><input id="taskAssignee" placeholder="HR / Manager name"/></div><div class="modal-field"><label>Priority</label><select id="taskPriority"><option>Medium</option><option>High</option><option>Low</option></select></div><div class="modal-field"><label>Due date</label><input id="taskDue" type="date"/></div><div class="modal-field"><label>Related person ID</label><input id="taskRelated"/></div></div><div class="modal-actions"><button class="hr-btn" data-close-modal="taskModal" type="button">Cancel</button><button class="hr-btn primary" type="submit">Assign task</button></div></form></div></div><div aria-live="polite" class="hr-toast" id="hrToast" role="status"></div>
 </body></html>
