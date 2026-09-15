@@ -594,6 +594,63 @@ const TEMPLATES=[
   ['Custom Formal Document','Custom'],
   ['Other','Custom']
 ];
+function renderTemplates(){
+  const target=document.getElementById('templateList');
+
+  if(!target)return;
+
+  const q=
+    (
+      document.getElementById('templateSearch')?.value||
+      ''
+    )
+      .trim()
+      .toLowerCase();
+
+  const filtered=TEMPLATES.filter(
+    t=>
+      !q||
+      t[0].toLowerCase().includes(q)||
+      t[1].toLowerCase().includes(q)
+  );
+
+  target.innerHTML=
+    filtered.map(
+      t=>`
+        <button
+          type="button"
+          class="template-card ${
+            state.selectedTemplate&&
+            state.selectedTemplate.name===t[0]
+              ?'selected'
+              :''
+          }"
+          data-template-name="${esc(t[0])}"
+          data-template-category="${esc(t[1])}"
+        >
+          <span class="template-name">${esc(t[0])}</span>
+          <span class="template-category">${esc(t[1])}</span>
+        </button>
+      `
+    ).join('');
+
+  target
+    .querySelectorAll('[data-template-name]')
+    .forEach(
+      el=>
+        el.addEventListener(
+          'click',
+          ()=>{
+            state.selectedTemplate={
+              name:el.dataset.templateName,
+              category:el.dataset.templateCategory
+            };
+
+            renderTemplates();
+          }
+        )
+    );
+}
 
 /* ---------- helpers ---------- */
 
