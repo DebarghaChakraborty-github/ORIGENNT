@@ -652,6 +652,47 @@ function renderTemplates(){
     );
 }
 
+function loadGeneratePerson(){
+  const input=document.getElementById('generateEmployee');
+
+  if(!input){
+    toast('Generate person field is unavailable.');
+    return;
+  }
+
+  const id=input.value.trim();
+
+  if(!id){
+    toast('Enter an Employee ID first.');
+    return;
+  }
+
+  const person=state.people.find(
+    p=>String(p['Employee ID'])===String(id)
+  );
+
+  if(!person){
+    toast('Employee not found.');
+    return;
+  }
+
+  state.generatePerson=person;
+
+  const name=document.getElementById('generatePersonName');
+  const meta=document.getElementById('generatePersonMeta');
+
+  if(name){
+    name.textContent=person['Full Name']||'—';
+  }
+
+  if(meta){
+    meta.textContent=
+      `${person['Employee ID']||'—'} · ${person['Designation']||'—'}`;
+  }
+
+  toast('Person selected.');
+}
+
 /* ---------- helpers ---------- */
 
 function toast(message){
