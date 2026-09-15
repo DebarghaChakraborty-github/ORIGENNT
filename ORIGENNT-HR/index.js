@@ -154,5 +154,51 @@ function bind(){document.querySelectorAll('.hr-nav button').forEach(b=>b.addEven
 $('fPhoto')?.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(!file)return;if(file.size>2*1024*1024){toast('Photo is larger than 2MB — please choose a smaller file.');e.target.value='';return}const reader=new FileReader();reader.onload=()=>{state.pendingPhoto=reader.result;const prev=$('fPhotoPreview');if(prev)prev.src=reader.result};reader.readAsDataURL(file)});
 $('fSameAddress')?.addEventListener('change',e=>{if(!e.target.checked)return;['Corr1','Corr2','CorrCity','CorrState','CorrPin','CorrCountry','CorrResidence'].forEach((k,i)=>{const src=$('f'+k),dst=$('f'+['Perm1','Perm2','PermCity','PermState','PermPin','PermCountry','PermResidence'][i]);if(src&&dst)dst.value=src.value});});
 if($('policyDocOptions'))$('policyDocOptions').innerHTML=POLICY_DOCS.map(([code,name])=>`<option>${esc(name)}</option>`).join('')}
-async function boot(){initDemo();bind();try{window.__session=await getSession();if(!window.__session&&location.hostname==='hr.origennt.com'){location.href='/';return}}catch(e){state.demo=true;window.__session={name:'Preview',role:'Admin',demo:true}}setWelcome();await renderDashboard();['training','mpr','appointments'].forEach(v=>{if(v==='training')loadTraining();if(v==='mpr')loadMpr();if(v==='appointments')loadAppointments()});renderAnalytics()}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+async function boot(){
+  initDemo();
+  bind();
+
+  try{
+    window.__session = await getSession();
+
+    if(
+      !window.__session &&
+      !state.demo &&
+      location.hostname === 'hr.origennt.com'
+    ){
+      location.replace('/login.html');
+      return;
+    }
+  }catch(e){
+    console.error('HR session bootstrap failed:', e);
+
+    if(location.hostname === 'hr.origennt.com'){
+      location.replace('/login.html');
+      return;
+    }
+
+    state.demo = true;
+    window.__session = {
+      name:'Preview',
+      role:'Admin',
+      demo:true
+    };
+  }
+
+  setWelcome();
+  await renderDashboard();
+
+  ['training','mpr','appointments'].forEach(v=>{
+    if(v==='training') loadTraining();
+    if(v==='mpr') loadMpr();
+    if(v==='appointments') loadAppointments();
+  });
+
+  renderAnalytics();
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', boot, {once:true});
+}else{
+  boot();
+}
