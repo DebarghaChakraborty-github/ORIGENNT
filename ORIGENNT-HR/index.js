@@ -2894,13 +2894,5 @@ document.getElementById('waComplianceBtn')
 setGreeting();
 renderTemplates();
 renderCompliance();
-loadPeople();
-loadRecentActivity();
-loadTasks();
-loadMpr();
-loadAppointments();
 
-window.addEventListener(
-  'load',
-  initialiseAccess
-);
+window.addEventListener('load',initialiseAccess);
