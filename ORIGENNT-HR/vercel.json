@@ -20,19 +20,7 @@
         }
       ]
     },
-    {
-      "source": "/admin.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store, max-age=0"
-        },
-        {
-          "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin-allow-popups"
-        }
-      ]
-    },
+   
     {
       "source": "/index.html",
       "headers": [
