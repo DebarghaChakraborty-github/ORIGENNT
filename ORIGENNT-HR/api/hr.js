@@ -1,5 +1,5 @@
-import crypto from "crypto";
-import { getSession } from "./_lib/session.js";
+const crypto = require("crypto");
+const { getSession } = require("./_lib/session");
 
 function signIdentity(email, timestamp, secret) {
   return crypto
@@ -8,7 +8,7 @@ function signIdentity(email, timestamp, secret) {
     .digest("hex");
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "GET" && req.method !== "POST") {
     return res.status(405).json({
       success: false,
@@ -20,7 +20,9 @@ export default async function handler(req, res) {
     const sessionSecret = String(process.env.HR_SESSION_SECRET || "").trim();
     const appsScriptUrl = String(process.env.HR_APPS_SCRIPT_URL || "").trim();
     const apiSecret = String(process.env.HR_API_SECRET || "").trim();
-    const identitySecret = String(process.env.HR_IDENTITY_SIGNING_SECRET || "").trim();
+    const identitySecret = String(
+      process.env.HR_IDENTITY_SIGNING_SECRET || ""
+    ).trim();
 
     if (!sessionSecret || !appsScriptUrl || !apiSecret || !identitySecret) {
       return res.status(500).json({
@@ -49,13 +51,16 @@ export default async function handler(req, res) {
     }
 
     const timestamp = String(Date.now());
-
     const target = new URL(appsScriptUrl);
+
     target.searchParams.set("key", apiSecret);
     target.searchParams.set("userEmail", email);
     target.searchParams.set("userName", name);
     target.searchParams.set("authTs", timestamp);
-    target.searchParams.set("authSig", signIdentity(email, timestamp, identitySecret));
+    target.searchParams.set(
+      "authSig",
+      signIdentity(email, timestamp, identitySecret)
+    );
 
     const options = {
       method: req.method,
@@ -67,10 +72,16 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
       for (const [key, value] of Object.entries(req.query || {})) {
-        if (["key", "userEmail", "userName", "authTs", "authSig"].includes(key)) continue;
+        if (
+          ["key", "userEmail", "userName", "authTs", "authSig"].includes(key)
+        ) {
+          continue;
+        }
 
         if (Array.isArray(value)) {
-          value.forEach((item) => target.searchParams.append(key, String(item)));
+          value.forEach((item) =>
+            target.searchParams.append(key, String(item))
+          );
         } else if (value !== undefined) {
           target.searchParams.set(key, String(value));
         }
@@ -112,3 +123,5 @@ export default async function handler(req, res) {
     });
   }
 }
+
+module.exports = handler;
