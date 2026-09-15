@@ -13,15 +13,10 @@
         {
           "key": "Cache-Control",
           "value": "no-store, max-age=0"
-        }
-      ]
-    },
-    {
-      "source": "/admin.html",
-      "headers": [
+        },
         {
-          "key": "Cache-Control",
-          "value": "no-store, max-age=0"
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
         }
       ]
     },
@@ -31,6 +26,23 @@
         {
           "key": "Cache-Control",
           "value": "no-store, max-age=0"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
+        }
+      ]
+    },
+    {
+      "source": "/admin.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
         }
       ]
     },
