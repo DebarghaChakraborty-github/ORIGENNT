@@ -86,8 +86,17 @@ dialog{border:0;border-radius:26px;max-width:580px;width:calc(100% - 28px);max-h
 dialog h3{font-size:26px;letter-spacing:-.02em;line-height:1.1;margin:6px 0 10px}dialog .x{position:absolute;top:16px;right:18px;border:0;background:none;font-size:22px;color:var(--ink);cursor:pointer}
 dl{display:grid;grid-template-columns:110px 1fr;gap:8px 14px;font-size:14px;margin:16px 0}dt{color:var(--mute)}dd{margin:0;font-weight:500}
 .price{font-size:32px;font-weight:800;letter-spacing:-.03em}.acts{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px}.acts .price{margin-right:auto}
-.ck input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:12px 14px;font:400 15px "Plus Jakarta Sans",sans-serif}.ck label{display:block;font-size:13px;font-weight:600;margin-top:12px}
-.ck .cb{display:flex;gap:8px;align-items:flex-start;font-weight:400;color:var(--mute)}.ck .cb input{width:auto;margin-top:3px}
+.ck{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px;margin-top:18px}
+.ck label{display:block;font-size:12px;font-weight:700;letter-spacing:.01em;margin-top:10px;color:var(--ink)}
+.ck input:not([type=checkbox]):not([type=radio]),.ck select{display:block;width:100%;min-width:0;margin-top:6px;border:1px solid #d6e2d8;background:#fbfdfb;color:var(--ink);border-radius:13px;padding:13px 14px;font:500 15px "Plus Jakarta Sans",sans-serif;transition:border-color .18s,box-shadow .18s}
+.ck input:focus,.ck select:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px rgba(11,122,83,.12)}
+.ck .full,.ck .cb,.ck .priv,.ck .acts{grid-column:1/-1}
+.ck .cb{display:flex;gap:9px;align-items:flex-start;font-weight:500;letter-spacing:0;color:var(--mute);line-height:1.45}
+.ck .cb input{flex:0 0 auto;width:17px;height:17px;margin:2px 0 0;accent-color:var(--g)}
+.ck .priv{display:block;color:var(--mute);font-size:11px;line-height:1.5;background:#f3f8f3;border-radius:12px;padding:11px 13px;margin-top:4px}
+.ck .acts{display:flex;gap:10px;margin-top:12px}
+.ck .acts .btn{min-height:48px}
+@media(max-width:560px){.ck{grid-template-columns:1fr;gap:2px}.ck .full,.ck .cb,.ck .priv,.ck .acts{grid-column:1}.ck .acts{flex-direction:column-reverse}.ck .acts .btn{width:100%;margin-left:0!important}}
 .sum{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:14px 0;font-size:14px}.sum div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}.sum .tt{border-top:1px solid var(--line);margin-top:6px;padding-top:8px;font-weight:800}
 .more{display:block;margin:28px auto 0}
 .bund{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
@@ -276,7 +285,7 @@ dialog[open]{animation:pop .22s ease-out}dialog::backdrop{animation:fade .22s}@k
   <label class="w">Career stage<select name="stage"><option>Student / Graduate</option><option>Early Career</option><option>Experienced Professional</option><option>Manager / Leader</option><option>Executive</option></select></label>
   <div class="w"><label>Services of interest</label><div class="sel" id="sel"><em>None yet. Add services from the catalogue above.</em></div></div>
   <label class="w">What do you need help with?<textarea name="msg"></textarea></label>
-  <label class="w" style="grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:8px;font-weight:400"><input type="checkbox" name="wa" value="1" style="width:auto;padding:0;margin-top:3px"> Message me on WhatsApp about this enquiry, including a reminder if I do not finish.</label><label class="w" style="grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:8px;font-weight:400"><input type="checkbox" name="em" value="1" style="width:auto;padding:0;margin-top:3px"> Email me reminders if I do not finish: one 10 minutes after I leave, then daily until I unsubscribe.</label><p class="w priv" style="grid-column:1/-1;margin:0;color:#52665a">If you accept cookies, we save the details you type so we can follow up if you do not finish. We use them only to contact you about Launchpad.</p><button class="btn lime w" style="grid-column:1/-1">Send enquiry →</button><p id="msg" aria-live="polite"></p>
+  <label class="w" style="grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:8px;font-weight:400"><input type="checkbox" name="wa" value="1" style="width:auto;padding:0;margin-top:3px"> Message me on WhatsApp about this enquiry, including a reminder if I do not finish.</label><label class="w" style="grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:8px;font-weight:400"><input type="checkbox" name="em" value="1" style="width:auto;padding:0;margin-top:3px"> Email me checkout reminders at 24, 48, 66 and 71 hours if payment is not completed or verified. I can opt out at any time.</label><p class="w priv" style="grid-column:1/-1;margin:0;color:#52665a">Checkout reminders are sent only if you explicitly opt in. Unpaid checkout drafts expire after 72 hours.</p><button class="btn lime w" style="grid-column:1/-1">Send enquiry →</button><p id="msg" aria-live="polite"></p>
  </form></div></section>
 
 <section id="local"><div class="eyebrow">LOCATION</div><h2 class="t">Based in Bhubaneswar, working across India</h2>
@@ -292,7 +301,7 @@ dialog[open]{animation:pop .22s ease-out}dialog::backdrop{animation:fade .22s}@k
 <p class="legal">© 2026 ORIGENNT PRIVATE LIMITED. LAUNCHPAD is a brand and business unit of ORIGENNT PRIVATE LIMITED, not a separate legal entity. Services are subject to ORIGENNT's Terms, Privacy, Refund and Cancellation and Service Delivery policies. <a href="#" id="cset">Cookie settings</a> · <a href="#" id="usl">Unsubscribe from reminders</a></p></div></footer>
 
 <div id="cc" role="dialog" aria-label="Cookie consent" hidden><p>We use cookies to remember your details and to follow up if you do not finish an enquiry or purchase. You can decline and still use the site.</p><div><button class="btn line" id="ccn">Decline</button><button class="btn" id="ccy">Accept</button></div></div>
-<aside id="sv" hidden aria-label="Save your picks"><button class="x2" id="svx" aria-label="Close">✕</button><b>Not ready yet?</b><p>We will email you what you looked at, plus helpful reminders.</p><form id="svf"><input name="email" type="email" required placeholder="Your email" autocomplete="email"><input name="phone" type="tel" placeholder="WhatsApp number (optional)" autocomplete="tel"><label class="cb"><input type="checkbox" name="em" required> Email me reminders about what I viewed: one 10 minutes after I leave, then daily until I unsubscribe.</label><button class="btn lime">Email me my picks</button></form><small>One-click unsubscribe in every email.</small></aside>
+<aside id="sv" hidden aria-label="Save your picks"><button class="x2" id="svx" aria-label="Close">✕</button><b>Not ready yet?</b><p>We will email you what you looked at, plus helpful reminders.</p><form id="svf"><input name="email" type="email" required placeholder="Your email" autocomplete="email"><input name="phone" type="tel" placeholder="WhatsApp number (optional)" autocomplete="tel"><label class="cb"><input type="checkbox" name="em" required> Email me reminders about the services I viewed. I can opt out at any time.</label><button class="btn lime">Email me my picks</button></form><small>One-click unsubscribe in every email.</small></aside>
 <a class="wab" data-tip="Not sure which service fits? Ask us on WhatsApp." href="https://wa.me/919861168291?text=Hi%20LAUNCHPAD%2C%20I%20need%20help%20choosing%20a%20career%20service." target="_blank" rel="noopener" aria-label="Chat with LAUNCHPAD on WhatsApp"><b aria-hidden="true">💬</b><span>Chat on WhatsApp</span></a>
 <dialog id="md" aria-label="Service details"><button class="x" id="mx" aria-label="Close">✕</button><div id="mb"></div></dialog>
 <aside class="drawer" id="dr" aria-label="Enquiry list"><h3>Your enquiry list</h3><div id="items"></div><b id="tot"></b>
@@ -348,20 +357,45 @@ function detail(i){const s=S[i];mb.innerHTML=`<div class="eyebrow">${P[s[1]].toU
 <dl><dt>Outcome</dt><dd>${s[4]}</dd><dt>Best for</dt><dd>${s[5]}</dd><dt>Format</dt><dd>${s[6]}, ${s[7]}</dd><dt>Service ID</dt><dd>${s[8]}</dd><dt>SAC code</dt><dd>${s[9]} (provisional)</dd></dl>
 <div class="acts"><span class="price">${inr(s[2])}</span><button class="btn line" data-a="${i}" data-close>${cart.has(i)?'Remove from list':'Add to list'}</button><button class="btn" data-pay="${i}">Proceed to payment</button></div>`;
  if(!md.open)md.showModal()}
+async function createSecureOrder(payload){
+ const response=await fetch('/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+ let data={};try{data=await response.json()}catch(_){}
+ if(!response.ok)throw new Error(data.error||'Secure checkout could not be started.');
+ return data;
+}
+async function verifySecurePayment(order,result){
+ const response=await fetch('/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({checkoutToken:order.checkoutToken,razorpay_order_id:result.razorpay_order_id||order.orderId,razorpay_payment_id:result.razorpay_payment_id,razorpay_signature:result.razorpay_signature})});
+ let data={};try{data=await response.json()}catch(_){}
+ return {ok:response.ok&&data.verified===true,pending:response.status===202||data.pending===true,data};
+}
 function checkout(ids){const t=ids.reduce((n,i)=>n+S[i][2],0);md.dataset.ids=ids;
  mb.innerHTML=`${stp(1)}<div class="eyebrow">CHECKOUT</div><h3>Confirm your order</h3>
 <div class="sum">${ids.map(i=>`<div><span>${S[i][0]}</span><span>${inr(S[i][2])}</span></div>`).join('')}<div class="tt"><span>Total</span><span>${inr(t)}</span></div></div>
-<form class="ck" id="cf"><label>Full name<input name="name" required autocomplete="name"></label><label>WhatsApp number<input name="phone" type="tel" required autocomplete="tel" placeholder="+91 or international"></label><label>Email<input name="email" type="email" required autocomplete="email"></label>
-<label class="cb"><input type="radio" name="pm" value="rzp" checked> Pay online with Razorpay (UPI, cards, netbanking)</label><label class="cb"><input type="radio" name="pm" value="bank"> Bank transfer (we share details)</label><label class="cb"><input type="checkbox" required> I agree to ORIGENNT's Terms, Privacy, Refund & Cancellation and Service Delivery policies.</label><label class="cb"><input type="checkbox" name="wa" value="1"> Message me on WhatsApp about this order, including a reminder if I do not finish.</label><label class="cb"><input type="checkbox" name="em" value="1"> Email me reminders if I do not finish: one 10 minutes after I leave, then daily until I unsubscribe.</label><small class="priv">If you accept cookies, we save the details you type so we can follow up if you do not finish. We use them only to contact you about Launchpad.</small>
-<div class="acts"><button type="button" class="btn line" data-back>Back</button><button class="btn lime" style="margin-left:auto">Confirm &amp; pay ${inr(t)}</button></div></form>`;
+<div class="checkout-intro"><p style="margin:0;color:var(--mute);font-size:14px">Your service is selected. Add your contact details, then continue to secure Razorpay checkout.</p></div>
+<form class="ck" id="cf">
+<label>Full name<input name="name" required autocomplete="name" placeholder="Your full name"></label>
+<label>Email address<input name="email" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+<label class="full">WhatsApp / mobile number<input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+91 98765 43210"></label>
+<label class="cb full"><input type="checkbox" required> I agree to the Terms, Privacy Policy, Refund &amp; Cancellation Policy and Service Delivery Policy.</label>
+<label class="cb full reminder-consent"><input type="checkbox" name="reminder_optin" value="yes"> Email me reminders if I enter my details but my payment is not completed or verified. I can opt out at any time.</label>
+<small class="priv">If you opt in, the planned reminders are at 24 hours (2 days left), 48 hours (1 day left), 66 hours (6 hours left) and 71 hours (1 hour left). The unpaid checkout draft is scheduled for deletion after 72 hours. Reminders require email automation to be connected; this page alone does not send scheduled emails.</small>
+<div class="acts"><button type="button" class="btn line" data-back>Back</button><button class="btn lime" style="margin-left:auto">Continue to Razorpay · ${inr(t)}</button></div></form>`;
  if(!md.open)md.showModal()}
 function done(h,p){finish();if(!md.open)md.showModal();mb.innerHTML=`${stp(3)}<div class="eyebrow">ORDER</div><h3>${h}</h3><p>${p}</p><div class="acts"><button class="btn line" data-close>Close</button></div>`}
-async function placed(ids,f){const t=ids.reduce((n,i)=>n+S[i][2],0),sv=ids.map(i=>`${S[i][0]} (${S[i][8]}) ${inr(S[i][2])}`).join('; ');
- const pm=f.get('pm'),rz=pm=='rzp'&&RZP_KEY&&window.Razorpay,rec={name:f.get('name'),phone:f.get('phone'),email:f.get('email'),payment_method:pm=='rzp'?'Razorpay':'Bank transfer',services:sv,total:inr(t),contracting_entity:'ORIGENNT PRIVATE LIMITED',lead_id:draft.id,whatsapp_optin:f.get('wa')?'yes':'no',whatsapp_link:waLink(f.get('phone'),'Hi '+f.get('name')+', thanks for your order with LAUNCHPAD, a unit of ORIGENNT.')};
- if(rz){lead('payment_started',{interest:sv,amount:inr(t)},false,true);pay(t,'Launchpad services',f,{services:sv},id=>{done('Payment received','Payment ID '+id+'. Receipt and invoice will name ORIGENNT PRIVATE LIMITED.');setTimeout(()=>{send('PAID '+rec.total+': '+rec.name+' · '+rec.phone,{...rec,payment_id:id,lead_status:'paid'},true);cart.clear();sync()},400)});return}
- const ok=await send('Launchpad order from '+rec.name,rec);
- done(ok?'Order received':'Almost done',(ok?'We have your order for ':'Your email app should have opened with the order filled in. Press send and we will take it from there for ')+inr(t)+'. '+(pm=='bank'?'Our team will share bank transfer details.':'Our team will send a secure payment link.'))}
-function pay(amt,desc,f,notes,ok){const r=new Razorpay({key:RZP_KEY,amount:amt*100,currency:'INR',name:'ORIGENNT Private Limited',description:desc,prefill:{name:f.get('name'),email:f.get('email'),contact:String(f.get('phone')).replace(/\s/g,'')},notes,theme:{color:'#0B7A53'},handler:x=>{inFlight=null;ok(x.razorpay_payment_id)},modal:{ondismiss:()=>{inFlight=null;lead('payment_not_completed',{interest:desc,amount:inr(amt)},false,true);if(!md.open)md.showModal();mb.insertAdjacentHTML('afterbegin',payNote(desc,amt))}}});r.on('payment.failed',x=>{inFlight=null;lead('payment_failed',{interest:desc,amount:inr(amt),reason:x.error.description},false,true);alert('Payment failed: '+x.error.description+'\nPlease try again or contact internships@origennt.com')});inFlight={amt,desc};md.close();r.open()}
+async function placed(ids,f){
+ const t=ids.reduce((n,i)=>n+S[i][2],0),sv=ids.map(i=>`${S[i][0]} (${S[i][8]}) ${inr(S[i][2])}`).join('; ');
+ if(!RZP_KEY||!window.Razorpay){done('Checkout unavailable','Razorpay checkout could not load. Please refresh the page and try again.');return}
+ let order;
+ try{const resumed=window.__LP_RESUMED_ORDER;const chosen=ids.map(i=>S[i][8]).sort();const expected=(resumed?.serviceIds||[]).slice().sort();order=(resumed&&resumed.kind==='services'&&chosen.length===expected.length&&chosen.every((id,i)=>id===expected[i]))?resumed:await createSecureOrder({kind:'services',serviceIds:ids.map(i=>S[i][8]),name:f.get('name'),email:f.get('email'),phone:f.get('phone'),reminderOptIn:f.get('reminder_optin')==='yes'})}
+ catch(e){alert(e.message||'Secure checkout could not be started. Please try again.');return}
+ if(!order.keyId){alert('Secure payment configuration is incomplete. Please contact support; no payment was started.');return}
+ pay(t,'LAUNCHPAD career service(s)',f,{services:sv},order.orderId,order.keyId,async result=>{
+   const verification=await verifySecurePayment(order,result);
+   if(verification.ok){done('Payment verified','Your payment has been verified. Reference: '+result.razorpay_payment_id+'. ORIGENNT PRIVATE LIMITED is the contracting entity.');cart.clear();sync();return}
+   done('Payment submitted — verification pending',verification.data?.error||'Do not attempt payment again yet. We are checking the payment status securely. If you were charged, contact admin@origennt.com with payment reference '+result.razorpay_payment_id+'.');
+ },true);
+}
+function pay(amt,desc,f,notes,orderId,keyId,ok,noTracking=false){const r=new Razorpay({key:keyId,order_id:orderId,amount:amt*100,currency:'INR',name:'ORIGENNT Private Limited',description:desc,prefill:{name:f.get('name'),email:f.get('email'),contact:String(f.get('phone')).replace(/\s/g,'')},notes,theme:{color:'#0B7A53'},handler:x=>{inFlight=null;ok(x)},modal:{ondismiss:()=>{inFlight=null;if(!noTracking)lead('payment_not_completed',{interest:desc,amount:inr(amt)},false,true);if(!md.open)md.showModal();mb.insertAdjacentHTML('afterbegin',payNote(desc,amt))}}});r.on('payment.failed',x=>{inFlight=null;if(!noTracking)lead('payment_failed',{interest:desc,amount:inr(amt),reason:x.error.description},false,true);alert('Payment attempt failed or was not confirmed. If money was debited, do not retry until your Razorpay status is checked.')});inFlight={amt,desc,orderId};md.close();r.open()}
 /* internships (data from internship.html) */
 const IP=[{id:'basic',n:'Basic Internship',tag:'Starter',p:1499,d:'Training-led introduction to professional work culture. Perfect for first-year students exploring a domain.',f:['Domain-specific training modules','Certificate of Completion, ORIGENNT Pvt. Ltd.','Orientation & corporate culture session','Learning portal access (30 days)','Email & LinkedIn profile guidance'],no:['Live Projects','Placement support']},
 {id:'adv',n:'Advanced Internship',tag:'Most Popular',p:4999,pop:1,d:'3-month immersive program with live projects, industry affiliation and structured readiness training.',f:['3 months structured internship','Certificate of Completion','2 Live Projects (real client/internal)','Industry Affiliation Certificate','Character Certificate','Industry Readiness Training (40 hrs)','Mentoring by senior consultants','LinkedIn optimisation + resume review','ORIGENNT Talent Pool access'],no:['Letter of Recommendation']},
@@ -380,13 +414,21 @@ function ddetail(n){const d=DM.find(x=>x[0]==n);
 function icheck(k,tok){const p=IP.find(x=>x.id==k),amt=tok?1000:p.p;
  mb.innerHTML=`${stp(1)}<div class="eyebrow">${p.n.toUpperCase()}</div><h3>${tok?'Book your slot':'Enroll now'}</h3><div class="price">${inr(amt)}</div><p>${tok?'Token booking. Balance '+inr(p.p-1000)+' due before Day 1.':'Pay in full. Seat confirmed immediately.'}</p>
 <form class="ck" id="icf" data-amt="${amt}" data-k="${k}" data-tok="${tok?1:''}"><label>Full name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" required autocomplete="email"></label><label>Mobile number (10 digits)<input name="phone" type="tel" required inputmode="numeric" pattern="[0-9 ]{10,12}" autocomplete="tel"></label><label>Preferred domain (optional)<input name="domain" value="${dsel}"></label><label>College / University (optional)<input name="college"></label>
-<label class="cb"><input type="checkbox" required> I agree to ORIGENNT's Terms, Privacy, Refund & Cancellation and Service Delivery policies.</label><label class="cb"><input type="checkbox" name="wa" value="1"> Message me on WhatsApp about this order, including a reminder if I do not finish.</label><label class="cb"><input type="checkbox" name="em" value="1"> Email me reminders if I do not finish: one 10 minutes after I leave, then daily until I unsubscribe.</label><small class="priv">If you accept cookies, we save the details you type so we can follow up if you do not finish. We use them only to contact you about Launchpad.</small>
+<label class="cb"><input type="checkbox" required> I agree to ORIGENNT's Terms, Privacy, Refund & Cancellation and Service Delivery policies.</label><label class="cb"><input type="checkbox" name="wa" value="1"> Message me on WhatsApp about this order, including a reminder if I do not finish.</label><label class="cb"><input type="checkbox" name="em" value="1"> Email me checkout reminders at 24, 48, 66 and 71 hours if payment is not completed or verified. I can opt out at any time.</label><small class="priv">Checkout reminders are sent only if you explicitly opt in. Unpaid checkout drafts expire after 72 hours.</small>
 <div class="acts"><button type="button" class="btn line" data-close>Cancel</button><button class="btn lime" style="margin-left:auto">Proceed to payment</button></div></form>`;if(!md.open)md.showModal()}
 document.addEventListener('submit',async e=>{if(e.target.id!='icf')return;e.preventDefault();const f=new FormData(e.target),d=e.target.dataset,p=IP.find(x=>x.id==d.k),amt=+d.amt,tok=d.tok,title=p.n+(tok?' (token)':'');
  if(!/^\d{10}$/.test(String(f.get('phone')).replace(/\s/g,''))){alert('Please enter a valid 10-digit mobile number.');return}
- const rec={name:f.get('name'),email:f.get('email'),phone:f.get('phone'),program:title,amount:inr(amt),balance_due:tok?inr(p.p-1000):'none',domain:f.get('domain'),college:f.get('college'),lead_id:draft.id,lead_status:'enrolment_request',whatsapp_optin:f.get('wa')?'yes':'no',whatsapp_link:waLink(f.get('phone'),'Hi '+f.get('name')+', thanks for enrolling with LAUNCHPAD, a unit of ORIGENNT.')};
- if(RZP_KEY&&window.Razorpay){lead('payment_started',{interest:title+(f.get('domain')?' / '+f.get('domain'):''),amount:inr(amt)},false,true);pay(amt,title,f,{plan:d.k,domain:f.get('domain'),program_title:title},id=>{done('Payment successful','Payment ID '+id+'. Welcome to ORIGENNT. Check your email for onboarding details within 24 hours.');setTimeout(()=>send('PAID '+rec.amount+': '+rec.name+' · '+rec.phone,{...rec,payment_id:id,lead_status:'paid'},true),400)});return}
- const ok=await send('Internship enrolment: '+rec.name,rec);done(ok?'Enrolment received':'Almost done',(ok?'We have your enrolment for ':'Your email app should have opened with the enrolment filled in. Press send to complete it for ')+title+' ('+inr(amt)+'). Our team will send a secure payment link.')});
+ if(!RZP_KEY||!window.Razorpay){alert('Secure Razorpay checkout is temporarily unavailable. Please try again shortly.');return}
+ let order;
+ try{const resumed=window.__LP_RESUMED_ORDER;order=(resumed&&resumed.kind==='internship'&&resumed.programId===d.k&&resumed.tokenOnly===!!tok)?resumed:await createSecureOrder({kind:'internship',programId:d.k,tokenOnly:!!tok,name:f.get('name'),email:f.get('email'),phone:f.get('phone'),domain:f.get('domain'),college:f.get('college'),reminderOptIn:f.get('em')==='1'})}
+ catch(err){alert(err.message||'Secure checkout could not be started. Please try again.');return}
+ if(!order.keyId){alert('Secure payment configuration is incomplete. Please contact support; no payment was started.');return}
+ pay(amt,title,f,{plan:d.k,domain:f.get('domain'),program_title:title},order.orderId,order.keyId,async result=>{
+   const verification=await verifySecurePayment(order,result);
+   if(verification.ok){done('Payment verified','Your payment has been verified. Reference: '+result.razorpay_payment_id+'. Check your email for onboarding information.');return}
+   done('Payment submitted — verification pending',verification.data?.error||'Do not attempt payment again yet. If you were charged, contact admin@origennt.com with payment reference '+result.razorpay_payment_id+'.');
+ },true);
+});
 document.addEventListener('click',e=>{const t=e.target,d=t.closest('[data-d]');
  if(d){detail(+d.dataset.d);return}
  const c=t.closest('.svc');if(c&&!t.closest('button')){const b=c.querySelector('[data-d]');b&&detail(+b.dataset.d)}
@@ -397,7 +439,7 @@ document.addEventListener('click',e=>{const t=e.target,d=t.closest('[data-d]');
  const dm=t.closest('[data-dm]');if(dm){dsel=dm.dataset.dm;$('#dsel').textContent='Selected domain: '+dsel;rdom();ddetail(dsel)}
  const pk=()=>document.querySelector('input[name=dpl]:checked').value;if(t.closest('[data-dp]'))icheck(pk(),0);if(t.closest('[data-dt]'))icheck(pk(),1);
  if(t.closest('[data-back]')||t.closest('[data-close]')||t.closest('#mx')||t===md)md.close()});
-document.addEventListener('submit',e=>{if(e.target.id=='cf'){e.preventDefault();placed(md.dataset.ids.split(',').map(Number),new FormData(e.target))}});
+document.addEventListener('submit',e=>{if(e.target.id=='cf'){e.preventDefault();const f=new FormData(e.target);if(f.get('reminder_optin')!=='yes'){setck(LK,'',-1);try{localStorage.removeItem(LK)}catch(_){}}else if(consent()){draft.name=f.get('name');draft.email=f.get('email');draft.phone=f.get('phone');draft.reminder_optin=true;draft.form='cf';draft.started_at=draft.started_at||new Date().toISOString();persist()}placed(md.dataset.ids.split(',').map(Number),f)}});
 function stp(n){return `<ol class="stp">${['Details','Payment','Done'].map((x,i)=>`<li class="${i<n?'d':''}${i==n-1?' c':''}">${x}</li>`).join('')}</ol>`}
 const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function count(el){const to=+el.dataset.n,pre=el.dataset.p||'';if(rm)return;let t0;const f=x=>{t0=t0||x;const k=Math.min(1,(x-t0)/1100),e=1-Math.pow(1-k,3);el.textContent=pre+Math.round(to*e).toLocaleString('en-IN');if(k<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
@@ -427,7 +469,7 @@ function ctxOf(form){
  if(form.id=='cf'){const ids=(md.dataset.ids||'').split(',').filter(Boolean).map(Number);return{interest:ids.map(i=>S[i][0]).join('; '),amount:inr(ids.reduce((n,i)=>n+S[i][2],0))}}
  if(form.id=='icf'){const p=IP.find(x=>x.id==form.dataset.k);return{interest:p.n+(form.dataset.tok?' (token booking)':''),amount:inr(+form.dataset.amt)}}
  const a=[...cart];return{interest:a.length?a.map(i=>S[i][0]).join('; '):(draft.viewed||''),amount:a.length?inr(a.reduce((n,i)=>n+S[i][2],0)):''}}
-document.addEventListener('input',e=>{const el=e.target,f=el.form;if(!f||!['ef','cf','icf'].includes(f.id)||!el.name)return;
+document.addEventListener('input',e=>{const el=e.target,f=el.form;if(!f||f.id!=='ef'||!el.name)return;if(f.id==='cf'){const opt=f.querySelector('[name="reminder_optin"]')?.checked;if(consent()&&opt){draft.name=f.elements.name?.value||'';draft.email=f.elements.email?.value||'';draft.phone=f.elements.phone?.value||'';draft.reminder_optin=true;draft.form='cf';draft.interest=(md.dataset.ids||'').split(',').filter(Boolean).map(i=>S[+i]?.[0]).filter(Boolean).join('; ');draft.amount=inr((md.dataset.ids||'').split(',').filter(Boolean).reduce((n,i)=>n+(S[+i]?.[2]||0),0));draft.started_at=draft.started_at||new Date().toISOString();persist()}else if(!opt){draft.reminder_optin=false;setck(LK,'',-1);try{localStorage.removeItem(LK)}catch(_){}}return;}
  const k=el.name=='msg'?'message':el.name;if(k=='wa')draft.wa=el.checked;else if(k=='em')draft.em=el.checked;else if(['name','email','phone','domain','college','message','stage'].includes(k))draft[k]=el.value;
  Object.assign(draft,ctxOf(f));draft.form=f.id;persist();clearTimeout(timer);timer=setTimeout(()=>lead('partial_lead'),1500)});
 const leave=fin=>{if(draft.form){if(draft.form=='cart'){if(cart.size&&(draft.wa||draft.em))lead('cart_abandoned',{},true)}else if(draft.form!='sv')lead('partial_lead',{},true)}if(fin&&inFlight)lead('payment_pending',{interest:inFlight.desc,amount:inr(inFlight.amt)},true,true);if(fin&&touched&&!idleSent)browseEvent('left_site',true)};addEventListener('pagehide',()=>leave(true));
@@ -495,4 +537,27 @@ if('IntersectionObserver' in window){const so=new IntersectionObserver(es=>es.fo
 if(!rm)setTimeout(()=>{const w=document.querySelector('.wab');if(w&&cc.hidden){w.classList.add('tip');setTimeout(()=>w.classList.remove('tip'),9000)}},25000);
 updateWab();
 sync();
+
+/* Restore a valid, signed, unexpired checkout from reminder emails. */
+window.__LP_RESUMED_ORDER = null;
+(async function restoreCheckoutFromReminder(){
+ const params=new URLSearchParams(location.search),draftId=params.get('resume'),sig=params.get('sig');
+ if(!draftId||!sig)return;
+ try{
+  const response=await fetch('/api/resume?draft='+encodeURIComponent(draftId)+'&sig='+encodeURIComponent(sig),{cache:'no-store'});
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.error||'This checkout link has expired.');
+  const meta=data.meta||{};
+  window.__LP_RESUMED_ORDER={kind:meta.kind,serviceIds:meta.serviceIds||[],programId:meta.programId||'',tokenOnly:!!meta.tokenOnly,orderId:data.orderId,checkoutToken:data.checkoutToken,keyId:data.keyId,draftId:data.id,amountPaise:data.amountPaise,reminderOptIn:data.reminderOptIn===true};
+  if(meta.kind==='services'){
+   const ids=(meta.serviceIds||[]).map(id=>S.findIndex(item=>item[8]===id)).filter(i=>i>=0);
+   if(!ids.length)throw new Error('The services in this checkout are no longer available.');
+   cart.clear();ids.forEach(i=>cart.add(i));sync();checkout(ids);
+   setTimeout(()=>{const form=document.getElementById('cf');if(!form)return;[['name',data.name],['email',data.email],['phone',data.phone]].forEach(([k,v])=>{const el=form.elements.namedItem(k);if(el)el.value=v||''});const opt=form.elements.namedItem('reminder_optin');if(opt)opt.checked=window.__LP_RESUMED_ORDER.reminderOptIn;},0);
+  }else if(meta.kind==='internship'){
+   icheck(meta.programId,meta.tokenOnly?1:0);
+   setTimeout(()=>{const form=document.getElementById('icf');if(!form)return;[['name',data.name],['email',data.email],['phone',data.phone],['domain',meta.domain||''],['college',meta.college||'']].forEach(([k,v])=>{const el=form.elements.namedItem(k);if(el)el.value=v||''});const opt=form.elements.namedItem('em');if(opt)opt.checked=window.__LP_RESUMED_ORDER.reminderOptIn;},0);
+  }
+ }catch(err){console.warn('LAUNCHPAD checkout resume unavailable:',err.message);}
+})();
 </script></body></html>
