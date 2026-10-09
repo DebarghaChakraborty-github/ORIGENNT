@@ -1,0 +1,1002 @@
+[
+  {
+    "id": "B2C-998311-CSA-001",
+    "name": "Career Counselling",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-CSA-002",
+    "name": "Career Strategy Session",
+    "price": 1299
+  },
+  {
+    "id": "B2C-998311-CSA-003",
+    "name": "Career Goal Setting",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-CSA-004",
+    "name": "First-Career Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-CSA-005",
+    "name": "Career Pathway Planning",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CSA-006",
+    "name": "Career Roadmap Development",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-007",
+    "name": "Higher Studies & Career Planning",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-008",
+    "name": "Career Change Advisory",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-009",
+    "name": "Industry Transition Advisory",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-010",
+    "name": "Functional Transition Advisory",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-011",
+    "name": "Role Transition Advisory",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-CSA-012",
+    "name": "Career Transition Planning",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-CSA-013",
+    "name": "Mid-Career Advisory",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-CSA-014",
+    "name": "Career Growth Advisory",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-CSA-015",
+    "name": "Career Progression Planning",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-CSA-016",
+    "name": "Promotion Readiness Advisory",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-017",
+    "name": "Leadership Career Planning",
+    "price": 2999
+  },
+  {
+    "id": "B2C-998311-CSA-018",
+    "name": "Career Risk Review",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CSA-019",
+    "name": "Career Decision Advisory",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CSA-020",
+    "name": "Professional Development Roadmap",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-CAI-001",
+    "name": "Career Assessment & Profiling",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CAI-002",
+    "name": "Employability Assessment",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CAI-003",
+    "name": "Career Readiness Assessment",
+    "price": 1299
+  },
+  {
+    "id": "B2C-998311-CAI-004",
+    "name": "Skills Gap Assessment",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CAI-005",
+    "name": "Transferable Skills Assessment",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CAI-006",
+    "name": "Competency Profile Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-007",
+    "name": "Career Strengths Analysis",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-CAI-008",
+    "name": "Career Interest Mapping",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-CAI-009",
+    "name": "Role Fit Assessment",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-CAI-010",
+    "name": "Industry Fit Assessment",
+    "price": 1299
+  },
+  {
+    "id": "B2C-998311-CAI-011",
+    "name": "Career Gap Analysis",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-CAI-012",
+    "name": "Professional Positioning Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-013",
+    "name": "Career Portfolio Assessment",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-CAI-014",
+    "name": "Leadership Readiness Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-015",
+    "name": "Management Readiness Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-016",
+    "name": "International Career Readiness Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-017",
+    "name": "Career Transition Risk Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-018",
+    "name": "Career Progression Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-019",
+    "name": "Professional Capability Benchmark",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-CAI-020",
+    "name": "Career Intelligence Report",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-PPP-001",
+    "name": "Resume Development",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-PPP-002",
+    "name": "Resume Review & Advisory",
+    "price": 499
+  },
+  {
+    "id": "B2C-998311-PPP-003",
+    "name": "Resume Redesign",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-PPP-004",
+    "name": "ATS Resume Optimisation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-005",
+    "name": "Achievement-Based Resume",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-006",
+    "name": "Competency-Based Resume",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-007",
+    "name": "Fresher Resume Development",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-PPP-008",
+    "name": "Professional Resume Development",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-009",
+    "name": "Executive Resume Development",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-PPP-010",
+    "name": "Career Transition Resume",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-PPP-011",
+    "name": "Return-to-Work Resume",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-012",
+    "name": "International Resume Development",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-PPP-013",
+    "name": "Resume Keyword Strategy",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-PPP-014",
+    "name": "Resume Achievement Mapping",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-PPP-015",
+    "name": "Resume Positioning Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-016",
+    "name": "LinkedIn Profile Optimisation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-017",
+    "name": "LinkedIn Profile Development",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-PPP-018",
+    "name": "Executive LinkedIn Optimisation",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-PPP-019",
+    "name": "Professional Bio Development",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-PPP-020",
+    "name": "Personal Professional Profile",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-JSE-001",
+    "name": "Job Search Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-002",
+    "name": "Job Application Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-003",
+    "name": "Job Targeting Advisory",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-JSE-004",
+    "name": "Job Description Analysis",
+    "price": 499
+  },
+  {
+    "id": "B2C-998311-JSE-005",
+    "name": "Career Opportunity Matching Advisory",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-006",
+    "name": "Job Portal Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-007",
+    "name": "Job Portal Profile Optimisation",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-008",
+    "name": "Recruiter Outreach Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-009",
+    "name": "Professional Networking Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-010",
+    "name": "Referral Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-011",
+    "name": "Application Tracking System",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-JSE-012",
+    "name": "Internship Search Strategy",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-JSE-013",
+    "name": "Internship Application Advisory",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-014",
+    "name": "First Job Readiness Advisory",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-015",
+    "name": "Employability Improvement Plan",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-JSE-016",
+    "name": "Recruiter Visibility Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-JSE-017",
+    "name": "Networking Profile Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-018",
+    "name": "Career Opportunity Research Brief",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-JSE-019",
+    "name": "Job Search Audit",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-JSE-020",
+    "name": "Job Search Improvement Program",
+    "price": 2499
+  },
+  {
+    "id": "B2C-999293-ISR-001",
+    "name": "Interview Preparation",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-ISR-002",
+    "name": "Mock Interview",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-ISR-003",
+    "name": "HR Interview Preparation",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-ISR-004",
+    "name": "Technical Interview Preparation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-ISR-005",
+    "name": "Managerial Interview Preparation",
+    "price": 1999
+  },
+  {
+    "id": "B2C-999293-ISR-006",
+    "name": "Behavioural Interview Preparation",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-ISR-007",
+    "name": "Case Interview Preparation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-ISR-008",
+    "name": "Group Discussion Preparation",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-ISR-009",
+    "name": "Assessment Centre Preparation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-ISR-010",
+    "name": "Interview Answer Framework",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-ISR-011",
+    "name": "Interview Performance Review",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-ISR-012",
+    "name": "Interview Improvement Plan",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-ISR-013",
+    "name": "Salary & Offer Negotiation Advisory",
+    "price": 1999
+  },
+  {
+    "id": "B2C-999293-ISR-014",
+    "name": "Executive Interview Preparation",
+    "price": 2999
+  },
+  {
+    "id": "B2C-999293-ISR-015",
+    "name": "Panel Interview Preparation",
+    "price": 1299
+  },
+  {
+    "id": "B2C-999293-ISR-016",
+    "name": "Video Interview Preparation",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-ISR-017",
+    "name": "Interview Communication Coaching",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-ISR-018",
+    "name": "Interview Evidence Bank",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-ISR-019",
+    "name": "Selection Process Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-ISR-020",
+    "name": "Interview Readiness Program",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-SGE-001",
+    "name": "Student Career Counselling",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-SGE-002",
+    "name": "Final-Year Career Planning",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-SGE-003",
+    "name": "Fresher Career Counselling",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-SGE-004",
+    "name": "Internship Readiness",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-SGE-005",
+    "name": "Campus Placement Preparation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-SGE-006",
+    "name": "Placement Readiness Program",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-SGE-007",
+    "name": "Campus-to-Corporate Program",
+    "price": 1999
+  },
+  {
+    "id": "B2C-999293-SGE-008",
+    "name": "Graduate Employability Program",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-SGE-009",
+    "name": "College-to-Career Transition",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-SGE-010",
+    "name": "Early Career Roadmap",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-SGE-011",
+    "name": "Fresher LinkedIn Optimisation",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-SGE-012",
+    "name": "Fresher Mock Interview",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-SGE-013",
+    "name": "Early Career Professional Skills",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-SGE-014",
+    "name": "Academic-to-Industry Positioning",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-SGE-015",
+    "name": "Project-to-Resume Advisory",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-SGE-016",
+    "name": "Internship-to-Job Strategy",
+    "price": 1299
+  },
+  {
+    "id": "B2C-998311-SGE-017",
+    "name": "Graduate Job Search Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-SGE-018",
+    "name": "Early Career Networking Strategy",
+    "price": 799
+  },
+  {
+    "id": "B2C-998311-SGE-019",
+    "name": "Graduate Career Portfolio",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-SGE-020",
+    "name": "Early Career Mentorship Session",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-001",
+    "name": "Business Skills Foundation",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-002",
+    "name": "Business Communication",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-003",
+    "name": "Professional Email & Communication",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-PSW-004",
+    "name": "Workplace Professional Skills",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-005",
+    "name": "Workplace Readiness",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-006",
+    "name": "Business Etiquette",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-PSW-007",
+    "name": "Presentation Skills",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-008",
+    "name": "Problem-Solving & Critical Thinking",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-009",
+    "name": "Teamwork & Collaboration",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-PSW-010",
+    "name": "Leadership Fundamentals",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-011",
+    "name": "Negotiation Skills",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-012",
+    "name": "Managerial Skills Foundation",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-013",
+    "name": "Entrepreneurship Skills",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-014",
+    "name": "Excel for Career",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-015",
+    "name": "Power BI for Career",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-016",
+    "name": "AI & Digital Workplace Skills",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-PSW-017",
+    "name": "Professional Meeting Skills",
+    "price": 799
+  },
+  {
+    "id": "B2C-999293-PSW-018",
+    "name": "Business Writing Skills",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-019",
+    "name": "Time & Priority Management",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-PSW-020",
+    "name": "Professional Confidence & Presence",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-GTL-001",
+    "name": "Career Growth Strategy",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-002",
+    "name": "Promotion Readiness",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-003",
+    "name": "Career Progression Advisory",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-004",
+    "name": "Mid-Career Transition",
+    "price": 2999
+  },
+  {
+    "id": "B2C-998311-GTL-005",
+    "name": "Industry Transition Strategy",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-006",
+    "name": "Functional Transition Strategy",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-007",
+    "name": "Role Transition Strategy",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-008",
+    "name": "Leadership Career Planning",
+    "price": 2999
+  },
+  {
+    "id": "B2C-999293-GTL-009",
+    "name": "Management Readiness Program",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-010",
+    "name": "Leadership Development Roadmap",
+    "price": 2999
+  },
+  {
+    "id": "B2C-998311-GTL-011",
+    "name": "Career Stagnation Review",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-012",
+    "name": "Role Expansion Advisory",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-013",
+    "name": "Internal Mobility Strategy",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-014",
+    "name": "Visibility & Influence Strategy",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-015",
+    "name": "Leadership Profile Positioning",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-GTL-016",
+    "name": "Succession Readiness Advisory",
+    "price": 2999
+  },
+  {
+    "id": "B2C-998311-GTL-017",
+    "name": "Career Capability Development Plan",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-018",
+    "name": "Professional Reputation Strategy",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-GTL-019",
+    "name": "Executive Transition Advisory",
+    "price": 3499
+  },
+  {
+    "id": "B2C-999293-GTL-020",
+    "name": "Career Advancement Mentorship",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-EIC-001",
+    "name": "Executive Career Advisory",
+    "price": 3499
+  },
+  {
+    "id": "B2C-998311-EIC-002",
+    "name": "Executive Profile Development",
+    "price": 3499
+  },
+  {
+    "id": "B2C-998311-EIC-003",
+    "name": "Executive Resume Development",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-EIC-004",
+    "name": "Executive LinkedIn Optimisation",
+    "price": 2499
+  },
+  {
+    "id": "B2C-999293-EIC-005",
+    "name": "Executive Interview Preparation",
+    "price": 2999
+  },
+  {
+    "id": "B2C-998311-EIC-006",
+    "name": "Executive Offer Negotiation Advisory",
+    "price": 3499
+  },
+  {
+    "id": "B2C-998311-EIC-007",
+    "name": "Executive Career Transition",
+    "price": 3499
+  },
+  {
+    "id": "B2C-998311-EIC-008",
+    "name": "International Career Counselling",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-EIC-009",
+    "name": "International Career Strategy",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-EIC-010",
+    "name": "International Resume Development",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-EIC-011",
+    "name": "Global LinkedIn Optimisation",
+    "price": 1999
+  },
+  {
+    "id": "B2C-999293-EIC-012",
+    "name": "Global Interview Preparation",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-EIC-013",
+    "name": "International Job Application Strategy",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-EIC-014",
+    "name": "International Career Roadmap",
+    "price": 2999
+  },
+  {
+    "id": "B2C-998311-EIC-015",
+    "name": "Cross-Border Career Transition Advisory",
+    "price": 3499
+  },
+  {
+    "id": "B2C-998311-EIC-016",
+    "name": "Global Professional Positioning",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-EIC-017",
+    "name": "International Employability Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-EIC-018",
+    "name": "Global Skills Gap Assessment",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-EIC-019",
+    "name": "International Networking Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-EIC-020",
+    "name": "Global Career Intelligence Report",
+    "price": 3999
+  },
+  {
+    "id": "B2C-998311-DAI-001",
+    "name": "AI Career Readiness Assessment",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-002",
+    "name": "Digital Skills Gap Assessment",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-003",
+    "name": "AI Skills Roadmap",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-004",
+    "name": "Digital Career Roadmap",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-005",
+    "name": "AI-Powered Job Search Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-006",
+    "name": "AI Resume Strategy",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-DAI-007",
+    "name": "AI Interview Practice Framework",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-DAI-008",
+    "name": "Professional Productivity with AI",
+    "price": 1499
+  },
+  {
+    "id": "B2C-999293-DAI-009",
+    "name": "AI for Workplace Communication",
+    "price": 999
+  },
+  {
+    "id": "B2C-999293-DAI-010",
+    "name": "AI for Career Research",
+    "price": 999
+  },
+  {
+    "id": "B2C-998311-DAI-011",
+    "name": "Digital Portfolio Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-012",
+    "name": "Professional Portfolio Development",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-DAI-013",
+    "name": "Career Analytics Review",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-DAI-014",
+    "name": "Career KPI Framework",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-015",
+    "name": "Career Progress Dashboard",
+    "price": 1999
+  },
+  {
+    "id": "B2C-998311-DAI-016",
+    "name": "Learning Needs Assessment",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-017",
+    "name": "Personal Learning Roadmap",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-018",
+    "name": "Credential & Certification Strategy",
+    "price": 1499
+  },
+  {
+    "id": "B2C-998311-DAI-019",
+    "name": "Career Intelligence Review",
+    "price": 2499
+  },
+  {
+    "id": "B2C-998311-DAI-020",
+    "name": "Digital Career Transformation Program",
+    "price": 4999
+  }
+]
