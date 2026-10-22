@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "origennt-site",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["C:\\Users\\KIIT\\AppData\\Local\\Temp\\claude\\C--Users-KIIT-Desktop-New-folder--4--ORIGENNT\\dd05c72f-fead-4a2c-b07f-30890747f23e\\scratchpad\\serve.js", ".", "5500"],
+      "port": 5500
+    }
+  ]
+}
